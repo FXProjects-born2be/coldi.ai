@@ -31,7 +31,6 @@ body {
   background: #fff;
   margin: 0;
   height: auto;
-  cursor: none !important;
   &::-webkit-scrollbar {
     background: transparent;
     width: 10px;
@@ -42,7 +41,7 @@ body {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #4268FF;
+    background-color: #4268ff;
     border-radius: 100px;
   }
 
