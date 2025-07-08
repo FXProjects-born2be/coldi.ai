@@ -3,6 +3,7 @@
 .footer {
   position: relative;
   padding-bottom: 300px;
+  overflow: hidden;
 
   &__container {
     margin: 24px 24px 0 24px;
@@ -93,7 +94,7 @@
   }
 
   &__image {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;

@@ -1,0 +1,41 @@
+.button {
+  padding: 24px 32px;
+  border-radius: 24px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 120%;
+  transition: background 0.3s ease;
+}
+
+.defaultWidth {
+  width: max-content;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.primary {
+  background: #4268ff;
+
+  &:hover {
+    background: #224eff;
+  }
+}
+
+.secondary {
+  background: #a34cff;
+
+  &:hover {
+    background: #9027ff;
+  }
+}
+
+.success {
+  background: #17b46b;
+
+  &:hover {
+    background: #008f4d;
+  }
+}

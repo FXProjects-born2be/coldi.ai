@@ -1,0 +1,84 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  padding: 165px 124px;
+  display: flex;
+  flex-direction: column;
+  gap: 128px;
+
+  h2 {
+    color: #0c1021;
+    text-align: center;
+    font-size: 128px;
+    font-weight: 400;
+    line-height: 120%;
+
+    @include tablet {
+      font-size: 48px;
+    }
+
+    .highlighted {
+      color: #4268ff;
+    }
+  }
+
+  @include mobile {
+    padding: 64px 16px;
+    gap: 64px;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  @include tablet {
+    gap: 16px;
+  }
+}
+
+.cardsRow {
+  display: flex;
+  gap: 48px;
+
+  @include tablet {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  border-radius: 48px;
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  background: #fafafa;
+  padding: 32px;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    h3 {
+      color: #0c1021;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 120%;
+    }
+
+    p {
+      color: #535662;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+}

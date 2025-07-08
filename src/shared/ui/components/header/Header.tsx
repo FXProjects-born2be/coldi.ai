@@ -11,34 +11,43 @@ import st from './Header.module.scss';
 const headerVisibilityOnScrollHandle = (set: (visible: boolean) => void) => {
   const scrollY = window.scrollY;
   set(scrollY > 0);
+
+  if (window.innerWidth < 768) {
+    set(true);
+  }
 };
 
 export const Header = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      setVisible(true);
+    }
+
     const onScroll = () => headerVisibilityOnScrollHandle(setVisible);
 
-    window.addEventListener('scroll', onScroll, {
-      passive: true,
-    });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   return (
     <header className={cn(st.header, { [st.visible]: visible })}>
       <div className={st.header__container}>
         <Image src="/full-logo.svg" alt="logo" width={145} height={50} />
-        <Navigation visible={false} />
+        <Navigation />
         <BurgerMenu />
       </div>
     </header>
   );
 };
 
-const Navigation = ({ visible }: { visible: boolean }) => {
+const Navigation = () => {
   return (
-    <ul className={cn(st.header__navigation, { [st.header__navigation_visible]: visible })}>
+    <ul className={st.header__navigation}>
       <li>Home</li>
       <li>News Page</li>
       <li>Product Page</li>
