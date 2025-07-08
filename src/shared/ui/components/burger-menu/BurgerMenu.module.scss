@@ -28,8 +28,9 @@
 }
 
 .content {
+  border-top: 1px solid rgba(80, 85, 107, 0.05);
   position: fixed;
-  top: 33%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
@@ -42,7 +43,6 @@
 .nav {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(80, 85, 107, 0.05);
   background-color: #fff;
   padding: 16px 16px 32px 16px;
   gap: 16px;
