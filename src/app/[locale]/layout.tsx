@@ -3,7 +3,8 @@ import { Urbanist } from 'next/font/google';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 
-import { Footer, Header } from '@/shared/ui/components';
+import { Footer } from '@/shared/ui/components/footer';
+import { Header } from '@/shared/ui/components/header';
 
 import '@/shared/lib/styles/null.scss';
 import '@/shared/lib/styles/base.scss';

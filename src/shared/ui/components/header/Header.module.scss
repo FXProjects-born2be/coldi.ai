@@ -1,1 +1,57 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid rgba(80, 85, 107, 0.05);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+
+  &.visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &__container {
+    padding: 24px 124px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  &__navigation {
+    width: 626px;
+    flex-shrink: 0;
+    padding: 4px;
+    border-radius: 48px;
+    background: #f6f6f6;
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include tablet {
+      display: none;
+    }
+
+    li {
+      flex-shrink: 0;
+      padding: 16px 24px;
+      border-radius: 48px;
+
+      &.active {
+        background: #eaeaeb;
+      }
+    }
+  }
+}
