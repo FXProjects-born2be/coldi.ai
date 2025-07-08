@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { cn } from '@/shared/lib/helpers/styles';
 import { BurgerMenu } from '@/shared/ui/components/burger-menu';
@@ -46,13 +48,25 @@ export const Header = () => {
 };
 
 const Navigation = () => {
+  const pathname = usePathname();
+
   return (
     <ul className={st.header__navigation}>
-      <li>Home</li>
-      <li>News Page</li>
-      <li>Product Page</li>
-      <li>About Page</li>
-      <li>Pricing Page</li>
+      <li className={cn({ [st.active]: pathname === '/' })}>
+        <Link href="/">Home</Link>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/news' })}>
+        <Link href="/news">News Page</Link>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/product' })}>
+        <Link href="/product">Product Page</Link>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/about' })}>
+        <Link href="/about">About Page</Link>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/pricing' })}>
+        <Link href="/pricing">Pricing Page</Link>
+      </li>
     </ul>
   );
 };
