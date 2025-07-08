@@ -1,4 +1,13 @@
-import { Advantages, ColdiInNews, Delivers, Hero, Voices, WhatCanDo, WhatIs } from './components';
+import {
+  Advantages,
+  ColdiInNews,
+  Delivers,
+  HearColdi,
+  Hero,
+  Voices,
+  WhatCanDo,
+  WhatIs,
+} from './components';
 
 export default function Home() {
   return (
@@ -8,6 +17,7 @@ export default function Home() {
       <ColdiInNews />
       <Advantages />
       <WhatCanDo />
+      <HearColdi />
       <Delivers />
       <WhatIs />
     </main>

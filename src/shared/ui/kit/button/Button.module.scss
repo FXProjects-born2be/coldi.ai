@@ -6,6 +6,17 @@
   font-weight: 500;
   line-height: 120%;
   transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.md {
+  padding: 24px 32px;
+}
+
+.sm {
+  padding: 24px;
 }
 
 .defaultWidth {

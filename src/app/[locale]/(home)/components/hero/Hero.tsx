@@ -2,7 +2,7 @@
 
 import { Button } from '@/shared/ui/kit/button';
 
-import st from './hero.module.scss';
+import st from './Hero.module.scss';
 
 export const Hero = () => {
   return (
@@ -16,7 +16,7 @@ export const Hero = () => {
           </h1>
           <p>Hired and Ready Before You Even Say &quot;Engage!&quot;</p>
         </div>
-        <Button>Receive the Call</Button>
+        <Button size="md">Receive the Call</Button>
       </section>
       <p className={st.hero__subtitle}>Welcome to Coldi!</p>
       <video
