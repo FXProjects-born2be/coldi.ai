@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { cn } from '@/shared/lib/helpers/styles';
 import { BurgerMenu } from '@/shared/ui/components/burger-menu';
@@ -11,39 +13,60 @@ import st from './Header.module.scss';
 const headerVisibilityOnScrollHandle = (set: (visible: boolean) => void) => {
   const scrollY = window.scrollY;
   set(scrollY > 0);
+
+  if (window.innerWidth < 768) {
+    set(true);
+  }
 };
 
 export const Header = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      setVisible(true);
+    }
+
     const onScroll = () => headerVisibilityOnScrollHandle(setVisible);
 
-    window.addEventListener('scroll', onScroll, {
-      passive: true,
-    });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   return (
     <header className={cn(st.header, { [st.visible]: visible })}>
       <div className={st.header__container}>
         <Image src="/full-logo.svg" alt="logo" width={145} height={50} />
-        <Navigation visible={false} />
+        <Navigation />
         <BurgerMenu />
       </div>
     </header>
   );
 };
 
-const Navigation = ({ visible }: { visible: boolean }) => {
+const Navigation = () => {
+  const pathname = usePathname();
+
   return (
-    <ul className={cn(st.header__navigation, { [st.header__navigation_visible]: visible })}>
-      <li>Home</li>
-      <li>News Page</li>
-      <li>Product Page</li>
-      <li>About Page</li>
-      <li>Pricing Page</li>
+    <ul className={st.header__navigation}>
+      <li className={cn({ [st.active]: pathname === '/' })}>
+        <Link href="/">Home</Link>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/news' })}>
+        <Link href="/news">News Page</Link>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/product' })}>
+        <Link href="/product">Product Page</Link>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/about' })}>
+        <Link href="/about">About Page</Link>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/pricing' })}>
+        <Link href="/pricing">Pricing Page</Link>
+      </li>
     </ul>
   );
 };

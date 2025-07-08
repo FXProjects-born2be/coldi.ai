@@ -1,0 +1,106 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.voices {
+  background: #fafafa;
+  margin-top: 64px;
+  padding: 165px 124px;
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
+
+  @include mobile {
+    padding: 64px 16px;
+  }
+
+  h2 {
+    color: #0c1021;
+    text-align: center;
+    font-size: 96px;
+    font-weight: 400;
+    line-height: 120%;
+
+    @include mobile {
+      font-size: 48px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    gap: 48px;
+
+    @include tablet {
+      flex-direction: column;
+    }
+  }
+
+  &__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  &__cardContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 48px;
+    border: 1px solid rgba(12, 16, 33, 0.05);
+    background: #fff;
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
+
+    img {
+      object-fit: cover;
+      border-radius: 42px;
+
+      @media (max-width: 1440px) {
+        height: 349px;
+      }
+
+      @include tablet {
+        position: relative;
+        height: 342px;
+        width: 100% !important;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  &__cardContent {
+    h3 {
+      color: #0c1021;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 12px;
+    }
+
+    h4 {
+      margin-bottom: 12px;
+      color: #0c1021;
+      font-family: Urbanist;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    p {
+      color: #50556b;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 24px;
+    }
+  }
+
+  &__card {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

@@ -3,7 +3,7 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 999;
   background: #fff;
   border-bottom: 1px solid rgba(80, 85, 107, 0.05);
   transition:
@@ -25,6 +25,10 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+
+    @include mobile {
+      padding: 16px;
+    }
   }
 
   &__navigation {
