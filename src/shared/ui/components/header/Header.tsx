@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { requestRoutes } from '@/shared/lib/helpers/request-routes';
 import { cn } from '@/shared/lib/helpers/styles';
 import { BurgerMenu } from '@/shared/ui/components/burger-menu';
 
@@ -20,9 +21,14 @@ const headerVisibilityOnScrollHandle = (set: (visible: boolean) => void) => {
 };
 
 export const Header = () => {
-  const [visible, setVisible] = useState(false);
+  const pathname = usePathname();
+  const isForcedVisible = requestRoutes.has(pathname);
+
+  const [visible, setVisible] = useState(isForcedVisible ? true : false);
 
   useEffect(() => {
+    if (isForcedVisible) return;
+
     if (window.innerWidth < 768) {
       setVisible(true);
     }
@@ -34,7 +40,7 @@ export const Header = () => {
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [isForcedVisible]);
 
   return (
     <header className={cn(st.header, { [st.visible]: visible })}>

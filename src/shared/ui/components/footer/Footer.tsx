@@ -2,14 +2,18 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
+import { requestRoutes } from '@/shared/lib/helpers/request-routes';
 import { MessageIcon } from '@/shared/ui/icons/fill/message';
 import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
 
 import st from './Footer.module.scss';
 
 export const Footer = () => {
-  return (
+  const pathname = usePathname();
+
+  return !requestRoutes.has(pathname) ? (
     <footer className={st.footer}>
       <div className={st.footer__container}>
         <section className={st.footer__content}>
@@ -67,5 +71,5 @@ export const Footer = () => {
         height={100}
       />
     </footer>
-  );
+  ) : null;
 };
