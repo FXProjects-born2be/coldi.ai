@@ -44,7 +44,7 @@ export const Hero = () => {
       <TypingText text="Welcome to Coldi!" speed={150} delay={500} className={st.hero__subtitle} />
       <video
         className={st.hero__video}
-        src="/videos/home/hero.mp4"
+        src="/videos/home/hero2.mp4"
         autoPlay
         playsInline
         muted
@@ -61,7 +61,7 @@ export const Hero = () => {
         />
         <video
           className={st.hero__videoMobile}
-          src="/videos/home/hero.mp4"
+          src="/videos/home/hero2.mp4"
           autoPlay
           playsInline
           muted
