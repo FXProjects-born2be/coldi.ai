@@ -27,7 +27,7 @@ export const CallFormContainer = ({ botName = 'Sana' }: { botName?: string }) =>
     name: '',
     email: '',
     industry: '',
-    companySize: '',
+    company: '',
   });
   const [isSuccess, setIsSuccess] = useState(false);
 

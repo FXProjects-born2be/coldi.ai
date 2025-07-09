@@ -1,22 +1,22 @@
 'use client';
 
-import type { InputHTMLAttributes } from 'react';
+import type { TextareaHTMLAttributes } from 'react';
 
 import { cn } from '@/shared/lib/helpers/styles';
 
-import st from './TextField.module.scss';
+import st from './TextArea.module.scss';
 
-export function TextField({
+export function TextArea({
   className,
   hint,
-  intent = 'default',
+  intent,
   ...args
-}: InputHTMLAttributes<HTMLInputElement> & {
+}: TextareaHTMLAttributes<HTMLTextAreaElement> & {
   hint?: string;
   intent?: 'default' | 'danger';
 }) {
-  const inputClasses = cn(
-    st.textField,
+  const textAreaClasses = cn(
+    st.textArea,
     {
       [st.danger]: intent === 'danger',
     },
@@ -25,7 +25,7 @@ export function TextField({
 
   return (
     <label className={st.layout}>
-      <input className={inputClasses} {...args} />
+      <textarea className={textAreaClasses} {...args} />
       {hint && <p className={st.hint}>{hint}</p>}
     </label>
   );
