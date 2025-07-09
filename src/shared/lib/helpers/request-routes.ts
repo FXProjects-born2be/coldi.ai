@@ -1,1 +1,1 @@
-export const requestRoutes = new Set(['/call-request']);
+export const requestRoutes = new Set(['/call-request', '/lead-request']);

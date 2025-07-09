@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .label {
+    color: #0c1021;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  border-radius: 48px;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+  background: #fff;
+  padding: 32px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formRow {
+  display: flex;
+  gap: 24px;
+}

@@ -1,5 +1,11 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .layout {
   padding: 32px;
   border-radius: 48px;
