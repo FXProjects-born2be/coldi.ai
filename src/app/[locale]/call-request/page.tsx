@@ -1,3 +1,4 @@
+import { CallFormContainer } from './components';
 import st from './page.module.scss';
 
 export default async function CallRequest({
@@ -5,5 +6,11 @@ export default async function CallRequest({
 }: {
   searchParams: Promise<{ botName?: string }>;
 }) {
-  return <section className={st.layout}>{(await searchParams).botName}</section>;
+  const { botName } = await searchParams;
+
+  return (
+    <section className={st.layout}>
+      <CallFormContainer botName={botName} />
+    </section>
+  );
 }

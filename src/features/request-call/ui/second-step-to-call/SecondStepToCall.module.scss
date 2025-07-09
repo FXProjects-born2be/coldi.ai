@@ -1,0 +1,48 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  padding: 32px;
+  border-radius: 48px;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.appendix {
+  color: #0c1021;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 120%;
+  text-align: center;
+
+  .name {
+    color: #4268ff;
+  }
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.formRow {
+  display: flex;
+  gap: 16px;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
