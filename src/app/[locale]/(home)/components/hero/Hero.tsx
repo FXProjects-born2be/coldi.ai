@@ -51,6 +51,7 @@ export const Hero = () => {
         loop
         preload="auto"
         controls={false}
+        poster="/videos/home/hero.png"
       />
       <div className={st.hero__videoMobileContainer}>
         <TypingText
@@ -68,6 +69,7 @@ export const Hero = () => {
           loop
           preload="auto"
           controls={false}
+          poster="/videos/home/hero.png"
         />
       </div>
     </section>
