@@ -5,12 +5,11 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 import { blurInUp } from '@/shared/lib/helpers/animations';
-import { useWindowSize } from '@/shared/lib/hooks/use-window-size';
 
 import st from './WhatIs.module.scss';
 
 export const WhatIs = () => {
-  const { width } = useWindowSize();
+  //const { width } = useWindowSize();
 
   return (
     <section className={st.layout}>
@@ -43,37 +42,21 @@ export const WhatIs = () => {
           agent. It’s the best sales rep you’ve ever had.
         </motion.p>
       </motion.section>
-      {width > 768 ? (
-        <motion.div
-          variants={blurInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <Image
-            src="/images/home/what-it-is.png"
-            alt="What Coldi Really Is"
-            width={801}
-            height={598}
-            unoptimized
-          />
-        </motion.div>
-      ) : (
-        <motion.div
-          variants={blurInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <Image
-            src="/images/home/what-it-is-mob.png"
-            alt="What Coldi Really Is"
-            width={326}
-            height={598}
-            unoptimized
-          />
-        </motion.div>
-      )}
+      <motion.div
+        variants={blurInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className={st.image}
+      >
+        <Image
+          src="/images/home/what-it-is.png"
+          alt="What Coldi Really Is"
+          width={801}
+          height={598}
+          unoptimized
+        />
+      </motion.div>
     </section>
   );
 };
