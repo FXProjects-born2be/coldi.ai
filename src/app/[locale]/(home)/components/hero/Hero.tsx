@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { motion } from 'framer-motion';
 
 import { blurInUp } from '@/shared/lib/helpers/animations';
@@ -32,14 +34,16 @@ export const Hero = () => {
             Hired and Ready Before You Even Say &quot;Engage!&quot;
           </motion.p>
         </div>
-        <motion.div
-          variants={blurInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <Button size="md">Receive the Call</Button>
-        </motion.div>
+        <Link href="/call-request">
+          <motion.div
+            variants={blurInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <Button size="md">Receive the Call</Button>
+          </motion.div>
+        </Link>
       </section>
       <TypingText text="Welcome to Coldi!" speed={150} delay={500} className={st.hero__subtitle} />
       <video

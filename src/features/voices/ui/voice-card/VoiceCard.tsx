@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Button } from '@/shared/ui/kit/button';
 import { Chip } from '@/shared/ui/kit/chip';
@@ -31,7 +32,9 @@ export const VoiceCard = ({
           ))}
         </section>
       </div>
-      <Button fullWidth>Receive the Call</Button>
+      <Link href={`/call-request?botName=${name}`}>
+        <Button fullWidth>Receive the Call</Button>
+      </Link>
     </section>
   </article>
 );
