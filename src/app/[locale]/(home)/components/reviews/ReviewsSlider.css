@@ -1,0 +1,17 @@
+.bullet {
+  height: 16px;
+  border-radius: 32px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #4268ff !important;
+  width: 48px !important;
+}
+
+.swiper-pagination-bullets {
+  bottom: 0 !important;
+}
+
+.swiper {
+  width: 100%;
+}

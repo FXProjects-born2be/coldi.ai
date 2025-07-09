@@ -4,6 +4,7 @@ import {
   Delivers,
   HearColdi,
   Hero,
+  Reviews,
   Voices,
   WhatCanDo,
   WhatIs,
@@ -19,6 +20,7 @@ export default function Home() {
       <WhatCanDo />
       <HearColdi />
       <Delivers />
+      <Reviews />
       <WhatIs />
     </main>
   );
