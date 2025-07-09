@@ -1,5 +1,9 @@
 'use client';
 
+import { motion } from 'framer-motion';
+
+import { blurInUp } from '@/shared/lib/helpers/animations';
+import { TypingText } from '@/shared/ui/components/typing-text';
 import { Button } from '@/shared/ui/kit/button';
 
 import st from './Hero.module.scss';
@@ -9,16 +13,35 @@ export const Hero = () => {
     <section className={st.hero}>
       <section className={st.hero__content}>
         <div className={st.hero__title}>
-          <h1>
+          <motion.h1
+            variants={blurInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             Coldi <br />
             Brand-Tuned
             <br /> <span className={st.highlighted}>AI Talkers</span>
-          </h1>
-          <p>Hired and Ready Before You Even Say &quot;Engage!&quot;</p>
+          </motion.h1>
+          <motion.p
+            variants={blurInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            Hired and Ready Before You Even Say &quot;Engage!&quot;
+          </motion.p>
         </div>
-        <Button size="md">Receive the Call</Button>
+        <motion.div
+          variants={blurInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <Button size="md">Receive the Call</Button>
+        </motion.div>
       </section>
-      <p className={st.hero__subtitle}>Welcome to Coldi!</p>
+      <TypingText text="Welcome to Coldi!" speed={150} delay={500} className={st.hero__subtitle} />
       <video
         className={st.hero__video}
         src="/videos/home/hero.mp4"
@@ -30,7 +53,12 @@ export const Hero = () => {
         controls={false}
       />
       <div className={st.hero__videoMobileContainer}>
-        <p className={st.hero__subtitleMobile}>Welcome to Coldi!</p>
+        <TypingText
+          text="Welcome to Coldi!"
+          speed={150}
+          delay={500}
+          className={st.hero__subtitleMobile}
+        />
         <video
           className={st.hero__videoMobile}
           src="/videos/home/hero.mp4"

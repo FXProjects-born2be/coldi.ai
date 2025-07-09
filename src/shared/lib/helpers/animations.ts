@@ -7,6 +7,15 @@ export const fadeInUp = {
   }),
 };
 
+export const blurInUp = {
+  hidden: { filter: 'blur(10px)', y: 50 },
+  visible: (customDelay = 0) => ({
+    filter: 'blur(0px)',
+    y: 0,
+    transition: { duration: 0.5, delay: customDelay },
+  }),
+};
+
 export const fadeInDown = {
   hidden: { opacity: 0, y: -50 },
   visible: (customDelay = 0) => ({

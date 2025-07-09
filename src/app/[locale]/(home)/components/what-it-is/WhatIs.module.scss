@@ -4,11 +4,15 @@
   padding: 165px 124px;
   display: flex;
   flex-direction: column;
-  gap: 165px;
+  gap: 164px;
   align-items: center;
   background-color: #fafafa;
   border-radius: 64px;
   margin: 24px;
+  @include largeDesktop {
+    flex-wrap: wrap;
+  flex-direction: row-reverse;
+  }
 
   @include mobile {
     margin: 64px 16px;
@@ -22,7 +26,7 @@
     font-size: 128px;
     font-weight: 400;
     line-height: 120%;
-
+    width: 100%;
     @include mobile {
       font-size: 48px;
     }
@@ -35,6 +39,10 @@
   gap: 48px;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  @include largeDesktop {
+    width: calc(50% - 82px);
+  }
 
   @include mobile {
     justify-content: flex-start;
@@ -53,5 +61,20 @@
       font-size: 24px;
       text-align: left;
     }
+  }
+}
+
+.image {
+  width: 100%;
+  max-width: 801px;
+  @include largeDesktop {
+    width: calc(50% - 82px);
+  }
+  @include tablet {
+    max-width: 100%;
+  }
+  img {
+    width: 100%;
+    height: auto;
   }
 }
