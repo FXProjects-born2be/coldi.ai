@@ -2,6 +2,9 @@
 
 import Image from 'next/image';
 
+import { motion } from 'framer-motion';
+
+import { blurInUp } from '@/shared/lib/helpers/animations';
 import { ArrowLeft } from '@/shared/ui/icons/gradient/arrow-left';
 import { ArrowRight } from '@/shared/ui/icons/gradient/arrow-right';
 import { Chip } from '@/shared/ui/kit/chip';
@@ -36,21 +39,49 @@ export const Advantages = () => {
     <section className={st.layout}>
       <header className={st.header}>
         <section className={st.title}>
-          <div className={st.chipContainer}>
+          <motion.div
+            variants={blurInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className={st.chipContainer}
+          >
             <ArrowRight />
             <Chip variant="secondary">Most AI tools fail on implementation.</Chip>
             <ArrowLeft />
-          </div>
-          <h2>The Advantages of Implementation</h2>
+          </motion.div>
+          <motion.h2
+            variants={blurInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            The Advantages of Implementation
+          </motion.h2>
         </section>
-        <p className={st.desc}>
+        <motion.p
+          variants={blurInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className={st.desc}
+        >
           Coldi doesn’t. We handle everything — from voice selection to full setup and performance
           tuning. You get a fully integrated AI voice agent that works for your business.s
-        </p>
+        </motion.p>
       </header>
       <section className={st.cards}>
-        {cards.map((card) => (
-          <Card key={card.name} {...card} />
+        {cards.map((card, index) => (
+          <motion.div
+            variants={blurInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            key={card.name}
+            custom={index * 0.5}
+          >
+            <Card {...card} />
+          </motion.div>
         ))}
       </section>
     </section>

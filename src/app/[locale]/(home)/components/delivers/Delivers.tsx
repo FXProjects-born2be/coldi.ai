@@ -2,16 +2,19 @@
 
 import Image from 'next/image';
 
+import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
+import { blurInUp } from '@/shared/lib/helpers/animations';
 import { cn } from '@/shared/lib/helpers/styles';
+import { Counter } from '@/shared/ui/components/counter';
 
 import st from './Delivers.module.scss';
 
 const cards = [
   {
     imgUrl: '/images/home/delivers/chart.png',
-    title: '72%',
+    title: { start: 10, end: 72, suffix: '%' },
     text: (
       <p>
         more qualified leads
@@ -21,18 +24,18 @@ const cards = [
   },
   {
     imgUrl: '/images/home/delivers/phone.png',
-    title: '0',
+    title: { start: 0, end: 0, suffix: '' },
     text: (
       <p>
         missed follow-ups
         <br />
-        with Coldi’s built-in call logic
+        with Coldi&apos;s built-in call logic
       </p>
     ),
   },
   {
     imgUrl: '/images/home/delivers/counter.png',
-    title: '300X',
+    title: { start: 100, end: 300, suffix: 'X' },
     text: (
       <p>
         faster lead coverage
@@ -43,7 +46,7 @@ const cards = [
   },
   {
     imgUrl: '/images/home/delivers/chart-2.png',
-    title: '80%',
+    title: { start: 10, end: 80, suffix: '%' },
     text: (
       <p>
         cost reduction
@@ -57,19 +60,48 @@ const cards = [
 export const Delivers = () => {
   return (
     <section className={st.layout}>
-      <h2>
+      <motion.h2
+        variants={blurInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         What Coldi <br />
         <span className={st.highlight}>Delivers at Scale</span>
-      </h2>
+      </motion.h2>
       <section className={st.cards}>
-        <div className={st.cardsRow}>
+        <motion.div
+          variants={blurInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           <Card {...cards[0]} />
+        </motion.div>
+        <motion.div
+          variants={blurInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           <Card {...cards[1]} reverse />
-        </div>
-        <div className={st.cardsRow}>
+        </motion.div>
+        <motion.div
+          variants={blurInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           <Card {...cards[2]} reverse />
+        </motion.div>
+        <motion.div
+          variants={blurInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           <Card {...cards[3]} />
-        </div>
+        </motion.div>
       </section>
     </section>
   );
@@ -82,14 +114,22 @@ const Card = ({
   reverse,
 }: {
   imgUrl: string;
-  title: string;
+  title: { start: number; end: number; suffix: string };
   text: ReactNode;
   reverse?: boolean;
 }) => (
   <article className={cn(st.card, reverse && st.card__reverse)}>
-    <Image src={imgUrl} alt={title} width={296} height={296} unoptimized />
+    <Image src={imgUrl} alt={`${title.end}${title.suffix}`} width={296} height={296} unoptimized />
     <div className={st.card__content}>
-      <h3>{title}</h3>
+      <h3>
+        <Counter
+          start={title.start}
+          end={title.end}
+          suffix={title.suffix}
+          duration={2}
+          delay={0.5}
+        />
+      </h3>
       {text}
     </div>
   </article>

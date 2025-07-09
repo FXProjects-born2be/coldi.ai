@@ -35,7 +35,7 @@
 
 .cards {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 48px;
 
   @include tablet {
@@ -44,6 +44,16 @@
 
   @include mobile {
     gap: 16px;
+  }
+
+  > div {
+    width: calc(50% - 24px);
+    @include largeDesktop {
+      width: calc(25% - 36px);
+    }
+    @include tablet {
+      width: 100%;
+    }
   }
 }
 
