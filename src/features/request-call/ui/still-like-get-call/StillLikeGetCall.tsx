@@ -1,16 +1,90 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
 
 import { Button } from '@/shared/ui/kit/button';
 
+import { useRequestCallStore } from '../../store/store';
 import st from './StillLikeGetCall.module.scss';
 
-export const StillLikeGetCall = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
+export const StillLikeGetCall = () => {
+  const { hasFirstStepData, setFirstStepData } = useRequestCallStore();
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    console.log(hasFirstStepData, pathname);
+
+    if (!hasFirstStepData || pathname !== '/call-request') return;
+
+    const handlePopState = (e: PopStateEvent) => {
+      e.preventDefault();
+      setIsOpen(true);
+      history.pushState(null, '', window.location.href);
+    };
+
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a');
+      if (link && link.href && !link.href.includes('/call-request')) {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsOpen(true);
+        return false;
+      }
+    };
+
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) {
+        setIsOpen(true);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        e.key === 'F5' ||
+        (e.ctrlKey && e.key === 'r') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'R')
+      ) {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsOpen(true);
+        return false;
+      }
+    };
+
+    // Only add event listeners when hasFirstStepData is true
+    document.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('popstate', handlePopState);
+    document.addEventListener('click', handleClick, true);
+    window.addEventListener('keydown', handleKeyDown, true);
+
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('popstate', handlePopState);
+      document.removeEventListener('click', handleClick, true);
+      window.removeEventListener('keydown', handleKeyDown, true);
+    };
+  }, [hasFirstStepData, pathname]);
+
+  const confirmLeave = () => {
+    setIsOpen(false);
+    setFirstStepData({
+      scenario: '',
+      phone: '',
+    });
+  };
+
+  const cancelLeave = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <Root open={open} onOpenChange={onClose}>
+    <Root open={isOpen} onOpenChange={cancelLeave}>
       <Portal>
         <Overlay className={st.overlay} />
         <Content>
@@ -25,14 +99,14 @@ export const StillLikeGetCall = ({ open, onClose }: { open: boolean; onClose: ()
                 </div>
                 <div className={st.textBlock}>
                   <p>
-                    Hey, I’m still here — ready to talk.
+                    Hey, I&apos;m still here — ready to talk.
                     <br />
-                    <br /> Let me show you what Coldi can do. Just click Call Me and I’ll take it
-                    from here.
+                    <br /> Let me show you what Coldi can do. Just click Call Me and I&apos;ll take
+                    it from here.
                   </p>
                 </div>
               </section>
-              <Button onClick={onClose} fullWidth>
+              <Button onClick={confirmLeave} fullWidth>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="25"

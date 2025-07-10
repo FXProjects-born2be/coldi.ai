@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
@@ -10,6 +10,7 @@ import { TextField } from '@/shared/ui/kit/text-field';
 
 import { getScenarios } from '../../model/data';
 import { type FirstStepCallSchema, firstStepCallSchema } from '../../model/schemas';
+import { useRequestCallStore } from '../../store/store';
 import st from './FirstStepToCall.module.scss';
 
 export const FirstStepToCall = ({
@@ -18,6 +19,7 @@ export const FirstStepToCall = ({
   onSubmit: (data: FirstStepCallSchema) => void;
 }) => {
   const scenarios = useMemo(() => getScenarios(), []);
+  const { setFirstStepData } = useRequestCallStore();
 
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
@@ -30,6 +32,18 @@ export const FirstStepToCall = ({
     onSubmit: (data) => onSubmit(data.value),
   });
   const errors = useStore(store, (state) => state.errorMap);
+
+  const formValues = useStore(store, (state) => state.values);
+
+  useEffect(() => {
+    console.log(formValues);
+    if (formValues) {
+      setFirstStepData({
+        scenario: formValues.scenario,
+        phone: formValues.phone,
+      });
+    }
+  }, [formValues, setFirstStepData]);
 
   return (
     <section className={st.container}>
@@ -64,7 +78,7 @@ export const FirstStepToCall = ({
           {(field) => (
             <TextField
               name={field.name}
-              placeholder="Message"
+              placeholder="Phone Number"
               value={String(field.state.value)}
               onBlur={field.handleBlur}
               onChange={(e) => field.handleChange(e.target.value)}

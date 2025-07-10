@@ -31,7 +31,6 @@ export const CallFormContainer = ({ botName = 'Sana' }: { botName?: string }) =>
     company: '',
   });
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isStillLikeGetCall, setIsStillLikeGetCall] = useState(false);
 
   const router = useRouter();
 
@@ -69,7 +68,7 @@ export const CallFormContainer = ({ botName = 'Sana' }: { botName?: string }) =>
         />
       )}
       <ThankYouDialog open={isSuccess} onClose={onContinueHandle} />
-      <StillLikeGetCall open={isStillLikeGetCall} onClose={() => setIsStillLikeGetCall(false)} />
+      <StillLikeGetCall />
     </section>
   );
 };
