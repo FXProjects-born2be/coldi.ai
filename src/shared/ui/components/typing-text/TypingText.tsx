@@ -13,7 +13,6 @@ type TypingTextProps = {
 export const TypingText = ({ text, speed = 100, delay = 0, className }: TypingTextProps) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
@@ -37,32 +36,24 @@ export const TypingText = ({ text, speed = 100, delay = 0, className }: TypingTe
       }, speed);
 
       return () => clearTimeout(timer);
-    } else if (
-      hasStarted &&
-      currentIndex === textArray[currentTextIndex].length &&
-      !isTypingComplete
-    ) {
-      // Wait before moving to next text or hiding cursor
+    } else if (hasStarted && currentIndex === textArray[currentTextIndex].length) {
+      // Wait before moving to next text
       const nextTextTimer = setTimeout(() => {
-        if (currentTextIndex < textArray.length - 1) {
-          // Move to next text
-          setCurrentTextIndex((prev) => prev + 1);
-          setCurrentIndex(0);
-          setDisplayedText('');
-        } else {
-          // Hide cursor after all texts are complete
-          setIsTypingComplete(true);
-        }
-      }, 2000); // Wait 2 seconds before next text or hiding cursor
+        // Cycle back to first text if we've reached the end
+        const nextTextIndex = (currentTextIndex + 1) % textArray.length;
+        setCurrentTextIndex(nextTextIndex);
+        setCurrentIndex(0);
+        setDisplayedText('');
+      }, 2000); // Wait 2 seconds before next text
 
       return () => clearTimeout(nextTextTimer);
     }
-  }, [hasStarted, currentIndex, textArray, currentTextIndex, speed, isTypingComplete]);
+  }, [hasStarted, currentIndex, textArray, currentTextIndex, speed]);
 
   return (
     <span className={className}>
       {displayedText}
-      {!isTypingComplete && hasStarted && (
+      {hasStarted && (
         <motion.span
           animate={{ opacity: [1, 0, 1] }}
           transition={{ duration: 0.8, repeat: Infinity }}
