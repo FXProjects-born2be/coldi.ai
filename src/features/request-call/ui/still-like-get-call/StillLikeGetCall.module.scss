@@ -45,6 +45,15 @@
   flex-direction: column;
   gap: 48px;
   width: 800px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  @include tablet {
+    padding: 24px;
+    width: 96%;
+    gap: 32px;
+    max-height: 96vh;
+  }
 
   h3 {
     color: #0c1021;
@@ -52,11 +61,19 @@
     font-size: 48px;
     font-weight: 500;
     line-height: normal;
+
+    @include tablet {
+      font-size: 32px;
+    }
   }
 }
 
 .content__info {
   display: flex;
+
+  @include tablet {
+    flex-direction: column;
+  }
 }
 
 .imgBlock {
@@ -64,9 +81,22 @@
   height: 368px;
   border-radius: 42px 0px 0px 42px;
   width: 50%;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+
+  @include tablet {
+    width: 100%;
+    height: 310px;
+    border-radius: 42px 42px 0px 0px !important;
+  }
 
   img {
     object-fit: cover;
+    object-position: top;
+    border-radius: 42px 0px 0px 42px;
+
+    @include tablet {
+      border-radius: 42px 42px 0px 0px !important;
+    }
   }
 }
 
@@ -75,7 +105,7 @@
   height: 368px;
   padding: 42px;
   border-radius: 0px 42px 42px 0px;
-  border-left: 1px solid rgba(12, 16, 33, 0.1);
+  border: 1px solid rgba(12, 16, 33, 0.1);
   background: #fafafa;
   color: #0c1021;
   font-size: 24px;
@@ -84,6 +114,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @include tablet {
+    width: 100%;
+    height: 310px;
+    border-radius: 0px 0px 42px 42px;
+  }
 }
 
 .divider {

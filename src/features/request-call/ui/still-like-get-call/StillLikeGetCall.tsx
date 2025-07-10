@@ -21,7 +21,7 @@ export const StillLikeGetCall = ({ open, onClose }: { open: boolean; onClose: ()
               <span className={st.divider} />
               <section className={st.content__info}>
                 <div className={st.imgBlock}>
-                  <Image src="/images/home/close-woman.png" alt="close-woman" fill unoptimized />
+                  <Image src="/images/home/close-woman.jpg" alt="close-woman" fill unoptimized />
                 </div>
                 <div className={st.textBlock}>
                   <p>
