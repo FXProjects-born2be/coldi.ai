@@ -30,7 +30,7 @@ export const Voices = () => {
             whileInView="visible"
             key={item.name}
             viewport={{ once: true }}
-            custom={index * 0.5}
+            custom={index * 0.2}
           >
             <VoiceCard {...item} />
           </motion.div>

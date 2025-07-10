@@ -6,6 +6,9 @@
   padding: 0 0 124px 124px;
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 
   @include tablet {
     flex-direction: column;
@@ -16,24 +19,30 @@
   }
 
   &__subtitle {
-    top: 38%;
-    left: calc(69% - 124px);
+    //top: 38%;
+    right: 10%;
     position: absolute;
     color: #4268ff;
     text-align: center;
     font-size: 52px;
     font-weight: 400;
     line-height: normal;
+    width: 30%;
 
     @include tablet {
       display: none;
       visibility: hidden;
     }
+
+    @include largeDesktop {
+      width: 50%;
+      right: 0;
+    }
   }
 
   &__video {
     width: 110%;
-    height: 110%;
+    height: 100%;
     position: absolute;
     top: -7%;
     left: 20%;

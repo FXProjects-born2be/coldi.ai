@@ -23,6 +23,7 @@ export const Reviews = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
+        className={st.sliderContainer}
       >
         <ReviewsSlider />
       </motion.div>

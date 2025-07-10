@@ -30,7 +30,7 @@ export const HearColdi = () => {
             whileInView="visible"
             viewport={{ once: true }}
             key={card.name}
-            custom={index * 0.5}
+            custom={index * 0.2}
           >
             <BotCard {...card} />
           </motion.div>

@@ -30,12 +30,23 @@
 
 .cards {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 48px;
 
   @include tablet {
     gap: 16px;
   }
+
+  >article{
+    width: calc(33.33% - 32px);
+    @include largeDesktop {
+      width: calc(25% - 36px);
+      &:first-child, &:nth-child(4), &:nth-child(5), &:nth-child(8){
+        margin-top: 40px;
+      }
+    }
+  }
+
 }
 
 .cardsRow {
@@ -49,7 +60,8 @@
 }
 
 .card {
-  flex: 1;
+  //flex: 1;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -60,6 +72,9 @@
 
   svg {
     flex-shrink: 0;
+    path{
+      fill: #4268ff;
+    }
   }
 
   &__content {

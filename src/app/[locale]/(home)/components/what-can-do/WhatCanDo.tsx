@@ -4,13 +4,13 @@ import { motion } from 'framer-motion';
 import type { JSX } from 'react';
 
 import { blurInUp } from '@/shared/lib/helpers/animations';
-import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
 import { CalendarIcon } from '@/shared/ui/icons/outline/calendar';
 import { CheckListIcon } from '@/shared/ui/icons/outline/check-list';
 import { DollarIcon } from '@/shared/ui/icons/outline/dollar';
 import { FilterIcon } from '@/shared/ui/icons/outline/filter';
 import { HornIcon } from '@/shared/ui/icons/outline/horn';
 import { LoginIcon } from '@/shared/ui/icons/outline/login';
+import { PhoneIcon } from '@/shared/ui/icons/outline/phone';
 import { RobotIcon } from '@/shared/ui/icons/outline/robot';
 
 import st from './WhatCanDo.module.scss';
@@ -64,39 +64,9 @@ export const WhatCanDo = () => (
       What Coldi Can <br /> <span className={st.highlighted}>Do for Your Business</span>
     </motion.h2>
     <section className={st.cards}>
-      <motion.div
-        variants={blurInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className={st.cardsRow}
-      >
-        {card.slice(0, 3).map((item) => (
-          <Card key={item.name} {...item} />
-        ))}
-      </motion.div>
-      <motion.div
-        variants={blurInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className={st.cardsRow}
-      >
-        {card.slice(3, 6).map((item) => (
-          <Card key={item.name} {...item} />
-        ))}
-      </motion.div>
-      <motion.div
-        variants={blurInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className={st.cardsRow}
-      >
-        {card.slice(6, 9).map((item) => (
-          <Card key={item.name} {...item} />
-        ))}
-      </motion.div>
+      {card.map((item) => (
+        <Card key={item.name} {...item} />
+      ))}
     </section>
   </section>
 );
