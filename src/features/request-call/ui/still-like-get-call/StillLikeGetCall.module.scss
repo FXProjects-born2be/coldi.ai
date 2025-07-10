@@ -1,0 +1,129 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.burger {
+  display: none;
+
+  @include tablet {
+    display: block;
+  }
+}
+
+.overlay {
+  background: rgba(12, 16, 33, 0.15);
+  backdrop-filter: blur(5px);
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.content {
+  border-top: 1px solid rgba(80, 85, 107, 0.05);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  background: #fff;
+  z-index: 999;
+  overflow: hidden;
+  animation: appear 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+  border-radius: 48px;
+  background: #fff;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 800px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  @include tablet {
+    padding: 24px;
+    width: 96%;
+    gap: 32px;
+    max-height: 96vh;
+  }
+
+  h3 {
+    color: #0c1021;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 500;
+    line-height: normal;
+
+    @include tablet {
+      font-size: 32px;
+    }
+  }
+}
+
+.content__info {
+  display: flex;
+
+  @include tablet {
+    flex-direction: column;
+  }
+}
+
+.imgBlock {
+  position: relative;
+  height: 368px;
+  border-radius: 42px 0px 0px 42px;
+  width: 50%;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+
+  @include tablet {
+    width: 100%;
+    height: 310px;
+    border-radius: 42px 42px 0px 0px !important;
+  }
+
+  img {
+    object-fit: cover;
+    object-position: top;
+    border-radius: 42px 0px 0px 42px;
+
+    @include tablet {
+      border-radius: 42px 42px 0px 0px !important;
+    }
+  }
+}
+
+.textBlock {
+  width: 50%;
+  height: 368px;
+  padding: 42px;
+  border-radius: 0px 42px 42px 0px;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+  background: #fafafa;
+  color: #0c1021;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include tablet {
+    width: 100%;
+    height: 310px;
+    border-radius: 0px 0px 42px 42px;
+  }
+}
+
+.divider {
+  background: rgba(12, 16, 33, 0.15);
+  width: 100%;
+  height: 1px;
+}
