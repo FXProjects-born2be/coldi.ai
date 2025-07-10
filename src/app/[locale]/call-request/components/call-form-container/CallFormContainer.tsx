@@ -10,6 +10,7 @@ import type {
 } from '@/features/request-call/model/schemas';
 import { FirstStepToCall } from '@/features/request-call/ui/first-step-to-call';
 import { SecondStepToCall } from '@/features/request-call/ui/second-step-to-call';
+import { StillLikeGetCall } from '@/features/request-call/ui/still-like-get-call';
 import { getVoices } from '@/features/voices/model/voices';
 
 import st from './CallFormContainer.module.scss';
@@ -30,6 +31,7 @@ export const CallFormContainer = ({ botName = 'Sana' }: { botName?: string }) =>
     company: '',
   });
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isStillLikeGetCall, setIsStillLikeGetCall] = useState(false);
 
   const router = useRouter();
 
@@ -67,6 +69,7 @@ export const CallFormContainer = ({ botName = 'Sana' }: { botName?: string }) =>
         />
       )}
       <ThankYouDialog open={isSuccess} onClose={onContinueHandle} />
+      <StillLikeGetCall open={isStillLikeGetCall} onClose={() => setIsStillLikeGetCall(false)} />
     </section>
   );
 };
