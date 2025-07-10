@@ -57,7 +57,6 @@ export const StillLikeGetCall = () => {
       }
     };
 
-    // Only add event listeners when hasFirstStepData is true
     document.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('popstate', handlePopState);
     document.addEventListener('click', handleClick, true);
