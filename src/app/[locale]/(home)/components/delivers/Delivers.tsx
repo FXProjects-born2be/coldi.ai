@@ -13,7 +13,7 @@ import st from './Delivers.module.scss';
 
 const cards = [
   {
-    imgUrl: '/images/home/delivers/chart.png',
+    imgUrl: '/images/home/delivers/chart.svg',
     title: { start: 10, end: 72, suffix: '%' },
     text: (
       <p>
@@ -23,7 +23,7 @@ const cards = [
     ),
   },
   {
-    imgUrl: '/images/home/delivers/phone.png',
+    imgUrl: '/images/home/delivers/phone.svg',
     title: { start: 0, end: 0, suffix: '' },
     text: (
       <p>
@@ -34,7 +34,7 @@ const cards = [
     ),
   },
   {
-    imgUrl: '/images/home/delivers/counter.png',
+    imgUrl: '/images/home/delivers/counter.svg',
     title: { start: 100, end: 300, suffix: 'X' },
     text: (
       <p>
@@ -45,7 +45,7 @@ const cards = [
     ),
   },
   {
-    imgUrl: '/images/home/delivers/chart-2.png',
+    imgUrl: '/images/home/delivers/chart-2.svg',
     title: { start: 10, end: 80, suffix: '%' },
     text: (
       <p>
