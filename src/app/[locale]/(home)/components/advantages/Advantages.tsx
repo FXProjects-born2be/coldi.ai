@@ -109,7 +109,7 @@ export const Advantages = () => {
             whileInView="visible"
             viewport={{ once: true }}
             key={card.name}
-            custom={index * 0.5}
+            custom={index * 0.2}
           >
             <Card {...card} />
           </motion.div>

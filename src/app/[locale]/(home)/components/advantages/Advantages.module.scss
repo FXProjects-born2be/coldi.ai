@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 64px;
   padding: 165px 124px;
+  background: #FAFAFA;
 
   @include mobile {
     padding: 64px 12px;
@@ -135,16 +136,25 @@
 
 .cards {
   display: flex;
+  flex-wrap: wrap;
   gap: 48px;
 
   @include tablet {
     flex-direction: column;
     gap: 16px;
   }
+
+  >div{
+    width: calc(50% - 24px);
+    @include largeDesktop {
+      width: calc(25% - 36px);
+    }
+  }
+
 }
 
 .cardLayout {
-  flex: 1;
+  height: 100%;
   padding: 32px;
   border-radius: 48px;
   border: 1px solid rgba(12, 16, 33, 0.05);
@@ -157,6 +167,7 @@
     object-fit: cover;
     border-radius: 28px;
     margin: 0 auto;
+    width: 100%;
   }
 
   @media (max-width: 1500px) {

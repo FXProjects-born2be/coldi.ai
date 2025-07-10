@@ -45,7 +45,17 @@ export const Hero = () => {
           </motion.div>
         </Link>
       </section>
-      <TypingText text="Welcome to Coldi!" speed={150} delay={500} className={st.hero__subtitle} />
+      <TypingText
+        text={[
+          'Hi!',
+          'Welcome to Coldi!',
+          'I can be your first AI employee.',
+          'Would you like to test me?',
+        ]}
+        speed={150}
+        delay={500}
+        className={st.hero__subtitle}
+      />
       <video
         className={st.hero__video}
         src="/videos/home/hero2.mp4"
@@ -59,7 +69,12 @@ export const Hero = () => {
       />
       <div className={st.hero__videoMobileContainer}>
         <TypingText
-          text="Welcome to Coldi!"
+          text={[
+            'Hi!',
+            'Welcome to Coldi!',
+            'I can be your first AI employee.',
+            'Would you like to test me?',
+          ]}
           speed={150}
           delay={500}
           className={st.hero__subtitleMobile}

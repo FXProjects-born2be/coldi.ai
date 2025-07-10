@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 type TypingTextProps = {
-  text: string;
+  text: string | string[];
   speed?: number;
   delay?: number;
   className?: string;
@@ -15,6 +15,9 @@ export const TypingText = ({ text, speed = 100, delay = 0, className }: TypingTe
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+
+  const textArray = Array.isArray(text) ? text : [text];
 
   useEffect(() => {
     if (!hasStarted) {
@@ -27,22 +30,34 @@ export const TypingText = ({ text, speed = 100, delay = 0, className }: TypingTe
   }, [delay, hasStarted]);
 
   useEffect(() => {
-    if (hasStarted && currentIndex < text.length) {
+    if (hasStarted && currentIndex < textArray[currentTextIndex].length) {
       const timer = setTimeout(() => {
-        setDisplayedText((prev) => prev + text[currentIndex]);
+        setDisplayedText((prev) => prev + textArray[currentTextIndex][currentIndex]);
         setCurrentIndex((prev) => prev + 1);
       }, speed);
 
       return () => clearTimeout(timer);
-    } else if (hasStarted && currentIndex === text.length && !isTypingComplete) {
-      // Hide cursor after typing is complete
-      const hideCursorTimer = setTimeout(() => {
-        setIsTypingComplete(true);
-      }, 1000); // Wait 1 second before hiding cursor
+    } else if (
+      hasStarted &&
+      currentIndex === textArray[currentTextIndex].length &&
+      !isTypingComplete
+    ) {
+      // Wait before moving to next text or hiding cursor
+      const nextTextTimer = setTimeout(() => {
+        if (currentTextIndex < textArray.length - 1) {
+          // Move to next text
+          setCurrentTextIndex((prev) => prev + 1);
+          setCurrentIndex(0);
+          setDisplayedText('');
+        } else {
+          // Hide cursor after all texts are complete
+          setIsTypingComplete(true);
+        }
+      }, 2000); // Wait 2 seconds before next text or hiding cursor
 
-      return () => clearTimeout(hideCursorTimer);
+      return () => clearTimeout(nextTextTimer);
     }
-  }, [hasStarted, currentIndex, text, speed, isTypingComplete]);
+  }, [hasStarted, currentIndex, textArray, currentTextIndex, speed, isTypingComplete]);
 
   return (
     <span className={className}>
