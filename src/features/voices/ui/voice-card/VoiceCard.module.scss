@@ -33,6 +33,10 @@
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 24px;
+    span {
+      width: calc(50% - 4px);
+      flex-grow: 1;
+    }
   }
 
   &__cardContent {

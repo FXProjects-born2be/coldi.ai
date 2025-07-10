@@ -9,9 +9,9 @@ export const getVoices = () => [
       'Persuasive',
       'American',
       'Sales Rep',
-      'Business-oriented',
       'Conversational',
       'Young Adult',
+      'Business-oriented',
     ],
   },
   {
@@ -39,9 +39,9 @@ export const getVoices = () => [
       'Friendly',
       'American',
       'AI Assistant',
-      'Youth-focused',
       'Motivational',
       'Young Adult',
+      'Youth-focused',
     ],
   },
 ];
