@@ -10,6 +10,12 @@
   }
 }
 
+@mixin desktop-1300 {
+  @media (min-width: 1300px) {
+    @content;
+  }
+}
+
 @mixin largeDesktop {
   @media (min-width: 1600px) {
     @content;
