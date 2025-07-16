@@ -15,11 +15,12 @@ export default function Home() {
     <main>
       <Hero />
       <Voices />
-      <ColdiInNews />
+
       <Advantages />
       <WhatCanDo />
       <HearColdi />
       <Delivers />
+      <ColdiInNews />
       <Reviews />
       <WhatIs />
     </main>
