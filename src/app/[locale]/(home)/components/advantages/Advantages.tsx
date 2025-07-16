@@ -11,22 +11,22 @@ import st from './Advantages.module.scss';
 
 const cards = [
   {
-    imgUrl: '/images/home/advtg/voice-agents.jpg',
+    imgUrl: '/images/home/advtg/advtg1.svg',
     name: 'Tailored Voice Agents',
     text: 'Trained on your tone, tasks, and real business scenarios – not generic templates.',
   },
   {
-    imgUrl: '/images/home/advtg/integration.jpg',
+    imgUrl: '/images/home/advtg/advtg2.svg',
     name: 'Hands-On Integration',
     text: 'We connect Coldi across your stack and channels. You don&apos;t lift a finger.',
   },
   {
-    imgUrl: '/images/home/advtg/setup.jpg',
+    imgUrl: '/images/home/advtg/advtg3.svg',
     name: 'End-to-End Campaign Setup',
     text: 'We build, test, and adjust each scenario – until it performs.',
   },
   {
-    imgUrl: '/images/home/advtg/optimization.jpg',
+    imgUrl: '/images/home/advtg/advtg4.svg',
     name: 'Ongoing Optimization',
     text: 'We monitor, measure, and refine – so Coldi keeps delivering.',
   },
