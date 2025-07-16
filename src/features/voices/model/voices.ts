@@ -1,6 +1,6 @@
 export const getVoices = () => [
   {
-    imgUrl: '/images/home/voices/sana.jpg',
+    imgUrl: '/images/home/voices/sana.webp',
     name: 'Sana',
     description: 'Real Estate Agent',
     features: [
@@ -12,7 +12,7 @@ export const getVoices = () => [
     ],
   },
   {
-    imgUrl: '/images/home/voices/james.jpg',
+    imgUrl: '/images/home/voices/james.webp',
     name: 'James',
     description: 'Investment Advisor',
     features: [
@@ -24,7 +24,7 @@ export const getVoices = () => [
     ],
   },
   {
-    imgUrl: '/images/home/voices/victoria.jpg',
+    imgUrl: '/images/home/voices/victoria.webp',
     name: 'Victoria',
     description: 'Tech support agent',
     features: [
