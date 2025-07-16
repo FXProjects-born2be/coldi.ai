@@ -3,10 +3,11 @@
 .voices {
   background: #fafafa;
   margin-top: 64px;
-  padding: 165px 124px;
+  padding: 165px 16px;
   display: flex;
   flex-direction: column;
   gap: 96px;
+  box-sizing: border-box;
 
   @include mobile {
     padding: 64px 16px;
@@ -27,15 +28,17 @@
   &__list {
     display: flex;
     gap: 48px;
-    max-width: 1300px;
+    width: 100%;
     margin: 0 auto;
-
+    max-width: 1300px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
     @include tablet {
       flex-direction: column;
       max-width: 100%;
     }
     > div {
-      width: 33.33333333333333%;
+      width: calc(33.33333333333333% - 32px);
       @include tablet {
         width: 100%;
       }
