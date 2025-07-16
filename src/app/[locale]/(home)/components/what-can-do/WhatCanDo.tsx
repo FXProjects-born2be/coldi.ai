@@ -81,9 +81,10 @@ const Card = ({
   text: string;
 }) => (
   <article className={st.card}>
-    <Icon />
     <div className={st.card__content}>
-      <h3>{name}</h3>
+      <h3>
+        <Icon /> <span>{name}</span>
+      </h3>
       <p>{text}</p>
     </div>
   </article>
