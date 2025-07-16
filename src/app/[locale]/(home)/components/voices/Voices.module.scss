@@ -31,5 +31,11 @@
     @include tablet {
       flex-direction: column;
     }
+    > div {
+      width: 33.33333333333333%;
+      @include tablet {
+        width: 100%;
+      }
+    }
   }
 }

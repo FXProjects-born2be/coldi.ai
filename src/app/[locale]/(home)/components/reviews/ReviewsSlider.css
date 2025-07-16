@@ -15,3 +15,16 @@
 .swiper {
   width: 100%;
 }
+
+.swiper-wrapper {
+  align-items: stretch !important;
+}
+
+.swiper-slide {
+  height: auto !important;
+}
+
+.swiper-pagination {
+  margin-top: 48px !important;
+  position: relative !important;
+}
