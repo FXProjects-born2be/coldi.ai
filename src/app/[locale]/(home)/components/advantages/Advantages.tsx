@@ -98,8 +98,14 @@ export const Advantages = () => {
         >
           We handle everything — from voice selection to full setup and performance tuning. You get
           a fully integrated AI voice agent that works for your business.
-          <br />
-          <br />
+        </motion.p>
+        <motion.p
+          variants={blurInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className={st.subtitle}
+        >
           The Advantages of Implementation
         </motion.p>
       </header>

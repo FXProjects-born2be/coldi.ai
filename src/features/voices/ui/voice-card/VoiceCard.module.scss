@@ -75,3 +75,38 @@
     justify-content: space-between;
   }
 }
+
+.marqueeContainer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  margin-bottom: 24px;
+  user-select: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  transition: all 0.3s ease-in-out;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  &:hover {
+    cursor: grab;
+  }
+  
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.marqueeContent {
+  display: inline-flex;
+  gap: 8px;
+  padding: 4px 0;
+  min-width: 100%;
+  
+  > * {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}

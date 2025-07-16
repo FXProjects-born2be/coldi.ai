@@ -66,12 +66,22 @@ export const ReviewsSlider = () => {
   return (
     <Swiper
       slidesPerView={1}
-      spaceBetween={24}
+      spaceBetween={48}
       pagination={pagination}
       modules={[Pagination, Autoplay]}
-      autoplay={{ delay: 5000, disableOnInteraction: false }}
+      autoplay={false}
       loop
       grabCursor
+      breakpoints={{
+        992: {
+          slidesPerView: 2,
+          spaceBetween: 48,
+        },
+        1600: {
+          slidesPerView: 3,
+          spaceBetween: 48,
+        },
+      }}
     >
       {slides.map((item) => (
         <SwiperSlide key={item.name}>
