@@ -64,16 +64,16 @@ const Navigation = () => {
         <Link href="/">Home</Link>
       </li>
       <li className={cn({ [st.active]: pathname === '/news' })}>
-        <Link href="/news">News Page</Link>
+        <Link href="/news">News</Link>
       </li>
       <li className={cn({ [st.active]: pathname === '/product' })}>
-        <Link href="/product">Product Page</Link>
-      </li>
-      <li className={cn({ [st.active]: pathname === '/about' })}>
-        <Link href="/about">About Page</Link>
+        <Link href="/product">Products</Link>
       </li>
       <li className={cn({ [st.active]: pathname === '/pricing' })}>
-        <Link href="/pricing">Pricing Page</Link>
+        <Link href="/pricing">Pricing</Link>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/about' })}>
+        <Link href="/about">About</Link>
       </li>
     </ul>
   );

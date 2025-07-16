@@ -86,7 +86,7 @@ export const Advantages = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            The Advantages of Implementation
+            Coldi doesn’t.
           </motion.h2>
         </section>
         <motion.p
@@ -96,9 +96,11 @@ export const Advantages = () => {
           viewport={{ once: true }}
           className={st.desc}
         >
-          Coldi doesn&apos;t. We handle everything — from voice selection to full setup and
-          performance tuning. You get a fully integrated AI voice agent that works for your
-          business.s
+          We handle everything — from voice selection to full setup and performance tuning. You get
+          a fully integrated AI voice agent that works for your business.
+          <br />
+          <br />
+          The Advantages of Implementation
         </motion.p>
       </header>
       <section className={st.cards}>

@@ -38,6 +38,23 @@ const slides = [
     position: 'Sales Operations Director',
     company: 'Beaconware CRM',
   },
+  {
+    title: 'Coldi is what helped us take our calls to a whole new level.',
+    review:
+      'Hundreds of calls, Coldi keeps consistent performance throughout the day. The results of the first month are amazing. We got +8,74% in conversion rate, just imagine. No other tweak in our work has ever provided the same result. We got +8,74% of customers saying yes to us. Bravo, Coldi!',
+    name: 'Alex Moreno',
+    position: 'Head of Sales',
+    company: 'LightBridge Solutions',
+  },
+  {
+    title:
+      'We used to miss a lot of follow-ups, and clients would get frustrated repeating themselves. Coldi changed that fast.',
+    review:
+      'Now every call gets handled, and people feel heard the first time. We witness an 11% increase in customer satisfaction — and honestly, that says it all.',
+    name: 'Daniela Martines',
+    position: 'Client Services Lead',
+    company: 'Westmoor Realty',
+  },
 ];
 
 export const ReviewsSlider = () => {
@@ -52,7 +69,7 @@ export const ReviewsSlider = () => {
       spaceBetween={24}
       pagination={pagination}
       modules={[Pagination, Autoplay]}
-      autoplay={{ delay: 3000, disableOnInteraction: false }}
+      autoplay={{ delay: 5000, disableOnInteraction: false }}
       loop
       grabCursor
     >

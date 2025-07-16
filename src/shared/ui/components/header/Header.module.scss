@@ -32,7 +32,6 @@
   }
 
   &__navigation {
-    width: 626px;
     flex-shrink: 0;
     padding: 4px;
     border-radius: 48px;
@@ -50,7 +49,7 @@
 
     li {
       flex-shrink: 0;
-      padding: 16px 24px;
+      padding: 16px 32px;
       border-radius: 48px;
 
       &.active {
