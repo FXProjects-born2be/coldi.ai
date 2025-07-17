@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 import { motion } from 'framer-motion';
 
@@ -33,6 +33,16 @@ const cards = [
 ];
 
 export const Advantages = () => {
+  const [isSmall, setIsSmall] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmall(window.innerWidth < 1300);
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <section className={st.layout}>
       <header className={st.header}>
@@ -48,7 +58,7 @@ export const Advantages = () => {
               />
               <motion.span
                 className={st.dot}
-                initial={{ x: -256 }}
+                initial={{ x: isSmall ? -128 : -256 }}
                 whileInView={{ x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.5, ease: 'easeInOut' }}
@@ -60,6 +70,7 @@ export const Advantages = () => {
               whileInView="visible"
               viewport={{ once: true }}
               custom={0.2}
+              className={st.chip}
             >
               <Chip variant="secondary">Most AI tools fail on implementation.</Chip>
             </motion.div>
@@ -74,7 +85,7 @@ export const Advantages = () => {
               <motion.span
                 className={st.dot}
                 initial={{ x: 0 }}
-                whileInView={{ x: 248 }}
+                whileInView={{ x: isSmall ? 116 : 235 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.5, ease: 'easeInOut' }}
               />
@@ -128,8 +139,12 @@ export const Advantages = () => {
 };
 
 const Card = ({ imgUrl, name, text }: { imgUrl: string; name: string; text: string }) => (
-  <article className={st.cardLayout}>
-    <Image src={imgUrl} alt={name} width={318} height={318} unoptimized />
+  <article
+    className={st.cardLayout}
+    style={{
+      background: `linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 82.21%), url(${imgUrl}) lightgray 50% / cover no-repeat;`,
+    }}
+  >
     <section className={st.card}>
       <h3>{name}</h3>
       <p>{text}</p>

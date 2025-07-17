@@ -30,14 +30,26 @@
       }
     }
 
+    .chip {
+      span{
+        font-size: 30px;
+        font-weight: 500;
+        padding: 12px 24px;
+        border-radius: 24px;
+      }
+    }
+
     .arrowRight {
       display: flex;
       align-items: center;
-      width: 265px;
+      width: 128px;
       height: 17px;
       position: relative;
       @include tablet {
         display: none;
+      }
+      @include desktop-1300 {
+        width: 250px;
       }
       span {
         position: relative;
@@ -62,12 +74,15 @@
     .arrowLeft {
       display: flex;
       align-items: center;
-      width: 265px;
+      width: 128px;
       height: 17px;
       position: relative;
       transform: scaleX(-1);
       @include tablet {
         display: none;
+      }
+      @include desktop-1300 {
+        width: 250px;
       }
       span {
         position: relative;
@@ -159,19 +174,24 @@
 
 .cardLayout {
   height: 100%;
-  padding: 32px;
+  padding: 256px 32px 32px 32px;
   border-radius: 48px;
-  border: 1px solid rgba(12, 16, 33, 0.05);
+  border: 1px solid #eee;
   background: #fff;
   display: flex;
   flex-direction: column;
   gap: 32px;
+  position: relative;
 
   img {
     object-fit: cover;
     border-radius: 28px;
     margin: 0 auto;
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
   }
 
   @media (max-width: 1500px) {
@@ -185,6 +205,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
+  
 
   h3 {
     color: #0c1021;

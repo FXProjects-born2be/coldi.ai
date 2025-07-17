@@ -2,16 +2,19 @@
 
 import { useEffect, useMemo } from 'react';
 
+import PhoneInput from 'react-phone-input-2';
+
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { Button } from '@/shared/ui/kit/button';
 import { Option } from '@/shared/ui/kit/option';
-import { TextField } from '@/shared/ui/kit/text-field';
 
 import { getScenarios } from '../../model/data';
 import { type FirstStepCallSchema, firstStepCallSchema } from '../../model/schemas';
 import { useRequestCallStore } from '../../store/store';
 import st from './FirstStepToCall.module.scss';
+
+import 'react-phone-input-2/lib/style.css';
 
 export const FirstStepToCall = ({
   onSubmit,
@@ -23,7 +26,7 @@ export const FirstStepToCall = ({
 
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
-      scenario: scenarios[0],
+      scenario: [scenarios[0]],
       phone: '',
     },
     validators: {
@@ -39,7 +42,9 @@ export const FirstStepToCall = ({
     console.log(formValues);
     if (formValues) {
       setFirstStepData({
-        scenario: formValues.scenario,
+        scenario: Array.isArray(formValues.scenario)
+          ? formValues.scenario.join(', ')
+          : formValues.scenario,
         phone: formValues.phone,
       });
     }
@@ -56,7 +61,7 @@ export const FirstStepToCall = ({
         }}
       >
         <header className={st.header}>
-          <h2>Choose call scenarios</h2>
+          <h2>Mark the call scenarios you are interested in</h2>
           <span className={st.divider} />
           <Field name="scenario">
             {(field) => (
@@ -64,8 +69,15 @@ export const FirstStepToCall = ({
                 {scenarios.map((scenario) => (
                   <Option
                     key={scenario}
-                    selected={field.state.value === scenario}
-                    onClick={() => field.handleChange(scenario)}
+                    selected={field.state.value.includes(scenario)}
+                    onClick={() => {
+                      const currentValue = field.state.value;
+                      if (currentValue.includes(scenario)) {
+                        field.handleChange(currentValue.filter((s) => s !== scenario));
+                      } else {
+                        field.handleChange([...currentValue, scenario]);
+                      }
+                    }}
                   >
                     {scenario}
                   </Option>
@@ -76,14 +88,21 @@ export const FirstStepToCall = ({
         </header>
         <Field name="phone">
           {(field) => (
-            <TextField
-              name={field.name}
-              placeholder="Phone Number"
-              value={String(field.state.value)}
-              onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
-              intent={field.state.meta.errors.length ? 'danger' : 'default'}
-            />
+            <div className={st.phoneInputContainer}>
+              <PhoneInput
+                country={'us'}
+                value={String(field.state.value)}
+                onChange={(phone) => field.handleChange(phone)}
+                onBlur={field.handleBlur}
+                placeholder="Phone Number"
+                inputClass={st.phoneInput}
+                buttonClass={st.phoneInputButton}
+                dropdownClass={st.phoneInputDropdown}
+                enableSearch={true}
+                searchPlaceholder="Search country..."
+                autoFormat={true}
+              />
+            </div>
           )}
         </Field>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
