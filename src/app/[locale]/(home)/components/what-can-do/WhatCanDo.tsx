@@ -64,8 +64,8 @@ export const WhatCanDo = () => (
       What Coldi Can <br /> <span className={st.highlighted}>Do for Your Business</span>
     </motion.h2>
     <section className={st.cards}>
-      {card.map((item) => (
-        <Card key={item.name} {...item} />
+      {card.map((item, index) => (
+        <Card key={item.name} {...item} index={index} />
       ))}
     </section>
   </section>
@@ -75,17 +75,37 @@ const Card = ({
   icon: Icon,
   name,
   text,
+  index,
 }: {
   icon: () => JSX.Element;
   name: string;
   text: string;
-}) => (
-  <article className={st.card}>
-    <div className={st.card__content}>
-      <h3>
-        <Icon /> <span>{name}</span>
-      </h3>
-      <p>{text}</p>
-    </div>
-  </article>
-);
+  index: number;
+}) => {
+  const totalDuration = card.length * 0.5; // 1.6s для 8 елементів
+
+  const shakeAnimation = {
+    rotate: [0, -15, 0, 15, 0],
+    transition: {
+      duration: 0.2,
+      repeat: Infinity,
+      repeatDelay: totalDuration - 0.5, // Затримка до наступного циклу
+      delay: index * 0.5,
+      ease: 'easeInOut',
+    },
+  };
+
+  return (
+    <article className={st.card}>
+      <div className={st.card__content}>
+        <h3>
+          <motion.div animate={shakeAnimation} style={{ display: 'inline-block' }}>
+            <Icon />
+          </motion.div>
+          <span>{name}</span>
+        </h3>
+        <p>{text}</p>
+      </div>
+    </article>
+  );
+};

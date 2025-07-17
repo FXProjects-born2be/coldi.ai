@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
 
+import { CloseIcon } from '@/shared/ui/icons/outline/close';
 import { Button } from '@/shared/ui/kit/button';
 
 import { useRequestCallStore } from '../../store/store';
@@ -90,6 +91,14 @@ export const StillLikeGetCall = () => {
           <Title />
           <Description asChild>
             <section className={st.content}>
+              <button
+                className={st.closeButton}
+                onClick={cancelLeave}
+                type="button"
+                aria-label="Close dialog"
+              >
+                <CloseIcon />
+              </button>
               <h3>Would you still like to get the call?</h3>
               <span className={st.divider} />
               <section className={st.content__info}>
@@ -98,7 +107,7 @@ export const StillLikeGetCall = () => {
                 </div>
                 <div className={st.textBlock}>
                   <p>
-                    Hey, I&apos;m still here — ready to talk.
+                    Hey, I&apos;m still here - ready to talk.
                     <br />
                     <br /> Let me show you what Coldi can do. Just click Call Me and I&apos;ll take
                     it from here.
