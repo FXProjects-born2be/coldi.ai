@@ -14,7 +14,7 @@ import { ThankYouDialog } from '@/features/request-lead/ui/thank-you-dialog';
 import st from './LeadFormContainer.module.scss';
 
 export const LeadFormContainer = () => {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
   const [data, setData] = useState<FirstLeadStepSchema & SecondLeadStepSchema>({
     company: '',

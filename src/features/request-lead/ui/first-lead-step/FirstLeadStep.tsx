@@ -1,6 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
+import PhoneInput from 'react-phone-input-2';
 
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
@@ -9,6 +10,8 @@ import { TextField } from '@/shared/ui/kit/text-field';
 
 import { type FirstLeadStepSchema, firstLeadStepSchema } from '../../model/schemas';
 import st from './FirstLeadStep.module.scss';
+
+import 'react-phone-input-2/lib/style.css';
 
 export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSchema) => void }) => {
   const { Field, Subscribe, handleSubmit, store } = useForm({
@@ -77,14 +80,21 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
             </Field>
             <Field name="phone">
               {(field) => (
-                <TextField
-                  name={field.name}
-                  placeholder="Phone"
-                  value={String(field.state.value)}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  intent={field.state.meta.errors.length ? 'danger' : 'default'}
-                />
+                <div className={st.phoneInputContainer}>
+                  <PhoneInput
+                    country={'us'}
+                    value={String(field.state.value)}
+                    onChange={(phone) => field.handleChange(phone)}
+                    onBlur={field.handleBlur}
+                    placeholder="Phone"
+                    inputClass={st.phoneInput}
+                    buttonClass={st.phoneInputButton}
+                    dropdownClass={st.phoneInputDropdown}
+                    enableSearch={true}
+                    searchPlaceholder="Search country..."
+                    autoFormat={true}
+                  />
+                </div>
               )}
             </Field>
           </FormRow>
