@@ -36,7 +36,7 @@ export const secondStepCallSchema = v.object({
     v.string(),
     v.minLength(
       1,
-      'Providing your company name helps us tailor the scenario with greater precision. Please fill in this field'
+      'Providing your company size helps us tailor the scenario with greater precision. Please fill in this field'
     )
   ),
 });

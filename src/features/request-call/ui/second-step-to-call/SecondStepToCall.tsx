@@ -5,11 +5,39 @@ import type { ReactNode } from 'react';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { Button } from '@/shared/ui/kit/button';
+import { Select } from '@/shared/ui/kit/select';
 import { TextField } from '@/shared/ui/kit/text-field';
 
 import type { SecondStepCallSchema } from '../../model/schemas';
 import { secondStepCallSchema } from '../../model/schemas';
 import st from './SecondStepToCall.module.scss';
+
+const industries = [
+  'Technology',
+  'Healthcare',
+  'Finance',
+  'E-commerce',
+  'Real Estate',
+  'Education',
+  'Retail',
+  'Telecommunications',
+  'Manufacturing',
+  'Hospitality',
+  'Consulting',
+  'Entertainment',
+  'Non-profit',
+  'Other (Please specify)',
+];
+
+const companySizes = [
+  'Up to 10',
+  '10-50',
+  '50-200',
+  '200-500',
+  '500-1,000',
+  '1,000-5,000',
+  '5,000+',
+];
 
 export const SecondStepToCall = ({
   botName,
@@ -70,23 +98,23 @@ export const SecondStepToCall = ({
           <FormRow>
             <Field name="industry">
               {(field) => (
-                <TextField
-                  name={field.name}
+                <Select
+                  items={industries.map((industry) => ({ label: industry, value: industry }))}
+                  value={field.state.value}
+                  onChange={field.handleChange}
                   placeholder="Industry"
-                  value={String(field.state.value)}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
+                  showOtherInput={true}
+                  otherPlaceholder="Please specify your industry"
                 />
               )}
             </Field>
             <Field name="company">
               {(field) => (
-                <TextField
-                  name={field.name}
+                <Select
+                  items={companySizes.map((size) => ({ label: size, value: size }))}
+                  value={field.state.value}
+                  onChange={field.handleChange}
                   placeholder="Company size"
-                  value={String(field.state.value)}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
                 />
               )}
             </Field>
