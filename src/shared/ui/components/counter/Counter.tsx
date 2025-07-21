@@ -8,6 +8,7 @@ type CounterProps = {
   end: number;
   duration?: number;
   delay?: number;
+  prefix?: string;
   suffix?: string;
   className?: string;
 };
@@ -17,6 +18,7 @@ export const Counter = ({
   end,
   duration = 2,
   delay = 0,
+  prefix = '',
   suffix = '',
   className,
 }: CounterProps) => {
@@ -57,8 +59,9 @@ export const Counter = ({
       onViewportEnter={() => setIsInView(true)}
       viewport={{ once: true }}
     >
+      <span>{prefix}</span>
       {count}
-      {suffix}
+      <span>{suffix}</span>
     </motion.span>
   );
 };
