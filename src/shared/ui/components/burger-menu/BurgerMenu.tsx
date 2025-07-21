@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -22,6 +22,10 @@ export const BurgerMenu = () => {
   const [open, setOpen] = useState(false);
 
   const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <Root open={open} onOpenChange={setOpen}>
@@ -55,16 +59,16 @@ export const BurgerMenu = () => {
                   Home
                 </Link>
                 <Link href="/news" className={cn({ [st.active]: pathname === '/news' })}>
-                  News Page
+                  News
                 </Link>
-                <Link href="/product" className={cn({ [st.active]: pathname === '/product' })}>
-                  Product Page
+                <Link href="/products" className={cn({ [st.active]: pathname === '/product' })}>
+                  Products
                 </Link>
                 <Link href="/about" className={cn({ [st.active]: pathname === '/about' })}>
-                  About Page
+                  About
                 </Link>
                 <Link href="/pricing" className={cn({ [st.active]: pathname === '/pricing' })}>
-                  Pricing Page
+                  Pricing
                 </Link>
               </nav>
             </section>
