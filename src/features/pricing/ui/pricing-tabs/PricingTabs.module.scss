@@ -1,0 +1,191 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  padding: 165px 124px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  background: #fafafa;
+  @include tablet {
+    padding: 64px 16px;
+    gap: 32px;
+  }
+  .tabs {
+    border-radius: 32px;
+    border: 1px solid rgba(12, 16, 33, 0.05);
+    background: #fff;
+    width: auto;
+    margin: 0 auto;
+    display: flex;
+    padding: 8px;
+    gap: 8px;
+    position: relative;
+    @include tablet {
+      width: 100%;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 8px;
+      width: calc(50% - 8px);
+      height: calc(100% - 16px);
+      transform: translateY(-50%);
+      border-radius: 24px;
+      background: rgba(66, 104, 255, 0.15);
+      transition: all 0.3s ease-in-out;
+    }
+    &.inbound {
+      &::before {
+        left: 8px;
+      }
+    }
+    &.outbound {
+      &::before {
+        left: calc(50%);
+      }
+    }
+    .tab {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 16px 24px;
+      border: none;
+      background: none;
+      color: #535662;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%; /* 24px */
+      display: flex;
+      padding: 24px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      &.active {
+        color: #4268ff;
+      }
+    }
+  }
+
+  .content {
+    .row {
+      max-width: 1074px;
+      margin: 0 auto;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      @include tablet {
+        flex-direction: column;
+      }
+      .item {
+        width: calc(50% - 12px);
+        border-radius: 48px;
+        border: 1px solid rgba(12, 16, 33, 0.05);
+        background: #fff;
+        box-shadow: 0px 4px 15px 0px rgba(12, 16, 33, 0.02);
+        padding: 8px;
+        @include tablet {
+          width: 100%;
+        }
+        &:hover {
+          .inner {
+            background: linear-gradient(
+              to top,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(178, 202, 255, 0.2) 90%
+            );
+            box-shadow: 0px 0px 15px 0px rgba(12, 16, 33, 0.05) inset;
+          }
+        }
+        .inner {
+          border-radius: 42px;
+          background: #fff;
+          box-shadow: 0px 0px 15px 0px rgba(12, 16, 33, 0.05) inset;
+          display: flex;
+          padding: 24px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 48px;
+          align-self: stretch;
+          .label {
+            color: #4268ff;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            display: flex;
+            padding: 12px 24px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 24px;
+            border: 1px solid rgba(66, 104, 255, 0.5);
+            background: rgba(66, 104, 255, 0.1);
+          }
+          .details {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            h3 {
+              color: #0c1021;
+              font-size: 32px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+            p {
+              color: #50556b;
+              font-size: 20px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+          }
+          .price {
+            color: #0c1021;
+            font-size: 42px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            span {
+              color: #0c1021;
+              font-size: 24px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: normal;
+            }
+          }
+          .features {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 24px;
+            align-self: stretch;
+            li {
+              display: flex;
+              align-items: flex-start;
+              gap: 8px;
+              align-self: stretch;
+              span {
+                width: calc(100% - 32px);
+                color: #0c1021;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+              }
+            }
+          }
+          .button {
+            width: 100%;
+            button {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
