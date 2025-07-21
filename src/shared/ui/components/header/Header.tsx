@@ -66,8 +66,8 @@ const Navigation = () => {
       <li className={cn({ [st.active]: pathname === '/news' })}>
         <Link href="/news">News</Link>
       </li>
-      <li className={cn({ [st.active]: pathname === '/product' })}>
-        <Link href="/product">Products</Link>
+      <li className={cn({ [st.active]: pathname === '/products' })}>
+        <Link href="/products">Products</Link>
       </li>
       <li className={cn({ [st.active]: pathname === '/pricing' })}>
         <Link href="/pricing">Pricing</Link>
