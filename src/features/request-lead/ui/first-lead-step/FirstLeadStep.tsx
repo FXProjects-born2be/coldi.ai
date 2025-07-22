@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 
 import type { ReactNode } from 'react';
 import PhoneInput from 'react-phone-input-2';
@@ -9,11 +10,14 @@ import { Button } from '@/shared/ui/kit/button';
 import { TextField } from '@/shared/ui/kit/text-field';
 
 import { type FirstLeadStepSchema, firstLeadStepSchema } from '../../model/schemas';
+import { useRequestLeadStore } from '../../store/store';
 import st from './FirstLeadStep.module.scss';
 
 import 'react-phone-input-2/lib/style.css';
 
 export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSchema) => void }) => {
+  const { setFirstStepData } = useRequestLeadStore();
+
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
       fullName: '',
@@ -27,6 +31,20 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
     onSubmit: (data) => onSubmit(data.value),
   });
   const errors = useStore(store, (state) => state.errorMap);
+
+  const formValues = useStore(store, (state) => state.values);
+
+  useEffect(() => {
+    console.log(formValues);
+    if (formValues) {
+      setFirstStepData({
+        fullName: formValues.fullName,
+        company: formValues.company,
+        email: formValues.email,
+        phone: formValues.phone,
+      });
+    }
+  }, [formValues, setFirstStepData]);
 
   return (
     <section className={st.container}>

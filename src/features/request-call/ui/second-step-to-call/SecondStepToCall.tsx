@@ -10,6 +10,7 @@ import { TextField } from '@/shared/ui/kit/text-field';
 
 import type { SecondStepCallSchema } from '../../model/schemas';
 import { secondStepCallSchema } from '../../model/schemas';
+import { useRequestCallStore } from '../../store/store';
 import st from './SecondStepToCall.module.scss';
 
 const industries = [
@@ -46,6 +47,8 @@ export const SecondStepToCall = ({
   botName: string;
   onSubmit: (data: SecondStepCallSchema) => void;
 }) => {
+  const { firstStepData } = useRequestCallStore();
+
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
       name: '',
@@ -56,7 +59,21 @@ export const SecondStepToCall = ({
     validators: {
       onChange: secondStepCallSchema,
     },
-    onSubmit: (data) => onSubmit(data.value),
+    onSubmit: async (data) => {
+      onSubmit(data.value);
+      const body = { ...data.value, ...firstStepData };
+      console.log(body);
+      const res = await fetch('/api/request-call', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (res.ok) {
+        console.log('Call request sent successfully');
+      } else {
+        console.error('Failed to send call request');
+      }
+    },
   });
   const errors = useStore(store, (state) => state.errorMap);
 

@@ -11,6 +11,7 @@ import { TextArea } from '@/shared/ui/kit/text-area/TextArea';
 import { TextField } from '@/shared/ui/kit/text-field';
 
 import { type SecondLeadStepSchema, secondLeadStepSchema } from '../../model/schemas';
+import { useRequestLeadStore } from '../../store/store';
 import st from './SecondLeadStep.module.scss';
 
 export const SecondLeadStep = ({
@@ -18,6 +19,7 @@ export const SecondLeadStep = ({
 }: {
   onSubmit: (data: SecondLeadStepSchema) => void;
 }) => {
+  const { firstStepData } = useRequestLeadStore();
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
       industry: '',
@@ -28,7 +30,21 @@ export const SecondLeadStep = ({
     validators: {
       onChange: secondLeadStepSchema,
     },
-    onSubmit: (data) => onSubmit(data.value),
+    onSubmit: async (data) => {
+      onSubmit(data.value);
+      const body = { ...data.value, ...firstStepData };
+      console.log(body);
+      const res = await fetch('/api/request-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (res.ok) {
+        console.log('Lead request sent successfully');
+      } else {
+        console.error('Failed to send lead request');
+      }
+    },
   });
   const errors = useStore(store, (state) => state.errorMap);
 
