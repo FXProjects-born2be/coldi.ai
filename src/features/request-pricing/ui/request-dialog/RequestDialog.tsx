@@ -47,11 +47,20 @@ export const RequestDialog = ({
   });
   const errors = useStore(store, (state) => state.errorMap);
 
-  const onSubmit = (data: RequestPricingSchema) => {
+  const onSubmit = async (data: RequestPricingSchema) => {
     console.log('Form submitted:', data);
     setOpen(false);
-    setIsThankYouDialogOpen(true);
-    reset();
+    const res = await fetch('/api/request-pricing', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      setIsThankYouDialogOpen(true);
+      reset();
+    } else {
+      console.error('Failed to submit request pricing');
+    }
   };
 
   return (

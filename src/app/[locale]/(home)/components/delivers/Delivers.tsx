@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
@@ -8,6 +9,7 @@ import type { ReactNode } from 'react';
 import { blurInUp } from '@/shared/lib/helpers/animations';
 import { cn } from '@/shared/lib/helpers/styles';
 import { Counter } from '@/shared/ui/components/counter';
+import { Button } from '@/shared/ui/kit/button';
 
 import st from './Delivers.module.scss';
 
@@ -103,6 +105,16 @@ export const Delivers = () => {
           <Card {...cards[3]} />
         </motion.div>
       </section>
+      <Link href="/lead-request" className={st.button}>
+        <motion.div
+          variants={blurInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <Button size="md">Get Started with Coldi</Button>
+        </motion.div>
+      </Link>
     </section>
   );
 };
