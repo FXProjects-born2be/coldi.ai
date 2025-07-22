@@ -32,8 +32,11 @@ export const SecondLeadStep = ({
     },
     onSubmit: async (data) => {
       onSubmit(data.value);
+
       const body = { ...data.value, ...firstStepData };
       console.log(body);
+
+      // Send to existing API
       const res = await fetch('/api/request-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -43,6 +46,34 @@ export const SecondLeadStep = ({
         console.log('Lead request sent successfully');
       } else {
         console.error('Failed to send lead request');
+      }
+
+      // Send to HubSpot
+      const hubspotData = {
+        email: firstStepData.email,
+        firstname: firstStepData.fullName,
+        phone: firstStepData.phone,
+        website: firstStepData.company,
+        message: data.value.message,
+        call_scenarios: data.value.primaryGoal.join('; '),
+        company_size: data.value.monthlyLeadVolume,
+        industry: data.value.industry,
+        hs_lead_status: 'NEW',
+      };
+
+      console.log('Sending to HubSpot:', hubspotData);
+
+      /*const hubspotRes = await fetch('/api/hubspot-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(hubspotData),
+      });*/
+
+      if (res.ok) {
+        console.log('Lead sent to HubSpot successfully');
+      } else {
+        const errorData = await res.json();
+        console.error('Failed to send lead to HubSpot:', errorData);
       }
     },
   });

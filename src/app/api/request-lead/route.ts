@@ -3,18 +3,21 @@ import { NextResponse } from 'next/server';
 import sgMail from '@sendgrid/mail';
 
 type RequestCallData = {
-  name: string;
+  fullName: string;
   email: string;
   phone: string;
   industry: string;
   company: string;
-  scenario: string;
+  monthlyLeadVolume: string;
+  primaryGoal: string[];
+  message: string;
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
   try {
     const bodyJSON = (await request.json()) as RequestCallData;
-    const { name, email, phone, industry, company, scenario } = bodyJSON;
+    const { fullName, email, phone, industry, company, monthlyLeadVolume, primaryGoal, message } =
+      bodyJSON;
 
     // Initialize SendGrid with API key
     sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
@@ -23,15 +26,17 @@ export async function POST(request: Request): Promise<NextResponse> {
     const msg = {
       to: process.env.ADMIN_EMAIL!, // Your admin email address
       from: process.env.FROM_EMAIL!, // Verified sender email
-      subject: 'New Call Request',
+      subject: 'New Lead Request',
       html: `
-        <h2>New Call Request</h2>
-        <p><strong>Nombre:</strong> ${name}</p>
+        <h2>New Lead Request</h2>
+        <p><strong>Nombre:</strong> ${fullName}</p>
         <p><strong>Correo Electrónico:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
         <p><strong>Industry:</strong> ${industry}</p>
         <p><strong>Company:</strong> ${company}</p>
-        <p><strong>Scenario:</strong> ${scenario}</p>
+        <p><strong>Monthly Lead Volume:</strong> ${monthlyLeadVolume}</p>
+        <p><strong>Primary Goal:</strong> ${primaryGoal}</p>
+        <p><strong>Message:</strong> ${message}</p>
       `,
     };
 
