@@ -74,10 +74,20 @@ export const SecondStepToCall = ({
         console.error('Failed to send call request');
       }
 
+      const retellPayload = {
+        name: data.value.name,
+        email: data.value.email,
+        phone: firstStepData.phone,
+        industry: data.value.industry,
+        company: data.value.company,
+        agent,
+      };
+      console.log('Retell payload:', retellPayload);
+
       const retellRes = await fetch('/api/retell-call', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+        body: JSON.stringify(retellPayload),
       });
       console.log('Retell response:', retellRes);
       if (retellRes.ok) {

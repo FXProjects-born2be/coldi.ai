@@ -16,7 +16,9 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
+  console.log('Received body:', body);
   const { name, email, phone, industry, company, agent } = body;
+  console.log('Extracted fields:', { name, email, phone, industry, company, agent });
 
   if (!name || !email || !phone || !industry || !company || !agent) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -24,6 +26,8 @@ export async function POST(req: NextRequest) {
 
   const override_agent_id = AGENT_IDS[agent];
   if (!override_agent_id) {
+    console.log('Unknown agent:', agent);
+    console.log('Available agents:', Object.keys(AGENT_IDS));
     return NextResponse.json({ error: 'Unknown agent' }, { status: 400 });
   }
 
@@ -43,6 +47,9 @@ export async function POST(req: NextRequest) {
     },
   };
 
+  console.log('Sending to Retell:', payload);
+  console.log('Retell API Key exists:', !!apiKey);
+
   try {
     const retellRes = await fetch(RETELL_API_URL, {
       method: 'POST',
@@ -53,7 +60,10 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify(payload),
     });
     const data = await retellRes.json();
+    console.log('Retell response:', data);
     if (!retellRes.ok) {
+      console.log('Retell error status:', retellRes.status);
+      console.log('Retell error data:', data);
       return NextResponse.json({ error: data }, { status: retellRes.status });
     }
     return NextResponse.json(data, { status: 200 });

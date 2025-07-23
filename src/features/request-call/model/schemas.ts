@@ -1,4 +1,5 @@
 import { v } from '@/shared/lib/forms';
+import { isPhoneValid } from '@/shared/lib/validation';
 
 export const firstStepCallSchema = v.object({
   scenario: v.pipe(
@@ -12,6 +13,10 @@ export const firstStepCallSchema = v.object({
     v.string(),
     v.minLength(
       1,
+      'We can’t complete your request without a valid phone number. Please provide one so we can place the test call.'
+    ),
+    v.custom(
+      (value) => isPhoneValid(String(`+${value}`)),
       'We can’t complete your request without a valid phone number. Please provide one so we can place the test call.'
     )
   ),
