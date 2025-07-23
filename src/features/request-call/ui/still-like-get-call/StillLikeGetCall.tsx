@@ -93,7 +93,7 @@ export const StillLikeGetCall = () => {
             <section className={st.content}>
               <button
                 className={st.closeButton}
-                onClick={cancelLeave}
+                onClick={confirmLeave}
                 type="button"
                 aria-label="Close dialog"
               >
