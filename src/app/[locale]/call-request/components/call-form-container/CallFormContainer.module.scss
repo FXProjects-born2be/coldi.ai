@@ -20,6 +20,15 @@
 
     .selected {
       color: #4268ff;
+      display: inline-flex !important;
+      align-items: center !important;
+      cursor: pointer;
+      gap: 4px;
+      > span {
+        display: block;
+        margin-top: 10px;
+        font-size: 16px;
+      }
     }
 
     @include mobile {
