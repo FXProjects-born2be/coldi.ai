@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 
 import sgMail from '@sendgrid/mail';
 
+import type { Agent } from '@/features/request-call/store/store';
+
 type RequestCallData = {
   name: string;
   email: string;
@@ -9,12 +11,13 @@ type RequestCallData = {
   industry: string;
   company: string;
   scenario: string;
+  agent: Agent;
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
   try {
     const bodyJSON = (await request.json()) as RequestCallData;
-    const { name, email, phone, industry, company, scenario } = bodyJSON;
+    const { name, email, phone, industry, company, scenario, agent } = bodyJSON;
 
     // Initialize SendGrid with API key
     sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
@@ -32,6 +35,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         <p><strong>Industry:</strong> ${industry}</p>
         <p><strong>Company:</strong> ${company}</p>
         <p><strong>Scenario:</strong> ${scenario}</p>
+        <p><strong>Agent:</strong> ${agent}</p>
       `,
     };
 

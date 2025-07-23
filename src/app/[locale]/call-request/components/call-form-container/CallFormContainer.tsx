@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 
@@ -8,6 +8,8 @@ import type {
   FirstStepCallSchema,
   SecondStepCallSchema,
 } from '@/features/request-call/model/schemas';
+import type { Agent } from '@/features/request-call/store/store';
+import { useRequestCallStore } from '@/features/request-call/store/store';
 import { FirstStepToCall } from '@/features/request-call/ui/first-step-to-call';
 import { SecondStepToCall } from '@/features/request-call/ui/second-step-to-call';
 import { StillLikeGetCall } from '@/features/request-call/ui/still-like-get-call';
@@ -22,6 +24,7 @@ const ThankYouDialog = dynamic(
 
 export const CallFormContainer = ({ botName = 'Sana' }: { botName?: string }) => {
   const [step, setStep] = useState(1);
+  const { setAgent } = useRequestCallStore();
   const [data, setData] = useState<FirstStepCallSchema & SecondStepCallSchema>({
     scenario: [],
     phone: '',
@@ -50,6 +53,10 @@ export const CallFormContainer = ({ botName = 'Sana' }: { botName?: string }) =>
     setIsSuccess(false);
     router.push('/');
   };
+
+  useEffect(() => {
+    setAgent(botName as Agent);
+  }, [botName, setAgent]);
 
   return (
     <section className={st.layout}>
