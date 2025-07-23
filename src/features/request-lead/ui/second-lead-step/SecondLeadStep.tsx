@@ -63,16 +63,16 @@ export const SecondLeadStep = ({
 
       console.log('Sending to HubSpot:', hubspotData);
 
-      /*const hubspotRes = await fetch('/api/hubspot-lead', {
+      const hubspotRes = await fetch('/api/hubspot-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(hubspotData),
-      });*/
-
-      if (res.ok) {
+      });
+      console.log('HubSpot response:', hubspotRes);
+      if (hubspotRes.ok) {
         console.log('Lead sent to HubSpot successfully');
       } else {
-        const errorData = await res.json();
+        const errorData = await hubspotRes.json();
         console.error('Failed to send lead to HubSpot:', errorData);
       }
     },

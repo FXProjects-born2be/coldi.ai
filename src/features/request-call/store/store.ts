@@ -5,11 +5,15 @@ type FirstStepData = {
   phone: string;
 };
 
+export type Agent = 'Sana' | 'James' | 'Victoria';
+
 type RequestCallStore = {
   firstStepData: FirstStepData;
   hasFirstStepData: boolean;
   setFirstStepData: (data: Partial<FirstStepData>) => void;
   resetFirstStepData: () => void;
+  agent: Agent;
+  setAgent: (agent: Agent) => void;
 };
 
 export const useRequestCallStore = create<RequestCallStore>((set, get) => ({
@@ -17,6 +21,7 @@ export const useRequestCallStore = create<RequestCallStore>((set, get) => ({
     scenario: '',
     phone: '',
   },
+  agent: 'Sana',
   hasFirstStepData: false,
   setFirstStepData: (data) => {
     const newData = { ...get().firstStepData, ...data };
@@ -26,6 +31,9 @@ export const useRequestCallStore = create<RequestCallStore>((set, get) => ({
       firstStepData: newData,
       hasFirstStepData: hasData,
     });
+  },
+  setAgent: (agent: Agent) => {
+    set({ agent });
   },
   resetFirstStepData: () => {
     set({

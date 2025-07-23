@@ -47,7 +47,7 @@ export const SecondStepToCall = ({
   botName: string;
   onSubmit: (data: SecondStepCallSchema) => void;
 }) => {
-  const { firstStepData } = useRequestCallStore();
+  const { agent, firstStepData } = useRequestCallStore();
 
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
@@ -61,7 +61,7 @@ export const SecondStepToCall = ({
     },
     onSubmit: async (data) => {
       onSubmit(data.value);
-      const body = { ...data.value, ...firstStepData };
+      const body = { ...data.value, ...firstStepData, agent };
       console.log(body);
       const res = await fetch('/api/request-call', {
         method: 'POST',
@@ -72,6 +72,28 @@ export const SecondStepToCall = ({
         console.log('Call request sent successfully');
       } else {
         console.error('Failed to send call request');
+      }
+
+      const retellPayload = {
+        name: data.value.name,
+        email: data.value.email,
+        phone: firstStepData.phone,
+        industry: data.value.industry,
+        company: data.value.company,
+        agent,
+      };
+      console.log('Retell payload:', retellPayload);
+
+      const retellRes = await fetch('/api/retell-call', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(retellPayload),
+      });
+      console.log('Retell response:', retellRes);
+      if (retellRes.ok) {
+        console.log('Retell call request sent successfully');
+      } else {
+        console.error('Failed to send retell call request');
       }
     },
   });
