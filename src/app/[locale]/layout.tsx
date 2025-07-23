@@ -1,5 +1,6 @@
 import { Urbanist } from 'next/font/google';
 
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 
@@ -41,6 +42,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
+      <GoogleAnalytics gaId="G-RCPHXB9V3B" />
       <body className={urbanist.variable}>
         <NextIntlClientProvider>
           <Header />
