@@ -58,6 +58,8 @@ export const SecondLeadStep = ({
         call_scenarios: data.value.primaryGoal.join('; '),
         company_size: data.value.monthlyLeadVolume,
         industry: data.value.industry,
+        monthly_lead: data.value.monthlyLeadVolume,
+        primary_goals: data.value.primaryGoal.join('; '),
         hs_lead_status: 'NEW',
       };
 
