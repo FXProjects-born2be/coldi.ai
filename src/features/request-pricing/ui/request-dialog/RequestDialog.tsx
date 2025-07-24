@@ -61,6 +61,26 @@ export const RequestDialog = ({
     } else {
       console.error('Failed to submit request pricing');
     }
+
+    const hubspotPayload = {
+      email: data.email,
+      firstname: data.name,
+      phone: data.phone,
+      website: data.website,
+      message: data.message,
+    };
+
+    const hubspotRes = await fetch('/api/hubspot-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(hubspotPayload),
+    });
+    console.log('Hubspot response:', hubspotRes);
+    if (hubspotRes.ok) {
+      console.log('Hubspot call request sent successfully');
+    } else {
+      console.error('Failed to send hubspot call request');
+    }
   };
 
   return (

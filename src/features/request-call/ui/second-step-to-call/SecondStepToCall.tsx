@@ -95,6 +95,30 @@ export const SecondStepToCall = ({
       } else {
         console.error('Failed to send retell call request');
       }
+
+      const hubspotPayload = {
+        email: data.value.email,
+        firstname: data.value.name,
+        phone: firstStepData.phone,
+        call_scenarios: firstStepData.scenario,
+        industry: data.value.industry,
+        company_size: data.value.company,
+        hs_lead_status: 'NEW',
+      };
+
+      console.log('Hubspot payload:', hubspotPayload);
+
+      const hubspotRes = await fetch('/api/hubspot-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(hubspotPayload),
+      });
+      console.log('Hubspot response:', hubspotRes);
+      if (hubspotRes.ok) {
+        console.log('Hubspot call request sent successfully');
+      } else {
+        console.error('Failed to send hubspot call request');
+      }
     },
   });
   const errors = useStore(store, (state) => state.errorMap);
