@@ -9,8 +9,16 @@
   margin: 0 auto;
 
   @include fourteenInch {
-    padding: 100px 16px;
-    zoom: 0.75;
+    padding: 32px 16px;
+    zoom: 0.7;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: center;
+    height: auto;
+    > section {
+      width: 100%;
+    }
   }
 
   h2 {
@@ -33,6 +41,8 @@
 .lines {
   display: flex;
   gap: 24px;
+
+  width: 100%;
 
   .activeLine {
     border-radius: 24px;
