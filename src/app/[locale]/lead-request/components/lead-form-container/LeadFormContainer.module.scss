@@ -9,7 +9,8 @@
   margin: 0 auto;
 
   @include fourteenInch {
-    zoom: 0.8;
+    padding: 100px 16px;
+    zoom: 0.75;
   }
 
   h2 {
