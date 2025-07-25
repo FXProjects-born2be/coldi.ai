@@ -6,6 +6,9 @@
   @include fourteenInch {
     //zoom: 0.8;
     padding: 32px 16px;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
   }
 
   @include mobile {
