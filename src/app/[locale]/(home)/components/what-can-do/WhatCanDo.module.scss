@@ -137,9 +137,6 @@
       span {
         width: calc(100% - 64px);
       }
-      @include fourteenInch {
-        font-size: 20px;
-      }
 
       @include tablet {
         flex-direction: column;
@@ -152,9 +149,6 @@
       font-size: 20px;
       font-weight: 400;
       line-height: normal;
-      @include fourteenInch {
-        font-size: 16px;
-      }
     }
   }
 }
