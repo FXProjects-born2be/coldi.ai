@@ -37,8 +37,11 @@ export const ThankYouDialog = ({ open, onClose }: { open: boolean; onClose: () =
                     fill="#16B46B"
                   />
                 </svg>
-                <h3>Great!</h3>
-                <p>Coldi agent will call you within seconds!</p>
+                <h3>Your request has been received.</h3>
+                <p>
+                  A Coldi specialist will review your submission and get back to you shortly with
+                  the optimal solution for your goals.
+                </p>
               </section>
               <Button onClick={onClose} fullWidth>
                 Continue
