@@ -26,13 +26,21 @@ export const FirstStepToCall = ({
 
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
-      scenario: [scenarios[0]],
-      phone: '',
+      scenario: localStorage.getItem('CallRequestFirstStepData')
+        ? JSON.parse(localStorage.getItem('CallRequestFirstStepData') || '{}').scenario
+        : [scenarios[0]],
+      phone: localStorage.getItem('CallRequestFirstStepData')
+        ? JSON.parse(localStorage.getItem('CallRequestFirstStepData') || '{}').phone
+        : '',
     },
     validators: {
       onChange: firstStepCallSchema,
     },
-    onSubmit: (data) => onSubmit(data.value),
+    onSubmit: (data) => {
+      onSubmit(data.value);
+      localStorage.setItem('CallRequestFirstStepData', JSON.stringify(data.value));
+      console.log(localStorage.getItem('CallRequestFirstStepData'));
+    },
   });
   const errors = useStore(store, (state) => state.errorMap);
 
@@ -73,7 +81,7 @@ export const FirstStepToCall = ({
                     onClick={() => {
                       const currentValue = field.state.value;
                       if (currentValue.includes(scenario)) {
-                        field.handleChange(currentValue.filter((s) => s !== scenario));
+                        field.handleChange(currentValue.filter((s: string) => s !== scenario));
                       } else {
                         field.handleChange([...currentValue, scenario]);
                       }

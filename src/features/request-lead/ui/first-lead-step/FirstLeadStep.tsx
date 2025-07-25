@@ -20,15 +20,27 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
 
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
-      fullName: '',
-      company: '',
-      email: '',
-      phone: '',
+      fullName: localStorage.getItem('LeadRequestFirstStepData')
+        ? JSON.parse(localStorage.getItem('LeadRequestFirstStepData') || '{}').fullName
+        : '',
+      company: localStorage.getItem('LeadRequestFirstStepData')
+        ? JSON.parse(localStorage.getItem('LeadRequestFirstStepData') || '{}').company
+        : '',
+      email: localStorage.getItem('LeadRequestFirstStepData')
+        ? JSON.parse(localStorage.getItem('LeadRequestFirstStepData') || '{}').email
+        : '',
+      phone: localStorage.getItem('LeadRequestFirstStepData')
+        ? JSON.parse(localStorage.getItem('LeadRequestFirstStepData') || '{}').phone
+        : '',
     },
     validators: {
       onChange: firstLeadStepSchema,
     },
-    onSubmit: (data) => onSubmit(data.value),
+    onSubmit: (data) => {
+      onSubmit(data.value);
+      localStorage.setItem('LeadRequestFirstStepData', JSON.stringify(data.value));
+      console.log(localStorage.getItem('LeadRequestFirstStepData'));
+    },
   });
   const errors = useStore(store, (state) => state.errorMap);
 

@@ -3,6 +3,7 @@ export * from './coldi-in-news/ColdiInNews';
 export * from './delivers/Delivers';
 export * from './hear-coldi/HearColdi';
 export * from './hero/Hero';
+export * from './infrustructure/Infrustructure';
 export * from './reviews/Reviews';
 export * from './voices/Voices';
 export * from './what-can-do/WhatCanDo';
