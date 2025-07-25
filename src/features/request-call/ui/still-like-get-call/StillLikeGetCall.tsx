@@ -79,14 +79,10 @@ export const StillLikeGetCall = () => {
     });
   };
 
-  const cancelLeave = () => {
-    setIsOpen(false);
-  };
-
   return (
-    <Root open={isOpen} onOpenChange={cancelLeave}>
+    <Root open={isOpen} onOpenChange={() => {}}>
       <Portal>
-        <Overlay className={st.overlay} />
+        <Overlay className={st.overlay} onClick={confirmLeave} />
         <Content>
           <Title />
           <Description asChild>
