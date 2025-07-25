@@ -26,10 +26,10 @@ export const FirstStepToCall = ({
 
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
-      scenario: localStorage.getItem('CallRequestFirstStepData')
+      scenario: localStorage?.getItem('CallRequestFirstStepData')
         ? JSON.parse(localStorage.getItem('CallRequestFirstStepData') || '{}').scenario
         : [scenarios[0]],
-      phone: localStorage.getItem('CallRequestFirstStepData')
+      phone: localStorage?.getItem('CallRequestFirstStepData')
         ? JSON.parse(localStorage.getItem('CallRequestFirstStepData') || '{}').phone
         : '',
     },
@@ -38,8 +38,8 @@ export const FirstStepToCall = ({
     },
     onSubmit: (data) => {
       onSubmit(data.value);
-      localStorage.setItem('CallRequestFirstStepData', JSON.stringify(data.value));
-      console.log(localStorage.getItem('CallRequestFirstStepData'));
+      localStorage?.setItem('CallRequestFirstStepData', JSON.stringify(data.value));
+      console.log(localStorage?.getItem('CallRequestFirstStepData'));
     },
   });
   const errors = useStore(store, (state) => state.errorMap);

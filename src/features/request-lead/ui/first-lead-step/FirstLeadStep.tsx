@@ -20,16 +20,16 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
 
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
-      fullName: localStorage.getItem('LeadRequestFirstStepData')
+      fullName: localStorage?.getItem('LeadRequestFirstStepData')
         ? JSON.parse(localStorage.getItem('LeadRequestFirstStepData') || '{}').fullName
         : '',
-      company: localStorage.getItem('LeadRequestFirstStepData')
+      company: localStorage?.getItem('LeadRequestFirstStepData')
         ? JSON.parse(localStorage.getItem('LeadRequestFirstStepData') || '{}').company
         : '',
-      email: localStorage.getItem('LeadRequestFirstStepData')
+      email: localStorage?.getItem('LeadRequestFirstStepData')
         ? JSON.parse(localStorage.getItem('LeadRequestFirstStepData') || '{}').email
         : '',
-      phone: localStorage.getItem('LeadRequestFirstStepData')
+      phone: localStorage?.getItem('LeadRequestFirstStepData')
         ? JSON.parse(localStorage.getItem('LeadRequestFirstStepData') || '{}').phone
         : '',
     },
@@ -38,8 +38,8 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
     },
     onSubmit: (data) => {
       onSubmit(data.value);
-      localStorage.setItem('LeadRequestFirstStepData', JSON.stringify(data.value));
-      console.log(localStorage.getItem('LeadRequestFirstStepData'));
+      localStorage?.setItem('LeadRequestFirstStepData', JSON.stringify(data.value));
+      console.log(localStorage?.getItem('LeadRequestFirstStepData'));
     },
   });
   const errors = useStore(store, (state) => state.errorMap);
