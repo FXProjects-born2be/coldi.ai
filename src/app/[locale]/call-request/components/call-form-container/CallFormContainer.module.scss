@@ -7,6 +7,10 @@
   width: 810px;
   margin: 0 auto;
 
+  @include fourteenInch {
+    zoom: 0.8;
+  }
+
   @include tablet {
     width: 100%;
   }

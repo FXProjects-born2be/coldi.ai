@@ -48,6 +48,13 @@
   height: 95vh;
   max-height: 95vh;
   max-width: 95%;
+
+  @include fourteenInch {
+    zoom: 0.8;
+    max-height: 100%;
+    height: auto;
+  }
+
   @include tablet {
     padding: 24px 16px;
   }

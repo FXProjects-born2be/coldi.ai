@@ -46,6 +46,10 @@
   gap: 32px;
   width: 500px;
 
+  @include fourteenInch {
+    zoom: 0.8;
+  }
+
   &__info {
     display: flex;
     flex-direction: column;
