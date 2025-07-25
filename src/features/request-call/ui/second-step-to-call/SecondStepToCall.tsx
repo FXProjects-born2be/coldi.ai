@@ -61,6 +61,7 @@ export const SecondStepToCall = ({
     },
     onSubmit: async (data) => {
       onSubmit(data.value);
+      localStorage?.removeItem('CallRequestFirstStepData');
       const body = { ...data.value, ...firstStepData, agent };
       console.log(body);
       const res = await fetch('/api/request-call', {

@@ -85,7 +85,7 @@ const Card = ({
   const totalDuration = card.length * 0.5; // 1.6s для 8 елементів
 
   const shakeAnimation = {
-    rotate: [0, -15, 0, 15, 0],
+    rotate: [0, -5, 0, 5, 0],
     transition: {
       duration: 0.2,
       repeat: Infinity,
@@ -98,13 +98,17 @@ const Card = ({
   return (
     <article className={st.card}>
       <div className={st.card__content}>
-        <h3>
-          <motion.div animate={shakeAnimation} style={{ display: 'inline-block' }}>
-            <Icon />
-          </motion.div>
-          <span>{name}</span>
-        </h3>
-        <p>{text}</p>
+        <div className={st.card__front}>
+          <h3>
+            <motion.div animate={shakeAnimation} style={{ display: 'inline-block' }}>
+              <Icon />
+            </motion.div>
+            <span>{name}</span>
+          </h3>
+        </div>
+        <div className={st.card__back}>
+          <p>{text}</p>
+        </div>
       </div>
     </article>
   );

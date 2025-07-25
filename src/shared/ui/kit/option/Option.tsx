@@ -15,7 +15,7 @@ export const Option = ({
   selected?: boolean;
   onClick?: () => void;
 }) => (
-  <button className={cn(st.option, selected && st.selected)} onClick={onClick}>
+  <span className={cn(st.option, selected && st.selected)} onClick={onClick}>
     {children}
-  </button>
+  </span>
 );
