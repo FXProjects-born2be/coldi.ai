@@ -68,6 +68,8 @@ export const RequestDialog = ({
       phone: data.phone,
       website: data.website,
       message: data.message,
+      hs_lead_status: 'NEW',
+      type: 'pricing_request',
     };
 
     const hubspotRes = await fetch('/api/hubspot-lead', {
@@ -79,7 +81,8 @@ export const RequestDialog = ({
     if (hubspotRes.ok) {
       console.log('Hubspot call request sent successfully');
     } else {
-      console.error('Failed to send hubspot call request');
+      const errorData = await hubspotRes.json();
+      console.error('Failed to send lead to HubSpot:', errorData);
     }
   };
 
