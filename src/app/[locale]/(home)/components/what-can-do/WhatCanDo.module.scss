@@ -7,12 +7,20 @@
   gap: 128px;
   background: #FAFAFA;
 
+  @include fourteenInch {
+    gap: 64px;
+  }
+
   h2 {
     color: #0c1021;
     text-align: center;
     font-size: 128px;
     font-weight: 400;
     line-height: 120%;
+
+    @include fourteenInch {
+      font-size: 72px;
+    }
 
     @include tablet {
       font-size: 48px;

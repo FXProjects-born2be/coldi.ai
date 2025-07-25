@@ -18,6 +18,10 @@
   font-weight: 400;
   line-height: 120%;
 
+  @include fourteenInch {
+    font-size: 64px;
+  }
+
   @include mobile {
     font-size: 48px;
   }

@@ -7,6 +7,10 @@
   gap: 64px;
   background: #ffffff;
 
+  @include fourteenInch {
+    gap: 64px;
+  }
+
   @include mobile {
     padding: 64px 16px;
   }
@@ -17,6 +21,10 @@
     font-size: 128px;
     font-weight: 400;
     line-height: 120%;
+
+    @include fourteenInch {
+      font-size: 64px;
+    }
 
     @include mobile {
       font-size: 48px;

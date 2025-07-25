@@ -99,6 +99,10 @@
         font-size: 48px;
       }
 
+      @include fourteenInch {
+        font-size: 64px;
+      }
+
       @include desktop-1300 {
         font-size: 80px;
       }

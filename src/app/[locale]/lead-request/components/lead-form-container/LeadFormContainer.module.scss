@@ -8,6 +8,10 @@
   width: 1000px;
   margin: 0 auto;
 
+  @include fourteenInch {
+    zoom: 0.8;
+  }
+
   h2 {
     color: #0c1021;
     text-align: center;
