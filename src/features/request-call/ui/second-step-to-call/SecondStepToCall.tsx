@@ -104,6 +104,7 @@ export const SecondStepToCall = ({
         industry: data.value.industry,
         company_size: data.value.company,
         hs_lead_status: 'NEW',
+        type: 'call_request',
       };
 
       console.log('Hubspot payload:', hubspotPayload);

@@ -39,13 +39,10 @@ export const Footer = () => {
             </ul>
             <ul className={st.footer__list}>
               <h4>Contact Us</h4>
-              <li>Registered address:</li>
-              <li>Registered number:</li>
-              <li>Office address:</li>
               <li>
-                <Link href="mailto:info@example.com">
+                <Link href="mailto:info@coldi.ai">
                   <MessageIcon />
-                  info@example.com
+                  info@coldi.ai
                 </Link>
               </li>
               <li>

@@ -61,6 +61,7 @@ export const SecondLeadStep = ({
         monthly_lead: data.value.monthlyLeadVolume,
         primary_goals: data.value.primaryGoal.join('; '),
         hs_lead_status: 'NEW',
+        type: 'lead_request',
       };
 
       console.log('Sending to HubSpot:', hubspotData);
