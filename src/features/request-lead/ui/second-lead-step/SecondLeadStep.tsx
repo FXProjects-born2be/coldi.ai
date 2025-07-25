@@ -33,6 +33,8 @@ export const SecondLeadStep = ({
     onSubmit: async (data) => {
       onSubmit(data.value);
 
+      localStorage?.removeItem('LeadRequestFirstStepData');
+
       const body = { ...data.value, ...firstStepData };
       console.log(body);
 
