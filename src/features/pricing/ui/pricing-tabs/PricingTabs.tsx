@@ -57,21 +57,23 @@ export const PricingTabs = () => {
                   className={st.item}
                   key={index}
                 >
-                  <div className={st.inner}>
-                    <div className={st.label}>{item.label}</div>
-                    <div className={st.details}>
-                      <h3>{item.title}</h3>
-                      <p>{item.description}</p>
+                  <div>
+                    <div className={st.inner}>
+                      <div className={st.label}>{item.label}</div>
+                      <div className={st.details}>
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
+                      </div>
+                      <h4 className={st.price} dangerouslySetInnerHTML={{ __html: item.price }} />
+                      <ul className={st.features}>
+                        {item.features.map((feature, index) => (
+                          <li key={index}>
+                            <ListCheck />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <h4 className={st.price} dangerouslySetInnerHTML={{ __html: item.price }} />
-                    <ul className={st.features}>
-                      {item.features.map((feature, index) => (
-                        <li key={index}>
-                          <ListCheck />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
                     <div className={st.button} onClick={() => onClick(item.title)}>
                       <Button size="md">Request Now</Button>
                     </div>
@@ -91,21 +93,23 @@ export const PricingTabs = () => {
                   className={st.item}
                   key={index}
                 >
-                  <div className={st.inner}>
-                    <div className={st.label}>{item.label}</div>
-                    <div className={st.details}>
-                      <h3>{item.title}</h3>
-                      <p>{item.description}</p>
+                  <div>
+                    <div className={st.inner}>
+                      <div className={st.label}>{item.label}</div>
+                      <div className={st.details}>
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
+                      </div>
+                      <h4 className={st.price} dangerouslySetInnerHTML={{ __html: item.price }} />
+                      <ul className={st.features}>
+                        {item.features.map((feature, index) => (
+                          <li key={index}>
+                            <ListCheck />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <h4 className={st.price} dangerouslySetInnerHTML={{ __html: item.price }} />
-                    <ul className={st.features}>
-                      {item.features.map((feature, index) => (
-                        <li key={index}>
-                          <ListCheck />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
                     <div className={st.button} onClick={() => onClick(item.title)}>
                       <Button size="md">Request Now</Button>
                     </div>
