@@ -10,7 +10,14 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const properties = body?.properties || body;
+  let properties = body?.properties || body;
+
+  // Remove 'type' property if it exists
+  if (properties && typeof properties === 'object' && 'type' in properties) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { type: _removed, ...rest } = properties;
+    properties = rest;
+  }
 
   try {
     const hubspotRes = await fetch(HUBSPOT_API_URL, {

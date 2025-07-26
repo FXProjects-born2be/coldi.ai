@@ -119,7 +119,8 @@ export const SecondStepToCall = ({
       if (hubspotRes.ok) {
         console.log('Hubspot call request sent successfully');
       } else {
-        console.error('Failed to send hubspot call request');
+        const error = await hubspotRes.json();
+        console.error('Failed to send hubspot call request', error);
       }
     },
   });
