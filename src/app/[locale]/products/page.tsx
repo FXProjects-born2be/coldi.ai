@@ -1,6 +1,7 @@
 import {
   ColdiAgentsBuilt,
   ColdiSpeaks,
+  Faq,
   Hero,
   NeverMiss,
   OutboundCalling,
@@ -16,6 +17,7 @@ export default function Products() {
       <ColdiAgentsBuilt />
       <VoiceAgentKPIs />
       <ColdiSpeaks />
+      <Faq />
     </main>
   );
 }
