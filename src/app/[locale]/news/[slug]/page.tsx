@@ -5,7 +5,7 @@ import { getNewsBySlug } from '@/features/news/news';
 import { TestIt } from '../components/test-it/TestIt';
 import st from './NewsPage.module.scss';
 
-export default async function NewsPage({ params }: { params: { slug: string } }) {
+export default async function NewsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
   const news = await getNewsBySlug(slug);
