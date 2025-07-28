@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
@@ -120,6 +121,17 @@ export const Advantages = () => {
           The Advantages of Implementation
         </motion.p>
       </header>
+
+      <motion.div
+        variants={blurInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className={st.image}
+      >
+        <Image src="/images/home/adv.jpg" alt="Advantages" width={1672} height={500} />
+      </motion.div>
+
       <section className={st.cards}>
         {cards.map((card, index) => (
           <motion.div key={index}>

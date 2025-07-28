@@ -71,7 +71,7 @@ export const Details = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <Image src={'/images/about/about2.png'} alt="Outbound Calling" width={432} height={491} />
+          <Image src={'/images/about/about2.png'} alt="Outbound Calling" width={516} height={515} />
         </motion.div>
       </div>
       <div className={st.row}>
