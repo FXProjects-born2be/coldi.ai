@@ -6,7 +6,7 @@ const supabase = createClient(
 );
 
 export type NewsArticle = {
-  id: number;
+  id: string;
   title: string;
   slug: string;
   content: string;
@@ -71,7 +71,7 @@ export const getNewsCategories = async (): Promise<string[]> => {
   }
 };
 
-export const getNewsById = async (id: number): Promise<NewsArticle | null> => {
+export const getNewsById = async (id: string | number): Promise<NewsArticle | null> => {
   try {
     const { data, error } = await supabase.from('posts').select('*').eq('id', id).single();
 
