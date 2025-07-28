@@ -122,16 +122,9 @@ export const Advantages = () => {
       </header>
       <section className={st.cards}>
         {cards.map((card, index) => (
-          <motion.div
-            variants={blurInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            key={card.name}
-            custom={index * 0.2}
-          >
+          <div key={index}>
             <Card {...card} />
-          </motion.div>
+          </div>
         ))}
       </section>
     </section>
