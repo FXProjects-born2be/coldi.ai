@@ -23,11 +23,17 @@
     &::-webkit-scrollbar {
       display: none;
     }
+    @include mobile {
+      justify-content: flex-start;
+    }
 
     > div {
       display: flex;
       justify-content: center;
       gap: 10px;
+      @include mobile {
+        justify-content: flex-start;
+      }
       > div {
         cursor: pointer;
         display: flex;
@@ -42,6 +48,7 @@
         font-style: normal;
         font-weight: 500;
         line-height: 120%; /* 24px */
+        white-space: nowrap;
         &.active {
           border: 1px solid #0c1021;
           color: #0c1021;
@@ -56,6 +63,14 @@
     margin-top: 64px;
     @include mobile {
       margin-top: 40px;
+    }
+
+    .noNews {
+      width: 100%;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 120%;
     }
 
     .loading {
