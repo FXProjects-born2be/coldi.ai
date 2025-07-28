@@ -9,6 +9,7 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
 
   const news = await getNewsBySlug(slug);
+
   return (
     <>
       <section className={st.layout}>
@@ -20,7 +21,12 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
             height={230}
           />
           <h1 className={st.title}>{news?.title}</h1>
-          <div className={st.content}>{news?.content}</div>
+          <div
+            className={st.content}
+            dangerouslySetInnerHTML={{
+              __html: news?.content?.replace(/NN/g, '<br />') || '',
+            }}
+          />
         </div>
       </section>
       <TestIt />
