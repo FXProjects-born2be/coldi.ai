@@ -6,7 +6,9 @@ import { TestIt } from '../components/test-it/TestIt';
 import st from './NewsPage.module.scss';
 
 export default async function NewsPage({ params }: { params: { slug: string } }) {
-  const news = await getNewsBySlug(params.slug);
+  const { slug } = await params;
+
+  const news = await getNewsBySlug(slug);
   return (
     <>
       <section className={st.layout}>
