@@ -51,6 +51,18 @@
   @include mobile {
     flex-direction: column;
   }
+  > div {
+    width: 50%;
+
+    &.error {
+      input,
+      [type='button'] {
+        border-color: #ff0000 !important;
+      }
+    }
+
+    @include mobile {
+      width: 100%;
+    }
+  }
 }
-
-

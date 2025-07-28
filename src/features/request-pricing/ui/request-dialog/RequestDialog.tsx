@@ -123,7 +123,7 @@ export const RequestDialog = ({
                   }}
                 >
                   <section className={st.fields}>
-                    <div className={st.inputWrapper}>
+                    <div className={`${st.inputWrapper} ${errors.onChange?.name ? st.error : ''}`}>
                       <Field name="name">
                         {(field) => (
                           <TextField
@@ -139,7 +139,9 @@ export const RequestDialog = ({
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
                     </div>
-                    <div className={st.inputWrapper}>
+                    <div
+                      className={`${st.inputWrapper} ${errors.onChange?.website ? st.error : ''}`}
+                    >
                       <Field name="website">
                         {(field) => (
                           <TextField
@@ -155,7 +157,7 @@ export const RequestDialog = ({
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
                     </div>
-                    <div className={st.inputWrapper}>
+                    <div className={`${st.inputWrapper} ${errors.onChange?.email ? st.error : ''}`}>
                       <Field name="email">
                         {(field) => (
                           <TextField
@@ -171,7 +173,7 @@ export const RequestDialog = ({
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
                     </div>
-                    <div className={st.inputWrapper}>
+                    <div className={`${st.inputWrapper} ${errors.onChange?.phone ? st.error : ''}`}>
                       <Field name="phone">
                         {(field) => (
                           <div className={st.phoneInputContainer}>
@@ -195,7 +197,9 @@ export const RequestDialog = ({
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
                     </div>{' '}
-                    <div className={`${st.inputWrapper} ${st.full}`}>
+                    <div
+                      className={`${st.inputWrapper} ${st.full} ${errors.onChange?.message ? st.error : ''}`}
+                    >
                       <Field name="message">
                         {(field) => (
                           <TextArea

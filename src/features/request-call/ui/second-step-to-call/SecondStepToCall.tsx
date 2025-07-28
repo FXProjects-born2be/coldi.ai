@@ -57,7 +57,7 @@ export const SecondStepToCall = ({
       company: '',
     },
     validators: {
-      onChange: secondStepCallSchema,
+      onSubmit: secondStepCallSchema,
     },
     onSubmit: async (data) => {
       onSubmit(data.value);
@@ -138,52 +138,72 @@ export const SecondStepToCall = ({
       >
         <section className={st.fields}>
           <FormRow>
-            <Field name="name">
-              {(field) => (
-                <TextField
-                  name={field.name}
-                  placeholder="Name"
-                  value={String(field.state.value)}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
-              )}
-            </Field>
-            <Field name="email">
-              {(field) => (
-                <TextField
-                  name={field.name}
-                  placeholder="Email"
-                  value={String(field.state.value)}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
-              )}
-            </Field>
+            <div className={`${st.inputWrapper} ${errors.onSubmit?.name ? st.error : ''}`}>
+              <Field name="name">
+                {(field) => (
+                  <TextField
+                    name={field.name}
+                    placeholder="Name"
+                    value={String(field.state.value)}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                )}
+              </Field>
+              {errors.onSubmit?.name?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
+            <div className={`${st.inputWrapper} ${errors.onSubmit?.email ? st.error : ''}`}>
+              <Field name="email">
+                {(field) => (
+                  <TextField
+                    name={field.name}
+                    placeholder="Email"
+                    value={String(field.state.value)}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                )}
+              </Field>
+              {errors.onSubmit?.email?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
           </FormRow>
           <FormRow>
-            <Field name="industry">
-              {(field) => (
-                <Select
-                  items={industries.map((industry) => ({ label: industry, value: industry }))}
-                  value={field.state.value}
-                  onChange={field.handleChange}
-                  placeholder="Industry"
-                  showOtherInput={true}
-                  otherPlaceholder="Please specify your industry"
-                />
-              )}
-            </Field>
-            <Field name="company">
-              {(field) => (
-                <Select
-                  items={companySizes.map((size) => ({ label: size, value: size }))}
-                  value={field.state.value}
-                  onChange={field.handleChange}
-                  placeholder="Company size"
-                />
-              )}
-            </Field>
+            <div className={`${st.inputWrapper} ${errors.onSubmit?.industry ? st.error : ''}`}>
+              <Field name="industry">
+                {(field) => (
+                  <Select
+                    items={industries.map((industry) => ({ label: industry, value: industry }))}
+                    value={field.state.value}
+                    onChange={field.handleChange}
+                    placeholder="Industry"
+                    showOtherInput={true}
+                    otherPlaceholder="Please specify your industry"
+                  />
+                )}
+              </Field>
+              {errors.onSubmit?.industry?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
+            <div className={`${st.inputWrapper} ${errors.onSubmit?.company ? st.error : ''}`}>
+              <Field name="company">
+                {(field) => (
+                  <Select
+                    items={companySizes.map((size) => ({ label: size, value: size }))}
+                    value={field.state.value}
+                    onChange={field.handleChange}
+                    placeholder="Company size"
+                  />
+                )}
+              </Field>
+              {errors.onSubmit?.company?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
           </FormRow>
         </section>
         <footer className={st.footer}>
@@ -199,18 +219,6 @@ export const SecondStepToCall = ({
           </span>
         </footer>
       </form>
-      {errors.onChange?.name?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
-      {errors.onChange?.email?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
-      {errors.onChange?.industry?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
-      {errors.onChange?.company?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
     </section>
   );
 };

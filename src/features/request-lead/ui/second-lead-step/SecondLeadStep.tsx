@@ -28,7 +28,7 @@ export const SecondLeadStep = ({
       message: '',
     },
     validators: {
-      onChange: secondLeadStepSchema,
+      onSubmit: secondLeadStepSchema,
     },
     onSubmit: async (data) => {
       onSubmit(data.value);
@@ -96,84 +96,106 @@ export const SecondLeadStep = ({
       >
         <section className={st.fields}>
           <FormRow>
-            <Field name="industry">
-              {(field) => (
-                <TextField
-                  name={field.name}
-                  placeholder="Industry"
-                  value={String(field.state.value)}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  intent={field.state.meta.errors.length ? 'danger' : 'default'}
-                />
-              )}
-            </Field>
-            <Field name="monthlyLeadVolume">
-              {(field) => (
-                <TextField
-                  name={field.name}
-                  placeholder="Monthly Lead Volume"
-                  value={String(field.state.value)}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  intent={field.state.meta.errors.length ? 'danger' : 'default'}
-                />
-              )}
-            </Field>
+            <div className={`${st.inputWrapper} ${errors.onSubmit?.industry ? st.error : ''}`}>
+              <Field name="industry">
+                {(field) => (
+                  <TextField
+                    name={field.name}
+                    placeholder="Industry"
+                    value={String(field.state.value)}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    intent={field.state.meta.errors.length ? 'danger' : 'default'}
+                  />
+                )}
+              </Field>
+              {errors.onSubmit?.industry?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
+            <div
+              className={`${st.inputWrapper} ${errors.onSubmit?.monthlyLeadVolume ? st.error : ''}`}
+            >
+              <Field name="monthlyLeadVolume">
+                {(field) => (
+                  <TextField
+                    name={field.name}
+                    placeholder="Monthly Lead Volume"
+                    value={String(field.state.value)}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    intent={field.state.meta.errors.length ? 'danger' : 'default'}
+                  />
+                )}
+              </Field>
+              {errors.onSubmit?.monthlyLeadVolume?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
           </FormRow>
           <div className={st.formGroup}>
             <p className={st.label}>Primary Goal</p>
-            <Field name="primaryGoal">
+            <div className={`${st.inputWrapper} ${errors.onSubmit?.primaryGoal ? st.error : ''}`}>
+              <Field name="primaryGoal">
+                {(field) => (
+                  <Dropdown
+                    trigger={
+                      <>
+                        {field.state.value.map((item) => (
+                          <Selected key={item}>{item}</Selected>
+                        ))}
+                      </>
+                    }
+                    items={[
+                      { label: 'Lead Generation', value: 'Lead Generation' },
+                      { label: 'Appointment Setting', value: 'Appointment Setting' },
+                      { label: 'Cost Reduction', value: 'Cost Reduction' },
+                      { label: 'Inbound Call Handling', value: 'Inbound Call Handling' },
+                      { label: 'Missed Call Recovery', value: 'Missed Call Recovery' },
+                      { label: 'Lead Qualification', value: 'Lead Qualification' },
+                      { label: 'Cold Outreach', value: 'Cold Outreach' },
+                      { label: 'Customer Re-engagement', value: 'Customer Re-engagement' },
+                      {
+                        label: 'Survey & Feedback Collection',
+                        value: 'Survey & Feedback Collection',
+                      },
+                      { label: 'Objection Handling', value: 'Objection Handling' },
+                      { label: 'Pre-Sales Screening', value: 'Pre-Sales Screening' },
+                      { label: 'Database Reactivation', value: 'Database Reactivation' },
+                      { label: 'Order Confirmation', value: 'Order Confirmation' },
+                      { label: 'Payment Collection', value: 'Payment Collection' },
+                      { label: 'Support Call Deflection', value: 'Support Call Deflection' },
+                      { label: 'Upselling / Cross-selling', value: 'Upselling / Cross-selling' },
+                      { label: 'Product/Service Promotion', value: 'Product/Service Promotion' },
+                      { label: 'Callback Scheduling', value: 'Callback Scheduling' },
+                    ]}
+                    selectedItems={field.state.value}
+                    onChange={(newSelected) => field.handleChange(newSelected)}
+                  />
+                )}
+              </Field>
+              {errors.onSubmit?.primaryGoal?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
+          </div>
+          <div className={`${st.inputWrapper} ${errors.onSubmit?.message ? st.error : ''}`}>
+            <Field name="message">
               {(field) => (
-                <Dropdown
-                  trigger={
-                    <>
-                      {field.state.value.map((item) => (
-                        <Selected key={item}>{item}</Selected>
-                      ))}
-                    </>
-                  }
-                  items={[
-                    { label: 'Lead Generation', value: 'Lead Generation' },
-                    { label: 'Appointment Setting', value: 'Appointment Setting' },
-                    { label: 'Cost Reduction', value: 'Cost Reduction' },
-                    { label: 'Inbound Call Handling', value: 'Inbound Call Handling' },
-                    { label: 'Missed Call Recovery', value: 'Missed Call Recovery' },
-                    { label: 'Lead Qualification', value: 'Lead Qualification' },
-                    { label: 'Cold Outreach', value: 'Cold Outreach' },
-                    { label: 'Customer Re-engagement', value: 'Customer Re-engagement' },
-                    {
-                      label: 'Survey & Feedback Collection',
-                      value: 'Survey & Feedback Collection',
-                    },
-                    { label: 'Objection Handling', value: 'Objection Handling' },
-                    { label: 'Pre-Sales Screening', value: 'Pre-Sales Screening' },
-                    { label: 'Database Reactivation', value: 'Database Reactivation' },
-                    { label: 'Order Confirmation', value: 'Order Confirmation' },
-                    { label: 'Payment Collection', value: 'Payment Collection' },
-                    { label: 'Support Call Deflection', value: 'Support Call Deflection' },
-                    { label: 'Upselling / Cross-selling', value: 'Upselling / Cross-selling' },
-                    { label: 'Product/Service Promotion', value: 'Product/Service Promotion' },
-                    { label: 'Callback Scheduling', value: 'Callback Scheduling' },
-                  ]}
-                  selectedItems={field.state.value}
-                  onChange={(newSelected) => field.handleChange(newSelected)}
+                <TextArea
+                  name={field.name}
+                  placeholder="Message"
+                  value={String(field.state.value)}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  intent={field.state.meta.errors.length ? 'danger' : 'default'}
                 />
               )}
             </Field>
+            {errors.onSubmit?.message?.map((err) => (
+              <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+            ))}
           </div>
-          <Field name="message">
-            {(field) => (
-              <TextArea
-                name={field.name}
-                placeholder="Message"
-                value={String(field.state.value)}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                intent={field.state.meta.errors.length ? 'danger' : 'default'}
-              />
-            )}
-          </Field>
         </section>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
           {([canSubmit, isSubmitting]) => (
@@ -183,18 +205,6 @@ export const SecondLeadStep = ({
           )}
         </Subscribe>
       </form>
-      {errors.onChange?.industry?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
-      {errors.onChange?.monthlyLeadVolume?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
-      {errors.onChange?.primaryGoal?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
-      {errors.onChange?.message?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
     </section>
   );
 };

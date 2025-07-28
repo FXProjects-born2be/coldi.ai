@@ -120,11 +120,18 @@ form {
   .fields {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    column-gap: 16px;
+    row-gap: 24px;
     margin-bottom: 48px;
     > div {
       width: calc(50% - 8px);
       position: relative;
+      &.error {
+        input,
+        [type='button'] {
+          border-color: #ff0000 !important;
+        }
+      }
       &.full {
         width: 100%;
       }
@@ -145,7 +152,7 @@ form {
         text-align: left;
         margin-top: 8px;
         position: absolute;
-        bottom: -10px;
+        bottom: -16px;
         left: 0;
       }
     }

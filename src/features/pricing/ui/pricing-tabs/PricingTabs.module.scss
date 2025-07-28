@@ -90,7 +90,7 @@
           width: 100%;
         }
         &:hover {
-          >div {
+          > div {
             background: linear-gradient(
               to top,
               rgba(255, 255, 255, 0) 0%,
@@ -118,10 +118,9 @@
         }
         .inner {
           border-radius: 42px;
-          
-          
+
           display: flex;
-          
+
           flex-direction: column;
           align-items: flex-start;
           gap: 48px;
@@ -194,7 +193,7 @@
               span {
                 width: calc(100% - 32px);
                 color: #0c1021;
-                font-size: 20px;
+                font-size: 18px;
                 font-style: normal;
                 font-weight: 400;
                 line-height: normal;
@@ -202,6 +201,30 @@
                   font-size: 16px;
                 }
               }
+            }
+          }
+          .moreOptions {
+            background: none;
+            border: none;
+            color: #4268ff;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            text-decoration-line: underline;
+            text-decoration-style: solid;
+            text-decoration-skip-ink: auto;
+            text-decoration-thickness: auto;
+            text-underline-offset: auto;
+            text-underline-position: from-font;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+
+            &:hover {
+              color: #2a4bcc;
             }
           }
         }
