@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /news-admin
+Disallow: /api/auth/
+Disallow: /api/news/
+
+# Allow all other pages
+Allow: /
