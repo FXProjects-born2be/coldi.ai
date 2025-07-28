@@ -34,7 +34,7 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
         : '',
     },
     validators: {
-      onChange: firstLeadStepSchema,
+      onSubmit: firstLeadStepSchema,
     },
     onSubmit: (data) => {
       onSubmit(data.value);
@@ -70,63 +70,83 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
       >
         <section className={st.fields}>
           <FormRow>
-            <Field name="fullName">
-              {(field) => (
-                <TextField
-                  name={field.name}
-                  placeholder="Full Name"
-                  value={String(field.state.value)}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  intent={field.state.meta.errors.length ? 'danger' : 'default'}
-                />
-              )}
-            </Field>
-            <Field name="company">
-              {(field) => (
-                <TextField
-                  name={field.name}
-                  placeholder="Company"
-                  value={String(field.state.value)}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  intent={field.state.meta.errors.length ? 'danger' : 'default'}
-                />
-              )}
-            </Field>
+            <div className={`${st.inputWrapper} ${errors.onSubmit?.fullName ? st.error : ''}`}>
+              <Field name="fullName">
+                {(field) => (
+                  <TextField
+                    name={field.name}
+                    placeholder="Full Name"
+                    value={String(field.state.value)}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    intent={errors.onSubmit?.fullName?.length ? 'danger' : 'default'}
+                  />
+                )}
+              </Field>
+              {errors.onSubmit?.fullName?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
+            <div className={`${st.inputWrapper} ${errors.onSubmit?.company ? st.error : ''}`}>
+              <Field name="company">
+                {(field) => (
+                  <TextField
+                    name={field.name}
+                    placeholder="Company"
+                    value={String(field.state.value)}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    intent={field.state.meta.errors.length ? 'danger' : 'default'}
+                  />
+                )}
+              </Field>
+              {errors.onSubmit?.company?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
           </FormRow>
           <FormRow>
-            <Field name="email">
-              {(field) => (
-                <TextField
-                  name={field.name}
-                  placeholder="Email"
-                  value={String(field.state.value)}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  intent={field.state.meta.errors.length ? 'danger' : 'default'}
-                />
-              )}
-            </Field>
-            <Field name="phone">
-              {(field) => (
-                <div className={st.phoneInputContainer}>
-                  <PhoneInput
-                    country={'us'}
+            <div className={`${st.inputWrapper} ${errors.onSubmit?.email ? st.error : ''}`}>
+              <Field name="email">
+                {(field) => (
+                  <TextField
+                    name={field.name}
+                    placeholder="Email"
                     value={String(field.state.value)}
-                    onChange={(phone) => field.handleChange(phone)}
                     onBlur={field.handleBlur}
-                    placeholder="Phone"
-                    inputClass={st.phoneInput}
-                    buttonClass={st.phoneInputButton}
-                    dropdownClass={st.phoneInputDropdown}
-                    enableSearch={true}
-                    searchPlaceholder="Search country..."
-                    autoFormat={true}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    intent={field.state.meta.errors.length ? 'danger' : 'default'}
                   />
-                </div>
-              )}
-            </Field>
+                )}
+              </Field>
+              {errors.onSubmit?.email?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
+            <div className={`${st.inputWrapper} ${errors.onSubmit?.phone ? st.error : ''}`}>
+              <Field name="phone">
+                {(field) => (
+                  <div className={st.phoneInputContainer}>
+                    <PhoneInput
+                      country={'us'}
+                      value={String(field.state.value)}
+                      onChange={(phone) => field.handleChange(phone)}
+                      onBlur={field.handleBlur}
+                      placeholder="Phone"
+                      inputClass={st.phoneInput}
+                      buttonClass={st.phoneInputButton}
+                      dropdownClass={st.phoneInputDropdown}
+                      enableSearch={true}
+                      searchPlaceholder="Search country..."
+                      autoFormat={true}
+                    />
+                  </div>
+                )}
+              </Field>
+              {errors.onSubmit?.phone?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
           </FormRow>
         </section>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
@@ -137,18 +157,6 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
           )}
         </Subscribe>
       </form>
-      {errors.onChange?.fullName?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
-      {errors.onChange?.company?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
-      {errors.onChange?.email?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
-      {errors.onChange?.phone?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
     </section>
   );
 };

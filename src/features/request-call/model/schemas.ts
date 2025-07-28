@@ -11,13 +11,10 @@ export const firstStepCallSchema = v.object({
   ),
   phone: v.pipe(
     v.string(),
-    v.minLength(
-      1,
-      'We can’t complete your request without a valid phone number. Please provide one so we can place the test call.'
-    ),
+    v.minLength(1, 'We can’t complete your request without a valid phone number.'),
     v.custom(
       (value) => isPhoneValid(String(`+${value}`)),
-      'We can’t complete your request without a valid phone number. Please provide one so we can place the test call.'
+      'We can’t complete your request without a valid phone number.'
     )
   ),
 });
@@ -26,22 +23,20 @@ export const secondStepCallSchema = v.object({
   name: v.pipe(v.string(), v.minLength(1, 'Please introduce yourself')),
   email: v.pipe(
     v.string(),
-    v.email(
-      "We can't send you the call results without your email address. Please enter a valid email to proceed"
-    )
+    v.email("We can't send you the call results without your email address.")
   ),
   industry: v.pipe(
     v.string(),
     v.minLength(
       1,
-      'Sharing your industry helps us create a more accurate and relevant call scenario. Please fill in this field'
+      'Sharing your industry helps us create a more accurate and relevant call scenario.'
     )
   ),
   company: v.pipe(
     v.string(),
     v.minLength(
       1,
-      'Providing your company size helps us tailor the scenario with greater precision. Please fill in this field'
+      'Providing your company size helps us tailor the scenario with greater precision.'
     )
   ),
 });

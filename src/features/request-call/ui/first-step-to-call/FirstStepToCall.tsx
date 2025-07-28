@@ -34,7 +34,7 @@ export const FirstStepToCall = ({
         : '',
     },
     validators: {
-      onChange: firstStepCallSchema,
+      onSubmit: firstStepCallSchema,
     },
     onSubmit: (data) => {
       onSubmit(data.value);
@@ -103,16 +103,20 @@ export const FirstStepToCall = ({
                 onChange={(phone) => field.handleChange(phone)}
                 onBlur={field.handleBlur}
                 placeholder="Phone Number"
-                inputClass={st.phoneInput}
+                inputClass={`${st.phoneInput} ${errors.onSubmit?.phone ? st.error : ''}`}
                 buttonClass={st.phoneInputButton}
                 dropdownClass={st.phoneInputDropdown}
                 enableSearch={true}
                 searchPlaceholder="Search country..."
                 autoFormat={true}
               />
+              {errors.onSubmit?.phone?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
             </div>
           )}
         </Field>
+
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
           {([canSubmit, isSubmitting]) => (
             <Button disabled={!canSubmit || isSubmitting} type="submit" fullWidth>
@@ -121,9 +125,6 @@ export const FirstStepToCall = ({
           )}
         </Subscribe>
       </form>
-      {errors.onChange?.phone?.map((err) => (
-        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-      ))}
     </section>
   );
 };

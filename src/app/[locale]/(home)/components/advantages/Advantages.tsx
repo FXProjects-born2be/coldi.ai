@@ -135,7 +135,7 @@ const Card = ({ imgUrl, name, text }: { imgUrl: string; name: string; text: stri
   <article
     className={st.cardLayout}
     style={{
-      background: `linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 82.21%), url(${imgUrl}) lightgray 50% / cover no-repeat;`,
+      background: `linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 82.21%), url(${imgUrl}) lightgray 50% / cover no-repeat`,
     }}
   >
     <section className={st.card}>

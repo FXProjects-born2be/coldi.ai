@@ -29,6 +29,20 @@
   @include mobile {
     flex-direction: column;
   }
+
+  > div {
+    width: 50%;
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+  &.error {
+    input,
+    [type='button'] {
+      border-color: #ff0000 !important;
+    }
+  }
 }
 
 .phoneInputContainer {

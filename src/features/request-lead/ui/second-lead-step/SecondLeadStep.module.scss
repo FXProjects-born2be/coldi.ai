@@ -1,3 +1,5 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -36,4 +38,17 @@
 .formRow {
   display: flex;
   gap: 24px;
+  .inputWrapper {
+    width: 50%;
+
+    @include mobile {
+      width: 100%;
+    }
+    &.error {
+      input,
+      > div {
+        border-color: #ff0000 !important;
+      }
+    }
+  }
 }
