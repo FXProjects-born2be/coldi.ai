@@ -61,6 +61,38 @@ export const NewsRow = () => {
               {category}
             </div>
           ))}
+          {!categories.includes('Industry Insight') && (
+            <div
+              className={`${st.category} ${activeCategory === 'Industry Insight' ? st.active : ''}`}
+              onClick={() => setActiveCategory('Industry Insight')}
+            >
+              Industry Insight
+            </div>
+          )}
+          {!categories.includes('Best Practices') && (
+            <div
+              className={`${st.category} ${activeCategory === 'Best Practices' ? st.active : ''}`}
+              onClick={() => setActiveCategory('Best Practices')}
+            >
+              Best Practices
+            </div>
+          )}
+          {!categories.includes('Trends & Predictions') && (
+            <div
+              className={`${st.category} ${activeCategory === 'Trends & Predictions' ? st.active : ''}`}
+              onClick={() => setActiveCategory('Trends & Predictions')}
+            >
+              Trends & Predictions
+            </div>
+          )}
+          {!categories.includes('Use cases') && (
+            <div
+              className={`${st.category} ${activeCategory === 'Use cases' ? st.active : ''}`}
+              onClick={() => setActiveCategory('Use cases')}
+            >
+              Use cases
+            </div>
+          )}
         </div>
       </div>
       <div className={st.news}>
@@ -70,7 +102,7 @@ export const NewsRow = () => {
               <div className={st.loadingItem} key={index}></div>
             ))}
           </div>
-        ) : (
+        ) : news.length > 0 ? (
           news.map((item) => (
             <div className={st.newsItem} key={item.id}>
               <Link href={`/news/${item.slug}`} className={st.newsItemTop}>
@@ -99,6 +131,8 @@ export const NewsRow = () => {
               </Link>
             </div>
           ))
+        ) : (
+          <div className={st.noNews}>No news found</div>
         )}
       </div>
     </section>
