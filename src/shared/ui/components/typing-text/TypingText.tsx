@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { motion } from 'framer-motion';
 
@@ -16,7 +16,7 @@ export const TypingText = ({ text, speed = 100, delay = 0, className }: TypingTe
   const [hasStarted, setHasStarted] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
-  const textArray = Array.isArray(text) ? text : [text];
+  const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
 
   useEffect(() => {
     if (!hasStarted) {
