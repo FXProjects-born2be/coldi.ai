@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
         slug,
         content: originalArticle,
         image: imageUrl,
-        tags: category ?? '',
+        category: category ?? '',
       },
     ]);
     if (insertError) throw insertError;
