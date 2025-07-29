@@ -20,6 +20,62 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    // Check if lead with email already exists
+    const email = properties?.email;
+    if (email) {
+      const searchUrl = `${HUBSPOT_API_URL}/search`;
+      const searchResponse = await fetch(searchUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          filterGroups: [
+            {
+              filters: [
+                {
+                  propertyName: 'email',
+                  operator: 'EQ',
+                  value: email,
+                },
+              ],
+            },
+          ],
+          properties: ['email', 'firstname'],
+        }),
+      });
+
+      if (searchResponse.ok) {
+        const searchData = await searchResponse.json();
+
+        // If lead with this email exists, create duplicate with "1" prefix
+        if (searchData.total > 0) {
+          const duplicateProperties = {
+            ...properties,
+            email: `1${email}`,
+            firstname: properties.firstname ? `${properties.firstname} - DUPLICATE` : 'DUPLICATE',
+          };
+
+          const hubspotRes = await fetch(HUBSPOT_API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ properties: duplicateProperties }),
+          });
+
+          const data = await hubspotRes.json();
+          if (!hubspotRes.ok) {
+            return NextResponse.json({ error: data }, { status: hubspotRes.status });
+          }
+          return NextResponse.json(data, { status: 200 });
+        }
+      }
+    }
+
+    // If no duplicate found or no email provided, create original lead
     const hubspotRes = await fetch(HUBSPOT_API_URL, {
       method: 'POST',
       headers: {
