@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: 'AI Voice Agent & Call Center Solutions Pricing',
     description:
       'See AI voice agent pricing and plans for inbound calls, booking agents, and full-service voice solutions. Discover affordable AI call center software built to scale. Request your AI voice agent now!',
-    //images: 'https://coldi.ai/images/meta.png',
+    images: 'https://coldi.ai/images/meta.png',
   },
 };
 

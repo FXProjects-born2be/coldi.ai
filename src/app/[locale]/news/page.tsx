@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'AI Calling & Industry News',
     description:
       'Stay informed with the latest news and updates on AI calling, AI call center software, and AI voice agents. Explore updates on AI call solutions shaping how businesses handle calls.',
-    //images: 'https://coldi.ai/images/meta.png',
+    images: 'https://coldi.ai/images/meta.png',
   },
 };
 

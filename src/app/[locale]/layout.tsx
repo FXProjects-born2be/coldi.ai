@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     },
     description:
       'Boost your customer service with Coldi’s AI call center. Try our AI voice agents to handle calls, bookings, and support – fast, efficient, and always on.',
-    //images: 'https://coldi.ai/images/meta.png',
+    images: 'https://coldi.ai/images/meta.png',
   },
 };
 
