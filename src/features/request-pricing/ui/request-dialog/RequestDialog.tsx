@@ -30,6 +30,10 @@ export const RequestDialog = ({
   console.log('RequestDialog rendered, open:', open);
   const plan = useRequestPricingStore((state) => state.plan);
   const [isThankYouDialogOpen, setIsThankYouDialogOpen] = useState(false);
+  console.log('plan', plan);
+  const planPrice = plan.price.replace('<span>', '').replace('</span>', '');
+  const planTitle = `${plan.label}: ${plan.title} - ${planPrice}`;
+  console.log('planTitle', planTitle);
 
   const { Field, Subscribe, handleSubmit, store, reset } = useForm({
     defaultValues: {
@@ -38,7 +42,7 @@ export const RequestDialog = ({
       website: '',
       phone: '',
       message: '',
-      plan,
+      plan: plan.title,
     },
     validators: {
       onChange: requestPricingSchema,
@@ -70,6 +74,7 @@ export const RequestDialog = ({
       message: data.message,
       hs_lead_status: 'NEW',
       type: 'pricing_request',
+      pricing: planTitle,
     };
 
     const hubspotRes = await fetch('/api/hubspot-lead', {
@@ -108,7 +113,7 @@ export const RequestDialog = ({
                 </button>
 
                 <h3>
-                  Start with Coldi <span>{plan}</span>
+                  Start with Coldi <span>{plan.title}</span>
                 </h3>
 
                 <h4>Fill out your data</h4>
