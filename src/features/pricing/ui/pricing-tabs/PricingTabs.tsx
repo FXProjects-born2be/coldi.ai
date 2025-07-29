@@ -23,7 +23,7 @@ const PricingCard = ({
   initialFeaturesCount,
 }: {
   item: Package;
-  onClick: (plan: string) => void;
+  onClick: (plan: { label: string; title: string; price: string }) => void;
   initialFeaturesCount: number;
 }) => {
   const [showAllFeatures, setShowAllFeatures] = useState(false);
@@ -81,7 +81,10 @@ const PricingCard = ({
             </button>
           )}
         </div>
-        <div className={st.button} onClick={() => onClick(item.title)}>
+        <div
+          className={st.button}
+          onClick={() => onClick({ label: item.label, title: item.title, price: item.price })}
+        >
           <Button size="md">Request Now</Button>
         </div>
       </div>
@@ -96,7 +99,7 @@ export const PricingTabs = () => {
   const [open, setOpen] = useState(false);
   const setPlan = useRequestPricingStore((state) => state.setPlan);
 
-  const onClick = (plan: string) => {
+  const onClick = (plan: { label: string; title: string; price: string }) => {
     setOpen(true);
     setPlan(plan);
   };
