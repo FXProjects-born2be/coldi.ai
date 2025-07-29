@@ -2,15 +2,14 @@
 
 import type { ReactNode } from 'react';
 
-import { useForm, useStore } from '@/shared/lib/forms';
-import { ErrorMessage } from '@/shared/ui/components/error-message';
+import { useForm } from '@/shared/lib/forms';
 import { Selected } from '@/shared/ui/components/selected';
 import { Button } from '@/shared/ui/kit/button';
 import { Dropdown } from '@/shared/ui/kit/dropdown';
 import { TextArea } from '@/shared/ui/kit/text-area/TextArea';
 import { TextField } from '@/shared/ui/kit/text-field';
 
-import { type SecondLeadStepSchema, secondLeadStepSchema } from '../../model/schemas';
+import { type SecondLeadStepSchema } from '../../model/schemas';
 import { useRequestLeadStore } from '../../store/store';
 import st from './SecondLeadStep.module.scss';
 
@@ -20,15 +19,12 @@ export const SecondLeadStep = ({
   onSubmit: (data: SecondLeadStepSchema) => void;
 }) => {
   const { firstStepData } = useRequestLeadStore();
-  const { Field, Subscribe, handleSubmit, store } = useForm({
+  const { Field, Subscribe, handleSubmit } = useForm({
     defaultValues: {
       industry: '',
       monthlyLeadVolume: '',
       primaryGoal: [] as string[],
       message: '',
-    },
-    validators: {
-      onSubmit: secondLeadStepSchema,
     },
     onSubmit: async (data) => {
       onSubmit(data.value);
@@ -68,7 +64,7 @@ export const SecondLeadStep = ({
 
       console.log('Sending to HubSpot:', hubspotData);
 
-      const hubspotRes = await fetch('/api/hubspot-lead', {
+      const hubspotRes = await fetch('/api/hubspot-lead-update', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(hubspotData),
@@ -82,7 +78,7 @@ export const SecondLeadStep = ({
       }
     },
   });
-  const errors = useStore(store, (state) => state.errorMap);
+  //const errors = useStore(store, (state) => state.errorMap);
 
   return (
     <section className={st.container}>
@@ -96,7 +92,7 @@ export const SecondLeadStep = ({
       >
         <section className={st.fields}>
           <FormRow>
-            <div className={`${st.inputWrapper} ${errors.onSubmit?.industry ? st.error : ''}`}>
+            <div className={`${st.inputWrapper}`}>
               <Field name="industry">
                 {(field) => (
                   <TextField
@@ -109,13 +105,8 @@ export const SecondLeadStep = ({
                   />
                 )}
               </Field>
-              {errors.onSubmit?.industry?.map((err) => (
-                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-              ))}
             </div>
-            <div
-              className={`${st.inputWrapper} ${errors.onSubmit?.monthlyLeadVolume ? st.error : ''}`}
-            >
+            <div className={`${st.inputWrapper}`}>
               <Field name="monthlyLeadVolume">
                 {(field) => (
                   <TextField
@@ -128,14 +119,11 @@ export const SecondLeadStep = ({
                   />
                 )}
               </Field>
-              {errors.onSubmit?.monthlyLeadVolume?.map((err) => (
-                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-              ))}
             </div>
           </FormRow>
           <div className={st.formGroup}>
             <p className={st.label}>Primary Goal</p>
-            <div className={`${st.inputWrapper} ${errors.onSubmit?.primaryGoal ? st.error : ''}`}>
+            <div className={`${st.inputWrapper}`}>
               <Field name="primaryGoal">
                 {(field) => (
                   <Dropdown
@@ -174,12 +162,9 @@ export const SecondLeadStep = ({
                   />
                 )}
               </Field>
-              {errors.onSubmit?.primaryGoal?.map((err) => (
-                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-              ))}
             </div>
           </div>
-          <div className={`${st.inputWrapper} ${errors.onSubmit?.message ? st.error : ''}`}>
+          <div className={`${st.inputWrapper}`}>
             <Field name="message">
               {(field) => (
                 <TextArea
@@ -192,9 +177,6 @@ export const SecondLeadStep = ({
                 />
               )}
             </Field>
-            {errors.onSubmit?.message?.map((err) => (
-              <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-            ))}
           </div>
         </section>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
