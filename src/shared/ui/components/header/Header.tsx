@@ -59,21 +59,35 @@ const Navigation = () => {
   const pathname = usePathname();
 
   return (
-    <ul className={st.header__navigation}>
-      <li className={cn({ [st.active]: pathname === '/' })}>
-        <Link href="/">Home</Link>
+    <ul
+      className={st.header__navigation}
+      itemScope
+      itemType="http://schema.org/SiteNavigationElement"
+    >
+      <li className={cn({ [st.active]: pathname === '/' })} itemProp="name">
+        <Link href="/" itemProp="url">
+          Home
+        </Link>
       </li>
-      <li className={cn({ [st.active]: pathname === '/news' })}>
-        <Link href="/news">News</Link>
+      <li className={cn({ [st.active]: pathname === '/news' })} itemProp="name">
+        <Link href="/news" itemProp="url">
+          News
+        </Link>
       </li>
-      <li className={cn({ [st.active]: pathname === '/products' })}>
-        <Link href="/products">Products</Link>
+      <li className={cn({ [st.active]: pathname === '/products' })} itemProp="name">
+        <Link href="/products" itemProp="url">
+          Products
+        </Link>
       </li>
-      <li className={cn({ [st.active]: pathname === '/pricing' })}>
-        <Link href="/pricing">Pricing</Link>
+      <li className={cn({ [st.active]: pathname === '/pricing' })} itemProp="name">
+        <Link href="/pricing" itemProp="url">
+          Pricing
+        </Link>
       </li>
-      <li className={cn({ [st.active]: pathname === '/about' })}>
-        <Link href="/about">About</Link>
+      <li className={cn({ [st.active]: pathname === '/about' })} itemProp="name">
+        <Link href="/about" itemProp="url">
+          About
+        </Link>
       </li>
     </ul>
   );

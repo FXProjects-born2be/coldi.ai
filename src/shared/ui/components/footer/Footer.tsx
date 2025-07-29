@@ -7,6 +7,9 @@ import { usePathname } from 'next/navigation';
 import { requestRoutes } from '@/shared/lib/helpers/request-routes';
 import { MessageIcon } from '@/shared/ui/icons/fill/message';
 import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
+import { Facebook } from '@/shared/ui/icons/fill/socials/facebook';
+import { Linkedin } from '@/shared/ui/icons/fill/socials/linkedin';
+import { X } from '@/shared/ui/icons/fill/socials/x';
 
 import st from './Footer.module.scss';
 
@@ -20,21 +23,44 @@ export const Footer = () => {
           <div className={st.footer__logo}>
             <Image src="/full-logo.svg" alt="Coldi" width={145} height={50} />
             <p>Brand-Tuned Ai Talkers. Always On.</p>
+            <div className={st.footer__socials}>
+              <Link href="https://x.com/Coldiai" target="_blank">
+                <X />
+              </Link>
+              <Link href="https://www.facebook.com/coldiai/" target="_blank">
+                <Facebook />
+              </Link>
+              <Link href="https://www.linkedin.com/company/coldiai/" target="_blank">
+                <Linkedin />
+              </Link>
+            </div>
           </div>
           <div className={st.footer__links}>
-            <ul className={st.footer__list}>
+            <ul
+              className={st.footer__list}
+              itemScope
+              itemType="http://schema.org/SiteNavigationElement"
+            >
               <h4>Explore</h4>
-              <li>
-                <Link href="/products">Products</Link>
+              <li itemProp="name">
+                <Link href="/products" itemProp="url">
+                  Products
+                </Link>
               </li>
-              <li>
-                <Link href="/pricing">Pricing</Link>
+              <li itemProp="name">
+                <Link href="/pricing" itemProp="url">
+                  Pricing
+                </Link>
               </li>
-              <li>
-                <Link href="/news">News</Link>
+              <li itemProp="name">
+                <Link href="/news" itemProp="url">
+                  News
+                </Link>
               </li>
-              <li>
-                <Link href="/about">About</Link>
+              <li itemProp="name">
+                <Link href="/about" itemProp="url">
+                  About
+                </Link>
               </li>
             </ul>
             <ul className={st.footer__list}>

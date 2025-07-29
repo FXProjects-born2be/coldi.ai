@@ -19,15 +19,17 @@ const urbanist = Urbanist({
 export const metadata: Metadata = {
   title: {
     template: '%s | Coldi',
-    default: 'Coldi | Coldi',
+    default: 'AI Voice Agents and Call Center for Business | Coldi',
   },
-  description: 'Coldi',
+  description:
+    'Boost your customer service with Coldi’s AI call center. Try our AI voice agents to handle calls, bookings, and support — fast, efficient, and always on.',
   openGraph: {
     title: {
       template: '%s | Coldi',
-      default: 'Coldi | Coldi',
+      default: 'AI Voice Agents and Call Center for Business | Coldi',
     },
-    description: 'Coldi',
+    description:
+      'Boost your customer service with Coldi’s AI call center. Try our AI voice agents to handle calls, bookings, and support — fast, efficient, and always on.',
     //images: 'https://coldi.ai/images/meta.png',
   },
 };
