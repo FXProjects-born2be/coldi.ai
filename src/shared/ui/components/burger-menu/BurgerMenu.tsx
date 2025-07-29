@@ -54,21 +54,37 @@ export const BurgerMenu = () => {
           <Title />
           <Description asChild>
             <section className={st.content}>
-              <nav className={st.nav}>
-                <Link href="/" className={cn({ [st.active]: pathname === '/' })}>
-                  Home
+              <nav className={st.nav} itemScope itemType="http://schema.org/SiteNavigationElement">
+                <Link href="/" className={cn({ [st.active]: pathname === '/' })} itemProp="url">
+                  <span itemProp="name">Home</span>
                 </Link>
-                <Link href="/news" className={cn({ [st.active]: pathname === '/news' })}>
-                  News
+                <Link
+                  href="/news"
+                  className={cn({ [st.active]: pathname === '/news' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">News</span>
                 </Link>
-                <Link href="/products" className={cn({ [st.active]: pathname === '/product' })}>
-                  Products
+                <Link
+                  href="/products"
+                  className={cn({ [st.active]: pathname === '/product' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">Products</span>
                 </Link>
-                <Link href="/about" className={cn({ [st.active]: pathname === '/about' })}>
-                  About
+                <Link
+                  href="/about"
+                  className={cn({ [st.active]: pathname === '/about' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">About</span>
                 </Link>
-                <Link href="/pricing" className={cn({ [st.active]: pathname === '/pricing' })}>
-                  Pricing
+                <Link
+                  href="/pricing"
+                  className={cn({ [st.active]: pathname === '/pricing' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">Pricing</span>
                 </Link>
               </nav>
             </section>

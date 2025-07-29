@@ -19,19 +19,10 @@ export const firstLeadStepSchema = v.object({
 });
 
 export const secondLeadStepSchema = v.object({
-  industry: v.pipe(
-    v.string(),
-    v.minLength(
-      1,
-      'Sharing your industry helps us create a more accurate and relevant call scenario. Please fill in this field'
-    )
-  ),
-  monthlyLeadVolume: v.pipe(
-    v.string(),
-    v.minLength(1, 'Please provide the number of leads you receive each month')
-  ),
-  primaryGoal: v.pipe(v.array(v.string()), v.minLength(1, 'Please select a primary goal')),
-  message: v.pipe(v.string(), v.minLength(1, 'Please provide a message')),
+  industry: v.optional(v.string()),
+  monthlyLeadVolume: v.optional(v.string()),
+  primaryGoal: v.optional(v.array(v.string())),
+  message: v.optional(v.string()),
 });
 
 export type FirstLeadStepSchema = v.InferOutput<typeof firstLeadStepSchema>;

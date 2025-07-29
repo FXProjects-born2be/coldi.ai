@@ -5,3 +5,6 @@ Disallow: /api/news/
 
 # Allow all other pages
 Allow: /
+
+# Sitemap
+Sitemap: https://coldi.ai/sitemap.xml

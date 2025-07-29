@@ -21,6 +21,30 @@
     }
   }
 
+  &__socials {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    a {
+      display: flex;
+      width: 42px;
+      height: 42px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: 16px;
+      background: #f6f6f6;
+      &:hover{
+        background: #E3E9FF;
+        svg{
+          path{
+            fill: #4268FF;
+          }
+        }
+      }
+    }
+  }
+
   &__copyright {
     color: #535662;
     text-align: center;
