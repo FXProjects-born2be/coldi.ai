@@ -1,4 +1,5 @@
 import { Urbanist } from 'next/font/google';
+import Script from 'next/script';
 
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
@@ -49,6 +50,13 @@ export default async function RootLayout({
           {children}
           <Footer />
         </NextIntlClientProvider>
+        <Script
+          async
+          defer
+          id="hs-script-loader"
+          strategy="afterInteractive"
+          src="//js-eu1.hs-scripts.com/146476440.js"
+        />
       </body>
     </html>
   );
