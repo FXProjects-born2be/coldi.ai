@@ -42,7 +42,7 @@
     box-sizing: border-box;
     flex-wrap: wrap;
     @include fourteenInch {
-      gap: 32px;
+      gap: 12px;
       max-width: 82%;
     }
     @include tablet {
