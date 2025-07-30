@@ -1,7 +1,7 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .layout {
-  padding: 165px 124px;
+  padding: 165px 165px;
   display: flex;
   flex-direction: column;
   gap: 64px;

@@ -1,7 +1,7 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .layout {
-  padding: 165px 124px;
+  padding: 165px 165px;
   display: flex;
   flex-direction: column;
   gap: 64px;
@@ -34,14 +34,14 @@
 
 .cards {
   display: flex;
-  gap: 48px;
+  gap: 12px;
 
   @include tablet {
     flex-direction: column;
   }
 
   > div {
-    width: calc(33.33% - 32px);
+    width: calc(33.33% - 8px);
     @include tablet {
       width: 100%;
     }

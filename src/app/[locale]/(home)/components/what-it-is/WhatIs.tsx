@@ -21,6 +21,30 @@ export const WhatIs = () => {
       >
         What Coldi Really Is
       </motion.h2>
+      <motion.div
+        variants={blurInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className={st.image}
+      >
+        <Image
+          src="/images/home/what-it-is.png"
+          alt="What Coldi Really Is"
+          width={670}
+          height={500}
+          unoptimized
+          className={st.desktop}
+        />
+        <Image
+          src="/images/home/what-it-is-mob.png"
+          alt="What Coldi Really Is"
+          width={326}
+          height={598}
+          unoptimized
+          className={st.mobile}
+        />
+      </motion.div>{' '}
       <motion.section
         variants={blurInUp}
         initial="hidden"
@@ -42,21 +66,6 @@ export const WhatIs = () => {
           agent. It’s the best sales rep you’ve ever had.
         </motion.p>
       </motion.section>
-      <motion.div
-        variants={blurInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className={st.image}
-      >
-        <Image
-          src="/images/home/what-it-is.png"
-          alt="What Coldi Really Is"
-          width={801}
-          height={598}
-          unoptimized
-        />
-      </motion.div>
     </section>
   );
 };

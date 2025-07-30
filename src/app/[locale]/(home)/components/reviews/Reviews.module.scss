@@ -1,7 +1,7 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .layout {
-  padding: 165px 124px;
+  padding: 165px 165px;
   border-radius: 64px;
   background: #fafafa;
   margin: 24px;
@@ -50,6 +50,10 @@
   border: 1px solid rgba(12, 16, 33, 0.05);
   background: #FFF;
   height: 100%;
+
+  @include tablet {
+    padding: 16px;
+  }
 
   &__info {
     display: flex;

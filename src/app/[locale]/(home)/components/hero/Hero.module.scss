@@ -3,7 +3,7 @@
 .hero {
   width: 100%;
   display: flex;
-  padding: 0 124px 124px 124px;
+  padding: 0 165px 124px 165px;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
@@ -106,7 +106,7 @@
         font-size: 80px;
       }
       @include largeDesktop {
-        font-size: 64px;
+        font-size: 96px;
       }
     }
 
