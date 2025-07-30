@@ -129,7 +129,22 @@ export const Advantages = () => {
         viewport={{ once: true }}
         className={st.image}
       >
-        <Image src="/images/home/adv.webp" alt="Advantages" width={1672} height={500} />
+        <Image
+          src="/images/home/adv.svg"
+          className={st.desktop}
+          alt="Advantages"
+          width={1672}
+          height={500}
+          quality={100}
+        />
+        <Image
+          src="/images/home/advMob.svg"
+          className={st.mobile}
+          alt="Advantages"
+          width={1672}
+          height={500}
+          quality={100}
+        />
       </motion.div>
 
       <section className={st.cards}>
