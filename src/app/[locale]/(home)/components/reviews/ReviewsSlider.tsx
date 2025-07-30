@@ -66,7 +66,7 @@ export const ReviewsSlider = () => {
   return (
     <Swiper
       slidesPerView={1}
-      spaceBetween={48}
+      spaceBetween={12}
       pagination={pagination}
       modules={[Pagination, Autoplay]}
       autoplay={false}
@@ -75,11 +75,11 @@ export const ReviewsSlider = () => {
       breakpoints={{
         992: {
           slidesPerView: 2,
-          spaceBetween: 48,
+          spaceBetween: 12,
         },
         1600: {
           slidesPerView: 3,
-          spaceBetween: 48,
+          spaceBetween: 12,
         },
       }}
     >

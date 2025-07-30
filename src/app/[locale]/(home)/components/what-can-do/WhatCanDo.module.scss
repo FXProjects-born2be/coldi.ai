@@ -1,7 +1,7 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .layout {
-  padding: 165px 124px;
+  padding: 165px 165px;
   display: flex;
   flex-direction: column;
   gap: 64px;
@@ -49,7 +49,7 @@
   }
 
   > article {
-    width: calc(33.33% - 12px);
+    width: calc(33.33% - 8px);
     @include largeDesktop {
       width: calc(25% - 36px);
       &:first-child,
