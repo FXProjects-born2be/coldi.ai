@@ -94,7 +94,7 @@ export const Delivers = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <Card {...cards[2]} reverse />
+          <Card {...cards[2]} />
         </motion.div>
         <motion.div
           variants={blurInUp}
@@ -102,7 +102,7 @@ export const Delivers = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <Card {...cards[3]} />
+          <Card {...cards[3]} reverse />
         </motion.div>
       </section>
       <Link href="/lead-request" className={st.button}>
