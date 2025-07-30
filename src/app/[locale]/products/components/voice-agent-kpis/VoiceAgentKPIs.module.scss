@@ -4,7 +4,7 @@
   padding: 165px 124px;
   display: flex;
   flex-direction: column;
-  gap: 165px;
+  gap: 64px;
   background: #fafafa;
 
   @include tablet {
@@ -41,7 +41,7 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 48px;
+  gap: 12px;
 
   @include tablet {
     flex-direction: column;
@@ -52,9 +52,9 @@
   }
 
   > div {
-    width: calc(50% - 24px);
+    width: calc(33.33% - 12px);
     @include largeDesktop {
-      width: calc(33.33% - 32px);
+      width: calc(33.33% - 12px);
     }
     @include tablet {
       width: 100%;
@@ -132,9 +132,9 @@
 
     h3 {
       color: #0c1021;
-      font-size: 64px;
+      font-size: 48px;
       font-weight: 400;
-      line-height: 120%;
+      line-height: 1;
       @include fourteenInch {
         font-size: 48px;
       }
@@ -142,7 +142,7 @@
 
     p {
       color: #535662;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 400;
       line-height: normal;
       @include fourteenInch {
@@ -153,5 +153,7 @@
 
   img {
     margin: 0 auto;
+    width: 100%;
+    height: auto;
   }
 }

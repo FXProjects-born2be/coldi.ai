@@ -85,14 +85,6 @@ export const Footer = () => {
           © {new Date().getFullYear()} Coldi. Voice-Powered. Rights Reserved.
         </p>
       </div>
-      <Image
-        className={st.footer__image}
-        src="/images/footer.png"
-        alt="Coldi"
-        unoptimized
-        width={1440}
-        height={100}
-      />
     </footer>
   ) : null;
 };

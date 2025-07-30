@@ -4,7 +4,7 @@
   padding: 165px 124px;
   display: flex;
   flex-direction: column;
-  gap: 128px;
+  gap: 64px;
   background: #fafafa;
 
   @include fourteenInch {
@@ -40,7 +40,8 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 48px;
+  gap: 12px;
+  justify-content: center;
 
   @include tablet {
     gap: 16px;
@@ -48,7 +49,7 @@
   }
 
   > article {
-    width: calc(33.33% - 32px);
+    width: calc(33.33% - 12px);
     @include largeDesktop {
       width: calc(25% - 36px);
       &:first-child,
@@ -76,7 +77,7 @@
 
 .card {
   //flex: 1;
-  flex-grow: 1;
+  //flex-grow: 1;
 
   &:hover {
     .card__content {
