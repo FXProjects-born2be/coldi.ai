@@ -72,9 +72,9 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="tel:+1000000000">
+                <Link href="tel:+441299667777">
                   <PhoneIcon />
-                  +1 000 000 000
+                  +441299667777
                 </Link>
               </li>
             </ul>
