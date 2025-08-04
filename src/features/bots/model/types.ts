@@ -5,4 +5,5 @@ export type BotPreview = {
   name: string;
   text: string;
   btnVariant: ButtonVariants;
+  audioUrl: string;
 };
