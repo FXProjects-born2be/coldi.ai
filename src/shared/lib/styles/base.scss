@@ -123,3 +123,7 @@ video {
 * {
   backface-visibility: hidden;
 }
+
+html, body {
+  overscroll-behavior: none;
+}
