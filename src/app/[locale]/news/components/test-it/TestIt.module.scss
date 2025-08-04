@@ -59,6 +59,10 @@
         display: none;
       }
     }
+
+    @include mobileSmall {
+      font-size: 16px;
+    }
   }
 
   .title {
@@ -87,6 +91,10 @@
       @include mobile {
         font-size: 32px;
         line-height: 120%;
+      }
+
+      @include mobileSmall {
+        font-size: 32px;
       }
     }
   }

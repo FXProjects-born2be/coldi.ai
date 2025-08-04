@@ -30,6 +30,11 @@
     @include mobile {
       padding: 64px 16px;
       gap: 64px;
+      margin-bottom: 0;
+    }
+
+    @include mobileSmall {
+      font-size: 32px;
     }
   }
 
@@ -112,6 +117,9 @@
       @include fourteenInch {
         font-size: 48px;
       }
+      @include mobileSmall {
+        font-size: 32px;
+      }
     }
 
     p {
@@ -120,6 +128,9 @@
       font-weight: 400;
       line-height: normal;
       @include fourteenInch {
+        font-size: 16px;
+      }
+      @include mobileSmall {
         font-size: 16px;
       }
     }

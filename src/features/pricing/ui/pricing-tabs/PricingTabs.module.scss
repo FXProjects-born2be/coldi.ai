@@ -139,6 +139,9 @@
             border-radius: 24px;
             border: 1px solid rgba(66, 104, 255, 0.5);
             background: rgba(66, 104, 255, 0.1);
+            @include mobileSmall {
+              font-size: 16px;
+            }
           }
           .details {
             display: flex;
@@ -150,6 +153,9 @@
               font-style: normal;
               font-weight: 400;
               line-height: normal;
+              @include mobileSmall {
+                font-size: 24px;
+              }
             }
             p {
               color: #50556b;
@@ -158,6 +164,9 @@
               font-weight: 400;
               line-height: normal;
               @include fourteenInch {
+                font-size: 16px;
+              }
+              @include mobileSmall {
                 font-size: 16px;
               }
             }
@@ -169,6 +178,9 @@
             font-weight: 600;
             line-height: normal;
             @include fourteenInch {
+              font-size: 32px;
+            }
+            @include mobileSmall {
               font-size: 32px;
             }
             span {
@@ -198,6 +210,9 @@
                 font-weight: 400;
                 line-height: normal;
                 @include fourteenInch {
+                  font-size: 16px;
+                }
+                @include mobileSmall {
                   font-size: 16px;
                 }
               }

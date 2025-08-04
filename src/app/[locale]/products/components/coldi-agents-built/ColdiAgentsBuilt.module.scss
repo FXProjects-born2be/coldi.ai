@@ -20,6 +20,9 @@
       font-size: 42px;
       text-align: center;
     }
+    @include mobileSmall {
+      font-size: 32px;
+    }
 
     .highlighted {
       color: #4268ff;
@@ -66,14 +69,20 @@
         @include fourteenInch {
           font-size: 32px;
         }
+        @include mobileSmall {
+          font-size: 24px;
+        }
       }
       p {
         color: #535662;
         font-size: 20px;
         font-style: normal;
         font-weight: 400;
-        line-height: normal;  
+        line-height: normal;
         @include fourteenInch {
+          font-size: 16px;
+        }
+        @include mobileSmall {
           font-size: 16px;
         }
       }

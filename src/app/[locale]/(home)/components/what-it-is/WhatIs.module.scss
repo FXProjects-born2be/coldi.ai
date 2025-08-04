@@ -39,6 +39,9 @@
     @include fourteenInch {
       font-size: 64px;
     }
+    @include mobileSmall {
+      font-size: 32px;
+    }
   }
 }
 
@@ -80,6 +83,9 @@
     @include mobile {
       font-size: 24px;
       text-align: left;
+    }
+    @include mobileSmall {
+      font-size: 16px;
     }
   }
 }

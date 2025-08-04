@@ -75,6 +75,10 @@
       @include mobile {
         font-size: 42px;
         line-height: 120%;
+      } 
+
+      @include mobileSmall {
+        font-size: 32px;
       }
     }
   }
