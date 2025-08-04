@@ -25,6 +25,10 @@
       text-align: center;
     }
 
+    @include mobileSmall {
+      font-size: 32px;
+    }
+
     .highlighted {
       color: #4268ff;
     }
@@ -79,6 +83,9 @@
           font-size: 48px;
           text-align: center;
         }
+        @include mobileSmall {
+          font-size: 32px;
+        }
       }
       p {
         color: #535662;
@@ -89,6 +96,9 @@
         @include tablet {
           font-size: 20px;
           text-align: center;
+        }
+        @include mobileSmall {
+          font-size: 16px;
         }
       }
     }

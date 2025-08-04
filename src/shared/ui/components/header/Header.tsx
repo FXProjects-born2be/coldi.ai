@@ -46,7 +46,13 @@ export const Header = () => {
     <header className={cn(st.header, { [st.visible]: visible })}>
       <div className={st.header__container}>
         <Link href="/">
-          <Image src="/full-logo.svg" alt="logo" width={145} height={50} />
+          <Image
+            className={st.header__logo}
+            src="/full-logo.svg"
+            alt="logo"
+            width={145}
+            height={50}
+          />
         </Link>
         <Navigation />
         <BurgerMenu />

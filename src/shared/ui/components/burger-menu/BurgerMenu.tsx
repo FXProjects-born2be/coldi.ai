@@ -53,7 +53,7 @@ export const BurgerMenu = () => {
         <Content>
           <Title />
           <Description asChild>
-            <section className={st.content}>
+            <section className={cn(st.content, { [st.open]: open })}>
               <nav className={st.nav} itemScope itemType="http://schema.org/SiteNavigationElement">
                 <Link href="/" className={cn({ [st.active]: pathname === '/' })} itemProp="url">
                   <span itemProp="name">Home</span>

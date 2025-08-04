@@ -25,6 +25,10 @@
       text-align: center;
     }
 
+    @include mobileSmall {
+      font-size: 32px;
+    }
+
     .highlighted {
       color: #4268ff;
     }
@@ -44,6 +48,9 @@
       br {
         display: none;
       }
+    }
+    @include mobileSmall {
+      font-size: 16px;
     }
   }
 
@@ -114,6 +121,9 @@
               @include tablet {
                 font-size: 22px;
               }
+              @include mobileSmall {
+                font-size: 20px;
+              }
             }
             svg {
             }
@@ -127,6 +137,9 @@
             line-height: normal;
             margin-bottom: 0;
             @include fourteenInch {
+              font-size: 16px;
+            }
+            @include mobileSmall {
               font-size: 16px;
             }
           }

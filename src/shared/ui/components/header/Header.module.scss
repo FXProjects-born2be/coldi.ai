@@ -13,6 +13,13 @@
   opacity: 0;
   pointer-events: none;
 
+  &__logo {
+    @include tablet {
+      width: auto;
+      height: 32px;
+    }
+  }
+
   &.visible {
     transform: translateY(0);
     opacity: 1;

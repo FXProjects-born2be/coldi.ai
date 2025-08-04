@@ -36,6 +36,11 @@
         font-weight: 500;
         padding: 12px 24px;
         border-radius: 24px;
+        text-align: center;
+        @include mobileSmall {
+          font-size: 16px;
+          padding: 8px 16px;
+        }
       }
     }
 
@@ -116,6 +121,11 @@
     @include tablet {
       width: 100%;
     }
+
+    @include mobileSmall {
+      font-size: 16px;
+    }
+
   }
 
   .subtitle {
@@ -128,6 +138,10 @@
     margin-top: 32px;
 
     display: none;
+
+    @include mobileSmall {
+      font-size: 24px;
+    }
   }
 
   .title {
@@ -156,6 +170,11 @@
         font-size: 48px;
         line-height: 57.6px;
       }
+
+      @include mobileSmall {
+        font-size: 32px;
+        line-height: 120%;
+      }
     }
   }
 }
@@ -171,7 +190,7 @@
     object-position: top right;
     border-radius: 24px;
     @include tablet {
-      //height: 250px;
+      height: 300px;
     }
     &.desktop {
       display: block;
@@ -243,6 +262,9 @@
     font-size: 28px;
     font-weight: 400;
     line-height: normal;
+    @include mobileSmall {
+      font-size: 24px;
+    }
   }
 
   p {
@@ -250,5 +272,8 @@
     font-size: 20px;
     font-weight: 400;
     line-height: normal;
+    @include mobileSmall {
+      font-size: 16px;
+    }
   }
 }

@@ -98,6 +98,10 @@
         font-size: 48px;
       }
 
+      @include mobileSmall {
+        font-size: 32px;
+      }
+
       @include fourteenInch {
         font-size: 64px;
       }
@@ -119,6 +123,9 @@
       font-size: 24px;
       font-weight: 400;
       line-height: normal;
+      @include mobileSmall {
+        font-size: 16px;
+      }
     }
   }
 }

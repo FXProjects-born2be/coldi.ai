@@ -19,25 +19,27 @@
 @keyframes slideDown {
   0% {
     opacity: 0;
-    transform: translate(-50%, -100%);
+    top: 0;
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    top: 64px;
   }
 }
 
 .content {
   border-top: 1px solid rgba(80, 85, 107, 0.05);
   position: fixed;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 64px;
+  left: 0;
   width: 100%;
   background: #fff;
   z-index: 995;
   overflow: hidden;
-  animation: slideDown 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+  transition: all 0.3s ease;
+  &.open {
+    animation: slideDown 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+  }
 }
 
 .nav {

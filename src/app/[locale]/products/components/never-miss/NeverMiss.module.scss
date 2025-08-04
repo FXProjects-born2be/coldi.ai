@@ -22,6 +22,10 @@
       font-size: 42px;
     }
 
+    @include mobileSmall {
+      font-size: 32px;
+    }
+
     .highlighted {
       color: #4268ff;
     }
@@ -39,6 +43,9 @@
       br {
         display: none;
       }
+    }
+    @include mobileSmall {
+      font-size: 16px;
     }
   }
 
@@ -147,6 +154,9 @@
         flex-direction: column;
         align-items: flex-start;
       }
+      @include mobileSmall {
+        font-size: 20px;
+      }
     }
 
     p {
@@ -155,6 +165,9 @@
       font-weight: 400;
       line-height: normal;
       text-align: left;
+      @include mobileSmall {
+        font-size: 16px;
+      }
     }
   }
 }

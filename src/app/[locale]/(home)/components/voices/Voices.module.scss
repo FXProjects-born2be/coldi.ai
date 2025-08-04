@@ -31,6 +31,10 @@
     @include mobile {
       font-size: 48px;
     }
+
+    @include mobileSmall {
+      font-size: 32px;
+    }
   }
 
   &__list {
