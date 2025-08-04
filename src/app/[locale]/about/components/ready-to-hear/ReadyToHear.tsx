@@ -47,7 +47,15 @@ export const ReadyToHear = () => {
             <Button size="md">Try Now</Button>
           </motion.div>
         </Link>
-        <video src="/videos/about/hero.mp4" autoPlay muted loop />
+        <video
+          src="/videos/about/hero.mp4"
+          autoPlay
+          playsInline
+          muted
+          loop
+          preload="auto"
+          controls={false}
+        />
       </section>
     </>
   );

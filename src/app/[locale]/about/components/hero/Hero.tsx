@@ -31,7 +31,15 @@ export const Hero = () => {
             Meet the Philosophy Behind the Voice
           </motion.p>
         </div>
-        <video src="/videos/about/hero.mp4" autoPlay muted loop />
+        <video
+          src="/videos/about/hero.mp4"
+          autoPlay
+          playsInline
+          muted
+          loop
+          preload="auto"
+          controls={false}
+        />
       </section>
     </>
   );

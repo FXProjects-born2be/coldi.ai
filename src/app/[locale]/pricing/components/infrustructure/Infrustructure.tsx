@@ -39,7 +39,15 @@ export const Infrustructure = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <video src="/videos/pricing/infrustructure.mp4" autoPlay muted loop />
+          <video
+            src="/videos/pricing/infrustructure.mp4"
+            autoPlay
+            playsInline
+            muted
+            loop
+            preload="auto"
+            controls={false}
+          />
         </motion.div>
       </div>
     </section>
