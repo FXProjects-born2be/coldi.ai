@@ -102,7 +102,15 @@ export const Hero = () => {
         </div>
       </section>
       <div className={st.video}>
-        <video src="/videos/products/hero.mp4" autoPlay muted loop />
+        <video
+          src="/videos/products/hero.mp4"
+          autoPlay
+          playsInline
+          muted
+          loop
+          preload="auto"
+          controls={false}
+        />
       </div>
     </>
   );

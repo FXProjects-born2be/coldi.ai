@@ -8,7 +8,16 @@ import st from './BotCard.module.scss';
 
 export const BotCard = ({ text, name, btnVariant, videoUrl }: BotPreview) => (
   <article className={st.card}>
-    <video className={st.card__video} src={videoUrl} autoPlay muted loop playsInline />
+    <video
+      className={st.card__video}
+      src={videoUrl}
+      autoPlay
+      playsInline
+      muted
+      loop
+      preload="auto"
+      controls={false}
+    />
     <section className={st.card__contentContainer}>
       <div className={st.card__content}>
         <h3>{name}</h3>
