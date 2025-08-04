@@ -116,7 +116,10 @@ img {
   }
 }
 
-
-video{
+video {
   pointer-events: none;
+}
+
+* {
+  backface-visibility: hidden;
 }
