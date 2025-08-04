@@ -3,20 +3,23 @@ import type { BotPreview } from './types';
 export const getBots = (): BotPreview[] => [
   {
     videoUrl: '/videos/voices/variant-1.mp4',
-    name: 'B2B Services',
-    text: 'Lead qualification & callback setup',
+    name: 'Insurance',
+    text: 'Needs check & offer optimization',
     btnVariant: 'primary',
+    audioUrl: '/audio/insurance.wav',
   },
   {
     videoUrl: '/videos/voices/variant-2.mp4',
-    name: 'E-commerce',
-    text: 'Cart recovery with objection handling',
+    name: 'Survey',
+    text: 'Social media habits & usage data collection',
     btnVariant: 'secondary',
+    audioUrl: '/audio/survey.wav',
   },
   {
     videoUrl: '/videos/voices/variant-3.mp4',
-    name: 'Finance',
-    text: 'Loan interest confirmation & upsell',
+    name: 'Investment',
+    text: 'Interest confirmation & proposal call',
     btnVariant: 'success',
+    audioUrl: '/audio/investment.wav',
   },
 ];
