@@ -13,15 +13,18 @@ export const BotCard = ({ text, name, btnVariant, videoUrl, audioUrl }: BotPrevi
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const handlePlay = () => {
     audioRef.current?.play();
     setIsPlaying(true);
+    videoRef.current?.play();
   };
 
   const handlePause = () => {
     audioRef.current?.pause();
     setIsPlaying(false);
+    videoRef.current?.pause();
   };
 
   const handleTimeUpdate = () => {
@@ -48,22 +51,19 @@ export const BotCard = ({ text, name, btnVariant, videoUrl, audioUrl }: BotPrevi
         <video
           className={st.card__video}
           src={videoUrl}
-          autoPlay
+          autoPlay={false}
           playsInline
           muted
           loop
           preload="auto"
           controls={false}
+          ref={videoRef}
         />
         <section className={st.card__contentContainer}>
           <div className={st.card__content}>
             <h3>{name}</h3>
             <p>{text}</p>
           </div>
-          <Button variant={btnVariant} fullWidth onClick={isPlaying ? handlePause : handlePlay}>
-            {isPlaying ? <PauseIcon /> : <PlayIcon />}
-            {isPlaying ? 'Pause' : 'Play'}
-          </Button>
           <div className={st.card__audio}>
             <audio
               ref={audioRef}
@@ -72,15 +72,17 @@ export const BotCard = ({ text, name, btnVariant, videoUrl, audioUrl }: BotPrevi
               onTimeUpdate={handleTimeUpdate}
               style={{ display: 'none' }}
             />
-            {isPlaying && (
-              <div className={st.card__timeline} onClick={handleTimelineClick}>
-                <div
-                  className={`${st.card__timeline__progress} ${st[`${btnVariant}`]}`}
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-            )}
+            <div className={st.card__timeline} onClick={handleTimelineClick}>
+              <div
+                className={`${st.card__timeline__progress} ${st[`${btnVariant}`]}`}
+                style={{ width: `${progress}%` }}
+              />
+            </div>
           </div>
+          <Button variant={btnVariant} fullWidth onClick={isPlaying ? handlePause : handlePlay}>
+            {isPlaying ? <PauseIcon /> : <PlayIcon />}
+            {isPlaying ? 'Pause' : 'Play'}
+          </Button>
         </section>
       </article>
     </>
