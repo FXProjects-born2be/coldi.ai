@@ -2,7 +2,7 @@ import type { Package } from './types';
 
 export const getInbound = (): Package[] => [
   {
-    label: 'Inbond calls',
+    label: 'Inbound calls',
     title: 'Ready-Made Booking Agent',
     description:
       'Pick from Coldi’s library of pre-built agent personalities. Launch instantly with a proven script and voice configuration - perfect for fast setups and smaller teams.',
@@ -19,7 +19,7 @@ export const getInbound = (): Package[] => [
     ],
   },
   {
-    label: 'Inbond calls',
+    label: 'Inbound calls',
     title: 'Fully Managed Inbound Agent',
     description:
       'A custom-built AI voice agent that handles incoming calls for your business. Coldi’s team manages the entire setup and ongoing performance - from script creation to live transfers.',
