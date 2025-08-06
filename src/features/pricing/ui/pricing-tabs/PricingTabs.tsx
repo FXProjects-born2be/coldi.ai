@@ -112,13 +112,13 @@ export const PricingTabs = () => {
             onClick={() => setActiveTab('inbound')}
             className={cn(st.tab, { [st.active]: activeTab === 'inbound' })}
           >
-            Inbond calls
+            Inbound calls
           </button>
           <button
             onClick={() => setActiveTab('outbound')}
             className={cn(st.tab, { [st.active]: activeTab === 'outbound' })}
           >
-            Outbond calls
+            Outbound calls
           </button>
         </div>
         <div className={st.content}>
