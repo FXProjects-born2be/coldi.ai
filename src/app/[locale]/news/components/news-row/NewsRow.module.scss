@@ -16,7 +16,7 @@
 
   .categories {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -31,6 +31,7 @@
       display: flex;
       justify-content: center;
       gap: 10px;
+      min-width: 100%;
       @include mobile {
         justify-content: flex-start;
       }
@@ -49,6 +50,7 @@
         font-weight: 500;
         line-height: 120%; /* 24px */
         white-space: nowrap;
+        text-transform: capitalize;
         &.active {
           border: 1px solid #0c1021;
           color: #0c1021;
