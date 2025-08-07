@@ -37,7 +37,9 @@ export const NewsRow = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       const categories = await getNewsCategories();
-      setCategories(categories);
+      // Convert all categories to lowercase and remove duplicates
+      const uniqueCategories = [...new Set(categories.map((cat) => cat.toLowerCase()))];
+      setCategories(uniqueCategories);
     };
     fetchCategories();
   }, []);
@@ -61,34 +63,34 @@ export const NewsRow = () => {
               {category}
             </div>
           ))}
-          {!categories.includes('Industry Insight') && (
+          {!categories.includes('industry insight') && (
             <div
-              className={`${st.category} ${activeCategory === 'Industry Insight' ? st.active : ''}`}
-              onClick={() => setActiveCategory('Industry Insight')}
+              className={`${st.category} ${activeCategory === 'industry insight' ? st.active : ''}`}
+              onClick={() => setActiveCategory('industry insight')}
             >
               Industry Insight
             </div>
           )}
-          {!categories.includes('Best Practices') && (
+          {!categories.includes('best practices') && (
             <div
-              className={`${st.category} ${activeCategory === 'Best Practices' ? st.active : ''}`}
-              onClick={() => setActiveCategory('Best Practices')}
+              className={`${st.category} ${activeCategory === 'best practices' ? st.active : ''}`}
+              onClick={() => setActiveCategory('best practices')}
             >
               Best Practices
             </div>
           )}
-          {!categories.includes('Trends & Predictions') && (
+          {!categories.includes('trends & predictions') && (
             <div
-              className={`${st.category} ${activeCategory === 'Trends & Predictions' ? st.active : ''}`}
-              onClick={() => setActiveCategory('Trends & Predictions')}
+              className={`${st.category} ${activeCategory === 'trends & predictions' ? st.active : ''}`}
+              onClick={() => setActiveCategory('trends & predictions')}
             >
               Trends & Predictions
             </div>
           )}
-          {!categories.includes('Use cases') && (
+          {!categories.includes('use cases') && (
             <div
-              className={`${st.category} ${activeCategory === 'Use cases' ? st.active : ''}`}
-              onClick={() => setActiveCategory('Use cases')}
+              className={`${st.category} ${activeCategory === 'use cases' ? st.active : ''}`}
+              onClick={() => setActiveCategory('use cases')}
             >
               Use cases
             </div>

@@ -20,9 +20,9 @@ export const getNewsByCategory = async (category?: string): Promise<NewsArticle[
   try {
     let query = supabase.from('posts').select('*').order('created_at', { ascending: false });
 
-    // If category is provided, filter by it
+    // If category is provided, filter by it (case-insensitive)
     if (category) {
-      query = query.eq('category', category);
+      query = query.ilike('category', category.toLowerCase());
     }
 
     const { data, error } = await query;
