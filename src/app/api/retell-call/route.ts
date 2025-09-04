@@ -4,8 +4,8 @@ import { NextResponse } from 'next/server';
 const RETELL_API_URL = 'https://api.retellai.com/v2/create-phone-call';
 
 const AGENT_IDS: Record<string, string> = {
-  Sana: 'agent_85d62851c87a6b82839131c000',
-  James: 'agent_cce0f4602f5b8e0002a1ebdd27',
+  Sophie: 'agent_85d62851c87a6b82839131c000',
+  Monica: 'agent_cce0f4602f5b8e0002a1ebdd27',
   Victoria: 'agent_14e9ea8c12206344652c81943c',
 };
 

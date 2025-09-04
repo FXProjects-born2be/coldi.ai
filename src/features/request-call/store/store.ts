@@ -5,7 +5,7 @@ type FirstStepData = {
   phone: string;
 };
 
-export type Agent = 'Sana' | 'James' | 'Victoria';
+export type Agent = 'Sophie' | 'Monica' | 'Victoria';
 
 type RequestCallStore = {
   firstStepData: FirstStepData;
@@ -21,7 +21,7 @@ export const useRequestCallStore = create<RequestCallStore>((set, get) => ({
     scenario: '',
     phone: '',
   },
-  agent: 'Sana',
+  agent: 'Sophie',
   hasFirstStepData: false,
   setFirstStepData: (data) => {
     const newData = { ...get().firstStepData, ...data };
