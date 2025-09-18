@@ -61,6 +61,21 @@ export default async function RootLayout({
           src="//js-eu1.hs-scripts.com/146476440.js"
         />
         <Script
+          id="recaptcha"
+          strategy="afterInteractive"
+          src="https://www.google.com/recaptcha/api.js?render=6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h"
+        />
+        <Script
+          id="retell-widget"
+          src="https://dashboard.retellai.com/retell-widget.js"
+          data-public-key="key_f863f9c8a125ea6bcbf5ed16ce54"
+          data-agent-id="agent_63b56595436752aa00582d2ad9"
+          data-agent-version="0"
+          data-title="Chat with us!"
+          data-recaptcha-key="6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h"
+          data-color="#4268ff"
+        />
+        <Script
           id="facebook-pixel"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{

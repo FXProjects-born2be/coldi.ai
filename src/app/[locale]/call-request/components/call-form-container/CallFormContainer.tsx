@@ -22,7 +22,7 @@ const ThankYouDialog = dynamic(
   { ssr: false }
 );
 
-export const CallFormContainer = ({ botName = 'Sana' }: { botName?: string }) => {
+export const CallFormContainer = ({ botName = 'Sophie' }: { botName?: string }) => {
   const [step, setStep] = useState(1);
   const { agent, setAgent } = useRequestCallStore();
   const [data, setData] = useState<FirstStepCallSchema & SecondStepCallSchema>({
