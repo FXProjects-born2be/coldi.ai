@@ -8,6 +8,7 @@ import { NextIntlClientProvider } from 'next-intl';
 
 import { Footer } from '@/shared/ui/components/footer';
 import { Header } from '@/shared/ui/components/header';
+import RetellWidget from '@/shared/ui/components/RetellWidget';
 
 import '@/shared/lib/styles/null.scss';
 import '@/shared/lib/styles/base.scss';
@@ -47,6 +48,13 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <GoogleAnalytics gaId="G-RCPHXB9V3B" />
+      <Script
+        id="recaptcha"
+        strategy="afterInteractive"
+        src="https://www.google.com/recaptcha/api.js?render=6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h"
+      />
+      <RetellWidget />
+
       <body className={urbanist.variable}>
         <NextIntlClientProvider>
           <Header />
@@ -60,22 +68,7 @@ export default async function RootLayout({
           strategy="afterInteractive"
           src="//js-eu1.hs-scripts.com/146476440.js"
         />
-        <Script
-          id="recaptcha"
-          strategy="afterInteractive"
-          src="https://www.google.com/recaptcha/api.js?render=6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h"
-        />
-        <Script
-          id="retell-widget"
-          src="https://dashboard.retellai.com/retell-widget.js"
-          data-public-key="key_f863f9c8a125ea6bcbf5ed16ce54"
-          data-agent-id="agent_63b56595436752aa00582d2ad9"
-          data-agent-version="0"
-          data-title="Chat with us!"
-          data-recaptcha-key="6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h"
-          data-color="#4268ff"
-          data-logo-url="https://coldi.ai/icon.png"
-        />
+
         <Script
           id="facebook-pixel"
           strategy="afterInteractive"
