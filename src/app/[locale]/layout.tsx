@@ -74,6 +74,7 @@ export default async function RootLayout({
           data-title="Chat with us!"
           data-recaptcha-key="6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h"
           data-color="#4268ff"
+          data-logo-url="https://coldi.ai/icon.png"
         />
         <Script
           id="facebook-pixel"
