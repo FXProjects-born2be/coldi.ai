@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 export default function RetellWidget() {
   useEffect(() => {
+    // прибираємо старі інстанції/сесії
     try {
       Object.keys(localStorage).forEach(
         (k) => k.toLowerCase().includes('retell') && localStorage.removeItem(k)
@@ -11,6 +12,8 @@ export default function RetellWidget() {
         (k) => k.toLowerCase().includes('retell') && sessionStorage.removeItem(k)
       );
     } catch {}
+
+    localStorage.clear();
 
     document
       .querySelectorAll('script[src*="retellai.com/retell-widget.js"]')
