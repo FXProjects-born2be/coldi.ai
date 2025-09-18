@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       'localhost:3000',
       'grqtgrzdalvrywluyqxe.supabase.co',
       'www.facebook.com',
+      'dashboard.retellai.com',
     ],
   },
 };

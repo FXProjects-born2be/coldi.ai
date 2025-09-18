@@ -48,13 +48,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <GoogleAnalytics gaId="G-RCPHXB9V3B" />
-      <Script
-        id="recaptcha"
-        strategy="afterInteractive"
-        src="https://www.google.com/recaptcha/api.js?render=6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h"
-      />
       <RetellWidget />
-
       <body className={urbanist.variable}>
         <NextIntlClientProvider>
           <Header />
