@@ -4,16 +4,16 @@ import { useEffect } from 'react';
 export default function RetellWidget() {
   useEffect(() => {
     // прибираємо старі інстанції/сесії
-    try {
+    /*try {
       Object.keys(localStorage).forEach(
         (k) => k.toLowerCase().includes('retell') && localStorage.removeItem(k)
       );
       Object.keys(sessionStorage).forEach(
         (k) => k.toLowerCase().includes('retell') && sessionStorage.removeItem(k)
       );
-    } catch {}
+    } catch {}*/
 
-    localStorage.clear();
+    //localStorage.clear();
 
     document
       .querySelectorAll('script[src*="retellai.com/retell-widget.js"]')
