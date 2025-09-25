@@ -9,6 +9,7 @@ import { MessageIcon } from '@/shared/ui/icons/fill/message';
 import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
 import { Facebook } from '@/shared/ui/icons/fill/socials/facebook';
 import { Linkedin } from '@/shared/ui/icons/fill/socials/linkedin';
+import { Whatsapp } from '@/shared/ui/icons/fill/socials/whatsapp';
 import { X } from '@/shared/ui/icons/fill/socials/x';
 
 import st from './Footer.module.scss';
@@ -32,6 +33,9 @@ export const Footer = () => {
               </Link>
               <Link href="https://www.linkedin.com/company/coldiai/" target="_blank">
                 <Linkedin />
+              </Link>
+              <Link href="https://wa.me/447521142301" target="_blank">
+                <Whatsapp />
               </Link>
             </div>
           </div>
