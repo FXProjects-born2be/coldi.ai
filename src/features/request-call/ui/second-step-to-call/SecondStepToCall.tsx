@@ -105,7 +105,7 @@ export const SecondStepToCall = ({
         industry: data.value.industry,
         company_size: data.value.company,
         hs_lead_status: 'NEW',
-        type: 'call_request',
+        //type: 'call_request',
         referral: 'affiliate_partner_a',
       };
 

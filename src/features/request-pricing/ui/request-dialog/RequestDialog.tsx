@@ -73,7 +73,7 @@ export const RequestDialog = ({
       website: data.website,
       message: data.message,
       hs_lead_status: 'NEW',
-      type: 'pricing_request',
+      //type: 'pricing_request',
       pricing: planTitle,
       referral: 'affiliate_partner_a',
     };

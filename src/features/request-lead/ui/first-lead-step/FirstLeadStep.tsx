@@ -45,9 +45,9 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
         firstname: data.value.fullName,
         email: data.value.email,
         phone: data.value.phone,
-        company: data.value.company,
+        website: data.value.company,
         hs_lead_status: 'NEW',
-        type: 'lead_request',
+        //type: 'lead_request',
         referral: 'affiliate_partner_a',
       };
 

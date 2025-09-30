@@ -59,7 +59,7 @@ export const SecondLeadStep = ({
         monthly_lead: data.value.monthlyLeadVolume,
         primary_goals: data.value.primaryGoal.join('; '),
         hs_lead_status: 'NEW',
-        type: 'lead_request',
+        //type: 'lead_request',
         referral: 'affiliate_partner_a',
       };
 

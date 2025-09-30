@@ -1,158 +1,75 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-const HUBSPOT_API_URL = 'https://api.hubapi.com/crm/v3/objects/contacts';
-const HUBSPOT_DEALS_URL = 'https://api.hubapi.com/crm/v3/objects/deals';
+const HUBSPOT_FORMS_API_URL =
+  'https://api.hsforms.com/submissions/v3/integration/submit/146476440/fc8302ca-aa67-4e59-a6e6-e69bc1d0cd46';
 
 export async function POST(req: NextRequest) {
-  const token = process.env.HUBSPOT_TOKEN;
-  if (!token) {
-    return NextResponse.json({ error: 'HubSpot token not configured' }, { status: 500 });
-  }
-
   const body = await req.json();
   const properties = body?.properties || body;
 
   try {
-    // First, try to find existing contact by email
-    const searchUrl = `${HUBSPOT_API_URL}/search`;
-    const searchResponse = await fetch(searchUrl, {
+    // Extract hutk from hubspotutk cookie
+    const hubspotutk = req.cookies.get('hubspotutk')?.value || '';
+
+    let city = 'unknown';
+    try {
+      // Replace with your actual API endpoint and key (if applicable)
+      const response = await fetch(
+        'https://api.ipdata.co?api-key=d44bfbc4443b29d45d5d1fe1694e3f4c6f17d6e4d00f2bb6f0838569'
+      );
+      const data = await response.json();
+      city = data.city;
+      console.log(`User's city: ${city}`);
+    } catch (error) {
+      console.error('Error fetching IP geolocation:', error);
+    }
+
+    // Convert properties to fields array format
+    const fields = Object.entries(properties)
+      .filter(([, value]) => value !== undefined && value !== null && value !== '')
+      .map(([name, value]) => ({
+        name,
+        value: String(value),
+      }));
+
+    // Add ip_city2 field if not present
+    if (!fields.find((field) => field.name === 'ip_city2')) {
+      fields.push({
+        name: 'ip_city2',
+        value: city,
+      });
+    }
+
+    const formData = {
+      fields,
+      context: {
+        hutk: hubspotutk,
+        pageUri: req.headers.get('referer') || 'https://coldi.ai',
+        pageName: 'Landing Page',
+      },
+      legalConsentOptions: {
+        consent: {
+          consentToProcess: true,
+          text: 'I agree to terms',
+        },
+      },
+    };
+
+    const hubspotRes = await fetch(HUBSPOT_FORMS_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        filterGroups: [
-          {
-            filters: [
-              {
-                propertyName: 'email',
-                operator: 'EQ',
-                value: properties.email,
-              },
-            ],
-          },
-        ],
-        properties: ['email', 'firstname', 'phone', 'website'],
-        limit: 1,
-      }),
+      body: JSON.stringify(formData),
     });
 
-    let contactId = null;
-    if (searchResponse.ok) {
-      const searchData = await searchResponse.json();
-      if (searchData.results && searchData.results.length > 0) {
-        contactId = searchData.results[0].id;
-      }
-    }
-
-    let hubspotRes;
-    if (contactId) {
-      console.log('updateProperties', properties);
-
-      // Update existing contact
-      hubspotRes = await fetch(`${HUBSPOT_API_URL}/${contactId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ properties }),
-      });
-    } else {
-      // Create new contact
-      hubspotRes = await fetch(HUBSPOT_API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ properties }),
-      });
-    }
-
-    // Check if response is JSON
-    const contentType = hubspotRes.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      const textResponse = await hubspotRes.text();
-      console.error('HubSpot returned non-JSON response:', textResponse.substring(0, 500));
-      return NextResponse.json(
-        {
-          error: 'HubSpot API returned invalid response format',
-          status: hubspotRes.status,
-        },
-        { status: 500 }
-      );
-    }
-
     const data = await hubspotRes.json();
-
     if (!hubspotRes.ok) {
-      console.error('HubSpot API error:', data);
-      return NextResponse.json(
-        {
-          error: 'Failed to create/update contact',
-          details: data,
-        },
-        { status: hubspotRes.status }
-      );
+      return NextResponse.json({ error: data }, { status: hubspotRes.status });
     }
-
-    // Get contact ID for deal creation
-    const finalContactId = contactId || data.id;
-
-    const propertiesType =
-      properties.type === 'pricing_request'
-        ? 'Pricing Request'
-        : properties.type === 'lead_request'
-          ? 'Lead Request'
-          : 'Call Request';
-
-    // Create deal for this contact
-    if (finalContactId) {
-      const dealProperties = {
-        dealname: `${propertiesType} - ${properties.email}`,
-      };
-
-      console.log('Creating deal for contact:', finalContactId);
-
-      const dealRes = await fetch(HUBSPOT_DEALS_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          properties: dealProperties,
-          associations: [
-            {
-              to: {
-                id: finalContactId,
-              },
-              types: [
-                {
-                  associationCategory: 'HUBSPOT_DEFINED',
-                  associationTypeId: 1, // Contact to Deal association
-                },
-              ],
-            },
-          ],
-        }),
-      });
-
-      if (dealRes.ok) {
-        const dealData = await dealRes.json();
-        console.log('Deal created successfully:', dealData.id);
-      } else {
-        const dealError = await dealRes.json();
-        console.error('Failed to create deal:', dealError);
-      }
-    }
-
     return NextResponse.json(data, { status: 200 });
   } catch (error: unknown) {
-    console.error('HubSpot API error:', error);
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
