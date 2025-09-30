@@ -106,6 +106,7 @@ export const SecondStepToCall = ({
         company_size: data.value.company,
         hs_lead_status: 'NEW',
         type: 'call_request',
+        referral: 'affiliate_partner_a',
       };
 
       console.log('Hubspot payload:', hubspotPayload);
