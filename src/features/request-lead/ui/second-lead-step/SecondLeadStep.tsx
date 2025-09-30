@@ -60,6 +60,7 @@ export const SecondLeadStep = ({
         primary_goals: data.value.primaryGoal.join('; '),
         hs_lead_status: 'NEW',
         type: 'lead_request',
+        referral: 'affiliate_partner_a',
       };
 
       console.log('Sending to HubSpot:', hubspotData);

@@ -75,6 +75,7 @@ export const RequestDialog = ({
       hs_lead_status: 'NEW',
       type: 'pricing_request',
       pricing: planTitle,
+      referral: 'affiliate_partner_a',
     };
 
     const hubspotRes = await fetch('/api/hubspot-lead', {

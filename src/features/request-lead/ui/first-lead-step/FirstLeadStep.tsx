@@ -48,6 +48,7 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
         company: data.value.company,
         hs_lead_status: 'NEW',
         type: 'lead_request',
+        referral: 'affiliate_partner_a',
       };
 
       const res = await fetch('/api/hubspot-lead', {
