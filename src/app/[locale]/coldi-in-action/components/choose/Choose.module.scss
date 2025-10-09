@@ -1,0 +1,118 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  padding: 165px 165px 165px 165px;
+  background: #ffffff;
+  position: relative;
+
+  @include mobile {
+    padding: 64px 12px 64px 12px;
+  }
+
+  > video {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
+    opacity: 0.5;
+  }
+}
+
+.button {
+  position: relative;
+  z-index: 1;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  a{
+    button{
+      border: 1px solid #4268ff;
+    }
+    &:last-child{
+      button{
+        background: #fff;
+        color: #0c1021;
+      }
+    }
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+
+  .desc {
+    color: #535662;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: normal;
+    width: 800px;
+    margin-top: 0;
+
+    @include tablet {
+      width: 100%;
+      font-size: 20px;
+      br {
+        display: none;
+      }
+    }
+    @include mobileSmall {
+      font-size: 16px;
+    }
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+
+    h2 {
+      color: #0c1021;
+      text-align: center;
+      font-size: 64px;
+      font-weight: 400;
+      line-height: 120%;
+      width: 850px;
+
+      @include fourteenInch {
+        font-size: 64px;
+      }
+
+      @include tablet {
+        width: 100%;
+        font-size: 42px;
+      }
+
+      @include mobile {
+        font-size: 42px;
+        line-height: 120%;
+      }
+
+      @include mobileSmall {
+        font-size: 32px;
+      }
+
+      span {
+        color: #4268ff;
+      }
+    }
+  }
+}
