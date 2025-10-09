@@ -60,10 +60,12 @@ export const BotCard = () => {
   return (
     <>
       <article className={st.card}>
+        {/*
         <h2>
           Click to hear how Coldi <br />
           <span>sounds in a real client call.</span>
         </h2>
+        */}
         <div className={st.card__videoWrapper}>
           <video
             className={st.card__video}
@@ -88,7 +90,7 @@ export const BotCard = () => {
           <div className={st.card__audio}>
             <audio
               ref={audioRef}
-              src={'/audio/recording.mp3'}
+              src={'/audio/recording2.mp3'}
               onEnded={handlePause}
               onTimeUpdate={handleTimeUpdate}
               onLoadedMetadata={() => {
