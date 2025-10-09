@@ -6,7 +6,7 @@ import { PauseIcon } from '@/shared/ui/icons/fill/pause-icon';
 import { PlayIcon } from '@/shared/ui/icons/fill/play';
 import { Button } from '@/shared/ui/kit/button';
 
-import type { BotPreview } from '../../../../../features/bots/model/types';
+import type { BotPreview } from '../../model/types';
 import st from './BotCard.module.scss';
 
 export const BotCard = ({ text, name, btnVariant, videoUrl, audioUrl }: BotPreview) => {
