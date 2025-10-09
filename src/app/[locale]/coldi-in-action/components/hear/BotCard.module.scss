@@ -2,7 +2,7 @@
 
 .card {
   position: relative;
-  //z-index: 1;
+  z-index: 1;
   flex: 1;
   padding: 32px;
   display: flex;
@@ -11,9 +11,9 @@
   border-radius: 48px;
   border: 1px solid rgba(12, 16, 33, 0.05);
   //background: #fff;
-  padding: 165px 16px;
+  padding: 0 16px 0 16px;
   @include mobile {
-    padding: 64px 16px;
+    padding: 0 16px 64px 16px;
   }
 
   h2 {
@@ -67,10 +67,13 @@
     margin: 0 auto;
     width: 100%;
     height: auto;
-    max-width: 762px;
+    max-width: 550px;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 24px;
+    @include fourteenInch {
+      max-width: 500px;
+    }
   }
 
   &__content {

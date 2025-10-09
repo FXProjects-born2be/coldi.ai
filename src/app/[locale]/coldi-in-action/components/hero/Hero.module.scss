@@ -4,17 +4,18 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 165px 165px 165px 165px;
+  padding: 124px 165px 0 165px;
   background: #ffffff;
   position: relative;
   margin-top: -124px;
 
   @include mobile {
-    padding: 64px 12px 64px 12px;
+    padding: 64px 12px 0 12px;
     margin-top: 0;
   }
 
   > video {
+    display: none;
     position: absolute;
     width: 100%;
     height: auto;
