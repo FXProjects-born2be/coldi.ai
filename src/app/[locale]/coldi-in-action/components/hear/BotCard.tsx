@@ -90,7 +90,7 @@ export const BotCard = () => {
           <div className={st.card__audio}>
             <audio
               ref={audioRef}
-              src={'/audio/recording2.mp3'}
+              src={'/audio/recording3.mp3'}
               onEnded={handlePause}
               onTimeUpdate={handleTimeUpdate}
               onLoadedMetadata={() => {
