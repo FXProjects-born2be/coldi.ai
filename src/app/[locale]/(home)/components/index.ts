@@ -5,6 +5,8 @@ export * from './hear-coldi/HearColdi';
 export * from './hero/Hero';
 export * from './infrustructure/Infrustructure';
 export * from './reviews/Reviews';
+export * from './tools/Tools';
 export * from './voices/Voices';
+export * from './voices-list/VoicesList';
 export * from './what-can-do/WhatCanDo';
 export * from './what-it-is/WhatIs';

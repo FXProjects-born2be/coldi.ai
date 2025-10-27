@@ -5,7 +5,7 @@ type FirstStepData = {
   phone: string;
 };
 
-export type Agent = 'Sophie' | 'Monica' | 'Victoria';
+export type Agent = 'Sophie' | 'George' | 'Kate';
 
 type RequestCallStore = {
   firstStepData: FirstStepData;
