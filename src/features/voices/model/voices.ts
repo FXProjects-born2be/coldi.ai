@@ -12,20 +12,19 @@ export const getVoices = () => [
     ],
   },
   {
-    imgUrl: '/images/home/voices/monica.webp',
-    name: 'Monica',
-    description: 'Casino & Gambling Agent',
+    imgUrl: '/images/home/voices/george.webp',
+    name: 'George',
+    description: 'Electrical Services Support Agent',
     features: [
-      'Confident British accent',
-      'Sales-driven tone',
-      'Loyalty and retention oriented',
-      'CRM and player account integrated',
-      'Re-engagement skills',
+      'Neutral accent',
+      'Friendly, professional delivery',
+      'Empathetic communication',
+      'Electrical service expert',
     ],
   },
   {
     imgUrl: '/images/home/voices/victoria.webp',
-    name: 'Victoria',
+    name: 'Kate',
     description: 'Tech support agent',
     features: [
       'Calm American accent',

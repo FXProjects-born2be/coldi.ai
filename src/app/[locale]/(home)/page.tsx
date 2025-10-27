@@ -6,7 +6,9 @@ import {
   Hero,
   Infrustructure,
   Reviews,
+  Tools,
   Voices,
+  VoicesList,
   WhatCanDo,
   WhatIs,
 } from './components';
@@ -19,6 +21,8 @@ export default function Home() {
 
       <Advantages />
       <Infrustructure />
+      <Tools />
+      <VoicesList />
       <WhatCanDo />
       <HearColdi />
       <Delivers />

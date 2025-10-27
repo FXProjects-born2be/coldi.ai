@@ -1,0 +1,95 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.card {
+  width: calc(33.33% - 8px);
+  display: flex;
+  height: 220px;
+  padding: 24px 48px 24px 24px;
+  align-items: center;
+  gap: 24px;
+  align-self: stretch;
+  border-radius: 32px;
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  background: #fff;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.05);
+  @include tablet {
+    width: 100%;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: calc(100% - 64px);
+  }
+  &__top {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    h4 {
+      color: #0c1021;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+    span {
+      overflow: hidden;
+      color: rgba(80, 85, 107, 0.6);
+      text-overflow: ellipsis;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+
+  &__button {
+    display: flex;
+    width: 40px;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: 48px;
+      background: #4268ff;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  p {
+    overflow: hidden;
+    color: #50556b;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    align-self: stretch;
+  }
+  a {
+    overflow: hidden;
+    color: #4268ff;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+  }
+}

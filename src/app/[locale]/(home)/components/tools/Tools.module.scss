@@ -1,0 +1,76 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  padding: 165px 165px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  background: #fafafa;
+
+  @include fourteenInch {
+    gap: 64px;
+  }
+
+  h2 {
+    color: #0c1021;
+    text-align: center;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 120%;
+
+    @include fourteenInch {
+      font-size: 72px;
+    }
+
+    @include tablet {
+      font-size: 48px;
+    }
+
+    @include mobileSmall {
+      font-size: 32px;
+    }
+
+    .highlighted {
+      color: #4268ff;
+    }
+  }
+
+  @include mobile {
+    padding: 64px 16px;
+    gap: 64px;
+  }
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-self: stretch;
+  flex-wrap: wrap;
+
+  @include tablet {
+    flex-direction: column;
+  }
+
+  .card {
+    display: flex;
+    padding: 32px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+
+    border-radius: 48px;
+    border: 1px solid rgba(12, 16, 33, 0.05);
+    background: #fff;
+    width: calc(33.33% - 8px);
+    @include tablet {
+      width: 100%;
+    }
+    img {
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+}
