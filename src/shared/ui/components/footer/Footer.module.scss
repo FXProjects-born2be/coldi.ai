@@ -1,10 +1,26 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
+.whatsappFixedLink {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 999;
+  svg {
+    width: 56px;
+    height: 56px;
+    transition: transform 0.2s ease;
+    filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.1));
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
 .footer {
   position: relative;
   padding-bottom: 24px;
   overflow: hidden;
-  background: linear-gradient(180deg, #FFF 29.63%, #819AFF 100%);
+  background: linear-gradient(180deg, #fff 29.63%, #819aff 100%);
 
   &__container {
     margin: 24px 24px 0 24px;
@@ -35,11 +51,11 @@
       gap: 10px;
       border-radius: 16px;
       background: #f6f6f6;
-      &:hover{
-        background: #E3E9FF;
-        svg{
-          path{
-            fill: #4268FF;
+      &:hover {
+        background: #e3e9ff;
+        svg {
+          path {
+            fill: #4268ff;
           }
         }
       }
