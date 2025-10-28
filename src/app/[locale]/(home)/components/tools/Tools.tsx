@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
@@ -8,28 +9,70 @@ import { blurInUp } from '@/shared/lib/helpers/animations';
 import st from './Tools.module.scss';
 
 const card = [
-  '/images/home/tools/twilio.svg',
-  '/images/home/tools/hubspot.svg',
-  '/images/home/tools/housecall.svg',
-  '/images/home/tools/n8n.svg',
-  '/images/home/tools/calendly.svg',
-  '/images/home/tools/slack.svg',
-  '/images/home/tools/zapier.svg',
-  '/images/home/tools/google-sheets.svg',
-  '/images/home/tools/bluefield.png',
+  {
+    image: '/images/home/tools/twilio.svg',
+    alt: 'Twilio',
+    href: 'https://twilio.com/',
+  },
+  {
+    image: '/images/home/tools/hubspot.svg',
+    alt: 'HubSpot',
+    href: 'https://hubspot.com/',
+  },
+  {
+    image: '/images/home/tools/housecall.svg',
+    alt: 'HouseCall',
+    href: 'https://housecallpro.com/',
+  },
+  {
+    image: '/images/home/tools/n8n.svg',
+    alt: 'N8N',
+    href: 'https://n8n.io/',
+  },
+  {
+    image: '/images/home/tools/calendly.svg',
+    alt: 'Calendly',
+    href: 'https://calendly.com/',
+  },
+  {
+    image: '/images/home/tools/slack.svg',
+    alt: 'Slack',
+    href: 'https://slack.com/',
+  },
+  {
+    image: '/images/home/tools/zapier.svg',
+    alt: 'Zapier',
+    href: 'https://zapier.com/',
+  },
+  {
+    image: '/images/home/tools/google-sheets.svg',
+    alt: 'Google Sheets',
+    href: 'https://google.com/sheets/about/',
+  },
+  {
+    image: '/images/home/tools/bluefield.png',
+    alt: 'Bluefield',
+    href: '#',
+  },
 ];
 
 export const Tools = () => (
   <section className={st.layout}>
     <motion.h2 variants={blurInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-      Coldi is already integrated <br />{' '}
-      <span className={st.highlighted}>with leading business tools</span>
+      Coldi is Already Integrated <br />
+      <span className={st.highlighted}>with Leading Business Tools</span>
     </motion.h2>
     <section className={st.cards}>
       {card.map((item) => (
-        <div key={item} className={st.card}>
-          <Image src={item} alt={item} width={100} height={100} unoptimized />
-        </div>
+        <Link
+          href={item.href}
+          key={item.alt}
+          className={st.card}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image src={item.image} alt={item.alt} width={100} height={100} unoptimized />
+        </Link>
       ))}
     </section>
   </section>
