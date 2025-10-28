@@ -50,9 +50,9 @@ const card = [
     href: 'https://google.com/sheets/about/',
   },
   {
-    image: '/images/home/tools/bluefield.png',
-    alt: 'Bluefield',
-    href: '#',
+    image: '/images/home/tools/sendgrid.svg',
+    alt: 'SendGrid',
+    href: 'https://sendgrid.com/',
   },
 ];
 
