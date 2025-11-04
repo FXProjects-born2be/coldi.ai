@@ -90,6 +90,19 @@ export const RequestDialog = ({
       const errorData = await hubspotRes.json();
       console.error('Failed to send lead to HubSpot:', errorData);
     }
+
+    // Trigger background check on server (30 second delay is handled on server)
+    // Fire and forget - don't wait for response
+    fetch('/api/check-hubspot-and-notify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: data.email,
+        name: data.name,
+      }),
+    }).catch((error) => {
+      console.error('Error triggering HubSpot check and notification:', error);
+    });
   };
 
   return (

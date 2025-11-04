@@ -77,6 +77,17 @@ export const SecondLeadStep = ({
         const errorData = await hubspotRes.json();
         console.error('Failed to send lead to HubSpot:', errorData);
       }
+
+      fetch('/api/check-hubspot-and-notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: firstStepData.email,
+          name: firstStepData.fullName,
+        }),
+      }).catch((error) => {
+        console.error('Error triggering HubSpot check and notification:', error);
+      });
     },
   });
   //const errors = useStore(store, (state) => state.errorMap);
