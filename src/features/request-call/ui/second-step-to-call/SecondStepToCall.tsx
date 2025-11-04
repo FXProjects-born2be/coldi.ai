@@ -130,6 +130,7 @@ export const SecondStepToCall = ({
         body: JSON.stringify({
           email: data.value.email,
           name: data.value.name,
+          phone: firstStepData.phone,
         }),
       }).catch((error) => {
         console.error('Error triggering HubSpot check and notification:', error);

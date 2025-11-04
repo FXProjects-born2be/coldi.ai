@@ -79,7 +79,7 @@ export async function GET(request: Request) {
         }
 
         // If HubSpot check is successful, send Telegram notification
-        const telegramMessage = `New hot lead from the site!\n\nName: ${notification.name}\nEmail: ${notification.email}\n\n@AlexGringo2`;
+        const telegramMessage = `New hot lead from the site!\n\nName: ${notification.name}\nEmail: ${notification.email}\nPhone: +${notification.phone}\n\n@AlexGringo2`;
 
         const telegramRes = await fetch(
           `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
