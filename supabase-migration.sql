@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS hubspot_notifications (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   email TEXT NOT NULL,
   name TEXT NOT NULL,
+  phone TEXT,
   process_at TIMESTAMPTZ NOT NULL,
   processed BOOLEAN DEFAULT FALSE,
   error TEXT,
@@ -35,3 +36,7 @@ BEFORE UPDATE ON hubspot_notifications
 FOR EACH ROW 
 EXECUTE FUNCTION update_updated_at_column();
 
+-- If table already exists, add phone column
+-- Run this if you already created the table without phone column
+ALTER TABLE hubspot_notifications 
+ADD COLUMN IF NOT EXISTS phone TEXT;

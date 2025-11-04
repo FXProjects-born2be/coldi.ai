@@ -84,6 +84,7 @@ export const SecondLeadStep = ({
         body: JSON.stringify({
           email: firstStepData.email,
           name: firstStepData.fullName,
+          phone: firstStepData.phone,
         }),
       }).catch((error) => {
         console.error('Error triggering HubSpot check and notification:', error);
