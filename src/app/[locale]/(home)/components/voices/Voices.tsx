@@ -1,6 +1,6 @@
 'use client';
-import Image from 'next/image';
-import Link from 'next/link';
+//import Image from 'next/image';
+//import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
@@ -8,18 +8,17 @@ import { getVoices } from '@/features/voices/model/voices';
 import { VoiceCard } from '@/features/voices/ui/voice-card';
 
 import { blurInUp } from '@/shared/lib/helpers/animations';
-import { Button } from '@/shared/ui/kit/button';
 
 import st from './Voices.module.scss';
 
 export const Voices = () => {
   const items = getVoices();
 
-  const images = [
+  /*const images = [
     '/images/home/voices/temp1.png',
     '/images/home/voices/temp2.png',
     '/images/home/voices/temp3.png',
-  ];
+  ];*/
 
   return (
     <section className={st.voices}>
@@ -45,6 +44,7 @@ export const Voices = () => {
           </motion.div>
         ))}
       </section>
+      {/* Temporary disabled images: 
       <section className={`${st.voices__list} ${st.images}`}>
         {images.map((imgUrl, index) => (
           <motion.div
@@ -69,7 +69,7 @@ export const Voices = () => {
         <Link href={`/voices`}>
           <Button fullWidth>Check more voices</Button>
         </Link>
-      </section>
+      </section>*/}
     </section>
   );
 };
