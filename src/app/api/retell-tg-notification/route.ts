@@ -8,9 +8,11 @@ type RetellWebhookPayload = {
   call?: {
     call_id?: string;
     call_status?: string;
+    to_number?: string;
     retell_llm_dynamic_variables?: {
       first_name?: string;
       last_name?: string;
+      customer_name?: string;
       email?: string;
       phone_number?: string;
     };
@@ -48,11 +50,18 @@ export async function POST(request: Request) {
       );
     }
 
-    const { first_name, last_name, email, phone_number } = body.call.retell_llm_dynamic_variables;
+    const { first_name, last_name, customer_name, email, phone_number } =
+      body.call.retell_llm_dynamic_variables;
     const recordingUrl = body.call.recording_url;
+    const toNumber = body.call.to_number;
 
-    // Build name from first_name and last_name
-    const name = [first_name, last_name].filter(Boolean).join(' ') || 'N/A';
+    // Build name: use first_name (with last_name if available) or customer_name
+    let name = 'N/A';
+    if (first_name) {
+      name = [first_name, last_name].filter(Boolean).join(' ') || first_name;
+    } else if (customer_name) {
+      name = customer_name;
+    }
 
     // Log extracted data
     console.log('=== Extracted Data ===');
@@ -60,8 +69,10 @@ export async function POST(request: Request) {
     console.log('Name:', name);
     console.log('First Name:', first_name);
     console.log('Last Name:', last_name);
+    console.log('Customer Name:', customer_name);
     console.log('Email:', email);
-    console.log('Phone Number:', phone_number);
+    console.log('Phone Number (from dynamic vars):', phone_number);
+    console.log('To Number (from call):', toNumber);
     console.log('Recording URL:', recordingUrl);
     console.log('Call ID:', body.call?.call_id);
     console.log('Call Status:', body.call?.call_status);
@@ -74,11 +85,12 @@ export async function POST(request: Request) {
       );
     }
 
-    // Format phone number (add + if not present)
-    const phone = phone_number
-      ? phone_number.startsWith('+')
-        ? phone_number
-        : `+${phone_number}`
+    // Format phone number: use to_number from call, or fallback to phone_number from dynamic variables
+    const phoneNumber = toNumber || phone_number;
+    const phone = phoneNumber
+      ? phoneNumber.startsWith('+')
+        ? phoneNumber
+        : `+${phoneNumber}`
       : 'N/A';
 
     // Create Telegram message similar to the existing one
