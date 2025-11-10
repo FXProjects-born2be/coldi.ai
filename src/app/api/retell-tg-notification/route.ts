@@ -6,6 +6,8 @@ const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 type RetellWebhookPayload = {
   event: string;
   call?: {
+    call_id?: string;
+    call_status?: string;
     retell_llm_dynamic_variables?: {
       first_name?: string;
       last_name?: string;
@@ -28,12 +30,18 @@ export async function POST(request: Request) {
 
     const body: RetellWebhookPayload = await request.json();
 
+    // Log the full incoming request
+    console.log('=== Retell Webhook Request ===');
+    console.log('Full request body:', JSON.stringify(body, null, 2));
+
     // Only process call_analyzed events
     if (body.event !== 'call_analyzed') {
+      console.log(`Event ignored: ${body.event}`);
       return NextResponse.json({ status: 'success', message: 'Event ignored' });
     }
 
     if (!body.call || !body.call.retell_llm_dynamic_variables) {
+      console.error('Missing call data or dynamic variables');
       return NextResponse.json(
         { status: 'error', message: 'Missing call data or dynamic variables' },
         { status: 400 }
@@ -45,6 +53,19 @@ export async function POST(request: Request) {
 
     // Build name from first_name and last_name
     const name = [first_name, last_name].filter(Boolean).join(' ') || 'N/A';
+
+    // Log extracted data
+    console.log('=== Extracted Data ===');
+    console.log('Event:', body.event);
+    console.log('Name:', name);
+    console.log('First Name:', first_name);
+    console.log('Last Name:', last_name);
+    console.log('Email:', email);
+    console.log('Phone Number:', phone_number);
+    console.log('Recording URL:', recordingUrl);
+    console.log('Call ID:', body.call?.call_id);
+    console.log('Call Status:', body.call?.call_status);
+    console.log('========================');
 
     if (!email) {
       return NextResponse.json(
