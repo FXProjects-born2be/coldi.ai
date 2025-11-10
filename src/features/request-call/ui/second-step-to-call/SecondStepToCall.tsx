@@ -124,7 +124,7 @@ export const SecondStepToCall = ({
         console.error('Failed to send hubspot call request', error);
       }
 
-      fetch('/api/check-hubspot-and-notify', {
+      /*fetch('/api/check-hubspot-and-notify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -134,7 +134,7 @@ export const SecondStepToCall = ({
         }),
       }).catch((error) => {
         console.error('Error triggering HubSpot check and notification:', error);
-      });
+      });*/
     },
   });
   const errors = useStore(store, (state) => state.errorMap);
