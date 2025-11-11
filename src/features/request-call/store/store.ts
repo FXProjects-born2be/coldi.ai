@@ -3,6 +3,7 @@ import { create } from 'zustand';
 type FirstStepData = {
   scenario: string;
   phone: string;
+  countryCode: string;
 };
 
 export type Agent = 'Sophie' | 'George' | 'Kate';
@@ -20,6 +21,7 @@ export const useRequestCallStore = create<RequestCallStore>((set, get) => ({
   firstStepData: {
     scenario: '',
     phone: '',
+    countryCode: '',
   },
   agent: 'Sophie',
   hasFirstStepData: false,
@@ -40,6 +42,7 @@ export const useRequestCallStore = create<RequestCallStore>((set, get) => ({
       firstStepData: {
         scenario: '',
         phone: '',
+        countryCode: '',
       },
       hasFirstStepData: false,
     });

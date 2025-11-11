@@ -10,7 +10,7 @@ const supabase = createClient(
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, name, phone } = await req.json();
+    const { email, name, phone, customMessage } = await req.json();
 
     if (!email || !name) {
       return NextResponse.json({ error: 'Email and name are required' }, { status: 400 });
@@ -27,6 +27,7 @@ export async function POST(req: NextRequest) {
         phone,
         process_at: processAt,
         processed: false,
+        custom_message: customMessage || null,
       },
     ]);
 

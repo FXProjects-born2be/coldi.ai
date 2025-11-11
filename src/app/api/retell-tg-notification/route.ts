@@ -3,12 +3,59 @@ import { NextResponse } from 'next/server';
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
+// List of supported country codes
+const SUPPORTED_COUNTRY_CODES = [
+  '+52',
+  '+1',
+  '+44',
+  '+54',
+  '+55',
+  '+56',
+  '+43',
+  '+32',
+  '+359',
+  '+385',
+  '+357',
+  '+420',
+  '+45',
+  '+372',
+  '+33',
+  '+49',
+  '+30',
+  '+36',
+  '+354',
+  '+353',
+  '+39',
+  '+371',
+  '+370',
+  '+352',
+  '+377',
+  '+31',
+  '+47',
+  '+48',
+  '+351',
+  '+34',
+  '+46',
+  '+41',
+  '+972',
+  '+965',
+  '+974',
+  '+966',
+  '+65',
+  '+886',
+  '+66',
+  '+90',
+  '+971',
+  '+61',
+];
+
 type RetellWebhookPayload = {
   event: string;
   call?: {
     call_id?: string;
     call_status?: string;
     to_number?: string;
+    country_code?: string;
     retell_llm_dynamic_variables?: {
       first_name?: string;
       last_name?: string;
@@ -54,6 +101,7 @@ export async function POST(request: Request) {
       body.call.retell_llm_dynamic_variables;
     const recordingUrl = body.call.recording_url;
     const toNumber = body.call.to_number;
+    const countryCode = body.call.country_code;
 
     // Build name: use first_name (with last_name if available) or customer_name
     let name = 'N/A';
@@ -73,6 +121,7 @@ export async function POST(request: Request) {
     console.log('Email:', email);
     console.log('Phone Number (from dynamic vars):', phone_number);
     console.log('To Number (from call):', toNumber);
+    console.log('Country Code:', countryCode);
     console.log('Recording URL:', recordingUrl);
     console.log('Call ID:', body.call?.call_id);
     console.log('Call Status:', body.call?.call_status);
@@ -93,8 +142,52 @@ export async function POST(request: Request) {
         : `+${phoneNumber}`
       : 'N/A';
 
-    // Create Telegram message similar to the existing one
-    const telegramMessage = `New hot lead from the site!\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\n@monika_farkas\n@goldsor\n@JacobAiris`;
+    // Check if country code is supported
+    const formattedCountryCode = countryCode
+      ? countryCode.startsWith('+')
+        ? countryCode
+        : `+${countryCode}`
+      : null;
+    const isSupported = formattedCountryCode
+      ? SUPPORTED_COUNTRY_CODES.includes(formattedCountryCode)
+      : true; // If no country code provided, assume supported
+
+    // Create Telegram message
+    let telegramMessage: string;
+    if (!isSupported) {
+      // Unsupported country: send message without audio
+      telegramMessage = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nCountry code blocked for outbound calls\n\n@monika_farkas\n@goldsor\n@JacobAiris`;
+
+      // For unsupported countries, send text message only (no audio)
+      const messageRes = await fetch(
+        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: telegramMessage,
+          }),
+        }
+      );
+
+      if (!messageRes.ok) {
+        const messageError = await messageRes.text();
+        console.error(`Telegram message failed for ${email}:`, messageError);
+        return NextResponse.json(
+          { status: 'error', message: 'Failed to send Telegram message' },
+          { status: 500 }
+        );
+      }
+
+      console.log(`Successfully sent blocked country notification for ${email}`);
+      return NextResponse.json({ status: 'success', message: 'Webhook processed' });
+    }
+
+    // Supported country: use standard message
+    telegramMessage = `New hot lead from the site!\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\n@monika_farkas\n@goldsor\n@JacobAiris`;
 
     // If recording_url is available, send audio with message as caption
     if (recordingUrl) {

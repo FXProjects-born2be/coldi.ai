@@ -82,6 +82,7 @@ export const SecondStepToCall = ({
         industry: data.value.industry,
         company: data.value.company,
         agent,
+        countryCode: firstStepData.countryCode,
       };
       console.log('Retell payload:', retellPayload);
 
