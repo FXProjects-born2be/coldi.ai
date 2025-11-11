@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
   const payload = {
     from_number: '+447401271428',
     to_number: phone.startsWith('+') ? phone : `+${phone}`,
-    country_code: countryCode,
+
     override_agent_id,
     metadata: {},
     retell_llm_dynamic_variables: {
@@ -42,6 +42,7 @@ export async function POST(req: NextRequest) {
       email,
       industry,
       companySize: company,
+      country_code: countryCode,
     },
     custom_sip_headers: {
       'X-Custom-Header': '1',
