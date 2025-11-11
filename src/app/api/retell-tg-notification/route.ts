@@ -55,13 +55,14 @@ type RetellWebhookPayload = {
     call_id?: string;
     call_status?: string;
     to_number?: string;
-    country_code?: string;
+
     retell_llm_dynamic_variables?: {
       first_name?: string;
       last_name?: string;
       customer_name?: string;
       email?: string;
       phone_number?: string;
+      country_code?: string;
     };
     recording_url?: string;
   };
@@ -101,7 +102,7 @@ export async function POST(request: Request) {
       body.call.retell_llm_dynamic_variables;
     const recordingUrl = body.call.recording_url;
     const toNumber = body.call.to_number;
-    const countryCode = body.call.country_code;
+    const countryCode = body.call.retell_llm_dynamic_variables?.country_code || null;
 
     // Build name: use first_name (with last_name if available) or customer_name
     let name = 'N/A';
