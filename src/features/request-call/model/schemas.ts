@@ -11,12 +11,13 @@ export const firstStepCallSchema = v.object({
   ),
   phone: v.pipe(
     v.string(),
-    v.minLength(1, 'We can’t complete your request without a valid phone number.'),
+    v.minLength(1, "We can't complete your request without a valid phone number."),
     v.custom(
       (value) => isPhoneValid(String(`+${value}`)),
-      'We can’t complete your request without a valid phone number.'
+      "We can't complete your request without a valid phone number."
     )
   ),
+  countryCode: v.string(),
 });
 
 export const secondStepCallSchema = v.object({

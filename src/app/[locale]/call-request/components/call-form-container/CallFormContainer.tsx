@@ -22,18 +22,28 @@ const ThankYouDialog = dynamic(
   { ssr: false }
 );
 
+const UnsupportedCountryDialog = dynamic(
+  () =>
+    import('@/features/request-call/ui/unsupported-country-dialog').then(
+      (mod) => mod.UnsupportedCountryDialog
+    ),
+  { ssr: false }
+);
+
 export const CallFormContainer = ({ botName = 'Sophie' }: { botName?: string }) => {
   const [step, setStep] = useState(1);
   const { agent, setAgent } = useRequestCallStore();
   const [data, setData] = useState<FirstStepCallSchema & SecondStepCallSchema>({
     scenario: [],
     phone: '',
+    countryCode: '',
     name: '',
     email: '',
     industry: '',
     company: '',
   });
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isUnsupportedCountry, setIsUnsupportedCountry] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const bots = getVoices().map((bot) => bot.name as Agent);
 
@@ -53,6 +63,7 @@ export const CallFormContainer = ({ botName = 'Sophie' }: { botName?: string }) 
 
   const onContinueHandle = () => {
     setIsSuccess(false);
+    setIsUnsupportedCountry(false);
     router.push('/');
   };
 
@@ -124,9 +135,11 @@ export const CallFormContainer = ({ botName = 'Sophie' }: { botName?: string }) 
         <SecondStepToCall
           botName={activeBot?.name ?? ''}
           onSubmit={(data) => secondStepHandle(data)}
+          onUnsupportedCountry={() => setIsUnsupportedCountry(true)}
         />
       )}
       <ThankYouDialog open={isSuccess} onClose={onContinueHandle} />
+      <UnsupportedCountryDialog open={isUnsupportedCountry} onClose={onContinueHandle} />
       <StillLikeGetCall />
     </section>
   );

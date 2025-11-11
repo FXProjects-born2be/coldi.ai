@@ -32,6 +32,9 @@ export const FirstStepToCall = ({
       phone: localStorage?.getItem('CallRequestFirstStepData')
         ? JSON.parse(localStorage.getItem('CallRequestFirstStepData') || '{}').phone
         : '',
+      countryCode: localStorage?.getItem('CallRequestFirstStepData')
+        ? JSON.parse(localStorage.getItem('CallRequestFirstStepData') || '{}').countryCode || ''
+        : '',
     },
     validators: {
       onSubmit: firstStepCallSchema,
@@ -54,6 +57,7 @@ export const FirstStepToCall = ({
           ? formValues.scenario.join(', ')
           : formValues.scenario,
         phone: formValues.phone,
+        countryCode: formValues.countryCode || '',
       });
     }
   }, [formValues, setFirstStepData]);
@@ -96,24 +100,34 @@ export const FirstStepToCall = ({
         </header>
         <Field name="phone">
           {(field) => (
-            <div className={st.phoneInputContainer}>
-              <PhoneInput
-                country={'us'}
-                value={String(field.state.value)}
-                onChange={(phone) => field.handleChange(phone)}
-                onBlur={field.handleBlur}
-                placeholder="Phone Number"
-                inputClass={`${st.phoneInput} ${errors.onSubmit?.phone ? st.error : ''}`}
-                buttonClass={st.phoneInputButton}
-                dropdownClass={st.phoneInputDropdown}
-                enableSearch={true}
-                searchPlaceholder="Search country..."
-                autoFormat={true}
-              />
-              {errors.onSubmit?.phone?.map((err) => (
-                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-              ))}
-            </div>
+            <Field name="countryCode">
+              {(countryCodeField) => (
+                <div className={st.phoneInputContainer}>
+                  <PhoneInput
+                    country={'us'}
+                    value={String(field.state.value)}
+                    onChange={(phone, country) => {
+                      field.handleChange(phone);
+                      if (country && typeof country === 'object' && 'dialCode' in country) {
+                        const dialCode = `+${country.dialCode}`;
+                        countryCodeField.handleChange(dialCode);
+                      }
+                    }}
+                    onBlur={field.handleBlur}
+                    placeholder="Phone Number"
+                    inputClass={`${st.phoneInput} ${errors.onSubmit?.phone ? st.error : ''}`}
+                    buttonClass={st.phoneInputButton}
+                    dropdownClass={st.phoneInputDropdown}
+                    enableSearch={true}
+                    searchPlaceholder="Search country..."
+                    autoFormat={true}
+                  />
+                  {errors.onSubmit?.phone?.map((err) => (
+                    <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+                  ))}
+                </div>
+              )}
+            </Field>
           )}
         </Field>
 

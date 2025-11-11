@@ -40,12 +40,60 @@ const companySizes = [
   '5,000+',
 ];
 
+// List of supported country codes
+const SUPPORTED_COUNTRY_CODES = [
+  '+52',
+  '+1',
+  '+44',
+  '+54',
+  '+55',
+  '+56',
+  '+43',
+  '+32',
+  '+359',
+  '+385',
+  '+357',
+  '+420',
+  '+45',
+  '+372',
+  '+33',
+  '+49',
+  '+30',
+  '+36',
+  '+354',
+  '+353',
+  '+39',
+  '+371',
+  '+370',
+  '+352',
+  '+377',
+  '+31',
+  '+47',
+  '+48',
+  '+351',
+  '+34',
+  '+46',
+  '+41',
+  '+972',
+  '+965',
+  '+974',
+  '+966',
+  '+65',
+  '+886',
+  '+66',
+  '+90',
+  '+971',
+  '+61',
+];
+
 export const SecondStepToCall = ({
   botName,
   onSubmit,
+  onUnsupportedCountry,
 }: {
   botName: string;
   onSubmit: (data: SecondStepCallSchema) => void;
+  onUnsupportedCountry: () => void;
 }) => {
   const { agent, firstStepData } = useRequestCallStore();
 
@@ -60,7 +108,24 @@ export const SecondStepToCall = ({
       onSubmit: secondStepCallSchema,
     },
     onSubmit: async (data) => {
-      onSubmit(data.value);
+      // Check if country code is supported
+      const countryCode = firstStepData.countryCode || '';
+      const isSupported = SUPPORTED_COUNTRY_CODES.includes(countryCode);
+
+      // Prepare HubSpot payload (used for both supported and unsupported countries)
+      const hubspotPayload = {
+        email: data.value.email,
+        firstname: data.value.name,
+        phone: firstStepData.phone,
+        call_scenarios: firstStepData.scenario,
+        industry: data.value.industry,
+        company_size: data.value.company,
+        hs_lead_status: 'NEW',
+        //type: 'call_request',
+        referral: 'affiliate_partner_a',
+      };
+
+      // Common flow for both supported and unsupported countries
       localStorage?.removeItem('CallRequestFirstStepData');
       const body = { ...data.value, ...firstStepData, agent };
       console.log(body);
@@ -82,6 +147,7 @@ export const SecondStepToCall = ({
         industry: data.value.industry,
         company: data.value.company,
         agent,
+        countryCode: firstStepData.countryCode,
       };
       console.log('Retell payload:', retellPayload);
 
@@ -96,18 +162,6 @@ export const SecondStepToCall = ({
       } else {
         console.error('Failed to send retell call request');
       }
-
-      const hubspotPayload = {
-        email: data.value.email,
-        firstname: data.value.name,
-        phone: firstStepData.phone,
-        call_scenarios: firstStepData.scenario,
-        industry: data.value.industry,
-        company_size: data.value.company,
-        hs_lead_status: 'NEW',
-        //type: 'call_request',
-        referral: 'affiliate_partner_a',
-      };
 
       console.log('Hubspot payload:', hubspotPayload);
 
@@ -124,17 +178,14 @@ export const SecondStepToCall = ({
         console.error('Failed to send hubspot call request', error);
       }
 
-      /*fetch('/api/check-hubspot-and-notify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: data.value.email,
-          name: data.value.name,
-          phone: firstStepData.phone,
-        }),
-      }).catch((error) => {
-        console.error('Error triggering HubSpot check and notification:', error);
-      });*/
+      // Show different dialog based on country code support
+      if (!isSupported) {
+        // Show unsupported country dialog
+        onUnsupportedCountry();
+      } else {
+        // Show success dialog for supported countries
+        onSubmit(data.value);
+      }
     },
   });
   const errors = useStore(store, (state) => state.errorMap);

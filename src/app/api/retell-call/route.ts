@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
   console.log('Received body:', body);
-  const { name, email, phone, industry, company, agent } = body;
+  const { name, email, phone, industry, company, agent, countryCode } = body;
   console.log('Extracted fields:', { name, email, phone, industry, company, agent });
 
   if (!name || !email || !phone || !industry || !company || !agent) {
@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
   const payload = {
     from_number: '+447401271428',
     to_number: phone.startsWith('+') ? phone : `+${phone}`,
+    country_code: countryCode,
     override_agent_id,
     metadata: {},
     retell_llm_dynamic_variables: {
