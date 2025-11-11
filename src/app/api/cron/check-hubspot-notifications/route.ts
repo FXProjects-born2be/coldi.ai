@@ -11,6 +11,9 @@ const HUBSPOT_API_TOKEN = process.env.HUBSPOT_API_TOKEN;
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
+// Toggle to enable/disable HubSpot check. Set to false to skip HubSpot verification and send directly to Telegram
+const ENABLE_HUBSPOT_CHECK = false;
+
 export async function GET(request: Request) {
   const authHeader = request.headers.get('authorization');
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
@@ -18,7 +21,15 @@ export async function GET(request: Request) {
   }
 
   try {
-    if (!HUBSPOT_API_TOKEN || !TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+    // Check required environment variables
+    if (ENABLE_HUBSPOT_CHECK && !HUBSPOT_API_TOKEN) {
+      console.error('HUBSPOT_API_TOKEN is required when HubSpot check is enabled');
+      return NextResponse.json(
+        { status: 'error', message: 'Configuration error: HUBSPOT_API_TOKEN missing' },
+        { status: 500 }
+      );
+    }
+    if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
       console.error('Required environment variables are not configured');
       return NextResponse.json(
         { status: 'error', message: 'Configuration error' },
@@ -50,36 +61,39 @@ export async function GET(request: Request) {
     for (const notification of notifications) {
       console.log('Processing notification:', notification);
       try {
-        // Format email for URL: encodeURIComponent properly encodes @ as %40
-        const encodedEmail = encodeURIComponent(notification.email);
+        // HubSpot check (can be disabled by setting ENABLE_HUBSPOT_CHECK to false)
+        if (ENABLE_HUBSPOT_CHECK) {
+          // Format email for URL: encodeURIComponent properly encodes @ as %40
+          const encodedEmail = encodeURIComponent(notification.email);
 
-        // Check if contact exists in HubSpot
-        const hubspotUrl = `https://api.hubapi.com/crm/v3/objects/contacts/${encodedEmail}?idProperty=email&properties=email`;
+          // Check if contact exists in HubSpot
+          const hubspotUrl = `https://api.hubapi.com/crm/v3/objects/contacts/${encodedEmail}?idProperty=email&properties=email`;
 
-        const hubspotRes = await fetch(hubspotUrl, {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${HUBSPOT_API_TOKEN}`,
-            'Content-Type': 'application/json',
-          },
-        });
+          const hubspotRes = await fetch(hubspotUrl, {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${HUBSPOT_API_TOKEN}`,
+              'Content-Type': 'application/json',
+            },
+          });
 
-        if (!hubspotRes.ok) {
-          console.error(
-            `HubSpot contact check failed for ${notification.email}:`,
-            hubspotRes.status,
-            await hubspotRes.text()
-          );
-          // Mark as processed even if failed to avoid retrying forever
-          await supabase
-            .from('hubspot_notifications')
-            .update({ processed: true, error: 'HubSpot check failed' })
-            .eq('id', notification.id);
-          errorCount++;
-          continue;
+          if (!hubspotRes.ok) {
+            console.error(
+              `HubSpot contact check failed for ${notification.email}:`,
+              hubspotRes.status,
+              await hubspotRes.text()
+            );
+            // Mark as processed even if failed to avoid retrying forever
+            await supabase
+              .from('hubspot_notifications')
+              .update({ processed: true, error: 'HubSpot check failed' })
+              .eq('id', notification.id);
+            errorCount++;
+            continue;
+          }
         }
 
-        // If HubSpot check is successful, send Telegram notification
+        // Send Telegram notification (always sent, regardless of HubSpot check)
         const telegramMessage = `New hot lead from the site!\n\nName: ${notification.name}\nEmail: ${notification.email}\nPhone: +${notification.phone}\n\n@monika_farkas\n@goldsor\n@JacobAiris`;
 
         /*let telegramMessage = `New hot lead from the site!\n\nName: ${notification.name}\nEmail: ${notification.email}`;

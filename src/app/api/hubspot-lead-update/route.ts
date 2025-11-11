@@ -42,13 +42,29 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    const referer = req.headers.get('referer') || 'https://coldi.ai';
+
+    const lastSegment = referer.split('/').pop() || 'coldi';
+    const pageName =
+      lastSegment.split('-').join(' ').charAt(0).toUpperCase() +
+      lastSegment.split('-').join(' ').slice(1);
+
+    const context: {
+      hutk?: string;
+      pageUri: string;
+      pageName: string;
+    } = {
+      pageUri: req.headers.get('referer') || 'https://coldi.ai',
+      pageName: pageName,
+    };
+
+    if (hubspotutk) {
+      context.hutk = hubspotutk;
+    }
+
     const formData = {
       fields,
-      context: {
-        hutk: hubspotutk,
-        pageUri: req.headers.get('referer') || 'https://coldi.ai',
-        pageName: 'Landing Page',
-      },
+      context,
       legalConsentOptions: {
         consent: {
           consentToProcess: true,
