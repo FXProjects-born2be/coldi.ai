@@ -36,7 +36,7 @@ export const Footer = () => {
                 <Link href="https://www.linkedin.com/company/coldiai/" target="_blank">
                   <Linkedin />
                 </Link>
-                <Link href="https://wa.me/447521142301" target="_blank">
+                <Link href="https://wa.me/447955534986" target="_blank">
                   <Whatsapp />
                 </Link>
               </div>
@@ -92,7 +92,7 @@ export const Footer = () => {
           </p>
         </div>
       </footer>
-      <Link href="https://wa.me/447521142301" target="_blank" className={st.whatsappFixedLink}>
+      <Link href="https://wa.me/447955534986" target="_blank" className={st.whatsappFixedLink}>
         <WhatsappFixed />
       </Link>
     </>
