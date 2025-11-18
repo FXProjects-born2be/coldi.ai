@@ -12,7 +12,7 @@ import { Button } from '@/shared/ui/kit/button';
 import st from './VoicesList.module.scss';
 
 export const VoicesList = () => {
-  const items = getPersonas();
+  const items = getPersonas().slice(0, 9);
 
   const blured = [
     {
