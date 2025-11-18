@@ -230,10 +230,11 @@
   gap: 12px;
   flex: 1 0 0;
   flex-wrap: wrap;
-  height: 1148px;
+  height: 518px;
   @include tablet {
     height: auto;
   }
+  
   &.images {
     flex-direction: row;
     position: relative;
@@ -267,4 +268,14 @@
       }
     }
   }
+
+  >div{
+    height: 164px;
+    >div{
+     >p{
+      display: none;
+     } 
+    }
+  }
+
 }
