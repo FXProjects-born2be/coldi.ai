@@ -45,7 +45,7 @@ export const PersonaCard = ({
           </div>
         </div>
         <p>{description}</p>
-        <Link href={`/call-request`}>Get Started →</Link>
+        <Link href={`/lead-request`}>Get Started →</Link>
       </div>
       <div className={st.card__button}>
         <audio ref={audioRef} src={audioUrl} onEnded={handlePause} style={{ display: 'none' }} />
