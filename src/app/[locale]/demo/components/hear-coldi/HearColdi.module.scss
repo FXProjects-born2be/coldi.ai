@@ -1,0 +1,53 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  padding: 165px 165px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  background: #ffffff;
+
+  @include fourteenInch {
+    gap: 64px;
+  }
+
+  @include mobile {
+    padding: 64px 16px;
+  }
+
+  h2 {
+    color: #0c1021;
+    text-align: center;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 120%;
+
+    @include fourteenInch {
+      font-size: 64px;
+    }
+
+    @include mobile {
+      font-size: 48px;
+    }
+
+    @include mobileSmall {
+      font-size: 32px;
+    }
+  }
+}
+
+.cards {
+  display: flex;
+  gap: 12px;
+
+  @include tablet {
+    flex-direction: column;
+  }
+
+  > div {
+    width: calc(33.33% - 8px);
+    @include tablet {
+      width: 100%;
+    }
+  }
+}
