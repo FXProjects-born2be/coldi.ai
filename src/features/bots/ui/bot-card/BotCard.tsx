@@ -62,7 +62,7 @@ export const BotCard = ({ text, name, btnVariant, videoUrl, audioUrl }: BotPrevi
         <section className={st.card__contentContainer}>
           <div className={st.card__content}>
             <h3>{name}</h3>
-            <p>{text}</p>
+            <p dangerouslySetInnerHTML={{ __html: text }} />
           </div>
           <div className={st.card__audio}>
             <audio
