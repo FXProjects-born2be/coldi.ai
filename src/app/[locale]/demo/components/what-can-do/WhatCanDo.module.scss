@@ -1,0 +1,168 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  padding: 165px 165px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  background: #fafafa;
+
+  @include fourteenInch {
+    gap: 64px;
+  }
+
+  h2 {
+    color: #0c1021;
+    text-align: center;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 120%;
+
+
+    @include fourteenInch {
+      font-size: 72px;
+    }
+
+    @include tablet {
+      font-size: 48px;
+    }
+
+    @include mobileSmall {
+      font-size: 32px;
+    }
+
+    .highlighted {
+      color: #4268ff;
+    }
+  }
+
+  @include mobile {
+    padding: 64px 16px;
+    gap: 64px;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+
+  @include tablet {
+    gap: 16px;
+    flex-direction: column;
+  }
+
+  > article {
+    width: calc(33.33% - 8px);
+    @include largeDesktop {
+      width: calc(25% - 36px);
+      &:first-child,
+      &:nth-child(4),
+      &:nth-child(5),
+      &:nth-child(8) {
+        margin-top: 40px;
+      }
+    }
+    @include tablet {
+      width: 100%;
+    }
+  }
+}
+
+.cardsRow {
+  display: flex;
+  gap: 48px;
+
+  @include tablet {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.card {
+  //flex: 1;
+  //flex-grow: 1;
+
+  &:hover {
+    .card__content {
+      transform: rotateY(180deg);
+    }
+  }
+
+  svg {
+    flex-shrink: 0;
+    path {
+      fill: #4268ff;
+    }
+  }
+
+  &__front,
+  &__back {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    border-radius: 48px;
+    border: 1px solid rgba(12, 16, 33, 0.05);
+    background: #fff;
+    padding: 32px;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    height: 210px;
+  }
+
+  &__back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotateY(180deg);
+    height: 210px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    position: relative;
+    height: 210px;
+
+    h3 {
+      color: #0c1021;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 120%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      height: 100%;
+
+      @include mobileSmall {
+        font-size: 20px;
+      }
+
+      span {
+        width: calc(100% - 64px);
+      }
+
+      @include tablet {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    p {
+      color: #535662;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: normal;
+      @include mobileSmall {
+        font-size: 16px;
+      }
+    }
+  }
+}
