@@ -230,7 +230,7 @@
   gap: 12px;
   flex: 1 0 0;
   flex-wrap: wrap;
-  height: 518px;
+  height: 473px;
   @include tablet {
     height: auto;
   }
@@ -238,6 +238,7 @@
   &.images {
     flex-direction: row;
     position: relative;
+    margin-top: -52px;
     &:after {
       content: '';
       position: absolute;
@@ -260,6 +261,7 @@
       }
     }
     > div {
+      opacity: 0.7;
       @include tablet {
         display: none;
         &:first-child {
@@ -270,7 +272,7 @@
   }
 
   >div{
-    height: 164px;
+    height: 150px;
     >div{
      >p{
       display: none;
