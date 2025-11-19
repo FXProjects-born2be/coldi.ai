@@ -23,7 +23,7 @@ export const useRequestCallStore = create<RequestCallStore>((set, get) => ({
     phone: '',
     countryCode: '',
   },
-  agent: 'Sophie',
+  agent: 'Kate',
   hasFirstStepData: false,
   setFirstStepData: (data) => {
     const newData = { ...get().firstStepData, ...data };
@@ -36,6 +36,7 @@ export const useRequestCallStore = create<RequestCallStore>((set, get) => ({
   },
   setAgent: (agent: Agent) => {
     set({ agent });
+    console.log(agent);
   },
   resetFirstStepData: () => {
     set({

@@ -102,7 +102,10 @@ export const VoiceCard = ({
         <h4>Voice Features:</h4>
         <MarqueeFeatures features={features} />
       </div>
-      <Link href={`/call-request?botName=${name}`}>
+      {/**<Link href={`/call-request?botName=${name}`}>
+        <Button fullWidth>Receive the Call</Button>
+      </Link> */}
+      <Link href={`/call-request`}>
         <Button fullWidth>Receive the Call</Button>
       </Link>
     </section>
