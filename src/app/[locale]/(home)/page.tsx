@@ -1,3 +1,5 @@
+import { DashboardSlider } from '@/shared/ui/components/dashboard-slider/DashboardSlider';
+
 import {
   Advantages,
   ColdiInNews,
@@ -24,6 +26,10 @@ export default function Home() {
       <Tools />
       <VoicesList />
       <WhatCanDo />
+      <DashboardSlider
+        title="<span>Easily Track</span> How Coldi Works"
+        subtitle="See all results in one place: review calls, compare performance, <br/>and optimize your campaigns with clear, real-time data."
+      />
       <HearColdi />
       <Delivers />
       <ColdiInNews />
