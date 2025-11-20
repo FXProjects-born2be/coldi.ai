@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { DashboardSlider } from '@/shared/ui/components/dashboard-slider/DashboardSlider';
+
 import {
   ColdiAgentsBuilt,
   ColdiSpeaks,
@@ -30,6 +32,10 @@ export default function Products() {
       <OutboundCalling />
       <ColdiAgentsBuilt />
       <VoiceAgentKPIs />
+      <DashboardSlider
+        title="Your Entire Call Workflow, Measured"
+        subtitle="Track your core metrics in one view: clients, campaigns, calls, and VoiceAI pods."
+      />
       <ColdiSpeaks />
       <Faq />
     </main>
