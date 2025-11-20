@@ -87,11 +87,15 @@ export const VoiceCard = ({
   description,
   features,
   imgUrl,
+  pageUrl = '/call-request',
+  demo = false,
 }: {
   name: string;
   description: string;
   features: string[];
   imgUrl: string;
+  pageUrl?: string;
+  demo?: boolean;
 }) => (
   <article className={st.container}>
     <Image src={imgUrl} alt={name} width={509} height={484} unoptimized />
@@ -105,7 +109,7 @@ export const VoiceCard = ({
       {/**<Link href={`/call-request?botName=${name}`}>
         <Button fullWidth>Receive the Call</Button>
       </Link> */}
-      <Link href={`/call-request`}>
+      <Link href={`${pageUrl}${demo ? `?botName=${name}` : ''}`}>
         <Button fullWidth>Receive the Call</Button>
       </Link>
     </section>
