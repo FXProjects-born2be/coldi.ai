@@ -40,7 +40,7 @@ export const Voices = () => {
             viewport={{ once: true }}
             custom={index * 0.2}
           >
-            <VoiceCard {...item} />
+            <VoiceCard {...item} demo={true} pageUrl={`/demo-call-request`} />
           </motion.div>
         ))}
       </section>
