@@ -78,7 +78,8 @@ export const CallFormContainer = ({ botName = 'Kate' }: { botName?: string }) =>
 
   return (
     <section className={st.layout}>
-      <h1>
+      <h1>Get your call from Coldi agent</h1>
+      <h1 style={{ display: 'none' }}>
         Get your call from <br />
         <span
           className={st.selected}
