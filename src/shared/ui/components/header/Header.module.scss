@@ -64,4 +64,21 @@
       }
     }
   }
+
+  &__bookMeeting {
+    display: flex;
+    padding: 16px 24px 16px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 24px;
+    background: #4268ff;
+    color: #fff;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%; /* 24px */
+    @include mobile {
+      display: none;
+    }
+  }
 }
