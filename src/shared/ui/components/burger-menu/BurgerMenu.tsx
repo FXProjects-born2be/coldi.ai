@@ -109,7 +109,7 @@ export const BurgerMenu = () => {
                       fill="white"
                     />
                   </svg>
-                  Book Meeting
+                  AI Voice Demo
                 </Link>
               </nav>
             </section>
