@@ -79,7 +79,7 @@ export const Header = () => {
               fill="white"
             />
           </svg>
-          Book Meeting
+          AI Voice Demo
         </Link>
       </div>
     </header>
