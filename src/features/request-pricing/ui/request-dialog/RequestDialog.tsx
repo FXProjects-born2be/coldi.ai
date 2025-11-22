@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
+import ReCAPTCHA from 'react-google-recaptcha';
 import PhoneInput from 'react-phone-input-2';
 
 import { useForm, useStore } from '@/shared/lib/forms';
@@ -20,6 +21,10 @@ import st from './RequestDialog.module.scss';
 
 import 'react-phone-input-2/lib/style.css';
 
+// Use env variable, otherwise use key from RetellWidget (same key used in the project)
+const RECAPTCHA_SITE_KEY =
+  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h';
+
 export const RequestDialog = ({
   open,
   setOpen,
@@ -30,6 +35,7 @@ export const RequestDialog = ({
   console.log('RequestDialog rendered, open:', open);
   const plan = useRequestPricingStore((state) => state.plan);
   const [isThankYouDialogOpen, setIsThankYouDialogOpen] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   console.log('plan', plan);
   const planPrice = plan.price.replace('<span>', '').replace('</span>', '');
   const planTitle = `${plan.label}: ${plan.title} - ${planPrice}`;
@@ -43,6 +49,7 @@ export const RequestDialog = ({
       phone: '',
       message: '',
       plan: plan.title,
+      recaptchaToken: '',
     },
     validators: {
       onChange: requestPricingSchema,
@@ -52,6 +59,11 @@ export const RequestDialog = ({
   const errors = useStore(store, (state) => state.errorMap);
 
   const onSubmit = async (data: RequestPricingSchema) => {
+    // Reset reCAPTCHA after submission
+    if (recaptchaRef.current) {
+      recaptchaRef.current.reset();
+    }
+
     console.log('Form submitted:', data);
     setOpen(false);
     const res = await fetch('/api/request-pricing', {
@@ -216,7 +228,7 @@ export const RequestDialog = ({
                       {errors.onChange?.phone?.map((err) => (
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
-                    </div>{' '}
+                    </div>
                     <div
                       className={`${st.inputWrapper} ${st.full} ${errors.onChange?.message ? st.error : ''}`}
                     >
@@ -231,6 +243,30 @@ export const RequestDialog = ({
                           />
                         )}
                       </Field>
+                    </div>
+                    <div
+                      className={`${st.inputWrapper} ${st.full} ${errors.onChange?.recaptchaToken ? st.error : ''}`}
+                    >
+                      <Field name="recaptchaToken">
+                        {(field) => (
+                          <ReCAPTCHA
+                            ref={recaptchaRef}
+                            sitekey={RECAPTCHA_SITE_KEY}
+                            onChange={(token) => {
+                              field.handleChange(token || '');
+                            }}
+                            onExpired={() => {
+                              field.handleChange('');
+                            }}
+                            onError={() => {
+                              field.handleChange('');
+                            }}
+                          />
+                        )}
+                      </Field>
+                      {errors.onChange?.recaptchaToken?.map((err: { message: string }) => (
+                        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+                      ))}
                     </div>
                   </section>
                   <footer className={st.footer}>

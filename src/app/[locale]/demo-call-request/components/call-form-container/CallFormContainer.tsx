@@ -41,6 +41,7 @@ export const CallFormContainer = ({ botName = 'Kate' }: { botName?: string }) =>
     email: '',
     industry: '',
     company: '',
+    recaptchaToken: '',
   });
   const [isSuccess, setIsSuccess] = useState(false);
   const [isUnsupportedCountry, setIsUnsupportedCountry] = useState(false);

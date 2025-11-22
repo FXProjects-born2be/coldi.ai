@@ -19,10 +19,11 @@ export const firstLeadStepSchema = v.object({
 });
 
 export const secondLeadStepSchema = v.object({
-  industry: v.optional(v.string()),
-  monthlyLeadVolume: v.optional(v.string()),
-  primaryGoal: v.optional(v.array(v.string())),
-  message: v.optional(v.string()),
+  industry: v.string(),
+  monthlyLeadVolume: v.string(),
+  primaryGoal: v.array(v.string()),
+  message: v.string(),
+  recaptchaToken: v.pipe(v.string(), v.minLength(1, 'Please complete the reCAPTCHA verification.')),
 });
 
 export type FirstLeadStepSchema = v.InferOutput<typeof firstLeadStepSchema>;
