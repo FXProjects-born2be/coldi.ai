@@ -1,17 +1,24 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { type ReactNode, useRef } from 'react';
 
-import { useForm } from '@/shared/lib/forms';
+import ReCAPTCHA from 'react-google-recaptcha';
+
+import { useForm, useStore } from '@/shared/lib/forms';
+import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { Selected } from '@/shared/ui/components/selected';
 import { Button } from '@/shared/ui/kit/button';
 import { Dropdown } from '@/shared/ui/kit/dropdown';
 import { TextArea } from '@/shared/ui/kit/text-area/TextArea';
 import { TextField } from '@/shared/ui/kit/text-field';
 
-import { type SecondLeadStepSchema } from '../../model/schemas';
+import { type SecondLeadStepSchema, secondLeadStepSchema } from '../../model/schemas';
 import { useRequestLeadStore } from '../../store/store';
 import st from './SecondLeadStep.module.scss';
+
+// Use env variable, otherwise use key from RetellWidget (same key used in the project)
+const RECAPTCHA_SITE_KEY =
+  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h';
 
 export const SecondLeadStep = ({
   onSubmit,
@@ -19,14 +26,24 @@ export const SecondLeadStep = ({
   onSubmit: (data: SecondLeadStepSchema) => void;
 }) => {
   const { firstStepData } = useRequestLeadStore();
-  const { Field, Subscribe, handleSubmit } = useForm({
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
       industry: '',
       monthlyLeadVolume: '',
       primaryGoal: [] as string[],
       message: '',
+      recaptchaToken: '',
+    },
+    validators: {
+      onSubmit: secondLeadStepSchema,
     },
     onSubmit: async (data) => {
+      // Reset reCAPTCHA after submission
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+
       onSubmit(data.value);
 
       localStorage?.removeItem('LeadRequestFirstStepData');
@@ -91,7 +108,7 @@ export const SecondLeadStep = ({
       });
     },
   });
-  //const errors = useStore(store, (state) => state.errorMap);
+  const errors = useStore(store, (state) => state.errorMap);
 
   return (
     <section className={st.container}>
@@ -190,6 +207,28 @@ export const SecondLeadStep = ({
                 />
               )}
             </Field>
+          </div>
+          <div className={`${st.inputWrapper} ${errors.onSubmit?.recaptchaToken ? st.error : ''}`}>
+            <Field name="recaptchaToken">
+              {(field) => (
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey={RECAPTCHA_SITE_KEY}
+                  onChange={(token) => {
+                    field.handleChange(token || '');
+                  }}
+                  onExpired={() => {
+                    field.handleChange('');
+                  }}
+                  onError={() => {
+                    field.handleChange('');
+                  }}
+                />
+              )}
+            </Field>
+            {errors.onSubmit?.recaptchaToken?.map((err: { message: string }) => (
+              <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+            ))}
           </div>
         </section>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>

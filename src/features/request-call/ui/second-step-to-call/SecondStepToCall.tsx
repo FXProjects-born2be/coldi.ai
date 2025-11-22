@@ -1,6 +1,8 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { type ReactNode, useRef } from 'react';
+
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
@@ -86,6 +88,10 @@ const SUPPORTED_COUNTRY_CODES = [
   '+61',
 ];
 
+// Use env variable, otherwise use key from RetellWidget (same key used in the project)
+const RECAPTCHA_SITE_KEY =
+  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h';
+
 export const SecondStepToCall = ({
   botName,
   onSubmit,
@@ -96,6 +102,7 @@ export const SecondStepToCall = ({
   onUnsupportedCountry: () => void;
 }) => {
   const { agent, firstStepData } = useRequestCallStore();
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
@@ -103,11 +110,17 @@ export const SecondStepToCall = ({
       email: '',
       industry: '',
       company: '',
+      recaptchaToken: '',
     },
     validators: {
       onSubmit: secondStepCallSchema,
     },
     onSubmit: async (data) => {
+      // Reset reCAPTCHA after submission
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+
       // Check if country code is supported
       const countryCode = firstStepData.countryCode || '';
       const isSupported = SUPPORTED_COUNTRY_CODES.includes(countryCode);
@@ -269,6 +282,28 @@ export const SecondStepToCall = ({
               ))}
             </div>
           </FormRow>
+          <div className={`${st.inputWrapper} ${errors.onSubmit?.recaptchaToken ? st.error : ''}`}>
+            <Field name="recaptchaToken">
+              {(field) => (
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey={RECAPTCHA_SITE_KEY}
+                  onChange={(token) => {
+                    field.handleChange(token || '');
+                  }}
+                  onExpired={() => {
+                    field.handleChange('');
+                  }}
+                  onError={() => {
+                    field.handleChange('');
+                  }}
+                />
+              )}
+            </Field>
+            {errors.onSubmit?.recaptchaToken?.map((err) => (
+              <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+            ))}
+          </div>
         </section>
         <footer className={st.footer}>
           <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
