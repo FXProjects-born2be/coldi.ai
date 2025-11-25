@@ -87,9 +87,20 @@ export const Footer = () => {
             </div>
           </section>
           <span className={st.divider} />
-          <p className={st.footer__copyright}>
-            © {new Date().getFullYear()} Coldi. Voice-Powered. Rights Reserved.
-          </p>
+          <div className={st.footer__copyright}>
+            <p>© {new Date().getFullYear()} Coldi. Voice-Powered. Rights Reserved.</p>
+            <a
+              href="https://www.saashub.com/coldi?utm_source=badge&utm_campaign=badge&utm_content=coldi&badge_variant=color&badge_kind=approved"
+              target="_blank"
+            >
+              <Image
+                src="https://cdn-b.saashub.com/img/badges/approved-color.png?v=1"
+                alt="Coldi badge"
+                width={126}
+                height={42}
+              />
+            </a>
+          </div>
         </div>
       </footer>
       <Link href="https://wa.me/447955534986" target="_blank" className={st.whatsappFixedLink}>
