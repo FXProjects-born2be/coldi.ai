@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
       'grqtgrzdalvrywluyqxe.supabase.co',
       'www.facebook.com',
       'dashboard.retellai.com',
+      'cdn-b.saashub.com',
     ],
   },
 };
