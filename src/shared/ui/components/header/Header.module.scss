@@ -56,7 +56,7 @@
 
     li {
       flex-shrink: 0;
-      padding: 12px 32px;
+      padding: 12px 24px;
       border-radius: 48px;
 
       &.active {
@@ -76,7 +76,7 @@
 
   &__call {
     display: flex;
-    padding: 10px 24px 10px 16px;
+    padding: 10px 16px 10px 12px;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -101,7 +101,7 @@
 
   &__bookMeeting {
     display: flex;
-    padding: 10px 24px 10px 16px;
+    padding: 10px 16px 10px 12px;
     justify-content: center;
     align-items: center;
     gap: 10px;
