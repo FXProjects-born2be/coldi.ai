@@ -95,7 +95,7 @@ export const Header = () => {
                 fill="white"
               />
             </svg>
-            AI Voice Demo
+            Schedule a Meeting
           </Link>
         </div>
       </div>
