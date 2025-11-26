@@ -30,6 +30,7 @@ export default function RetellWidget() {
     s.setAttribute('data-public-key', 'public_key_ef7801eebc795b89609f6');
     s.setAttribute('data-agent-id', 'agent_c99e46a0a32540c6e80fbc97cf');
     //s.setAttribute('data-agent-version', '1');
+
     s.setAttribute('data-title', 'Chat with us!');
     s.setAttribute('data-recaptcha-key', '6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h');
     s.setAttribute('data-color', '#4268ff');
