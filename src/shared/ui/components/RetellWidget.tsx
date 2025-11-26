@@ -27,8 +27,8 @@ export default function RetellWidget() {
     s.type = 'module';
     s.src = 'https://dashboard.retellai.com/retell-widget.js';
 
-    s.setAttribute('data-public-key', 'key_38f3c70e5f603b5a3ce82ff9f401');
-    s.setAttribute('data-agent-id', 'agent_63b56595436752aa00582d2ad9');
+    s.setAttribute('data-public-key', 'public_key_ef7801eebc795b89609f6');
+    s.setAttribute('data-agent-id', 'agent_c99e46a0a32540c6e80fbc97cf');
     s.setAttribute('data-agent-version', '5');
     s.setAttribute('data-title', 'Chat with us!');
     s.setAttribute('data-recaptcha-key', '6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h');
