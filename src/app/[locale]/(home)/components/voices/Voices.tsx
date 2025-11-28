@@ -12,7 +12,7 @@ import { blurInUp } from '@/shared/lib/helpers/animations';
 import st from './Voices.module.scss';
 
 export const Voices = () => {
-  const items = getVoices().slice(0, 2);
+  const items = getVoices();
 
   /*const images = [
     '/images/home/voices/temp1.png',
