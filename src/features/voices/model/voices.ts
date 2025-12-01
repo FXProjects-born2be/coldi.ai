@@ -27,11 +27,10 @@ export const getVoices = () => [
     name: 'Monica',
     description: 'Casino & Gambling Agent',
     features: [
-      'Confident British accent',
-      'Live Market insights',
-      'Finance oriented',
-      'Portfolio integrated',
-      'Retention skills',
+      'Confident, smooth American accent',
+      'Casino-oriented communication',
+      'Player account handling',
+      'Bonus & promotion guidance',
     ],
   },
   {
