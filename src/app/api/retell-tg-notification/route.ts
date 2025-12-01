@@ -47,6 +47,7 @@ const SUPPORTED_COUNTRY_CODES = [
   '+90',
   '+971',
   '+61',
+  '+91',
 ];
 
 type RetellWebhookPayload = {
@@ -149,9 +150,14 @@ export async function POST(request: Request) {
         ? countryCode
         : `+${countryCode}`
       : null;
+
+    console.log('Formatted Country Code:', formattedCountryCode);
+
     const isSupported = formattedCountryCode
       ? SUPPORTED_COUNTRY_CODES.includes(formattedCountryCode)
       : true; // If no country code provided, assume supported
+
+    console.log('Is Supported:', isSupported);
 
     // Create Telegram message
     let telegramMessage: string;
