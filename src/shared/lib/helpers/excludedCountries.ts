@@ -21,7 +21,6 @@ export const excludedCountries = [
   'ht', // Haiti
   'ir', // Iran
   'iq', // Iraq
-  'in', // Kashmir (part of India)
   'ua', // Kherson (part of Ukraine)
   'kp', // North Korea
   'xk', // Kosovo
