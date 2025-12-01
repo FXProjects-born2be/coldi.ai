@@ -23,6 +23,18 @@ export const getVoices = () => [
     ],
   },
   {
+    imgUrl: '/images/home/voices/monica.webp',
+    name: 'Monica',
+    description: 'Casino & Gambling Agent',
+    features: [
+      'Confident British accent',
+      'Live Market insights',
+      'Finance oriented',
+      'Portfolio integrated',
+      'Retention skills',
+    ],
+  },
+  {
     imgUrl: '/images/home/voices/sana.webp',
     name: 'Sophie',
     description: 'Forex Outgoing Call Agent',
