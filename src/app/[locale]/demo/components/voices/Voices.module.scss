@@ -74,7 +74,7 @@
         top: 50%;
         z-index: 2;
         transform: translate(-50%, -50%);
-        button{
+        button {
           white-space: nowrap;
         }
       }
@@ -96,7 +96,7 @@
           border: 1px solid rgba(12, 16, 33, 0.05);
           background: #fff;
           box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
-          img{
+          img {
             height: auto;
           }
         }
@@ -104,7 +104,7 @@
     }
 
     > div {
-      width: calc(33.33333333333333% - 8px);
+      width: calc(25% - 9px);
       @include tablet {
         width: 100%;
       }
@@ -114,11 +114,11 @@
         }
         @include desktop {
           width: 100%;
-          height: 385px;
+          height: 300px;
         }
         @include largeDesktop {
           width: 100%;
-          height: 385px;
+          height: 350px;
         }
         @include fourteenInch {
           width: 100%;
