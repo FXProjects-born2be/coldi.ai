@@ -86,6 +86,7 @@ const SUPPORTED_COUNTRY_CODES = [
   '+90',
   '+971',
   '+61',
+  '+91',
 ];
 
 // Use env variable, otherwise use key from RetellWidget (same key used in the project)
