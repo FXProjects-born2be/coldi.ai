@@ -7,6 +7,7 @@ const AGENT_IDS: Record<string, string> = {
   Sophie: 'agent_c7bdb8b06aea7f3d389f49eddc',
   George: 'agent_6fc05cc128bcee73ca7d0007c5',
   Kate: 'agent_783e3b56e581419bb847db9cff',
+  Monica: 'agent_6fc05cc128bcee73ca7d0007c5',
 };
 
 export async function POST(req: NextRequest) {
@@ -38,7 +39,7 @@ export async function POST(req: NextRequest) {
     override_agent_id,
     metadata: {},
     retell_llm_dynamic_variables: {
-      customer_name: name,
+      first_name: name,
       email,
       industry,
       companySize: company,

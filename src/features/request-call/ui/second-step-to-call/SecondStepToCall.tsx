@@ -104,7 +104,7 @@ export const SecondStepToCall = ({
 }) => {
   const { agent, firstStepData } = useRequestCallStore();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
-
+  console.log(botName);
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
       name: '',
@@ -315,7 +315,7 @@ export const SecondStepToCall = ({
             )}
           </Subscribe>
           <span className={st.appendix}>
-            <span className={st.name}>{botName}</span> will call you immediately.
+            <span className={st.name}>Agent</span> will call you immediately.
           </span>
         </footer>
       </form>
