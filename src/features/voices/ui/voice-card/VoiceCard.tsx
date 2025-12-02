@@ -109,7 +109,7 @@ export const VoiceCard = ({
       {/**<Link href={`/call-request?botName=${name}`}>
         <Button fullWidth>Receive the Call</Button>
       </Link> */}
-      <Link href={`${pageUrl}${demo ? `?botName=${name}` : ''}`}>
+      <Link href={`${pageUrl}${demo ? `?botName=${name}` : `?botName=${name}`}`}>
         <Button fullWidth>Receive the Call</Button>
       </Link>
     </section>
