@@ -104,7 +104,7 @@ export const SecondStepToCall = ({
 }) => {
   const { agent, firstStepData } = useRequestCallStore();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
-  console.log(botName);
+  console.log('botName', botName);
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
       name: '',
