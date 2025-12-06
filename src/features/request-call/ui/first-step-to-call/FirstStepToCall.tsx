@@ -24,18 +24,37 @@ export const FirstStepToCall = ({
   const scenarios = useMemo(() => getScenarios(), []);
   const { setFirstStepData } = useRequestCallStore();
 
+  // Safe localStorage access - only on client side
+  const getStoredData = () => {
+    if (typeof window === 'undefined') {
+      return {
+        scenario: [scenarios[0]],
+        phone: '',
+        countryCode: '',
+      };
+    }
+    try {
+      const stored = localStorage.getItem('CallRequestFirstStepData');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        return {
+          scenario: parsed.scenario || [scenarios[0]],
+          phone: parsed.phone || '',
+          countryCode: parsed.countryCode || '',
+        };
+      }
+    } catch (error) {
+      console.error('Error parsing stored data:', error);
+    }
+    return {
+      scenario: [scenarios[0]],
+      phone: '',
+      countryCode: '',
+    };
+  };
+
   const { Field, Subscribe, handleSubmit, store } = useForm({
-    defaultValues: {
-      scenario: localStorage?.getItem('CallRequestFirstStepData')
-        ? JSON.parse(localStorage.getItem('CallRequestFirstStepData') || '{}').scenario
-        : [scenarios[0]],
-      phone: localStorage?.getItem('CallRequestFirstStepData')
-        ? JSON.parse(localStorage.getItem('CallRequestFirstStepData') || '{}').phone
-        : '',
-      countryCode: localStorage?.getItem('CallRequestFirstStepData')
-        ? JSON.parse(localStorage.getItem('CallRequestFirstStepData') || '{}').countryCode || ''
-        : '',
-    },
+    defaultValues: getStoredData(),
     validators: {
       onSubmit: firstStepCallSchema,
     },

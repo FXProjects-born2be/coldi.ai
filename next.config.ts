@@ -1,5 +1,8 @@
+import { withBotId } from 'botid/next/config';
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   images: {
@@ -12,7 +15,15 @@ const nextConfig: NextConfig = {
       'cdn-b.saashub.com',
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/botid/:path*',
+        destination: 'https://botid.vercel.app/:path*',
+      },
+    ];
+  },
 };
 
-const withNextIntl = createNextIntlPlugin();
-export default withNextIntl(nextConfig);
+// Спочатку застосовуємо next-intl, потім botid
+export default withBotId(withNextIntl(nextConfig));
