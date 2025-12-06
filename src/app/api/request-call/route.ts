@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import sgMail from '@sendgrid/mail';
+import { checkBotId } from 'botid/server';
 
 import type { Agent } from '@/features/request-call/store/store';
 
@@ -22,6 +23,28 @@ export async function POST(request: Request): Promise<NextResponse> {
   try {
     const bodyJSON = (await request.json()) as RequestCallData;
     const { name, email, phone, industry, company, scenario, agent, recaptchaToken } = bodyJSON;
+
+    // BotID check (most reliable bot detection)
+    try {
+      const botIdResult = await checkBotId();
+      const isBot = 'isBot' in botIdResult ? botIdResult.isBot : false;
+      const isVerifiedBot = 'isVerifiedBot' in botIdResult ? botIdResult.isVerifiedBot : false;
+      const verifiedBotName =
+        'verifiedBotName' in botIdResult ? botIdResult.verifiedBotName : undefined;
+      const isOperator = isVerifiedBot && verifiedBotName === 'chatgpt-operator';
+
+      if (isBot && !isOperator) {
+        console.warn('[BOT DETECTED] BotID detected bot', {
+          isBot,
+          isVerifiedBot,
+          verifiedBotName,
+        });
+        return NextResponse.json({ message: 'Access denied. Bot detected.' }, { status: 403 });
+      }
+    } catch (botIdError) {
+      console.error('Error checking BotID:', botIdError);
+      // Don't block on BotID errors, but log them
+    }
 
     // Comprehensive bot detection
     const botDetection = detectBot(request, bodyJSON, 'call');

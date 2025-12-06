@@ -21,6 +21,7 @@
     "@supabase/supabase-js": "^2.52.0",
     "@tanstack/react-form": "^1.14.1",
     "@types/react-google-recaptcha": "^2.1.9",
+    "botid": "^1.5.10",
     "canvas": "^3.1.2",
     "classnames": "^2.5.1",
     "framer-motion": "^12.16.0",
