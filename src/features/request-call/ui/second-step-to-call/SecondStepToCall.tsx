@@ -141,18 +141,28 @@ export const SecondStepToCall = ({
 
       // Common flow for both supported and unsupported countries
       localStorage?.removeItem('CallRequestFirstStepData');
-      const body = { ...data.value, ...firstStepData, agent };
+
+      // Get honeypot field value from DOM
+      const honeypotField = document.querySelector<HTMLInputElement>('input[name="website_url"]');
+      const honeypotValue = honeypotField?.value || '';
+
+      const body = { ...data.value, ...firstStepData, agent, website_url: honeypotValue };
       console.log(body);
       const res = await fetch('/api/request-call', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
-      if (res.ok) {
-        console.log('Call request sent successfully');
-      } else {
-        console.error('Failed to send call request');
+
+      // If main request failed (bot detected, rate limit, etc.), stop execution
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        console.error('Call request blocked or failed:', errorData);
+        // Don't proceed with Retell, HubSpot, or show success dialog
+        return;
       }
+
+      console.log('Call request sent successfully');
 
       const retellPayload = {
         name: data.value.name,
@@ -283,6 +293,16 @@ export const SecondStepToCall = ({
               ))}
             </div>
           </FormRow>
+          {/* Honeypot field - hidden from users but visible to bots */}
+          <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
+            <input
+              type="text"
+              name="website_url"
+              tabIndex={-1}
+              autoComplete="off"
+              style={{ display: 'none' }}
+            />
+          </div>
           <div className={`${st.inputWrapper} ${errors.onSubmit?.recaptchaToken ? st.error : ''}`}>
             <Field name="recaptchaToken">
               {(field) => (

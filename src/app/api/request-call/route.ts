@@ -4,6 +4,8 @@ import sgMail from '@sendgrid/mail';
 
 import type { Agent } from '@/features/request-call/store/store';
 
+import { detectBot } from '@/shared/lib/anti-bot';
+
 type RequestCallData = {
   name: string;
   email: string;
@@ -12,70 +14,64 @@ type RequestCallData = {
   company: string;
   scenario: string;
   agent: Agent;
-};
-
-const ONE_HOUR_IN_MS = 60 * 60 * 1000;
-const PHONE_LIMIT = 5;
-const IP_LIMIT = 10;
-
-// Simple in-memory stores scoped to the module instance
-const phoneRequestLog = new Map<string, number[]>();
-const ipRequestLog = new Map<string, number[]>();
-
-const normalizePhone = (phone: string) => phone.replace(/[^\d+]/g, '');
-
-const shouldBlock = (
-  log: Map<string, number[]>,
-  key: string,
-  limit: number,
-  now: number
-): boolean => {
-  if (!key) {
-    return false;
-  }
-
-  const previous = log.get(key) ?? [];
-  const recentRequests = previous.filter((timestamp) => now - timestamp < ONE_HOUR_IN_MS);
-
-  if (recentRequests.length >= limit) {
-    log.set(key, recentRequests);
-    return true;
-  }
-
-  recentRequests.push(now);
-  log.set(key, recentRequests);
-  return false;
+  website_url?: string; // Honeypot field
+  recaptchaToken?: string;
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
   try {
     const bodyJSON = (await request.json()) as RequestCallData;
-    const { name, email, phone, industry, company, scenario, agent } = bodyJSON;
+    const { name, email, phone, industry, company, scenario, agent, recaptchaToken } = bodyJSON;
 
-    const now = Date.now();
-    const normalizedPhone = normalizePhone(phone);
-    const forwardedFor = request.headers.get('x-forwarded-for');
-    const clientIp =
-      forwardedFor?.split(',')[0]?.trim() ||
-      request.headers.get('x-real-ip') ||
-      // @ts-expect-error - Next Request may expose ip depending on runtime
-      request.ip ||
-      'unknown';
+    // Comprehensive bot detection
+    const botDetection = detectBot(request, bodyJSON, 'call');
 
-    if (shouldBlock(phoneRequestLog, normalizedPhone, PHONE_LIMIT, now)) {
-      console.warn(`Phone rate limit exceeded for ${normalizedPhone}`);
+    // Block if honeypot is filled or rate limit exceeded
+    if (botDetection.blocked) {
       return NextResponse.json(
-        { message: 'Too many requests for this phone number. Please try again later.' },
+        {
+          message:
+            botDetection.reason ||
+            'Request blocked due to security policy. Please try again later.',
+        },
         { status: 429 }
       );
     }
 
-    if (shouldBlock(ipRequestLog, clientIp, IP_LIMIT, now)) {
-      console.warn(`IP rate limit exceeded for ${clientIp}`);
-      return NextResponse.json(
-        { message: 'Too many requests from this IP address. Please try again later.' },
-        { status: 429 }
-      );
+    // Verify reCAPTCHA token if provided
+    if (recaptchaToken) {
+      try {
+        // Check if using test key - if so, skip verification or use test secret
+        const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
+        const isTestKey = siteKey === '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+        const secretKey = isTestKey
+          ? '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe' // Test secret key
+          : process.env.RECAPTCHA_SECRET_KEY;
+
+        // For test key, always pass verification
+        if (isTestKey) {
+          console.log('[TEST MODE] Using test reCAPTCHA key - skipping verification');
+        } else {
+          const recaptchaResponse = await fetch(
+            `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`,
+            { method: 'POST' }
+          );
+          const recaptchaData = await recaptchaResponse.json();
+          if (!recaptchaData.success) {
+            console.warn('[BOT DETECTED] Invalid reCAPTCHA token', {
+              ip: botDetection.reason,
+              errors: recaptchaData['error-codes'],
+            });
+            return NextResponse.json(
+              { message: 'reCAPTCHA verification failed. Please try again.' },
+              { status: 400 }
+            );
+          }
+        }
+      } catch (recaptchaError) {
+        console.error('Error verifying reCAPTCHA:', recaptchaError);
+        // Don't block on reCAPTCHA verification errors, but log them
+      }
     }
 
     // Initialize SendGrid with API key
@@ -111,12 +107,12 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     await sgMail.send(clientMSG);*/
 
-    return NextResponse.json({ message: 'Pricing request sent successfully.' });
+    return NextResponse.json({ message: 'Call request sent successfully.' });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-    console.error('Error sending pricing request:', errorMessage);
+    console.error('[ERROR] Failed to process call request:', errorMessage);
     return NextResponse.json(
-      { message: 'Failed to send fund access request.', error: errorMessage },
+      { message: 'Failed to send call request. Please try again later.' },
       { status: 500 }
     );
   }
