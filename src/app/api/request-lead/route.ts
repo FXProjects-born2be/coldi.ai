@@ -35,20 +35,20 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     // BotID check (most reliable bot detection)
     try {
-      const botIdResult = await checkBotId();
-      const isBot = 'isBot' in botIdResult ? botIdResult.isBot : false;
-      const isVerifiedBot = 'isVerifiedBot' in botIdResult ? botIdResult.isVerifiedBot : false;
-      const verifiedBotName =
-        'verifiedBotName' in botIdResult ? botIdResult.verifiedBotName : undefined;
-      const isOperator = isVerifiedBot && verifiedBotName === 'chatgpt-operator';
+      const verification = await checkBotId();
 
-      if (isBot && !isOperator) {
-        console.warn('[BOT DETECTED] BotID detected bot', {
-          isBot,
-          isVerifiedBot,
-          verifiedBotName,
-        });
-        return NextResponse.json({ message: 'Access denied. Bot detected.' }, { status: 403 });
+      if (verification.isBot) {
+        // Allow verified bots (e.g., chatgpt-operator)
+        // Note: verifiedBotName may not be available in all BotID versions
+        const isOperator = verification.isVerifiedBot;
+
+        if (!isOperator) {
+          console.warn('[BOT DETECTED] BotID detected bot', {
+            isBot: verification.isBot,
+            isVerifiedBot: verification.isVerifiedBot,
+          });
+          return NextResponse.json({ message: 'Access denied. Bot detected.' }, { status: 403 });
+        }
       }
     } catch (botIdError) {
       console.error('Error checking BotID:', botIdError);
