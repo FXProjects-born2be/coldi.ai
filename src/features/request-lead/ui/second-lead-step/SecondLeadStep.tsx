@@ -48,7 +48,13 @@ export const SecondLeadStep = ({
 
       localStorage?.removeItem('LeadRequestFirstStepData');
 
-      const body = { ...data.value, ...firstStepData };
+      // Get honeypot field value from DOM
+      const honeypotField = document.querySelector<HTMLInputElement>(
+        'input[name="company_website"]'
+      );
+      const honeypotValue = honeypotField?.value || '';
+
+      const body = { ...data.value, ...firstStepData, company_website: honeypotValue };
       console.log(body);
 
       // Send to existing API
@@ -57,11 +63,16 @@ export const SecondLeadStep = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
-      if (res.ok) {
-        console.log('Lead request sent successfully');
-      } else {
-        console.error('Failed to send lead request');
+
+      // If main request failed (bot detected, rate limit, etc.), stop execution
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        console.error('Lead request blocked or failed:', errorData);
+        // Don't proceed with HubSpot or other services
+        return;
       }
+
+      console.log('Lead request sent successfully');
 
       // Send to HubSpot
       const hubspotData = {
@@ -207,6 +218,16 @@ export const SecondLeadStep = ({
                 />
               )}
             </Field>
+          </div>
+          {/* Honeypot field - hidden from users but visible to bots */}
+          <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
+            <input
+              type="text"
+              name="company_website"
+              tabIndex={-1}
+              autoComplete="off"
+              style={{ display: 'none' }}
+            />
           </div>
           <div className={`${st.inputWrapper} ${errors.onSubmit?.recaptchaToken ? st.error : ''}`}>
             <Field name="recaptchaToken">

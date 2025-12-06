@@ -65,18 +65,28 @@ export const RequestDialog = ({
     }
 
     console.log('Form submitted:', data);
-    setOpen(false);
+
+    // Get honeypot field value from DOM
+    const honeypotField = document.querySelector<HTMLInputElement>('input[name="business_url"]');
+    const honeypotValue = honeypotField?.value || '';
+
     const res = await fetch('/api/request-pricing', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, business_url: honeypotValue }),
     });
-    if (res.ok) {
-      setIsThankYouDialogOpen(true);
-      reset();
-    } else {
-      console.error('Failed to submit request pricing');
+
+    // If main request failed (bot detected, rate limit, etc.), stop execution
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      console.error('Pricing request blocked or failed:', errorData);
+      // Don't close dialog, don't proceed with HubSpot
+      return;
     }
+
+    setOpen(false);
+    setIsThankYouDialogOpen(true);
+    reset();
 
     const hubspotPayload = {
       email: data.email,
@@ -243,6 +253,23 @@ export const RequestDialog = ({
                           />
                         )}
                       </Field>
+                    </div>
+                    {/* Honeypot field - hidden from users but visible to bots */}
+                    <div
+                      style={{
+                        position: 'absolute',
+                        left: '-9999px',
+                        opacity: 0,
+                        pointerEvents: 'none',
+                      }}
+                    >
+                      <input
+                        type="text"
+                        name="business_url"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        style={{ display: 'none' }}
+                      />
                     </div>
                     <div
                       className={`${st.inputWrapper} ${st.full} ${errors.onChange?.recaptchaToken ? st.error : ''}`}

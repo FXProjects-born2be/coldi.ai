@@ -2,7 +2,9 @@ import { NextResponse } from 'next/server';
 
 import sgMail from '@sendgrid/mail';
 
-type RequestCallData = {
+import { detectBot } from '@/shared/lib/anti-bot';
+
+type RequestLeadData = {
   fullName: string;
   email: string;
   phone: string;
@@ -11,13 +13,75 @@ type RequestCallData = {
   monthlyLeadVolume: string;
   primaryGoal: string[];
   message: string;
+  company_website?: string; // Honeypot field
+  recaptchaToken?: string;
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
   try {
-    const bodyJSON = (await request.json()) as RequestCallData;
-    const { fullName, email, phone, industry, company, monthlyLeadVolume, primaryGoal, message } =
-      bodyJSON;
+    const bodyJSON = (await request.json()) as RequestLeadData;
+    const {
+      fullName,
+      email,
+      phone,
+      industry,
+      company,
+      monthlyLeadVolume,
+      primaryGoal,
+      message,
+      recaptchaToken,
+    } = bodyJSON;
+
+    // Comprehensive bot detection
+    const botDetection = detectBot(request, bodyJSON, 'lead');
+
+    // Block if honeypot is filled or rate limit exceeded
+    if (botDetection.blocked) {
+      return NextResponse.json(
+        {
+          message:
+            botDetection.reason ||
+            'Request blocked due to security policy. Please try again later.',
+        },
+        { status: 429 }
+      );
+    }
+
+    // Verify reCAPTCHA token if provided
+    if (recaptchaToken) {
+      try {
+        // Check if using test key - if so, skip verification or use test secret
+        const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
+        const isTestKey = siteKey === '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+        const secretKey = isTestKey
+          ? '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe' // Test secret key
+          : process.env.RECAPTCHA_SECRET_KEY;
+
+        // For test key, always pass verification
+        if (isTestKey) {
+          console.log('[TEST MODE] Using test reCAPTCHA key - skipping verification');
+        } else {
+          const recaptchaResponse = await fetch(
+            `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`,
+            { method: 'POST' }
+          );
+          const recaptchaData = await recaptchaResponse.json();
+          if (!recaptchaData.success) {
+            console.warn('[BOT DETECTED] Invalid reCAPTCHA token', {
+              ip: botDetection.reason,
+              errors: recaptchaData['error-codes'],
+            });
+            return NextResponse.json(
+              { message: 'reCAPTCHA verification failed. Please try again.' },
+              { status: 400 }
+            );
+          }
+        }
+      } catch (recaptchaError) {
+        console.error('Error verifying reCAPTCHA:', recaptchaError);
+        // Don't block on reCAPTCHA verification errors, but log them
+      }
+    }
 
     // Initialize SendGrid with API key
     sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
@@ -53,12 +117,12 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     await sgMail.send(clientMSG);*/
 
-    return NextResponse.json({ message: 'Pricing request sent successfully.' });
+    return NextResponse.json({ message: 'Lead request sent successfully.' });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-    console.error('Error sending pricing request:', errorMessage);
+    console.error('[ERROR] Failed to process lead request:', errorMessage);
     return NextResponse.json(
-      { message: 'Failed to send fund access request.', error: errorMessage },
+      { message: 'Failed to send lead request. Please try again later.' },
       { status: 500 }
     );
   }
