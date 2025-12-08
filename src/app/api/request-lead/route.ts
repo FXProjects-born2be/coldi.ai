@@ -19,6 +19,13 @@ type RequestLeadData = {
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
+  // Check if the request is from a bot
+  const verification = await checkBotId();
+
+  if (verification.isBot) {
+    return NextResponse.json({ error: 'Bot detected. Access denied.' }, { status: 403 });
+  }
+
   try {
     const bodyJSON = (await request.json()) as RequestLeadData;
     const {
@@ -32,28 +39,6 @@ export async function POST(request: Request): Promise<NextResponse> {
       message,
       recaptchaToken,
     } = bodyJSON;
-
-    // BotID check (most reliable bot detection)
-    try {
-      const verification = await checkBotId();
-
-      if (verification.isBot) {
-        // Allow verified bots (e.g., chatgpt-operator)
-        // Note: verifiedBotName may not be available in all BotID versions
-        const isOperator = verification.isVerifiedBot;
-
-        if (!isOperator) {
-          console.warn('[BOT DETECTED] BotID detected bot', {
-            isBot: verification.isBot,
-            isVerifiedBot: verification.isVerifiedBot,
-          });
-          return NextResponse.json({ message: 'Access denied. Bot detected.' }, { status: 403 });
-        }
-      }
-    } catch (botIdError) {
-      console.error('Error checking BotID:', botIdError);
-      // Don't block on BotID errors, but log them
-    }
 
     // Comprehensive bot detection
     const botDetection = detectBot(request, bodyJSON, 'lead');
