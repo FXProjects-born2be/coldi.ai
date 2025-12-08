@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 
 import sgMail from '@sendgrid/mail';
-import { checkBotId } from 'botid/server';
 
 import type { Agent } from '@/features/request-call/store/store';
 
@@ -20,13 +19,6 @@ type RequestCallData = {
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
-  // Check if the request is from a bot
-  const verification = await checkBotId();
-
-  if (verification.isBot) {
-    return NextResponse.json({ error: 'Bot detected. Access denied.' }, { status: 403 });
-  }
-
   try {
     const bodyJSON = (await request.json()) as RequestCallData;
     const { name, email, phone, industry, company, scenario, agent, recaptchaToken } = bodyJSON;

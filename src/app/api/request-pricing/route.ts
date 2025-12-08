@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 
 import sgMail from '@sendgrid/mail';
-import { checkBotId } from 'botid/server';
 
 import { detectBot } from '@/shared/lib/anti-bot';
 
@@ -17,13 +16,6 @@ type RequestPricingData = {
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
-  // Check if the request is from a bot
-  const verification = await checkBotId();
-
-  if (verification.isBot) {
-    return NextResponse.json({ error: 'Bot detected. Access denied.' }, { status: 403 });
-  }
-
   try {
     const bodyJSON = (await request.json()) as RequestPricingData;
     const { name, email, website, phone, message, plan, recaptchaToken } = bodyJSON;
