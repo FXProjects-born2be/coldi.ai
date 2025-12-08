@@ -28,6 +28,15 @@ export async function POST(request: Request): Promise<NextResponse> {
     try {
       const verification = await checkBotId();
 
+      // Log full verification result for debugging
+      console.log('[BOTID DEBUG] Full verification result:', JSON.stringify(verification, null, 2));
+      console.log('[BOTID DEBUG] Verification keys:', Object.keys(verification));
+      console.log('[BOTID DEBUG] isBot:', verification.isBot);
+      console.log('[BOTID DEBUG] isVerifiedBot:', verification.isVerifiedBot);
+      if ('verifiedBotName' in verification) {
+        console.log('[BOTID DEBUG] verifiedBotName:', verification.verifiedBotName);
+      }
+
       if (verification.isBot) {
         // Allow verified bots (e.g., chatgpt-operator)
         // Note: verifiedBotName may not be available in all BotID versions
@@ -37,9 +46,12 @@ export async function POST(request: Request): Promise<NextResponse> {
           console.warn('[BOT DETECTED] BotID detected bot', {
             isBot: verification.isBot,
             isVerifiedBot: verification.isVerifiedBot,
+            fullVerification: verification,
           });
           return NextResponse.json({ message: 'Access denied. Bot detected.' }, { status: 403 });
         }
+      } else {
+        console.log('[BOTID DEBUG] User is NOT a bot, allowing request');
       }
     } catch (botIdError) {
       console.error('Error checking BotID:', botIdError);
