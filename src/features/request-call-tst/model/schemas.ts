@@ -26,7 +26,6 @@ export const secondStepCallSchema = v.object({
     v.string(),
     v.email("We can't send you the call results without your email address.")
   ),
-  smsCode: v.optional(v.string()),
   industry: v.pipe(
     v.string(),
     v.minLength(

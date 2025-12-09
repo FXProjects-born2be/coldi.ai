@@ -23,7 +23,7 @@ import st from './RequestDialog.module.scss';
 import 'react-phone-input-2/lib/style.css';
 
 // Feature flag: SMS verification (temporary off; set to true to re-enable)
-const SMS_VERIFICATION_ENABLED = false;
+const SMS_VERIFICATION_ENABLED = true;
 
 // Use env variable, otherwise use key from RetellWidget (same key used in the project)
 const RECAPTCHA_SITE_KEY =
@@ -128,7 +128,17 @@ export const RequestDialog = ({
       const data = await res.json();
 
       if (!res.ok) {
-        setSmsError(data.message || 'Failed to send SMS code');
+        // Show specific error message from API
+        const errorMessage =
+          data.message ||
+          (res.status === 400
+            ? 'Invalid phone number. Please check and try again.'
+            : res.status === 403
+              ? 'SMS is not available for this country code.'
+              : res.status === 429
+                ? 'Too many requests. Please wait before requesting a new code.'
+                : 'Failed to send SMS code. Please try again.');
+        setSmsError(errorMessage);
         setSmsSending(false);
         return;
       }
@@ -380,14 +390,21 @@ export const RequestDialog = ({
                       {needsSmsVerification && (
                         <div style={{ marginTop: '8px' }}>
                           {!smsCodeSent ? (
-                            <Button
-                              type="button"
-                              onClick={handleSendSmsCode}
-                              disabled={smsSending || !formValues.phone}
-                              variant="secondary"
-                            >
-                              {smsSending ? 'Sending...' : 'Send Verification Code'}
-                            </Button>
+                            <>
+                              <Button
+                                type="button"
+                                onClick={handleSendSmsCode}
+                                disabled={smsSending || !formValues.phone}
+                                variant="secondary"
+                              >
+                                {smsSending ? 'Sending...' : 'Send SMS'}
+                              </Button>
+                              {smsError && (
+                                <div style={{ marginTop: '8px' }}>
+                                  <ErrorMessage>{smsError}</ErrorMessage>
+                                </div>
+                              )}
+                            </>
                           ) : !smsVerified ? (
                             <div>
                               <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 import sgMail from '@sendgrid/mail';
 
-import type { Agent } from '@/features/request-call/store/store';
+import type { Agent } from '@/features/request-call-tst/store/store';
 
 import { detectBot } from '@/shared/lib/anti-bot';
 

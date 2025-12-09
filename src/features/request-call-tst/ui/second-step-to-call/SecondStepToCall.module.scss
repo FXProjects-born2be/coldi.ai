@@ -87,16 +87,3 @@
     }
   }
 }
-
-.smsCodeInputWrapper {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
-  width: 100%;
-  @include mobile {
-    flex-wrap: wrap;
-    button{
-      flex-grow: 1;
-    }
-  }
-}
