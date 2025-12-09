@@ -8,6 +8,7 @@ export const requestPricingSchema = v.object({
   message: v.pipe(v.string()),
   plan: v.pipe(v.string()),
   recaptchaToken: v.pipe(v.string(), v.minLength(1, 'Please complete the reCAPTCHA verification.')),
+  smsCode: v.optional(v.string()), // SMS verification code for free email domains
 });
 
 export type RequestPricingSchema = v.InferOutput<typeof requestPricingSchema>;

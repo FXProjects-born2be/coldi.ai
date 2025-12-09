@@ -1,0 +1,102 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.layout {
+  padding: 32px;
+  border-radius: 48px;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.appendix {
+  color: #0c1021;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 120%;
+  text-align: center;
+
+  .name {
+    color: #4268ff;
+  }
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.formRow {
+  display: flex;
+  gap: 16px;
+
+  @include mobile {
+    flex-direction: column;
+  }
+  > div {
+    width: 50%;
+
+    &.error {
+      input,
+      [type='button'] {
+        border-color: #ff0000 !important;
+      }
+    }
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  :global(.g-recaptcha) {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0;
+  }
+
+  &.error {
+    :global(.g-recaptcha) {
+      border: 1px solid #ff0000;
+      border-radius: 4px;
+      padding: 4px;
+    }
+  }
+}
+
+.smsCodeInputWrapper {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+  @include mobile {
+    flex-wrap: wrap;
+    button{
+      flex-grow: 1;
+    }
+  }
+}

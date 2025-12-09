@@ -1,0 +1,17 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  padding: 100px 124px;
+
+  @include fourteenInch {
+    //zoom: 0.8;
+    padding: 32px 16px;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  @include mobile {
+    padding: 64px 16px;
+  }
+}
