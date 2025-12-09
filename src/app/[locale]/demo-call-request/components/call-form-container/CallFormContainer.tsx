@@ -7,24 +7,24 @@ import { useRouter } from 'next/navigation';
 import type {
   FirstStepCallSchema,
   SecondStepCallSchema,
-} from '@/features/request-call/model/schemas';
-import type { Agent } from '@/features/request-call/store/store';
-import { useRequestCallStore } from '@/features/request-call/store/store';
-import { FirstStepToCall } from '@/features/request-call/ui/first-step-to-call';
-import { SecondStepToCall } from '@/features/request-call/ui/second-step-to-call';
-import { StillLikeGetCall } from '@/features/request-call/ui/still-like-get-call';
+} from '@/features/request-call-tst/model/schemas';
+import type { Agent } from '@/features/request-call-tst/store/store';
+import { useRequestCallStore } from '@/features/request-call-tst/store/store';
+import { FirstStepToCall } from '@/features/request-call-tst/ui/first-step-to-call';
+import { SecondStepToCall } from '@/features/request-call-tst/ui/second-step-to-call';
+import { StillLikeGetCall } from '@/features/request-call-tst/ui/still-like-get-call';
 import { getVoices } from '@/features/voices/model/voices';
 
 import st from './CallFormContainer.module.scss';
 
 const ThankYouDialog = dynamic(
-  () => import('@/features/request-call/ui/thank-you-dialog').then((mod) => mod.ThankYouDialog),
+  () => import('@/features/request-call-tst/ui/thank-you-dialog').then((mod) => mod.ThankYouDialog),
   { ssr: false }
 );
 
 const UnsupportedCountryDialog = dynamic(
   () =>
-    import('@/features/request-call/ui/unsupported-country-dialog').then(
+    import('@/features/request-call-tst/ui/unsupported-country-dialog').then(
       (mod) => mod.UnsupportedCountryDialog
     ),
   { ssr: false }

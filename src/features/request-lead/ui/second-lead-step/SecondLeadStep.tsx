@@ -1,9 +1,10 @@
 'use client';
 
-import { type ReactNode, useRef } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from 'react';
 
 import ReCAPTCHA from 'react-google-recaptcha';
 
+import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { Selected } from '@/shared/ui/components/selected';
@@ -33,12 +34,20 @@ export const SecondLeadStep = ({
       monthlyLeadVolume: '',
       primaryGoal: [] as string[],
       message: '',
+      smsCode: undefined as string | undefined,
       recaptchaToken: '',
     },
     validators: {
+      // @ts-expect-error Schema marks smsCode optional; form typing treats it as present
       onSubmit: secondLeadStepSchema,
     },
     onSubmit: async (data) => {
+      // Check SMS verification for free email domains
+      if (needsSmsVerification && !smsVerified) {
+        setSmsError('Please verify your phone number with SMS code');
+        return;
+      }
+
       // Reset reCAPTCHA after submission
       if (recaptchaRef.current) {
         recaptchaRef.current.reset();
@@ -119,7 +128,135 @@ export const SecondLeadStep = ({
       });
     },
   });
-  const errors = useStore(store, (state) => state.errorMap);
+  const errors = useStore(store, (state) => state.errorMap) as {
+    onSubmit?: {
+      industry?: Array<{ message: string }>;
+      monthlyLeadVolume?: Array<{ message: string }>;
+      primaryGoal?: Array<{ message: string }>;
+      message?: Array<{ message: string }>;
+      smsCode?: Array<{ message: string }>;
+      recaptchaToken?: Array<{ message: string }>;
+    };
+  };
+  const formValues = useStore(store, (state) => state.values) as {
+    industry: string;
+    monthlyLeadVolume: string;
+    primaryGoal: string[];
+    message: string;
+    smsCode?: string;
+    recaptchaToken: string;
+  };
+
+  // SMS verification state
+  const [smsCodeSent, setSmsCodeSent] = useState(false);
+  const [smsVerified, setSmsVerified] = useState(false);
+  const [smsSending, setSmsSending] = useState(false);
+  const [smsVerifying, setSmsVerifying] = useState(false);
+  const [smsError, setSmsError] = useState<string | null>(null);
+
+  // Check if email requires SMS verification
+  const needsSmsVerification = firstStepData.email
+    ? requiresSmsVerification(firstStepData.email)
+    : false;
+
+  // Reset SMS state when email changes
+  useEffect(() => {
+    if (!needsSmsVerification) {
+      setSmsCodeSent(false);
+      setSmsVerified(false);
+      setSmsError(null);
+    } else {
+      // If email changed to free domain, reset verification
+      setSmsVerified(false);
+    }
+  }, [needsSmsVerification, firstStepData.email]);
+
+  const handleSendSmsCode = async () => {
+    if (!firstStepData.phone) {
+      setSmsError('Please enter your phone number on step 1');
+      return;
+    }
+
+    setSmsSending(true);
+    setSmsError(null);
+
+    try {
+      const res = await fetch('/api/sms/verify-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: firstStepData.phone }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        // Show specific error message from API
+        const errorMessage =
+          data.message ||
+          (res.status === 400
+            ? 'Invalid phone number. Please check and try again.'
+            : res.status === 403
+              ? 'SMS is not available for this country code.'
+              : res.status === 429
+                ? 'Too many requests. Please wait before requesting a new code.'
+                : 'Failed to send SMS code. Please try again.');
+        setSmsError(errorMessage);
+        setSmsSending(false);
+        return;
+      }
+
+      setSmsCodeSent(true);
+      setSmsVerified(false);
+      setSmsError(null);
+    } catch (error) {
+      console.error('Error sending SMS code:', error);
+      setSmsError('Failed to send SMS code. Please try again.');
+    } finally {
+      setSmsSending(false);
+    }
+  };
+
+  const handleVerifySmsCode = async () => {
+    if (!formValues.smsCode) {
+      setSmsError('Please enter the verification code');
+      return;
+    }
+
+    setSmsVerifying(true);
+    setSmsError(null);
+
+    try {
+      const res = await fetch('/api/sms/verify-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: firstStepData.phone, code: formValues.smsCode }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        // If code not found or expired, allow resending
+        if (
+          data.message?.includes('No verification code found') ||
+          data.message?.includes('expired') ||
+          data.message?.includes('Maximum verification attempts exceeded')
+        ) {
+          setSmsCodeSent(false);
+        }
+        setSmsError(data.message || 'Invalid verification code');
+        setSmsVerifying(false);
+        return;
+      }
+
+      setSmsVerified(true);
+      setSmsError(null);
+    } catch (error) {
+      console.error('Error verifying SMS code:', error);
+      setSmsError('Failed to verify code. Please try again.');
+    } finally {
+      setSmsVerifying(false);
+    }
+  };
 
   return (
     <section className={st.container}>
@@ -219,6 +356,69 @@ export const SecondLeadStep = ({
               )}
             </Field>
           </div>
+          {/* SMS verification - only for free email domains */}
+          {needsSmsVerification && (
+            <div className={st.inputWrapper}>
+              {!smsCodeSent ? (
+                <>
+                  <Button
+                    type="button"
+                    onClick={handleSendSmsCode}
+                    disabled={smsSending || !firstStepData.phone}
+                    variant="secondary"
+                  >
+                    {smsSending ? 'Sending...' : 'Send SMS'}
+                  </Button>
+                  {smsError && (
+                    <div style={{ marginBottom: '8px' }}>
+                      <ErrorMessage>{smsError}</ErrorMessage>
+                    </div>
+                  )}
+                </>
+              ) : !smsVerified ? (
+                <div>
+                  <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+                    <Field name="smsCode">
+                      {(smsField) => (
+                        <TextField
+                          name={smsField.name}
+                          placeholder="Enter 6-digit code"
+                          value={String(smsField.state.value || '')}
+                          onChange={(e) => smsField.handleChange(e.target.value)}
+                          maxLength={6}
+                          style={{ flex: 1 }}
+                          intent={smsField.state.meta.errors.length ? 'danger' : 'default'}
+                        />
+                      )}
+                    </Field>
+                    <Button
+                      type="button"
+                      onClick={handleSendSmsCode}
+                      disabled={smsSending || !firstStepData.phone}
+                      variant="secondary"
+                      style={{ whiteSpace: 'nowrap' }}
+                    >
+                      {smsSending ? 'Sending...' : 'Resend Code'}
+                    </Button>
+                    <Button
+                      type="button"
+                      onClick={handleVerifySmsCode}
+                      disabled={smsVerifying || !formValues.smsCode}
+                    >
+                      {smsVerifying ? 'Verifying...' : 'Verify'}
+                    </Button>
+                  </div>
+                  {smsError && (
+                    <div style={{ marginBottom: '8px' }}>
+                      <ErrorMessage>{smsError}</ErrorMessage>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div style={{ color: 'green', fontSize: '14px' }}>✓ Phone number verified</div>
+              )}
+            </div>
+          )}
           {/* Honeypot field - hidden from users but visible to bots */}
           <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
             <input
@@ -253,11 +453,17 @@ export const SecondLeadStep = ({
           </div>
         </section>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-          {([canSubmit, isSubmitting]) => (
-            <Button disabled={!canSubmit || isSubmitting} type="submit" fullWidth>
-              {isSubmitting ? 'Submitting...' : 'Submit'}
-            </Button>
-          )}
+          {([canSubmit, isSubmitting]) => {
+            // Disable button if SMS verification is required but not completed
+            const isSmsVerificationRequired = needsSmsVerification && !smsVerified;
+            const isDisabled = !canSubmit || isSubmitting || isSmsVerificationRequired;
+
+            return (
+              <Button disabled={isDisabled} type="submit" fullWidth>
+                {isSubmitting ? 'Submitting...' : 'Submit'}
+              </Button>
+            );
+          }}
         </Subscribe>
       </form>
     </section>
