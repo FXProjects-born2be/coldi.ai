@@ -271,46 +271,83 @@ export async function POST(request: Request): Promise<NextResponse> {
       }
 
       const smsData = await smsResponse.json().catch(() => ({}));
-      console.log('[SMS] SMS code sent successfully:', {
+      console.log('[SMS] SMS webhook response:', {
         phone: normalizedPhone,
         code: verificationCode,
         response: smsData,
       });
 
-      // Update or create rate limit
-      const { data: rateLimitData } = await supabase
-        .from('sms_rate_limits')
-        .select('*')
-        .eq('phone', normalizedPhone)
-        .single();
+      // Parse response - webhook returns array with message object
+      const responseArray = Array.isArray(smsData) ? smsData : [smsData];
+      const responseMessage = responseArray[0]?.message || '';
 
-      if (rateLimitData) {
-        // Reset attempts if hour has passed
-        const lastSmsSent = new Date(rateLimitData.last_sms_sent).getTime();
-        const attemptsUsed =
-          Date.now() - lastSmsSent >= SMS_RATE_LIMIT_WINDOW_MS ? 0 : rateLimitData.attempts_used;
-
-        await supabase
+      // Check response message and handle accordingly
+      if (responseMessage === 'SMS sent successfully.') {
+        // Success - update rate limit
+        const { data: rateLimitData } = await supabase
           .from('sms_rate_limits')
-          .update({
+          .select('*')
+          .eq('phone', normalizedPhone)
+          .single();
+
+        if (rateLimitData) {
+          // Reset attempts if hour has passed
+          const lastSmsSent = new Date(rateLimitData.last_sms_sent).getTime();
+          const attemptsUsed =
+            Date.now() - lastSmsSent >= SMS_RATE_LIMIT_WINDOW_MS ? 0 : rateLimitData.attempts_used;
+
+          await supabase
+            .from('sms_rate_limits')
+            .update({
+              last_sms_sent: now,
+              attempts_used: attemptsUsed,
+              updated_at: now,
+            })
+            .eq('phone', normalizedPhone);
+        } else {
+          await supabase.from('sms_rate_limits').insert({
+            phone: normalizedPhone,
             last_sms_sent: now,
-            attempts_used: attemptsUsed,
-            updated_at: now,
-          })
-          .eq('phone', normalizedPhone);
-      } else {
-        await supabase.from('sms_rate_limits').insert({
-          phone: normalizedPhone,
-          last_sms_sent: now,
-          attempts_used: 0,
+            attempts_used: 0,
+          });
+        }
+
+        return NextResponse.json({
+          message: 'SMS code sent successfully',
+          success: true,
+          expiresIn: Math.floor(SMS_CODE_EXPIRY_MS / 1000 / 60), // minutes
         });
       }
 
-      return NextResponse.json({
-        message: 'SMS code sent successfully',
-        success: true,
-        expiresIn: Math.floor(SMS_CODE_EXPIRY_MS / 1000 / 60), // minutes
+      // Handle error cases
+      let errorMessage = 'Failed to send SMS code. Please try again later.';
+      let statusCode = 400;
+
+      if (responseMessage === 'The number is invalid.') {
+        errorMessage = 'Invalid phone number. Please check your phone number and try again.';
+        statusCode = 400;
+      } else if (responseMessage === 'This country code is blocked for SMS.') {
+        errorMessage =
+          'SMS is not available for this country code. Please use a different phone number.';
+        statusCode = 403;
+      } else if (responseMessage === 'SMS not sent.') {
+        errorMessage = 'SMS could not be sent. Please try again later.';
+        statusCode = 500;
+      }
+
+      // Delete stored code if SMS failed
+      await supabase
+        .from('sms_verification_codes')
+        .delete()
+        .eq('phone', normalizedPhone)
+        .eq('code', verificationCode);
+
+      console.error('[SMS] SMS sending failed:', {
+        phone: normalizedPhone,
+        message: responseMessage,
       });
+
+      return NextResponse.json({ message: errorMessage }, { status: statusCode });
     } catch (smsError) {
       console.error('[SMS] Error sending SMS:', smsError);
       // Delete stored code if SMS failed
