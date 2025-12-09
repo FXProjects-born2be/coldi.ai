@@ -4,7 +4,7 @@ const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 // List of supported country codes
-const SUPPORTED_COUNTRY_CODES = [
+/*const SUPPORTED_COUNTRY_CODES = [
   '+52',
   '+1',
   '+44',
@@ -48,7 +48,7 @@ const SUPPORTED_COUNTRY_CODES = [
   '+971',
   '+61',
   '+91',
-];
+];*/
 
 type RetellWebhookPayload = {
   event: string;
@@ -153,9 +153,11 @@ export async function POST(request: Request) {
 
     console.log('Formatted Country Code:', formattedCountryCode);
 
-    const isSupported = formattedCountryCode
+    /*const isSupported = formattedCountryCode
       ? SUPPORTED_COUNTRY_CODES.includes(formattedCountryCode)
-      : true; // If no country code provided, assume supported
+      : true; // If no country code provided, assume supported*/
+
+    const isSupported = true;
 
     console.log('Is Supported:', isSupported);
 

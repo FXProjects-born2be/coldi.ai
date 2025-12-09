@@ -43,7 +43,7 @@ const companySizes = [
 ];
 
 // List of supported country codes
-const SUPPORTED_COUNTRY_CODES = [
+/*const SUPPORTED_COUNTRY_CODES = [
   '+52',
   '+1',
   '+44',
@@ -87,7 +87,7 @@ const SUPPORTED_COUNTRY_CODES = [
   '+971',
   '+61',
   '+91',
-];
+];*/
 
 // Use env variable, otherwise use key from RetellWidget (same key used in the project)
 const RECAPTCHA_SITE_KEY =
@@ -123,8 +123,8 @@ export const SecondStepToCall = ({
       }
 
       // Check if country code is supported
-      const countryCode = firstStepData.countryCode || '';
-      const isSupported = SUPPORTED_COUNTRY_CODES.includes(countryCode);
+      //const countryCode = firstStepData.countryCode || '';
+      const isSupported = true; //SUPPORTED_COUNTRY_CODES.includes(countryCode);
 
       // Prepare HubSpot payload (used for both supported and unsupported countries)
       const hubspotPayload = {
