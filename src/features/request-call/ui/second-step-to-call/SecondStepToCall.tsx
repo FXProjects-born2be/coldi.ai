@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactNode, useEffect, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 
 import ReCAPTCHA from 'react-google-recaptcha';
 
@@ -103,9 +103,67 @@ export const SecondStepToCall = ({
   onSubmit: (data: SecondStepCallSchema) => void;
   onUnsupportedCountry: () => void;
 }) => {
-  const { agent, firstStepData } = useRequestCallStore();
+  const { agent, firstStepData: storeFirstStepData, setFirstStepData } = useRequestCallStore();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   console.log('botName', botName);
+  console.log('[SecondStep] store firstStepData:', storeFirstStepData);
+
+  // Restore firstStepData from localStorage if store is empty
+  useEffect(() => {
+    if (
+      (!storeFirstStepData.phone || storeFirstStepData.phone === '') &&
+      typeof window !== 'undefined'
+    ) {
+      try {
+        const stored = localStorage.getItem('CallRequestFirstStepData');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          console.log('[SecondStep] Restoring from localStorage:', parsed);
+          setFirstStepData({
+            scenario: Array.isArray(parsed.scenario)
+              ? parsed.scenario.join(', ')
+              : parsed.scenario || '',
+            phone: parsed.phone || '',
+            countryCode: parsed.countryCode || '',
+          });
+        }
+      } catch (error) {
+        console.error('[SecondStep] Error restoring from localStorage:', error);
+      }
+    }
+  }, [storeFirstStepData.phone, setFirstStepData]);
+
+  // Use restored data or store data - memoized to avoid unnecessary recalculations
+  const firstStepData = useMemo(() => {
+    if (storeFirstStepData.phone) {
+      return storeFirstStepData;
+    }
+
+    // Fallback to localStorage if store is empty
+    if (typeof window === 'undefined') {
+      return { scenario: '', phone: '', countryCode: '' };
+    }
+
+    try {
+      const stored = localStorage.getItem('CallRequestFirstStepData');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        return {
+          scenario: Array.isArray(parsed.scenario)
+            ? parsed.scenario.join(', ')
+            : parsed.scenario || '',
+          phone: parsed.phone || '',
+          countryCode: parsed.countryCode || '',
+        };
+      }
+    } catch (error) {
+      console.error('[SecondStep] Error reading localStorage:', error);
+    }
+
+    return { scenario: '', phone: '', countryCode: '' };
+  }, [storeFirstStepData]);
+
+  console.log('[SecondStep] Using firstStepData:', firstStepData);
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
       name: '',
@@ -142,9 +200,6 @@ export const SecondStepToCall = ({
         referral: 'affiliate_partner_a',
       };
 
-      // Common flow for both supported and unsupported countries
-      localStorage?.removeItem('CallRequestFirstStepData');
-
       // Get honeypot field value from DOM
       const honeypotField = document.querySelector<HTMLInputElement>('input[name="website_url"]');
       const honeypotValue = honeypotField?.value || '';
@@ -166,6 +221,9 @@ export const SecondStepToCall = ({
       }
 
       console.log('Call request sent successfully');
+
+      // Only remove localStorage after successful submission
+      localStorage?.removeItem('CallRequestFirstStepData');
 
       const retellPayload = {
         name: data.value.name,
@@ -264,6 +322,7 @@ export const SecondStepToCall = ({
     setSmsError(null);
 
     try {
+      console.log('[SMS Send] Using phone:', firstStepData.phone, 'firstStepData:', firstStepData);
       const res = await fetch('/api/sms/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -305,10 +364,16 @@ export const SecondStepToCall = ({
       return;
     }
 
+    if (!firstStepData.phone) {
+      setSmsError('Phone number is missing. Please go back to step 1 and enter your phone number.');
+      return;
+    }
+
     setSmsVerifying(true);
     setSmsError(null);
 
     try {
+      console.log('[SMS Verify] Using phone:', firstStepData.phone);
       const res = await fetch('/api/sms/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
