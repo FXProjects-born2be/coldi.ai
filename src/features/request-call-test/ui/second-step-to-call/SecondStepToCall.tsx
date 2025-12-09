@@ -273,7 +273,17 @@ export const SecondStepToCall = ({
       const data = await res.json();
 
       if (!res.ok) {
-        setSmsError(data.message || 'Failed to send SMS code');
+        // Show specific error message from API
+        const errorMessage =
+          data.message ||
+          (res.status === 400
+            ? 'Invalid phone number. Please check and try again.'
+            : res.status === 403
+              ? 'SMS is not available for this country code.'
+              : res.status === 429
+                ? 'Too many requests. Please wait before requesting a new code.'
+                : 'Failed to send SMS code. Please try again.');
+        setSmsError(errorMessage);
         setSmsSending(false);
         return;
       }
@@ -417,14 +427,21 @@ export const SecondStepToCall = ({
           {needsSmsVerification && (
             <div className={st.inputWrapper}>
               {!smsCodeSent ? (
-                <Button
-                  type="button"
-                  onClick={handleSendSmsCode}
-                  disabled={smsSending || !firstStepData.phone}
-                  variant="secondary"
-                >
-                  {smsSending ? 'Sending...' : 'Send SMS'}
-                </Button>
+                <>
+                  <Button
+                    type="button"
+                    onClick={handleSendSmsCode}
+                    disabled={smsSending || !firstStepData.phone}
+                    variant="secondary"
+                  >
+                    {smsSending ? 'Sending...' : 'Send SMS'}
+                  </Button>
+                  {smsError && (
+                    <div style={{ marginBottom: '8px' }}>
+                      <ErrorMessage>{smsError}</ErrorMessage>
+                    </div>
+                  )}
+                </>
               ) : !smsVerified ? (
                 <div style={{ width: '100%' }}>
                   <div className={st.smsCodeInputWrapper}>
