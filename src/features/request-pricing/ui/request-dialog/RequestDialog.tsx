@@ -1,11 +1,12 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
 import ReCAPTCHA from 'react-google-recaptcha';
 import PhoneInput from 'react-phone-input-2';
 
+import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { CloseIcon } from '@/shared/ui/icons/outline/close';
@@ -20,6 +21,9 @@ import { ThankYouDialog } from '../thank-you-dialog/ThankYouDialog';
 import st from './RequestDialog.module.scss';
 
 import 'react-phone-input-2/lib/style.css';
+
+// Feature flag: SMS verification (temporary off; set to true to re-enable)
+const SMS_VERIFICATION_ENABLED = false;
 
 // Use env variable, otherwise use key from RetellWidget (same key used in the project)
 const RECAPTCHA_SITE_KEY =
@@ -50,15 +54,145 @@ export const RequestDialog = ({
       message: '',
       plan: plan.title,
       recaptchaToken: '',
+      smsCode: undefined as string | undefined,
     },
     validators: {
+      // @ts-expect-error - Schema type mismatch due to optional smsCode field
       onChange: requestPricingSchema,
     },
     onSubmit: (data) => onSubmit(data.value),
   });
-  const errors = useStore(store, (state) => state.errorMap);
+  const errors = useStore(store, (state) => state.errorMap) as {
+    onChange?: {
+      name?: Array<{ message: string }>;
+      website?: Array<{ message: string }>;
+      email?: Array<{ message: string }>;
+      phone?: Array<{ message: string }>;
+      message?: Array<{ message: string }>;
+      recaptchaToken?: Array<{ message: string }>;
+      smsCode?: Array<{ message: string }>;
+    };
+  };
+  const formValues = useStore(store, (state) => state.values) as {
+    name: string;
+    email: string;
+    website: string;
+    phone: string;
+    message: string;
+    plan: string;
+    recaptchaToken: string;
+    smsCode?: string;
+  };
+
+  // SMS verification state
+  const [smsCodeSent, setSmsCodeSent] = useState(false);
+  const [smsVerified, setSmsVerified] = useState(false);
+  const [smsSending, setSmsSending] = useState(false);
+  const [smsVerifying, setSmsVerifying] = useState(false);
+  const [smsError, setSmsError] = useState<string | null>(null);
+
+  // Check if email requires SMS verification (guarded by feature flag)
+  const needsSmsVerification =
+    SMS_VERIFICATION_ENABLED && formValues.email
+      ? requiresSmsVerification(formValues.email)
+      : false;
+
+  // Reset SMS state when email changes
+  useEffect(() => {
+    if (!needsSmsVerification) {
+      setSmsCodeSent(false);
+      setSmsVerified(false);
+      setSmsError(null);
+    } else {
+      // If email changed to free domain, reset verification
+      setSmsVerified(false);
+    }
+  }, [needsSmsVerification, formValues.email]);
+
+  const handleSendSmsCode = async () => {
+    if (!formValues.phone) {
+      setSmsError('Please enter your phone number first');
+      return;
+    }
+
+    setSmsSending(true);
+    setSmsError(null);
+
+    try {
+      const res = await fetch('/api/sms/verify-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: formValues.phone }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setSmsError(data.message || 'Failed to send SMS code');
+        setSmsSending(false);
+        return;
+      }
+
+      setSmsCodeSent(true);
+      setSmsVerified(false); // Reset verification status when sending new code
+      setSmsError(null);
+    } catch (error) {
+      console.error('Error sending SMS code:', error);
+      setSmsError('Failed to send SMS code. Please try again.');
+    } finally {
+      setSmsSending(false);
+    }
+  };
+
+  const handleVerifySmsCode = async () => {
+    if (!formValues.smsCode) {
+      setSmsError('Please enter the verification code');
+      return;
+    }
+
+    setSmsVerifying(true);
+    setSmsError(null);
+
+    try {
+      const res = await fetch('/api/sms/verify-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: formValues.phone, code: formValues.smsCode }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        // If code not found or expired, allow resending
+        if (
+          data.message?.includes('No verification code found') ||
+          data.message?.includes('expired') ||
+          data.message?.includes('Maximum verification attempts exceeded')
+        ) {
+          setSmsCodeSent(false); // Allow resending
+        }
+        setSmsError(data.message || 'Invalid verification code');
+        setSmsVerifying(false);
+        return;
+      }
+
+      setSmsVerified(true);
+      setSmsError(null);
+    } catch (error) {
+      console.error('Error verifying SMS code:', error);
+      setSmsError('Failed to verify code. Please try again.');
+    } finally {
+      setSmsVerifying(false);
+    }
+  };
 
   const onSubmit = async (data: RequestPricingSchema) => {
+    // Check SMS verification for free email domains
+    if (needsSmsVerification && !smsVerified) {
+      setSmsError('Please verify your phone number with SMS code');
+      return;
+    }
+
     // Reset reCAPTCHA after submission
     if (recaptchaRef.current) {
       recaptchaRef.current.reset();
@@ -199,7 +333,9 @@ export const RequestDialog = ({
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
                     </div>
-                    <div className={`${st.inputWrapper} ${errors.onChange?.email ? st.error : ''}`}>
+                    <div
+                      className={`${st.inputWrapper} ${st.full} ${errors.onChange?.email ? st.error : ''}`}
+                    >
                       <Field name="email">
                         {(field) => (
                           <TextField
@@ -215,7 +351,9 @@ export const RequestDialog = ({
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
                     </div>
-                    <div className={`${st.inputWrapper} ${errors.onChange?.phone ? st.error : ''}`}>
+                    <div
+                      className={`${st.inputWrapper} ${st.full} ${errors.onChange?.phone ? st.error : ''}`}
+                    >
                       <Field name="phone">
                         {(field) => (
                           <div className={st.phoneInputContainer}>
@@ -238,6 +376,63 @@ export const RequestDialog = ({
                       {errors.onChange?.phone?.map((err) => (
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
+                      {/* SMS verification for free email domains */}
+                      {needsSmsVerification && (
+                        <div style={{ marginTop: '8px' }}>
+                          {!smsCodeSent ? (
+                            <Button
+                              type="button"
+                              onClick={handleSendSmsCode}
+                              disabled={smsSending || !formValues.phone}
+                              variant="secondary"
+                            >
+                              {smsSending ? 'Sending...' : 'Send Verification Code'}
+                            </Button>
+                          ) : !smsVerified ? (
+                            <div>
+                              <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+                                <Field name="smsCode">
+                                  {(field) => (
+                                    <TextField
+                                      name={field.name}
+                                      placeholder="Enter 6-digit code"
+                                      value={String(field.state.value || '')}
+                                      onChange={(e) => field.handleChange(e.target.value)}
+                                      maxLength={6}
+                                      style={{ flex: 1 }}
+                                    />
+                                  )}
+                                </Field>
+                                <Button
+                                  type="button"
+                                  onClick={handleSendSmsCode}
+                                  disabled={smsSending || !formValues.phone}
+                                  variant="secondary"
+                                  style={{ whiteSpace: 'nowrap' }}
+                                >
+                                  {smsSending ? 'Sending...' : 'Resend Code'}
+                                </Button>
+                                <Button
+                                  type="button"
+                                  onClick={handleVerifySmsCode}
+                                  disabled={smsVerifying || !formValues.smsCode}
+                                >
+                                  {smsVerifying ? 'Verifying...' : 'Verify'}
+                                </Button>
+                              </div>
+                              {smsError && (
+                                <div style={{ marginBottom: '8px' }}>
+                                  <ErrorMessage>{smsError}</ErrorMessage>
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <div style={{ color: 'green', fontSize: '14px' }}>
+                              ✓ Phone number verified
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                     <div
                       className={`${st.inputWrapper} ${st.full} ${errors.onChange?.message ? st.error : ''}`}
@@ -298,11 +493,17 @@ export const RequestDialog = ({
                   </section>
                   <footer className={st.footer}>
                     <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-                      {([canSubmit, isSubmitting]) => (
-                        <Button disabled={!canSubmit || isSubmitting} type="submit" fullWidth>
-                          {isSubmitting ? 'Loading...' : 'Request'}
-                        </Button>
-                      )}
+                      {([canSubmit, isSubmitting]) => {
+                        // Disable button if SMS verification is required but not completed
+                        const isSmsVerificationRequired = needsSmsVerification && !smsVerified;
+                        const isDisabled = !canSubmit || isSubmitting || isSmsVerificationRequired;
+
+                        return (
+                          <Button disabled={isDisabled} type="submit" fullWidth>
+                            {isSubmitting ? 'Loading...' : 'Request'}
+                          </Button>
+                        );
+                      }}
                     </Subscribe>
                   </footer>
                 </form>
