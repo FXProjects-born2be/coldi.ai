@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactNode, useEffect, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 
 import ReCAPTCHA from 'react-google-recaptcha';
 
@@ -26,8 +26,64 @@ export const SecondLeadStep = ({
 }: {
   onSubmit: (data: SecondLeadStepSchema) => void;
 }) => {
-  const { firstStepData } = useRequestLeadStore();
+  const { firstStepData: storeFirstStepData, setFirstStepData } = useRequestLeadStore();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  console.log('[SecondLeadStep] store firstStepData:', storeFirstStepData);
+
+  // Restore firstStepData from localStorage if store is empty
+  useEffect(() => {
+    if (
+      (!storeFirstStepData.phone || storeFirstStepData.phone === '') &&
+      typeof window !== 'undefined'
+    ) {
+      try {
+        const stored = localStorage.getItem('LeadRequestFirstStepData');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          console.log('[SecondLeadStep] Restoring from localStorage:', parsed);
+          setFirstStepData({
+            fullName: parsed.fullName || '',
+            company: parsed.company || '',
+            email: parsed.email || '',
+            phone: parsed.phone || '',
+          });
+        }
+      } catch (error) {
+        console.error('[SecondLeadStep] Error restoring from localStorage:', error);
+      }
+    }
+  }, [storeFirstStepData.phone, setFirstStepData]);
+
+  // Use restored data or store data - memoized to avoid unnecessary recalculations
+  const firstStepData = useMemo(() => {
+    if (storeFirstStepData.phone) {
+      return storeFirstStepData;
+    }
+
+    // Fallback to localStorage if store is empty
+    if (typeof window === 'undefined') {
+      return { fullName: '', company: '', email: '', phone: '' };
+    }
+
+    try {
+      const stored = localStorage.getItem('LeadRequestFirstStepData');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        return {
+          fullName: parsed.fullName || '',
+          company: parsed.company || '',
+          email: parsed.email || '',
+          phone: parsed.phone || '',
+        };
+      }
+    } catch (error) {
+      console.error('[SecondLeadStep] Error reading localStorage:', error);
+    }
+
+    return { fullName: '', company: '', email: '', phone: '' };
+  }, [storeFirstStepData]);
+
+  console.log('[SecondLeadStep] Using firstStepData:', firstStepData);
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
       industry: '',
@@ -55,8 +111,6 @@ export const SecondLeadStep = ({
 
       onSubmit(data.value);
 
-      localStorage?.removeItem('LeadRequestFirstStepData');
-
       // Get honeypot field value from DOM
       const honeypotField = document.querySelector<HTMLInputElement>(
         'input[name="company_website"]'
@@ -82,6 +136,9 @@ export const SecondLeadStep = ({
       }
 
       console.log('Lead request sent successfully');
+
+      // Only remove localStorage after successful submission
+      localStorage?.removeItem('LeadRequestFirstStepData');
 
       // Send to HubSpot
       const hubspotData = {
