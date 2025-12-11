@@ -17,6 +17,9 @@ import { type SecondLeadStepSchema, secondLeadStepSchema } from '../../model/sch
 import { useRequestLeadStore } from '../../store/store';
 import st from './SecondLeadStep.module.scss';
 
+// Feature flag: SMS verification (temporary off; set to true to re-enable)
+const SMS_VERIFICATION_ENABLED = false;
+
 // Use env variable, otherwise use key from RetellWidget (same key used in the project)
 const RECAPTCHA_SITE_KEY =
   process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h';
@@ -211,10 +214,11 @@ export const SecondLeadStep = ({
   const [smsVerifying, setSmsVerifying] = useState(false);
   const [smsError, setSmsError] = useState<string | null>(null);
 
-  // Check if email requires SMS verification
-  const needsSmsVerification = firstStepData.email
-    ? requiresSmsVerification(firstStepData.email)
-    : false;
+  // Check if email requires SMS verification (guarded by feature flag)
+  const needsSmsVerification =
+    SMS_VERIFICATION_ENABLED && firstStepData.email
+      ? requiresSmsVerification(firstStepData.email)
+      : false;
 
   // Reset SMS state when email changes
   useEffect(() => {
