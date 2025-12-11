@@ -23,7 +23,7 @@ import st from './RequestDialog.module.scss';
 import 'react-phone-input-2/lib/style.css';
 
 // Feature flag: SMS verification (temporary off; set to true to re-enable)
-const SMS_VERIFICATION_ENABLED = true;
+const SMS_VERIFICATION_ENABLED = false;
 
 // Use env variable, otherwise use key from RetellWidget (same key used in the project)
 const RECAPTCHA_SITE_KEY =
