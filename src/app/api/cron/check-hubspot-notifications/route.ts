@@ -94,7 +94,7 @@ export async function GET(request: Request) {
         }
 
         // Send Telegram notification (always sent, regardless of HubSpot check)
-        const telegramMessage = `New hot lead from the site!\n\nName: ${notification.name}\nEmail: ${notification.email}\nPhone: +${notification.phone}\n\n@monika_farkas\n@goldsor\n@JacobAiris`;
+        const telegramMessage = `New hot lead from the site!\n\nName: ${notification.name}\nEmail: ${notification.email}\nPhone: +${notification.phone}\n\n@monika_farkas\n@goldsor\n@JacobAiris\n@MDTTDMT`;
 
         /*let telegramMessage = `New hot lead from the site!\n\nName: ${notification.name}\nEmail: ${notification.email}`;
         if (notification.phone) {
