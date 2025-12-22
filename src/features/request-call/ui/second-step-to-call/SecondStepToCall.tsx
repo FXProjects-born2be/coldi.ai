@@ -16,6 +16,9 @@ import { secondStepCallSchema } from '../../model/schemas';
 import { useRequestCallStore } from '../../store/store';
 import st from './SecondStepToCall.module.scss';
 
+// Feature flag: SMS verification (temporary off; set to true to re-enable)
+const SMS_VERIFICATION_ENABLED = true;
+
 const industries = [
   'Technology',
   'Healthcare',
@@ -299,7 +302,11 @@ export const SecondStepToCall = ({
   const [smsVerifying, setSmsVerifying] = useState(false);
   const [smsError, setSmsError] = useState<string | null>(null);
 
-  const needsSmsVerification = formValues.email ? requiresSmsVerification(formValues.email) : false;
+  // Check if email requires SMS verification (guarded by feature flag)
+  const needsSmsVerification =
+    SMS_VERIFICATION_ENABLED && formValues.email
+      ? requiresSmsVerification(formValues.email)
+      : false;
 
   // Reset SMS state when email changes
   useEffect(() => {
@@ -323,7 +330,7 @@ export const SecondStepToCall = ({
 
     try {
       console.log('[SMS Send] Using phone:', firstStepData.phone, 'firstStepData:', firstStepData);
-      const res = await fetch('/api/sms/verify-code', {
+      const res = await fetch('/api/sms/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone: firstStepData.phone }),
@@ -382,9 +389,10 @@ export const SecondStepToCall = ({
 
       const data = await res.json();
 
-      if (!res.ok) {
+      // New API returns { verified: boolean, message?: string }
+      if (!res.ok || !data.verified) {
         if (
-          data.message?.includes('No verification code found') ||
+          data.message?.includes('not found') ||
           data.message?.includes('expired') ||
           data.message?.includes('Maximum verification attempts exceeded')
         ) {

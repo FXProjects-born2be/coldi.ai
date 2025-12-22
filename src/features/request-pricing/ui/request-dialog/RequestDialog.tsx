@@ -23,7 +23,7 @@ import st from './RequestDialog.module.scss';
 import 'react-phone-input-2/lib/style.css';
 
 // Feature flag: SMS verification (temporary off; set to true to re-enable)
-const SMS_VERIFICATION_ENABLED = false;
+const SMS_VERIFICATION_ENABLED = true;
 
 // Use env variable, otherwise use key from RetellWidget (same key used in the project)
 const RECAPTCHA_SITE_KEY =
@@ -119,7 +119,7 @@ export const RequestDialog = ({
     setSmsError(null);
 
     try {
-      const res = await fetch('/api/sms/verify-code', {
+      const res = await fetch('/api/sms/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone: formValues.phone }),
@@ -172,10 +172,11 @@ export const RequestDialog = ({
 
       const data = await res.json();
 
-      if (!res.ok) {
+      // New API returns { verified: boolean, message?: string }
+      if (!res.ok || !data.verified) {
         // If code not found or expired, allow resending
         if (
-          data.message?.includes('No verification code found') ||
+          data.message?.includes('not found') ||
           data.message?.includes('expired') ||
           data.message?.includes('Maximum verification attempts exceeded')
         ) {
