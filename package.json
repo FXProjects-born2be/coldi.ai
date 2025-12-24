@@ -43,6 +43,7 @@
     "react-select-country-list": "^2.2.3",
     "sass": "^1.89.1",
     "swiper": "^11.2.10",
+    "twilio": "^5.11.1",
     "valibot": "^1.1.0",
     "zod": "^3.25.67",
     "zustand": "^5.0.5"
