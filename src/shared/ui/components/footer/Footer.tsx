@@ -12,6 +12,7 @@ import { Linkedin } from '@/shared/ui/icons/fill/socials/linkedin';
 import { Whatsapp } from '@/shared/ui/icons/fill/socials/whatsapp';
 import { WhatsappFixed } from '@/shared/ui/icons/fill/socials/whatsapp-fixed';
 import { X } from '@/shared/ui/icons/fill/socials/x';
+import { Youtube } from '@/shared/ui/icons/fill/socials/youtube';
 
 import st from './Footer.module.scss';
 
@@ -38,6 +39,9 @@ export const Footer = () => {
                 </Link>
                 <Link href="https://wa.me/447955534986" target="_blank">
                   <Whatsapp />
+                </Link>
+                <Link href="https://www.youtube.com/@coldi_ai" target="_blank">
+                  <Youtube />
                 </Link>
               </div>
             </div>
