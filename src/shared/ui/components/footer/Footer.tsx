@@ -37,11 +37,11 @@ export const Footer = () => {
                 <Link href="https://www.linkedin.com/company/coldiai/" target="_blank">
                   <Linkedin />
                 </Link>
-                <Link href="https://wa.me/447955534986" target="_blank">
-                  <Whatsapp />
-                </Link>
                 <Link href="https://www.youtube.com/@coldi_ai" target="_blank">
                   <Youtube />
+                </Link>
+                <Link href="https://wa.me/447955534986" target="_blank">
+                  <Whatsapp />
                 </Link>
               </div>
             </div>
