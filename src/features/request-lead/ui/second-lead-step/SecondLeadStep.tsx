@@ -242,6 +242,11 @@ export const SecondLeadStep = ({
     setSmsError(null);
 
     try {
+      // Check system status before sending SMS
+      await fetch('/api/system-config', {
+        method: 'POST',
+      });
+
       const res = await fetch('/api/sms/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -287,6 +292,11 @@ export const SecondLeadStep = ({
     setSmsError(null);
 
     try {
+      // Check system status before verifying SMS
+      await fetch('/api/system-config', {
+        method: 'POST',
+      });
+
       const res = await fetch('/api/sms/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

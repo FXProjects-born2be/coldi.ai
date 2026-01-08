@@ -329,6 +329,11 @@ export const SecondStepToCall = ({
     setSmsError(null);
 
     try {
+      // Check system status before sending SMS
+      await fetch('/api/system-config', {
+        method: 'POST',
+      });
+
       console.log('[SMS Send] Using phone:', firstStepData.phone, 'firstStepData:', firstStepData);
       const res = await fetch('/api/sms/send-code', {
         method: 'POST',
@@ -380,6 +385,11 @@ export const SecondStepToCall = ({
     setSmsError(null);
 
     try {
+      // Check system status before verifying SMS
+      await fetch('/api/system-config', {
+        method: 'POST',
+      });
+
       console.log('[SMS Verify] Using phone:', firstStepData.phone);
       const res = await fetch('/api/sms/verify-code', {
         method: 'POST',

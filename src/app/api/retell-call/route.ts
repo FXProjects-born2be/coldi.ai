@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { getRetellPhoneNumber } from '@/shared/lib/system-status';
+import { checkSuspendStatus, getRetellPhoneNumber } from '@/shared/lib/system-status';
 
 const RETELL_API_URL = 'https://api.retellai.com/v2/create-phone-call';
 
@@ -13,6 +13,9 @@ const AGENT_IDS: Record<string, string> = {
 };
 
 export async function POST(req: NextRequest) {
+  // Check system status before processing request
+  await checkSuspendStatus();
+
   const apiKey = process.env.RETELL_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: 'RETELL_API_KEY not configured' }, { status: 500 });
@@ -34,8 +37,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unknown agent' }, { status: 400 });
   }
 
+  // Get phone number after status check to ensure correct number (primary/reserve)
+  const fromNumber = getRetellPhoneNumber();
+  console.log('[Retell Call] Using phone number:', fromNumber);
+
   const payload = {
-    from_number: getRetellPhoneNumber(),
+    from_number: fromNumber,
     to_number: phone.startsWith('+') ? phone : `+${phone}`,
 
     override_agent_id,
