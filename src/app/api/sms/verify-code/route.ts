@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const WEBHOOK_URL =
-  process.env.TWILIO_VERIFY_CODE_ENDPOINT ||
-  'https://aitassistance.app.n8n.cloud/webhook/sms-for-site-verify';
+import { getSmsVerifyCodeWebhookUrl } from '@/shared/lib/system-status';
 
 /**
  * Normalize phone number to E.164 format
@@ -22,7 +20,9 @@ function normalizePhone(phone: string): string {
  * Sends request to webhook with { "to": phone, "code": code }
  */
 export async function POST(request: Request): Promise<NextResponse> {
-  if (!WEBHOOK_URL) {
+  const webhookUrl = getSmsVerifyCodeWebhookUrl();
+
+  if (!webhookUrl) {
     return NextResponse.json(
       { verified: false, message: 'SMS verification service is not configured' },
       { status: 500 }
@@ -50,7 +50,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     const normalizedPhone = normalizePhone(phone);
 
     // Send to webhook
-    const response = await fetch(WEBHOOK_URL, {
+    const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ to: normalizedPhone, code: code.trim() }),

@@ -1,6 +1,8 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { getRetellPhoneNumber } from '@/shared/lib/system-status';
+
 const RETELL_API_URL = 'https://api.retellai.com/v2/create-phone-call';
 
 const AGENT_IDS: Record<string, string> = {
@@ -33,7 +35,7 @@ export async function POST(req: NextRequest) {
   }
 
   const payload = {
-    from_number: '+447401271428',
+    from_number: getRetellPhoneNumber(),
     to_number: phone.startsWith('+') ? phone : `+${phone}`,
 
     override_agent_id,
