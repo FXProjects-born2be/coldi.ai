@@ -46,6 +46,14 @@ const FREE_EMAIL_DOMAINS = [
   'tmpmail.org',
   'yopmail.com',
   'zoemail.com',
+  'mail.ru',
+  'desumail.com',
+  'ro.ru',
+  'bk.ru',
+  'rambler.ru',
+  'inbox.ru',
+  'autorambler.ru',
+  'pucann.org',
 ];
 
 /**
