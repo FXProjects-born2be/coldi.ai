@@ -7,10 +7,6 @@
     {
       "path": "/api/cron/cleanup-hubspot-notifications",
       "schedule": "0 2 * * 0"
-    },
-    {
-      "path": "/api/cron/check-suspend-status",
-      "schedule": "*/10 * * * *"
     }
   ]
 }

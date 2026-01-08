@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 
-import { getFooterPhoneNumber, getSystemStatus } from '@/shared/lib/system-status';
+import {
+  checkSuspendStatus,
+  getFooterPhoneNumber,
+  getSystemStatus,
+} from '@/shared/lib/system-status';
 
 /**
  * GET /api/system-config
@@ -12,6 +16,19 @@ import { getFooterPhoneNumber, getSystemStatus } from '@/shared/lib/system-statu
 export async function GET() {
   return NextResponse.json({
     status: getSystemStatus(),
+    footerPhoneNumber: getFooterPhoneNumber(),
+  });
+}
+
+/**
+ * POST /api/system-config/check-status
+ * Checks system status and returns current mode
+ * Used before SMS verification to ensure correct endpoints
+ */
+export async function POST() {
+  const status = await checkSuspendStatus();
+  return NextResponse.json({
+    status,
     footerPhoneNumber: getFooterPhoneNumber(),
   });
 }

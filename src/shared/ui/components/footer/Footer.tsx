@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -19,23 +18,7 @@ import st from './Footer.module.scss';
 
 export const Footer = () => {
   const pathname = usePathname();
-  const [phoneNumber, setPhoneNumber] = useState('+441299667777'); // Default fallback
-
-  useEffect(() => {
-    // Fetch current system configuration
-    // Status is updated by cron job every 10 minutes
-    fetch('/api/system-config')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.footerPhoneNumber) {
-          setPhoneNumber(data.footerPhoneNumber);
-        }
-      })
-      .catch((error) => {
-        console.error('Failed to fetch system config:', error);
-        // Keep default fallback
-      });
-  }, []);
+  const phoneNumber = '+441299667777'; // Static phone number
 
   return !requestRoutes.has(pathname) ? (
     <>
