@@ -19,10 +19,11 @@ import st from './Footer.module.scss';
 
 export const Footer = () => {
   const pathname = usePathname();
-  const [phoneNumber, setPhoneNumber] = useState(''); // Default fallback
+  const [phoneNumber, setPhoneNumber] = useState('+441299667777'); // Default fallback
 
   useEffect(() => {
     // Fetch current system configuration
+    // Status is updated by cron job every 10 minutes
     fetch('/api/system-config')
       .then((res) => res.json())
       .then((data) => {
@@ -34,47 +35,6 @@ export const Footer = () => {
         console.error('Failed to fetch system config:', error);
         // Keep default fallback
       });
-
-    // Direct check to suspend_check webhook
-    const checkSuspendStatus = async () => {
-      try {
-        const response = await fetch('https://aitassistance.app.n8n.cloud/webhook/suspend_check', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (!response.ok) {
-          console.error('[Footer] Suspend check HTTP error:', response.status);
-          // On error, use reserve number
-          setPhoneNumber('+447427898400');
-          return;
-        }
-
-        const data = await response.json();
-        console.log('[Footer] Suspend check response:', data);
-
-        // Check response result
-        if (data?.result === 'ok') {
-          // Account is active - use primary number
-          setPhoneNumber('+441299667777');
-        } else if (data?.result === 'error') {
-          // Account is suspended - use reserve number
-          setPhoneNumber('+447427898400');
-        } else {
-          // Unknown response - default to reserve for safety
-          console.warn('[Footer] Unknown suspend check response format:', data);
-          setPhoneNumber('+447427898400');
-        }
-      } catch (error) {
-        console.error('[Footer] Failed to check suspend status:', error);
-        // On error/timeout, use reserve number for safety
-        setPhoneNumber('+447427898400');
-      }
-    };
-
-    checkSuspendStatus();
   }, []);
 
   return !requestRoutes.has(pathname) ? (
