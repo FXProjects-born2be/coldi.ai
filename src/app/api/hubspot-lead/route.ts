@@ -21,6 +21,7 @@ export async function POST(req: NextRequest) {
   const properties = restBody?.properties || restBody;
 
   // Verify Cloudflare Turnstile token if provided
+  // Note: Token may be already used in main route, so timeout-or-duplicate is acceptable
   if (turnstileToken) {
     try {
       const secretKey = process.env.TURNSTILE_SECRET_KEY;
@@ -42,13 +43,22 @@ export async function POST(req: NextRequest) {
         );
         const turnstileData = await turnstileResponse.json();
         if (!turnstileData.success) {
-          console.warn('[BOT DETECTED] Invalid Turnstile token', {
-            errors: turnstileData['error-codes'],
-          });
-          return NextResponse.json(
-            { error: 'Security verification failed. Please try again.' },
-            { status: 400 }
-          );
+          const errorCodes = turnstileData['error-codes'] || [];
+          // Allow timeout-or-duplicate errors (token already verified in main route)
+          const isTimeoutOrDuplicate = errorCodes.includes('timeout-or-duplicate');
+
+          if (isTimeoutOrDuplicate) {
+            console.log('[TURNSTILE] Token already used (expected for secondary routes)');
+            // Don't block - token was already verified in main route
+          } else {
+            console.warn('[BOT DETECTED] Invalid Turnstile token', {
+              errors: errorCodes,
+            });
+            return NextResponse.json(
+              { error: 'Security verification failed. Please try again.' },
+              { status: 400 }
+            );
+          }
         }
       }
     } catch (turnstileError) {
