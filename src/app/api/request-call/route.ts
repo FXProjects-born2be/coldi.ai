@@ -134,6 +134,10 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     // Generate session token for secondary routes (retell-call, hubspot-lead)
     const sessionToken = generateSessionToken();
+    console.log('[REQUEST-CALL] Generated sessionToken for response:', {
+      token: sessionToken.substring(0, 50) + '...',
+      tokenLength: sessionToken.length,
+    });
 
     return NextResponse.json({
       message: 'Call request sent successfully.',
