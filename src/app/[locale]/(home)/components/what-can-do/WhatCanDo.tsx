@@ -91,7 +91,7 @@ const Card = ({
       repeat: Infinity,
       repeatDelay: totalDuration - 0.5, // Затримка до наступного циклу
       delay: index * 0.5,
-      ease: 'easeInOut',
+      ease: 'easeInOut' as const,
     },
   };
 
