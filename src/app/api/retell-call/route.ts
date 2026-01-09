@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
   });
 
   // Require session token from /api/request-call to prevent direct API calls
-  const isValidSession = validateAndConsumeSessionToken(sessionToken);
+  const isValidSession = validateAndConsumeSessionToken(sessionToken, 'retell-call');
   if (!isValidSession) {
     return NextResponse.json(
       { error: 'Invalid or missing session token. Please submit the form through the website.' },

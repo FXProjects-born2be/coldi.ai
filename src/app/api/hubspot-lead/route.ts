@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     tokenPreview: sessionToken ? `${sessionToken.substring(0, 20)}...` : 'none',
   });
 
-  const isValidSession = validateAndConsumeSessionToken(sessionToken);
+  const isValidSession = validateAndConsumeSessionToken(sessionToken, 'hubspot-lead');
   console.log('[HUBSPOT-LEAD] Session token validation result:', isValidSession);
 
   if (!isValidSession) {

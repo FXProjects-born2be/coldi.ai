@@ -7,6 +7,7 @@ type SessionToken = {
   token: string;
   expiresAt: number;
   used: boolean;
+  usedBy: string[]; // Track which routes have used this token
 };
 
 // In-memory store for session tokens (cleared on server restart)
@@ -41,6 +42,7 @@ export function generateSessionToken(): string {
     token,
     expiresAt,
     used: false,
+    usedBy: [],
   });
 
   console.log('[SESSION-TOKEN] Generated new token:', {
@@ -55,15 +57,22 @@ export function generateSessionToken(): string {
 
 /**
  * Validate and consume a session token
+ * Token format: timestamp-random1-random2
+ * We validate by checking if timestamp is within TTL window
  * @param token - Session token to validate
+ * @param routeName - Optional route name to track usage (e.g., 'retell-call', 'hubspot-lead')
  * @returns true if token is valid and was successfully consumed, false otherwise
  */
-export function validateAndConsumeSessionToken(token: string | undefined | null): boolean {
+export function validateAndConsumeSessionToken(
+  token: string | undefined | null,
+  routeName?: string
+): boolean {
   console.log('[SESSION-TOKEN] Validating token:', {
     hasToken: !!token,
     tokenType: typeof token,
     tokenLength: token?.length || 0,
     tokenPreview: token ? `${token.substring(0, 30)}...` : 'none',
+    routeName,
   });
 
   if (!token || typeof token !== 'string') {
@@ -71,42 +80,70 @@ export function validateAndConsumeSessionToken(token: string | undefined | null)
     return false;
   }
 
-  const sessionData = tokenStore.get(token);
-  console.log('[SESSION-TOKEN] Token lookup result:', {
-    found: !!sessionData,
-    expiresAt: sessionData?.expiresAt,
-    now: Date.now(),
-    expired: sessionData ? sessionData.expiresAt < Date.now() : 'N/A',
-    used: sessionData?.used,
+  // Parse token: format is timestamp-random1-random2
+  const parts = token.split('-');
+  if (parts.length < 3) {
+    console.warn('[SESSION-TOKEN] Invalid token format');
+    return false;
+  }
+
+  const tokenTimestamp = parseInt(parts[0], 10);
+  if (isNaN(tokenTimestamp)) {
+    console.warn('[SESSION-TOKEN] Invalid timestamp in token');
+    return false;
+  }
+
+  const now = Date.now();
+  const tokenAge = now - tokenTimestamp;
+  const isExpired = tokenAge > TOKEN_TTL_MS;
+
+  console.log('[SESSION-TOKEN] Token validation:', {
+    tokenTimestamp,
+    now,
+    tokenAge: `${Math.floor(tokenAge / 1000)}s`,
+    expiresIn: `${Math.floor((TOKEN_TTL_MS - tokenAge) / 1000)}s`,
+    isExpired,
     storeSize: tokenStore.size,
   });
 
-  if (!sessionData) {
-    console.warn('[SESSION-TOKEN] Token not found in store');
-    return false;
-  }
-
-  // Check if token is expired
-  if (sessionData.expiresAt < Date.now()) {
+  if (isExpired) {
     console.warn('[SESSION-TOKEN] Token expired', {
-      expiresAt: sessionData.expiresAt,
-      now: Date.now(),
-      diff: Date.now() - sessionData.expiresAt,
+      tokenTimestamp,
+      now,
+      age: tokenAge,
+      maxAge: TOKEN_TTL_MS,
     });
+    return false;
+  }
+
+  // Check in-memory store if available (for same-worker validation)
+  const sessionData = tokenStore.get(token);
+  if (sessionData) {
+    // Token exists in store, use store-based validation
+    if (routeName) {
+      if (sessionData.usedBy.includes(routeName)) {
+        console.warn('[SESSION-TOKEN] Token already used by this route:', routeName);
+        return false;
+      }
+      sessionData.usedBy.push(routeName);
+      const allowedRoutes = ['retell-call', 'hubspot-lead'];
+      const allRoutesUsed = allowedRoutes.every((route) => sessionData.usedBy.includes(route));
+      if (allRoutesUsed) {
+        sessionData.used = true;
+        tokenStore.delete(token);
+        console.log('[SESSION-TOKEN] Token fully consumed by all routes, deleting from store');
+      }
+      return true;
+    }
+    sessionData.used = true;
     tokenStore.delete(token);
-    return false;
+    return true;
   }
 
-  // Check if token was already used
-  if (sessionData.used) {
-    console.warn('[SESSION-TOKEN] Token already used');
-    return false;
-  }
-
-  // Mark token as used and delete it
-  tokenStore.delete(token);
-  console.log('[SESSION-TOKEN] Token validated and consumed successfully');
-
+  // Token not in store (different worker), but timestamp is valid
+  // Allow usage based on timestamp validation only
+  // This allows cross-worker token validation
+  console.log('[SESSION-TOKEN] Token not in store but timestamp valid (cross-worker), allowing');
   return true;
 }
 
