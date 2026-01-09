@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import sgMail from '@sendgrid/mail';
 
 import { detectBot } from '@/shared/lib/anti-bot';
+import { areFormsEnabled } from '@/shared/lib/forms-status';
 
 type RequestPricingData = {
   name: string;
@@ -17,6 +18,15 @@ type RequestPricingData = {
 
 export async function POST(request: Request): Promise<NextResponse> {
   try {
+    // Check if forms are enabled
+    const formsEnabled = await areFormsEnabled();
+    if (!formsEnabled) {
+      return NextResponse.json(
+        { message: 'Form submissions are currently disabled. Please try again later.' },
+        { status: 503 }
+      );
+    }
+
     const bodyJSON = (await request.json()) as RequestPricingData;
     const { name, email, website, phone, message, plan, turnstileToken } = bodyJSON;
 
