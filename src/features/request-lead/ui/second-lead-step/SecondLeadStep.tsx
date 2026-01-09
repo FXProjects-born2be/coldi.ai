@@ -167,7 +167,7 @@ export const SecondLeadStep = ({
 
       console.log('Sending to HubSpot:', hubspotData);
 
-      const hubspotRes = await fetch('/api/hubspot-lead-update', {
+      const hubspotRes = await fetch('/api/hubspot-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(hubspotData),
@@ -225,7 +225,7 @@ export const SecondLeadStep = ({
       ? requiresSmsVerification(firstStepData.email)
       : false;
 
-  // Reset SMS state when email changes
+  // Reset SMS state when email changes or captcha expires
   useEffect(() => {
     if (!needsSmsVerification) {
       setSmsCodeSent(false);
@@ -237,6 +237,15 @@ export const SecondLeadStep = ({
     }
   }, [needsSmsVerification, firstStepData.email]);
 
+  // Reset SMS verification when captcha expires or is cleared
+  useEffect(() => {
+    if (!turnstileToken) {
+      setSmsCodeSent(false);
+      setSmsVerified(false);
+      setSmsError(null);
+    }
+  }, [turnstileToken]);
+
   const handleSendSmsCode = async () => {
     if (!firstStepData.phone) {
       setSmsError('Please enter your phone number on step 1');
@@ -247,15 +256,11 @@ export const SecondLeadStep = ({
     setSmsError(null);
 
     try {
-      // Check system status before sending SMS
-      await fetch('/api/system-config', {
-        method: 'POST',
-      });
-
+      // System status is automatically checked and cached in /api/sms/send-code
       const res = await fetch('/api/sms/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: firstStepData.phone }),
+        body: JSON.stringify({ phone: firstStepData.phone, turnstileToken }),
       });
 
       const data = await res.json();
@@ -297,15 +302,15 @@ export const SecondLeadStep = ({
     setSmsError(null);
 
     try {
-      // Check system status before verifying SMS
-      await fetch('/api/system-config', {
-        method: 'POST',
-      });
-
+      // System status is automatically checked and cached in /api/sms/verify-code
       const res = await fetch('/api/sms/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: firstStepData.phone, code: formValues.smsCode }),
+        body: JSON.stringify({
+          phone: firstStepData.phone,
+          code: formValues.smsCode,
+          turnstileToken,
+        }),
       });
 
       const data = await res.json();
@@ -433,8 +438,43 @@ export const SecondLeadStep = ({
               )}
             </Field>
           </div>
-          {/* SMS verification - only for free email domains */}
-          {needsSmsVerification && (
+          {/* Honeypot field - hidden from users but visible to bots */}
+          <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
+            <input
+              type="text"
+              name="company_website"
+              tabIndex={-1}
+              autoComplete="off"
+              style={{ display: 'none' }}
+            />
+          </div>
+          <div className={`${st.inputWrapper} ${errors.onSubmit?.turnstileToken ? st.error : ''}`}>
+            <Field name="turnstileToken">
+              {(field) => (
+                <Turnstile
+                  key={turnstileKey}
+                  siteKey={TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => {
+                    setTurnstileToken(token);
+                    field.handleChange(token);
+                  }}
+                  onError={() => {
+                    setTurnstileToken(null);
+                    field.handleChange('');
+                  }}
+                  onExpire={() => {
+                    setTurnstileToken(null);
+                    field.handleChange('');
+                  }}
+                />
+              )}
+            </Field>
+            {errors.onSubmit?.turnstileToken?.map((err: { message: string }) => (
+              <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+            ))}
+          </div>
+          {/* SMS verification - only for free email domains, shown after captcha */}
+          {needsSmsVerification && turnstileToken && (
             <div className={st.inputWrapper}>
               {!smsCodeSent ? (
                 <>
@@ -496,41 +536,6 @@ export const SecondLeadStep = ({
               )}
             </div>
           )}
-          {/* Honeypot field - hidden from users but visible to bots */}
-          <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
-            <input
-              type="text"
-              name="company_website"
-              tabIndex={-1}
-              autoComplete="off"
-              style={{ display: 'none' }}
-            />
-          </div>
-          <div className={`${st.inputWrapper} ${errors.onSubmit?.turnstileToken ? st.error : ''}`}>
-            <Field name="turnstileToken">
-              {(field) => (
-                <Turnstile
-                  key={turnstileKey}
-                  siteKey={TURNSTILE_SITE_KEY}
-                  onSuccess={(token) => {
-                    setTurnstileToken(token);
-                    field.handleChange(token);
-                  }}
-                  onError={() => {
-                    setTurnstileToken(null);
-                    field.handleChange('');
-                  }}
-                  onExpire={() => {
-                    setTurnstileToken(null);
-                    field.handleChange('');
-                  }}
-                />
-              )}
-            </Field>
-            {errors.onSubmit?.turnstileToken?.map((err: { message: string }) => (
-              <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-            ))}
-          </div>
         </section>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
           {([canSubmit, isSubmitting]) => {

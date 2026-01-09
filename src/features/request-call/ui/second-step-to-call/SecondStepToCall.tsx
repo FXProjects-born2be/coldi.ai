@@ -229,6 +229,7 @@ export const SecondStepToCall = ({
       // Only remove localStorage after successful submission
       localStorage?.removeItem('CallRequestFirstStepData');
 
+      // Send to Retell (phone number will be determined automatically based on system status)
       const retellPayload = {
         name: data.value.name,
         email: data.value.email,
@@ -237,6 +238,7 @@ export const SecondStepToCall = ({
         company: data.value.company,
         agent,
         countryCode: firstStepData.countryCode,
+        turnstileToken,
       };
       console.log('Retell payload:', retellPayload);
 
@@ -252,6 +254,7 @@ export const SecondStepToCall = ({
         console.error('Failed to send retell call request');
       }
 
+      // Send to HubSpot
       console.log('Hubspot payload:', hubspotPayload);
 
       const hubspotRes = await fetch('/api/hubspot-lead', {
@@ -267,7 +270,7 @@ export const SecondStepToCall = ({
         console.error('Failed to send hubspot call request', error);
       }
 
-      // Show different dialog based on country code support
+      // Show success dialog
       if (!isSupported) {
         // Show unsupported country dialog
         onUnsupportedCountry();
@@ -313,7 +316,7 @@ export const SecondStepToCall = ({
       ? requiresSmsVerification(formValues.email)
       : false;
 
-  // Reset SMS state when email changes
+  // Reset SMS state when email changes or captcha expires
   useEffect(() => {
     if (!needsSmsVerification) {
       setSmsCodeSent(false);
@@ -323,6 +326,15 @@ export const SecondStepToCall = ({
       setSmsVerified(false);
     }
   }, [needsSmsVerification, formValues.email]);
+
+  // Reset SMS verification when captcha expires or is cleared
+  useEffect(() => {
+    if (!turnstileToken) {
+      setSmsCodeSent(false);
+      setSmsVerified(false);
+      setSmsError(null);
+    }
+  }, [turnstileToken]);
 
   const handleSendSmsCode = async () => {
     if (!firstStepData.phone) {
@@ -334,16 +346,12 @@ export const SecondStepToCall = ({
     setSmsError(null);
 
     try {
-      // Check system status before sending SMS
-      await fetch('/api/system-config', {
-        method: 'POST',
-      });
-
+      // System status is automatically checked and cached in /api/sms/send-code
       console.log('[SMS Send] Using phone:', firstStepData.phone, 'firstStepData:', firstStepData);
       const res = await fetch('/api/sms/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: firstStepData.phone }),
+        body: JSON.stringify({ phone: firstStepData.phone, turnstileToken }),
       });
 
       const data = await res.json();
@@ -390,16 +398,16 @@ export const SecondStepToCall = ({
     setSmsError(null);
 
     try {
-      // Check system status before verifying SMS
-      await fetch('/api/system-config', {
-        method: 'POST',
-      });
-
+      // System status is automatically checked and cached in /api/sms/verify-code
       console.log('[SMS Verify] Using phone:', firstStepData.phone);
       const res = await fetch('/api/sms/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: firstStepData.phone, code: formValues.smsCode }),
+        body: JSON.stringify({
+          phone: firstStepData.phone,
+          code: formValues.smsCode,
+          turnstileToken,
+        }),
       });
 
       const data = await res.json();
@@ -511,8 +519,43 @@ export const SecondStepToCall = ({
               ))}
             </div>
           </FormRow>
-          {/* SMS verification - only for free email domains */}
-          {needsSmsVerification && (
+          {/* Honeypot field - hidden from users but visible to bots */}
+          <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
+            <input
+              type="text"
+              name="website_url"
+              tabIndex={-1}
+              autoComplete="off"
+              style={{ display: 'none' }}
+            />
+          </div>
+          <div className={`${st.inputWrapper} ${errors.onSubmit?.turnstileToken ? st.error : ''}`}>
+            <Field name="turnstileToken">
+              {(field) => (
+                <Turnstile
+                  key={turnstileKey}
+                  siteKey={TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => {
+                    setTurnstileToken(token);
+                    field.handleChange(token);
+                  }}
+                  onError={() => {
+                    setTurnstileToken(null);
+                    field.handleChange('');
+                  }}
+                  onExpire={() => {
+                    setTurnstileToken(null);
+                    field.handleChange('');
+                  }}
+                />
+              )}
+            </Field>
+            {errors.onSubmit?.turnstileToken?.map((err) => (
+              <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+            ))}
+          </div>
+          {/* SMS verification - only for free email domains, shown after captcha */}
+          {needsSmsVerification && turnstileToken && (
             <div className={st.inputWrapper}>
               {!smsCodeSent ? (
                 <>
@@ -573,41 +616,6 @@ export const SecondStepToCall = ({
               )}
             </div>
           )}
-          {/* Honeypot field - hidden from users but visible to bots */}
-          <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
-            <input
-              type="text"
-              name="website_url"
-              tabIndex={-1}
-              autoComplete="off"
-              style={{ display: 'none' }}
-            />
-          </div>
-          <div className={`${st.inputWrapper} ${errors.onSubmit?.turnstileToken ? st.error : ''}`}>
-            <Field name="turnstileToken">
-              {(field) => (
-                <Turnstile
-                  key={turnstileKey}
-                  siteKey={TURNSTILE_SITE_KEY}
-                  onSuccess={(token) => {
-                    setTurnstileToken(token);
-                    field.handleChange(token);
-                  }}
-                  onError={() => {
-                    setTurnstileToken(null);
-                    field.handleChange('');
-                  }}
-                  onExpire={() => {
-                    setTurnstileToken(null);
-                    field.handleChange('');
-                  }}
-                />
-              )}
-            </Field>
-            {errors.onSubmit?.turnstileToken?.map((err) => (
-              <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-            ))}
-          </div>
         </section>
         <footer className={st.footer}>
           <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>

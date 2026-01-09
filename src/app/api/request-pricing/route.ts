@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import sgMail from '@sendgrid/mail';
 
 import { detectBot } from '@/shared/lib/anti-bot';
+import { areFormsEnabled } from '@/shared/lib/forms-status';
 
 type RequestPricingData = {
   name: string;
@@ -71,6 +72,15 @@ export async function POST(request: Request): Promise<NextResponse> {
         console.error('Error verifying Turnstile:', turnstileError);
         // Don't block on Turnstile verification errors, but log them
       }
+    }
+
+    // Check if forms are enabled (after all validations: bot detection, turnstile)
+    const formsEnabled = await areFormsEnabled();
+    if (!formsEnabled) {
+      return NextResponse.json(
+        { message: 'Form submissions are currently disabled. Please try again later.' },
+        { status: 503 }
+      );
     }
 
     // Initialize SendGrid with API key

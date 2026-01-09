@@ -5,6 +5,7 @@ import sgMail from '@sendgrid/mail';
 import type { Agent } from '@/features/request-call-tst/store/store';
 
 import { detectBot } from '@/shared/lib/anti-bot';
+import { areFormsEnabled } from '@/shared/lib/forms-status';
 
 type RequestCallData = {
   name: string;
@@ -20,6 +21,15 @@ type RequestCallData = {
 
 export async function POST(request: Request): Promise<NextResponse> {
   try {
+    // Check if forms are enabled
+    const formsEnabled = await areFormsEnabled();
+    if (!formsEnabled) {
+      return NextResponse.json(
+        { message: 'Form submissions are currently disabled. Please try again later.' },
+        { status: 503 }
+      );
+    }
+
     const bodyJSON = (await request.json()) as RequestCallData;
     const { name, email, phone, industry, company, scenario, agent, turnstileToken } = bodyJSON;
 

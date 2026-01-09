@@ -1,7 +1,9 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { checkSuspendStatus, getRetellPhoneNumber } from '@/shared/lib/system-status';
+import { getRetellPhoneNumber } from '@/shared/lib/system-status';
+import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
+import { verifyTurnstileToken } from '@/shared/lib/turnstile-verification';
 
 const RETELL_API_URL = 'https://api.retellai.com/v2/create-phone-call';
 
@@ -13,8 +15,9 @@ const AGENT_IDS: Record<string, string> = {
 };
 
 export async function POST(req: NextRequest) {
-  // Check system status before processing request
-  await checkSuspendStatus();
+  // Get system status from cache or fetch fresh (with cookie caching)
+  const { response: cachedResponse } = await getSystemStatusWithCache(req);
+  // Status is now cached in cookie for 5 minutes, getRetellPhoneNumber() will use it
 
   const apiKey = process.env.RETELL_API_KEY;
   if (!apiKey) {
@@ -23,8 +26,17 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
   console.log('Received body:', body);
-  const { name, email, phone, industry, company, agent, countryCode } = body;
+  const { name, email, phone, industry, company, agent, countryCode, turnstileToken } = body;
   console.log('Extracted fields:', { name, email, phone, industry, company, agent });
+
+  // Require Turnstile token to prevent direct API calls from console
+  const isValidToken = await verifyTurnstileToken(turnstileToken);
+  if (!isValidToken) {
+    return NextResponse.json(
+      { error: 'Security verification required. Please complete the captcha.' },
+      { status: 400 }
+    );
+  }
 
   if (!name || !email || !phone || !industry || !company || !agent) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -76,9 +88,31 @@ export async function POST(req: NextRequest) {
     if (!retellRes.ok) {
       console.log('Retell error status:', retellRes.status);
       console.log('Retell error data:', data);
-      return NextResponse.json({ error: data }, { status: retellRes.status });
+      const errorResponse = NextResponse.json({ error: data }, { status: retellRes.status });
+      // Copy status cookie to error response (status was already cached at the start)
+      cachedResponse.cookies.getAll().forEach((cookie) => {
+        errorResponse.cookies.set(cookie.name, cookie.value, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'lax',
+          maxAge: Math.floor((5 * 60 * 1000) / 1000),
+          path: '/',
+        });
+      });
+      return errorResponse;
     }
-    return NextResponse.json(data, { status: 200 });
+    const successResponse = NextResponse.json(data, { status: 200 });
+    // Copy status cookie to success response (status was already cached at the start)
+    cachedResponse.cookies.getAll().forEach((cookie) => {
+      successResponse.cookies.set(cookie.name, cookie.value, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: Math.floor((5 * 60 * 1000) / 1000),
+        path: '/',
+      });
+    });
+    return successResponse;
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });

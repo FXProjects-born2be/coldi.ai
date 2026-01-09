@@ -40,31 +40,7 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
       onSubmit(data.value);
       localStorage?.setItem('LeadRequestFirstStepData', JSON.stringify(data.value));
       console.log(localStorage?.getItem('LeadRequestFirstStepData'));
-
-      const hubspotData = {
-        firstname: data.value.fullName,
-        email: data.value.email,
-        phone: data.value.phone,
-        website: data.value.company,
-        hs_lead_status: 'NEW',
-        //type: 'lead_request',
-        referral: 'affiliate_partner_a',
-      };
-
-      const res = await fetch('/api/hubspot-lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(hubspotData),
-      });
-
-      if (res.ok) {
-        console.log('Lead sent to HubSpot successfully');
-      } else {
-        const errorData = await res.json();
-        console.error('Failed to send lead to HubSpot:', errorData);
-      }
-
-      console.log(res);
+      // HubSpot lead creation happens in second step after all validations and captcha
     },
   });
   const errors = useStore(store, (state) => state.errorMap);
