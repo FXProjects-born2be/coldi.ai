@@ -129,6 +129,7 @@ export const SecondLeadStep = ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
+        credentials: 'include', // Include cookies in request
       });
 
       // If main request failed (bot detected, rate limit, etc.), stop execution
@@ -181,6 +182,7 @@ export const SecondLeadStep = ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(hubspotData),
+        credentials: 'include', // Include cookies in request
       });
       console.log('HubSpot response:', hubspotRes);
       if (hubspotRes.ok) {

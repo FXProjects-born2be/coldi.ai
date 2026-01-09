@@ -165,6 +165,7 @@ export const SecondStepToCall = ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
+        credentials: 'include', // Include cookies in request
       });
 
       // If main request failed (bot detected, rate limit, etc.), stop execution
@@ -203,6 +204,7 @@ export const SecondStepToCall = ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(retellPayload),
+        credentials: 'include', // Include cookies in request
       });
       console.log('Retell response:', retellRes);
       if (retellRes.ok) {
@@ -218,6 +220,7 @@ export const SecondStepToCall = ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...hubspotPayload, sessionToken }),
+        credentials: 'include', // Include cookies in request
       });
       console.log('Hubspot response:', hubspotRes);
       if (hubspotRes.ok) {
