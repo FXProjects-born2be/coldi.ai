@@ -17,7 +17,45 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const properties = body?.properties || body;
+  const { turnstileToken, ...restBody } = body;
+  const properties = restBody?.properties || restBody;
+
+  // Verify Cloudflare Turnstile token if provided
+  if (turnstileToken) {
+    try {
+      const secretKey = process.env.TURNSTILE_SECRET_KEY;
+      if (!secretKey) {
+        console.warn('[TURNSTILE] Secret key not configured, skipping verification');
+      } else {
+        const turnstileResponse = await fetch(
+          'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              secret: secretKey,
+              response: turnstileToken,
+            }),
+          }
+        );
+        const turnstileData = await turnstileResponse.json();
+        if (!turnstileData.success) {
+          console.warn('[BOT DETECTED] Invalid Turnstile token', {
+            errors: turnstileData['error-codes'],
+          });
+          return NextResponse.json(
+            { error: 'Security verification failed. Please try again.' },
+            { status: 400 }
+          );
+        }
+      }
+    } catch (turnstileError) {
+      console.error('Error verifying Turnstile:', turnstileError);
+      // Don't block on Turnstile verification errors, but log them
+    }
+  }
 
   try {
     // Extract hutk from hubspotutk cookie
