@@ -1,8 +1,8 @@
 'use client';
 
-import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useState } from 'react';
 
-import ReCAPTCHA from 'react-google-recaptcha';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
@@ -20,9 +20,8 @@ import st from './SecondLeadStep.module.scss';
 // Feature flag: SMS verification (temporary off; set to true to re-enable)
 const SMS_VERIFICATION_ENABLED = true;
 
-// Use env variable, otherwise use key from RetellWidget (same key used in the project)
-const RECAPTCHA_SITE_KEY =
-  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h';
+// Use env variable for Cloudflare Turnstile site key
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '';
 
 export const SecondLeadStep = ({
   onSubmit,
@@ -30,7 +29,8 @@ export const SecondLeadStep = ({
   onSubmit: (data: SecondLeadStepSchema) => void;
 }) => {
   const { firstStepData: storeFirstStepData, setFirstStepData } = useRequestLeadStore();
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileKey, setTurnstileKey] = useState(0);
   console.log('[SecondLeadStep] store firstStepData:', storeFirstStepData);
 
   // Restore firstStepData from localStorage if store is empty
@@ -94,7 +94,7 @@ export const SecondLeadStep = ({
       primaryGoal: [] as string[],
       message: '',
       smsCode: undefined as string | undefined,
-      recaptchaToken: '',
+      turnstileToken: '',
     },
     validators: {
       // @ts-expect-error Schema marks smsCode optional; form typing treats it as present
@@ -107,9 +107,10 @@ export const SecondLeadStep = ({
         return;
       }
 
-      // Reset reCAPTCHA after submission
-      if (recaptchaRef.current) {
-        recaptchaRef.current.reset();
+      // Check Turnstile token
+      if (!turnstileToken) {
+        console.error('Turnstile token is missing');
+        return;
       }
 
       onSubmit(data.value);
@@ -142,6 +143,10 @@ export const SecondLeadStep = ({
 
       // Only remove localStorage after successful submission
       localStorage?.removeItem('LeadRequestFirstStepData');
+
+      // Reset Turnstile after successful submission
+      setTurnstileToken(null);
+      setTurnstileKey((prev) => prev + 1);
 
       // Send to HubSpot
       const hubspotData = {
@@ -195,7 +200,7 @@ export const SecondLeadStep = ({
       primaryGoal?: Array<{ message: string }>;
       message?: Array<{ message: string }>;
       smsCode?: Array<{ message: string }>;
-      recaptchaToken?: Array<{ message: string }>;
+      turnstileToken?: Array<{ message: string }>;
     };
   };
   const formValues = useStore(store, (state) => state.values) as {
@@ -204,7 +209,7 @@ export const SecondLeadStep = ({
     primaryGoal: string[];
     message: string;
     smsCode?: string;
-    recaptchaToken: string;
+    turnstileToken: string;
   };
 
   // SMS verification state
@@ -501,25 +506,28 @@ export const SecondLeadStep = ({
               style={{ display: 'none' }}
             />
           </div>
-          <div className={`${st.inputWrapper} ${errors.onSubmit?.recaptchaToken ? st.error : ''}`}>
-            <Field name="recaptchaToken">
+          <div className={`${st.inputWrapper} ${errors.onSubmit?.turnstileToken ? st.error : ''}`}>
+            <Field name="turnstileToken">
               {(field) => (
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey={RECAPTCHA_SITE_KEY}
-                  onChange={(token) => {
-                    field.handleChange(token || '');
-                  }}
-                  onExpired={() => {
-                    field.handleChange('');
+                <Turnstile
+                  key={turnstileKey}
+                  siteKey={TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => {
+                    setTurnstileToken(token);
+                    field.handleChange(token);
                   }}
                   onError={() => {
+                    setTurnstileToken(null);
+                    field.handleChange('');
+                  }}
+                  onExpire={() => {
+                    setTurnstileToken(null);
                     field.handleChange('');
                   }}
                 />
               )}
             </Field>
-            {errors.onSubmit?.recaptchaToken?.map((err: { message: string }) => (
+            {errors.onSubmit?.turnstileToken?.map((err: { message: string }) => (
               <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
             ))}
           </div>

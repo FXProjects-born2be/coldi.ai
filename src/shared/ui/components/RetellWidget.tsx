@@ -32,6 +32,8 @@ export default function RetellWidget() {
     //s.setAttribute('data-agent-version', '1');
 
     s.setAttribute('data-title', 'Chat with us!');
+    // Note: Retell widget uses data-recaptcha-key attribute (Retell-specific configuration)
+    // This may need to be updated if Retell adds Turnstile support in the future
     s.setAttribute('data-recaptcha-key', '6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h');
     s.setAttribute('data-color', '#4268ff');
     s.setAttribute('data-logo-url', 'https://coldi.ai/icon.png');

@@ -129,6 +129,7 @@ html, body {
 }
 
 
+// Legacy reCAPTCHA badge hiding - no longer needed with Turnstile
 .grecaptcha-badge{
   opacity: 0;
 }

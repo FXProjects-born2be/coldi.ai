@@ -7,7 +7,7 @@ export const requestPricingSchema = v.object({
   phone: v.pipe(v.string(), v.minLength(1, 'Please provide a valid phone number')),
   message: v.pipe(v.string()),
   plan: v.pipe(v.string()),
-  recaptchaToken: v.pipe(v.string(), v.minLength(1, 'Please complete the reCAPTCHA verification.')),
+  turnstileToken: v.pipe(v.string(), v.minLength(1, 'Please complete the security verification.')),
   smsCode: v.optional(v.string()), // SMS verification code for free email domains
 });
 

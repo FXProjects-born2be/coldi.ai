@@ -1,8 +1,8 @@
 'use client';
 
-import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useState } from 'react';
 
-import ReCAPTCHA from 'react-google-recaptcha';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
@@ -93,9 +93,8 @@ const companySizes = [
   '+91',
 ];*/
 
-// Use env variable, otherwise use key from RetellWidget (same key used in the project)
-const RECAPTCHA_SITE_KEY =
-  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h';
+// Use env variable for Cloudflare Turnstile site key
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '';
 
 export const SecondStepToCall = ({
   botName,
@@ -107,7 +106,8 @@ export const SecondStepToCall = ({
   onUnsupportedCountry: () => void;
 }) => {
   const { agent, firstStepData: storeFirstStepData, setFirstStepData } = useRequestCallStore();
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileKey, setTurnstileKey] = useState(0);
   console.log('botName', botName);
   console.log('[SecondStep] store firstStepData:', storeFirstStepData);
 
@@ -174,16 +174,17 @@ export const SecondStepToCall = ({
       smsCode: '',
       industry: '',
       company: '',
-      recaptchaToken: '',
+      turnstileToken: '',
     },
     validators: {
       // @ts-expect-error Schema marks smsCode optional; form typing treats it as present
       onSubmit: secondStepCallSchema,
     },
     onSubmit: async (data) => {
-      // Reset reCAPTCHA after submission
-      if (recaptchaRef.current) {
-        recaptchaRef.current.reset();
+      // Check Turnstile token
+      if (!turnstileToken) {
+        console.error('Turnstile token is missing');
+        return;
       }
 
       // Check if country code is supported
@@ -274,6 +275,10 @@ export const SecondStepToCall = ({
         // Show success dialog for supported countries
         onSubmit(data.value);
       }
+
+      // Reset Turnstile after successful submission
+      setTurnstileToken(null);
+      setTurnstileKey((prev) => prev + 1);
     },
   });
   const errors = useStore(store, (state) => state.errorMap) as {
@@ -283,7 +288,7 @@ export const SecondStepToCall = ({
       smsCode?: Array<{ message: string }>;
       industry?: Array<{ message: string }>;
       company?: Array<{ message: string }>;
-      recaptchaToken?: Array<{ message: string }>;
+      turnstileToken?: Array<{ message: string }>;
     };
   };
   const formValues = useStore(store, (state) => state.values) as {
@@ -292,7 +297,7 @@ export const SecondStepToCall = ({
     smsCode?: string;
     industry: string;
     company: string;
-    recaptchaToken: string;
+    turnstileToken: string;
   };
 
   // SMS verification state
@@ -578,25 +583,28 @@ export const SecondStepToCall = ({
               style={{ display: 'none' }}
             />
           </div>
-          <div className={`${st.inputWrapper} ${errors.onSubmit?.recaptchaToken ? st.error : ''}`}>
-            <Field name="recaptchaToken">
+          <div className={`${st.inputWrapper} ${errors.onSubmit?.turnstileToken ? st.error : ''}`}>
+            <Field name="turnstileToken">
               {(field) => (
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey={RECAPTCHA_SITE_KEY}
-                  onChange={(token) => {
-                    field.handleChange(token || '');
-                  }}
-                  onExpired={() => {
-                    field.handleChange('');
+                <Turnstile
+                  key={turnstileKey}
+                  siteKey={TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => {
+                    setTurnstileToken(token);
+                    field.handleChange(token);
                   }}
                   onError={() => {
+                    setTurnstileToken(null);
+                    field.handleChange('');
+                  }}
+                  onExpire={() => {
+                    setTurnstileToken(null);
                     field.handleChange('');
                   }}
                 />
               )}
             </Field>
-            {errors.onSubmit?.recaptchaToken?.map((err) => (
+            {errors.onSubmit?.turnstileToken?.map((err) => (
               <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
             ))}
           </div>

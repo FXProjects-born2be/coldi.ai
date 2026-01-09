@@ -24,7 +24,7 @@ export const secondLeadStepSchema = v.object({
   primaryGoal: v.array(v.string()),
   message: v.string(),
   smsCode: v.optional(v.string()),
-  recaptchaToken: v.pipe(v.string(), v.minLength(1, 'Please complete the reCAPTCHA verification.')),
+  turnstileToken: v.pipe(v.string(), v.minLength(1, 'Please complete the security verification.')),
 });
 
 export type FirstLeadStepSchema = v.InferOutput<typeof firstLeadStepSchema>;
