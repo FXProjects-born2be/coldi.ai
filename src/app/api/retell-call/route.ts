@@ -48,16 +48,48 @@ export async function POST(req: NextRequest) {
   } = body;
   console.log('Extracted fields:', { name, email, phone, industry, company, agent });
 
-  // Get session token from cookie (preferred) or body (fallback)
-  const sessionToken = req.cookies.get('session-token')?.value || bodySessionToken;
+  // Require session token from cookie only (not from body) to prevent direct API calls from console
+  const sessionToken = req.cookies.get('session-token')?.value;
 
   console.log('[RETELL-CALL] Received sessionToken:', {
-    fromCookie: !!req.cookies.get('session-token')?.value,
+    fromCookie: !!sessionToken,
     fromBody: !!bodySessionToken,
     tokenLength: sessionToken?.length || 0,
+    referer: req.headers.get('referer'),
   });
 
+  // Block if token is only in body (direct console call)
+  if (!sessionToken && bodySessionToken) {
+    console.warn(
+      '[RETELL-CALL] Blocked: Token in body but not in cookie (likely direct console call)'
+    );
+    return NextResponse.json(
+      { error: 'Invalid or missing session token. Please submit the form through the website.' },
+      { status: 403 }
+    );
+  }
+
   // Require session token from /api/request-call to prevent direct API calls
+  if (!sessionToken) {
+    console.warn('[RETELL-CALL] Blocked: No session token in cookie');
+    return NextResponse.json(
+      { error: 'Invalid or missing session token. Please submit the form through the website.' },
+      { status: 403 }
+    );
+  }
+
+  // Additional check: verify referer is from our domain
+  const referer = req.headers.get('referer');
+  const isFromOurDomain =
+    referer && (referer.includes('coldi.ai') || referer.includes('localhost'));
+  if (!isFromOurDomain) {
+    console.warn('[RETELL-CALL] Blocked: Invalid referer', { referer });
+    return NextResponse.json(
+      { error: 'Invalid request origin. Please submit the form through the website.' },
+      { status: 403 }
+    );
+  }
+
   const isValidSession = validateAndConsumeSessionToken(sessionToken, 'retell-call');
   if (!isValidSession) {
     return NextResponse.json(
