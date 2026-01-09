@@ -241,6 +241,15 @@ export const RequestDialog = ({
       return;
     }
 
+    // Get session token from response
+    const responseData = await res.json().catch(() => ({}));
+    const sessionToken = responseData.sessionToken;
+
+    if (!sessionToken) {
+      console.error('Session token not received from /api/request-pricing');
+      return;
+    }
+
     setOpen(false);
     setIsThankYouDialogOpen(true);
     setTurnstileToken(null);
@@ -258,6 +267,7 @@ export const RequestDialog = ({
       //type: 'pricing_request',
       pricing: planTitle,
       referral: 'affiliate_partner_a',
+      sessionToken,
     };
 
     const hubspotRes = await fetch('/api/hubspot-lead', {

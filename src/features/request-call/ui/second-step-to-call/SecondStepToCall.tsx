@@ -224,6 +224,15 @@ export const SecondStepToCall = ({
         return;
       }
 
+      // Get session token from response
+      const responseData = await res.json().catch(() => ({}));
+      const sessionToken = responseData.sessionToken;
+
+      if (!sessionToken) {
+        console.error('Session token not received from /api/request-call');
+        return;
+      }
+
       console.log('Call request sent successfully');
 
       // Only remove localStorage after successful submission
@@ -238,7 +247,7 @@ export const SecondStepToCall = ({
         company: data.value.company,
         agent,
         countryCode: firstStepData.countryCode,
-        turnstileToken,
+        sessionToken,
       };
       console.log('Retell payload:', retellPayload);
 
@@ -260,7 +269,7 @@ export const SecondStepToCall = ({
       const hubspotRes = await fetch('/api/hubspot-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(hubspotPayload),
+        body: JSON.stringify({ ...hubspotPayload, sessionToken }),
       });
       console.log('Hubspot response:', hubspotRes);
       if (hubspotRes.ok) {
