@@ -139,10 +139,22 @@ export async function POST(request: Request): Promise<NextResponse> {
       tokenLength: sessionToken.length,
     });
 
-    return NextResponse.json({
+    // Set session token in httpOnly cookie for cross-worker access
+    const response = NextResponse.json({
       message: 'Call request sent successfully.',
-      sessionToken, // Return session token for secondary routes
+      sessionToken, // Return session token for secondary routes (for client-side use)
     });
+
+    // Also set in cookie for server-side validation (works across workers)
+    response.cookies.set('session-token', sessionToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 5 * 60, // 5 minutes
+      path: '/',
+    });
+
+    return response;
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     console.error('[ERROR] Failed to process call request:', errorMessage);

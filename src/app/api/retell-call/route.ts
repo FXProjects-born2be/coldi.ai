@@ -36,8 +36,26 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
   console.log('Received body:', body);
-  const { name, email, phone, industry, company, agent, countryCode, sessionToken } = body;
+  const {
+    name,
+    email,
+    phone,
+    industry,
+    company,
+    agent,
+    countryCode,
+    sessionToken: bodySessionToken,
+  } = body;
   console.log('Extracted fields:', { name, email, phone, industry, company, agent });
+
+  // Get session token from cookie (preferred) or body (fallback)
+  const sessionToken = req.cookies.get('session-token')?.value || bodySessionToken;
+
+  console.log('[RETELL-CALL] Received sessionToken:', {
+    fromCookie: !!req.cookies.get('session-token')?.value,
+    fromBody: !!bodySessionToken,
+    tokenLength: sessionToken?.length || 0,
+  });
 
   // Require session token from /api/request-call to prevent direct API calls
   const isValidSession = validateAndConsumeSessionToken(sessionToken);
@@ -122,6 +140,8 @@ export async function POST(req: NextRequest) {
         path: '/',
       });
     });
+    // Clear session token cookie after successful validation
+    successResponse.cookies.delete('session-token');
     return successResponse;
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Unknown error';
