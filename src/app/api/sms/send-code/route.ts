@@ -1,6 +1,9 @@
+import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import { getSmsSendCodeWebhookUrl } from '@/shared/lib/system-status';
+import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
+import { verifyTurnstileToken } from '@/shared/lib/turnstile-verification';
 
 /**
  * Normalize phone number to E.164 format
@@ -18,7 +21,12 @@ function normalizePhone(phone: string): string {
  * Body: { phone: string }
  * Sends request to webhook with { "to": phone }
  */
-export async function POST(request: Request): Promise<NextResponse> {
+export async function POST(request: NextRequest): Promise<NextResponse> {
+  // Get system status from cache or fetch fresh (with cookie caching)
+  // This ensures correct webhook URL is used based on current status
+  const { response: cachedResponse } = await getSystemStatusWithCache(request);
+  // Status is now cached in cookie for 5 minutes
+
   const webhookUrl = getSmsSendCodeWebhookUrl();
 
   if (!webhookUrl) {
@@ -30,7 +38,16 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   try {
     const body = await request.json();
-    const { phone } = body;
+    const { phone, turnstileToken } = body;
+
+    // Require Turnstile token to prevent direct API calls from console
+    const isValidToken = await verifyTurnstileToken(turnstileToken);
+    if (!isValidToken) {
+      return NextResponse.json(
+        { message: 'Security verification required. Please complete the captcha.' },
+        { status: 400 }
+      );
+    }
 
     if (!phone || typeof phone !== 'string') {
       return NextResponse.json({ message: 'Phone number is required' }, { status: 400 });
@@ -71,10 +88,23 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     // For all other cases, always return success message
     // (Twilio doesn't validate properly, so we don't tell client about actual status)
-    return NextResponse.json({
+    const successResponse = NextResponse.json({
       message: 'SMS sent to the specified number',
       success: true,
     });
+
+    // Copy status cookie to response
+    cachedResponse.cookies.getAll().forEach((cookie) => {
+      successResponse.cookies.set(cookie.name, cookie.value, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: Math.floor((5 * 60 * 1000) / 1000),
+        path: '/',
+      });
+    });
+
+    return successResponse;
   } catch (error) {
     console.error('[SMS Send Code] Error:', error);
     return NextResponse.json(

@@ -97,7 +97,7 @@ export const RequestDialog = ({
       ? requiresSmsVerification(formValues.email)
       : false;
 
-  // Reset SMS state when email changes
+  // Reset SMS state when email changes or captcha expires
   useEffect(() => {
     if (!needsSmsVerification) {
       setSmsCodeSent(false);
@@ -109,6 +109,15 @@ export const RequestDialog = ({
     }
   }, [needsSmsVerification, formValues.email]);
 
+  // Reset SMS verification when captcha expires or is cleared
+  useEffect(() => {
+    if (!turnstileToken) {
+      setSmsCodeSent(false);
+      setSmsVerified(false);
+      setSmsError(null);
+    }
+  }, [turnstileToken]);
+
   const handleSendSmsCode = async () => {
     if (!formValues.phone) {
       setSmsError('Please enter your phone number first');
@@ -119,15 +128,11 @@ export const RequestDialog = ({
     setSmsError(null);
 
     try {
-      // Check system status before sending SMS
-      await fetch('/api/system-config', {
-        method: 'POST',
-      });
-
+      // System status is automatically checked and cached in /api/sms/send-code
       const res = await fetch('/api/sms/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: formValues.phone }),
+        body: JSON.stringify({ phone: formValues.phone, turnstileToken }),
       });
 
       const data = await res.json();
@@ -169,15 +174,11 @@ export const RequestDialog = ({
     setSmsError(null);
 
     try {
-      // Check system status before verifying SMS
-      await fetch('/api/system-config', {
-        method: 'POST',
-      });
-
+      // System status is automatically checked and cached in /api/sms/verify-code
       const res = await fetch('/api/sms/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: formValues.phone, code: formValues.smsCode }),
+        body: JSON.stringify({ phone: formValues.phone, code: formValues.smsCode, turnstileToken }),
       });
 
       const data = await res.json();
@@ -246,6 +247,7 @@ export const RequestDialog = ({
     setTurnstileKey((prev) => prev + 1); // Reset Turnstile widget
     reset();
 
+    // Send to HubSpot
     const hubspotPayload = {
       email: data.email,
       firstname: data.name,
@@ -400,70 +402,6 @@ export const RequestDialog = ({
                       {errors.onChange?.phone?.map((err) => (
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
-                      {/* SMS verification for free email domains */}
-                      {needsSmsVerification && (
-                        <div style={{ marginTop: '8px' }}>
-                          {!smsCodeSent ? (
-                            <>
-                              <Button
-                                type="button"
-                                onClick={handleSendSmsCode}
-                                disabled={smsSending || !formValues.phone}
-                                variant="secondary"
-                              >
-                                {smsSending ? 'Sending...' : 'Send SMS'}
-                              </Button>
-                              {smsError && (
-                                <div style={{ marginTop: '8px' }}>
-                                  <ErrorMessage>{smsError}</ErrorMessage>
-                                </div>
-                              )}
-                            </>
-                          ) : !smsVerified ? (
-                            <div>
-                              <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
-                                <Field name="smsCode">
-                                  {(field) => (
-                                    <TextField
-                                      name={field.name}
-                                      placeholder="Enter 6-digit code"
-                                      value={String(field.state.value || '')}
-                                      onChange={(e) => field.handleChange(e.target.value)}
-                                      maxLength={6}
-                                      style={{ flex: 1 }}
-                                    />
-                                  )}
-                                </Field>
-                                <Button
-                                  type="button"
-                                  onClick={handleSendSmsCode}
-                                  disabled={smsSending || !formValues.phone}
-                                  variant="secondary"
-                                  style={{ whiteSpace: 'nowrap' }}
-                                >
-                                  {smsSending ? 'Sending...' : 'Resend Code'}
-                                </Button>
-                                <Button
-                                  type="button"
-                                  onClick={handleVerifySmsCode}
-                                  disabled={smsVerifying || !formValues.smsCode}
-                                >
-                                  {smsVerifying ? 'Verifying...' : 'Verify'}
-                                </Button>
-                              </div>
-                              {smsError && (
-                                <div style={{ marginBottom: '8px' }}>
-                                  <ErrorMessage>{smsError}</ErrorMessage>
-                                </div>
-                              )}
-                            </div>
-                          ) : (
-                            <div style={{ color: 'green', fontSize: '14px' }}>
-                              ✓ Phone number verified
-                            </div>
-                          )}
-                        </div>
-                      )}
                     </div>
                     <div
                       className={`${st.inputWrapper} ${st.full} ${errors.onChange?.message ? st.error : ''}`}
@@ -524,6 +462,70 @@ export const RequestDialog = ({
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
                     </div>
+                    {/* SMS verification - only for free email domains, shown after captcha */}
+                    {needsSmsVerification && turnstileToken && (
+                      <div className={`${st.inputWrapper} ${st.full}`}>
+                        {!smsCodeSent ? (
+                          <>
+                            <Button
+                              type="button"
+                              onClick={handleSendSmsCode}
+                              disabled={smsSending || !formValues.phone}
+                              variant="secondary"
+                            >
+                              {smsSending ? 'Sending...' : 'Send SMS'}
+                            </Button>
+                            {smsError && (
+                              <div style={{ marginTop: '8px' }}>
+                                <ErrorMessage>{smsError}</ErrorMessage>
+                              </div>
+                            )}
+                          </>
+                        ) : !smsVerified ? (
+                          <div>
+                            <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+                              <Field name="smsCode">
+                                {(field) => (
+                                  <TextField
+                                    name={field.name}
+                                    placeholder="Enter 6-digit code"
+                                    value={String(field.state.value || '')}
+                                    onChange={(e) => field.handleChange(e.target.value)}
+                                    maxLength={6}
+                                    style={{ flex: 1 }}
+                                  />
+                                )}
+                              </Field>
+                              <Button
+                                type="button"
+                                onClick={handleSendSmsCode}
+                                disabled={smsSending || !formValues.phone}
+                                variant="secondary"
+                                style={{ whiteSpace: 'nowrap' }}
+                              >
+                                {smsSending ? 'Sending...' : 'Resend Code'}
+                              </Button>
+                              <Button
+                                type="button"
+                                onClick={handleVerifySmsCode}
+                                disabled={smsVerifying || !formValues.smsCode}
+                              >
+                                {smsVerifying ? 'Verifying...' : 'Verify'}
+                              </Button>
+                            </div>
+                            {smsError && (
+                              <div style={{ marginBottom: '8px' }}>
+                                <ErrorMessage>{smsError}</ErrorMessage>
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <div style={{ color: 'green', fontSize: '14px' }}>
+                            ✓ Phone number verified
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </section>
                   <footer className={st.footer}>
                     <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>

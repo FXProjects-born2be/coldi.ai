@@ -1,6 +1,9 @@
+import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import { getSmsVerifyCodeWebhookUrl } from '@/shared/lib/system-status';
+import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
+import { verifyTurnstileToken } from '@/shared/lib/turnstile-verification';
 
 /**
  * Normalize phone number to E.164 format
@@ -19,7 +22,12 @@ function normalizePhone(phone: string): string {
  * Returns: { verified: boolean, message?: string }
  * Sends request to webhook with { "to": phone, "code": code }
  */
-export async function POST(request: Request): Promise<NextResponse> {
+export async function POST(request: NextRequest): Promise<NextResponse> {
+  // Get system status from cache or fetch fresh (with cookie caching)
+  // This ensures correct webhook URL is used based on current status
+  const { response: cachedResponse } = await getSystemStatusWithCache(request);
+  // Status is now cached in cookie for 5 minutes
+
   const webhookUrl = getSmsVerifyCodeWebhookUrl();
 
   if (!webhookUrl) {
@@ -31,7 +39,19 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   try {
     const body = await request.json();
-    const { phone, code } = body;
+    const { phone, code, turnstileToken } = body;
+
+    // Require Turnstile token to prevent direct API calls from console
+    const isValidToken = await verifyTurnstileToken(turnstileToken);
+    if (!isValidToken) {
+      return NextResponse.json(
+        {
+          verified: false,
+          message: 'Security verification required. Please complete the captcha.',
+        },
+        { status: 400 }
+      );
+    }
 
     if (!phone || typeof phone !== 'string') {
       return NextResponse.json(
@@ -64,25 +84,64 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     // If status is "approved" and valid is true, verification is successful
     if (result?.status === 'approved' && result?.valid === true) {
-      return NextResponse.json({
+      const successResponse = NextResponse.json({
         verified: true,
         message: 'Code verified successfully',
       });
+
+      // Copy status cookie to response
+      cachedResponse.cookies.getAll().forEach((cookie) => {
+        successResponse.cookies.set(cookie.name, cookie.value, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'lax',
+          maxAge: Math.floor((5 * 60 * 1000) / 1000),
+          path: '/',
+        });
+      });
+
+      return successResponse;
     }
 
     // If result contains "Error", verification failed
     if (result?.result === 'Error') {
-      return NextResponse.json({
+      const errorResponse = NextResponse.json({
         verified: false,
         message: 'Invalid verification code. Please try again.',
       });
+
+      // Copy status cookie to response
+      cachedResponse.cookies.getAll().forEach((cookie) => {
+        errorResponse.cookies.set(cookie.name, cookie.value, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'lax',
+          maxAge: Math.floor((5 * 60 * 1000) / 1000),
+          path: '/',
+        });
+      });
+
+      return errorResponse;
     }
 
     // Default to failed verification
-    return NextResponse.json({
+    const defaultResponse = NextResponse.json({
       verified: false,
       message: 'Invalid verification code. Please try again.',
     });
+
+    // Copy status cookie to response
+    cachedResponse.cookies.getAll().forEach((cookie) => {
+      defaultResponse.cookies.set(cookie.name, cookie.value, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: Math.floor((5 * 60 * 1000) / 1000),
+        path: '/',
+      });
+    });
+
+    return defaultResponse;
   } catch (error) {
     console.error('[SMS Verify Code] Error:', error);
     return NextResponse.json(

@@ -18,15 +18,6 @@ type RequestPricingData = {
 
 export async function POST(request: Request): Promise<NextResponse> {
   try {
-    // Check if forms are enabled
-    const formsEnabled = await areFormsEnabled();
-    if (!formsEnabled) {
-      return NextResponse.json(
-        { message: 'Form submissions are currently disabled. Please try again later.' },
-        { status: 503 }
-      );
-    }
-
     const bodyJSON = (await request.json()) as RequestPricingData;
     const { name, email, website, phone, message, plan, turnstileToken } = bodyJSON;
 
@@ -81,6 +72,15 @@ export async function POST(request: Request): Promise<NextResponse> {
         console.error('Error verifying Turnstile:', turnstileError);
         // Don't block on Turnstile verification errors, but log them
       }
+    }
+
+    // Check if forms are enabled (after all validations: bot detection, turnstile)
+    const formsEnabled = await areFormsEnabled();
+    if (!formsEnabled) {
+      return NextResponse.json(
+        { message: 'Form submissions are currently disabled. Please try again later.' },
+        { status: 503 }
+      );
     }
 
     // Initialize SendGrid with API key
