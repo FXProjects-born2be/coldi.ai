@@ -6,6 +6,7 @@ import type { Agent } from '@/features/request-call-tst/store/store';
 
 import { detectBot } from '@/shared/lib/anti-bot';
 import { areFormsEnabled } from '@/shared/lib/forms-status';
+import { generateSessionToken } from '@/shared/lib/session-tokens';
 
 type RequestCallData = {
   name: string;
@@ -119,7 +120,13 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     await sgMail.send(clientMSG);*/
 
-    return NextResponse.json({ message: 'Call request sent successfully.' });
+    // Generate session token for secondary routes (retell-call, hubspot-lead)
+    const sessionToken = generateSessionToken();
+
+    return NextResponse.json({
+      message: 'Call request sent successfully.',
+      sessionToken, // Return session token for secondary routes
+    });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     console.error('[ERROR] Failed to process call request:', errorMessage);

@@ -2,6 +2,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import { areFormsEnabled } from '@/shared/lib/forms-status';
+import { validateAndConsumeSessionToken } from '@/shared/lib/session-tokens';
 import { getRetellPhoneNumber } from '@/shared/lib/system-status';
 import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
 
@@ -35,54 +36,16 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
   console.log('Received body:', body);
-  const { name, email, phone, industry, company, agent, countryCode, turnstileToken } = body;
+  const { name, email, phone, industry, company, agent, countryCode, sessionToken } = body;
   console.log('Extracted fields:', { name, email, phone, industry, company, agent });
 
-  // Verify Cloudflare Turnstile token if provided
-  // Note: Token may be already used in /api/request-call, so timeout-or-duplicate is acceptable
-  if (turnstileToken) {
-    try {
-      const secretKey = process.env.TURNSTILE_SECRET_KEY;
-      if (!secretKey) {
-        console.warn('[TURNSTILE] Secret key not configured, skipping verification');
-      } else {
-        const turnstileResponse = await fetch(
-          'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              secret: secretKey,
-              response: turnstileToken,
-            }),
-          }
-        );
-        const turnstileData = await turnstileResponse.json();
-        if (!turnstileData.success) {
-          const errorCodes = turnstileData['error-codes'] || [];
-          // Allow timeout-or-duplicate errors (token already verified in main route)
-          const isTimeoutOrDuplicate = errorCodes.includes('timeout-or-duplicate');
-
-          if (isTimeoutOrDuplicate) {
-            console.log('[TURNSTILE] Token already used (expected for secondary routes)');
-            // Don't block - token was already verified in /api/request-call
-          } else {
-            console.warn('[BOT DETECTED] Invalid Turnstile token', {
-              errors: errorCodes,
-            });
-            return NextResponse.json(
-              { error: 'Security verification failed. Please try again.' },
-              { status: 400 }
-            );
-          }
-        }
-      }
-    } catch (turnstileError) {
-      console.error('Error verifying Turnstile:', turnstileError);
-      // Don't block on Turnstile verification errors, but log them
-    }
+  // Require session token from /api/request-call to prevent direct API calls
+  const isValidSession = validateAndConsumeSessionToken(sessionToken);
+  if (!isValidSession) {
+    return NextResponse.json(
+      { error: 'Invalid or missing session token. Please submit the form through the website.' },
+      { status: 403 }
+    );
   }
 
   if (!name || !email || !phone || !industry || !company || !agent) {

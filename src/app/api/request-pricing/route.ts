@@ -4,6 +4,7 @@ import sgMail from '@sendgrid/mail';
 
 import { detectBot } from '@/shared/lib/anti-bot';
 import { areFormsEnabled } from '@/shared/lib/forms-status';
+import { generateSessionToken } from '@/shared/lib/session-tokens';
 
 type RequestPricingData = {
   name: string;
@@ -115,7 +116,13 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     await sgMail.send(clientMSG);*/
 
-    return NextResponse.json({ message: 'Pricing request sent successfully.' });
+    // Generate session token for secondary routes (hubspot-lead)
+    const sessionToken = generateSessionToken();
+
+    return NextResponse.json({
+      message: 'Pricing request sent successfully.',
+      sessionToken, // Return session token for secondary routes
+    });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     console.error('[ERROR] Failed to process pricing request:', errorMessage);

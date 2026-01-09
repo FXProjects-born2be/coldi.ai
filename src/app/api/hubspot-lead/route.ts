@@ -2,6 +2,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import { areFormsEnabled } from '@/shared/lib/forms-status';
+import { validateAndConsumeSessionToken } from '@/shared/lib/session-tokens';
 
 const HUBSPOT_FORMS_API_URL =
   'https://api.hsforms.com/submissions/v3/integration/submit/146476440/fc8302ca-aa67-4e59-a6e6-e69bc1d0cd46';
@@ -17,54 +18,16 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { turnstileToken, ...restBody } = body;
+  const { sessionToken, ...restBody } = body;
   const properties = restBody?.properties || restBody;
 
-  // Verify Cloudflare Turnstile token if provided
-  // Note: Token may be already used in main route, so timeout-or-duplicate is acceptable
-  if (turnstileToken) {
-    try {
-      const secretKey = process.env.TURNSTILE_SECRET_KEY;
-      if (!secretKey) {
-        console.warn('[TURNSTILE] Secret key not configured, skipping verification');
-      } else {
-        const turnstileResponse = await fetch(
-          'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              secret: secretKey,
-              response: turnstileToken,
-            }),
-          }
-        );
-        const turnstileData = await turnstileResponse.json();
-        if (!turnstileData.success) {
-          const errorCodes = turnstileData['error-codes'] || [];
-          // Allow timeout-or-duplicate errors (token already verified in main route)
-          const isTimeoutOrDuplicate = errorCodes.includes('timeout-or-duplicate');
-
-          if (isTimeoutOrDuplicate) {
-            console.log('[TURNSTILE] Token already used (expected for secondary routes)');
-            // Don't block - token was already verified in main route
-          } else {
-            console.warn('[BOT DETECTED] Invalid Turnstile token', {
-              errors: errorCodes,
-            });
-            return NextResponse.json(
-              { error: 'Security verification failed. Please try again.' },
-              { status: 400 }
-            );
-          }
-        }
-      }
-    } catch (turnstileError) {
-      console.error('Error verifying Turnstile:', turnstileError);
-      // Don't block on Turnstile verification errors, but log them
-    }
+  // Require session token from main route to prevent direct API calls
+  const isValidSession = validateAndConsumeSessionToken(sessionToken);
+  if (!isValidSession) {
+    return NextResponse.json(
+      { error: 'Invalid or missing session token. Please submit the form through the website.' },
+      { status: 403 }
+    );
   }
 
   try {
