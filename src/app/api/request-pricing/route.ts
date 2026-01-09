@@ -37,42 +37,54 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
-    // Verify Cloudflare Turnstile token if provided
-    if (turnstileToken) {
-      try {
-        const secretKey = process.env.TURNSTILE_SECRET_KEY;
-        if (!secretKey) {
-          console.warn('[TURNSTILE] Secret key not configured, skipping verification');
-        } else {
-          const turnstileResponse = await fetch(
-            'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                secret: secretKey,
-                response: turnstileToken,
-              }),
-            }
-          );
-          const turnstileData = await turnstileResponse.json();
-          if (!turnstileData.success) {
-            console.warn('[BOT DETECTED] Invalid Turnstile token', {
-              ip: botDetection.reason,
-              errors: turnstileData['error-codes'],
-            });
-            return NextResponse.json(
-              { message: 'Security verification failed. Please try again.' },
-              { status: 400 }
-            );
-          }
-        }
-      } catch (turnstileError) {
-        console.error('Error verifying Turnstile:', turnstileError);
-        // Don't block on Turnstile verification errors, but log them
+    // Require Cloudflare Turnstile token
+    if (!turnstileToken) {
+      return NextResponse.json(
+        { message: 'Security verification required. Please complete the captcha.' },
+        { status: 400 }
+      );
+    }
+
+    try {
+      const secretKey = process.env.TURNSTILE_SECRET_KEY;
+      if (!secretKey) {
+        console.warn('[TURNSTILE] Secret key not configured, rejecting request');
+        return NextResponse.json(
+          { message: 'Security verification failed. Please try again.' },
+          { status: 400 }
+        );
       }
+
+      const turnstileResponse = await fetch(
+        'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            secret: secretKey,
+            response: turnstileToken,
+          }),
+        }
+      );
+      const turnstileData = await turnstileResponse.json();
+      if (!turnstileData.success) {
+        console.warn('[BOT DETECTED] Invalid Turnstile token', {
+          ip: botDetection.reason,
+          errors: turnstileData['error-codes'],
+        });
+        return NextResponse.json(
+          { message: 'Security verification failed. Please try again.' },
+          { status: 400 }
+        );
+      }
+    } catch (turnstileError) {
+      console.error('Error verifying Turnstile:', turnstileError);
+      return NextResponse.json(
+        { message: 'Security verification failed. Please try again.' },
+        { status: 400 }
+      );
     }
 
     // Check if forms are enabled (after all validations: bot detection, turnstile)
