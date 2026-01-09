@@ -21,43 +21,46 @@ export async function POST(req: NextRequest) {
   const { sessionToken: bodySessionToken, ...restBody } = body;
   const properties = restBody?.properties || restBody;
 
-  // Require session token from cookie only (not from body) to prevent direct API calls from console
-  const sessionToken = req.cookies.get('session-token')?.value;
-
-  console.log('[HUBSPOT-LEAD] Received sessionToken:', {
-    fromCookie: !!sessionToken,
-    fromBody: !!bodySessionToken,
-    tokenLength: sessionToken?.length || 0,
-    tokenPreview: sessionToken ? `${sessionToken.substring(0, 20)}...` : 'none',
-    referer: req.headers.get('referer'),
-  });
-
-  // Block if token is only in body (direct console call)
-  if (!sessionToken && bodySessionToken) {
-    console.warn(
-      '[HUBSPOT-LEAD] Blocked: Token in body but not in cookie (likely direct console call)'
-    );
-    return NextResponse.json(
-      { error: 'Invalid or missing session token. Please submit the form through the website.' },
-      { status: 403 }
-    );
-  }
-
-  // Require session token from /api/request-call to prevent direct API calls
-  if (!sessionToken) {
-    console.warn('[HUBSPOT-LEAD] Blocked: No session token in cookie');
-    return NextResponse.json(
-      { error: 'Invalid or missing session token. Please submit the form through the website.' },
-      { status: 403 }
-    );
-  }
-
-  // Additional check: verify referer is from our domain
+  // Get session token from cookie (preferred) or body (if referer is valid)
+  const sessionTokenFromCookie = req.cookies.get('session-token')?.value;
   const referer = req.headers.get('referer');
   const isFromOurDomain =
     referer && (referer.includes('coldi.ai') || referer.includes('localhost'));
-  if (!isFromOurDomain) {
-    console.warn('[HUBSPOT-LEAD] Blocked: Invalid referer', { referer });
+
+  // Use cookie if available, otherwise use body only if referer is valid (normal form submission)
+  const sessionToken = sessionTokenFromCookie || (isFromOurDomain ? bodySessionToken : null);
+
+  console.log('[HUBSPOT-LEAD] Received sessionToken:', {
+    fromCookie: !!sessionTokenFromCookie,
+    fromBody: !!bodySessionToken,
+    tokenLength: sessionToken?.length || 0,
+    tokenPreview: sessionToken ? `${sessionToken.substring(0, 20)}...` : 'none',
+    referer,
+    isFromOurDomain,
+    usingTokenFrom: sessionTokenFromCookie
+      ? 'cookie'
+      : isFromOurDomain
+        ? 'body (valid referer)'
+        : 'none',
+  });
+
+  // Block if no token at all
+  if (!sessionToken) {
+    console.warn('[HUBSPOT-LEAD] Blocked: No session token (cookie or valid body with referer)');
+    return NextResponse.json(
+      { error: 'Invalid or missing session token. Please submit the form through the website.' },
+      { status: 403 }
+    );
+  }
+
+  // Block if token is only in body but referer is invalid (likely direct console call)
+  if (!sessionTokenFromCookie && bodySessionToken && !isFromOurDomain) {
+    console.warn(
+      '[HUBSPOT-LEAD] Blocked: Token in body but invalid referer (likely direct console call)',
+      {
+        referer,
+      }
+    );
     return NextResponse.json(
       { error: 'Invalid request origin. Please submit the form through the website.' },
       { status: 403 }

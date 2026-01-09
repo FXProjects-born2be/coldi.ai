@@ -231,6 +231,7 @@ export const RequestDialog = ({
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...data, business_url: honeypotValue }),
+      credentials: 'include', // Include cookies in request
     });
 
     // If main request failed (bot detected, rate limit, etc.), stop execution
@@ -274,6 +275,7 @@ export const RequestDialog = ({
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(hubspotPayload),
+      credentials: 'include', // Include cookies in request
     });
     console.log('Hubspot response:', hubspotRes);
     if (hubspotRes.ok) {
