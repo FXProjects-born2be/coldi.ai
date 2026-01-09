@@ -18,11 +18,15 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { sessionToken, ...restBody } = body;
+  const { sessionToken: bodySessionToken, ...restBody } = body;
   const properties = restBody?.properties || restBody;
 
-  // Require session token from main route to prevent direct API calls
-  console.log('[HUBSPOT-LEAD] Received sessionToken:', sessionToken ? 'present' : 'missing', {
+  // Get session token from cookie (preferred) or body (fallback)
+  const sessionToken = req.cookies.get('session-token')?.value || bodySessionToken;
+
+  console.log('[HUBSPOT-LEAD] Received sessionToken:', {
+    fromCookie: !!req.cookies.get('session-token')?.value,
+    fromBody: !!bodySessionToken,
     tokenLength: sessionToken?.length || 0,
     tokenPreview: sessionToken ? `${sessionToken.substring(0, 20)}...` : 'none',
   });
@@ -41,6 +45,10 @@ export async function POST(req: NextRequest) {
       { status: 403 }
     );
   }
+
+  // Clear cookie after successful validation
+  const response = NextResponse.json({ success: true });
+  response.cookies.delete('session-token');
 
   console.log('[HUBSPOT-LEAD] Session token validated successfully');
 
