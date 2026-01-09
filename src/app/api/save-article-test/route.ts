@@ -1,8 +1,16 @@
+/* eslint-disable simple-import-sort/imports */
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import { createClient } from '@supabase/supabase-js';
 import { createCanvas, loadImage } from 'canvas';
+/* eslint-enable simple-import-sort/imports */
+
+// Force Node.js runtime for canvas package
+export const runtime = 'nodejs';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -17,8 +25,10 @@ async function addWatermark(imageBuffer: ArrayBuffer): Promise<Buffer> {
   // Load the original image
   const img = await loadImage(Buffer.from(imageBuffer));
 
-  // Load the watermark image
-  const watermark = await loadImage('./watermark.png');
+  // Load the watermark image - use absolute path for serverless compatibility
+  const watermarkPath = join(process.cwd(), 'public', 'watermark.png');
+  const watermarkBuffer = readFileSync(watermarkPath);
+  const watermark = await loadImage(watermarkBuffer);
 
   // Set canvas size to match image
   canvas.width = img.width;
