@@ -25,7 +25,7 @@ export const LeadFormContainer = () => {
     monthlyLeadVolume: '',
     primaryGoal: [],
     message: '',
-    recaptchaToken: '',
+    turnstileToken: '',
   });
 
   const router = useRouter();
