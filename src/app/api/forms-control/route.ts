@@ -37,16 +37,19 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Get action from body or query params
-    let action: 'enable' | 'disable' | null = null;
+    // Get action from query params first, then from body
+    const { searchParams } = new URL(req.url);
+    let action: 'enable' | 'disable' | null =
+      (searchParams.get('action') as 'enable' | 'disable') || null;
 
-    try {
-      const body = await req.json().catch(() => ({}));
-      action = body?.action || null;
-    } catch {
-      // If body parsing fails, try query params
-      const { searchParams } = new URL(req.url);
-      action = (searchParams.get('action') as 'enable' | 'disable') || null;
+    // If not in query params, try to get from body
+    if (!action) {
+      try {
+        const body = await req.json().catch(() => ({}));
+        action = body?.action || null;
+      } catch {
+        // Body parsing failed, action remains null
+      }
     }
 
     if (!action || (action !== 'enable' && action !== 'disable')) {
