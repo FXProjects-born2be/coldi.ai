@@ -22,13 +22,27 @@ export async function POST(req: NextRequest) {
   const properties = restBody?.properties || restBody;
 
   // Require session token from main route to prevent direct API calls
+  console.log('[HUBSPOT-LEAD] Received sessionToken:', sessionToken ? 'present' : 'missing', {
+    tokenLength: sessionToken?.length || 0,
+    tokenPreview: sessionToken ? `${sessionToken.substring(0, 20)}...` : 'none',
+  });
+
   const isValidSession = validateAndConsumeSessionToken(sessionToken);
+  console.log('[HUBSPOT-LEAD] Session token validation result:', isValidSession);
+
   if (!isValidSession) {
+    console.warn('[HUBSPOT-LEAD] Session token validation failed', {
+      hasToken: !!sessionToken,
+      tokenType: typeof sessionToken,
+      tokenValue: sessionToken ? 'present' : 'missing',
+    });
     return NextResponse.json(
       { error: 'Invalid or missing session token. Please submit the form through the website.' },
       { status: 403 }
     );
   }
+
+  console.log('[HUBSPOT-LEAD] Session token validated successfully');
 
   try {
     // Extract hutk from hubspotutk cookie

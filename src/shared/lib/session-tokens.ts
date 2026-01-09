@@ -43,6 +43,13 @@ export function generateSessionToken(): string {
     used: false,
   });
 
+  console.log('[SESSION-TOKEN] Generated new token:', {
+    token: token.substring(0, 50) + '...',
+    expiresAt,
+    expiresIn: TOKEN_TTL_MS / 1000 + 's',
+    storeSize: tokenStore.size,
+  });
+
   return token;
 }
 
@@ -52,29 +59,53 @@ export function generateSessionToken(): string {
  * @returns true if token is valid and was successfully consumed, false otherwise
  */
 export function validateAndConsumeSessionToken(token: string | undefined | null): boolean {
+  console.log('[SESSION-TOKEN] Validating token:', {
+    hasToken: !!token,
+    tokenType: typeof token,
+    tokenLength: token?.length || 0,
+    tokenPreview: token ? `${token.substring(0, 30)}...` : 'none',
+  });
+
   if (!token || typeof token !== 'string') {
+    console.warn('[SESSION-TOKEN] Token is missing or invalid type');
     return false;
   }
 
   const sessionData = tokenStore.get(token);
+  console.log('[SESSION-TOKEN] Token lookup result:', {
+    found: !!sessionData,
+    expiresAt: sessionData?.expiresAt,
+    now: Date.now(),
+    expired: sessionData ? sessionData.expiresAt < Date.now() : 'N/A',
+    used: sessionData?.used,
+    storeSize: tokenStore.size,
+  });
 
   if (!sessionData) {
+    console.warn('[SESSION-TOKEN] Token not found in store');
     return false;
   }
 
   // Check if token is expired
   if (sessionData.expiresAt < Date.now()) {
+    console.warn('[SESSION-TOKEN] Token expired', {
+      expiresAt: sessionData.expiresAt,
+      now: Date.now(),
+      diff: Date.now() - sessionData.expiresAt,
+    });
     tokenStore.delete(token);
     return false;
   }
 
   // Check if token was already used
   if (sessionData.used) {
+    console.warn('[SESSION-TOKEN] Token already used');
     return false;
   }
 
   // Mark token as used and delete it
   tokenStore.delete(token);
+  console.log('[SESSION-TOKEN] Token validated and consumed successfully');
 
   return true;
 }
