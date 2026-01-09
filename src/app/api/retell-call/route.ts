@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import { areFormsEnabled } from '@/shared/lib/forms-status';
-import { validateAndConsumeSessionToken } from '@/shared/lib/session-tokens';
+import { validateAndMarkSubmissionCode } from '@/shared/lib/submission-codes';
 import { getRetellPhoneNumber } from '@/shared/lib/system-status';
 import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
 
@@ -36,55 +36,21 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
   console.log('Received body:', body);
-  const {
-    name,
-    email,
-    phone,
-    industry,
-    company,
-    agent,
-    countryCode,
-    sessionToken: bodySessionToken,
-  } = body;
+  const { name, email, phone, industry, company, agent, countryCode, submissionCode } = body;
   console.log('Extracted fields:', { name, email, phone, industry, company, agent });
 
-  // Require session token from cookie ONLY - httpOnly cookies cannot be set from console
-  const sessionToken = req.cookies.get('session-token')?.value;
-  const referer = req.headers.get('referer');
-  const origin = req.headers.get('origin');
+  // Validate submission code with email and phone
+  const isValidCode = await validateAndMarkSubmissionCode(
+    submissionCode,
+    email,
+    phone,
+    'retell-call'
+  );
 
-  console.log('[RETELL-CALL] Received sessionToken:', {
-    fromCookie: !!sessionToken,
-    fromBody: !!bodySessionToken,
-    tokenLength: sessionToken?.length || 0,
-    referer,
-    origin,
-  });
-
-  // Block if token is only in body (direct console call - httpOnly cookie cannot be set from console)
-  if (!sessionToken && bodySessionToken) {
-    console.warn(
-      '[RETELL-CALL] Blocked: Token in body but not in cookie (direct console call detected)'
-    );
+  if (!isValidCode) {
+    console.warn('[RETELL-CALL] Blocked: Invalid submission code or mismatch with email/phone');
     return NextResponse.json(
-      { error: 'Invalid or missing session token. Please submit the form through the website.' },
-      { status: 403 }
-    );
-  }
-
-  // Require session token from cookie
-  if (!sessionToken) {
-    console.warn('[RETELL-CALL] Blocked: No session token in cookie');
-    return NextResponse.json(
-      { error: 'Invalid or missing session token. Please submit the form through the website.' },
-      { status: 403 }
-    );
-  }
-
-  const isValidSession = validateAndConsumeSessionToken(sessionToken, 'retell-call');
-  if (!isValidSession) {
-    return NextResponse.json(
-      { error: 'Invalid or missing session token. Please submit the form through the website.' },
+      { error: 'Invalid or missing submission code. Please submit the form through the website.' },
       { status: 403 }
     );
   }

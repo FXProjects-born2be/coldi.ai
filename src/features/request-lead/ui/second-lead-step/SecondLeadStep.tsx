@@ -140,12 +140,12 @@ export const SecondLeadStep = ({
         return;
       }
 
-      // Get session token from response
+      // Get submission code from response
       const responseData = await res.json().catch(() => ({}));
-      const sessionToken = responseData.sessionToken;
+      const submissionCode = responseData.submissionCode;
 
-      if (!sessionToken) {
-        console.error('Session token not received from /api/request-lead');
+      if (!submissionCode) {
+        console.error('Submission code not received from /api/request-lead');
         return;
       }
 
@@ -173,7 +173,7 @@ export const SecondLeadStep = ({
         hs_lead_status: 'NEW',
         //type: 'lead_request',
         referral: 'affiliate_partner_a',
-        sessionToken,
+        submissionCode,
       };
 
       console.log('Sending to HubSpot:', hubspotData);

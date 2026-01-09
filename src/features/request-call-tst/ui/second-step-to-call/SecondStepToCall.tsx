@@ -176,12 +176,12 @@ export const SecondStepToCall = ({
         return;
       }
 
-      // Get session token from response
+      // Get submission code from response
       const responseData = await res.json().catch(() => ({}));
-      const sessionToken = responseData.sessionToken;
+      const submissionCode = responseData.submissionCode;
 
-      if (!sessionToken) {
-        console.error('Session token not received from /api/request-call');
+      if (!submissionCode) {
+        console.error('Submission code not received from /api/request-call');
         return;
       }
 
@@ -196,7 +196,7 @@ export const SecondStepToCall = ({
         company: data.value.company,
         agent,
         countryCode: firstStepData.countryCode,
-        sessionToken,
+        submissionCode,
       };
       console.log('Retell payload:', retellPayload);
 
@@ -219,7 +219,12 @@ export const SecondStepToCall = ({
       const hubspotRes = await fetch('/api/hubspot-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...hubspotPayload, sessionToken }),
+        body: JSON.stringify({
+          ...hubspotPayload,
+          submissionCode,
+          email: data.value.email,
+          phone: firstStepData.phone,
+        }),
         credentials: 'include', // Include cookies in request
       });
       console.log('Hubspot response:', hubspotRes);

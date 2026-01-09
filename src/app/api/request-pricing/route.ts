@@ -4,7 +4,7 @@ import sgMail from '@sendgrid/mail';
 
 import { detectBot } from '@/shared/lib/anti-bot';
 import { areFormsEnabled } from '@/shared/lib/forms-status';
-import { generateSessionToken } from '@/shared/lib/session-tokens';
+import { generateSubmissionCode } from '@/shared/lib/submission-codes';
 
 type RequestPricingData = {
   name: string;
@@ -129,11 +129,18 @@ export async function POST(request: Request): Promise<NextResponse> {
     await sgMail.send(clientMSG);*/
 
     // Generate session token for secondary routes (hubspot-lead)
-    const sessionToken = generateSessionToken();
+    // Generate submission code for secondary routes (hubspot-lead)
+    const submissionCode = await generateSubmissionCode(email, phone);
+    console.log('[REQUEST-PRICING] Generated submissionCode for response:', {
+      code: submissionCode.substring(0, 50) + '...',
+      codeLength: submissionCode.length,
+      email,
+      phone,
+    });
 
     return NextResponse.json({
       message: 'Pricing request sent successfully.',
-      sessionToken, // Return session token for secondary routes
+      submissionCode, // Return submission code for secondary routes
     });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
