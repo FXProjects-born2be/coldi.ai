@@ -48,47 +48,35 @@ export async function POST(req: NextRequest) {
   } = body;
   console.log('Extracted fields:', { name, email, phone, industry, company, agent });
 
-  // Get session token from cookie (preferred) or body (if referer is valid)
-  const sessionTokenFromCookie = req.cookies.get('session-token')?.value;
+  // Require session token from cookie ONLY - httpOnly cookies cannot be set from console
+  const sessionToken = req.cookies.get('session-token')?.value;
   const referer = req.headers.get('referer');
-  const isFromOurDomain =
-    referer && (referer.includes('coldi.ai') || referer.includes('localhost'));
-
-  // Use cookie if available, otherwise use body only if referer is valid (normal form submission)
-  const sessionToken = sessionTokenFromCookie || (isFromOurDomain ? bodySessionToken : null);
+  const origin = req.headers.get('origin');
 
   console.log('[RETELL-CALL] Received sessionToken:', {
-    fromCookie: !!sessionTokenFromCookie,
+    fromCookie: !!sessionToken,
     fromBody: !!bodySessionToken,
     tokenLength: sessionToken?.length || 0,
     referer,
-    isFromOurDomain,
-    usingTokenFrom: sessionTokenFromCookie
-      ? 'cookie'
-      : isFromOurDomain
-        ? 'body (valid referer)'
-        : 'none',
+    origin,
   });
 
-  // Block if no token at all
-  if (!sessionToken) {
-    console.warn('[RETELL-CALL] Blocked: No session token (cookie or valid body with referer)');
+  // Block if token is only in body (direct console call - httpOnly cookie cannot be set from console)
+  if (!sessionToken && bodySessionToken) {
+    console.warn(
+      '[RETELL-CALL] Blocked: Token in body but not in cookie (direct console call detected)'
+    );
     return NextResponse.json(
       { error: 'Invalid or missing session token. Please submit the form through the website.' },
       { status: 403 }
     );
   }
 
-  // Block if token is only in body but referer is invalid (likely direct console call)
-  if (!sessionTokenFromCookie && bodySessionToken && !isFromOurDomain) {
-    console.warn(
-      '[RETELL-CALL] Blocked: Token in body but invalid referer (likely direct console call)',
-      {
-        referer,
-      }
-    );
+  // Require session token from cookie
+  if (!sessionToken) {
+    console.warn('[RETELL-CALL] Blocked: No session token in cookie');
     return NextResponse.json(
-      { error: 'Invalid request origin. Please submit the form through the website.' },
+      { error: 'Invalid or missing session token. Please submit the form through the website.' },
       { status: 403 }
     );
   }
