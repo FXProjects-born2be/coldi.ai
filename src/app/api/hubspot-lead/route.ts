@@ -1,10 +1,21 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { areFormsEnabled } from '@/shared/lib/forms-status';
+
 const HUBSPOT_FORMS_API_URL =
   'https://api.hsforms.com/submissions/v3/integration/submit/146476440/fc8302ca-aa67-4e59-a6e6-e69bc1d0cd46';
 
 export async function POST(req: NextRequest) {
+  // Check if forms are enabled
+  const formsEnabled = await areFormsEnabled();
+  if (!formsEnabled) {
+    return NextResponse.json(
+      { error: 'Form submissions are currently disabled. Please try again later.' },
+      { status: 503 }
+    );
+  }
+
   const body = await req.json();
   const properties = body?.properties || body;
 

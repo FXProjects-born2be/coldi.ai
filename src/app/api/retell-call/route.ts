@@ -1,6 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { areFormsEnabled } from '@/shared/lib/forms-status';
 import { getRetellPhoneNumber } from '@/shared/lib/system-status';
 import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
 import { verifyTurnstileToken } from '@/shared/lib/turnstile-verification';
@@ -15,6 +16,15 @@ const AGENT_IDS: Record<string, string> = {
 };
 
 export async function POST(req: NextRequest) {
+  // Check if forms are enabled
+  const formsEnabled = await areFormsEnabled();
+  if (!formsEnabled) {
+    return NextResponse.json(
+      { error: 'Form submissions are currently disabled. Please try again later.' },
+      { status: 503 }
+    );
+  }
+
   // Get system status from cache or fetch fresh (with cookie caching)
   const { response: cachedResponse } = await getSystemStatusWithCache(req);
   // Status is now cached in cookie for 5 minutes, getRetellPhoneNumber() will use it
