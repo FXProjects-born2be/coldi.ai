@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { Turnstile } from '@marsidev/react-turnstile';
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
-import ReCAPTCHA from 'react-google-recaptcha';
 import PhoneInput from 'react-phone-input-2';
 
 import { requiresSmsVerification } from '@/shared/lib/email-verification';
@@ -25,9 +25,8 @@ import 'react-phone-input-2/lib/style.css';
 // Feature flag: SMS verification (temporary off; set to true to re-enable)
 const SMS_VERIFICATION_ENABLED = true;
 
-// Use env variable, otherwise use key from RetellWidget (same key used in the project)
-const RECAPTCHA_SITE_KEY =
-  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6Ldzfc0rAAAAAECsL-e1IGCcwDiDmRkM8EaPB03h';
+// Use env variable for Cloudflare Turnstile site key
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '';
 
 export const RequestDialog = ({
   open,
@@ -39,7 +38,8 @@ export const RequestDialog = ({
   console.log('RequestDialog rendered, open:', open);
   const plan = useRequestPricingStore((state) => state.plan);
   const [isThankYouDialogOpen, setIsThankYouDialogOpen] = useState(false);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileKey, setTurnstileKey] = useState(0);
   console.log('plan', plan);
   const planPrice = plan.price.replace('<span>', '').replace('</span>', '');
   const planTitle = `${plan.label}: ${plan.title} - ${planPrice}`;
@@ -53,7 +53,7 @@ export const RequestDialog = ({
       phone: '',
       message: '',
       plan: plan.title,
-      recaptchaToken: '',
+      turnstileToken: '',
       smsCode: undefined as string | undefined,
     },
     validators: {
@@ -69,7 +69,7 @@ export const RequestDialog = ({
       email?: Array<{ message: string }>;
       phone?: Array<{ message: string }>;
       message?: Array<{ message: string }>;
-      recaptchaToken?: Array<{ message: string }>;
+      turnstileToken?: Array<{ message: string }>;
       smsCode?: Array<{ message: string }>;
     };
   };
@@ -80,7 +80,7 @@ export const RequestDialog = ({
     phone: string;
     message: string;
     plan: string;
-    recaptchaToken: string;
+    turnstileToken: string;
     smsCode?: string;
   };
 
@@ -214,9 +214,10 @@ export const RequestDialog = ({
       return;
     }
 
-    // Reset reCAPTCHA after submission
-    if (recaptchaRef.current) {
-      recaptchaRef.current.reset();
+    // Check Turnstile token
+    if (!turnstileToken) {
+      setSmsError('Please complete the security verification');
+      return;
     }
 
     console.log('Form submitted:', data);
@@ -241,6 +242,8 @@ export const RequestDialog = ({
 
     setOpen(false);
     setIsThankYouDialogOpen(true);
+    setTurnstileToken(null);
+    setTurnstileKey((prev) => prev + 1); // Reset Turnstile widget
     reset();
 
     const hubspotPayload = {
@@ -495,26 +498,29 @@ export const RequestDialog = ({
                       />
                     </div>
                     <div
-                      className={`${st.inputWrapper} ${st.full} ${errors.onChange?.recaptchaToken ? st.error : ''}`}
+                      className={`${st.inputWrapper} ${st.full} ${errors.onChange?.turnstileToken ? st.error : ''}`}
                     >
-                      <Field name="recaptchaToken">
+                      <Field name="turnstileToken">
                         {(field) => (
-                          <ReCAPTCHA
-                            ref={recaptchaRef}
-                            sitekey={RECAPTCHA_SITE_KEY}
-                            onChange={(token) => {
-                              field.handleChange(token || '');
-                            }}
-                            onExpired={() => {
-                              field.handleChange('');
+                          <Turnstile
+                            key={turnstileKey}
+                            siteKey={TURNSTILE_SITE_KEY}
+                            onSuccess={(token) => {
+                              setTurnstileToken(token);
+                              field.handleChange(token);
                             }}
                             onError={() => {
+                              setTurnstileToken(null);
+                              field.handleChange('');
+                            }}
+                            onExpire={() => {
+                              setTurnstileToken(null);
                               field.handleChange('');
                             }}
                           />
                         )}
                       </Field>
-                      {errors.onChange?.recaptchaToken?.map((err: { message: string }) => (
+                      {errors.onChange?.turnstileToken?.map((err: { message: string }) => (
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
                     </div>

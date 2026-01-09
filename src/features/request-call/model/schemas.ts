@@ -41,7 +41,7 @@ export const secondStepCallSchema = v.object({
       'Providing your company size helps us tailor the scenario with greater precision.'
     )
   ),
-  recaptchaToken: v.pipe(v.string(), v.minLength(1, 'Please complete the reCAPTCHA verification.')),
+  turnstileToken: v.pipe(v.string(), v.minLength(1, 'Please complete the security verification.')),
 });
 
 export type FirstStepCallSchema = v.InferOutput<typeof firstStepCallSchema>;

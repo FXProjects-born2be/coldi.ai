@@ -14,7 +14,7 @@ type RequestLeadData = {
   primaryGoal: string[];
   message: string;
   company_website?: string; // Honeypot field
-  recaptchaToken?: string;
+  turnstileToken?: string;
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
@@ -29,7 +29,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       monthlyLeadVolume,
       primaryGoal,
       message,
-      recaptchaToken,
+      turnstileToken,
     } = bodyJSON;
 
     // Comprehensive bot detection
@@ -47,39 +47,41 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
-    // Verify reCAPTCHA token if provided
-    if (recaptchaToken) {
+    // Verify Cloudflare Turnstile token if provided
+    if (turnstileToken) {
       try {
-        // Check if using test key - if so, skip verification or use test secret
-        const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
-        const isTestKey = siteKey === '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
-        const secretKey = isTestKey
-          ? '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe' // Test secret key
-          : process.env.RECAPTCHA_SECRET_KEY;
-
-        // For test key, always pass verification
-        if (isTestKey) {
-          console.log('[TEST MODE] Using test reCAPTCHA key - skipping verification');
+        const secretKey = process.env.TURNSTILE_SECRET_KEY;
+        if (!secretKey) {
+          console.warn('[TURNSTILE] Secret key not configured, skipping verification');
         } else {
-          const recaptchaResponse = await fetch(
-            `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`,
-            { method: 'POST' }
+          const turnstileResponse = await fetch(
+            'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                secret: secretKey,
+                response: turnstileToken,
+              }),
+            }
           );
-          const recaptchaData = await recaptchaResponse.json();
-          if (!recaptchaData.success) {
-            console.warn('[BOT DETECTED] Invalid reCAPTCHA token', {
+          const turnstileData = await turnstileResponse.json();
+          if (!turnstileData.success) {
+            console.warn('[BOT DETECTED] Invalid Turnstile token', {
               ip: botDetection.reason,
-              errors: recaptchaData['error-codes'],
+              errors: turnstileData['error-codes'],
             });
             return NextResponse.json(
-              { message: 'reCAPTCHA verification failed. Please try again.' },
+              { message: 'Security verification failed. Please try again.' },
               { status: 400 }
             );
           }
         }
-      } catch (recaptchaError) {
-        console.error('Error verifying reCAPTCHA:', recaptchaError);
-        // Don't block on reCAPTCHA verification errors, but log them
+      } catch (turnstileError) {
+        console.error('Error verifying Turnstile:', turnstileError);
+        // Don't block on Turnstile verification errors, but log them
       }
     }
 
