@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import { areFormsEnabled } from '@/shared/lib/forms-status';
-import { validateAndConsumeSessionToken } from '@/shared/lib/session-tokens';
+import { validateAndMarkSubmissionCode } from '@/shared/lib/submission-codes';
 
 const HUBSPOT_FORMS_API_URL =
   'https://api.hsforms.com/submissions/v3/integration/submit/146476440/fc8302ca-aa67-4e59-a6e6-e69bc1d0cd46';
@@ -18,63 +18,33 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { sessionToken: bodySessionToken, ...restBody } = body;
+  const { submissionCode, email, phone, ...restBody } = body;
   const properties = restBody?.properties || restBody;
 
-  // Require session token from cookie ONLY - httpOnly cookies cannot be set from console
-  const sessionToken = req.cookies.get('session-token')?.value;
-  const referer = req.headers.get('referer');
-  const origin = req.headers.get('origin');
-
-  console.log('[HUBSPOT-LEAD] Received sessionToken:', {
-    fromCookie: !!sessionToken,
-    fromBody: !!bodySessionToken,
-    tokenLength: sessionToken?.length || 0,
-    tokenPreview: sessionToken ? `${sessionToken.substring(0, 20)}...` : 'none',
-    referer,
-    origin,
+  console.log('[HUBSPOT-LEAD] Received submissionCode:', {
+    hasCode: !!submissionCode,
+    hasEmail: !!email,
+    hasPhone: !!phone,
+    codePreview: submissionCode ? `${submissionCode.substring(0, 20)}...` : 'none',
   });
 
-  // Block if token is only in body (direct console call - httpOnly cookie cannot be set from console)
-  if (!sessionToken && bodySessionToken) {
-    console.warn(
-      '[HUBSPOT-LEAD] Blocked: Token in body but not in cookie (direct console call detected)'
-    );
+  // Validate submission code with email and phone
+  const isValidCode = await validateAndMarkSubmissionCode(
+    submissionCode,
+    email,
+    phone,
+    'hubspot-lead'
+  );
+
+  if (!isValidCode) {
+    console.warn('[HUBSPOT-LEAD] Blocked: Invalid submission code or mismatch with email/phone');
     return NextResponse.json(
-      { error: 'Invalid or missing session token. Please submit the form through the website.' },
+      { error: 'Invalid or missing submission code. Please submit the form through the website.' },
       { status: 403 }
     );
   }
 
-  // Require session token from cookie
-  if (!sessionToken) {
-    console.warn('[HUBSPOT-LEAD] Blocked: No session token in cookie');
-    return NextResponse.json(
-      { error: 'Invalid or missing session token. Please submit the form through the website.' },
-      { status: 403 }
-    );
-  }
-
-  const isValidSession = validateAndConsumeSessionToken(sessionToken, 'hubspot-lead');
-  console.log('[HUBSPOT-LEAD] Session token validation result:', isValidSession);
-
-  if (!isValidSession) {
-    console.warn('[HUBSPOT-LEAD] Session token validation failed', {
-      hasToken: !!sessionToken,
-      tokenType: typeof sessionToken,
-      tokenValue: sessionToken ? 'present' : 'missing',
-    });
-    return NextResponse.json(
-      { error: 'Invalid or missing session token. Please submit the form through the website.' },
-      { status: 403 }
-    );
-  }
-
-  // Clear cookie after successful validation
-  const response = NextResponse.json({ success: true });
-  response.cookies.delete('session-token');
-
-  console.log('[HUBSPOT-LEAD] Session token validated successfully');
+  console.log('[HUBSPOT-LEAD] Submission code validated successfully');
 
   try {
     // Extract hutk from hubspotutk cookie

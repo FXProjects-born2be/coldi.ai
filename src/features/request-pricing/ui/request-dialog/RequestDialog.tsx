@@ -242,12 +242,12 @@ export const RequestDialog = ({
       return;
     }
 
-    // Get session token from response
+    // Get submission code from response
     const responseData = await res.json().catch(() => ({}));
-    const sessionToken = responseData.sessionToken;
+    const submissionCode = responseData.submissionCode;
 
-    if (!sessionToken) {
-      console.error('Session token not received from /api/request-pricing');
+    if (!submissionCode) {
+      console.error('Submission code not received from /api/request-pricing');
       return;
     }
 
@@ -268,7 +268,7 @@ export const RequestDialog = ({
       //type: 'pricing_request',
       pricing: planTitle,
       referral: 'affiliate_partner_a',
-      sessionToken,
+      submissionCode,
     };
 
     const hubspotRes = await fetch('/api/hubspot-lead', {
