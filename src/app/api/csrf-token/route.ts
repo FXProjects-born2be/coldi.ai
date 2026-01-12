@@ -7,7 +7,11 @@ import { generateCsrfToken } from '@/shared/lib/csrf-tokens';
  * Returns a new CSRF token for the current session
  */
 export async function GET(): Promise<NextResponse> {
-  const token = generateCsrfToken();
-
-  return NextResponse.json({ token });
+  try {
+    const token = await generateCsrfToken();
+    return NextResponse.json({ token });
+  } catch (error) {
+    console.error('[CSRF-TOKEN] Error generating token:', error);
+    return NextResponse.json({ error: 'Failed to generate security token' }, { status: 500 });
+  }
 }
