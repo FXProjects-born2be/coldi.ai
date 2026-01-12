@@ -55,31 +55,18 @@ export const RequestDialog = () => {
 
     console.log('Form submitted:', data);
 
-    // Get honeypot field value from DOM
-    const honeypotField = document.querySelector<HTMLInputElement>('input[name="business_url"]');
-    const honeypotValue = honeypotField?.value || '';
-
-    const res = await fetch('/api/request-pricing', {
+    const res = await fetch('/api/retell-demo-call', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...data, business_url: honeypotValue }),
+      body: JSON.stringify({ phone: data.phone }),
       credentials: 'include', // Include cookies in request
     });
 
     // If main request failed (bot detected, rate limit, etc.), stop execution
     if (!res.ok) {
       const errorData = await res.json().catch(() => ({}));
-      console.error('Pricing request blocked or failed:', errorData);
+      console.error('Demo call request blocked or failed:', errorData);
       // Don't close dialog, don't proceed with HubSpot
-      return;
-    }
-
-    // Get submission code from response
-    const responseData = await res.json().catch(() => ({}));
-    const submissionCode = responseData.submissionCode;
-
-    if (!submissionCode) {
-      console.error('Submission code not received from /api/request-pricing');
       return;
     }
 
@@ -90,7 +77,7 @@ export const RequestDialog = () => {
 
     // Send to HubSpot with phone and generated email for live-demo
     // Use phone-based email since HubSpot requires email field
-    const liveDemoEmail = `phone-${data.phone}@live-demo.coldi.ai`;
+    /*const liveDemoEmail = `phone-${data.phone}@live-demo.coldi.ai`;
     const hubspotPayload = {
       email: liveDemoEmail,
       phone: data.phone,
@@ -112,7 +99,7 @@ export const RequestDialog = () => {
     } else {
       const errorData = await hubspotRes.json();
       console.error('Failed to send lead to HubSpot:', errorData);
-    }
+    }*/
   };
 
   return (
