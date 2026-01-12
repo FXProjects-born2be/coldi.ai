@@ -42,7 +42,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     // Require CSRF token to prevent direct API calls from console
     // CSRF token must be obtained from the page and can only be used once
-    if (!validateAndConsumeCsrfToken(csrfToken)) {
+    const isValidCsrfToken = await validateAndConsumeCsrfToken(csrfToken);
+    if (!isValidCsrfToken) {
       return NextResponse.json(
         { message: 'Security verification required. Please refresh the page and try again.' },
         { status: 403 }
@@ -113,8 +114,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       });
     });
 
-    // Cleanup expired CSRF tokens
-    cleanupExpiredCsrfTokens();
+    // Cleanup expired CSRF tokens (fire and forget)
+    cleanupExpiredCsrfTokens().catch((error) => {
+      console.error('[CSRF-TOKEN] Error during cleanup:', error);
+    });
 
     return successResponse;
   } catch (error) {
