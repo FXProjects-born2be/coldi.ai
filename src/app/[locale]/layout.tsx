@@ -1,4 +1,5 @@
 import { Urbanist } from 'next/font/google';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import Script from 'next/script';
 
@@ -45,15 +46,20 @@ export default async function RootLayout({
 }>) {
   const { locale } = await params;
 
+  const headersList = await headers();
+  const pathname = headersList.get('x-pathname') ?? '';
+
+  const isLiveDemo = pathname.includes('/live-demo');
+
   return (
     <html lang={locale}>
       <GoogleAnalytics gaId="G-RCPHXB9V3B" />
       <RetellWidget />
       <body className={urbanist.variable}>
         <NextIntlClientProvider>
-          <Header />
+          {!isLiveDemo && <Header />}
           {children}
-          <Footer />
+          {!isLiveDemo && <Footer />}
         </NextIntlClientProvider>
         <Script
           async
