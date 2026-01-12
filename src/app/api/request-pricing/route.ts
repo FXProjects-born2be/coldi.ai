@@ -7,12 +7,12 @@ import { areFormsEnabled } from '@/shared/lib/forms-status';
 import { generateSubmissionCode } from '@/shared/lib/submission-codes';
 
 type RequestPricingData = {
-  name: string;
-  email: string;
+  name?: string;
+  email?: string;
   phone: string;
   message?: string;
-  plan: string;
-  website: string;
+  plan?: string;
+  website?: string;
   business_url?: string; // Honeypot field
   turnstileToken?: string;
 };
@@ -96,41 +96,34 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
-    // Initialize SendGrid with API key
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+    // Initialize SendGrid with API key (only if email is provided)
+    if (email) {
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
-    // Create email content
-    const msg = {
-      to: process.env.ADMIN_EMAIL!, // Your admin email address
-      from: process.env.FROM_EMAIL!, // Verified sender email
-      subject: 'New Pricing Request',
-      html: `
-        <h2>New Pricing Request</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Plan:</strong> ${plan}</p>
-        <p><strong>Website:</strong> ${website}</p>
-        ${message ? `<p><strong>Message:</strong> ${message}</p>` : ''}
-      `,
-    };
+      // Create email content
+      const msg = {
+        to: process.env.ADMIN_EMAIL!, // Your admin email address
+        from: process.env.FROM_EMAIL!, // Verified sender email
+        subject: 'New Pricing Request',
+        html: `
+          <h2>New Pricing Request</h2>
+          ${name ? `<p><strong>Name:</strong> ${name}</p>` : ''}
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
+          ${plan ? `<p><strong>Plan:</strong> ${plan}</p>` : ''}
+          ${website ? `<p><strong>Website:</strong> ${website}</p>` : ''}
+          ${message ? `<p><strong>Message:</strong> ${message}</p>` : ''}
+        `,
+      };
 
-    // Send email
-    await sgMail.send(msg);
+      // Send email
+      await sgMail.send(msg);
+    }
 
-    /*const clientMSG = {
-      to: email, // Your admin email address
-      from: process.env.FROM_EMAIL!, // Verified sender email
-      subject: 'Tanzora Request Received',
-      html: `
-      `,
-    };
-
-    await sgMail.send(clientMSG);*/
-
-    // Generate session token for secondary routes (hubspot-lead)
     // Generate submission code for secondary routes (hubspot-lead)
-    const submissionCode = await generateSubmissionCode(email, phone);
+    // Use phone-based email if email is not provided (for live-demo)
+    const emailForCode = email || `phone-${phone}@live-demo.coldi.ai`;
+    const submissionCode = await generateSubmissionCode(emailForCode, phone);
     console.log('[REQUEST-PRICING] Generated submissionCode for response:', {
       code: submissionCode.substring(0, 50) + '...',
       codeLength: submissionCode.length,

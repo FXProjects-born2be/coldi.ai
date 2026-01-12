@@ -1,4 +1,5 @@
 import { Urbanist } from 'next/font/google';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import Script from 'next/script';
 
@@ -44,6 +45,10 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
+  const headersList = await headers();
+  const referer = headersList.get('referer') || '';
+  const pathname = referer ? new URL(referer).pathname : '';
+  const isLiveDemo = pathname.includes('/live-demo');
 
   return (
     <html lang={locale}>
@@ -51,9 +56,9 @@ export default async function RootLayout({
       <RetellWidget />
       <body className={urbanist.variable}>
         <NextIntlClientProvider>
-          <Header />
+          {!isLiveDemo && <Header />}
           {children}
-          <Footer />
+          {!isLiveDemo && <Footer />}
         </NextIntlClientProvider>
         <Script
           async

@@ -1,0 +1,248 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.burger {
+  display: none;
+
+  @include tablet {
+    display: block;
+  }
+}
+
+.overlay {
+  background: rgba(12, 16, 33, 0.15);
+  backdrop-filter: blur(5px);
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.content {
+  border-top: 1px solid rgba(80, 85, 107, 0.05);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  background: #fff;
+  z-index: 1000;
+  overflow-y: auto;
+  animation: appear 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+  border-radius: 48px;
+  background: #fff;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 800px;
+  height: 95vh;
+  max-height: 95vh;
+  max-width: 95%;
+
+  @include fourteenInch {
+    zoom: 0.8;
+    max-height: 100%;
+    height: auto;
+  }
+
+  @include tablet {
+    padding: 24px 16px;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    @include tablet {
+      top: 16px;
+      right: 16px;
+    }
+  }
+
+  h3 {
+    color: #0c1021;
+    text-align: center;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 48px;
+    span {
+      color: #4268ff;
+    }
+    @include tablet {
+      font-size: 32px;
+    }
+  }
+
+  h4 {
+    color: #0c1021;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-bottom: 1px solid rgba(12, 16, 33, 0.15);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+
+    p {
+      color: #50556b;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+}
+
+form.layout {
+  width: 600px;
+  max-width: 100%;
+  margin: 64px 0;
+  .fields {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 16px;
+    row-gap: 24px;
+    margin-bottom: 24px;
+    > div {
+      width: 100%;
+      position: relative;
+      &.error {
+        input,
+        [type='button'] {
+          border-color: #ff0000 !important;
+        }
+      }
+      &.full {
+        width: 100%;
+      }
+      @include tablet {
+        width: 100%;
+      }
+      p {
+        color: #f00;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: normal;
+        padding: 0;
+        background: none;
+        border: none;
+        outline: none;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        margin-bottom: 8px;
+        left: 0;
+      }
+      &.error {
+        // Error styling for Turnstile widget if needed
+      }
+    }
+  }
+}
+
+.phoneInputContainer {
+  width: 100%;
+}
+
+.phoneInput {
+  width: 100% !important;
+  height: 73.6px !important;
+  border-radius: 24px !important;
+  border: 1px solid rgba(12, 16, 33, 0.1) !important;
+  font-size: 16px !important;
+  padding-left: 60px !important;
+  background: #fafafa !important;
+  color: #0c1021 !important;
+
+  &:focus {
+    border-color: rgba(12, 16, 33, 0.1) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(66, 104, 255, 0) !important;
+  }
+
+  &::placeholder {
+    color: #535662 !important;
+  }
+}
+
+.phoneInputButton {
+  border: none !important;
+  background: transparent !important;
+  border-right: 1px solid rgba(12, 16, 33, 0.1) !important;
+  border-radius: 12px 0 0 12px !important;
+  width: 50px !important;
+  height: 73.6px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  &:hover {
+    background: rgba(12, 16, 33, 0.05) !important;
+  }
+}
+
+.phoneInputDropdown {
+  border: 1px solid rgba(12, 16, 33, 0.1) !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  box-shadow: 0 4px 20px rgba(12, 16, 33, 0.1) !important;
+  max-height: 200px !important;
+  overflow-y: auto !important;
+  left: 0 !important;
+  top: 100% !important;
+
+  .country {
+    padding: 8px 12px !important;
+    color: #0c1021 !important;
+
+    &:hover {
+      background: rgba(12, 16, 33, 0.05) !important;
+    }
+
+    &.highlight {
+      background: rgba(66, 104, 255, 0.1) !important;
+    }
+  }
+
+  .search-box {
+    border: none !important;
+    border-bottom: 1px solid rgba(12, 16, 33, 0.1) !important;
+    border-radius: 0 !important;
+    padding: 12px !important;
+    font-size: 14px !important;
+    color: #0c1021 !important;
+
+    &:focus {
+      outline: none !important;
+      border-color: #4268ff !important;
+    }
+
+    &::placeholder {
+      color: #535662 !important;
+    }
+  }
+}
