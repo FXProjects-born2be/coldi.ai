@@ -72,6 +72,21 @@ export async function POST(req: NextRequest) {
         value: String(value),
       }));
 
+    // Add email and phone to fields if they exist (required by HubSpot)
+    // Check if they already exist in fields to avoid duplicates
+    if (email && !fields.find((field) => field.name === 'email')) {
+      fields.push({
+        name: 'email',
+        value: String(email),
+      });
+    }
+    if (phone && !fields.find((field) => field.name === 'phone')) {
+      fields.push({
+        name: 'phone',
+        value: String(phone),
+      });
+    }
+
     // Add ip_city2 field if not present
     if (!fields.find((field) => field.name === 'ip_city2')) {
       fields.push({
