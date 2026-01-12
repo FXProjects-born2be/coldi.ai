@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 
 import { getSmsVerifyCodeWebhookUrl } from '@/shared/lib/system-status';
 import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
-import { verifyTurnstileToken } from '@/shared/lib/turnstile-verification';
 
 /**
  * Normalize phone number to E.164 format
@@ -39,10 +38,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
   try {
     const body = await request.json();
-    const { phone, code, turnstileToken } = body;
+    const { phone, code } = body;
 
     // Require Turnstile token to prevent direct API calls from console
-    const isValidToken = await verifyTurnstileToken(turnstileToken);
+    /*const isValidToken = await verifyTurnstileToken(turnstileToken);
     if (!isValidToken) {
       return NextResponse.json(
         {
@@ -51,7 +50,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         },
         { status: 400 }
       );
-    }
+    }*/
 
     if (!phone || typeof phone !== 'string') {
       return NextResponse.json(

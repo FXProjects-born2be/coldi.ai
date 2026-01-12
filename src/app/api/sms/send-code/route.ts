@@ -4,7 +4,6 @@ import { NextResponse } from 'next/server';
 import { validateAndConsumeCsrfToken } from '@/shared/lib/csrf-tokens';
 import { getSmsSendCodeWebhookUrl } from '@/shared/lib/system-status';
 import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
-import { verifyTurnstileToken } from '@/shared/lib/turnstile-verification';
 
 /**
  * Normalize phone number to E.164 format
@@ -39,7 +38,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
   try {
     const body = await request.json();
-    const { phone, turnstileToken, csrfToken } = body;
+    const { phone, csrfToken } = body;
 
     // Require CSRF token to prevent direct API calls from console
     // CSRF token must be obtained from the page and can only be used once
@@ -51,13 +50,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
 
     // Require Turnstile token to prevent direct API calls from console
-    const isValidToken = await verifyTurnstileToken(turnstileToken);
+    /*const isValidToken = await verifyTurnstileToken(turnstileToken);
     if (!isValidToken) {
       return NextResponse.json(
         { message: 'Security verification required. Please complete the captcha.' },
         { status: 400 }
       );
-    }
+    }*/
 
     if (!phone || typeof phone !== 'string') {
       return NextResponse.json({ message: 'Phone number is required' }, { status: 400 });
