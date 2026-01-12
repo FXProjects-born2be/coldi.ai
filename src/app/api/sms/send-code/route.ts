@@ -22,26 +22,13 @@ function normalizePhone(phone: string): string {
  * Sends request to webhook with { "to": phone }
  */
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  // Get system status from cache or fetch fresh (with cookie caching)
-  // This ensures correct webhook URL is used based on current status
-  const { response: cachedResponse } = await getSystemStatusWithCache(request);
-  // Status is now cached in cookie for 5 minutes
-
-  const webhookUrl = getSmsSendCodeWebhookUrl();
-
-  if (!webhookUrl) {
-    return NextResponse.json(
-      { message: 'SMS verification service is not configured' },
-      { status: 500 }
-    );
-  }
-
   try {
     const body = await request.json();
     const { phone, csrfToken } = body;
 
     // Require CSRF token to prevent direct API calls from console
     // CSRF token must be obtained from the page and can only be used once
+    // Check CSRF token FIRST before any other operations (including system status check)
     const isValidCsrfToken = await validateAndConsumeCsrfToken(csrfToken);
     if (!isValidCsrfToken) {
       return NextResponse.json(
@@ -50,6 +37,20 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       );
     }
 
+    // Only check system status if CSRF token is valid
+    // Get system status from cache or fetch fresh (with cookie caching)
+    // This ensures correct webhook URL is used based on current status
+    const { response: cachedResponse } = await getSystemStatusWithCache(request);
+    // Status is now cached in cookie for 5 minutes
+
+    const webhookUrl = getSmsSendCodeWebhookUrl();
+
+    if (!webhookUrl) {
+      return NextResponse.json(
+        { message: 'SMS verification service is not configured' },
+        { status: 500 }
+      );
+    }
     // Require Turnstile token to prevent direct API calls from console
     /*const isValidToken = await verifyTurnstileToken(turnstileToken);
     if (!isValidToken) {
