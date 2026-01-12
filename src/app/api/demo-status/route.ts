@@ -46,11 +46,24 @@ export async function GET() {
  * Sets demo status (primary/reserve)
  *
  * Body: { status: 'primary' | 'reserve' }
+ * Or query param: ?status=primary or ?status=reserve
  */
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { status } = body;
+    // Get status from query params first, then from body
+    const { searchParams } = new URL(req.url);
+    let status: 'primary' | 'reserve' | null =
+      (searchParams.get('status') as 'primary' | 'reserve') || null;
+
+    // If not in query params, try to get from body
+    if (!status) {
+      try {
+        const body = await req.json().catch(() => ({}));
+        status = body?.status || null;
+      } catch {
+        // Body parsing failed, status remains null
+      }
+    }
 
     if (!status || (status !== 'primary' && status !== 'reserve')) {
       return NextResponse.json(
