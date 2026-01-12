@@ -45,11 +45,10 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
+
   const headersList = await headers();
-  console.log('headersList', headersList);
-  const referer = headersList.get('referer') || '';
-  console.log('referer', referer);
-  const pathname = referer ? new URL(referer).pathname : '';
+  const pathname = headersList.get('x-pathname') ?? '';
+
   const isLiveDemo = pathname.includes('/live-demo');
 
   return (

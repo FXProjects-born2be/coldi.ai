@@ -1,12 +1,22 @@
+import type { NextRequest } from 'next/server';
+
 import createMiddleware from 'next-intl/middleware';
 
 import { routing } from './i18n/routing';
 
-export default createMiddleware(routing);
+const intlMiddleware = createMiddleware(routing);
+
+export default function middleware(request: NextRequest) {
+  // 1) запускаємо next-intl middleware
+  const response = intlMiddleware(request);
+
+  // 2) додаємо pathname в headers
+  // (врахуй: тут буде вже з locale в URL, напр. /en/pricing)
+  response.headers.set('x-pathname', request.nextUrl.pathname);
+
+  return response;
+}
 
 export const config = {
-  // Match all pathnames except for
-  // - … if they start with `/api`, `/trpc`, `/_next` or `/_vercel`
-  // - … the ones containing a dot (e.g. `favicon.ico`)
   matcher: '/((?!api|trpc|_next|_vercel|.*\\..*).*)',
 };
