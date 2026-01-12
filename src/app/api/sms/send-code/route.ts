@@ -1,6 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { validateAndConsumeCsrfToken } from '@/shared/lib/csrf-tokens';
 import { getSmsSendCodeWebhookUrl } from '@/shared/lib/system-status';
 import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
 import { verifyTurnstileToken } from '@/shared/lib/turnstile-verification';
@@ -38,7 +39,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
   try {
     const body = await request.json();
-    const { phone, turnstileToken } = body;
+    const { phone, turnstileToken, csrfToken } = body;
+
+    // Require CSRF token to prevent direct API calls from console
+    // CSRF token must be obtained from the page and can only be used once
+    if (!validateAndConsumeCsrfToken(csrfToken)) {
+      return NextResponse.json(
+        { message: 'Security verification required. Please refresh the page and try again.' },
+        { status: 403 }
+      );
+    }
 
     // Require Turnstile token to prevent direct API calls from console
     const isValidToken = await verifyTurnstileToken(turnstileToken);

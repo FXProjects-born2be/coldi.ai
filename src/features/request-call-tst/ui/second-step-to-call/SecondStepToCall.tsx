@@ -108,6 +108,7 @@ export const SecondStepToCall = ({
   const { agent, firstStepData } = useRequestCallStore();
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [turnstileKey, setTurnstileKey] = useState(0);
+  const [csrfToken, setCsrfToken] = useState<string | null>(null);
   console.log('botName', botName);
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
@@ -292,6 +293,22 @@ export const SecondStepToCall = ({
     }
   }, [needsSmsVerification, formValues.email]);
 
+  // Get CSRF token on mount
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      try {
+        const res = await fetch('/api/csrf-token');
+        const data = await res.json();
+        if (data.token) {
+          setCsrfToken(data.token);
+        }
+      } catch (error) {
+        console.error('Error fetching CSRF token:', error);
+      }
+    };
+    fetchCsrfToken();
+  }, []);
+
   // Reset SMS verification when captcha expires or is cleared
   useEffect(() => {
     if (!turnstileToken) {
@@ -307,6 +324,11 @@ export const SecondStepToCall = ({
       return;
     }
 
+    if (!csrfToken) {
+      setSmsError('Security token is missing. Please refresh the page and try again.');
+      return;
+    }
+
     setSmsSending(true);
     setSmsError(null);
 
@@ -316,7 +338,7 @@ export const SecondStepToCall = ({
       const res = await fetch('/api/sms/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: firstStepData.phone, turnstileToken }),
+        body: JSON.stringify({ phone: firstStepData.phone, turnstileToken, csrfToken }),
       });
 
       const data = await res.json();
