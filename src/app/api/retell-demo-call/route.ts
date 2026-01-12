@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { getDemoStatusWithCache } from '@/shared/lib/demo-status-cache';
+import { getDemoStatus } from '@/shared/lib/demo-status-cache';
 import { areFormsEnabled } from '@/shared/lib/forms-status';
 
 const RETELL_API_URL = 'https://api.retellai.com/v2/create-phone-call';
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   }
 
   // Get demo status from cache or fetch fresh from database (with cookie caching)
-  const { response: cachedResponse, status } = await getDemoStatusWithCache(req);
+  const status = await getDemoStatus();
   // Status is now cached in cookie for 5 minutes
 
   const body = await req.json();
@@ -79,30 +79,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         data,
       });
       const errorResponse = NextResponse.json({ error: data }, { status: retellRes.status });
-      // Copy status cookie to error response
-      cachedResponse.cookies.getAll().forEach((cookie) => {
-        errorResponse.cookies.set(cookie.name, cookie.value, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: 'lax',
-          maxAge: Math.floor((5 * 60 * 1000) / 1000),
-          path: '/',
-        });
-      });
+
       return errorResponse;
     }
 
     const successResponse = NextResponse.json(data, { status: 200 });
-    // Copy status cookie to success response
-    cachedResponse.cookies.getAll().forEach((cookie) => {
-      successResponse.cookies.set(cookie.name, cookie.value, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        maxAge: Math.floor((5 * 60 * 1000) / 1000),
-        path: '/',
-      });
-    });
 
     return successResponse;
   } catch (error: unknown) {
