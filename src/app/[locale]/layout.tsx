@@ -46,6 +46,7 @@ export default async function RootLayout({
 }>) {
   const { locale } = await params;
   const headersList = await headers();
+  console.log('headersList', headersList);
   const referer = headersList.get('referer') || '';
   console.log('referer', referer);
   const pathname = referer ? new URL(referer).pathname : '';
