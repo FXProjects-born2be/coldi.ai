@@ -46,18 +46,9 @@ export async function GET() {
  * Sets demo status (primary/reserve)
  *
  * Body: { status: 'primary' | 'reserve' }
- * Requires authorization header: Bearer {DEMO_STATUS_SECRET}
  */
 export async function POST(req: NextRequest) {
   try {
-    // Check for authorization
-    const authHeader = req.headers.get('authorization');
-    const authToken = process.env.DEMO_STATUS_SECRET;
-
-    if (authToken && authHeader !== `Bearer ${authToken}`) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const body = await req.json();
     const { status } = body;
 
