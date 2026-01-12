@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { validateAndConsumeCsrfToken } from '@/shared/lib/csrf-tokens';
+import { cleanupExpiredCsrfTokens, validateAndConsumeCsrfToken } from '@/shared/lib/csrf-tokens';
 import { getSmsSendCodeWebhookUrl } from '@/shared/lib/system-status';
 import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
 
@@ -112,6 +112,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         path: '/',
       });
     });
+
+    // Cleanup expired CSRF tokens
+    cleanupExpiredCsrfTokens();
 
     return successResponse;
   } catch (error) {
