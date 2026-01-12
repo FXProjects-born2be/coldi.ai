@@ -6,6 +6,7 @@ import { Turnstile } from '@marsidev/react-turnstile';
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
 import PhoneInput from 'react-phone-input-2';
 
+import { validateEmail } from '@/shared/lib/email-validation';
 import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
@@ -92,11 +93,57 @@ export const RequestDialog = ({
   const [smsVerifying, setSmsVerifying] = useState(false);
   const [smsError, setSmsError] = useState<string | null>(null);
 
+  // Email validation state
+  const [emailValidating, setEmailValidating] = useState(false);
+  const [emailValidationError, setEmailValidationError] = useState<string | null>(null);
+  const [isEmailValid, setIsEmailValid] = useState<boolean | null>(null);
+
   // Check if email requires SMS verification (guarded by feature flag)
   const needsSmsVerification =
     SMS_VERIFICATION_ENABLED && formValues.email
       ? requiresSmsVerification(formValues.email)
       : false;
+
+  // Validate email when it changes
+  useEffect(() => {
+    const email = formValues.email?.trim();
+
+    // Reset validation state if email is empty
+    if (!email) {
+      setIsEmailValid(null);
+      setEmailValidationError(null);
+      return;
+    }
+
+    // Basic email format check
+    if (!email.includes('@')) {
+      setIsEmailValid(false);
+      setEmailValidationError('Please enter a valid email address');
+      return;
+    }
+
+    // Debounce email validation
+    const timeoutId = setTimeout(async () => {
+      setEmailValidating(true);
+      setEmailValidationError(null);
+
+      const result = await validateEmail(email);
+      console.log('result', result);
+
+      setIsEmailValid(result.isValid);
+      if (!result.isValid) {
+        setEmailValidationError(
+          result.message || 'Email is not valid. Please use another email address.'
+        );
+      } else {
+        setEmailValidationError(null);
+      }
+
+      setEmailValidating(false);
+    }, 500); // Wait 500ms after user stops typing
+
+    return () => clearTimeout(timeoutId);
+  }, [formValues.email]);
 
   // Reset SMS state when email changes or captcha expires
   useEffect(() => {
@@ -231,6 +278,30 @@ export const RequestDialog = ({
   };
 
   const onSubmit = async (data: RequestPricingSchema) => {
+    // Check email validation
+    if (isEmailValid === false || emailValidating) {
+      if (emailValidating) {
+        setEmailValidationError('Please wait while we validate your email...');
+      }
+      return;
+    }
+
+    // If email validation hasn't completed yet, validate it now
+    if (isEmailValid === null && formValues.email) {
+      setEmailValidating(true);
+      const result = await validateEmail(formValues.email);
+      setIsEmailValid(result.isValid);
+      if (!result.isValid) {
+        setEmailValidationError(
+          result.message || 'Email is not valid. Please use another email address.'
+        );
+        setEmailValidating(false);
+        return;
+      }
+      setEmailValidationError(null);
+      setEmailValidating(false);
+    }
+
     // Check SMS verification for free email domains
     if (needsSmsVerification && !smsVerified) {
       setSmsError('Please verify your phone number with SMS code');
@@ -394,7 +465,7 @@ export const RequestDialog = ({
                       ))}
                     </div>
                     <div
-                      className={`${st.inputWrapper} ${st.full} ${errors.onChange?.email ? st.error : ''}`}
+                      className={`${st.inputWrapper} ${st.full} ${errors.onChange?.email || emailValidationError ? st.error : ''}`}
                     >
                       <Field name="email">
                         {(field) => (
@@ -410,6 +481,14 @@ export const RequestDialog = ({
                       {errors.onChange?.email?.map((err) => (
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
+                      {emailValidating && (
+                        <div style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>
+                          Validating email...
+                        </div>
+                      )}
+                      {emailValidationError && !emailValidating && (
+                        <ErrorMessage>{emailValidationError}</ErrorMessage>
+                      )}
                     </div>
                     <div
                       className={`${st.inputWrapper} ${st.full} ${errors.onChange?.phone ? st.error : ''}`}
@@ -566,7 +645,10 @@ export const RequestDialog = ({
                       {([canSubmit, isSubmitting]) => {
                         // Disable button if SMS verification is required but not completed
                         const isSmsVerificationRequired = needsSmsVerification && !smsVerified;
-                        const isDisabled = !canSubmit || isSubmitting || isSmsVerificationRequired;
+                        // Disable button if email is invalid or validating
+                        const isEmailInvalid = isEmailValid === false || emailValidating;
+                        const isDisabled =
+                          !canSubmit || isSubmitting || isSmsVerificationRequired || isEmailInvalid;
 
                         return (
                           <Button disabled={isDisabled} type="submit" fullWidth>

@@ -1,9 +1,10 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { ReactNode } from 'react';
 import PhoneInput from 'react-phone-input-2';
 
+import { validateEmail } from '@/shared/lib/email-validation';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { Button } from '@/shared/ui/kit/button';
@@ -37,6 +38,30 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
       onSubmit: firstLeadStepSchema,
     },
     onSubmit: async (data) => {
+      // Check email validation
+      if (isEmailValid === false || emailValidating) {
+        if (emailValidating) {
+          setEmailValidationError('Please wait while we validate your email...');
+        }
+        return;
+      }
+
+      // If email validation hasn't completed yet, validate it now
+      if (isEmailValid === null && formValues.email) {
+        setEmailValidating(true);
+        const result = await validateEmail(formValues.email);
+        setIsEmailValid(result.isValid);
+        if (!result.isValid) {
+          setEmailValidationError(
+            result.message || 'Email is not valid. Please use another email address.'
+          );
+          setEmailValidating(false);
+          return;
+        }
+        setEmailValidationError(null);
+        setEmailValidating(false);
+      }
+
       onSubmit(data.value);
       localStorage?.setItem('LeadRequestFirstStepData', JSON.stringify(data.value));
       console.log(localStorage?.getItem('LeadRequestFirstStepData'));
@@ -46,6 +71,51 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
   const errors = useStore(store, (state) => state.errorMap);
 
   const formValues = useStore(store, (state) => state.values);
+
+  // Email validation state
+  const [emailValidating, setEmailValidating] = useState(false);
+  const [emailValidationError, setEmailValidationError] = useState<string | null>(null);
+  const [isEmailValid, setIsEmailValid] = useState<boolean | null>(null);
+
+  // Validate email when it changes
+  useEffect(() => {
+    const email = formValues.email?.trim();
+
+    // Reset validation state if email is empty
+    if (!email) {
+      setIsEmailValid(null);
+      setEmailValidationError(null);
+      return;
+    }
+
+    // Basic email format check
+    if (!email.includes('@')) {
+      setIsEmailValid(false);
+      setEmailValidationError('Please enter a valid email address');
+      return;
+    }
+
+    // Debounce email validation
+    const timeoutId = setTimeout(async () => {
+      setEmailValidating(true);
+      setEmailValidationError(null);
+
+      const result = await validateEmail(email);
+
+      setIsEmailValid(result.isValid);
+      if (!result.isValid) {
+        setEmailValidationError(
+          result.message || 'Email is not valid. Please use another email address.'
+        );
+      } else {
+        setEmailValidationError(null);
+      }
+
+      setEmailValidating(false);
+    }, 500); // Wait 500ms after user stops typing
+
+    return () => clearTimeout(timeoutId);
+  }, [formValues.email]);
 
   useEffect(() => {
     console.log(formValues);
@@ -107,7 +177,9 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
             </div>
           </FormRow>
           <FormRow>
-            <div className={`${st.inputWrapper} ${errors.onSubmit?.email ? st.error : ''}`}>
+            <div
+              className={`${st.inputWrapper} ${errors.onSubmit?.email || emailValidationError ? st.error : ''}`}
+            >
               <Field name="email">
                 {(field) => (
                   <TextField
@@ -116,13 +188,23 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
                     value={String(field.state.value)}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
-                    intent={field.state.meta.errors.length ? 'danger' : 'default'}
+                    intent={
+                      field.state.meta.errors.length || emailValidationError ? 'danger' : 'default'
+                    }
                   />
                 )}
               </Field>
               {errors.onSubmit?.email?.map((err) => (
                 <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
               ))}
+              {emailValidating && (
+                <div style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>
+                  Validating email...
+                </div>
+              )}
+              {emailValidationError && !emailValidating && (
+                <ErrorMessage>{emailValidationError}</ErrorMessage>
+              )}
             </div>
             <div className={`${st.inputWrapper} ${errors.onSubmit?.phone ? st.error : ''}`}>
               <Field name="phone">
@@ -151,11 +233,19 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
           </FormRow>
         </section>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-          {([canSubmit, isSubmitting]) => (
-            <Button disabled={!canSubmit || isSubmitting} type="submit" fullWidth>
-              {isSubmitting ? 'Loading...' : 'Next'}
-            </Button>
-          )}
+          {([canSubmit, isSubmitting]) => {
+            // Disable button if email is invalid or validating
+            const isEmailInvalid = isEmailValid === false || emailValidating;
+            return (
+              <Button
+                disabled={!canSubmit || isSubmitting || isEmailInvalid}
+                type="submit"
+                fullWidth
+              >
+                {isSubmitting ? 'Loading...' : 'Next'}
+              </Button>
+            );
+          }}
         </Subscribe>
       </form>
     </section>
