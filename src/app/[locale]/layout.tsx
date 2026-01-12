@@ -47,6 +47,7 @@ export default async function RootLayout({
   const { locale } = await params;
   const headersList = await headers();
   const referer = headersList.get('referer') || '';
+  console.log('referer', referer);
   const pathname = referer ? new URL(referer).pathname : '';
   const isLiveDemo = pathname.includes('/live-demo');
 
