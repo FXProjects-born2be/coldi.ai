@@ -6,7 +6,7 @@ import { areFormsEnabled } from '@/shared/lib/forms-status';
 
 const RETELL_API_URL = 'https://api.retellai.com/v2/create-phone-call';
 const RETELL_DEMO_API_KEY = 'key_699f4f31197cd1ecc286b2f94aa4';
-const RETELL_DEMO_AGENT_ID = 'agent_0dc55d484ba66170b2f9e2f1b5';
+const RETELL_DEMO_AGENT_ID = 'agent_9d2e7c7893bf4abf860003e0bd';
 
 // Phone numbers for live-demo
 const PRIMARY_PHONE = '+18076971313';
