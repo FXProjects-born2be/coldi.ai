@@ -25,15 +25,6 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Get system status from cache or fetch fresh (with cookie caching)
-  const { response: cachedResponse } = await getSystemStatusWithCache(req);
-  // Status is now cached in cookie for 5 minutes, getRetellPhoneNumber() will use it
-
-  const apiKey = process.env.RETELL_API_KEY;
-  if (!apiKey) {
-    return NextResponse.json({ error: 'RETELL_API_KEY not configured' }, { status: 500 });
-  }
-
   const body = await req.json();
   console.log('Received body:', body);
   const { name, email, phone, industry, company, agent, countryCode, submissionCode } = body;
@@ -53,6 +44,15 @@ export async function POST(req: NextRequest) {
       { error: 'Invalid or missing submission code. Please submit the form through the website.' },
       { status: 403 }
     );
+  }
+
+  // Get system status from cache or fetch fresh (with cookie caching)
+  const { response: cachedResponse } = await getSystemStatusWithCache(req);
+  // Status is now cached in cookie for 5 minutes, getRetellPhoneNumber() will use it
+
+  const apiKey = process.env.RETELL_API_KEY;
+  if (!apiKey) {
+    return NextResponse.json({ error: 'RETELL_API_KEY not configured' }, { status: 500 });
   }
 
   if (!name || !email || !phone || !industry || !company || !agent) {
