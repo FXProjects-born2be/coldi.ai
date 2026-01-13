@@ -6,6 +6,7 @@ import { Turnstile } from '@marsidev/react-turnstile';
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
 import PhoneInput from 'react-phone-input-2';
 
+import { validateEmail } from '@/shared/lib/email-validation';
 import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
@@ -91,6 +92,10 @@ export const RequestDialog = ({
   const [smsSending, setSmsSending] = useState(false);
   const [smsVerifying, setSmsVerifying] = useState(false);
   const [smsError, setSmsError] = useState<string | null>(null);
+
+  // Email validation state
+  const [emailValidating, setEmailValidating] = useState(false);
+  const [emailValidationError, setEmailValidationError] = useState<string | null>(null);
 
   // Check if email requires SMS verification (guarded by feature flag)
   const needsSmsVerification =
@@ -231,15 +236,53 @@ export const RequestDialog = ({
   };
 
   const onSubmit = async (data: RequestPricingSchema) => {
-    // Check SMS verification for free email domains
-    if (needsSmsVerification && !smsVerified) {
-      setSmsError('Please verify your phone number with SMS code');
+    // Check Turnstile token first
+    if (!turnstileToken) {
+      setSmsError('Please complete the security verification');
       return;
     }
 
-    // Check Turnstile token
-    if (!turnstileToken) {
-      setSmsError('Please complete the security verification');
+    // Validate email after captcha is passed
+    const email = formValues.email?.trim();
+    if (!email) {
+      setEmailValidationError('Please enter your email address');
+      // Reset captcha on failed validation
+      setTurnstileToken(null);
+      setTurnstileKey((prev) => prev + 1);
+      return;
+    }
+
+    // Basic email format check
+    if (!email.includes('@')) {
+      setEmailValidationError('Please enter a valid email address');
+      // Reset captcha on failed validation
+      setTurnstileToken(null);
+      setTurnstileKey((prev) => prev + 1);
+      return;
+    }
+
+    // Validate email
+    setEmailValidating(true);
+    setEmailValidationError(null);
+    const result = await validateEmail(email);
+    console.log('result', result);
+
+    if (!result.isValid) {
+      setEmailValidationError(
+        result.message || 'Email is not valid. Please use another email address.'
+      );
+      setEmailValidating(false);
+      // Reset captcha on failed validation
+      setTurnstileToken(null);
+      setTurnstileKey((prev) => prev + 1);
+      return;
+    }
+    setEmailValidationError(null);
+    setEmailValidating(false);
+
+    // Check SMS verification for free email domains
+    if (needsSmsVerification && !smsVerified) {
+      setSmsError('Please verify your phone number with SMS code');
       return;
     }
 
@@ -394,7 +437,7 @@ export const RequestDialog = ({
                       ))}
                     </div>
                     <div
-                      className={`${st.inputWrapper} ${st.full} ${errors.onChange?.email ? st.error : ''}`}
+                      className={`${st.inputWrapper} ${st.full} ${errors.onChange?.email || emailValidationError ? st.error : ''}`}
                     >
                       <Field name="email">
                         {(field) => (
@@ -410,6 +453,7 @@ export const RequestDialog = ({
                       {errors.onChange?.email?.map((err) => (
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
+                      {emailValidationError && <ErrorMessage>{emailValidationError}</ErrorMessage>}
                     </div>
                     <div
                       className={`${st.inputWrapper} ${st.full} ${errors.onChange?.phone ? st.error : ''}`}
@@ -570,7 +614,7 @@ export const RequestDialog = ({
 
                         return (
                           <Button disabled={isDisabled} type="submit" fullWidth>
-                            {isSubmitting ? 'Loading...' : 'Request'}
+                            {isSubmitting || emailValidating ? 'Loading...' : 'Request'}
                           </Button>
                         );
                       }}

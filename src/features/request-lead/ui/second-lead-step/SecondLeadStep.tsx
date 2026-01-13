@@ -4,6 +4,7 @@ import { type ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { Turnstile } from '@marsidev/react-turnstile';
 
+import { validateEmail } from '@/shared/lib/email-validation';
 import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
@@ -102,15 +103,52 @@ export const SecondLeadStep = ({
       onSubmit: secondLeadStepSchema,
     },
     onSubmit: async (data) => {
-      // Check SMS verification for free email domains
-      if (needsSmsVerification && !smsVerified) {
-        setSmsError('Please verify your phone number with SMS code');
+      // Check Turnstile token first
+      if (!turnstileToken) {
+        console.error('Turnstile token is missing');
         return;
       }
 
-      // Check Turnstile token
-      if (!turnstileToken) {
-        console.error('Turnstile token is missing');
+      // Validate email after captcha is passed
+      const email = firstStepData.email?.trim();
+      if (!email) {
+        setEmailValidationError('Please enter your email address on step 1');
+        // Reset captcha on failed validation
+        setTurnstileToken(null);
+        setTurnstileKey((prev) => prev + 1);
+        return;
+      }
+
+      // Basic email format check
+      if (!email.includes('@')) {
+        setEmailValidationError('Please enter a valid email address');
+        // Reset captcha on failed validation
+        setTurnstileToken(null);
+        setTurnstileKey((prev) => prev + 1);
+        return;
+      }
+
+      // Validate email
+      setEmailValidating(true);
+      setEmailValidationError(null);
+      const result = await validateEmail(email);
+
+      if (!result.isValid) {
+        setEmailValidationError(
+          result.message || 'Email is not valid. Please use another email address.'
+        );
+        setEmailValidating(false);
+        // Reset captcha on failed validation
+        setTurnstileToken(null);
+        setTurnstileKey((prev) => prev + 1);
+        return;
+      }
+      setEmailValidationError(null);
+      setEmailValidating(false);
+
+      // Check SMS verification for free email domains
+      if (needsSmsVerification && !smsVerified) {
+        setSmsError('Please verify your phone number with SMS code');
         return;
       }
 
@@ -231,6 +269,10 @@ export const SecondLeadStep = ({
   const [smsSending, setSmsSending] = useState(false);
   const [smsVerifying, setSmsVerifying] = useState(false);
   const [smsError, setSmsError] = useState<string | null>(null);
+
+  // Email validation state
+  const [emailValidating, setEmailValidating] = useState(false);
+  const [emailValidationError, setEmailValidationError] = useState<string | null>(null);
 
   // Check if email requires SMS verification (guarded by feature flag)
   const needsSmsVerification =
@@ -571,6 +613,11 @@ export const SecondLeadStep = ({
             </div>
           )}
         </section>
+        {emailValidationError && (
+          <div style={{ marginBottom: '16px' }}>
+            <ErrorMessage>{emailValidationError}</ErrorMessage>
+          </div>
+        )}
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
           {([canSubmit, isSubmitting]) => {
             // Disable button if SMS verification is required but not completed
@@ -579,7 +626,7 @@ export const SecondLeadStep = ({
 
             return (
               <Button disabled={isDisabled} type="submit" fullWidth>
-                {isSubmitting ? 'Submitting...' : 'Submit'}
+                {isSubmitting || emailValidating ? 'Submitting...' : 'Submit'}
               </Button>
             );
           }}
