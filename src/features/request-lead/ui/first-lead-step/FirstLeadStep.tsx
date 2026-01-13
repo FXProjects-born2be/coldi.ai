@@ -38,29 +38,33 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
       onSubmit: firstLeadStepSchema,
     },
     onSubmit: async (data) => {
-      // Check email validation
-      if (isEmailValid === false || emailValidating) {
-        if (emailValidating) {
-          setEmailValidationError('Please wait while we validate your email...');
-        }
+      // Validate email on submit
+      const email = formValues.email?.trim();
+      if (!email) {
+        setEmailValidationError('Please enter your email address');
         return;
       }
 
-      // If email validation hasn't completed yet, validate it now
-      if (isEmailValid === null && formValues.email) {
-        setEmailValidating(true);
-        const result = await validateEmail(formValues.email);
-        setIsEmailValid(result.isValid);
-        if (!result.isValid) {
-          setEmailValidationError(
-            result.message || 'Email is not valid. Please use another email address.'
-          );
-          setEmailValidating(false);
-          return;
-        }
-        setEmailValidationError(null);
-        setEmailValidating(false);
+      // Basic email format check
+      if (!email.includes('@')) {
+        setEmailValidationError('Please enter a valid email address');
+        return;
       }
+
+      // Validate email
+      setEmailValidating(true);
+      setEmailValidationError(null);
+      const result = await validateEmail(email);
+
+      if (!result.isValid) {
+        setEmailValidationError(
+          result.message || 'Email is not valid. Please use another email address.'
+        );
+        setEmailValidating(false);
+        return;
+      }
+      setEmailValidationError(null);
+      setEmailValidating(false);
 
       onSubmit(data.value);
       localStorage?.setItem('LeadRequestFirstStepData', JSON.stringify(data.value));
@@ -75,47 +79,6 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
   // Email validation state
   const [emailValidating, setEmailValidating] = useState(false);
   const [emailValidationError, setEmailValidationError] = useState<string | null>(null);
-  const [isEmailValid, setIsEmailValid] = useState<boolean | null>(null);
-
-  // Validate email when it changes
-  useEffect(() => {
-    const email = formValues.email?.trim();
-
-    // Reset validation state if email is empty
-    if (!email) {
-      setIsEmailValid(null);
-      setEmailValidationError(null);
-      return;
-    }
-
-    // Basic email format check
-    if (!email.includes('@')) {
-      setIsEmailValid(false);
-      setEmailValidationError('Please enter a valid email address');
-      return;
-    }
-
-    // Debounce email validation
-    const timeoutId = setTimeout(async () => {
-      setEmailValidating(true);
-      setEmailValidationError(null);
-
-      const result = await validateEmail(email);
-
-      setIsEmailValid(result.isValid);
-      if (!result.isValid) {
-        setEmailValidationError(
-          result.message || 'Email is not valid. Please use another email address.'
-        );
-      } else {
-        setEmailValidationError(null);
-      }
-
-      setEmailValidating(false);
-    }, 500); // Wait 500ms after user stops typing
-
-    return () => clearTimeout(timeoutId);
-  }, [formValues.email]);
 
   useEffect(() => {
     console.log(formValues);
@@ -197,14 +160,7 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
               {errors.onSubmit?.email?.map((err) => (
                 <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
               ))}
-              {emailValidating && (
-                <div style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>
-                  Validating email...
-                </div>
-              )}
-              {emailValidationError && !emailValidating && (
-                <ErrorMessage>{emailValidationError}</ErrorMessage>
-              )}
+              {emailValidationError && <ErrorMessage>{emailValidationError}</ErrorMessage>}
             </div>
             <div className={`${st.inputWrapper} ${errors.onSubmit?.phone ? st.error : ''}`}>
               <Field name="phone">
@@ -234,15 +190,9 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
         </section>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
           {([canSubmit, isSubmitting]) => {
-            // Disable button if email is invalid or validating
-            const isEmailInvalid = isEmailValid === false || emailValidating;
             return (
-              <Button
-                disabled={!canSubmit || isSubmitting || isEmailInvalid}
-                type="submit"
-                fullWidth
-              >
-                {isSubmitting ? 'Loading...' : 'Next'}
+              <Button disabled={!canSubmit || isSubmitting} type="submit" fullWidth>
+                {isSubmitting || emailValidating ? 'Loading...' : 'Next'}
               </Button>
             );
           }}

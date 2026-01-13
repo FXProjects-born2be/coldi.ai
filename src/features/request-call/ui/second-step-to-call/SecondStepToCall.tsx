@@ -183,9 +183,52 @@ export const SecondStepToCall = ({
       onSubmit: secondStepCallSchema,
     },
     onSubmit: async (data) => {
-      // Check Turnstile token
+      // Check Turnstile token first
       if (!turnstileToken) {
         console.error('Turnstile token is missing');
+        return;
+      }
+
+      // Validate email after captcha is passed
+      const email = formValues.email?.trim();
+      if (!email) {
+        setEmailValidationError('Please enter your email address');
+        // Reset captcha on failed validation
+        setTurnstileToken(null);
+        setTurnstileKey((prev) => prev + 1);
+        return;
+      }
+
+      // Basic email format check
+      if (!email.includes('@')) {
+        setEmailValidationError('Please enter a valid email address');
+        // Reset captcha on failed validation
+        setTurnstileToken(null);
+        setTurnstileKey((prev) => prev + 1);
+        return;
+      }
+
+      // Validate email
+      setEmailValidating(true);
+      setEmailValidationError(null);
+      const result = await validateEmail(email);
+
+      if (!result.isValid) {
+        setEmailValidationError(
+          result.message || 'Email is not valid. Please use another email address.'
+        );
+        setEmailValidating(false);
+        // Reset captcha on failed validation
+        setTurnstileToken(null);
+        setTurnstileKey((prev) => prev + 1);
+        return;
+      }
+      setEmailValidationError(null);
+      setEmailValidating(false);
+
+      // Check SMS verification for free email domains
+      if (needsSmsVerification && !smsVerified) {
+        setSmsError('Please verify your phone number with SMS code');
         return;
       }
 
@@ -332,7 +375,6 @@ export const SecondStepToCall = ({
   // Email validation state
   const [emailValidating, setEmailValidating] = useState(false);
   const [emailValidationError, setEmailValidationError] = useState<string | null>(null);
-  const [isEmailValid, setIsEmailValid] = useState<boolean | null>(null);
 
   // Check if email requires SMS verification (guarded by feature flag)
   const needsSmsVerification =
@@ -366,46 +408,6 @@ export const SecondStepToCall = ({
     };
     fetchCsrfToken();
   }, []);
-
-  // Validate email when it changes
-  useEffect(() => {
-    const email = formValues.email?.trim();
-
-    // Reset validation state if email is empty
-    if (!email) {
-      setIsEmailValid(null);
-      setEmailValidationError(null);
-      return;
-    }
-
-    // Basic email format check
-    if (!email.includes('@')) {
-      setIsEmailValid(false);
-      setEmailValidationError('Please enter a valid email address');
-      return;
-    }
-
-    // Debounce email validation
-    const timeoutId = setTimeout(async () => {
-      setEmailValidating(true);
-      setEmailValidationError(null);
-
-      const result = await validateEmail(email);
-
-      setIsEmailValid(result.isValid);
-      if (!result.isValid) {
-        setEmailValidationError(
-          result.message || 'Email is not valid. Please use another email address.'
-        );
-      } else {
-        setEmailValidationError(null);
-      }
-
-      setEmailValidating(false);
-    }, 500); // Wait 500ms after user stops typing
-
-    return () => clearTimeout(timeoutId);
-  }, [formValues.email]);
 
   // Reset SMS verification when captcha expires or is cleared
   useEffect(() => {
@@ -528,13 +530,6 @@ export const SecondStepToCall = ({
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          // Check email validation before submit
-          if (isEmailValid === false || emailValidating) {
-            if (emailValidating) {
-              setEmailValidationError('Please wait while we validate your email...');
-            }
-            return;
-          }
           if (needsSmsVerification && !smsVerified) {
             setSmsError('Please verify your phone number with SMS code');
             return;
@@ -577,14 +572,7 @@ export const SecondStepToCall = ({
               {errors.onSubmit?.email?.map((err) => (
                 <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
               ))}
-              {emailValidating && (
-                <div style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>
-                  Validating email...
-                </div>
-              )}
-              {emailValidationError && !emailValidating && (
-                <ErrorMessage>{emailValidationError}</ErrorMessage>
-              )}
+              {emailValidationError && <ErrorMessage>{emailValidationError}</ErrorMessage>}
             </div>
           </FormRow>
           <FormRow>
@@ -723,13 +711,10 @@ export const SecondStepToCall = ({
           <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
             {([canSubmit, isSubmitting]) => {
               const isSmsVerificationRequired = needsSmsVerification && !smsVerified;
-              // Disable button if email is invalid or validating
-              const isEmailInvalid = isEmailValid === false || emailValidating;
-              const isDisabled =
-                !canSubmit || isSubmitting || isSmsVerificationRequired || isEmailInvalid;
+              const isDisabled = !canSubmit || isSubmitting || isSmsVerificationRequired;
               return (
                 <Button disabled={isDisabled} type="submit" fullWidth>
-                  {isSubmitting ? 'Loading...' : 'Next'}
+                  {isSubmitting || emailValidating ? 'Loading...' : 'Next'}
                 </Button>
               );
             }}
