@@ -74,6 +74,18 @@ export const Footer = () => {
                   </Link>
                 </li>
               </ul>
+              <ul
+                className={st.footer__list}
+                itemScope
+                itemType="http://schema.org/SiteNavigationElement"
+              >
+                <h4>Legal</h4>
+                <li itemProp="name">
+                  <Link href="/legal" itemProp="url">
+                    Terms of Service
+                  </Link>
+                </li>
+              </ul>
               <ul className={st.footer__list}>
                 <h4>Contact Us</h4>
                 <li>

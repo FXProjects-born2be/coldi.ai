@@ -1,0 +1,82 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #ffffff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+
+  @include mobile {
+    padding: 0 12px 32px 12px;
+    margin-top: 0;
+  }
+}
+
+.files {
+  width: 800px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  .file {
+    display: flex;
+    width: 100%;
+    padding: 32px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+    border-radius: 32px;
+    border: 1px solid rgba(12, 16, 33, 0.1);
+    background: #fff;
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    > div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      h3 {
+        color: #0c1021;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%; /* 24px */
+      }
+      p {
+        overflow: hidden;
+        color: rgba(80, 85, 107, 0.6);
+        text-overflow: ellipsis;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    }
+    a {
+      display: flex;
+      padding: 12px 16px 12px 12px;
+      align-items: center;
+      gap: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(12, 16, 33, 0.1);
+      background: #fafafa;
+      overflow: hidden;
+      color: #0c1021;
+      text-overflow: ellipsis;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+}
