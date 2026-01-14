@@ -21,10 +21,10 @@ export const Files = () => {
             className={st.file}
           >
             <div>
-              <h3>Terms & Conditions</h3>
+              <h3>Terms of Service</h3>
               <p>PDF ・ Last updated 14 January 2026</p>
             </div>
-            <Link href="/terms-and-conditions.pdf" target="_blank">
+            <Link href="/terms-of-service.pdf" target="_blank">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
