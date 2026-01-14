@@ -85,6 +85,11 @@ export const Footer = () => {
                     Terms of Service
                   </Link>
                 </li>
+                <li itemProp="name">
+                  <Link href="/legal" itemProp="url">
+                    Privacy Policy
+                  </Link>
+                </li>
               </ul>
               <ul className={st.footer__list}>
                 <h4>Contact Us</h4>
