@@ -16,6 +16,9 @@ import st from './FirstLeadStep.module.scss';
 
 import 'react-phone-input-2/lib/style.css';
 
+// Feature flag: Email validation (set to true to enable email validation)
+const EMAIL_VALIDATION_ENABLED = false;
+
 export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSchema) => void }) => {
   const { setFirstStepData } = useRequestLeadStore();
 
@@ -51,20 +54,22 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
         return;
       }
 
-      // Validate email
-      setEmailValidating(true);
-      setEmailValidationError(null);
-      const result = await validateEmail(email);
+      // Validate email (if enabled)
+      if (EMAIL_VALIDATION_ENABLED) {
+        setEmailValidating(true);
+        setEmailValidationError(null);
+        const result = await validateEmail(email);
 
-      if (!result.isValid) {
-        setEmailValidationError(
-          result.message || 'Email is not valid. Please use another email address.'
-        );
+        if (!result.isValid) {
+          setEmailValidationError(
+            result.message || 'Email is not valid. Please use another email address.'
+          );
+          setEmailValidating(false);
+          return;
+        }
+        setEmailValidationError(null);
         setEmailValidating(false);
-        return;
       }
-      setEmailValidationError(null);
-      setEmailValidating(false);
 
       onSubmit(data.value);
       localStorage?.setItem('LeadRequestFirstStepData', JSON.stringify(data.value));

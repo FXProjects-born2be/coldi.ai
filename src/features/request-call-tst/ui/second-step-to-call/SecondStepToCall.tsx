@@ -97,6 +97,9 @@ const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '';
 // Feature flag: SMS verification (temporary off; set to true to re-enable)
 const SMS_VERIFICATION_ENABLED = true;
 
+// Feature flag: Email validation (set to true to enable email validation)
+const EMAIL_VALIDATION_ENABLED = false;
+
 export const SecondStepToCall = ({
   botName,
   onSubmit,
@@ -150,23 +153,25 @@ export const SecondStepToCall = ({
         return;
       }
 
-      // Validate email
-      setEmailValidating(true);
-      setEmailValidationError(null);
-      const result = await validateEmail(email);
+      // Validate email (if enabled)
+      if (EMAIL_VALIDATION_ENABLED) {
+        setEmailValidating(true);
+        setEmailValidationError(null);
+        const result = await validateEmail(email);
 
-      if (!result.isValid) {
-        setEmailValidationError(
-          result.message || 'Email is not valid. Please use another email address.'
-        );
+        if (!result.isValid) {
+          setEmailValidationError(
+            result.message || 'Email is not valid. Please use another email address.'
+          );
+          setEmailValidating(false);
+          // Reset captcha on failed validation
+          setTurnstileToken(null);
+          setTurnstileKey((prev) => prev + 1);
+          return;
+        }
+        setEmailValidationError(null);
         setEmailValidating(false);
-        // Reset captcha on failed validation
-        setTurnstileToken(null);
-        setTurnstileKey((prev) => prev + 1);
-        return;
       }
-      setEmailValidationError(null);
-      setEmailValidating(false);
 
       // Check SMS verification for free email domains
       if (needsSmsVerification && !smsVerified) {
