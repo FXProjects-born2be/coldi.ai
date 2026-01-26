@@ -165,7 +165,7 @@ export async function POST(request: Request) {
     let telegramMessage: string;
     if (!isSupported) {
       // Unsupported country: send message without audio
-      telegramMessage = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nCountry code blocked for outbound calls\n\n@monika_farkas\n@goldsor\n@JacobAiris\n@MDTTDMT`;
+      telegramMessage = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nCountry code blocked for outbound calls\n\n@monika_farkas\n@goldsor\n@JacobAiris\n@Natalie_Marten`;
 
       // For unsupported countries, send text message only (no audio)
       const messageRes = await fetch(
@@ -196,7 +196,7 @@ export async function POST(request: Request) {
     }
 
     // Supported country: use standard message
-    telegramMessage = `New hot lead from the site!\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\n@monika_farkas\n@goldsor\n@JacobAiris\n@MDTTDMT`;
+    telegramMessage = `New hot lead from the site!\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\n@monika_farkas\n@goldsor\n@JacobAiris\n@Natalie_Marten`;
 
     // If recording_url is available, send audio with message as caption
     if (recordingUrl) {
