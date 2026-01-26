@@ -5,12 +5,12 @@ import { getDemoStatus } from '@/shared/lib/demo-status-cache';
 import { areFormsEnabled } from '@/shared/lib/forms-status';
 
 const RETELL_API_URL = 'https://api.retellai.com/v2/create-phone-call';
-const RETELL_DEMO_API_KEY = 'key_699f4f31197cd1ecc286b2f94aa4';
-const RETELL_DEMO_AGENT_ID = 'agent_9d2e7c7893bf4abf860003e0bd';
+const RETELL_DEMO_API_KEY = 'key_798c7db6a871dbd4661d3f8201ba';
+const RETELL_DEMO_AGENT_ID = 'agent_6fc05cc128bcee73ca7d0007c5';
 
 // Phone numbers for live-demo
-const PRIMARY_PHONE = '+18076971313';
-const RESERVE_PHONE = '+13658329885';
+const PRIMARY_PHONE = '+12494681104';
+const RESERVE_PHONE = '+12494681104';
 
 /**
  * Get Retell phone number for demo based on system status
