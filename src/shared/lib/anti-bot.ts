@@ -300,6 +300,9 @@ export function detectBot(
   if (suspiciousCheck.reason) reasons.push(suspiciousCheck.reason);
   if (userAgentCheck.reason) reasons.push(userAgentCheck.reason);
 
+  // Block if bot is detected (suspicious patterns or user-agent)
+  const shouldBlock = isBot;
+
   // Log all attempts (both bots and legitimate users)
   logBotAttempt({
     ip,
@@ -310,13 +313,13 @@ export function detectBot(
     data,
     isBot,
     reason: reasons.length > 0 ? reasons.join('; ') : undefined,
-    blocked: false, // Don't block on suspicious patterns alone
+    blocked: shouldBlock,
   });
 
   return {
     isBot,
     reason: reasons.length > 0 ? reasons.join('; ') : undefined,
-    blocked: false,
+    blocked: shouldBlock,
   };
 }
 

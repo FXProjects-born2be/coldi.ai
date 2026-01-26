@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 import sgMail from '@sendgrid/mail';
 
-import { detectBot } from '@/shared/lib/anti-bot';
+import { detectBot, getClientIp } from '@/shared/lib/anti-bot';
 import { areFormsEnabled } from '@/shared/lib/forms-status';
 import { generateSubmissionCode } from '@/shared/lib/submission-codes';
 
@@ -37,8 +37,27 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
+    // Get request metadata for logging
+    const ip = getClientIp(request);
+    const userAgent = request.headers.get('user-agent') || 'unknown';
+    const referer = request.headers.get('referer') || 'unknown';
+
     // Require Cloudflare Turnstile token
     if (!turnstileToken) {
+      console.warn('[TURNSTILE] Missing token', {
+        timestamp: new Date().toISOString(),
+        formType: 'pricing',
+        ip,
+        userAgent,
+        referer,
+        email,
+        phone,
+        name,
+        isBot: botDetection.isBot,
+        botReason: botDetection.reason,
+        status: 'FAILED',
+        reason: 'Token missing',
+      });
       return NextResponse.json(
         { message: 'Security verification required. Please complete the captcha.' },
         { status: 400 }
@@ -48,7 +67,20 @@ export async function POST(request: Request): Promise<NextResponse> {
     try {
       const secretKey = process.env.TURNSTILE_SECRET_KEY;
       if (!secretKey) {
-        console.warn('[TURNSTILE] Secret key not configured, rejecting request');
+        console.warn('[TURNSTILE] Secret key not configured', {
+          timestamp: new Date().toISOString(),
+          formType: 'pricing',
+          ip,
+          userAgent,
+          referer,
+          email,
+          phone,
+          name,
+          isBot: botDetection.isBot,
+          botReason: botDetection.reason,
+          status: 'FAILED',
+          reason: 'Secret key not configured',
+        });
         return NextResponse.json(
           { message: 'Security verification failed. Please try again.' },
           { status: 400 }
@@ -69,18 +101,61 @@ export async function POST(request: Request): Promise<NextResponse> {
         }
       );
       const turnstileData = await turnstileResponse.json();
+
       if (!turnstileData.success) {
-        console.warn('[BOT DETECTED] Invalid Turnstile token', {
-          ip: botDetection.reason,
-          errors: turnstileData['error-codes'],
+        console.warn('[TURNSTILE] Verification failed', {
+          timestamp: new Date().toISOString(),
+          formType: 'pricing',
+          ip,
+          userAgent,
+          referer,
+          email,
+          phone,
+          name,
+          isBot: botDetection.isBot,
+          botReason: botDetection.reason,
+          status: 'FAILED',
+          reason: 'Turnstile verification failed',
+          errorCodes: turnstileData['error-codes'],
+          turnstileResponse: turnstileData,
         });
         return NextResponse.json(
           { message: 'Security verification failed. Please try again.' },
           { status: 400 }
         );
       }
+
+      // Log successful verification
+      console.log('[TURNSTILE] Verification successful', {
+        timestamp: new Date().toISOString(),
+        formType: 'pricing',
+        ip,
+        userAgent,
+        referer,
+        email,
+        phone,
+        name,
+        isBot: botDetection.isBot,
+        botReason: botDetection.reason,
+        status: 'SUCCESS',
+        challengeTs: turnstileData['challenge_ts'],
+        hostname: turnstileData.hostname,
+      });
     } catch (turnstileError) {
-      console.error('Error verifying Turnstile:', turnstileError);
+      console.error('[TURNSTILE] Verification error', {
+        timestamp: new Date().toISOString(),
+        formType: 'pricing',
+        ip,
+        userAgent,
+        referer,
+        email,
+        phone,
+        name,
+        isBot: botDetection.isBot,
+        botReason: botDetection.reason,
+        status: 'ERROR',
+        error: turnstileError instanceof Error ? turnstileError.message : 'Unknown error',
+      });
       return NextResponse.json(
         { message: 'Security verification failed. Please try again.' },
         { status: 400 }
