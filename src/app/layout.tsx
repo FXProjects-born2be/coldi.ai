@@ -5,7 +5,6 @@ import Script from 'next/script';
 
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
-import { NextIntlClientProvider } from 'next-intl';
 
 import { Footer } from '@/shared/ui/components/footer';
 import { Header } from '@/shared/ui/components/header';
@@ -56,11 +55,9 @@ export default async function RootLayout({
       <GoogleAnalytics gaId="G-RCPHXB9V3B" />
       <RetellWidget />
       <body className={urbanist.variable}>
-        <NextIntlClientProvider>
-          {!isLiveDemo && <Header />}
-          {children}
-          {!isLiveDemo && <Footer />}
-        </NextIntlClientProvider>
+        {!isLiveDemo && <Header />}
+        {children}
+        {!isLiveDemo && <Footer />}
         <Script
           async
           defer

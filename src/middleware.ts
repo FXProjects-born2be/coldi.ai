@@ -1,22 +1,32 @@
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-import createMiddleware from 'next-intl/middleware';
+export function middleware(req: NextRequest) {
+  // ✅ bypass Vercel internal/proxy traffic (BotID дуже часто йде так)
+  if (
+    req.headers.get('x-vercel-proxy-signature') ||
+    req.headers.get('x-vercel-id') ||
+    req.headers.get('x-vercel-sc-host')
+  ) {
+    return NextResponse.next();
+  }
 
-import { routing } from './i18n/routing';
+  // ✅ стандартні байпаси
+  const { pathname } = req.nextUrl;
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname === '/favicon.ico' ||
+    pathname === '/robots.txt' ||
+    pathname === '/sitemap.xml'
+  ) {
+    return NextResponse.next();
+  }
 
-const intlMiddleware = createMiddleware(routing);
-
-export default function middleware(request: NextRequest) {
-  // 1) запускаємо next-intl middleware
-  const response = intlMiddleware(request);
-
-  // 2) додаємо pathname в headers
-  // (врахуй: тут буде вже з locale в URL, напр. /en/pricing)
-  response.headers.set('x-pathname', request.nextUrl.pathname);
-
-  return response;
+  // ...твоя існуюча логіка
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: '/((?!api|trpc|_next|_vercel|.*\\..*).*)',
+  matcher: ['/((?!_next|api|favicon.ico|robots.txt|sitemap.xml).*)'],
 };
