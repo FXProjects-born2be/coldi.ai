@@ -7,35 +7,40 @@ import { initBotId } from 'botid/client/core';
 // - Server actions invoked from a page (e.g., '/dashboard')
 // - Dynamic routes (e.g., '/api/create/*')
 
-initBotId({
-  protect: [
-    {
-      path: '/api/request-call',
-      method: 'POST',
-    },
-    {
-      path: '/api/request-lead',
-      method: 'POST',
-    },
-    {
-      path: '/api/request-pricing',
-      method: 'POST',
-    },
-    {
-      path: '/api/retell-call',
-      method: 'POST',
-    },
-    {
-      path: '/api/hubspot-lead',
-      method: 'POST',
-    },
-    {
-      path: '/api/sms/send-code',
-      method: 'POST',
-    },
-    {
-      path: '/api/sms/verify-code',
-      method: 'POST',
-    },
-  ],
-});
+try {
+  initBotId({
+    protect: [
+      {
+        path: '/api/request-call',
+        method: 'POST',
+      },
+      {
+        path: '/api/request-lead',
+        method: 'POST',
+      },
+      {
+        path: '/api/request-pricing',
+        method: 'POST',
+      },
+      {
+        path: '/api/retell-call',
+        method: 'POST',
+      },
+      {
+        path: '/api/hubspot-lead',
+        method: 'POST',
+      },
+      {
+        path: '/api/sms/send-code',
+        method: 'POST',
+      },
+      {
+        path: '/api/sms/verify-code',
+        method: 'POST',
+      },
+    ],
+  });
+  console.log('[BOTID] BotID initialized successfully');
+} catch (error) {
+  console.error('[BOTID] Error initializing BotID:', error);
+}
