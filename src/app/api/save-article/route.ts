@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
   try {
     // Check for authorization first (if auth is provided and valid, bypass BotID)
     const authHeader = req.headers.get('authorization');
-    const authToken = process.env.SAVE_ARTICLE_SECRET || process.env.FORMS_CONTROL_SECRET;
+    const authToken = process.env.API_SECRET;
     const hasValidAuth = authToken && authHeader === `Bearer ${authToken}`;
 
     // Skip BotID check if:
