@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import sgMail from '@sendgrid/mail';
+import { checkBotId } from 'botid/server';
 
 import { detectBot, getClientIp } from '@/shared/lib/anti-bot';
 import { areFormsEnabled } from '@/shared/lib/forms-status';
@@ -20,6 +21,12 @@ type RequestLeadData = {
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
+  const verification = await checkBotId();
+
+  if (verification.isBot) {
+    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+  }
+
   try {
     const bodyJSON = (await request.json()) as RequestLeadData;
     const {

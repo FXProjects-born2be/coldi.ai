@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import sgMail from '@sendgrid/mail';
+import { checkBotId } from 'botid/server';
 
 import type { Agent } from '@/features/request-call-tst/store/store';
 
@@ -21,6 +22,12 @@ type RequestCallData = {
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
+  const verification = await checkBotId();
+
+  if (verification.isBot) {
+    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+  }
+
   try {
     // Check if forms are enabled
     const formsEnabled = await areFormsEnabled();
