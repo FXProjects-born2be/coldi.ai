@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Script from 'next/script';
 
 import { GoogleAnalytics } from '@next/third-parties/google';
-import { BotIdClient } from 'botid/client';
 import type { Metadata } from 'next';
 
 import { Footer } from '@/shared/ui/components/footer';
@@ -37,37 +36,6 @@ export const metadata: Metadata = {
   },
 };
 
-const protectedRoutes = [
-  {
-    path: '/api/request-call',
-    method: 'POST',
-  },
-  {
-    path: '/api/request-lead',
-    method: 'POST',
-  },
-  {
-    path: '/api/request-pricing',
-    method: 'POST',
-  },
-  {
-    path: '/api/retell-call',
-    method: 'POST',
-  },
-  {
-    path: '/api/hubspot-lead',
-    method: 'POST',
-  },
-  {
-    path: '/api/sms/send-code',
-    method: 'POST',
-  },
-  {
-    path: '/api/sms/verify-code',
-    method: 'POST',
-  },
-];
-
 export default async function RootLayout({
   children,
   params,
@@ -84,9 +52,6 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <head>
-        <BotIdClient protect={protectedRoutes} />
-      </head>
       <GoogleAnalytics gaId="G-RCPHXB9V3B" />
       <RetellWidget />
       <body className={urbanist.variable}>

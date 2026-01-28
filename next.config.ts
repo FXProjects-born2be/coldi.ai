@@ -14,5 +14,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-// Спочатку застосовуємо next-intl, потім botid
 export default withBotId(nextConfig);
