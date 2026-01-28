@@ -1,6 +1,8 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { checkBotId } from 'botid/server';
+
 import { cleanupExpiredCsrfTokens, validateAndConsumeCsrfToken } from '@/shared/lib/csrf-tokens';
 import { getSmsSendCodeWebhookUrl } from '@/shared/lib/system-status';
 import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
@@ -22,6 +24,12 @@ function normalizePhone(phone: string): string {
  * Sends request to webhook with { "to": phone }
  */
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  const verification = await checkBotId();
+
+  if (verification.isBot) {
+    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+  }
+
   try {
     const body = await request.json();
     const { phone, csrfToken } = body;

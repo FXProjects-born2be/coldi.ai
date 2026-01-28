@@ -1,6 +1,8 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { checkBotId } from 'botid/server';
+
 import { getClientIp } from '@/shared/lib/anti-bot';
 import { getSmsVerifyCodeWebhookUrl } from '@/shared/lib/system-status';
 import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
@@ -23,6 +25,12 @@ function normalizePhone(phone: string): string {
  * Sends request to webhook with { "to": phone, "code": code }
  */
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  const verification = await checkBotId();
+
+  if (verification.isBot) {
+    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+  }
+
   // Get system status from cache or fetch fresh (with cookie caching)
   // This ensures correct webhook URL is used based on current status
   const { response: cachedResponse } = await getSystemStatusWithCache(request);

@@ -1,6 +1,8 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { checkBotId } from 'botid/server';
+
 import { areFormsEnabled } from '@/shared/lib/forms-status';
 import { validateAndMarkSubmissionCode } from '@/shared/lib/submission-codes';
 import { getRetellPhoneNumber } from '@/shared/lib/system-status';
@@ -16,6 +18,12 @@ const AGENT_IDS: Record<string, string> = {
 };
 
 export async function POST(req: NextRequest) {
+  const verification = await checkBotId();
+
+  if (verification.isBot) {
+    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+  }
+
   // Check if forms are enabled
   const formsEnabled = await areFormsEnabled();
   if (!formsEnabled) {
