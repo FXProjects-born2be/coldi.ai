@@ -1,6 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { getClientIp } from '@/shared/lib/anti-bot';
 import { getSmsVerifyCodeWebhookUrl } from '@/shared/lib/system-status';
 import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
 
@@ -37,8 +38,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   }
 
   try {
+    // Get request metadata for logging
+    const ip = getClientIp(request);
+    const userAgent = request.headers.get('user-agent') || 'unknown';
+    const referer = request.headers.get('referer') || 'unknown';
+
     const body = await request.json();
-    const { phone, code } = body;
+    const { phone, code, email } = body;
+    // turnstileToken is commented out but may be used in future
+    // const { phone, code, email, turnstileToken } = body;
 
     // Require Turnstile token to prevent direct API calls from console
     /*const isValidToken = await verifyTurnstileToken(turnstileToken);
@@ -53,6 +61,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }*/
 
     if (!phone || typeof phone !== 'string') {
+      console.warn('[SMS VERIFY] Missing phone number', {
+        timestamp: new Date().toISOString(),
+        ip,
+        userAgent,
+        referer,
+        email,
+        status: 'FAILED',
+        reason: 'Phone number is required',
+      });
       return NextResponse.json(
         { verified: false, message: 'Phone number is required' },
         { status: 400 }
@@ -60,6 +77,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
 
     if (!code || typeof code !== 'string') {
+      console.warn('[SMS VERIFY] Missing verification code', {
+        timestamp: new Date().toISOString(),
+        ip,
+        userAgent,
+        referer,
+        email,
+        phone: phone.substring(0, 4) + '***',
+        status: 'FAILED',
+        reason: 'Verification code is required',
+      });
       return NextResponse.json(
         { verified: false, message: 'Verification code is required' },
         { status: 400 }
@@ -67,12 +94,25 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
 
     const normalizedPhone = normalizePhone(phone);
+    const trimmedCode = code.trim();
+
+    // Log verification attempt
+    console.log('[SMS VERIFY] Verification attempt', {
+      timestamp: new Date().toISOString(),
+      ip,
+      userAgent,
+      referer,
+      email: email || 'not provided',
+      phone: normalizedPhone,
+      codeLength: trimmedCode.length,
+      status: 'ATTEMPTING',
+    });
 
     // Send to webhook
     const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ to: normalizedPhone, code: code.trim() }),
+      body: JSON.stringify({ to: normalizedPhone, code: trimmedCode }),
     });
 
     const data = await response.json();
@@ -83,6 +123,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     // If status is "approved" and valid is true, verification is successful
     if (result?.status === 'approved' && result?.valid === true) {
+      // Log successful verification
+      console.log('[SMS VERIFY] Verification successful', {
+        timestamp: new Date().toISOString(),
+        ip,
+        userAgent,
+        referer,
+        email: email || 'not provided',
+        phone: normalizedPhone,
+        codeLength: trimmedCode.length,
+        status: 'SUCCESS',
+        webhookResponse: result,
+      });
+
       const successResponse = NextResponse.json({
         verified: true,
         message: 'Code verified successfully',
@@ -104,6 +157,20 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     // If result contains "Error", verification failed
     if (result?.result === 'Error') {
+      // Log failed verification
+      console.warn('[SMS VERIFY] Verification failed - Error response', {
+        timestamp: new Date().toISOString(),
+        ip,
+        userAgent,
+        referer,
+        email: email || 'not provided',
+        phone: normalizedPhone,
+        codeLength: trimmedCode.length,
+        status: 'FAILED',
+        reason: 'Invalid verification code',
+        webhookResponse: result,
+      });
+
       const errorResponse = NextResponse.json({
         verified: false,
         message: 'Invalid verification code. Please try again.',
@@ -124,6 +191,21 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
 
     // Default to failed verification
+    // Log failed verification with unknown reason
+    console.warn('[SMS VERIFY] Verification failed - Unknown reason', {
+      timestamp: new Date().toISOString(),
+      ip,
+      userAgent,
+      referer,
+      email: email || 'not provided',
+      phone: normalizedPhone,
+      codeLength: trimmedCode.length,
+      status: 'FAILED',
+      reason: 'Unknown verification failure',
+      webhookResponse: result,
+      fullResponse: data,
+    });
+
     const defaultResponse = NextResponse.json({
       verified: false,
       message: 'Invalid verification code. Please try again.',
@@ -142,7 +224,21 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     return defaultResponse;
   } catch (error) {
-    console.error('[SMS Verify Code] Error:', error);
+    // Get request metadata for error logging
+    const ip = getClientIp(request);
+    const userAgent = request.headers.get('user-agent') || 'unknown';
+    const referer = request.headers.get('referer') || 'unknown';
+
+    console.error('[SMS VERIFY] Verification error', {
+      timestamp: new Date().toISOString(),
+      ip,
+      userAgent,
+      referer,
+      status: 'ERROR',
+      error: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+
     return NextResponse.json(
       { verified: false, message: 'Failed to process request. Please try again later.' },
       { status: 500 }
