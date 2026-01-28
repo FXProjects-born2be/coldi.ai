@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
   try {
     // Check for authorization (optional - add your auth logic here)
     const authHeader = req.headers.get('authorization');
-    const authToken = process.env.FORMS_CONTROL_SECRET;
+    const authToken = process.env.FORMS_CONTROL_SECRET || process.env.API_SECRET;
 
     if (authToken && authHeader !== `Bearer ${authToken}`) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
