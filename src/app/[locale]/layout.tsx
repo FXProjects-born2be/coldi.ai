@@ -6,6 +6,7 @@ import Script from 'next/script';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 
+import BotIdClient from '@/shared/ui/components/BotIdClient';
 import { Footer } from '@/shared/ui/components/footer';
 import { Header } from '@/shared/ui/components/header';
 import RetellWidget from '@/shared/ui/components/RetellWidget';
@@ -54,6 +55,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <GoogleAnalytics gaId="G-RCPHXB9V3B" />
       <RetellWidget />
+      <BotIdClient />
       <body className={urbanist.variable}>
         {!isLiveDemo && <Header />}
         {children}
