@@ -38,15 +38,6 @@ try {
         path: '/api/sms/verify-code',
         method: 'POST',
       },
-      // Add page routes to help BotID track requests from specific pages
-      {
-        path: '/call-request',
-        method: 'GET',
-      },
-      {
-        path: '/lead-request',
-        method: 'GET',
-      },
     ],
   });
   console.log('[BOTID] BotID initialized successfully from instrumentation-client.js');
