@@ -19,6 +19,10 @@ initBotId({
       method: 'POST',
     },
     {
+      path: '/api/retell-demo-call',
+      method: 'POST',
+    },
+    {
       path: '/api/hubspot-lead',
       method: 'POST',
     },
