@@ -10,6 +10,14 @@ const supabase = createClient(
 
 export async function POST(req: NextRequest) {
   try {
+    // Check for authorization (same as forms-control: API_SECRET or SAVE_ARTICLE_SECRET)
+    const authHeader = req.headers.get('authorization');
+    const authToken = process.env.API_SECRET;
+
+    if (authToken && authHeader !== `Bearer ${authToken}`) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const formData = await req.formData();
     const file = formData.get('file') as File;
     const metadata = formData.get('metadata') as string;
