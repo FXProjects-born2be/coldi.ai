@@ -1,5 +1,3 @@
-import { NextIntlClientProvider } from 'next-intl';
-
 /**
  * Live Demo Layout
  * This layout wraps only the live-demo pages and excludes Header/Footer
@@ -10,5 +8,5 @@ export default function LiveDemoLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <NextIntlClientProvider>{children}</NextIntlClientProvider>;
+  return <>{children}</>;
 }
