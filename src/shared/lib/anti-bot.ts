@@ -21,6 +21,8 @@ export type BotDetectionResult = {
   isBot: boolean;
   reason?: string;
   blocked: boolean;
+  /** Set when blocked due to rate limit (for detailed logging) */
+  rateLimitType?: 'ip_short' | 'ip_long' | 'email' | 'phone';
 };
 
 export type RequestMetadata = {
@@ -109,6 +111,45 @@ export function checkHoneypot(data: Record<string, unknown>): BotDetectionResult
 }
 
 /**
+ * Log when user hits rate limit (detailed for monitoring)
+ */
+function logRateLimitExceeded(
+  limitType: 'ip_short' | 'ip_long' | 'email' | 'phone',
+  ip: string,
+  formType: 'call' | 'lead' | 'pricing',
+  opts: {
+    userAgent: string | null;
+    referer: string | null;
+    email?: string;
+    phone?: string;
+    reason: string;
+    maxRequests: number;
+    windowMs: number;
+  }
+): void {
+  const emailMasked = opts.email ? opts.email.replace(/(.{2})(.*)(@.*)/, '$1***$3') : undefined;
+  const phoneMasked = opts.phone
+    ? '***' + String(opts.phone).replace(/\D/g, '').slice(-4)
+    : undefined;
+  const windowLabel = opts.windowMs === RATE_LIMIT_SHORT_WINDOW_MS ? '1 minute' : '1 hour';
+
+  console.warn('[RATE LIMIT EXCEEDED]', {
+    timestamp: new Date().toISOString(),
+    limitType,
+    formType,
+    ip,
+    userAgent: opts.userAgent ?? 'unknown',
+    referer: opts.referer ?? 'unknown',
+    email: emailMasked,
+    phone: phoneMasked,
+    reason: opts.reason,
+    maxRequests: opts.maxRequests,
+    window: windowLabel,
+    message: `User exceeded rate limit (${opts.maxRequests} requests per ${windowLabel}). Request blocked.`,
+  });
+}
+
+/**
  * Check rate limits for IP, email, and phone
  */
 export function checkRateLimits(ip: string, email?: string, phone?: string): BotDetectionResult {
@@ -122,6 +163,7 @@ export function checkRateLimits(ip: string, email?: string, phone?: string): Bot
       isBot: true,
       reason: `Too many requests from IP ${ip} in short time window`,
       blocked: true,
+      rateLimitType: 'ip_short',
     };
   }
 
@@ -131,6 +173,7 @@ export function checkRateLimits(ip: string, email?: string, phone?: string): Bot
       isBot: true,
       reason: `Too many requests from IP ${ip} in long time window`,
       blocked: true,
+      rateLimitType: 'ip_long',
     };
   }
 
@@ -150,6 +193,7 @@ export function checkRateLimits(ip: string, email?: string, phone?: string): Bot
         isBot: true,
         reason: `Too many requests from email ${normalizedEmail}`,
         blocked: true,
+        rateLimitType: 'email',
       };
     }
   }
@@ -170,6 +214,7 @@ export function checkRateLimits(ip: string, email?: string, phone?: string): Bot
         isBot: true,
         reason: `Too many requests from phone ${normalizedPhone}`,
         blocked: true,
+        rateLimitType: 'phone',
       };
     }
   }
@@ -243,7 +288,9 @@ export function checkUserAgent(userAgent: string | null): BotDetectionResult {
 }
 
 /**
- * Comprehensive bot detection
+ * Comprehensive bot detection.
+ * Includes: honeypot, checkRateLimits (IP/email/phone), suspicious patterns, User-Agent.
+ * Used by: /api/request-call, /api/request-lead, /api/request-pricing.
  */
 export function detectBot(
   request: Request,
@@ -277,6 +324,21 @@ export function detectBot(
   const phone = (data.phone as string) || undefined;
   const rateLimitCheck = checkRateLimits(ip, email, phone);
   if (rateLimitCheck.blocked) {
+    const limitType = rateLimitCheck.rateLimitType ?? 'ip_long';
+    const maxRequests =
+      limitType === 'ip_short' ? RATE_LIMIT_SHORT_MAX_REQUESTS : RATE_LIMIT_MAX_REQUESTS;
+    const windowMs = limitType === 'ip_short' ? RATE_LIMIT_SHORT_WINDOW_MS : RATE_LIMIT_WINDOW_MS;
+
+    logRateLimitExceeded(limitType, ip, formType, {
+      userAgent,
+      referer,
+      email,
+      phone,
+      reason: rateLimitCheck.reason ?? 'Rate limit exceeded',
+      maxRequests,
+      windowMs,
+    });
+
     logBotAttempt({
       ip,
       userAgent,

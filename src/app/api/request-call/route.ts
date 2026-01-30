@@ -111,10 +111,10 @@ export async function POST(request: Request): Promise<NextResponse> {
     const bodyJSON = (await request.json()) as RequestCallData;
     const { name, email, phone, industry, company, scenario, agent, turnstileToken } = bodyJSON;
 
-    // Comprehensive bot detection
+    // Comprehensive bot detection (includes checkRateLimits for IP/email/phone)
     const botDetection = detectBot(request, bodyJSON, 'call');
 
-    // Block if honeypot is filled or rate limit exceeded
+    // Block if honeypot filled, rate limit exceeded, or suspicious pattern
     if (botDetection.blocked) {
       return NextResponse.json(
         {
