@@ -71,6 +71,14 @@ type RetellWebhookPayload = {
 
 export async function POST(request: Request) {
   try {
+    // Check for authorization (same as save-article: API_SECRET or RETELL_TG_NOTIFICATION_SECRET)
+    const authHeader = request.headers.get('authorization');
+    const authToken = process.env.API_SECRET;
+
+    if (authToken && authHeader !== `Bearer ${authToken}`) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
       console.error('Required environment variables are not configured');
       return NextResponse.json(
