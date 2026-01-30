@@ -91,50 +91,9 @@ export async function POST(request: Request) {
     host,
     method: 'POST',
     path: '/api/retell-tg-notification',
-    hasAuthHeader: !!request.headers.get('authorization'),
   });
 
   try {
-    // Check for authorization (same as save-article: API_SECRET or RETELL_TG_NOTIFICATION_SECRET)
-    const authHeader = request.headers.get('authorization');
-    const authToken = process.env.RETELL_TG_NOTIFICATION_SECRET || process.env.API_SECRET;
-
-    if (authToken) {
-      if (!authHeader) {
-        console.warn('[RETELL-TG-NOTIFICATION] Missing authorization header', {
-          timestamp: new Date().toISOString(),
-          ip,
-          userAgent,
-          referer,
-          origin,
-          error: 'Missing Authorization header',
-        });
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-      }
-
-      const expectedAuth = `Bearer ${authToken}`;
-      if (authHeader !== expectedAuth) {
-        console.warn('[RETELL-TG-NOTIFICATION] Invalid authorization token', {
-          timestamp: new Date().toISOString(),
-          ip,
-          userAgent,
-          referer,
-          origin,
-          error: 'Invalid Authorization token',
-          providedHeader: authHeader.substring(0, 20) + '...',
-          expectedPrefix: expectedAuth.substring(0, 20) + '...',
-        });
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-      }
-
-      console.log('[RETELL-TG-NOTIFICATION] Authorization successful', {
-        timestamp: new Date().toISOString(),
-        ip,
-        userAgent,
-        referer,
-      });
-    }
-
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
       console.error('[RETELL-TG-NOTIFICATION] Configuration error', {
         timestamp: new Date().toISOString(),
