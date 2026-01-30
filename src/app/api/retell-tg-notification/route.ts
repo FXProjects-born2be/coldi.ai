@@ -70,24 +70,104 @@ type RetellWebhookPayload = {
 };
 
 export async function POST(request: Request) {
+  // Extract request metadata for logging
+  const ip =
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    request.headers.get('x-real-ip') ||
+    request.headers.get('cf-connecting-ip') ||
+    'unknown';
+  const userAgent = request.headers.get('user-agent') || 'unknown';
+  const referer = request.headers.get('referer') || 'unknown';
+  const origin = request.headers.get('origin') || 'unknown';
+  const host = request.headers.get('host') || 'unknown';
+
+  // Log incoming request details
+  console.log('[RETELL-TG-NOTIFICATION] Incoming request', {
+    timestamp: new Date().toISOString(),
+    ip,
+    userAgent,
+    referer,
+    origin,
+    host,
+    method: 'POST',
+    path: '/api/retell-tg-notification',
+    hasAuthHeader: !!request.headers.get('authorization'),
+  });
+
   try {
     // Check for authorization (same as save-article: API_SECRET or RETELL_TG_NOTIFICATION_SECRET)
     const authHeader = request.headers.get('authorization');
-    const authToken = process.env.API_SECRET;
+    const authToken = process.env.RETELL_TG_NOTIFICATION_SECRET || process.env.API_SECRET;
 
-    if (authToken && authHeader !== `Bearer ${authToken}`) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (authToken) {
+      if (!authHeader) {
+        console.warn('[RETELL-TG-NOTIFICATION] Missing authorization header', {
+          timestamp: new Date().toISOString(),
+          ip,
+          userAgent,
+          referer,
+          origin,
+          error: 'Missing Authorization header',
+        });
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
+
+      const expectedAuth = `Bearer ${authToken}`;
+      if (authHeader !== expectedAuth) {
+        console.warn('[RETELL-TG-NOTIFICATION] Invalid authorization token', {
+          timestamp: new Date().toISOString(),
+          ip,
+          userAgent,
+          referer,
+          origin,
+          error: 'Invalid Authorization token',
+          providedHeader: authHeader.substring(0, 20) + '...',
+          expectedPrefix: expectedAuth.substring(0, 20) + '...',
+        });
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
+
+      console.log('[RETELL-TG-NOTIFICATION] Authorization successful', {
+        timestamp: new Date().toISOString(),
+        ip,
+        userAgent,
+        referer,
+      });
     }
 
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-      console.error('Required environment variables are not configured');
+      console.error('[RETELL-TG-NOTIFICATION] Configuration error', {
+        timestamp: new Date().toISOString(),
+        ip,
+        userAgent,
+        referer,
+        error: 'Required environment variables are not configured',
+        hasTelegramBotToken: !!TELEGRAM_BOT_TOKEN,
+        hasTelegramChatId: !!TELEGRAM_CHAT_ID,
+      });
       return NextResponse.json(
         { status: 'error', message: 'Configuration error' },
         { status: 500 }
       );
     }
 
-    const body: RetellWebhookPayload = await request.json();
+    let body: RetellWebhookPayload;
+    try {
+      body = await request.json();
+    } catch (parseError) {
+      console.error('[RETELL-TG-NOTIFICATION] JSON parse error', {
+        timestamp: new Date().toISOString(),
+        ip,
+        userAgent,
+        referer,
+        origin,
+        error: parseError instanceof Error ? parseError.message : 'Failed to parse JSON',
+      });
+      return NextResponse.json(
+        { status: 'error', message: 'Invalid JSON payload' },
+        { status: 400 }
+      );
+    }
 
     // Log the full incoming request
     console.log('=== Retell Webhook Request ===');
@@ -95,12 +175,27 @@ export async function POST(request: Request) {
 
     // Only process call_analyzed events
     if (body.event !== 'call_analyzed') {
-      console.log(`Event ignored: ${body.event}`);
+      console.log('[RETELL-TG-NOTIFICATION] Event ignored', {
+        timestamp: new Date().toISOString(),
+        ip,
+        userAgent,
+        referer,
+        event: body.event,
+        reason: 'Event is not call_analyzed',
+      });
       return NextResponse.json({ status: 'success', message: 'Event ignored' });
     }
 
     if (!body.call || !body.call.retell_llm_dynamic_variables) {
-      console.error('Missing call data or dynamic variables');
+      console.error('[RETELL-TG-NOTIFICATION] Missing call data', {
+        timestamp: new Date().toISOString(),
+        ip,
+        userAgent,
+        referer,
+        error: 'Missing call data or dynamic variables',
+        hasCall: !!body.call,
+        hasDynamicVariables: !!body.call?.retell_llm_dynamic_variables,
+      });
       return NextResponse.json(
         { status: 'error', message: 'Missing call data or dynamic variables' },
         { status: 400 }
@@ -138,6 +233,17 @@ export async function POST(request: Request) {
     console.log('========================');
 
     if (!email) {
+      console.error('[RETELL-TG-NOTIFICATION] Missing email', {
+        timestamp: new Date().toISOString(),
+        ip,
+        userAgent,
+        referer,
+        error: 'Missing email in dynamic variables',
+        callId: body.call?.call_id,
+        name,
+        phoneNumber: phone_number,
+        toNumber,
+      });
       return NextResponse.json(
         { status: 'error', message: 'Missing email in dynamic variables' },
         { status: 400 }
@@ -199,7 +305,16 @@ export async function POST(request: Request) {
         );
       }
 
-      console.log(`Successfully sent blocked country notification for ${email}`);
+      console.log('[RETELL-TG-NOTIFICATION] Successfully sent blocked country notification', {
+        timestamp: new Date().toISOString(),
+        ip,
+        userAgent,
+        referer,
+        email,
+        name,
+        phone,
+        countryCode: formattedCountryCode,
+      });
       return NextResponse.json({ status: 'success', message: 'Webhook processed' });
     }
 
@@ -352,13 +467,33 @@ export async function POST(request: Request) {
       }
     }
 
-    console.log(`Successfully processed Retell webhook for ${email}`);
+    console.log('[RETELL-TG-NOTIFICATION] Successfully processed webhook', {
+      timestamp: new Date().toISOString(),
+      ip,
+      userAgent,
+      referer,
+      email,
+      name,
+      phone,
+      callId: body.call?.call_id,
+      hasRecording: !!recordingUrl,
+    });
     return NextResponse.json({ status: 'success', message: 'Webhook processed' });
   } catch (error) {
-    console.error('Retell webhook error:', error);
-    return NextResponse.json(
-      { status: 'error', message: error instanceof Error ? error.message : 'Unknown error' },
-      { status: 500 }
-    );
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : undefined;
+
+    console.error('[RETELL-TG-NOTIFICATION] Error processing webhook', {
+      timestamp: new Date().toISOString(),
+      ip,
+      userAgent,
+      referer,
+      origin,
+      error: errorMessage,
+      stack: errorStack,
+      errorType: error instanceof Error ? error.constructor.name : typeof error,
+    });
+
+    return NextResponse.json({ status: 'error', message: errorMessage }, { status: 500 });
   }
 }
