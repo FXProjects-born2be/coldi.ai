@@ -111,10 +111,10 @@ export async function POST(request: Request): Promise<NextResponse> {
       turnstileToken,
     } = bodyJSON;
 
-    // Comprehensive bot detection
+    // Comprehensive bot detection (includes checkRateLimits for IP/email/phone)
     const botDetection = detectBot(request, bodyJSON, 'lead');
 
-    // Block if honeypot is filled or rate limit exceeded
+    // Block if honeypot filled, rate limit exceeded, or suspicious pattern
     if (botDetection.blocked) {
       return NextResponse.json(
         {
