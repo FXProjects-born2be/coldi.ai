@@ -6,10 +6,17 @@ import { Turnstile } from '@marsidev/react-turnstile';
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
 import PhoneInput from 'react-phone-input-2';
 
+import {
+  RECAPTCHA_ENABLED,
+  TURNSTILE_ENABLED,
+  TURNSTILE_SITE_KEY,
+} from '@/shared/lib/captcha-config';
 import { validateEmail } from '@/shared/lib/email-validation';
 import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
+import { isValidName } from '@/shared/lib/name-validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
+import { Recaptcha } from '@/shared/ui/components/Recaptcha';
 import { CloseIcon } from '@/shared/ui/icons/outline/close';
 import { Button } from '@/shared/ui/kit/button';
 import { TextArea } from '@/shared/ui/kit/text-area/TextArea';
@@ -29,9 +36,6 @@ const SMS_VERIFICATION_ENABLED = true;
 // Feature flag: Email validation (set to true to enable email validation)
 const EMAIL_VALIDATION_ENABLED = false;
 
-// Use env variable for Cloudflare Turnstile site key
-const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '';
-
 export const RequestDialog = ({
   open,
   setOpen,
@@ -42,8 +46,8 @@ export const RequestDialog = ({
   console.log('RequestDialog rendered, open:', open);
   const plan = useRequestPricingStore((state) => state.plan);
   const [isThankYouDialogOpen, setIsThankYouDialogOpen] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [turnstileKey, setTurnstileKey] = useState(0);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaKey, setCaptchaKey] = useState(0);
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
   console.log('plan', plan);
   const planPrice = plan.price.replace('<span>', '').replace('</span>', '');
@@ -58,14 +62,21 @@ export const RequestDialog = ({
       phone: '',
       message: '',
       plan: plan.title,
-      turnstileToken: '',
+      captchaToken: '',
       smsCode: undefined as string | undefined,
     },
     validators: {
       // @ts-expect-error - Schema type mismatch due to optional smsCode field
       onChange: requestPricingSchema,
     },
-    onSubmit: (data) => onSubmit(data.value),
+    onSubmit: (data) => {
+      // Map captchaToken from form values
+      const formData = {
+        ...data.value,
+        captchaToken: (data.value as unknown as { captchaToken: string }).captchaToken || '',
+      } as RequestPricingSchema;
+      onSubmit(formData);
+    },
   });
   const errors = useStore(store, (state) => state.errorMap) as {
     onChange?: {
@@ -74,7 +85,7 @@ export const RequestDialog = ({
       email?: Array<{ message: string }>;
       phone?: Array<{ message: string }>;
       message?: Array<{ message: string }>;
-      turnstileToken?: Array<{ message: string }>;
+      captchaToken?: Array<{ message: string }>;
       smsCode?: Array<{ message: string }>;
     };
   };
@@ -85,7 +96,7 @@ export const RequestDialog = ({
     phone: string;
     message: string;
     plan: string;
-    turnstileToken: string;
+    captchaToken: string;
     smsCode?: string;
   };
 
@@ -136,12 +147,12 @@ export const RequestDialog = ({
 
   // Reset SMS verification when captcha expires or is cleared
   useEffect(() => {
-    if (!turnstileToken) {
+    if (!captchaToken) {
       setSmsCodeSent(false);
       setSmsVerified(false);
       setSmsError(null);
     }
-  }, [turnstileToken]);
+  }, [captchaToken]);
 
   const handleSendSmsCode = async () => {
     if (!formValues.phone) {
@@ -162,7 +173,7 @@ export const RequestDialog = ({
       const res = await fetch('/api/sms/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: formValues.phone, turnstileToken, csrfToken }),
+        body: JSON.stringify({ phone: formValues.phone, turnstileToken: captchaToken, csrfToken }),
       });
 
       const data = await res.json();
@@ -208,7 +219,11 @@ export const RequestDialog = ({
       const res = await fetch('/api/sms/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: formValues.phone, code: formValues.smsCode, turnstileToken }),
+        body: JSON.stringify({
+          phone: formValues.phone,
+          code: formValues.smsCode,
+          turnstileToken: captchaToken,
+        }),
       });
 
       const data = await res.json();
@@ -239,8 +254,8 @@ export const RequestDialog = ({
   };
 
   const onSubmit = async (data: RequestPricingSchema) => {
-    // Check Turnstile token first
-    if (!turnstileToken) {
+    // Check captcha token first
+    if (!captchaToken) {
       setSmsError('Please complete the security verification');
       return;
     }
@@ -250,8 +265,8 @@ export const RequestDialog = ({
     if (!email) {
       setEmailValidationError('Please enter your email address');
       // Reset captcha on failed validation
-      setTurnstileToken(null);
-      setTurnstileKey((prev) => prev + 1);
+      setCaptchaToken(null);
+      setCaptchaKey((prev) => prev + 1);
       return;
     }
 
@@ -259,8 +274,8 @@ export const RequestDialog = ({
     if (!email.includes('@')) {
       setEmailValidationError('Please enter a valid email address');
       // Reset captcha on failed validation
-      setTurnstileToken(null);
-      setTurnstileKey((prev) => prev + 1);
+      setCaptchaToken(null);
+      setCaptchaKey((prev) => prev + 1);
       return;
     }
 
@@ -277,8 +292,8 @@ export const RequestDialog = ({
         );
         setEmailValidating(false);
         // Reset captcha on failed validation
-        setTurnstileToken(null);
-        setTurnstileKey((prev) => prev + 1);
+        setCaptchaToken(null);
+        setCaptchaKey((prev) => prev + 1);
         return;
       }
       setEmailValidationError(null);
@@ -291,6 +306,41 @@ export const RequestDialog = ({
       return;
     }
 
+    // Validate name - if invalid, send to trash route and show success to user
+    const name = data.name?.trim() || '';
+    const isNameValid = name && isValidName(name);
+
+    if (!isNameValid) {
+      // Get honeypot field value from DOM
+      const honeypotField = document.querySelector<HTMLInputElement>('input[name="business_url"]');
+      const honeypotValue = honeypotField?.value || '';
+
+      const trashBody = {
+        ...data,
+        business_url: honeypotValue,
+        formType: 'pricing_request',
+        plan: planTitle,
+      };
+
+      // Send to trash route (user won't know)
+      await fetch('/api/trash-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(trashBody),
+        credentials: 'include',
+      }).catch(() => {
+        // Silently fail - user shouldn't know
+      });
+
+      // Show success to user (they think form was submitted successfully)
+      setOpen(false);
+      setIsThankYouDialogOpen(true);
+      setCaptchaToken(null);
+      setCaptchaKey((prev) => prev + 1);
+      reset();
+      return;
+    }
+
     console.log('Form submitted:', data);
 
     // Get honeypot field value from DOM
@@ -300,7 +350,13 @@ export const RequestDialog = ({
     const res = await fetch('/api/request-pricing', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...data, business_url: honeypotValue }),
+      body: JSON.stringify({
+        ...data,
+        business_url: honeypotValue,
+        captchaToken, // Use unified captcha token name
+        turnstileToken: TURNSTILE_ENABLED ? captchaToken : undefined, // Backward compatibility
+        recaptchaToken: RECAPTCHA_ENABLED ? captchaToken : undefined, // Backward compatibility
+      }),
       credentials: 'include', // Include cookies in request
     });
 
@@ -323,8 +379,8 @@ export const RequestDialog = ({
 
     setOpen(false);
     setIsThankYouDialogOpen(true);
-    setTurnstileToken(null);
-    setTurnstileKey((prev) => prev + 1); // Reset Turnstile widget
+    setCaptchaToken(null);
+    setCaptchaKey((prev) => prev + 1); // Reset captcha widget
     reset();
 
     // Send to HubSpot
@@ -519,34 +575,54 @@ export const RequestDialog = ({
                       />
                     </div>
                     <div
-                      className={`${st.inputWrapper} ${st.full} ${errors.onChange?.turnstileToken ? st.error : ''}`}
+                      className={`${st.inputWrapper} ${st.full} ${errors.onChange?.captchaToken ? st.error : ''}`}
                     >
-                      <Field name="turnstileToken">
+                      <Field name="captchaToken">
                         {(field) => (
-                          <Turnstile
-                            key={turnstileKey}
-                            siteKey={TURNSTILE_SITE_KEY}
-                            onSuccess={(token) => {
-                              setTurnstileToken(token);
-                              field.handleChange(token);
-                            }}
-                            onError={() => {
-                              setTurnstileToken(null);
-                              field.handleChange('');
-                            }}
-                            onExpire={() => {
-                              setTurnstileToken(null);
-                              field.handleChange('');
-                            }}
-                          />
+                          <>
+                            {TURNSTILE_ENABLED ? (
+                              <Turnstile
+                                key={captchaKey}
+                                siteKey={TURNSTILE_SITE_KEY}
+                                onSuccess={(token) => {
+                                  setCaptchaToken(token);
+                                  field.handleChange(token);
+                                }}
+                                onError={() => {
+                                  setCaptchaToken(null);
+                                  field.handleChange('');
+                                }}
+                                onExpire={() => {
+                                  setCaptchaToken(null);
+                                  field.handleChange('');
+                                }}
+                              />
+                            ) : RECAPTCHA_ENABLED ? (
+                              <Recaptcha
+                                key={captchaKey}
+                                onSuccess={(token) => {
+                                  setCaptchaToken(token);
+                                  field.handleChange(token);
+                                }}
+                                onError={() => {
+                                  setCaptchaToken(null);
+                                  field.handleChange('');
+                                }}
+                                onExpire={() => {
+                                  setCaptchaToken(null);
+                                  field.handleChange('');
+                                }}
+                              />
+                            ) : null}
+                          </>
                         )}
                       </Field>
-                      {errors.onChange?.turnstileToken?.map((err: { message: string }) => (
+                      {errors.onChange?.captchaToken?.map((err: { message: string }) => (
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
                     </div>
                     {/* SMS verification - only for free email domains, shown after captcha */}
-                    {needsSmsVerification && turnstileToken && (
+                    {needsSmsVerification && captchaToken && (
                       <div className={`${st.inputWrapper} ${st.full}`}>
                         {!smsCodeSent ? (
                           <>
