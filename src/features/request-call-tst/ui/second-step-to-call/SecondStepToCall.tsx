@@ -4,10 +4,19 @@ import { type ReactNode, useEffect, useState } from 'react';
 
 import { Turnstile } from '@marsidev/react-turnstile';
 
+import {
+  HCAPTCHA_ENABLED,
+  RECAPTCHA_ENABLED,
+  TURNSTILE_ENABLED,
+  TURNSTILE_SITE_KEY,
+} from '@/shared/lib/captcha-config';
 import { validateEmail } from '@/shared/lib/email-validation';
 import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
+import { isValidName } from '@/shared/lib/name-validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
+import { HCaptcha } from '@/shared/ui/components/HCaptcha';
+import { Recaptcha } from '@/shared/ui/components/Recaptcha';
 import { Button } from '@/shared/ui/kit/button';
 import { Select } from '@/shared/ui/kit/select';
 import { TextField } from '@/shared/ui/kit/text-field';
@@ -91,9 +100,6 @@ const companySizes = [
   '+91',
 ];*/
 
-// Use env variable for Cloudflare Turnstile site key
-const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '';
-
 // Feature flag: SMS verification (temporary off; set to true to re-enable)
 const SMS_VERIFICATION_ENABLED = true;
 
@@ -110,8 +116,8 @@ export const SecondStepToCall = ({
   onUnsupportedCountry: () => void;
 }) => {
   const { agent, firstStepData } = useRequestCallStore();
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [turnstileKey, setTurnstileKey] = useState(0);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaKey, setCaptchaKey] = useState(0);
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
   console.log('botName', botName);
   const { Field, Subscribe, handleSubmit, store } = useForm({
@@ -120,7 +126,7 @@ export const SecondStepToCall = ({
       email: '',
       industry: '',
       company: '',
-      turnstileToken: '',
+      captchaToken: '',
       smsCode: undefined as string | undefined,
     },
     validators: {
@@ -128,9 +134,9 @@ export const SecondStepToCall = ({
       onSubmit: secondStepCallSchema,
     },
     onSubmit: async (data) => {
-      // Check Turnstile token first
-      if (!turnstileToken) {
-        console.error('Turnstile token is missing');
+      // Check captcha token first
+      if (!captchaToken) {
+        console.error('Captcha token is missing');
         return;
       }
 
@@ -139,8 +145,8 @@ export const SecondStepToCall = ({
       if (!email) {
         setEmailValidationError('Please enter your email address');
         // Reset captcha on failed validation
-        setTurnstileToken(null);
-        setTurnstileKey((prev) => prev + 1);
+        setCaptchaToken(null);
+        setCaptchaKey((prev) => prev + 1);
         return;
       }
 
@@ -148,8 +154,8 @@ export const SecondStepToCall = ({
       if (!email.includes('@')) {
         setEmailValidationError('Please enter a valid email address');
         // Reset captcha on failed validation
-        setTurnstileToken(null);
-        setTurnstileKey((prev) => prev + 1);
+        setCaptchaToken(null);
+        setCaptchaKey((prev) => prev + 1);
         return;
       }
 
@@ -165,8 +171,8 @@ export const SecondStepToCall = ({
           );
           setEmailValidating(false);
           // Reset captcha on failed validation
-          setTurnstileToken(null);
-          setTurnstileKey((prev) => prev + 1);
+          setCaptchaToken(null);
+          setCaptchaKey((prev) => prev + 1);
           return;
         }
         setEmailValidationError(null);
@@ -176,6 +182,41 @@ export const SecondStepToCall = ({
       // Check SMS verification for free email domains
       if (needsSmsVerification && !smsVerified) {
         setSmsError('Please verify your phone number with SMS code');
+        return;
+      }
+
+      // Validate name - if invalid, send to trash route and show success to user
+      const name = data.value.name?.trim() || '';
+      const isNameValid = name && isValidName(name);
+
+      if (!isNameValid) {
+        // Get honeypot field value from DOM
+        const honeypotField = document.querySelector<HTMLInputElement>('input[name="website_url"]');
+        const honeypotValue = honeypotField?.value || '';
+
+        const trashBody = {
+          ...data.value,
+          ...firstStepData,
+          agent,
+          website_url: honeypotValue,
+          formType: 'call_request_tst',
+        };
+
+        // Send to trash route (user won't know)
+        await fetch('/api/trash-form', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(trashBody),
+          credentials: 'include',
+        }).catch(() => {
+          // Silently fail - user shouldn't know
+        });
+
+        // Show success to user (they think form was submitted successfully)
+        localStorage?.removeItem('CallRequestFirstStepData');
+        onSubmit(data.value);
+        setCaptchaToken(null);
+        setCaptchaKey((prev) => prev + 1);
         return;
       }
 
@@ -203,7 +244,15 @@ export const SecondStepToCall = ({
       const honeypotField = document.querySelector<HTMLInputElement>('input[name="website_url"]');
       const honeypotValue = honeypotField?.value || '';
 
-      const body = { ...data.value, ...firstStepData, agent, website_url: honeypotValue };
+      const body = {
+        ...data.value,
+        ...firstStepData,
+        agent,
+        website_url: honeypotValue,
+        captchaToken, // Use unified captcha token name
+        turnstileToken: TURNSTILE_ENABLED ? captchaToken : undefined, // Backward compatibility
+        recaptchaToken: RECAPTCHA_ENABLED ? captchaToken : undefined, // Backward compatibility
+      };
       console.log(body);
       const res = await fetch('/api/request-call', {
         method: 'POST',
@@ -288,9 +337,9 @@ export const SecondStepToCall = ({
         onSubmit(data.value);
       }
 
-      // Reset Turnstile after successful submission
-      setTurnstileToken(null);
-      setTurnstileKey((prev) => prev + 1);
+      // Reset captcha after successful submission
+      setCaptchaToken(null);
+      setCaptchaKey((prev) => prev + 1);
     },
   });
   const errors = useStore(store, (state) => state.errorMap) as {
@@ -300,7 +349,7 @@ export const SecondStepToCall = ({
       smsCode?: Array<{ message: string }>;
       industry?: Array<{ message: string }>;
       company?: Array<{ message: string }>;
-      turnstileToken?: Array<{ message: string }>;
+      captchaToken?: Array<{ message: string }>;
     };
   };
   const formValues = useStore(store, (state) => state.values) as {
@@ -309,7 +358,7 @@ export const SecondStepToCall = ({
     smsCode?: string;
     industry: string;
     company: string;
-    turnstileToken: string;
+    captchaToken: string;
   };
 
   // SMS verification state
@@ -358,12 +407,12 @@ export const SecondStepToCall = ({
 
   // Reset SMS verification when captcha expires or is cleared
   useEffect(() => {
-    if (!turnstileToken) {
+    if (!captchaToken) {
       setSmsCodeSent(false);
       setSmsVerified(false);
       setSmsError(null);
     }
-  }, [turnstileToken]);
+  }, [captchaToken]);
 
   const handleSendSmsCode = async () => {
     if (!firstStepData.phone) {
@@ -385,7 +434,11 @@ export const SecondStepToCall = ({
       const res = await fetch('/api/sms/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: firstStepData.phone, turnstileToken, csrfToken }),
+        body: JSON.stringify({
+          phone: firstStepData.phone,
+          turnstileToken: captchaToken,
+          csrfToken,
+        }),
       });
 
       const data = await res.json();
@@ -440,7 +493,7 @@ export const SecondStepToCall = ({
         body: JSON.stringify({
           phone: firstStepData.phone,
           code: formValues.smsCode,
-          turnstileToken,
+          turnstileToken: captchaToken,
         }),
       });
 
@@ -562,33 +615,69 @@ export const SecondStepToCall = ({
               style={{ display: 'none' }}
             />
           </div>
-          <div className={`${st.inputWrapper} ${errors.onSubmit?.turnstileToken ? st.error : ''}`}>
-            <Field name="turnstileToken">
+          <div className={`${st.inputWrapper} ${errors.onSubmit?.captchaToken ? st.error : ''}`}>
+            <Field name="captchaToken">
               {(field) => (
-                <Turnstile
-                  key={turnstileKey}
-                  siteKey={TURNSTILE_SITE_KEY}
-                  onSuccess={(token) => {
-                    setTurnstileToken(token);
-                    field.handleChange(token);
-                  }}
-                  onError={() => {
-                    setTurnstileToken(null);
-                    field.handleChange('');
-                  }}
-                  onExpire={() => {
-                    setTurnstileToken(null);
-                    field.handleChange('');
-                  }}
-                />
+                <>
+                  {TURNSTILE_ENABLED ? (
+                    <Turnstile
+                      key={captchaKey}
+                      siteKey={TURNSTILE_SITE_KEY}
+                      onSuccess={(token) => {
+                        setCaptchaToken(token);
+                        field.handleChange(token);
+                      }}
+                      onError={() => {
+                        setCaptchaToken(null);
+                        field.handleChange('');
+                      }}
+                      onExpire={() => {
+                        setCaptchaToken(null);
+                        field.handleChange('');
+                      }}
+                    />
+                  ) : HCAPTCHA_ENABLED ? (
+                    <HCaptcha
+                      resetKey={captchaKey}
+                      onSuccess={(token) => {
+                        setCaptchaToken(token);
+                        field.handleChange(token);
+                      }}
+                      onError={() => {
+                        setCaptchaToken(null);
+                        field.handleChange('');
+                      }}
+                      onExpire={() => {
+                        setCaptchaToken(null);
+                        field.handleChange('');
+                      }}
+                    />
+                  ) : RECAPTCHA_ENABLED ? (
+                    <Recaptcha
+                      resetKey={captchaKey}
+                      onSuccess={(token) => {
+                        setCaptchaToken(token);
+                        field.handleChange(token);
+                      }}
+                      onError={() => {
+                        setCaptchaToken(null);
+                        field.handleChange('');
+                      }}
+                      onExpire={() => {
+                        setCaptchaToken(null);
+                        field.handleChange('');
+                      }}
+                    />
+                  ) : null}
+                </>
               )}
             </Field>
-            {errors.onSubmit?.turnstileToken?.map((err) => (
+            {errors.onSubmit?.captchaToken?.map((err) => (
               <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
             ))}
           </div>
           {/* SMS verification - only for free email domains, shown after captcha */}
-          {needsSmsVerification && turnstileToken && (
+          {needsSmsVerification && captchaToken && (
             <div className={st.inputWrapper}>
               {!smsCodeSent ? (
                 <>

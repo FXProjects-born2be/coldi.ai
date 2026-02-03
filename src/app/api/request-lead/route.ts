@@ -17,7 +17,9 @@ type RequestLeadData = {
   primaryGoal: string[];
   message: string;
   company_website?: string; // Honeypot field
-  turnstileToken?: string;
+  turnstileToken?: string; // Backward compatibility
+  captchaToken?: string;
+  recaptchaToken?: string;
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
@@ -109,7 +111,12 @@ export async function POST(request: Request): Promise<NextResponse> {
       primaryGoal,
       message,
       turnstileToken,
+      captchaToken,
+      recaptchaToken,
     } = bodyJSON;
+
+    // Use unified captcha token (prefer new name, fallback to old names for backward compatibility)
+    const token = captchaToken || recaptchaToken || turnstileToken;
 
     // Comprehensive bot detection (includes checkRateLimits for IP/email/phone)
     const botDetection = detectBot(request, bodyJSON, 'lead');
@@ -131,9 +138,9 @@ export async function POST(request: Request): Promise<NextResponse> {
     const userAgent = request.headers.get('user-agent') || 'unknown';
     const referer = request.headers.get('referer') || 'unknown';
 
-    // Require Cloudflare Turnstile token
-    if (!turnstileToken) {
-      console.warn('[TURNSTILE] Missing token', {
+    // Require captcha token
+    if (!token) {
+      console.warn('[CAPTCHA] Missing token', {
         timestamp: new Date().toISOString(),
         formType: 'lead',
         ip,
@@ -153,69 +160,12 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
-    try {
-      const secretKey = process.env.TURNSTILE_SECRET_KEY;
-      if (!secretKey) {
-        console.warn('[TURNSTILE] Secret key not configured', {
-          timestamp: new Date().toISOString(),
-          formType: 'lead',
-          ip,
-          userAgent,
-          referer,
-          email,
-          phone,
-          name: fullName,
-          isBot: botDetection.isBot,
-          botReason: botDetection.reason,
-          status: 'FAILED',
-          reason: 'Secret key not configured',
-        });
-        return NextResponse.json(
-          { message: 'Security verification failed. Please try again.' },
-          { status: 400 }
-        );
-      }
+    // Verify captcha token (supports both Turnstile and reCAPTCHA)
+    const { verifyCaptchaToken } = await import('@/shared/lib/captcha-verification');
+    const captchaVerification = await verifyCaptchaToken(token, ip);
 
-      const turnstileResponse = await fetch(
-        'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            secret: secretKey,
-            response: turnstileToken,
-          }),
-        }
-      );
-      const turnstileData = await turnstileResponse.json();
-
-      if (!turnstileData.success) {
-        console.warn('[TURNSTILE] Verification failed', {
-          timestamp: new Date().toISOString(),
-          formType: 'lead',
-          ip,
-          userAgent,
-          referer,
-          email,
-          phone,
-          name: fullName,
-          isBot: botDetection.isBot,
-          botReason: botDetection.reason,
-          status: 'FAILED',
-          reason: 'Turnstile verification failed',
-          errorCodes: turnstileData['error-codes'],
-          turnstileResponse: turnstileData,
-        });
-        return NextResponse.json(
-          { message: 'Security verification failed. Please try again.' },
-          { status: 400 }
-        );
-      }
-
-      // Log successful verification
-      console.log('[TURNSTILE] Verification successful', {
+    if (!captchaVerification.isValid) {
+      console.warn('[CAPTCHA] Invalid token', {
         timestamp: new Date().toISOString(),
         formType: 'lead',
         ip,
@@ -226,30 +176,31 @@ export async function POST(request: Request): Promise<NextResponse> {
         name: fullName,
         isBot: botDetection.isBot,
         botReason: botDetection.reason,
-        status: 'SUCCESS',
-        challengeTs: turnstileData['challenge_ts'],
-        hostname: turnstileData.hostname,
-      });
-    } catch (turnstileError) {
-      console.error('[TURNSTILE] Verification error', {
-        timestamp: new Date().toISOString(),
-        formType: 'lead',
-        ip,
-        userAgent,
-        referer,
-        email,
-        phone,
-        name: fullName,
-        isBot: botDetection.isBot,
-        botReason: botDetection.reason,
-        status: 'ERROR',
-        error: turnstileError instanceof Error ? turnstileError.message : 'Unknown error',
+        status: 'FAILED',
+        reason: 'Invalid token',
+        captchaType: captchaVerification.type,
       });
       return NextResponse.json(
         { message: 'Security verification failed. Please try again.' },
         { status: 400 }
       );
     }
+
+    // Log successful verification
+    console.log('[CAPTCHA] Verification successful', {
+      timestamp: new Date().toISOString(),
+      formType: 'lead',
+      ip,
+      userAgent,
+      referer,
+      email,
+      phone,
+      name: fullName,
+      isBot: botDetection.isBot,
+      botReason: botDetection.reason,
+      status: 'SUCCESS',
+      captchaType: captchaVerification.type,
+    });
 
     // Check if forms are enabled (after all validations: bot detection, turnstile)
     const formsEnabled = await areFormsEnabled();
