@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Script from 'next/script';
 
-import { RECAPTCHA_FALLBACK_MODE, RECAPTCHA_SITE_KEY } from '@/shared/lib/captcha-config';
+import { RECAPTCHA_SITE_KEY } from '@/shared/lib/captcha-config';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
@@ -33,13 +34,14 @@ type RecaptchaProps = {
   onSuccess: (token: string) => void;
   onError?: () => void;
   onExpire?: () => void;
-  key?: string | number; // For resetting the widget
+  resetKey?: string | number; // For resetting the widget (renamed from 'key' to avoid React warning)
 };
 
-export const Recaptcha = ({ onSuccess, onError, onExpire, key }: RecaptchaProps) => {
+export const Recaptcha = ({ onSuccess, onError, onExpire, resetKey }: RecaptchaProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<number | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   // Store callbacks in refs to avoid re-rendering when they change
   const onSuccessRef = useRef(onSuccess);
@@ -53,36 +55,72 @@ export const Recaptcha = ({ onSuccess, onError, onExpire, key }: RecaptchaProps)
     onExpireRef.current = onExpire;
   }, [onSuccess, onError, onExpire]);
 
-  useEffect(() => {
-    // Load reCAPTCHA script with explicit render
-    // Note: Google reCAPTCHA v2 automatically shows image challenge when needed
-    // Image challenge appears after clicking checkbox based on Google's risk assessment
-    // To increase chance of image challenge: set Security Preference to "Most secure" in Google Console
-    const script = document.createElement('script');
-    // Using fallback=true may help trigger challenges more often (for testing)
-    // Configure via NEXT_PUBLIC_RECAPTCHA_FALLBACK=true in .env.local
-    script.src = RECAPTCHA_FALLBACK_MODE
-      ? 'https://www.google.com/recaptcha/api.js?render=explicit&fallback=true'
-      : 'https://www.google.com/recaptcha/api.js?render=explicit';
-    script.async = true;
-    script.defer = true;
-
-    script.onload = () => {
-      setIsLoaded(true);
-    };
-
-    document.body.appendChild(script);
-
-    return () => {
-      // Cleanup script on unmount
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
+  // Handle script load success
+  const handleScriptLoad = () => {
+    console.log('[RECAPTCHA] Script loaded successfully');
+    // Wait a moment for grecaptcha to initialize, then check
+    const checkGrecaptcha = () => {
+      if (
+        typeof window !== 'undefined' &&
+        window.grecaptcha &&
+        typeof window.grecaptcha.ready === 'function'
+      ) {
+        window.grecaptcha.ready(() => {
+          console.log(
+            '[RECAPTCHA] grecaptcha.ready callback fired - reCAPTCHA is fully initialized'
+          );
+          setIsLoaded(true);
+        });
+      } else {
+        console.warn('[RECAPTCHA] grecaptcha not ready yet, retrying...');
+        setTimeout(checkGrecaptcha, 200);
       }
     };
-  }, []);
+    // Start checking after a short delay
+    setTimeout(checkGrecaptcha, 100);
+  };
+
+  // Handle script load error
+  const handleScriptError = () => {
+    const errorMsg =
+      'Failed to load reCAPTCHA script. Check your internet connection and ensure the site key is valid.';
+    console.error('[RECAPTCHA]', errorMsg);
+    setLoadError(errorMsg);
+  };
 
   useEffect(() => {
+    console.log('[RECAPTCHA] Render effect triggered', {
+      isLoaded,
+      hasContainer: !!containerRef.current,
+      hasSiteKey: !!RECAPTCHA_SITE_KEY,
+      siteKeyPreview: RECAPTCHA_SITE_KEY ? RECAPTCHA_SITE_KEY.substring(0, 10) + '...' : 'none',
+      grecaptchaAvailable: typeof window !== 'undefined' && !!window.grecaptcha,
+    });
+
     if (!isLoaded || !containerRef.current || !RECAPTCHA_SITE_KEY) {
+      if (!RECAPTCHA_SITE_KEY) {
+        console.warn(
+          '[RECAPTCHA] Site key not configured. Please set NEXT_PUBLIC_RECAPTCHA_SITE_KEY in your environment variables.'
+        );
+      }
+      if (!isLoaded) {
+        console.log('[RECAPTCHA] Waiting for script to load...');
+      }
+      if (!containerRef.current) {
+        console.log('[RECAPTCHA] Waiting for container ref...');
+      }
+      return;
+    }
+
+    // Verify grecaptcha is available
+    if (!window.grecaptcha || !window.grecaptcha.ready) {
+      console.error(
+        '[RECAPTCHA] grecaptcha object not available. Script may not have loaded correctly.',
+        {
+          grecaptchaExists: !!window.grecaptcha,
+          readyExists: window.grecaptcha ? typeof window.grecaptcha.ready : 'N/A',
+        }
+      );
       return;
     }
 
@@ -107,7 +145,10 @@ export const Recaptcha = ({ onSuccess, onError, onExpire, key }: RecaptchaProps)
     // when it detects suspicious behavior or insufficient trust signals
     // To force image challenge in testing: use incognito mode or test from same IP repeatedly
     window.grecaptcha.ready(() => {
-      if (!containerRef.current) return;
+      if (!containerRef.current) {
+        console.warn('[RECAPTCHA] Container ref is null, cannot render widget');
+        return;
+      }
 
       // Double-check container is empty
       if (containerRef.current.children.length > 0) {
@@ -115,15 +156,28 @@ export const Recaptcha = ({ onSuccess, onError, onExpire, key }: RecaptchaProps)
       }
 
       try {
+        console.log(
+          '[RECAPTCHA] Rendering widget with site key:',
+          RECAPTCHA_SITE_KEY.substring(0, 10) + '...'
+        );
         const widgetId = window.grecaptcha.render(containerRef.current, {
           sitekey: RECAPTCHA_SITE_KEY,
           callback: (token: string) => {
+            console.log('[RECAPTCHA] Success callback triggered');
             onSuccessRef.current(token);
           },
           'expired-callback': () => {
+            console.log('[RECAPTCHA] Token expired');
             onExpireRef.current?.();
           },
           'error-callback': () => {
+            const errorMsg =
+              'reCAPTCHA error callback triggered. This usually means the site key is invalid, there is a domain mismatch, or the service cannot be reached.';
+            console.error('[RECAPTCHA]', errorMsg, {
+              siteKey: RECAPTCHA_SITE_KEY.substring(0, 10) + '...',
+              currentDomain: typeof window !== 'undefined' ? window.location.hostname : 'unknown',
+            });
+            setLoadError(errorMsg);
             onErrorRef.current?.();
           },
           size: 'normal', // Normal size - shows checkbox first, then image challenge if needed
@@ -133,6 +187,7 @@ export const Recaptcha = ({ onSuccess, onError, onExpire, key }: RecaptchaProps)
         });
 
         widgetIdRef.current = widgetId;
+        console.log('[RECAPTCHA] Widget rendered successfully with ID:', widgetId);
 
         // Try to trigger image challenge by programmatically interacting with the checkbox
         // This may help trigger the challenge, but Google's algorithm ultimately decides
@@ -187,7 +242,7 @@ export const Recaptcha = ({ onSuccess, onError, onExpire, key }: RecaptchaProps)
         }
       }
     });
-  }, [isLoaded, key]); // Removed callbacks from dependencies - using refs instead
+  }, [isLoaded, resetKey]); // resetKey is used to reset the widget when it changes
 
   // Cleanup on unmount
   useEffect(() => {
@@ -209,10 +264,123 @@ export const Recaptcha = ({ onSuccess, onError, onExpire, key }: RecaptchaProps)
     };
   }, []);
 
+  // Listen for recaptcha-ready event if script was already loaded
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleReady = () => {
+      console.log('[RECAPTCHA] Received recaptcha-ready event');
+      setIsLoaded(true);
+    };
+
+    // Check if script already exists and grecaptcha is ready
+    const existingScript = document.querySelector('script[src*="google.com/recaptcha/api.js"]');
+    if (existingScript && window.grecaptcha && typeof window.grecaptcha.ready === 'function') {
+      window.grecaptcha.ready(() => {
+        console.log('[RECAPTCHA] Script already loaded, grecaptcha ready');
+        setIsLoaded(true);
+      });
+    }
+
+    window.addEventListener('recaptcha-ready', handleReady);
+    return () => {
+      window.removeEventListener('recaptcha-ready', handleReady);
+    };
+  }, []);
+
   if (!RECAPTCHA_SITE_KEY) {
-    console.warn('[RECAPTCHA] Site key not configured');
-    return null;
+    console.warn(
+      '[RECAPTCHA] Site key not configured. Please set NEXT_PUBLIC_RECAPTCHA_SITE_KEY in your .env.local file.'
+    );
+    return (
+      <div
+        style={{
+          padding: '10px',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+          background: '#f9f9f9',
+        }}
+      >
+        <p style={{ margin: 0, color: '#d32f2f' }}>
+          reCAPTCHA not configured. Please set NEXT_PUBLIC_RECAPTCHA_SITE_KEY in your environment
+          variables.
+        </p>
+      </div>
+    );
   }
 
-  return <div ref={containerRef} />;
+  // Validate site key format (should be ~40 characters)
+  if (RECAPTCHA_SITE_KEY.length < 20) {
+    console.warn(
+      '[RECAPTCHA] Site key appears to be invalid (too short). Please check your NEXT_PUBLIC_RECAPTCHA_SITE_KEY.'
+    );
+  }
+
+  // Show error message if script failed to load
+  if (loadError) {
+    return (
+      <div
+        style={{
+          padding: '15px',
+          border: '1px solid #d32f2f',
+          borderRadius: '4px',
+          background: '#ffebee',
+          color: '#c62828',
+        }}
+      >
+        <p style={{ margin: '0 0 10px 0', fontWeight: 'bold' }}>reCAPTCHA Error</p>
+        <p style={{ margin: 0, fontSize: '14px' }}>{loadError}</p>
+        <p style={{ margin: '10px 0 0 0', fontSize: '12px', opacity: 0.8 }}>
+          Please check:
+          <br />• Your internet connection
+          <br />• That NEXT_PUBLIC_RECAPTCHA_SITE_KEY is set correctly
+          <br />• That the site key is configured for this domain in Google reCAPTCHA Console
+        </p>
+        <button
+          onClick={() => {
+            setLoadError(null);
+            setIsLoaded(false);
+            window.location.reload();
+          }}
+          style={{
+            marginTop: '10px',
+            padding: '8px 16px',
+            background: '#1976d2',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '14px',
+          }}
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  // Use standard script URL - fallback=true can cause connection issues
+  // For testing image challenges, use incognito mode or configure in Google Console
+  const scriptUrl = 'https://www.google.com/recaptcha/api.js?render=explicit';
+
+  // Check if script already exists
+  const scriptExists =
+    typeof window !== 'undefined' &&
+    document.querySelector('script[src*="google.com/recaptcha/api.js"]');
+
+  return (
+    <>
+      {/* Only load script once globally */}
+      {!scriptExists && (
+        <Script
+          id="recaptcha-script"
+          src={scriptUrl}
+          strategy="afterInteractive"
+          onLoad={handleScriptLoad}
+          onError={handleScriptError}
+        />
+      )}
+      <div ref={containerRef} />
+    </>
+  );
 };
