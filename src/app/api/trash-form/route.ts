@@ -64,7 +64,9 @@ export async function POST(request: Request) {
     const formType = (body.formType as string) || 'unknown';
 
     // Build Telegram message
-    const telegramMessage = `Form Submission (Invalid Name)\n\nForm Type: ${formType}\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nFull Data:\n${JSON.stringify(body, null, 2)}`;
+    //Full Data:\n${JSON.stringify(body, null, 2)}
+
+    const telegramMessage = `Form Submission (Invalid Name)\n\nForm Type: ${formType}\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`;
 
     // Send to Telegram
     const messageRes = await fetch(
