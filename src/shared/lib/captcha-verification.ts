@@ -3,13 +3,14 @@
  * Supports both Turnstile and reCAPTCHA based on feature flags
  */
 
-import { RECAPTCHA_ENABLED, TURNSTILE_ENABLED } from './captcha-config';
+import { HCAPTCHA_ENABLED, RECAPTCHA_ENABLED, TURNSTILE_ENABLED } from './captcha-config';
+import { verifyHcaptchaToken } from './hcaptcha-verification';
 import { verifyRecaptchaToken } from './recaptcha-verification';
 import { verifyTurnstileToken } from './turnstile-verification';
 
 export type CaptchaVerificationResult = {
   isValid: boolean;
-  type: 'turnstile' | 'recaptcha' | 'none';
+  type: 'turnstile' | 'recaptcha' | 'hcaptcha' | 'none';
 };
 
 /**
@@ -22,13 +23,19 @@ export async function verifyCaptchaToken(
   token: string | undefined | null,
   remoteIp?: string
 ): Promise<CaptchaVerificationResult> {
-  // If both are disabled, skip verification (for development)
-  if (!TURNSTILE_ENABLED && !RECAPTCHA_ENABLED) {
-    console.warn('[CAPTCHA] Both Turnstile and reCAPTCHA are disabled, skipping verification');
+  // If all are disabled, skip verification (for development)
+  if (!TURNSTILE_ENABLED && !RECAPTCHA_ENABLED && !HCAPTCHA_ENABLED) {
+    console.warn('[CAPTCHA] All captcha services are disabled, skipping verification');
     return { isValid: true, type: 'none' };
   }
 
-  // Try Turnstile first if enabled
+  // Try hCaptcha first if enabled (preferred for always-on image challenges)
+  if (HCAPTCHA_ENABLED) {
+    const isValid = await verifyHcaptchaToken(token, remoteIp);
+    return { isValid, type: 'hcaptcha' };
+  }
+
+  // Try Turnstile if enabled
   if (TURNSTILE_ENABLED) {
     const isValid = await verifyTurnstileToken(token);
     return { isValid, type: 'turnstile' };

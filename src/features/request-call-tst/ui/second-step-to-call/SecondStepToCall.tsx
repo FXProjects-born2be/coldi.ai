@@ -5,6 +5,7 @@ import { type ReactNode, useEffect, useState } from 'react';
 import { Turnstile } from '@marsidev/react-turnstile';
 
 import {
+  HCAPTCHA_ENABLED,
   RECAPTCHA_ENABLED,
   TURNSTILE_ENABLED,
   TURNSTILE_SITE_KEY,
@@ -14,6 +15,7 @@ import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { isValidName } from '@/shared/lib/name-validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
+import { HCaptcha } from '@/shared/ui/components/HCaptcha';
 import { Recaptcha } from '@/shared/ui/components/Recaptcha';
 import { Button } from '@/shared/ui/kit/button';
 import { Select } from '@/shared/ui/kit/select';
@@ -634,9 +636,25 @@ export const SecondStepToCall = ({
                         field.handleChange('');
                       }}
                     />
+                  ) : HCAPTCHA_ENABLED ? (
+                    <HCaptcha
+                      resetKey={captchaKey}
+                      onSuccess={(token) => {
+                        setCaptchaToken(token);
+                        field.handleChange(token);
+                      }}
+                      onError={() => {
+                        setCaptchaToken(null);
+                        field.handleChange('');
+                      }}
+                      onExpire={() => {
+                        setCaptchaToken(null);
+                        field.handleChange('');
+                      }}
+                    />
                   ) : RECAPTCHA_ENABLED ? (
                     <Recaptcha
-                      key={captchaKey}
+                      resetKey={captchaKey}
                       onSuccess={(token) => {
                         setCaptchaToken(token);
                         field.handleChange(token);
