@@ -34,6 +34,10 @@ export const Select = ({
   const [isOpen, setIsOpen] = useState(false);
   const [showOtherInputState, setShowOtherInputState] = useState(false);
 
+  // Find the selected item's label to display instead of value
+  const selectedItem = items.find((item) => item.value === value);
+  const displayValue = selectedItem ? selectedItem.label : value || placeholder;
+
   const handleItemSelect = (itemValue: string) => {
     if (itemValue === 'Other (Please specify)') {
       onChange(itemValue);
@@ -59,7 +63,7 @@ export const Select = ({
     >
       <Trigger asChild>
         <div className={st.trigger}>
-          <section className={st.triggerContent}>{value || placeholder}</section>
+          <section className={st.triggerContent}>{displayValue}</section>
           <ArrowBottom />
         </div>
       </Trigger>

@@ -8,6 +8,7 @@ import { getDemoStatus } from '@/shared/lib/demo-status-cache';
 
 const RETELL_API_URL = 'https://api.retellai.com/v2/create-phone-call';
 const RETELL_DEMO_API_KEY = 'key_798c7db6a871dbd4661d3f8201ba';
+// Default agent ID (fallback if not provided)
 const RETELL_DEMO_AGENT_ID = 'agent_6fc05cc128bcee73ca7d0007c5';
 
 // Phone numbers for live-demo
@@ -103,11 +104,20 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   // Status is now cached in cookie for 5 minutes
 
   const body = await req.json();
-  const { phone } = body;
+  const { phone, agentId } = body;
 
   if (!phone || typeof phone !== 'string') {
     return NextResponse.json({ error: 'Phone number is required' }, { status: 400 });
   }
+
+  if (!agentId || typeof agentId !== 'string') {
+    return NextResponse.json({ error: 'Agent ID is required' }, { status: 400 });
+  }
+
+  // Use provided agentId or fallback to default
+  const selectedAgentId = agentId || RETELL_DEMO_AGENT_ID;
+
+  console.log('[Retell Demo Call] Selected agent:', selectedAgentId, 'Phone:', phone);
 
   // Get phone number based on system status
   const fromNumber = getDemoRetellPhoneNumber(status);
@@ -119,8 +129,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const payload = {
     from_number: fromNumber,
     to_number: toNumber,
-    override_agent_id: RETELL_DEMO_AGENT_ID,
-    metadata: {},
+    override_agent_id: selectedAgentId,
+    metadata: {
+      agent_id: selectedAgentId,
+      phone: toNumber,
+    },
     retell_llm_dynamic_variables: {},
     custom_sip_headers: {
       'X-Custom-Header': '1',

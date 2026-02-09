@@ -8,9 +8,10 @@ import PhoneInput from 'react-phone-input-2';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { Button } from '@/shared/ui/kit/button';
+import { Select } from '@/shared/ui/kit/select';
 
 import type { RequestPricingSchema } from '../../model/schemas';
-import { requestPricingSchema } from '../../model/schemas';
+import { DEMO_AGENTS, requestPricingSchema } from '../../model/schemas';
 import { useRequestPricingStore } from '../../store/store';
 import { ThankYouDialog } from '../thank-you-dialog/ThankYouDialog';
 import st from './RequestDialog.module.scss';
@@ -34,9 +35,11 @@ export const RequestDialog = () => {
     defaultValues: {
       phone: '',
       turnstileToken: '',
+      agentId: '',
     },
     validators: {
       onChange: requestPricingSchema,
+      onSubmit: requestPricingSchema,
     },
     onSubmit: (data) => onSubmit(data.value),
   });
@@ -44,6 +47,12 @@ export const RequestDialog = () => {
     onChange?: {
       phone?: Array<{ message: string }>;
       turnstileToken?: Array<{ message: string }>;
+      agentId?: Array<{ message: string }>;
+    };
+    onSubmit?: {
+      phone?: Array<{ message: string }>;
+      turnstileToken?: Array<{ message: string }>;
+      agentId?: Array<{ message: string }>;
     };
   };
 
@@ -58,7 +67,7 @@ export const RequestDialog = () => {
     const res = await fetch('/api/retell-demo-call', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone: data.phone }),
+      body: JSON.stringify({ phone: data.phone, agentId: data.agentId }),
       credentials: 'include', // Include cookies in request
     });
 
@@ -115,11 +124,25 @@ export const RequestDialog = () => {
       >
         <section className={st.fields}>
           <div
-            className={`${st.inputWrapper} ${st.full} ${errors.onChange?.phone ? st.error : ''}`}
+            className={`${st.inputWrapper} ${st.full} ${errors.onSubmit?.agentId ? st.error : ''}`}
           >
-            {errors.onChange?.phone?.map((err) => (
+            <Field name="agentId">
+              {(field) => (
+                <Select
+                  items={DEMO_AGENTS.map((agent) => ({ label: agent.label, value: agent.value }))}
+                  value={field.state.value}
+                  onChange={field.handleChange}
+                  placeholder="Select Agent"
+                />
+              )}
+            </Field>
+            {errors.onSubmit?.agentId?.map((err) => (
               <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
             ))}
+          </div>
+          <div
+            className={`${st.inputWrapper} ${st.full} ${errors.onSubmit?.phone ? st.error : ''}`}
+          >
             <Field name="phone">
               {(field) => (
                 <div className={st.phoneInputContainer}>
@@ -139,6 +162,9 @@ export const RequestDialog = () => {
                 </div>
               )}
             </Field>
+            {errors.onSubmit?.phone?.map((err) => (
+              <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+            ))}
           </div>
           {/* Honeypot field - hidden from users but visible to bots */}
           <div
@@ -158,7 +184,7 @@ export const RequestDialog = () => {
             />
           </div>
           <div
-            className={`${st.inputWrapper} ${st.full} ${errors.onChange?.turnstileToken ? st.error : ''}`}
+            className={`${st.inputWrapper} ${st.full} ${errors.onSubmit?.turnstileToken ? st.error : ''}`}
           >
             <Field name="turnstileToken">
               {(field) => (
@@ -180,7 +206,7 @@ export const RequestDialog = () => {
                 />
               )}
             </Field>
-            {errors.onChange?.turnstileToken?.map((err: { message: string }) => (
+            {errors.onSubmit?.turnstileToken?.map((err: { message: string }) => (
               <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
             ))}
           </div>

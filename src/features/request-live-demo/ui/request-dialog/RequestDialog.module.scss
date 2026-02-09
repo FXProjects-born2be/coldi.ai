@@ -120,6 +120,10 @@ form.layout {
   width: 600px;
   max-width: 100%;
   margin: 64px 0;
+  position: relative;
+  z-index: 1; // Base z-index for form
+  isolation: isolate; // Create new stacking context to prevent z-index conflicts
+  
   .fields {
     width: 100%;
     display: flex;
@@ -127,9 +131,13 @@ form.layout {
     column-gap: 16px;
     row-gap: 24px;
     margin-bottom: 24px;
+    position: relative;
+    
     > div {
       width: 100%;
       position: relative;
+      z-index: 1; // Base z-index for form fields
+      
       &.error {
         input,
         [type='button'] {
