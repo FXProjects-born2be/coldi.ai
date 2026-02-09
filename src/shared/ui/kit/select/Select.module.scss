@@ -18,6 +18,8 @@
   transition: all 0.2s ease;
   min-height: 56px;
   width: 100%;
+  position: relative;
+  z-index: 1; // Base z-index for trigger
 
   &:hover {
     border-color: rgba(12, 16, 33, 0.2);
@@ -26,6 +28,10 @@
   &:focus-within {
     border-color: #4268ff;
     box-shadow: 0 0 0 2px rgba(66, 104, 255, 0.1);
+  }
+
+  &[data-state='open'] {
+    z-index: 10000; // Higher z-index when dropdown is open
   }
 }
 
@@ -46,6 +52,8 @@
   min-width: 200px;
   max-height: 300px;
   overflow-y: auto;
+  z-index: 9999 !important; // High z-index to ensure dropdown appears above all form fields and dialogs
+  position: relative;
 }
 
 .item {
