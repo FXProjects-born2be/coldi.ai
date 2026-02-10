@@ -211,7 +211,7 @@ export const RequestDialog = () => {
             ))}
           </div>
         </section>
-        <footer className={st.footer}>
+        <div className={st.footer}>
           <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
             {([canSubmit, isSubmitting]) => {
               return (
@@ -221,7 +221,7 @@ export const RequestDialog = () => {
               );
             }}
           </Subscribe>
-        </footer>
+        </div>
       </form>
       <ThankYouDialog open={isThankYouDialogOpen} onClose={() => setIsThankYouDialogOpen(false)} />
     </>
