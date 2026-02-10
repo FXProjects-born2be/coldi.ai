@@ -123,7 +123,15 @@ form.layout {
   position: relative;
   z-index: 1; // Base z-index for form
   isolation: isolate; // Create new stacking context to prevent z-index conflicts
-  
+  display: flex;
+  flex-direction: column;
+
+  .footer {
+    flex-shrink: 0;
+    margin-top: 24px;
+    padding-top: 16px;
+  }
+
   .fields {
     width: 100%;
     display: flex;
