@@ -92,7 +92,7 @@ export const FirstStepToCall = ({
         }}
       >
         <header className={st.header}>
-          <h2>Mark the call scenarios you are interested in</h2>
+          <h2>Mark the call scenarios that you are interested in</h2>
           <span className={st.divider} />
           <Field name="scenario">
             {(field) => (
