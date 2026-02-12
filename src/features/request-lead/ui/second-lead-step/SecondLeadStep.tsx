@@ -27,6 +27,9 @@ import { type SecondLeadStepSchema, secondLeadStepSchema } from '../../model/sch
 import { useRequestLeadStore } from '../../store/store';
 import st from './SecondLeadStep.module.scss';
 
+// Master switch: set to true to enable all verifications (except captcha which is always on)
+const ENABLE_VERIFICATIONS = false;
+
 // Feature flag: SMS verification (temporary off; set to true to re-enable)
 const SMS_VERIFICATION_ENABLED = true;
 
@@ -137,8 +140,8 @@ export const SecondLeadStep = ({
         return;
       }
 
-      // Validate email (if enabled)
-      if (EMAIL_VALIDATION_ENABLED) {
+      // Validate email (if enabled and verifications on)
+      if (ENABLE_VERIFICATIONS && EMAIL_VALIDATION_ENABLED) {
         setEmailValidating(true);
         setEmailValidationError(null);
         const result = await validateEmail(email);
@@ -157,46 +160,48 @@ export const SecondLeadStep = ({
         setEmailValidating(false);
       }
 
-      // Check SMS verification for free email domains
-      if (needsSmsVerification && !smsVerified) {
+      // Check SMS verification for free email domains (only when verifications enabled)
+      if (ENABLE_VERIFICATIONS && needsSmsVerification && !smsVerified) {
         setSmsError('Please verify your phone number with SMS code');
         return;
       }
 
-      // Validate name - if invalid, send to trash route and show success to user
-      const name = firstStepData.fullName?.trim() || '';
-      const isNameValid = name && isValidName(name);
+      // Validate name - if invalid, send to trash route and show success to user (only when verifications enabled)
+      if (ENABLE_VERIFICATIONS) {
+        const name = firstStepData.fullName?.trim() || '';
+        const isNameValid = name && isValidName(name);
 
-      if (!isNameValid) {
-        // Get honeypot field value from DOM
-        const honeypotField = document.querySelector<HTMLInputElement>(
-          'input[name="company_website"]'
-        );
-        const honeypotValue = honeypotField?.value || '';
+        if (!isNameValid) {
+          // Get honeypot field value from DOM
+          const honeypotField = document.querySelector<HTMLInputElement>(
+            'input[name="company_website"]'
+          );
+          const honeypotValue = honeypotField?.value || '';
 
-        const trashBody = {
-          ...data.value,
-          ...firstStepData,
-          company_website: honeypotValue,
-          formType: 'lead_request',
-        };
+          const trashBody = {
+            ...data.value,
+            ...firstStepData,
+            company_website: honeypotValue,
+            formType: 'lead_request',
+          };
 
-        // Send to trash route (user won't know)
-        await fetch('/api/trash-form', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(trashBody),
-          credentials: 'include',
-        }).catch(() => {
-          // Silently fail - user shouldn't know
-        });
+          // Send to trash route (user won't know)
+          await fetch('/api/trash-form', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(trashBody),
+            credentials: 'include',
+          }).catch(() => {
+            // Silently fail - user shouldn't know
+          });
 
-        // Show success to user (they think form was submitted successfully)
-        localStorage?.removeItem('LeadRequestFirstStepData');
-        onSubmit(data.value);
-        setCaptchaToken(null);
-        setCaptchaKey((prev) => prev + 1);
-        return;
+          // Show success to user (they think form was submitted successfully)
+          localStorage?.removeItem('LeadRequestFirstStepData');
+          onSubmit(data.value);
+          setCaptchaToken(null);
+          setCaptchaKey((prev) => prev + 1);
+          return;
+        }
       }
 
       onSubmit(data.value);
@@ -328,9 +333,9 @@ export const SecondLeadStep = ({
   const [emailValidating, setEmailValidating] = useState(false);
   const [emailValidationError, setEmailValidationError] = useState<string | null>(null);
 
-  // Check if email requires SMS verification (guarded by feature flag)
+  // Check if email requires SMS verification (guarded by ENABLE_VERIFICATIONS and feature flag)
   const needsSmsVerification =
-    SMS_VERIFICATION_ENABLED && firstStepData.email
+    ENABLE_VERIFICATIONS && SMS_VERIFICATION_ENABLED && firstStepData.email
       ? requiresSmsVerification(firstStepData.email)
       : false;
 
