@@ -104,7 +104,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   // Status is now cached in cookie for 5 minutes
 
   const body = await req.json();
-  const { phone, agentId } = body;
+  const { phone, agentId, name } = body;
 
   if (!phone || typeof phone !== 'string') {
     return NextResponse.json({ error: 'Phone number is required' }, { status: 400 });
@@ -126,6 +126,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   // Normalize phone number (ensure it starts with +)
   const toNumber = phone.startsWith('+') ? phone : `+${phone}`;
 
+  const customerName = typeof name === 'string' ? name.trim() : '';
+
   const payload = {
     from_number: fromNumber,
     to_number: toNumber,
@@ -133,8 +135,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     metadata: {
       agent_id: selectedAgentId,
       phone: toNumber,
+      first_name: customerName,
     },
-    retell_llm_dynamic_variables: {},
+    retell_llm_dynamic_variables: {
+      first_name: customerName,
+    },
     custom_sip_headers: {
       'X-Custom-Header': '1',
     },

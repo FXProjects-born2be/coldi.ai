@@ -1,6 +1,7 @@
 import { v } from '@/shared/lib/forms';
 
 export const requestPricingSchema = v.object({
+  name: v.string(), // optional for user; sent to Retell as first_name
   phone: v.pipe(v.string(), v.minLength(1, 'Please provide a valid phone number')),
   turnstileToken: v.pipe(v.string(), v.minLength(1, 'Please complete the security verification.')),
   agentId: v.pipe(v.string(), v.minLength(1, 'Please select an agent')),
