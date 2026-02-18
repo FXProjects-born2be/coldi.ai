@@ -9,6 +9,7 @@ import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { Button } from '@/shared/ui/kit/button';
 import { Select } from '@/shared/ui/kit/select';
+import { TextField } from '@/shared/ui/kit/text-field';
 
 import type { RequestPricingSchema } from '../../model/schemas';
 import { DEMO_AGENTS, requestPricingSchema } from '../../model/schemas';
@@ -33,6 +34,7 @@ export const RequestDialog = () => {
 
   const { Field, Subscribe, handleSubmit, store, reset } = useForm({
     defaultValues: {
+      name: '',
       phone: '',
       turnstileToken: '',
       agentId: '',
@@ -45,11 +47,13 @@ export const RequestDialog = () => {
   });
   const errors = useStore(store, (state) => state.errorMap) as {
     onChange?: {
+      name?: Array<{ message: string }>;
       phone?: Array<{ message: string }>;
       turnstileToken?: Array<{ message: string }>;
       agentId?: Array<{ message: string }>;
     };
     onSubmit?: {
+      name?: Array<{ message: string }>;
       phone?: Array<{ message: string }>;
       turnstileToken?: Array<{ message: string }>;
       agentId?: Array<{ message: string }>;
@@ -67,7 +71,7 @@ export const RequestDialog = () => {
     const res = await fetch('/api/retell-demo-call', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone: data.phone, agentId: data.agentId }),
+      body: JSON.stringify({ phone: data.phone, agentId: data.agentId, name: data.name ?? '' }),
       credentials: 'include', // Include cookies in request
     });
 
@@ -123,6 +127,23 @@ export const RequestDialog = () => {
         }}
       >
         <section className={st.fields}>
+          <div className={`${st.inputWrapper} ${st.full} ${errors.onSubmit?.name ? st.error : ''}`}>
+            <Field name="name">
+              {(field) => (
+                <TextField
+                  name={field.name}
+                  placeholder="Name"
+                  value={String(field.state.value ?? '')}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  intent={field.state.meta.errors.length ? 'danger' : 'default'}
+                />
+              )}
+            </Field>
+            {errors.onSubmit?.name?.map((err) => (
+              <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+            ))}
+          </div>
           <div
             className={`${st.inputWrapper} ${st.full} ${errors.onSubmit?.agentId ? st.error : ''}`}
           >
