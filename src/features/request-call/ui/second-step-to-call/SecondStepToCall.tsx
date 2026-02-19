@@ -27,7 +27,7 @@ import { useRequestCallStore } from '../../store/store';
 import st from './SecondStepToCall.module.scss';
 
 // Feature flag: SMS verification (temporary off; set to true to re-enable)
-const SMS_VERIFICATION_ENABLED = true;
+const SMS_VERIFICATION_ENABLED = false;
 
 // Feature flag: Email validation (set to true to enable email validation)
 const EMAIL_VALIDATION_ENABLED = false;

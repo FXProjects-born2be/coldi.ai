@@ -33,7 +33,7 @@ import st from './RequestDialog.module.scss';
 import 'react-phone-input-2/lib/style.css';
 
 // Feature flag: SMS verification (temporary off; set to true to re-enable)
-const SMS_VERIFICATION_ENABLED = true;
+const SMS_VERIFICATION_ENABLED = false;
 
 // Feature flag: Email validation (set to true to enable email validation)
 const EMAIL_VALIDATION_ENABLED = false;
