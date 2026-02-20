@@ -29,6 +29,7 @@ function getUtmFromSearchParams(searchParams: ReturnType<typeof useSearchParams>
 }
 
 const SUCCESS_REDIRECT_PATH = '/calendar';
+const REDIRECT_DELAY_MS = 1000;
 
 export const RequestDialog = () => {
   const router = useRouter();
@@ -88,7 +89,8 @@ export const RequestDialog = () => {
     if (data.surname?.trim()) params.set('lastName', data.surname.trim());
     if (data.email?.trim()) params.set('email', data.email.trim());
     const query = params.toString();
-    router.push(query ? `${SUCCESS_REDIRECT_PATH}?${query}` : SUCCESS_REDIRECT_PATH);
+    const redirectUrl = query ? `${SUCCESS_REDIRECT_PATH}?${query}` : SUCCESS_REDIRECT_PATH;
+    setTimeout(() => router.push(redirectUrl), REDIRECT_DELAY_MS);
   };
 
   return (
