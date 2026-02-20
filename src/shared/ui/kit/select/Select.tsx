@@ -41,8 +41,8 @@ export const Select = ({
   const handleItemSelect = (itemValue: string) => {
     if (itemValue === 'Other (Please specify)') {
       onChange(itemValue);
+      setOtherValue(items.some((i) => i.value === value) ? '' : value);
       setShowOtherInputState(true);
-      // Не закриваємо дропдаун для "Other"
     } else {
       onChange(itemValue);
       setOtherValue('');
@@ -51,14 +51,25 @@ export const Select = ({
     }
   };
 
+  const commitOtherValue = () => {
+    const trimmed = otherValue.trim();
+    onChange(trimmed ? trimmed : 'Other (Please specify)');
+    setShowOtherInputState(false);
+    setIsOpen(false);
+  };
+
   return (
     <Root
       open={isOpen}
       onOpenChange={(open) => {
-        setIsOpen(open);
         if (!open) {
+          if (showOtherInputState) {
+            const trimmed = otherValue.trim();
+            onChange(trimmed ? trimmed : 'Other (Please specify)');
+          }
           setShowOtherInputState(false);
         }
+        setIsOpen(open);
       }}
     >
       <Trigger asChild>
@@ -82,20 +93,19 @@ export const Select = ({
             </Item>
           ))}
           {showOtherInput && showOtherInputState && (
-            <div className={st.otherInputContainer}>
+            <div
+              className={st.otherInputContainer}
+              onPointerDown={(e) => e.stopPropagation()}
+              onKeyDown={(e) => e.stopPropagation()}
+            >
               <TextField
                 placeholder={otherPlaceholder}
                 value={otherValue}
-                onChange={(e) => {
-                  const newValue = e.target.value;
-                  setOtherValue(newValue);
-                  onChange(newValue);
-                }}
+                onChange={(e) => setOtherValue(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
-                    setIsOpen(false);
-                    setShowOtherInputState(false);
+                    commitOtherValue();
                   }
                 }}
                 autoFocus
