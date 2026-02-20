@@ -3,10 +3,10 @@ import type { Metadata } from 'next';
 import { Faq, Hero, How, Sectors, Why } from './components';
 
 export const metadata: Metadata = {
-  title: 'Coldi Live',
+  title: 'Turn Leads into Meetings',
   description: '',
   openGraph: {
-    title: 'Coldi Live',
+    title: 'Turn Leads into Meetings',
     description: '',
     images: 'https://coldi.ai/images/meta.png',
   },
