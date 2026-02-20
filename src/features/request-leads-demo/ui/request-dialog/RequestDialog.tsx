@@ -1,21 +1,12 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { Turnstile } from '@marsidev/react-turnstile';
 import PhoneInput from 'react-phone-input-2';
 
-import {
-  HCAPTCHA_ENABLED,
-  RECAPTCHA_ENABLED,
-  TURNSTILE_ENABLED,
-  TURNSTILE_SITE_KEY,
-} from '@/shared/lib/captcha-config';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
-import { HCaptcha } from '@/shared/ui/components/HCaptcha';
-import { Recaptcha } from '@/shared/ui/components/Recaptcha';
 import { Button } from '@/shared/ui/kit/button';
 import { Select } from '@/shared/ui/kit/select';
 import { TextField } from '@/shared/ui/kit/text-field';
@@ -41,8 +32,6 @@ const SUCCESS_REDIRECT_PATH = '/calendar';
 
 export const RequestDialog = () => {
   const router = useRouter();
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const [captchaKey, setCaptchaKey] = useState(0);
   const searchParams = useSearchParams();
   const utmParams = useMemo(() => getUtmFromSearchParams(searchParams), [searchParams]);
 
@@ -53,7 +42,6 @@ export const RequestDialog = () => {
       phone: '',
       email: '',
       sector: '',
-      captchaToken: '',
     },
     validators: {
       onChange: bookDemoSchema,
@@ -69,7 +57,6 @@ export const RequestDialog = () => {
       phone?: Array<{ message: string }>;
       email?: Array<{ message: string }>;
       sector?: Array<{ message: string }>;
-      captchaToken?: Array<{ message: string }>;
     };
     onSubmit?: {
       name?: Array<{ message: string }>;
@@ -77,14 +64,10 @@ export const RequestDialog = () => {
       phone?: Array<{ message: string }>;
       email?: Array<{ message: string }>;
       sector?: Array<{ message: string }>;
-      captchaToken?: Array<{ message: string }>;
     };
   };
 
   const onSubmit = async (data: BookDemoSchema) => {
-    if (!captchaToken) {
-      return;
-    }
     const res = await fetch('/api/leads-book-demo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -102,13 +85,9 @@ export const RequestDialog = () => {
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
       console.error('Book demo failed:', err);
-      setCaptchaToken(null);
-      setCaptchaKey((k) => k + 1);
       return;
     }
 
-    setCaptchaToken(null);
-    setCaptchaKey((k) => k + 1);
     reset();
     const params = new URLSearchParams();
     if (data.name?.trim()) params.set('firstName', data.name.trim());
@@ -223,74 +202,11 @@ export const RequestDialog = () => {
             <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
           ))}
         </div>
-        <div
-          className={`${st.inputWrapper} ${st.full} ${errors.onSubmit?.captchaToken ? st.error : ''}`}
-        >
-          <Field name="captchaToken">
-            {(field) => (
-              <>
-                {TURNSTILE_ENABLED ? (
-                  <Turnstile
-                    key={captchaKey}
-                    siteKey={TURNSTILE_SITE_KEY}
-                    onSuccess={(token) => {
-                      setCaptchaToken(token);
-                      field.handleChange(token);
-                    }}
-                    onError={() => {
-                      setCaptchaToken(null);
-                      field.handleChange('');
-                    }}
-                    onExpire={() => {
-                      setCaptchaToken(null);
-                      field.handleChange('');
-                    }}
-                  />
-                ) : HCAPTCHA_ENABLED ? (
-                  <HCaptcha
-                    resetKey={captchaKey}
-                    onSuccess={(token) => {
-                      setCaptchaToken(token);
-                      field.handleChange(token);
-                    }}
-                    onError={() => {
-                      setCaptchaToken(null);
-                      field.handleChange('');
-                    }}
-                    onExpire={() => {
-                      setCaptchaToken(null);
-                      field.handleChange('');
-                    }}
-                  />
-                ) : RECAPTCHA_ENABLED ? (
-                  <Recaptcha
-                    resetKey={captchaKey}
-                    onSuccess={(token) => {
-                      setCaptchaToken(token);
-                      field.handleChange(token);
-                    }}
-                    onError={() => {
-                      setCaptchaToken(null);
-                      field.handleChange('');
-                    }}
-                    onExpire={() => {
-                      setCaptchaToken(null);
-                      field.handleChange('');
-                    }}
-                  />
-                ) : null}
-              </>
-            )}
-          </Field>
-          {errors.onSubmit?.captchaToken?.map((err: { message: string }) => (
-            <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-          ))}
-        </div>
       </section>
       <div className={st.footer}>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
           {([canSubmit, isSubmitting]) => (
-            <Button disabled={!canSubmit || isSubmitting || !captchaToken} type="submit" fullWidth>
+            <Button disabled={!canSubmit || isSubmitting} type="submit" fullWidth>
               {isSubmitting ? 'Sending...' : 'Book a Demo'}
             </Button>
           )}
