@@ -121,6 +121,7 @@ export async function POST(req: NextRequest) {
       console.error('[LEADS-BOOK-DEMO] HubSpot error:', hubspotRes.status, data);
       return NextResponse.json({ error: data }, { status: hubspotRes.status });
     }
+    console.log('[LEADS-BOOK-DEMO] HubSpot response:', data);
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
