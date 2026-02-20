@@ -2,8 +2,6 @@
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
 
-import { Button } from '@/shared/ui/kit/button';
-
 import st from './ThankYouDialog.module.scss';
 
 export const ThankYouDialog = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
@@ -41,9 +39,6 @@ export const ThankYouDialog = ({ open, onClose }: { open: boolean; onClose: () =
                   the optimal solution for your goals.
                 </p>
               </section>
-              <Button onClick={onClose} fullWidth>
-                Continue
-              </Button>
             </div>
           </Description>
         </Content>

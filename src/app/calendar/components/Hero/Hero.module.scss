@@ -32,6 +32,9 @@
       display: block;
       color: #4268ff;
     }
+    @include mobile {
+      font-size: 48px;
+    }
   }
 }
 

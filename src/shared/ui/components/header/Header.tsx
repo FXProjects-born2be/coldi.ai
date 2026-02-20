@@ -11,6 +11,8 @@ import { BurgerMenu } from '@/shared/ui/components/burger-menu';
 
 import st from './Header.module.scss';
 
+//https://calendly.com/coldi/30min
+
 const headerVisibilityOnScrollHandle = (set: (visible: boolean) => void) => {
   const scrollY = window.scrollY;
   set(scrollY > 0);
@@ -57,11 +59,7 @@ export const Header = () => {
         <Navigation />
         <BurgerMenu />
         <div className={st.header__buttons}>
-          <Link
-            className={st.header__bookMeeting}
-            href="https://calendly.com/coldi/30min"
-            target="_blank"
-          >
+          <Link className={st.header__bookMeeting} href="/calendar" target="_blank">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
