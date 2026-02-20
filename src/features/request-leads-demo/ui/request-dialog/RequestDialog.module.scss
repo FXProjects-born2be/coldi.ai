@@ -121,10 +121,11 @@ form.layout {
   max-width: 100%;
   margin: 0;
   position: relative;
-  z-index: 1; // Base z-index for form
-  isolation: isolate; // Create new stacking context to prevent z-index conflicts
+  z-index: 1;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
+  overflow: visible;
 
   .footer {
     flex-shrink: 0;
@@ -139,11 +140,26 @@ form.layout {
     row-gap: 24px;
     margin-bottom: 24px;
     position: relative;
-
+    overflow: visible;
+    > div {
+      &:nth-child(2) {
+        z-index: 999;
+        position: relative;
+        > div {
+          z-index: 999;
+          position: relative;
+          > div {
+            z-index: 999;
+            position: relative;
+          }
+        }
+      }
+    }
     .formRow {
       width: 100%;
       display: flex;
       gap: 16px;
+      z-index: 1;
 
       > div {
         flex: 1;
@@ -158,11 +174,12 @@ form.layout {
     > div {
       width: 100%;
       position: relative;
-      z-index: 1; // Base z-index for form fields
-      
+      z-index: 1;
+      overflow: visible;
+
       &.error {
         input,
-        [type='button'] {
+        [type="button"] {
           border-color: #ff0000 !important;
         }
       }
@@ -196,6 +213,16 @@ form.layout {
 
 .phoneInputContainer {
   width: 100%;
+  position: relative;
+  z-index: 999;
+  overflow: visible;
+
+  // Випадаючий список країн — рендериться бібліотекою, потрібен високий z-index
+  :global(.country-list),
+  :global([class*="country-list"]) {
+    z-index: 99999 !important;
+    position: absolute !important;
+  }
 }
 
 .phoneInput {
@@ -242,8 +269,11 @@ form.layout {
   box-shadow: 0 4px 20px rgba(12, 16, 33, 0.1) !important;
   max-height: 200px !important;
   overflow-y: auto !important;
+  overflow-x: visible !important;
   left: 0 !important;
   top: 100% !important;
+  z-index: 99999 !important;
+  position: absolute !important;
 
   .country {
     padding: 8px 12px !important;
@@ -275,4 +305,10 @@ form.layout {
       color: #535662 !important;
     }
   }
+}
+
+.captchaDevNote {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: #535662;
 }

@@ -7,21 +7,19 @@ import { Button } from '@/shared/ui/kit/button';
 import st from './ThankYouDialog.module.scss';
 
 export const ThankYouDialog = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
-  console.log('ThankYouDialog rendered, open:', open);
   return (
     <Root
       open={open}
-      onOpenChange={(v) => {
-        console.log('ThankYouDialog onOpenChange', v);
-        if (!v) onClose();
+      onOpenChange={(open) => {
+        if (!open) onClose();
       }}
     >
       <Portal>
         <Overlay className={st.overlay} />
-        <Content>
+        <Content className={st.content}>
           <Title />
           <Description asChild>
-            <section className={st.content}>
+            <div>
               <section className={st.content__info}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +41,7 @@ export const ThankYouDialog = ({ open, onClose }: { open: boolean; onClose: () =
               <Button onClick={onClose} fullWidth>
                 Continue
               </Button>
-            </section>
+            </div>
           </Description>
         </Content>
       </Portal>
