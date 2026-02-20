@@ -4,3 +4,13 @@ header {
 footer {
     display: none;
 }
+body{
+    >a{
+        display: none!important;
+    }
+    >div{
+        &:last-child{
+            display: none!important;
+        }
+    }
+}

@@ -144,7 +144,7 @@ export const RequestDialog = () => {
             {(field) => (
               <div className={st.phoneInputContainer}>
                 <PhoneInput
-                  country="us"
+                  country="gb"
                   value={String(field.state.value)}
                   onChange={(phone) => field.handleChange(phone)}
                   onBlur={field.handleBlur}

@@ -110,6 +110,8 @@ export async function POST(req: NextRequest) {
     },
   };
 
+  console.log('[LEADS-BOOK-DEMO] Sending to HubSpot:', JSON.stringify(formData, null, 2));
+
   try {
     const hubspotRes = await fetch(HUBSPOT_FORMS_API_URL, {
       method: 'POST',
@@ -117,11 +119,15 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify(formData),
     });
     const data = await hubspotRes.json();
+    console.log(
+      '[LEADS-BOOK-DEMO] HubSpot response:',
+      hubspotRes.status,
+      JSON.stringify(data, null, 2)
+    );
     if (!hubspotRes.ok) {
       console.error('[LEADS-BOOK-DEMO] HubSpot error:', hubspotRes.status, data);
       return NextResponse.json({ error: data }, { status: hubspotRes.status });
     }
-    console.log('[LEADS-BOOK-DEMO] HubSpot response:', data);
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
