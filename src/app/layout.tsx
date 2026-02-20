@@ -19,6 +19,9 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
+  verification: {
+    google: 'xwxPBu6sQqKwZ2sx5fphyZV8rM-oyAvHww_SZNUXevQ',
+  },
   title: {
     template: '%s | Coldi',
     default: 'AI Voice Agents and Call Center for Business | Coldi',
