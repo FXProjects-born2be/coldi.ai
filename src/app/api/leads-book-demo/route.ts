@@ -6,7 +6,7 @@ import { checkBotId } from 'botid/server';
 import { areFormsEnabled } from '@/shared/lib/forms-status';
 
 const HUBSPOT_FORMS_API_URL =
-  'https://api.hsforms.com/submissions/v3/integration/submit/146476440/fc8302ca-aa67-4e59-a6e6-e69bc1d0cd46';
+  'https://api.hsforms.com/submissions/v3/integration/submit/146476440/1a333114-c2f0-44c0-afbe-7c79d58b399d';
 
 const BOTID_ENABLED = true;
 
@@ -36,7 +36,17 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  let body: { name?: string; surname?: string; phone?: string; email?: string; sector?: string };
+  let body: {
+    name?: string;
+    surname?: string;
+    phone?: string;
+    email?: string;
+    sector?: string;
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+    utm_content?: string;
+  };
   try {
     body = await req.json();
   } catch {
@@ -48,6 +58,10 @@ export async function POST(req: NextRequest) {
   const phone = typeof body.phone === 'string' ? body.phone.trim() : '';
   const email = typeof body.email === 'string' ? body.email.trim() : '';
   const sector = typeof body.sector === 'string' ? body.sector.trim() : '';
+  const utm_source = typeof body.utm_source === 'string' ? body.utm_source.trim() : '';
+  const utm_medium = typeof body.utm_medium === 'string' ? body.utm_medium.trim() : '';
+  const utm_campaign = typeof body.utm_campaign === 'string' ? body.utm_campaign.trim() : '';
+  const utm_content = typeof body.utm_content === 'string' ? body.utm_content.trim() : '';
 
   if (!email || !email.includes('@')) {
     return NextResponse.json({ error: 'Valid email is required' }, { status: 400 });
@@ -57,33 +71,27 @@ export async function POST(req: NextRequest) {
   }
 
   const hubspotutk = req.cookies.get('hubspotutk')?.value || '';
-  let city = 'unknown';
-  try {
-    const response = await fetch(
-      'https://api.ipdata.co?api-key=d44bfbc4443b29d45d5d1fe1694e3f4c6f17d6e4d00f2bb6f0838569'
-    );
-    const data = await response.json();
-    city = data.city ?? city;
-  } catch {
-    // ignore
-  }
-
   const refererHeader = req.headers.get('referer') || 'https://coldi.ai';
   const lastSegment = refererHeader.split('/').pop() || 'coldi';
   const pageName =
     lastSegment.split('-').join(' ').charAt(0).toUpperCase() +
     lastSegment.split('-').join(' ').slice(1);
 
+  const phoneWithPlus = phone.startsWith('+') ? phone : `+${phone}`;
+
   const fields: { name: string; value: string }[] = [
     { name: 'firstname', value: name },
+    { name: 'hs_lead_status', value: 'NEW' },
     { name: 'lastname', value: surname },
+    { name: 'referral', value: 'Ad form' },
     { name: 'email', value: email },
-    { name: 'phone', value: phone },
-    { name: 'ip_city2', value: city },
+    { name: 'phone', value: phoneWithPlus },
+    { name: 'industry', value: sector },
+    { name: 'utm_campaign', value: utm_campaign },
+    { name: 'utm_source', value: utm_source },
+    { name: 'utm_medium', value: utm_medium },
+    { name: 'utm_content', value: utm_content },
   ];
-  if (sector) {
-    fields.push({ name: 'sector', value: sector });
-  }
 
   const context: { pageUri: string; pageName: string; hutk?: string } = {
     pageUri: refererHeader,
