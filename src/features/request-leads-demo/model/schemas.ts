@@ -10,7 +10,6 @@ export const bookDemoSchema = v.object({
     v.email('Please enter a valid email')
   ),
   sector: v.pipe(v.string(), v.minLength(1, 'Please select a sector')),
-  captchaToken: v.pipe(v.string(), v.minLength(1, 'Please complete the security verification.')),
 });
 
 export type BookDemoSchema = v.InferOutput<typeof bookDemoSchema>;
