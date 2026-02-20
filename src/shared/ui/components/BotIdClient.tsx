@@ -39,6 +39,10 @@ export default function BotIdClient() {
                 method: 'POST',
               },
               {
+                path: '/api/leads-book-demo',
+                method: 'POST',
+              },
+              {
                 path: '/api/sms/send-code',
                 method: 'POST',
               },

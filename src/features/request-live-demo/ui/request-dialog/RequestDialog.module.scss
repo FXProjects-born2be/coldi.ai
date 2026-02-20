@@ -140,15 +140,28 @@ form.layout {
     row-gap: 24px;
     margin-bottom: 24px;
     position: relative;
-    
+    > div {
+      &:nth-child(3) {
+        z-index: 999;
+        position: relative;
+        > div {
+          z-index: 999;
+          position: relative;
+          > div {
+            z-index: 999;
+            position: relative;
+          }
+        }
+      }
+    }
     > div {
       width: 100%;
       position: relative;
       z-index: 1; // Base z-index for form fields
-      
+
       &.error {
         input,
-        [type='button'] {
+        [type="button"] {
           border-color: #ff0000 !important;
         }
       }
