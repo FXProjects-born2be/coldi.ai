@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import PhoneInput from 'react-phone-input-2';
@@ -33,6 +33,7 @@ const REDIRECT_DELAY_MS = 1000;
 
 export const RequestDialog = () => {
   const router = useRouter();
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const searchParams = useSearchParams();
   const utmParams = useMemo(() => getUtmFromSearchParams(searchParams), [searchParams]);
 
@@ -69,6 +70,7 @@ export const RequestDialog = () => {
   };
 
   const onSubmit = (data: BookDemoSchema) => {
+    setIsRedirecting(true);
     fetch('/api/leads-book-demo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -201,11 +203,14 @@ export const RequestDialog = () => {
       </section>
       <div className={st.footer}>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-          {([canSubmit, isSubmitting]) => (
-            <Button disabled={!canSubmit || isSubmitting} type="submit" fullWidth>
-              {isSubmitting ? 'Sending...' : 'Book a Demo'}
-            </Button>
-          )}
+          {([canSubmit, isSubmitting]) => {
+            const pending = isSubmitting || isRedirecting;
+            return (
+              <Button disabled={!canSubmit || pending} type="submit" fullWidth>
+                {isRedirecting ? 'Sending...' : isSubmitting ? 'Sending...' : 'Book a Demo'}
+              </Button>
+            );
+          }}
         </Subscribe>
       </div>
     </form>
