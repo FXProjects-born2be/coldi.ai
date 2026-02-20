@@ -67,8 +67,8 @@ export const RequestDialog = () => {
     };
   };
 
-  const onSubmit = async (data: BookDemoSchema) => {
-    const res = await fetch('/api/leads-book-demo', {
+  const onSubmit = (data: BookDemoSchema) => {
+    fetch('/api/leads-book-demo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -80,13 +80,7 @@ export const RequestDialog = () => {
         ...utmParams,
       }),
       credentials: 'include',
-    });
-
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      console.error('Book demo failed:', err);
-      return;
-    }
+    }).catch((err) => console.error('Book demo request failed:', err));
 
     reset();
     const params = new URLSearchParams();
