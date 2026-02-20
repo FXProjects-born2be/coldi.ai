@@ -52,6 +52,8 @@ export default async function RootLayout({
   const pathname = headersList.get('x-pathname') ?? '';
 
   const isLiveDemo = pathname.includes('/live-demo');
+  const showRetellWidget =
+    !pathname.includes('/turn-leads-into-meetings') && !pathname.includes('/calendar');
 
   return (
     <html lang={locale}>
@@ -71,7 +73,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {/* End Google Tag Manager */}
       </head>
       <GoogleAnalytics gaId="G-RCPHXB9V3B" />
-      <RetellWidget />
+      {showRetellWidget && <RetellWidget />}
       <body className={urbanist.variable}>
         {/* Google Tag Manager (noscript) */}
         <noscript>
