@@ -14,7 +14,6 @@ export const bookDemoSchema = v.object({
 
 export type BookDemoSchema = v.InferOutput<typeof bookDemoSchema>;
 
-// Same list as industries in request-call SecondStepToCall
 export const SECTOR_OPTIONS = [
   { label: 'Technology', value: 'Technology' },
   { label: 'Healthcare', value: 'Healthcare' },
@@ -29,5 +28,5 @@ export const SECTOR_OPTIONS = [
   { label: 'Consulting', value: 'Consulting' },
   { label: 'Entertainment', value: 'Entertainment' },
   { label: 'Non-profit', value: 'Non-profit' },
-  { label: 'Other (Please specify)', value: 'Other (Please specify)' },
+  { label: 'Other', value: 'Other' },
 ] as const;
