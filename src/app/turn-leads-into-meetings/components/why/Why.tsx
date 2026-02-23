@@ -1,9 +1,11 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
 import { blurInUp } from '@/shared/lib/helpers/animations';
+import { Button } from '@/shared/ui/kit/button';
 
 import st from './Why.module.scss';
 
@@ -145,6 +147,17 @@ export const Why = () => {
             </div>
           </motion.div>
         </div>
+        <motion.div
+          variants={blurInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className={st.button}
+        >
+          <Link href="#demo">
+            <Button size="md">Stop missing Sale calls</Button>
+          </Link>
+        </motion.div>
       </section>
     </>
   );
