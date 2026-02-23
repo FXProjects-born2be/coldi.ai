@@ -1,10 +1,12 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { blurInUp } from '@/shared/lib/helpers/animations';
+import { Button } from '@/shared/ui/kit/button';
 
 import st from './Faq.module.scss';
 
@@ -99,6 +101,17 @@ export const Faq = () => {
             );
           })}
         </div>
+        <motion.div
+          variants={blurInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className={st.button}
+        >
+          <Link href="#demo">
+            <Button size="md">Hire AI Voice Agents</Button>
+          </Link>
+        </motion.div>
       </section>
     </>
   );

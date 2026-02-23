@@ -12,7 +12,7 @@ import st from './Hero.module.scss';
 export const Hero = () => {
   return (
     <>
-      <section className={st.layout}>
+      <section className={st.layout} id="demo">
         <div className={st.col1}>
           <motion.h1
             variants={blurInUp}
@@ -28,8 +28,7 @@ export const Hero = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            More booked calls. Less manual work.
-            <br />
+            More booked calls. Less manual work. <br />
             Zero missed opportunities.
           </motion.p>
         </div>
