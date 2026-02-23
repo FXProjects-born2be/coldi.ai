@@ -8,11 +8,11 @@ import PhoneInput from 'react-phone-input-2';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { Button } from '@/shared/ui/kit/button';
-import { Select } from '@/shared/ui/kit/select';
 import { TextField } from '@/shared/ui/kit/text-field';
 
 import type { BookDemoSchema } from '../../model/schemas';
 import { bookDemoSchema, SECTOR_OPTIONS } from '../../model/schemas';
+import { SectorSelect } from '../sector-select';
 import st from './RequestDialog.module.scss';
 
 import 'react-phone-input-2/lib/style.css';
@@ -186,13 +186,11 @@ export const RequestDialog = () => {
         <div className={`${st.inputWrapper} ${st.full} ${errors.onSubmit?.sector ? st.error : ''}`}>
           <Field name="sector">
             {(field) => (
-              <Select
-                items={SECTOR_OPTIONS.map((o) => ({ label: o.label, value: o.value }))}
+              <SectorSelect
+                items={SECTOR_OPTIONS}
                 value={field.state.value}
                 onChange={field.handleChange}
                 placeholder="Sector"
-                showOtherInput={true}
-                otherPlaceholder="Please specify your sector"
               />
             )}
           </Field>
