@@ -155,7 +155,7 @@ export const Why = () => {
           className={st.button}
         >
           <Link href="#demo">
-            <Button size="md">Stop missing sale calls</Button>
+            <Button size="md">Stop missing sales calls</Button>
           </Link>
         </motion.div>
       </section>
