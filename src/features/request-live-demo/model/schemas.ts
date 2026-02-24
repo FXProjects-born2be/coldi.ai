@@ -20,12 +20,12 @@ export const DEMO_AGENTS = [
     value: 'agent_9ab288f249e9a4bcac7dd013ee',
   },
   {
-    label: 'Outbound Lead Warm-Up Script - English',
-    value: 'agent_ec5d779caaf4f2ba5e5dc74f25',
+    label: 'Kate: Coldi.ai Support Agent',
+    value: 'agent_b2385fff265239b19ea60ce4d8',
   },
   {
-    label: 'Outbound Lead Warm-Up Script - Arabic',
-    value: 'agent_b2385fff265239b19ea60ce4d8',
+    label: 'Outbound Lead Warm-Up Script - English',
+    value: 'agent_ec5d779caaf4f2ba5e5dc74f25',
   },
   {
     label: 'Outbound Lead Warm-Up Script - Spanish',
