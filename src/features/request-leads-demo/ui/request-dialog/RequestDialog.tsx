@@ -34,6 +34,7 @@ const REDIRECT_DELAY_MS = 1000;
 export const RequestDialog = () => {
   const router = useRouter();
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const [isSectorOpen, setIsSectorOpen] = useState(false);
   const searchParams = useSearchParams();
   const utmParams = useMemo(() => getUtmFromSearchParams(searchParams), [searchParams]);
 
@@ -183,7 +184,9 @@ export const RequestDialog = () => {
             <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
           ))}
         </div>
-        <div className={`${st.inputWrapper} ${st.full} ${errors.onSubmit?.sector ? st.error : ''}`}>
+        <div
+          className={`${st.inputWrapper} ${st.sector} ${st.full} ${errors.onSubmit?.sector ? st.error : ''} ${isSectorOpen ? st.sectorOpen : ''}`}
+        >
           <Field name="sector">
             {(field) => (
               <SectorSelect
@@ -191,6 +194,7 @@ export const RequestDialog = () => {
                 value={field.state.value}
                 onChange={field.handleChange}
                 placeholder="Sector"
+                onOpenChange={setIsSectorOpen}
               />
             )}
           </Field>

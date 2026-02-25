@@ -40,10 +40,11 @@ export const Why = () => {
             viewport={{ once: true }}
           >
             <Image
-              src="/images/leads/why-1.svg"
+              src="/images/leads/why-1.png"
               alt="Instant lead contact, 24/7"
               width={290}
               height={225}
+              unoptimized
             />
             <div>
               <h3>Instant lead contact, 24/7</h3>
@@ -61,10 +62,11 @@ export const Why = () => {
             viewport={{ once: true }}
           >
             <Image
-              src="/images/leads/why-2.svg"
+              src="/images/leads/why-2.png"
               alt="Increase your booked calls"
               width={290}
               height={225}
+              unoptimized
             />
             <div>
               <h3>Increase your booked calls</h3>
@@ -79,10 +81,11 @@ export const Why = () => {
             viewport={{ once: true }}
           >
             <Image
-              src="/images/leads/why-3.svg"
+              src="/images/leads/why-3.png"
               alt="Full lead tracking"
               width={290}
               height={225}
+              unoptimized
             />
             <div>
               <h3>Full lead tracking</h3>
@@ -97,10 +100,11 @@ export const Why = () => {
             viewport={{ once: true }}
           >
             <Image
-              src="/images/leads/why-4.svg"
+              src="/images/leads/why-4.png"
               alt="Built for high-volume teams"
               width={290}
               height={225}
+              unoptimized
             />
             <div>
               <h3>Built for high-volume teams</h3>
@@ -115,10 +119,11 @@ export const Why = () => {
             viewport={{ once: true }}
           >
             <Image
-              src="/images/leads/why-5.svg"
+              src="/images/leads/why-5.png"
               alt="Works in 30+ languages"
               width={290}
               height={225}
+              unoptimized
             />
             <div>
               <h3>Works in 30+ languages</h3>
@@ -133,10 +138,11 @@ export const Why = () => {
             viewport={{ once: true }}
           >
             <Image
-              src="/images/leads/why-6.svg"
+              src="/images/leads/why-6.png"
               alt="Global Telephony Infrastructure"
               width={290}
               height={225}
+              unoptimized
             />
             <div>
               <h3>Global Telephony Infrastructure</h3>
