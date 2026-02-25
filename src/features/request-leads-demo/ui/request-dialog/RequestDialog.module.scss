@@ -186,6 +186,12 @@ form.layout {
       &.full {
         width: 100%;
       }
+      &.sector {
+        position: relative;
+      }
+      &.sectorOpen {
+        z-index: 1000;
+      }
       @include tablet {
         width: 100%;
       }

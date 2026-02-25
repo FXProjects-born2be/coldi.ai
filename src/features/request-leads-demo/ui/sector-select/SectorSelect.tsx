@@ -13,6 +13,7 @@ type SectorSelectProps = {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  onOpenChange?: (open: boolean) => void;
 };
 
 export const SectorSelect = ({
@@ -20,12 +21,15 @@ export const SectorSelect = ({
   value,
   onChange,
   placeholder = 'Sector',
+  onOpenChange,
 }: SectorSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openUp, setOpenUp] = useState(false);
   const [showOtherInput, setShowOtherInput] = useState(false);
   const [otherText, setOtherText] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
   const otherInputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const isKnownValue = items.some((item) => item.value === value);
   const isCustomOther = !!value && !isKnownValue;
@@ -34,6 +38,10 @@ export const SectorSelect = ({
     ? value
     : (items.find((item) => item.value === value)?.label ?? (value || placeholder));
   const isPlaceholder = !value;
+
+  useEffect(() => {
+    onOpenChange?.(isOpen);
+  }, [isOpen, onOpenChange]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -52,6 +60,14 @@ export const SectorSelect = ({
   useEffect(() => {
     if (showOtherInput) otherInputRef.current?.focus();
   }, [showOtherInput]);
+
+  useEffect(() => {
+    if (!isOpen || !containerRef.current) return;
+    const triggerRect = containerRef.current.getBoundingClientRect();
+    const spaceBelow = window.innerHeight - triggerRect.bottom;
+    const DROPDOWN_HEIGHT = 320;
+    setOpenUp(spaceBelow < DROPDOWN_HEIGHT && triggerRect.top > DROPDOWN_HEIGHT);
+  }, [isOpen]);
 
   const handleOptionClick = (itemValue: string) => {
     if (itemValue === OTHER_VALUE) {
@@ -84,7 +100,7 @@ export const SectorSelect = ({
       </button>
 
       {isOpen && (
-        <div className={st.dropdown}>
+        <div ref={dropdownRef} className={`${st.dropdown} ${openUp ? st.dropdownUp : ''}`}>
           <div className={st.grid}>
             {items.map((item) => {
               const isActive =
