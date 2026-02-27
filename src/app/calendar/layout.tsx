@@ -30,16 +30,26 @@ export default function LiveDemoLayout({
         dangerouslySetInnerHTML={{
           __html: `
             window.addEventListener('message', function(event) {
-              if (event.data && event.data.meetingBookSucceeded) {
+              let data = event.data;
+
+              if (typeof data === 'string') {
+                try { data = JSON.parse(data); } catch (e) {}
+              }
+
+              if (data && data.meetingBookSucceeded) {
+                console.log("Success");
+
                 fetch('https://aitassistance.app.n8n.cloud/webhook/hubspot-calendar', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({
                     source: "website_calendar",
                     status: "booked",
-                    hubspot_data: event.data
+                    hubspot_data: data
                   })
-                });
+                })
+                .then(res => console.log("✅", res.status))
+                .catch(err => console.error("❌", err));
               }
             });
           `,
