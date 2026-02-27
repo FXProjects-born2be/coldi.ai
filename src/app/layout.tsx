@@ -52,9 +52,9 @@ export default async function RootLayout({
   const pathname = headersList.get('x-pathname') ?? '';
 
   const isLiveDemo = pathname.includes('/live-demo');
-  const showRetellWidget =
-    !pathname.includes('/turn-leads-into-meetings') && !pathname.includes('/calendar');
-
+  //const showRetellWidget =
+  //!pathname.includes('/turn-leads-into-meetings') && !pathname.includes('/calendar');
+  const showRetellWidget = false;
   return (
     <html lang={locale}>
       <head>
