@@ -8,7 +8,7 @@ import { areFormsEnabled } from '@/shared/lib/forms-status';
 const HUBSPOT_FORMS_API_URL =
   'https://api.hsforms.com/submissions/v3/integration/submit/146476440/1a333114-c2f0-44c0-afbe-7c79d58b399d';
 
-const BOTID_ENABLED = true;
+const BOTID_ENABLED = false;
 
 export async function POST(req: NextRequest) {
   const ip =
