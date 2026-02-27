@@ -12,7 +12,6 @@ import type { Agent } from '@/features/request-call-tst/store/store';
 import { useRequestCallStore } from '@/features/request-call-tst/store/store';
 import { FirstStepToCall } from '@/features/request-call-tst/ui/first-step-to-call';
 import { SecondStepToCall } from '@/features/request-call-tst/ui/second-step-to-call';
-import { StillLikeGetCall } from '@/features/request-call-tst/ui/still-like-get-call';
 import { getVoices } from '@/features/voices/model/voices';
 
 import st from './CallFormContainer.module.scss';
@@ -141,7 +140,6 @@ export const CallFormContainer = ({ botName = 'Kate' }: { botName?: string }) =>
       )}
       <ThankYouDialog open={isSuccess} onClose={onContinueHandle} />
       <UnsupportedCountryDialog open={isUnsupportedCountry} onClose={onContinueHandle} />
-      <StillLikeGetCall />
     </section>
   );
 };
