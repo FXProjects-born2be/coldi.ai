@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
   // Feature flag: Temporarily disable BotID for debugging
   // Set to false to disable BotID check temporarily
-  const BOTID_ENABLED = true;
+  const BOTID_ENABLED = false;
 
   let verification;
   if (BOTID_ENABLED) {
