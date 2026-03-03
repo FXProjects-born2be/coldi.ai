@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 import { Chip } from '@/shared/ui/kit/chip';
 
 import st from './Advantages.module.scss';

@@ -2,7 +2,7 @@
 
 import type { TextareaHTMLAttributes } from 'react';
 
-import { cn } from '@/shared/lib/helpers/styles';
+import { cn } from '@/shared/lib/helpers';
 
 import st from './TextArea.module.scss';
 

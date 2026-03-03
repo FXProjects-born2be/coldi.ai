@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 
 import HCaptchaLib from '@hcaptcha/react-hcaptcha';
 
-import { HCAPTCHA_SITE_KEY } from '@/shared/lib/captcha-config';
+import { HCAPTCHA_SITE_KEY } from '@/shared/lib/captcha/config';
 
 type HCaptchaProps = {
   onSuccess: (token: string) => void;

@@ -3,9 +3,8 @@ import { NextResponse } from 'next/server';
 
 import { checkBotId } from 'botid/server';
 
-import { getClientIp } from '@/shared/lib/anti-bot';
-import { getSmsVerifyCodeWebhookUrl } from '@/shared/lib/system-status';
-import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
+import { getClientIp } from '@/shared/lib/security/anti-bot';
+import { getSmsVerifyCodeWebhookUrl, getSystemStatusWithCache } from '@/shared/lib/system';
 
 /**
  * Normalize phone number to E.164 format

@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { getVoices } from '@/features/voices/model/voices';
 import { VoiceCard } from '@/features/voices/ui/voice-card';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Voices.module.scss';
 

@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 import { Button } from '@/shared/ui/kit/button';
 
 import st from './Choose.module.scss';

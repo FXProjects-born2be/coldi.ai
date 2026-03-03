@@ -11,12 +11,10 @@ import {
   RECAPTCHA_ENABLED,
   TURNSTILE_ENABLED,
   TURNSTILE_SITE_KEY,
-} from '@/shared/lib/captcha-config';
-import { validateEmail } from '@/shared/lib/email-validation';
-import { requiresSmsVerification } from '@/shared/lib/email-verification';
+} from '@/shared/lib/captcha/config';
 import { useForm, useStore } from '@/shared/lib/forms';
-import { getHoneypotValue } from '@/shared/lib/honeypot';
-import { isValidName } from '@/shared/lib/name-validation';
+import { getHoneypotValue } from '@/shared/lib/security/honeypot';
+import { isValidName, requiresSmsVerification, validateEmail } from '@/shared/lib/validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { HCaptcha } from '@/shared/ui/components/HCaptcha';
 import { Recaptcha } from '@/shared/ui/components/Recaptcha';

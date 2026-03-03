@@ -6,8 +6,8 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import type { SystemStatus } from './system-status';
-import { checkSuspendStatus } from './system-status';
+import type { SystemStatus } from './status';
+import { checkSuspendStatus } from './status';
 
 const STATUS_COOKIE_NAME = 'system-status';
 const STATUS_COOKIE_TTL_MS = 5 * 60 * 1000; // 5 minutes

@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import { useRequestPricingStore } from '@/features/request-pricing/store/store';
 import { RequestDialog } from '@/features/request-pricing/ui/request-dialog/RequestDialog';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 import { ListCheck } from '@/shared/ui/icons/fill/list-check';
 import { Button } from '@/shared/ui/kit/button';
 

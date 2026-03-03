@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { requestRoutes } from '@/shared/lib/helpers/request-routes';
+import { requestRoutes } from '@/shared/lib/helpers';
 import { MessageIcon } from '@/shared/ui/icons/fill/message';
 import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
 import { Facebook } from '@/shared/ui/icons/fill/socials/facebook';

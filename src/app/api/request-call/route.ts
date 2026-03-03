@@ -5,9 +5,9 @@ import { checkBotId } from 'botid/server';
 
 import type { Agent } from '@/features/request-call-tst/store/store';
 
-import { detectBot, getClientIp } from '@/shared/lib/anti-bot';
-import { areFormsEnabled } from '@/shared/lib/forms-status';
-import { generateSubmissionCode } from '@/shared/lib/submission-codes';
+import { detectBot, getClientIp } from '@/shared/lib/security/anti-bot';
+import { generateSubmissionCode } from '@/shared/lib/security/submission-codes';
+import { areFormsEnabled } from '@/shared/lib/system';
 
 type RequestCallData = {
   name: string;
@@ -190,7 +190,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     }
 
     // Verify captcha token (supports both Turnstile and reCAPTCHA)
-    const { verifyCaptchaToken } = await import('@/shared/lib/captcha-verification');
+    const { verifyCaptchaToken } = await import('@/shared/lib/captcha/verification');
     const captchaVerification = await verifyCaptchaToken(token, ip);
 
     if (!captchaVerification.isValid) {

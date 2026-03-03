@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import type { JSX } from 'react';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 import { CalendarIcon } from '@/shared/ui/icons/outline/calendar';
 import { CheckListIcon } from '@/shared/ui/icons/outline/check-list';
 import { DollarIcon } from '@/shared/ui/icons/outline/dollar';

@@ -14,7 +14,7 @@ import {
   Trigger,
 } from '@radix-ui/react-dialog';
 
-import { cn } from '@/shared/lib/helpers/styles';
+import { cn } from '@/shared/lib/helpers';
 
 import st from './BurgerMenu.module.scss';
 

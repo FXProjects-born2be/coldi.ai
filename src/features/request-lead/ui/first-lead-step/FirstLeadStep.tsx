@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import PhoneInput from 'react-phone-input-2';
 
-import { validateEmail } from '@/shared/lib/email-validation';
 import { useForm, useStore } from '@/shared/lib/forms';
+import { validateEmail } from '@/shared/lib/validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { Button } from '@/shared/ui/kit/button';
 import { TextField } from '@/shared/ui/kit/text-field';

@@ -3,10 +3,10 @@
  * Supports both Turnstile and reCAPTCHA based on feature flags
  */
 
-import { HCAPTCHA_ENABLED, RECAPTCHA_ENABLED, TURNSTILE_ENABLED } from './captcha-config';
-import { verifyHcaptchaToken } from './hcaptcha-verification';
-import { verifyRecaptchaToken } from './recaptcha-verification';
-import { verifyTurnstileToken } from './turnstile-verification';
+import { HCAPTCHA_ENABLED, RECAPTCHA_ENABLED, TURNSTILE_ENABLED } from './config';
+import { verifyHcaptchaToken } from './hcaptcha';
+import { verifyRecaptchaToken } from './recaptcha';
+import { verifyTurnstileToken } from './turnstile';
 
 export type CaptchaVerificationResult = {
   isValid: boolean;

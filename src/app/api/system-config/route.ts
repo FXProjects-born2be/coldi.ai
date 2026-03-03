@@ -1,10 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import {
-  checkSuspendStatus,
-  getFooterPhoneNumber,
-  getSystemStatus,
-} from '@/shared/lib/system-status';
+import { checkSuspendStatus, getFooterPhoneNumber, getSystemStatus } from '@/shared/lib/system';
 
 /**
  * GET /api/system-config

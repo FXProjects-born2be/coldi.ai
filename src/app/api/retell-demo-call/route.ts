@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server';
 
 import { checkBotId } from 'botid/server';
 
-import { getDemoStatus } from '@/shared/lib/demo-status-cache';
-//import { areFormsEnabled } from '@/shared/lib/forms-status';
+import { getDemoStatus } from '@/shared/lib/system';
+//import { areFormsEnabled } from '@/shared/lib/system';
 
 const RETELL_API_URL = 'https://api.retellai.com/v2/create-phone-call';
 const RETELL_DEMO_API_KEY = 'key_798c7db6a871dbd4661d3f8201ba';
