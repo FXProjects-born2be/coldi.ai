@@ -57,11 +57,13 @@ export default async function RootLayout({
   const showRetellWidget = false;
   return (
     <html lang={locale}>
-      <head>
+      <GoogleAnalytics gaId="G-RCPHXB9V3B" />
+      {showRetellWidget && <RetellWidget />}
+      <body className={urbanist.variable}>
         {/* Google Tag Manager */}
         <Script
           id="gtm"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -70,11 +72,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-MLLM3R8B');`,
           }}
         />
-        {/* End Google Tag Manager */}
-      </head>
-      <GoogleAnalytics gaId="G-RCPHXB9V3B" />
-      {showRetellWidget && <RetellWidget />}
-      <body className={urbanist.variable}>
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
