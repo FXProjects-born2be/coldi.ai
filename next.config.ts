@@ -1,4 +1,4 @@
-import { withBotId } from 'botid/next/config';
+// import { withBotId } from 'botid/next/config'; // temporarily disabled to debug 429 on static chunks
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
@@ -14,4 +14,5 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withBotId(nextConfig);
+// export default withBotId(nextConfig); // temporarily disabled to debug 429 on static chunks
+export default nextConfig;
