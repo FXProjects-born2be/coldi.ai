@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Faq, Hero, How, Sectors, Why } from './components';
+import { Faq, Hero, How, Reviews, Sectors, Why } from './components';
 
 export const metadata: Metadata = {
   title: 'Turn Leads into Meetings',
@@ -19,6 +19,7 @@ export default function TurnLeadsIntoMeetings() {
       <Why />
       <How />
       <Sectors />
+      <Reviews />
       <Faq />
     </main>
   );

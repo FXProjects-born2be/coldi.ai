@@ -1,0 +1,30 @@
+.bullet {
+  height: 16px;
+  border-radius: 32px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #4268ff !important;
+  width: 48px !important;
+}
+
+.swiper-pagination-bullets {
+  bottom: 0 !important;
+}
+
+.swiper {
+  width: 100%;
+}
+
+.swiper-wrapper {
+  align-items: stretch !important;
+}
+
+.swiper-slide {
+  height: auto !important;
+}
+
+.swiper-pagination {
+  margin-top: 48px !important;
+  position: relative !important;
+}
