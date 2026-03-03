@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { areFormsEnabled, type FormsStatus, setFormsStatus } from '@/shared/lib/forms-status';
+import { areFormsEnabled, type FormsStatus, setFormsStatus } from '@/shared/lib/system';
 
 /**
  * GET /api/forms-control

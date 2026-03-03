@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 import { TypingText } from '@/shared/ui/components/typing-text';
 import { Button } from '@/shared/ui/kit/button';
 

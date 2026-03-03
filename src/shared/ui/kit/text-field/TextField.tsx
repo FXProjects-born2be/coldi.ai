@@ -2,7 +2,7 @@
 
 import type { InputHTMLAttributes } from 'react';
 
-import { cn } from '@/shared/lib/helpers/styles';
+import { cn } from '@/shared/lib/helpers';
 
 import st from './TextField.module.scss';
 

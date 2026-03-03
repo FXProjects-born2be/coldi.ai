@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react';
 
-import { cn } from '@/shared/lib/helpers/styles';
+import { cn } from '@/shared/lib/helpers';
 
 import st from './Chip.module.scss';
 

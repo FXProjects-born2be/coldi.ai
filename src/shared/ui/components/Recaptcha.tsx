@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
 
-import { RECAPTCHA_SITE_KEY } from '@/shared/lib/captcha-config';
+import { RECAPTCHA_SITE_KEY } from '@/shared/lib/captcha/config';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions

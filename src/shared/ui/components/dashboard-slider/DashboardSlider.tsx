@@ -8,7 +8,7 @@ import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperInstance } from 'swiper/types';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './DashboardSlider.module.scss';
 

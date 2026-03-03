@@ -6,8 +6,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
-import { cn } from '@/shared/lib/helpers/styles';
+import { blurInUp, cn } from '@/shared/lib/helpers';
 import { Counter } from '@/shared/ui/components/counter';
 import { Button } from '@/shared/ui/kit/button';
 

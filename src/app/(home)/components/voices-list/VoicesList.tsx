@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { getPersonas } from '@/features/personas/model/personas';
 import { PersonaCard } from '@/features/personas/ui/persona-card';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 import { Button } from '@/shared/ui/kit/button';
 
 import st from './VoicesList.module.scss';

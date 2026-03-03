@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './ReadyToHear.module.scss';
 

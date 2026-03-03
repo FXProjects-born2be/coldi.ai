@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { motion } from 'framer-motion';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 import { ChevronDownIcon } from '@/shared/ui/icons/outline/chevron-down';
 
 import st from './Faq.module.scss';

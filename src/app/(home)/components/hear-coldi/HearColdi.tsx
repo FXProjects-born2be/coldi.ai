@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { getBots } from '@/features/bots/model/bots';
 import { BotCard } from '@/features/bots/ui/bot-card/BotCard';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './HearColdi.module.scss';
 

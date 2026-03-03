@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 import { ChevronDownIcon } from '@/shared/ui/icons/outline/chevron-down';
 import { Button } from '@/shared/ui/kit/button';
 

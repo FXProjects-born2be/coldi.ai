@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 import { checkBotId } from 'botid/server';
 
-import { areFormsEnabled } from '@/shared/lib/forms-status';
+import { areFormsEnabled } from '@/shared/lib/system';
 
 const HUBSPOT_FORMS_API_URL =
   'https://api.hsforms.com/submissions/v3/integration/submit/146476440/1a333114-c2f0-44c0-afbe-7c79d58b399d';

@@ -5,8 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { requestRoutes } from '@/shared/lib/helpers/request-routes';
-import { cn } from '@/shared/lib/helpers/styles';
+import { cn, requestRoutes } from '@/shared/lib/helpers';
 import { BurgerMenu } from '@/shared/ui/components/burger-menu';
 
 import st from './Header.module.scss';

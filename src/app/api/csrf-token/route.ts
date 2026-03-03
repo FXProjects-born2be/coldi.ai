@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { generateCsrfToken } from '@/shared/lib/csrf-tokens';
+import { generateCsrfToken } from '@/shared/lib/security/csrf';
 
 /**
  * GET /api/csrf-token

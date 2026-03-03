@@ -3,9 +3,8 @@ import { NextResponse } from 'next/server';
 
 import { checkBotId } from 'botid/server';
 
-import { cleanupExpiredCsrfTokens, validateAndConsumeCsrfToken } from '@/shared/lib/csrf-tokens';
-import { getSmsSendCodeWebhookUrl } from '@/shared/lib/system-status';
-import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
+import { cleanupExpiredCsrfTokens, validateAndConsumeCsrfToken } from '@/shared/lib/security/csrf';
+import { getSmsSendCodeWebhookUrl, getSystemStatusWithCache } from '@/shared/lib/system';
 
 /**
  * Normalize phone number to E.164 format

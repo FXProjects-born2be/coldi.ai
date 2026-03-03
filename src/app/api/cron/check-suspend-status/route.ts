@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getSystemStatus, setSystemStatus } from '@/shared/lib/system-status';
+import { getSystemStatus, setSystemStatus } from '@/shared/lib/system';
 
 const SUSPEND_CHECK_URL = 'https://aitassistance.app.n8n.cloud/webhook/suspend_check';
 const REQUEST_TIMEOUT_MS = 30000; // 30 seconds

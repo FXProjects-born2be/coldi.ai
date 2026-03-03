@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 import { RequestDialog } from '@/features/request-leads-demo/ui/request-dialog/RequestDialog';
 
-import { blurInUp } from '@/shared/lib/helpers/animations';
+import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Hero.module.scss';
 

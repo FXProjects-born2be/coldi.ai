@@ -2,7 +2,7 @@
 
 import type { ButtonHTMLAttributes } from 'react';
 
-import { cn } from '@/shared/lib/helpers/styles';
+import { cn } from '@/shared/lib/helpers';
 
 import st from './Button.module.scss';
 

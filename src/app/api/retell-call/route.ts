@@ -3,10 +3,12 @@ import { NextResponse } from 'next/server';
 
 import { checkBotId } from 'botid/server';
 
-import { areFormsEnabled } from '@/shared/lib/forms-status';
-import { validateAndMarkSubmissionCode } from '@/shared/lib/submission-codes';
-import { getRetellPhoneNumber } from '@/shared/lib/system-status';
-import { getSystemStatusWithCache } from '@/shared/lib/system-status-cache';
+import { validateAndMarkSubmissionCode } from '@/shared/lib/security/submission-codes';
+import {
+  areFormsEnabled,
+  getRetellPhoneNumber,
+  getSystemStatusWithCache,
+} from '@/shared/lib/system';
 
 const RETELL_API_URL = 'https://api.retellai.com/v2/create-phone-call';
 
