@@ -8,8 +8,11 @@
   align-items: center;
   gap: 48px;
   align-self: stretch;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
+  background: url('/images/land-hero.png');
   position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   @include mobile {
     padding: 32px 16px;
     flex-direction: column;
