@@ -1,8 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { checkBotId } from 'botid/server';
-
+// import { checkBotId } from 'botid/server'; // temporarily disabled
 import { getClientIp } from '@/shared/lib/security/anti-bot';
 import { getSmsVerifyCodeWebhookUrl, getSystemStatusWithCache } from '@/shared/lib/system';
 
@@ -24,7 +23,7 @@ function normalizePhone(phone: string): string {
  * Sends request to webhook with { "to": phone, "code": code }
  */
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  const verification = await checkBotId();
+  const verification = { isBot: false as const }; // BotID temporarily disabled
 
   if (verification.isBot) {
     return NextResponse.json({ error: 'Access denied' }, { status: 403 });

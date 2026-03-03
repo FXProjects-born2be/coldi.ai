@@ -1,8 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { checkBotId } from 'botid/server';
-
+// import { checkBotId } from 'botid/server'; // temporarily disabled
 import { areFormsEnabled } from '@/shared/lib/system';
 
 const HUBSPOT_FORMS_API_URL =
@@ -19,9 +18,7 @@ export async function POST(req: NextRequest) {
   const userAgent = req.headers.get('user-agent') || 'unknown';
 
   if (BOTID_ENABLED) {
-    const verification = await checkBotId({
-      developmentOptions: { bypass: 'HUMAN' },
-    });
+    const verification = { isBot: false as const }; // BotID temporarily disabled
     if (verification.isBot) {
       console.warn('[LEADS-BOOK-DEMO] Blocked bot', { ip, userAgent });
       return NextResponse.json({ error: 'Bot detected. Access denied.' }, { status: 403 });
