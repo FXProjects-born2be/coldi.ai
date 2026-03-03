@@ -1,42 +1,16 @@
-import { initBotId } from 'botid/client/core';
-
-initBotId({
-  protect: [
-    {
-      path: '/api/request-call',
-      method: 'POST',
-    },
-    {
-      path: '/api/request-lead',
-      method: 'POST',
-    },
-    {
-      path: '/api/request-pricing',
-      method: 'POST',
-    },
-    {
-      path: '/api/retell-call',
-      method: 'POST',
-    },
-    {
-      path: '/api/retell-demo-call',
-      method: 'POST',
-    },
-    {
-      path: '/api/hubspot-lead',
-      method: 'POST',
-    },
-    {
-      path: '/api/leads-book-demo',
-      method: 'POST',
-    },
-    {
-      path: '/api/sms/send-code',
-      method: 'POST',
-    },
-    {
-      path: '/api/sms/verify-code',
-      method: 'POST',
-    },
-  ],
-});
+// BotID temporarily disabled to debug 429 on static chunks
+// import { initBotId } from 'botid/client/core';
+//
+// initBotId({
+//   protect: [
+//     { path: '/api/request-call', method: 'POST' },
+//     { path: '/api/request-lead', method: 'POST' },
+//     { path: '/api/request-pricing', method: 'POST' },
+//     { path: '/api/retell-call', method: 'POST' },
+//     { path: '/api/retell-demo-call', method: 'POST' },
+//     { path: '/api/hubspot-lead', method: 'POST' },
+//     { path: '/api/leads-book-demo', method: 'POST' },
+//     { path: '/api/sms/send-code', method: 'POST' },
+//     { path: '/api/sms/verify-code', method: 'POST' },
+//   ],
+// });

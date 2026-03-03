@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 
 import sgMail from '@sendgrid/mail';
-import { checkBotId } from 'botid/server';
 
+// import { checkBotId } from 'botid/server'; // temporarily disabled
 import type { Agent } from '@/features/request-call-tst/store/store';
 
 import { detectBot, getClientIp } from '@/shared/lib/security/anti-bot';
@@ -49,11 +49,8 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (BOTID_ENABLED) {
     // Check BotID with development options for local testing
     // In production, this will use real bot detection
-    verification = await checkBotId({
-      developmentOptions: {
-        bypass: 'HUMAN', // In development, always allow (set to 'BAD-BOT' to test blocking)
-      },
-    });
+    // verification = await checkBotId({ developmentOptions: { bypass: 'HUMAN' } }); // BotID temporarily disabled
+    verification = { isBot: false };
   } else {
     // Temporarily bypass BotID for debugging
     verification = { isBot: false };

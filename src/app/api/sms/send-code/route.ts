@@ -1,8 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { checkBotId } from 'botid/server';
-
+// import { checkBotId } from 'botid/server'; // temporarily disabled
 import { cleanupExpiredCsrfTokens, validateAndConsumeCsrfToken } from '@/shared/lib/security/csrf';
 import { getSmsSendCodeWebhookUrl, getSystemStatusWithCache } from '@/shared/lib/system';
 
@@ -47,11 +46,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   if (BOTID_ENABLED) {
     // Check BotID with development options for local testing
     // In production, this will use real bot detection
-    verification = await checkBotId({
-      developmentOptions: {
-        bypass: 'HUMAN', // In development, always allow (set to 'BAD-BOT' to test blocking)
-      },
-    });
+    // verification = await checkBotId({ developmentOptions: { bypass: 'HUMAN' } }); // BotID temporarily disabled
+    verification = { isBot: false };
   } else {
     // Temporarily bypass BotID for debugging
     verification = { isBot: false };
