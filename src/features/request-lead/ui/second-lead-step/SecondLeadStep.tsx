@@ -13,6 +13,7 @@ import {
 import { validateEmail } from '@/shared/lib/email-validation';
 import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
+import { getHoneypotValue } from '@/shared/lib/honeypot';
 import { isValidName } from '@/shared/lib/name-validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { HCaptcha } from '@/shared/ui/components/HCaptcha';
@@ -27,14 +28,11 @@ import { type SecondLeadStepSchema, secondLeadStepSchema } from '../../model/sch
 import { useRequestLeadStore } from '../../store/store';
 import st from './SecondLeadStep.module.scss';
 
-// Master switch: set to true to enable all verifications (except captcha which is always on)
 const ENABLE_VERIFICATIONS = false;
-
-// Feature flag: SMS verification (temporary off; set to true to re-enable)
 const SMS_VERIFICATION_ENABLED = false;
-
-// Feature flag: Email validation (set to true to enable email validation)
 const EMAIL_VALIDATION_ENABLED = false;
+const HONEYPOT_FIELD = 'company_website';
+const LOCAL_STORAGE_KEY = 'LeadRequestFirstStepData';
 
 export const SecondLeadStep = ({
   onSubmit,
@@ -45,19 +43,21 @@ export const SecondLeadStep = ({
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaKey, setCaptchaKey] = useState(0);
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
-  console.log('[SecondLeadStep] store firstStepData:', storeFirstStepData);
 
-  // Restore firstStepData from localStorage if store is empty
+  const resetCaptcha = () => {
+    setCaptchaToken(null);
+    setCaptchaKey((prev) => prev + 1);
+  };
+
   useEffect(() => {
     if (
       (!storeFirstStepData.phone || storeFirstStepData.phone === '') &&
       typeof window !== 'undefined'
     ) {
       try {
-        const stored = localStorage.getItem('LeadRequestFirstStepData');
+        const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
         if (stored) {
           const parsed = JSON.parse(stored);
-          console.log('[SecondLeadStep] Restoring from localStorage:', parsed);
           setFirstStepData({
             fullName: parsed.fullName || '',
             company: parsed.company || '',
@@ -71,19 +71,17 @@ export const SecondLeadStep = ({
     }
   }, [storeFirstStepData.phone, setFirstStepData]);
 
-  // Use restored data or store data - memoized to avoid unnecessary recalculations
   const firstStepData = useMemo(() => {
     if (storeFirstStepData.phone) {
       return storeFirstStepData;
     }
 
-    // Fallback to localStorage if store is empty
     if (typeof window === 'undefined') {
       return { fullName: '', company: '', email: '', phone: '' };
     }
 
     try {
-      const stored = localStorage.getItem('LeadRequestFirstStepData');
+      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
         return {
@@ -100,7 +98,6 @@ export const SecondLeadStep = ({
     return { fullName: '', company: '', email: '', phone: '' };
   }, [storeFirstStepData]);
 
-  console.log('[SecondLeadStep] Using firstStepData:', firstStepData);
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
       industry: '',
@@ -115,32 +112,24 @@ export const SecondLeadStep = ({
       onSubmit: secondLeadStepSchema,
     },
     onSubmit: async (data) => {
-      // Check captcha token first
       if (!captchaToken) {
         console.error('Captcha token is missing');
         return;
       }
 
-      // Validate email after captcha is passed
       const email = firstStepData.email?.trim();
       if (!email) {
         setEmailValidationError('Please enter your email address on step 1');
-        // Reset captcha on failed validation
-        setCaptchaToken(null);
-        setCaptchaKey((prev) => prev + 1);
+        resetCaptcha();
         return;
       }
 
-      // Basic email format check
       if (!email.includes('@')) {
         setEmailValidationError('Please enter a valid email address');
-        // Reset captcha on failed validation
-        setCaptchaToken(null);
-        setCaptchaKey((prev) => prev + 1);
+        resetCaptcha();
         return;
       }
 
-      // Validate email (if enabled and verifications on)
       if (ENABLE_VERIFICATIONS && EMAIL_VALIDATION_ENABLED) {
         setEmailValidating(true);
         setEmailValidationError(null);
@@ -151,94 +140,66 @@ export const SecondLeadStep = ({
             result.message || 'Email is not valid. Please use another email address.'
           );
           setEmailValidating(false);
-          // Reset captcha on failed validation
-          setCaptchaToken(null);
-          setCaptchaKey((prev) => prev + 1);
+          resetCaptcha();
           return;
         }
         setEmailValidationError(null);
         setEmailValidating(false);
       }
 
-      // Check SMS verification for free email domains (only when verifications enabled)
       if (ENABLE_VERIFICATIONS && needsSmsVerification && !smsVerified) {
         setSmsError('Please verify your phone number with SMS code');
         return;
       }
 
-      // Validate name - if invalid, send to trash route and show success to user (only when verifications enabled)
       if (ENABLE_VERIFICATIONS) {
         const name = firstStepData.fullName?.trim() || '';
-        const isNameValid = name && isValidName(name);
-
-        if (!isNameValid) {
-          // Get honeypot field value from DOM
-          const honeypotField = document.querySelector<HTMLInputElement>(
-            'input[name="company_website"]'
-          );
-          const honeypotValue = honeypotField?.value || '';
-
+        if (!name || !isValidName(name)) {
           const trashBody = {
             ...data.value,
             ...firstStepData,
-            company_website: honeypotValue,
+            [HONEYPOT_FIELD]: getHoneypotValue(HONEYPOT_FIELD),
             formType: 'lead_request',
           };
 
-          // Send to trash route (user won't know)
           await fetch('/api/trash-form', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(trashBody),
             credentials: 'include',
-          }).catch(() => {
-            // Silently fail - user shouldn't know
-          });
+          }).catch(() => {});
 
-          // Show success to user (they think form was submitted successfully)
-          localStorage?.removeItem('LeadRequestFirstStepData');
+          localStorage?.removeItem(LOCAL_STORAGE_KEY);
           onSubmit(data.value);
-          setCaptchaToken(null);
-          setCaptchaKey((prev) => prev + 1);
+          resetCaptcha();
           return;
         }
       }
 
       onSubmit(data.value);
 
-      // Get honeypot field value from DOM
-      const honeypotField = document.querySelector<HTMLInputElement>(
-        'input[name="company_website"]'
-      );
-      const honeypotValue = honeypotField?.value || '';
-
       const body = {
         ...data.value,
         ...firstStepData,
-        company_website: honeypotValue,
-        captchaToken, // Use unified captcha token name
-        turnstileToken: TURNSTILE_ENABLED ? captchaToken : undefined, // Backward compatibility
-        recaptchaToken: RECAPTCHA_ENABLED ? captchaToken : undefined, // Backward compatibility
+        [HONEYPOT_FIELD]: getHoneypotValue(HONEYPOT_FIELD),
+        captchaToken,
+        turnstileToken: TURNSTILE_ENABLED ? captchaToken : undefined,
+        recaptchaToken: RECAPTCHA_ENABLED ? captchaToken : undefined,
       };
-      console.log(body);
 
-      // Send to existing API
       const res = await fetch('/api/request-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-        credentials: 'include', // Include cookies in request
+        credentials: 'include',
       });
 
-      // If main request failed (bot detected, rate limit, etc.), stop execution
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
         console.error('Lead request blocked or failed:', errorData);
-        // Don't proceed with HubSpot or other services
         return;
       }
 
-      // Get submission code from response
       const responseData = await res.json().catch(() => ({}));
       const submissionCode = responseData.submissionCode;
 
@@ -247,16 +208,9 @@ export const SecondLeadStep = ({
         return;
       }
 
-      console.log('Lead request sent successfully');
+      localStorage?.removeItem(LOCAL_STORAGE_KEY);
+      resetCaptcha();
 
-      // Only remove localStorage after successful submission
-      localStorage?.removeItem('LeadRequestFirstStepData');
-
-      // Reset captcha after successful submission
-      setCaptchaToken(null);
-      setCaptchaKey((prev) => prev + 1);
-
-      // Send to HubSpot
       const hubspotData = {
         email: firstStepData.email,
         firstname: firstStepData.fullName,
@@ -269,23 +223,18 @@ export const SecondLeadStep = ({
         monthly_lead: data.value.monthlyLeadVolume,
         primary_goals: data.value.primaryGoal.join('; '),
         hs_lead_status: 'NEW',
-        //type: 'lead_request',
         referral: 'affiliate_partner_a',
         submissionCode,
       };
-
-      console.log('Sending to HubSpot:', hubspotData);
 
       const hubspotRes = await fetch('/api/hubspot-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(hubspotData),
-        credentials: 'include', // Include cookies in request
+        credentials: 'include',
       });
-      console.log('HubSpot response:', hubspotRes);
-      if (hubspotRes.ok) {
-        console.log('Lead sent to HubSpot successfully');
-      } else {
+
+      if (!hubspotRes.ok) {
         const errorData = await hubspotRes.json();
         console.error('Failed to send lead to HubSpot:', errorData);
       }
@@ -303,6 +252,7 @@ export const SecondLeadStep = ({
       });
     },
   });
+
   const errors = useStore(store, (state) => state.errorMap) as {
     onSubmit?: {
       industry?: Array<{ message: string }>;
@@ -322,36 +272,29 @@ export const SecondLeadStep = ({
     captchaToken: string;
   };
 
-  // SMS verification state
   const [smsCodeSent, setSmsCodeSent] = useState(false);
   const [smsVerified, setSmsVerified] = useState(false);
   const [smsSending, setSmsSending] = useState(false);
   const [smsVerifying, setSmsVerifying] = useState(false);
   const [smsError, setSmsError] = useState<string | null>(null);
-
-  // Email validation state
   const [emailValidating, setEmailValidating] = useState(false);
   const [emailValidationError, setEmailValidationError] = useState<string | null>(null);
 
-  // Check if email requires SMS verification (guarded by ENABLE_VERIFICATIONS and feature flag)
   const needsSmsVerification =
     ENABLE_VERIFICATIONS && SMS_VERIFICATION_ENABLED && firstStepData.email
       ? requiresSmsVerification(firstStepData.email)
       : false;
 
-  // Reset SMS state when email changes or captcha expires
   useEffect(() => {
     if (!needsSmsVerification) {
       setSmsCodeSent(false);
       setSmsVerified(false);
       setSmsError(null);
     } else {
-      // If email changed to free domain, reset verification
       setSmsVerified(false);
     }
   }, [needsSmsVerification, firstStepData.email]);
 
-  // Get CSRF token on mount
   useEffect(() => {
     const fetchCsrfToken = async () => {
       try {
@@ -367,7 +310,6 @@ export const SecondLeadStep = ({
     fetchCsrfToken();
   }, []);
 
-  // Reset SMS verification when captcha expires or is cleared
   useEffect(() => {
     if (!captchaToken) {
       setSmsCodeSent(false);
@@ -381,7 +323,6 @@ export const SecondLeadStep = ({
       setSmsError('Please enter your phone number on step 1');
       return;
     }
-
     if (!csrfToken) {
       setSmsError('Security token is missing. Please refresh the page and try again.');
       return;
@@ -391,7 +332,6 @@ export const SecondLeadStep = ({
     setSmsError(null);
 
     try {
-      // System status is automatically checked and cached in /api/sms/send-code
       const res = await fetch('/api/sms/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -401,11 +341,9 @@ export const SecondLeadStep = ({
           csrfToken,
         }),
       });
-
       const data = await res.json();
 
       if (!res.ok) {
-        // Show specific error message from API
         const errorMessage =
           data.message ||
           (res.status === 400
@@ -441,7 +379,6 @@ export const SecondLeadStep = ({
     setSmsError(null);
 
     try {
-      // System status is automatically checked and cached in /api/sms/verify-code
       const res = await fetch('/api/sms/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -451,12 +388,9 @@ export const SecondLeadStep = ({
           turnstileToken: captchaToken,
         }),
       });
-
       const data = await res.json();
 
-      // New API returns { verified: boolean, message?: string }
       if (!res.ok || !data.verified) {
-        // If code not found or expired, allow resending
         if (
           data.message?.includes('not found') ||
           data.message?.includes('expired') ||
@@ -491,7 +425,7 @@ export const SecondLeadStep = ({
       >
         <section className={st.fields}>
           <FormRow>
-            <div className={`${st.inputWrapper}`}>
+            <div className={st.inputWrapper}>
               <Field name="industry">
                 {(field) => (
                   <TextField
@@ -505,7 +439,7 @@ export const SecondLeadStep = ({
                 )}
               </Field>
             </div>
-            <div className={`${st.inputWrapper}`}>
+            <div className={st.inputWrapper}>
               <Field name="monthlyLeadVolume">
                 {(field) => (
                   <TextField
@@ -522,7 +456,7 @@ export const SecondLeadStep = ({
           </FormRow>
           <div className={st.formGroup}>
             <p className={st.label}>Primary Goal</p>
-            <div className={`${st.inputWrapper}`}>
+            <div className={st.inputWrapper}>
               <Field name="primaryGoal">
                 {(field) => (
                   <Dropdown
@@ -563,7 +497,7 @@ export const SecondLeadStep = ({
               </Field>
             </div>
           </div>
-          <div className={`${st.inputWrapper}`}>
+          <div className={st.inputWrapper}>
             <Field name="message">
               {(field) => (
                 <TextArea
@@ -577,11 +511,10 @@ export const SecondLeadStep = ({
               )}
             </Field>
           </div>
-          {/* Honeypot field - hidden from users but visible to bots */}
           <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
             <input
               type="text"
-              name="company_website"
+              name={HONEYPOT_FIELD}
               tabIndex={-1}
               autoComplete="off"
               style={{ display: 'none' }}
@@ -648,7 +581,6 @@ export const SecondLeadStep = ({
               <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
             ))}
           </div>
-          {/* SMS verification - only for free email domains, shown after captcha */}
           {needsSmsVerification && captchaToken && (
             <div className={st.inputWrapper}>
               {!smsCodeSent ? (
@@ -719,7 +651,6 @@ export const SecondLeadStep = ({
         )}
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
           {([canSubmit, isSubmitting]) => {
-            // Disable button if SMS verification is required but not completed
             const isSmsVerificationRequired = needsSmsVerification && !smsVerified;
             const isDisabled = !canSubmit || isSubmitting || isSmsVerificationRequired;
 

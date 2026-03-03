@@ -18,8 +18,6 @@ export const StillLikeGetCall = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log(hasFirstStepData, pathname);
-
     if (!hasFirstStepData || pathname !== '/call-request') return;
 
     const handlePopState = (e: PopStateEvent) => {

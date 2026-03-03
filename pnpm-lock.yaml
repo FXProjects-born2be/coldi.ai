@@ -50,6 +50,9 @@ importers:
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
+      disposable-email-domains-js:
+        specifier: ^1.22.0
+        version: 1.22.0
       framer-motion:
         specifier: ^12.16.0
         version: 12.24.12(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1674,6 +1677,9 @@ packages:
   diff@4.0.2:
     resolution: {integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==}
     engines: {node: '>=0.3.1'}
+
+  disposable-email-domains-js@1.22.0:
+    resolution: {integrity: sha512-5miXovN3Qujy07FczD1Z7To6UfHv6U6AhGy2DNXPaD7+Ga1kzR0l5IRNnRuIOVcPgBZ8n855kubx1/ZECDXI/Q==}
 
   doctrine@2.1.0:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
@@ -4672,6 +4678,8 @@ snapshots:
   detect-node-es@1.1.0: {}
 
   diff@4.0.2: {}
+
+  disposable-email-domains-js@1.22.0: {}
 
   doctrine@2.1.0:
     dependencies:

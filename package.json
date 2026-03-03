@@ -26,6 +26,7 @@
     "botid": "^1.5.10",
     "canvas": "^3.1.2",
     "classnames": "^2.5.1",
+    "disposable-email-domains-js": "^1.22.0",
     "framer-motion": "^12.16.0",
     "fs": "^0.0.1-security",
     "google-libphonenumber": "^3.2.42",

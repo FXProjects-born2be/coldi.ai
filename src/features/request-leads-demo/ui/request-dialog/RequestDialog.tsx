@@ -209,7 +209,7 @@ export const RequestDialog = () => {
             const pending = isSubmitting || isRedirecting;
             return (
               <Button disabled={!canSubmit || pending} type="submit" fullWidth>
-                {isRedirecting ? 'Sending...' : isSubmitting ? 'Sending...' : 'Book a Demo'}
+                {pending ? 'Sending...' : 'Book a Demo'}
               </Button>
             );
           }}

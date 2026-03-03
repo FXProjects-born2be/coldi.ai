@@ -18,6 +18,7 @@ type RequestCallData = {
   scenario: string;
   agent: Agent;
   website_url?: string; // Honeypot field
+  zip_code_verification?: string; // Honeypot field
   turnstileToken?: string; // Backward compatibility
   captchaToken?: string;
   recaptchaToken?: string;
@@ -129,6 +130,22 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     // Use unified captcha token (prefer new name, fallback to old names for backward compatibility)
     const token = captchaToken || recaptchaToken || turnstileToken;
+
+    // Honeypot: zip_code_verification should never be filled by real users
+    if (bodyJSON.zip_code_verification) {
+      console.warn('[HONEYPOT] zip_code_verification filled on server', {
+        timestamp: new Date().toISOString(),
+        ip: getClientIp(request),
+        userAgent: request.headers.get('user-agent') || 'unknown',
+        value: bodyJSON.zip_code_verification,
+        email: bodyJSON.email,
+        name: bodyJSON.name,
+      });
+      return NextResponse.json(
+        { message: 'Request blocked due to security policy.' },
+        { status: 429 }
+      );
+    }
 
     // Comprehensive bot detection (includes checkRateLimits for IP/email/phone)
     const botDetection = detectBot(request, bodyJSON, 'call');
