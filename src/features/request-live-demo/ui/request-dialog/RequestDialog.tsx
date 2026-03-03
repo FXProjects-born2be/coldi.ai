@@ -13,7 +13,7 @@ import { TextField } from '@/shared/ui/kit/text-field';
 
 import type { RequestPricingSchema } from '../../model/schemas';
 import { DEMO_AGENTS, requestPricingSchema } from '../../model/schemas';
-import { useRequestPricingStore } from '../../store/store';
+//import { useRequestPricingStore } from '../../store/store';
 import { ThankYouDialog } from '../thank-you-dialog/ThankYouDialog';
 import st from './RequestDialog.module.scss';
 
@@ -23,14 +23,12 @@ import 'react-phone-input-2/lib/style.css';
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '';
 
 export const RequestDialog = () => {
-  const plan = useRequestPricingStore((state) => state.plan);
+  //const plan = useRequestPricingStore((state) => state.plan);
   const [isThankYouDialogOpen, setIsThankYouDialogOpen] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [turnstileKey, setTurnstileKey] = useState(0);
-  console.log('plan', plan);
-  const planPrice = plan.price.replace('<span>', '').replace('</span>', '');
-  const planTitle = `${plan.label}: ${plan.title} - ${planPrice}`;
-  console.log('planTitle', planTitle);
+  //const planPrice = plan.price.replace('<span>', '').replace('</span>', '');
+  //const planTitle = `${plan.label}: ${plan.title} - ${planPrice}`;
 
   const { Field, Subscribe, handleSubmit, store, reset } = useForm({
     defaultValues: {
@@ -66,8 +64,6 @@ export const RequestDialog = () => {
       return;
     }
 
-    console.log('Form submitted:', data);
-
     const res = await fetch('/api/retell-demo-call', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -85,34 +81,8 @@ export const RequestDialog = () => {
 
     setIsThankYouDialogOpen(true);
     setTurnstileToken(null);
-    setTurnstileKey((prev) => prev + 1); // Reset Turnstile widget
+    setTurnstileKey((prev) => prev + 1);
     reset();
-
-    // Send to HubSpot with phone and generated email for live-demo
-    // Use phone-based email since HubSpot requires email field
-    /*const liveDemoEmail = `phone-${data.phone}@live-demo.coldi.ai`;
-    const hubspotPayload = {
-      email: liveDemoEmail,
-      phone: data.phone,
-      hs_lead_status: 'NEW',
-      pricing: planTitle,
-      referral: 'affiliate_partner_a',
-      submissionCode,
-    };
-
-    const hubspotRes = await fetch('/api/hubspot-lead', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(hubspotPayload),
-      credentials: 'include', // Include cookies in request
-    });
-    console.log('Hubspot response:', hubspotRes);
-    if (hubspotRes.ok) {
-      console.log('Hubspot call request sent successfully');
-    } else {
-      const errorData = await hubspotRes.json();
-      console.error('Failed to send lead to HubSpot:', errorData);
-    }*/
   };
 
   return (
@@ -122,7 +92,6 @@ export const RequestDialog = () => {
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          console.log('Form submit event');
           handleSubmit().catch(console.error);
         }}
       >

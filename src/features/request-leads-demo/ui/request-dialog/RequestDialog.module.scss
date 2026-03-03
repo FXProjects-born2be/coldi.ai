@@ -1,13 +1,5 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
-.burger {
-  display: none;
-
-  @include tablet {
-    display: block;
-  }
-}
-
 .overlay {
   background: rgba(12, 16, 33, 0.15);
   backdrop-filter: blur(5px);

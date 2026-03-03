@@ -61,7 +61,6 @@ export const FirstStepToCall = ({
     onSubmit: (data) => {
       onSubmit(data.value);
       localStorage?.setItem('CallRequestFirstStepData', JSON.stringify(data.value));
-      console.log(localStorage?.getItem('CallRequestFirstStepData'));
     },
   });
   const errors = useStore(store, (state) => state.errorMap);
@@ -69,7 +68,6 @@ export const FirstStepToCall = ({
   const formValues = useStore(store, (state) => state.values);
 
   useEffect(() => {
-    console.log(formValues);
     if (formValues) {
       setFirstStepData({
         scenario: Array.isArray(formValues.scenario)

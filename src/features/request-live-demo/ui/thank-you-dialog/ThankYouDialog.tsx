@@ -7,12 +7,10 @@ import { Button } from '@/shared/ui/kit/button';
 import st from './ThankYouDialog.module.scss';
 
 export const ThankYouDialog = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
-  console.log('ThankYouDialog rendered, open:', open);
   return (
     <Root
       open={open}
       onOpenChange={(v) => {
-        console.log('ThankYouDialog onOpenChange', v);
         if (!v) onClose();
       }}
     >

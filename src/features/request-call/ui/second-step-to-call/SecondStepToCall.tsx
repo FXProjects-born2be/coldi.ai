@@ -10,9 +10,11 @@ import {
   TURNSTILE_ENABLED,
   TURNSTILE_SITE_KEY,
 } from '@/shared/lib/captcha-config';
+import { checkDisposableEmail } from '@/shared/lib/disposable-email';
 import { validateEmail } from '@/shared/lib/email-validation';
 import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
+import { getHoneypotValue } from '@/shared/lib/honeypot';
 import { isValidName } from '@/shared/lib/name-validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { HCaptcha } from '@/shared/ui/components/HCaptcha';
@@ -26,11 +28,11 @@ import { secondStepCallSchema } from '../../model/schemas';
 import { useRequestCallStore } from '../../store/store';
 import st from './SecondStepToCall.module.scss';
 
-// Feature flag: SMS verification (temporary off; set to true to re-enable)
 const SMS_VERIFICATION_ENABLED = false;
-
-// Feature flag: Email validation (set to true to enable email validation)
 const EMAIL_VALIDATION_ENABLED = false;
+const MIN_FILL_TIME_MS = 4000;
+const LOCAL_STORAGE_KEY = 'CallRequestFirstStepData';
+const HONEYPOT_FIELDS = { url: 'website_url', zip: 'zip_code_verification' } as const;
 
 const industries = [
   'Technology',
@@ -59,56 +61,11 @@ const companySizes = [
   '5,000+',
 ];
 
-// List of supported country codes
-/*const SUPPORTED_COUNTRY_CODES = [
-  '+52',
-  '+1',
-  '+44',
-  '+54',
-  '+55',
-  '+56',
-  '+43',
-  '+32',
-  '+359',
-  '+385',
-  '+357',
-  '+420',
-  '+45',
-  '+372',
-  '+33',
-  '+49',
-  '+30',
-  '+36',
-  '+354',
-  '+353',
-  '+39',
-  '+371',
-  '+370',
-  '+352',
-  '+377',
-  '+31',
-  '+47',
-  '+48',
-  '+351',
-  '+34',
-  '+46',
-  '+41',
-  '+972',
-  '+965',
-  '+974',
-  '+966',
-  '+65',
-  '+886',
-  '+66',
-  '+90',
-  '+971',
-  '+61',
-  '+91',
-];*/
-
 export const SecondStepToCall = ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   botName,
   onSubmit,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onUnsupportedCountry,
 }: {
   botName: string;
@@ -119,20 +76,28 @@ export const SecondStepToCall = ({
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaKey, setCaptchaKey] = useState(0);
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
-  console.log('botName', botName);
-  console.log('[SecondStep] store firstStepData:', storeFirstStepData);
+  const formMountedAt = useMemo(() => Date.now(), []);
 
-  // Restore firstStepData from localStorage if store is empty
+  const resetCaptcha = () => {
+    setCaptchaToken(null);
+    setCaptchaKey((prev) => prev + 1);
+  };
+
+  const fakeSuccessAndReturn = (data: SecondStepCallSchema) => {
+    localStorage?.removeItem(LOCAL_STORAGE_KEY);
+    onSubmit(data);
+    resetCaptcha();
+  };
+
   useEffect(() => {
     if (
       (!storeFirstStepData.phone || storeFirstStepData.phone === '') &&
       typeof window !== 'undefined'
     ) {
       try {
-        const stored = localStorage.getItem('CallRequestFirstStepData');
+        const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
         if (stored) {
           const parsed = JSON.parse(stored);
-          console.log('[SecondStep] Restoring from localStorage:', parsed);
           setFirstStepData({
             scenario: Array.isArray(parsed.scenario)
               ? parsed.scenario.join(', ')
@@ -147,19 +112,17 @@ export const SecondStepToCall = ({
     }
   }, [storeFirstStepData.phone, setFirstStepData]);
 
-  // Use restored data or store data - memoized to avoid unnecessary recalculations
   const firstStepData = useMemo(() => {
     if (storeFirstStepData.phone) {
       return storeFirstStepData;
     }
 
-    // Fallback to localStorage if store is empty
     if (typeof window === 'undefined') {
       return { scenario: '', phone: '', countryCode: '' };
     }
 
     try {
-      const stored = localStorage.getItem('CallRequestFirstStepData');
+      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
         return {
@@ -177,7 +140,6 @@ export const SecondStepToCall = ({
     return { scenario: '', phone: '', countryCode: '' };
   }, [storeFirstStepData]);
 
-  console.log('[SecondStep] Using firstStepData:', firstStepData);
   const { Field, Subscribe, handleSubmit, store } = useForm({
     defaultValues: {
       name: '',
@@ -192,32 +154,57 @@ export const SecondStepToCall = ({
       onSubmit: secondStepCallSchema,
     },
     onSubmit: async (data) => {
-      // Check captcha token first
+      const elapsed = Date.now() - formMountedAt;
+      if (elapsed < MIN_FILL_TIME_MS) {
+        console.warn('[ANTI-BOT] Form submitted too fast:', {
+          elapsedMs: elapsed,
+          minRequiredMs: MIN_FILL_TIME_MS,
+          timestamp: new Date().toISOString(),
+          formData: { name: data.value.name, email: data.value.email },
+        });
+        fakeSuccessAndReturn(data.value);
+        return;
+      }
+
+      const zipHoneypotValue = getHoneypotValue(HONEYPOT_FIELDS.zip);
+      if (zipHoneypotValue) {
+        console.warn('[HONEYPOT] zip_code_verification filled:', {
+          value: zipHoneypotValue,
+          timestamp: new Date().toISOString(),
+          formData: { name: data.value.name, email: data.value.email },
+        });
+        fakeSuccessAndReturn(data.value);
+        return;
+      }
+
       if (!captchaToken) {
         console.error('Captcha token is missing');
         return;
       }
 
-      // Validate email after captcha is passed
       const email = formValues.email?.trim();
       if (!email) {
         setEmailValidationError('Please enter your email address');
-        // Reset captcha on failed validation
-        setCaptchaToken(null);
-        setCaptchaKey((prev) => prev + 1);
+        resetCaptcha();
         return;
       }
 
-      // Basic email format check
       if (!email.includes('@')) {
         setEmailValidationError('Please enter a valid email address');
-        // Reset captcha on failed validation
-        setCaptchaToken(null);
-        setCaptchaKey((prev) => prev + 1);
+        resetCaptcha();
         return;
       }
 
-      // Validate email (if enabled)
+      if (checkDisposableEmail(email)) {
+        console.warn('[DISPOSABLE EMAIL] Blocked:', {
+          email,
+          timestamp: new Date().toISOString(),
+        });
+        setEmailValidationError('Please use a non-disposable email address.');
+        resetCaptcha();
+        return;
+      }
+
       if (EMAIL_VALIDATION_ENABLED) {
         setEmailValidating(true);
         setEmailValidationError(null);
@@ -228,103 +215,64 @@ export const SecondStepToCall = ({
             result.message || 'Email is not valid. Please use another email address.'
           );
           setEmailValidating(false);
-          // Reset captcha on failed validation
-          setCaptchaToken(null);
-          setCaptchaKey((prev) => prev + 1);
+          resetCaptcha();
           return;
         }
         setEmailValidationError(null);
         setEmailValidating(false);
       }
 
-      // Check SMS verification for free email domains
       if (needsSmsVerification && !smsVerified) {
         setSmsError('Please verify your phone number with SMS code');
         return;
       }
 
-      // Validate name - if invalid, send to trash route and show success to user
       const name = data.value.name?.trim() || '';
-      const isNameValid = name && isValidName(name);
-
-      if (!isNameValid) {
-        // Get honeypot field value from DOM
-        const honeypotField = document.querySelector<HTMLInputElement>('input[name="website_url"]');
-        const honeypotValue = honeypotField?.value || '';
-
+      if (!name || !isValidName(name)) {
         const trashBody = {
           ...data.value,
           ...firstStepData,
           agent,
-          website_url: honeypotValue,
+          [HONEYPOT_FIELDS.url]: getHoneypotValue(HONEYPOT_FIELDS.url),
+          [HONEYPOT_FIELDS.zip]: zipHoneypotValue,
           formType: 'call_request',
         };
 
-        // Send to trash route (user won't know)
         await fetch('/api/trash-form', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(trashBody),
           credentials: 'include',
-        }).catch(() => {
-          // Silently fail - user shouldn't know
-        });
+        }).catch(() => {});
 
-        // Show success to user (they think form was submitted successfully)
-        localStorage?.removeItem('CallRequestFirstStepData');
-        onSubmit(data.value);
-        setCaptchaToken(null);
-        setCaptchaKey((prev) => prev + 1);
+        fakeSuccessAndReturn(data.value);
         return;
       }
-
-      // Check if country code is supported
-      //const countryCode = firstStepData.countryCode || '';
-      const isSupported = true; //SUPPORTED_COUNTRY_CODES.includes(countryCode);
-
-      // Prepare HubSpot payload (used for both supported and unsupported countries)
-      const hubspotPayload = {
-        email: data.value.email,
-        firstname: data.value.name,
-        phone: firstStepData.phone,
-        call_scenarios: firstStepData.scenario,
-        industry: data.value.industry,
-        company_size: data.value.company,
-        hs_lead_status: 'NEW',
-        //type: 'call_request',
-        referral: 'affiliate_partner_a',
-      };
-
-      // Get honeypot field value from DOM
-      const honeypotField = document.querySelector<HTMLInputElement>('input[name="website_url"]');
-      const honeypotValue = honeypotField?.value || '';
 
       const body = {
         ...data.value,
         ...firstStepData,
         agent,
-        website_url: honeypotValue,
-        captchaToken, // Use unified captcha token name
-        turnstileToken: TURNSTILE_ENABLED ? captchaToken : undefined, // Backward compatibility
-        recaptchaToken: RECAPTCHA_ENABLED ? captchaToken : undefined, // Backward compatibility
+        [HONEYPOT_FIELDS.url]: getHoneypotValue(HONEYPOT_FIELDS.url),
+        [HONEYPOT_FIELDS.zip]: zipHoneypotValue,
+        captchaToken,
+        turnstileToken: TURNSTILE_ENABLED ? captchaToken : undefined,
+        recaptchaToken: RECAPTCHA_ENABLED ? captchaToken : undefined,
       };
-      console.log(body);
+
       const res = await fetch('/api/request-call', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-        credentials: 'include', // Include cookies in request
+        credentials: 'include',
       });
 
-      // If main request failed (bot detected, rate limit, etc.), stop execution
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
         console.error('Call request blocked or failed:', errorData);
-        // Don't proceed with Retell, HubSpot, or show success dialog
         return;
       }
 
-      // Get submission code from response
       const responseData = await res.json().catch(() => ({}));
       const submissionCode = responseData.submissionCode;
 
@@ -333,12 +281,8 @@ export const SecondStepToCall = ({
         return;
       }
 
-      console.log('Call request sent successfully');
+      localStorage?.removeItem(LOCAL_STORAGE_KEY);
 
-      // Only remove localStorage after successful submission
-      localStorage?.removeItem('CallRequestFirstStepData');
-
-      // Send to Retell (phone number will be determined automatically based on system status)
       const retellPayload = {
         name: data.value.name,
         email: data.value.email,
@@ -349,23 +293,28 @@ export const SecondStepToCall = ({
         countryCode: firstStepData.countryCode,
         submissionCode,
       };
-      console.log('Retell payload:', retellPayload);
 
       const retellRes = await fetch('/api/retell-call', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(retellPayload),
-        credentials: 'include', // Include cookies in request
+        credentials: 'include',
       });
-      console.log('Retell response:', retellRes);
-      if (retellRes.ok) {
-        console.log('Retell call request sent successfully');
-      } else {
+
+      if (!retellRes.ok) {
         console.error('Failed to send retell call request');
       }
 
-      // Send to HubSpot
-      console.log('Hubspot payload:', hubspotPayload);
+      const hubspotPayload = {
+        email: data.value.email,
+        firstname: data.value.name,
+        phone: firstStepData.phone,
+        call_scenarios: firstStepData.scenario,
+        industry: data.value.industry,
+        company_size: data.value.company,
+        hs_lead_status: 'NEW',
+        referral: 'affiliate_partner_a',
+      };
 
       const hubspotRes = await fetch('/api/hubspot-lead', {
         method: 'POST',
@@ -376,30 +325,19 @@ export const SecondStepToCall = ({
           email: data.value.email,
           phone: firstStepData.phone,
         }),
-        credentials: 'include', // Include cookies in request
+        credentials: 'include',
       });
-      console.log('Hubspot response:', hubspotRes);
-      if (hubspotRes.ok) {
-        console.log('Hubspot call request sent successfully');
-      } else {
+
+      if (!hubspotRes.ok) {
         const error = await hubspotRes.json();
         console.error('Failed to send hubspot call request', error);
       }
 
-      // Show success dialog
-      if (!isSupported) {
-        // Show unsupported country dialog
-        onUnsupportedCountry();
-      } else {
-        // Show success dialog for supported countries
-        onSubmit(data.value);
-      }
-
-      // Reset captcha after successful submission
-      setCaptchaToken(null);
-      setCaptchaKey((prev) => prev + 1);
+      onSubmit(data.value);
+      resetCaptcha();
     },
   });
+
   const errors = useStore(store, (state) => state.errorMap) as {
     onSubmit?: {
       name?: Array<{ message: string }>;
@@ -419,24 +357,19 @@ export const SecondStepToCall = ({
     captchaToken: string;
   };
 
-  // SMS verification state
   const [smsCodeSent, setSmsCodeSent] = useState(false);
   const [smsVerified, setSmsVerified] = useState(false);
   const [smsSending, setSmsSending] = useState(false);
   const [smsVerifying, setSmsVerifying] = useState(false);
   const [smsError, setSmsError] = useState<string | null>(null);
-
-  // Email validation state
   const [emailValidating, setEmailValidating] = useState(false);
   const [emailValidationError, setEmailValidationError] = useState<string | null>(null);
 
-  // Check if email requires SMS verification (guarded by feature flag)
   const needsSmsVerification =
     SMS_VERIFICATION_ENABLED && formValues.email
       ? requiresSmsVerification(formValues.email)
       : false;
 
-  // Reset SMS state when email changes or captcha expires
   useEffect(() => {
     if (!needsSmsVerification) {
       setSmsCodeSent(false);
@@ -447,7 +380,6 @@ export const SecondStepToCall = ({
     }
   }, [needsSmsVerification, formValues.email]);
 
-  // Get CSRF token on mount
   useEffect(() => {
     const fetchCsrfToken = async () => {
       try {
@@ -463,7 +395,6 @@ export const SecondStepToCall = ({
     fetchCsrfToken();
   }, []);
 
-  // Reset SMS verification when captcha expires or is cleared
   useEffect(() => {
     if (!captchaToken) {
       setSmsCodeSent(false);
@@ -477,7 +408,6 @@ export const SecondStepToCall = ({
       setSmsError('Please enter your phone number on step 1');
       return;
     }
-
     if (!csrfToken) {
       setSmsError('Security token is missing. Please refresh the page and try again.');
       return;
@@ -487,8 +417,6 @@ export const SecondStepToCall = ({
     setSmsError(null);
 
     try {
-      // System status is automatically checked and cached in /api/sms/send-code
-      console.log('[SMS Send] Using phone:', firstStepData.phone, 'firstStepData:', firstStepData);
       const res = await fetch('/api/sms/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -498,11 +426,9 @@ export const SecondStepToCall = ({
           csrfToken,
         }),
       });
-
       const data = await res.json();
 
       if (!res.ok) {
-        // Show specific error message from API
         const errorMessage =
           data.message ||
           (res.status === 400
@@ -543,8 +469,6 @@ export const SecondStepToCall = ({
     setSmsError(null);
 
     try {
-      // System status is automatically checked and cached in /api/sms/verify-code
-      console.log('[SMS Verify] Using phone:', firstStepData.phone);
       const res = await fetch('/api/sms/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -554,10 +478,8 @@ export const SecondStepToCall = ({
           turnstileToken: captchaToken,
         }),
       });
-
       const data = await res.json();
 
-      // New API returns { verified: boolean, message?: string }
       if (!res.ok || !data.verified) {
         if (
           data.message?.includes('not found') ||
@@ -667,15 +589,17 @@ export const SecondStepToCall = ({
               ))}
             </div>
           </FormRow>
-          {/* Honeypot field - hidden from users but visible to bots */}
           <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
             <input
               type="text"
-              name="website_url"
+              name={HONEYPOT_FIELDS.url}
               tabIndex={-1}
               autoComplete="off"
               style={{ display: 'none' }}
             />
+          </div>
+          <div style={{ display: 'none' }}>
+            <input type="text" name={HONEYPOT_FIELDS.zip} tabIndex={-1} autoComplete="off" />
           </div>
           <div className={`${st.inputWrapper} ${errors.onSubmit?.captchaToken ? st.error : ''}`}>
             <Field name="captchaToken">
@@ -738,7 +662,6 @@ export const SecondStepToCall = ({
               <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
             ))}
           </div>
-          {/* SMS verification - only for free email domains, shown after captcha */}
           {needsSmsVerification && captchaToken && (
             <div className={st.inputWrapper}>
               {!smsCodeSent ? (

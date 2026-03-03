@@ -15,6 +15,7 @@ import {
 import { validateEmail } from '@/shared/lib/email-validation';
 import { requiresSmsVerification } from '@/shared/lib/email-verification';
 import { useForm, useStore } from '@/shared/lib/forms';
+import { getHoneypotValue } from '@/shared/lib/honeypot';
 import { isValidName } from '@/shared/lib/name-validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { HCaptcha } from '@/shared/ui/components/HCaptcha';
@@ -32,11 +33,9 @@ import st from './RequestDialog.module.scss';
 
 import 'react-phone-input-2/lib/style.css';
 
-// Feature flag: SMS verification (temporary off; set to true to re-enable)
 const SMS_VERIFICATION_ENABLED = false;
-
-// Feature flag: Email validation (set to true to enable email validation)
 const EMAIL_VALIDATION_ENABLED = false;
+const HONEYPOT_FIELD = 'business_url';
 
 export const RequestDialog = ({
   open,
@@ -45,16 +44,19 @@ export const RequestDialog = ({
   open: boolean;
   setOpen: (open: boolean) => void;
 }) => {
-  console.log('RequestDialog rendered, open:', open);
   const plan = useRequestPricingStore((state) => state.plan);
   const [isThankYouDialogOpen, setIsThankYouDialogOpen] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaKey, setCaptchaKey] = useState(0);
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
-  console.log('plan', plan);
+
   const planPrice = plan.price.replace('<span>', '').replace('</span>', '');
   const planTitle = `${plan.label}: ${plan.title} - ${planPrice}`;
-  console.log('planTitle', planTitle);
+
+  const resetCaptcha = () => {
+    setCaptchaToken(null);
+    setCaptchaKey((prev) => prev + 1);
+  };
 
   const { Field, Subscribe, handleSubmit, store, reset } = useForm({
     defaultValues: {
@@ -72,7 +74,6 @@ export const RequestDialog = ({
       onChange: requestPricingSchema,
     },
     onSubmit: (data) => {
-      // Map captchaToken from form values
       const formData = {
         ...data.value,
         captchaToken: (data.value as unknown as { captchaToken: string }).captchaToken || '',
@@ -80,6 +81,7 @@ export const RequestDialog = ({
       onSubmit(formData);
     },
   });
+
   const errors = useStore(store, (state) => state.errorMap) as {
     onChange?: {
       name?: Array<{ message: string }>;
@@ -102,36 +104,29 @@ export const RequestDialog = ({
     smsCode?: string;
   };
 
-  // SMS verification state
   const [smsCodeSent, setSmsCodeSent] = useState(false);
   const [smsVerified, setSmsVerified] = useState(false);
   const [smsSending, setSmsSending] = useState(false);
   const [smsVerifying, setSmsVerifying] = useState(false);
   const [smsError, setSmsError] = useState<string | null>(null);
-
-  // Email validation state
   const [emailValidating, setEmailValidating] = useState(false);
   const [emailValidationError, setEmailValidationError] = useState<string | null>(null);
 
-  // Check if email requires SMS verification (guarded by feature flag)
   const needsSmsVerification =
     SMS_VERIFICATION_ENABLED && formValues.email
       ? requiresSmsVerification(formValues.email)
       : false;
 
-  // Reset SMS state when email changes or captcha expires
   useEffect(() => {
     if (!needsSmsVerification) {
       setSmsCodeSent(false);
       setSmsVerified(false);
       setSmsError(null);
     } else {
-      // If email changed to free domain, reset verification
       setSmsVerified(false);
     }
   }, [needsSmsVerification, formValues.email]);
 
-  // Get CSRF token on mount
   useEffect(() => {
     const fetchCsrfToken = async () => {
       try {
@@ -147,7 +142,6 @@ export const RequestDialog = ({
     fetchCsrfToken();
   }, []);
 
-  // Reset SMS verification when captcha expires or is cleared
   useEffect(() => {
     if (!captchaToken) {
       setSmsCodeSent(false);
@@ -161,7 +155,6 @@ export const RequestDialog = ({
       setSmsError('Please enter your phone number first');
       return;
     }
-
     if (!csrfToken) {
       setSmsError('Security token is missing. Please refresh the page and try again.');
       return;
@@ -171,17 +164,14 @@ export const RequestDialog = ({
     setSmsError(null);
 
     try {
-      // System status is automatically checked and cached in /api/sms/send-code
       const res = await fetch('/api/sms/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone: formValues.phone, turnstileToken: captchaToken, csrfToken }),
       });
-
       const data = await res.json();
 
       if (!res.ok) {
-        // Show specific error message from API
         const errorMessage =
           data.message ||
           (res.status === 400
@@ -197,7 +187,7 @@ export const RequestDialog = ({
       }
 
       setSmsCodeSent(true);
-      setSmsVerified(false); // Reset verification status when sending new code
+      setSmsVerified(false);
       setSmsError(null);
     } catch (error) {
       console.error('Error sending SMS code:', error);
@@ -217,7 +207,6 @@ export const RequestDialog = ({
     setSmsError(null);
 
     try {
-      // System status is automatically checked and cached in /api/sms/verify-code
       const res = await fetch('/api/sms/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -227,18 +216,15 @@ export const RequestDialog = ({
           turnstileToken: captchaToken,
         }),
       });
-
       const data = await res.json();
 
-      // New API returns { verified: boolean, message?: string }
       if (!res.ok || !data.verified) {
-        // If code not found or expired, allow resending
         if (
           data.message?.includes('not found') ||
           data.message?.includes('expired') ||
           data.message?.includes('Maximum verification attempts exceeded')
         ) {
-          setSmsCodeSent(false); // Allow resending
+          setSmsCodeSent(false);
         }
         setSmsError(data.message || 'Invalid verification code');
         setSmsVerifying(false);
@@ -256,121 +242,88 @@ export const RequestDialog = ({
   };
 
   const onSubmit = async (data: RequestPricingSchema) => {
-    // Check captcha token first
     if (!captchaToken) {
       setSmsError('Please complete the security verification');
       return;
     }
 
-    // Validate email after captcha is passed
     const email = formValues.email?.trim();
     if (!email) {
       setEmailValidationError('Please enter your email address');
-      // Reset captcha on failed validation
-      setCaptchaToken(null);
-      setCaptchaKey((prev) => prev + 1);
+      resetCaptcha();
       return;
     }
 
-    // Basic email format check
     if (!email.includes('@')) {
       setEmailValidationError('Please enter a valid email address');
-      // Reset captcha on failed validation
-      setCaptchaToken(null);
-      setCaptchaKey((prev) => prev + 1);
+      resetCaptcha();
       return;
     }
 
-    // Validate email (if enabled)
     if (EMAIL_VALIDATION_ENABLED) {
       setEmailValidating(true);
       setEmailValidationError(null);
       const result = await validateEmail(email);
-      console.log('result', result);
 
       if (!result.isValid) {
         setEmailValidationError(
           result.message || 'Email is not valid. Please use another email address.'
         );
         setEmailValidating(false);
-        // Reset captcha on failed validation
-        setCaptchaToken(null);
-        setCaptchaKey((prev) => prev + 1);
+        resetCaptcha();
         return;
       }
       setEmailValidationError(null);
       setEmailValidating(false);
     }
 
-    // Check SMS verification for free email domains
     if (needsSmsVerification && !smsVerified) {
       setSmsError('Please verify your phone number with SMS code');
       return;
     }
 
-    // Validate name - if invalid, send to trash route and show success to user
     const name = data.name?.trim() || '';
-    const isNameValid = name && isValidName(name);
-
-    if (!isNameValid) {
-      // Get honeypot field value from DOM
-      const honeypotField = document.querySelector<HTMLInputElement>('input[name="business_url"]');
-      const honeypotValue = honeypotField?.value || '';
-
+    if (!name || !isValidName(name)) {
       const trashBody = {
         ...data,
-        business_url: honeypotValue,
+        [HONEYPOT_FIELD]: getHoneypotValue(HONEYPOT_FIELD),
         formType: 'pricing_request',
         plan: planTitle,
       };
 
-      // Send to trash route (user won't know)
       await fetch('/api/trash-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(trashBody),
         credentials: 'include',
-      }).catch(() => {
-        // Silently fail - user shouldn't know
-      });
+      }).catch(() => {});
 
-      // Show success to user (they think form was submitted successfully)
       setOpen(false);
       setIsThankYouDialogOpen(true);
-      setCaptchaToken(null);
-      setCaptchaKey((prev) => prev + 1);
+      resetCaptcha();
       reset();
       return;
     }
-
-    console.log('Form submitted:', data);
-
-    // Get honeypot field value from DOM
-    const honeypotField = document.querySelector<HTMLInputElement>('input[name="business_url"]');
-    const honeypotValue = honeypotField?.value || '';
 
     const res = await fetch('/api/request-pricing', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...data,
-        business_url: honeypotValue,
-        captchaToken, // Use unified captcha token name
-        turnstileToken: TURNSTILE_ENABLED ? captchaToken : undefined, // Backward compatibility
-        recaptchaToken: RECAPTCHA_ENABLED ? captchaToken : undefined, // Backward compatibility
+        [HONEYPOT_FIELD]: getHoneypotValue(HONEYPOT_FIELD),
+        captchaToken,
+        turnstileToken: TURNSTILE_ENABLED ? captchaToken : undefined,
+        recaptchaToken: RECAPTCHA_ENABLED ? captchaToken : undefined,
       }),
-      credentials: 'include', // Include cookies in request
+      credentials: 'include',
     });
 
-    // If main request failed (bot detected, rate limit, etc.), stop execution
     if (!res.ok) {
       const errorData = await res.json().catch(() => ({}));
       console.error('Pricing request blocked or failed:', errorData);
-      // Don't close dialog, don't proceed with HubSpot
       return;
     }
 
-    // Get submission code from response
     const responseData = await res.json().catch(() => ({}));
     const submissionCode = responseData.submissionCode;
 
@@ -381,11 +334,9 @@ export const RequestDialog = ({
 
     setOpen(false);
     setIsThankYouDialogOpen(true);
-    setCaptchaToken(null);
-    setCaptchaKey((prev) => prev + 1); // Reset captcha widget
+    resetCaptcha();
     reset();
 
-    // Send to HubSpot
     const hubspotPayload = {
       email: data.email,
       firstname: data.name,
@@ -393,7 +344,6 @@ export const RequestDialog = ({
       website: data.website,
       message: data.message,
       hs_lead_status: 'NEW',
-      //type: 'pricing_request',
       pricing: planTitle,
       referral: 'affiliate_partner_a',
       submissionCode,
@@ -403,18 +353,14 @@ export const RequestDialog = ({
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(hubspotPayload),
-      credentials: 'include', // Include cookies in request
+      credentials: 'include',
     });
-    console.log('Hubspot response:', hubspotRes);
-    if (hubspotRes.ok) {
-      console.log('Hubspot call request sent successfully');
-    } else {
+
+    if (!hubspotRes.ok) {
       const errorData = await hubspotRes.json();
       console.error('Failed to send lead to HubSpot:', errorData);
     }
 
-    // Trigger background check on server (30 second delay is handled on server)
-    // Fire and forget - don't wait for response
     fetch('/api/check-hubspot-and-notify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -432,17 +378,14 @@ export const RequestDialog = ({
     <>
       <Root open={open} onOpenChange={setOpen}>
         <Portal>
-          <Overlay className={st.overlay} onClick={() => console.log('Overlay clicked')} />
+          <Overlay className={st.overlay} />
           <Content className={st.content}>
             <Title />
             <Description asChild>
               <section>
                 <button
                   className={st.closeButton}
-                  onClick={() => {
-                    console.log('Close button clicked');
-                    setOpen(false);
-                  }}
+                  onClick={() => setOpen(false)}
                   type="button"
                   aria-label="Close dialog"
                 >
@@ -460,7 +403,6 @@ export const RequestDialog = ({
                   onSubmit={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log('Form submit event');
                     handleSubmit().catch(console.error);
                   }}
                 >
@@ -533,9 +475,9 @@ export const RequestDialog = ({
                               inputClass={st.phoneInput}
                               buttonClass={st.phoneInputButton}
                               dropdownClass={st.phoneInputDropdown}
-                              enableSearch={true}
+                              enableSearch
                               searchPlaceholder="Search country..."
-                              autoFormat={true}
+                              autoFormat
                             />
                           </div>
                         )}
@@ -559,7 +501,6 @@ export const RequestDialog = ({
                         )}
                       </Field>
                     </div>
-                    {/* Honeypot field - hidden from users but visible to bots */}
                     <div
                       style={{
                         position: 'absolute',
@@ -570,7 +511,7 @@ export const RequestDialog = ({
                     >
                       <input
                         type="text"
-                        name="business_url"
+                        name={HONEYPOT_FIELD}
                         tabIndex={-1}
                         autoComplete="off"
                         style={{ display: 'none' }}
@@ -639,7 +580,6 @@ export const RequestDialog = ({
                         <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
                       ))}
                     </div>
-                    {/* SMS verification - only for free email domains, shown after captcha */}
                     {needsSmsVerification && captchaToken && (
                       <div className={`${st.inputWrapper} ${st.full}`}>
                         {!smsCodeSent ? (
@@ -707,7 +647,6 @@ export const RequestDialog = ({
                   <footer className={st.footer}>
                     <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
                       {([canSubmit, isSubmitting]) => {
-                        // Disable button if SMS verification is required but not completed
                         const isSmsVerificationRequired = needsSmsVerification && !smsVerified;
                         const isDisabled = !canSubmit || isSubmitting || isSmsVerificationRequired;
 

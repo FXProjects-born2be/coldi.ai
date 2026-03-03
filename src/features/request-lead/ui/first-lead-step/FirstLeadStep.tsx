@@ -73,7 +73,6 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
 
       onSubmit(data.value);
       localStorage?.setItem('LeadRequestFirstStepData', JSON.stringify(data.value));
-      console.log(localStorage?.getItem('LeadRequestFirstStepData'));
       // HubSpot lead creation happens in second step after all validations and captcha
     },
   });
@@ -86,7 +85,6 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
   const [emailValidationError, setEmailValidationError] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log(formValues);
     if (formValues) {
       setFirstStepData({
         fullName: formValues.fullName,
