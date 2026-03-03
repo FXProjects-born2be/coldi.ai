@@ -47,15 +47,6 @@ export const Hero = () => {
             <RequestDialog />
           </div>
         </motion.div>
-        <video
-          src="/videos/about/hero.mp4"
-          autoPlay
-          playsInline
-          muted
-          loop
-          preload="auto"
-          controls={false}
-        />
       </section>
     </>
   );
