@@ -6,7 +6,7 @@ import Script from 'next/script';
 
 import st from './Hero.module.scss';
 
-const HUBSPOT_MEETINGS_BASE = 'https://meetings-eu1.hubspot.com/hector-iglesias?embed=true';
+const HUBSPOT_MEETINGS_BASE = 'https://meetings-eu1.hubspot.com/serge-zhak-coldi?embed=true';
 const HUBSPOT_MEETINGS_SCRIPT =
   'https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js';
 
