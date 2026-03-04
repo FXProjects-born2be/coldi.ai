@@ -166,6 +166,15 @@ export const SecondStepToCall = ({
         });
         fakeSuccessAndReturn(data.value);
         return;
+      } else {
+        console.log(`[ANTI-BOT] Form submitted in ${elapsed}ms`);
+        console.log(`[ANTI-BOT] Form data:`, {
+          name: data.value.name,
+          email: data.value.email,
+          industry: data.value.industry,
+          company: data.value.company,
+          captchaToken: data.value.captchaToken,
+        });
       }
 
       const zipHoneypotValue = getHoneypotValue(HONEYPOT_FIELDS.zip);
@@ -177,6 +186,8 @@ export const SecondStepToCall = ({
         });
         fakeSuccessAndReturn(data.value);
         return;
+      } else {
+        console.log(`[HONEYPOT] zip_code_verification not filled`);
       }
 
       if (!captchaToken) {
