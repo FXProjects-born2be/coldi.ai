@@ -187,7 +187,7 @@ export const SecondStepToCall = ({
         fakeSuccessAndReturn(data.value);
         return;
       } else {
-        console.log(`[HONEYPOT] zip_code_verification not filled`);
+        console.log(`[HONEYPOT] zip_code_verification not filled : ${zipHoneypotValue}`);
       }
 
       if (!captchaToken) {
