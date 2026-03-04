@@ -6,6 +6,7 @@ import sgMail from '@sendgrid/mail';
 import type { Agent } from '@/features/request-call-tst/store/store';
 
 import { detectBot, getClientIp } from '@/shared/lib/security/anti-bot';
+import { verifyFinalToken } from '@/shared/lib/security/form-token';
 import { generateSubmissionCode } from '@/shared/lib/security/submission-codes';
 import { areFormsEnabled } from '@/shared/lib/system';
 
@@ -22,6 +23,8 @@ type RequestCallData = {
   turnstileToken?: string; // Backward compatibility
   captchaToken?: string;
   recaptchaToken?: string;
+  formToken?: string;
+  formFilledInMs?: number;
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
@@ -142,6 +145,42 @@ export async function POST(request: Request): Promise<NextResponse> {
         { message: 'Request blocked due to security policy.' },
         { status: 429 }
       );
+    }
+
+    // Log form fill time from client
+    if (bodyJSON.formFilledInMs != null) {
+      const sec = (bodyJSON.formFilledInMs / 1000).toFixed(1);
+      if (bodyJSON.formFilledInMs < 10_000) {
+        console.warn(`[ANTI-BOT] Suspiciously fast form fill: ${sec}s`, {
+          formFilledInMs: bodyJSON.formFilledInMs,
+          ip: getClientIp(request),
+          email: bodyJSON.email,
+        });
+      } else {
+        console.log(`[ANTI-BOT] Form fill time: ${sec}s`);
+      }
+    }
+
+    // Two-phase form token verification (proof-of-visit with delay challenge)
+    if (bodyJSON.formToken) {
+      const tokenResult = verifyFinalToken(bodyJSON.formToken, 'call-request');
+      if (!tokenResult.valid) {
+        console.warn('[FORM-TOKEN] Invalid form token on request-call', {
+          error: tokenResult.error,
+          ip: getClientIp(request),
+          email: bodyJSON.email,
+        });
+      } else {
+        console.log('[FORM-TOKEN] Valid form token', {
+          sid: tokenResult.sid,
+          interactions: tokenResult.interactions,
+        });
+      }
+    } else {
+      console.warn('[FORM-TOKEN] Missing form token on request-call', {
+        ip: getClientIp(request),
+        email: bodyJSON.email,
+      });
     }
 
     // Comprehensive bot detection (includes checkRateLimits for IP/email/phone)
