@@ -310,27 +310,28 @@ export const SecondStepToCall = ({
 
       localStorage?.removeItem(LOCAL_STORAGE_KEY);
 
-      const retellPayload = {
-        name: data.value.name,
-        email: data.value.email,
-        phone: firstStepData.phone,
-        industry: data.value.industry,
-        company: data.value.company,
-        agent,
-        countryCode: firstStepData.countryCode,
-        submissionCode,
-      };
-
-      const retellRes = await fetch('/api/retell-call', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(retellPayload),
-        credentials: 'include',
-      });
-
-      if (!retellRes.ok) {
-        console.error('Failed to send retell call request');
-      }
+      // Retell call temporarily disabled
+      // const retellPayload = {
+      //   name: data.value.name,
+      //   email: data.value.email,
+      //   phone: firstStepData.phone,
+      //   industry: data.value.industry,
+      //   company: data.value.company,
+      //   agent,
+      //   countryCode: firstStepData.countryCode,
+      //   submissionCode,
+      // };
+      //
+      // const retellRes = await fetch('/api/retell-call', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(retellPayload),
+      //   credentials: 'include',
+      // });
+      //
+      // if (!retellRes.ok) {
+      //   console.error('Failed to send retell call request');
+      // }
 
       const hubspotPayload = {
         email: data.value.email,
