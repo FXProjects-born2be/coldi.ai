@@ -12,6 +12,7 @@ import {
 } from '@/shared/lib/captcha/config';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { getHoneypotValue } from '@/shared/lib/security/honeypot';
+import { useFormToken } from '@/shared/lib/security/useFormToken';
 import {
   checkDisposableEmail,
   isValidName,
@@ -33,6 +34,7 @@ import st from './SecondStepToCall.module.scss';
 const SMS_VERIFICATION_ENABLED = false;
 const EMAIL_VALIDATION_ENABLED = false;
 const MIN_FILL_TIME_MS = 4000;
+const SUSPICIOUS_FILL_TIME_MS = 10_000;
 const LOCAL_STORAGE_KEY = 'CallRequestFirstStepData';
 const HONEYPOT_FIELDS = { url: 'website_url', zip: 'zip_code_verification' } as const;
 
@@ -79,6 +81,7 @@ export const SecondStepToCall = ({
   const [captchaKey, setCaptchaKey] = useState(0);
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
   const formMountedAt = useMemo(() => Date.now(), []);
+  const { formToken } = useFormToken('call-request');
 
   const resetCaptcha = () => {
     setCaptchaToken(null);
@@ -157,15 +160,33 @@ export const SecondStepToCall = ({
     },
     onSubmit: async (data) => {
       const elapsed = Date.now() - formMountedAt;
+
       if (elapsed < MIN_FILL_TIME_MS) {
-        console.warn('[ANTI-BOT] Form submitted too fast:', {
+        console.warn('[ANTI-BOT] Form submitted too fast — blocked:', {
           elapsedMs: elapsed,
-          minRequiredMs: MIN_FILL_TIME_MS,
+          threshold: MIN_FILL_TIME_MS,
           timestamp: new Date().toISOString(),
-          formData: { name: data.value.name, email: data.value.email },
+          email: data.value.email,
         });
         fakeSuccessAndReturn(data.value);
         return;
+      }
+
+      if (elapsed < SUSPICIOUS_FILL_TIME_MS) {
+        console.warn('[ANTI-BOT] Suspiciously fast form fill (<10s):', {
+          elapsedMs: elapsed,
+          elapsedSec: (elapsed / 1000).toFixed(1),
+          timestamp: new Date().toISOString(),
+          email: data.value.email,
+          name: data.value.name,
+          hasFormToken: !!formToken,
+        });
+      } else {
+        console.log('[ANTI-BOT] Form fill time OK:', {
+          elapsedMs: elapsed,
+          elapsedSec: (elapsed / 1000).toFixed(1),
+          hasFormToken: !!formToken,
+        });
       }
 
       const zipHoneypotValue = getHoneypotValue(HONEYPOT_FIELDS.zip);
@@ -177,6 +198,8 @@ export const SecondStepToCall = ({
         });
         fakeSuccessAndReturn(data.value);
         return;
+      } else {
+        console.log(`[HONEYPOT] zip_code_verification not filled : ${zipHoneypotValue}`);
       }
 
       if (!captchaToken) {
@@ -260,6 +283,8 @@ export const SecondStepToCall = ({
         captchaToken,
         turnstileToken: TURNSTILE_ENABLED ? captchaToken : undefined,
         recaptchaToken: RECAPTCHA_ENABLED ? captchaToken : undefined,
+        formToken,
+        formFilledInMs: elapsed,
       };
 
       const res = await fetch('/api/request-call', {
