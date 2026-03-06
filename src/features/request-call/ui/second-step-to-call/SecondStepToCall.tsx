@@ -363,6 +363,7 @@ export const SecondStepToCall = ({
 
       onSubmit(data.value);
       resetCaptcha();
+      window.location.href = '/calendar';
     },
   });
 

@@ -58,7 +58,8 @@ export const CallFormContainer = ({ botName = 'Kate' }: { botName?: string }) =>
 
   const secondStepHandle = (diff: SecondStepCallSchema) => {
     setData({ ...data, ...diff });
-    setIsSuccess(true);
+    //setIsSuccess(true);
+    //router.push('/calendar');
   };
 
   const onContinueHandle = () => {
@@ -78,7 +79,7 @@ export const CallFormContainer = ({ botName = 'Kate' }: { botName?: string }) =>
 
   return (
     <section className={st.layout}>
-      <h1>Get your call from Coldi agent</h1>
+      <h1>Book a Demo</h1>
       <h1 style={{ display: 'none' }}>
         Get your call from <br />
         <span
