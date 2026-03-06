@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   verification: {
     google: 'xwxPBu6sQqKwZ2sx5fphyZV8rM-oyAvHww_SZNUXevQ',
   },
+  other: {
+    'facebook-domain-verification': 'mzne85ac0n2d0wka3heosu8pd81iwc',
+  },
   title: {
     template: '%s | Coldi',
     default: 'AI Voice Agents and Call Center for Business | Coldi',

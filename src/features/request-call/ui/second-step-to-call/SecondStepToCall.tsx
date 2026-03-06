@@ -764,9 +764,9 @@ export const SecondStepToCall = ({
               );
             }}
           </Subscribe>
-          <span className={st.appendix}>
+          {/**<span className={st.appendix}>
             <span className={st.name}>Agent</span> will call you immediately.
-          </span>
+          </span> */}
         </footer>
       </form>
     </section>
