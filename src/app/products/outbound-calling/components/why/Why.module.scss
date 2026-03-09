@@ -1,0 +1,154 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  padding: 165px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 124px;
+  align-self: stretch;
+  @include mobile {
+    padding: 32px 16px;
+    gap: 48px;
+  }
+
+  h2 {
+    color: #0c1021;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 120%;
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 124px;
+  align-self: stretch;
+  @include mobile {
+    gap: 48px;
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  align-self: stretch;
+  @include mobile {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &.reversed {
+    flex-direction: row-reverse;
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+
+  &:last-child {
+    .illustration {
+      //padding: 64px 64px 33px 0;
+      display: flex;
+      justify-content: flex-end;
+      //background-image: url("/images/outbound/back-4.svg");
+      background-size: 100%;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.card {
+  width: calc(100% - 628px);
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  border-radius: 48px;
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  background: #fff;
+  @include mobile {
+    flex: none;
+    width: 100%;
+  }
+
+  h3 {
+    color: #0c1021;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 125%;
+    @include mobile {
+      font-size: 28px;
+    }
+  }
+}
+
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.subtitle {
+  color: #535662;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  p {
+    color: #535662;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 140%;
+    @include mobile {
+      font-size: 16px;
+    }
+  }
+}
+
+.dot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #4268ff;
+  margin-top: 8px;
+}
+
+.illustration {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 48px;
+  background: #fafafa;
+  overflow: hidden;
+  height: 564px;
+  width: 564px;
+  @include mobile {
+    width: 100%;
+    min-height: 360px;
+  }
+
+  img {
+    width: 80%;
+    height: auto;
+    display: block;
+  }
+}

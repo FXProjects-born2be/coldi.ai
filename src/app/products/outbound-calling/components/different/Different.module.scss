@@ -1,0 +1,268 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  padding: 64px 165px;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  align-self: stretch;
+  background: #fff;
+  @include mobile {
+    padding: 32px 16px;
+    gap: 32px;
+  }
+
+  h2 {
+    color: #0c1021;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 120%;
+    text-align: center;
+    align-self: stretch;
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.card {
+  width: calc(50% - 12px);
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  border-radius: 48px;
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  background: #fff;
+  overflow: hidden;
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.illustWrap {
+  width: 100%;
+  height: 250px;
+  border-radius: 24px;
+  background: #fafafa;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  h3 {
+    color: #0c1021;
+    font-size: 24px;
+    font-weight: 400;
+  }
+  p {
+    color: #535662;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.cta {
+  display: flex;
+  justify-content: center;
+}
+
+// --- Mini card shared ---
+.miniCard {
+  width: 100%;
+  max-width: 427px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(12, 16, 33, 0.1);
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.miniCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.miniCardTitle {
+  color: #0c1021;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.badgeBlue {
+  background: rgba(66, 104, 255, 0.15);
+  color: #4268ff;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 16px;
+  white-space: nowrap;
+}
+
+.badgeGreen {
+  background: rgba(61, 236, 130, 0.15);
+  color: #28bc62;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 16px;
+  white-space: nowrap;
+}
+
+// --- Active Calls chart ---
+.callsChart {
+  position: relative;
+  height: 100px;
+}
+
+.callBubble {
+  position: absolute;
+  background: #fff;
+  border: 1px solid rgba(45, 45, 45, 0.1);
+  border-radius: 64px;
+  padding: 8px 12px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #0c1021;
+  white-space: nowrap;
+}
+
+// --- 24/7 time tags ---
+.timeTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.timeTag {
+  background: #fff;
+  border: 1px solid rgba(45, 45, 45, 0.1);
+  border-radius: 64px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeLabel {
+  color: #535662;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.timeValue {
+  color: #0c1021;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+// --- Call process flow ---
+.processFlow {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.processRow {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.processStep {
+  background: #fff;
+  border: 1px solid rgba(45, 45, 45, 0.1);
+  border-radius: 64px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #0c1021;
+}
+
+.processDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4268ff;
+  flex-shrink: 0;
+}
+
+// --- Instant response steps ---
+.responseSteps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.responseStep {
+  background: #fff;
+  border: 1px solid rgba(45, 45, 45, 0.1);
+  border-radius: 64px;
+  padding: 8px 12px 8px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.responseNum {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #4268ff;
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.responseLabel {
+  color: #0c1021;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.responseTime {
+  color: #535662;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.responseStepActive {
+  background: #4268ff;
+  border-color: #4268ff;
+
+  .responseNum {
+    background: #fff;
+    color: #4268ff;
+  }
+  .responseLabel {
+    color: #fff;
+  }
+  .responseTime {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}

@@ -1,0 +1,175 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  padding: 165px;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  align-self: stretch;
+  background: #fafafa;
+  @include mobile {
+    padding: 32px 16px;
+    gap: 32px;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+    h2 {
+      color: #0c1021;
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 120%;
+      @include mobile {
+        font-size: 32px;
+      }
+    }
+    p {
+      color: #535662;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-self: stretch;
+  }
+
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-self: stretch;
+  }
+
+  .item {
+    width: calc(50% - 12px);
+    display: flex;
+    padding: 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    border-radius: 48px;
+    border: 1px solid rgba(12, 16, 33, 0.05);
+    background: #fff;
+    @include mobile {
+      width: 100%;
+    }
+    span {
+      display: flex;
+      width: 55px;
+      height: 55px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 64px;
+      background: #fafafa;
+      color: #4268ff;
+      font-size: 24px;
+      font-weight: 400;
+    }
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      h3 {
+        color: #0c1021;
+        font-size: 24px;
+        font-weight: 400;
+      }
+      p {
+        color: #535662;
+        font-size: 20px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .imageWrap {
+    width: 100%;
+    border-radius: 48px;
+    overflow: hidden;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .videoWrap {
+    width: 100%;
+    align-self: stretch;
+    border-radius: 48px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16 / 9;
+  }
+
+  .poster {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: block;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 48px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.2);
+      transition: background 0.2s ease;
+    }
+
+    &:hover::after {
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    &:hover .playButton {
+      //transform: scale(1.08);
+    }
+  }
+
+  .posterImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .playButton {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      display: block;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    }
+  }
+
+  .video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: none;
+  }
+}
