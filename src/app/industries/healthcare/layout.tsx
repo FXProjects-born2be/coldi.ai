@@ -5,5 +5,5 @@ export default function HealthcareLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className="layout">{children}</div>;
+  return <>{children}</>;
 }
