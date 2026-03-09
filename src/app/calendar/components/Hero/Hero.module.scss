@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   align-self: stretch;
+  gap: 64px;
   @include mobile {
     padding: 80px 16px;
     flex-direction: column;
@@ -14,7 +15,7 @@
 }
 
 .title {
-  text-align: center;
+  text-align: left;
   margin-bottom: 24px;
   width: 40%;
   @include mobile {
@@ -22,19 +23,30 @@
   }
   h1 {
     color: #0c1021;
-    text-align: center;
+    text-align: left;
     font-family: Urbanist;
-    font-size: 60px;
+    font-size: 48px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     span {
-      display: block;
       color: #4268ff;
     }
     @include mobile {
       font-size: 48px;
     }
+  }
+  p {
+    color: #50556b;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .video{
+    border-radius: 12px;
+    margin-top: 64px;
+    overflow: hidden;
   }
 }
 
