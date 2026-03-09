@@ -2,7 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+
+import { motion } from 'framer-motion';
 
 import type {
   FirstStepCallSchema,
@@ -12,7 +15,10 @@ import type { Agent } from '@/features/request-call/store/store';
 import { useRequestCallStore } from '@/features/request-call/store/store';
 import { FirstStepToCall } from '@/features/request-call/ui/first-step-to-call';
 import { SecondStepToCall } from '@/features/request-call/ui/second-step-to-call';
+import { RequestDialog } from '@/features/request-leads-demo/ui/request-dialog';
 import { getVoices } from '@/features/voices/model/voices';
+
+import { blurInUp } from '@/shared/lib/helpers/animations';
 
 import st from './CallFormContainer.module.scss';
 
@@ -79,6 +85,21 @@ export const CallFormContainer = ({ botName = 'Kate' }: { botName?: string }) =>
 
   return (
     <section className={st.layout}>
+      <motion.div
+        className={st.col2}
+        variants={blurInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className={st.top}>
+          <h3>Book a Demo</h3>
+          <Image src="/full-logo.svg" alt="Book a Demo" width={93} height={32} unoptimized />
+        </div>
+        <div className={st.bottom}>
+          <RequestDialog />
+        </div>
+      </motion.div>
       <h1>Book a Demo</h1>
       <h1 style={{ display: 'none' }}>
         Get your call from <br />
