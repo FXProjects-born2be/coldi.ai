@@ -2,11 +2,12 @@
 
 .layout {
   display: flex;
-  padding: 80px 165px;
+  padding: 80px 120px;
   justify-content: center;
   align-items: center;
   align-self: stretch;
   gap: 64px;
+  flex-wrap: wrap;
   @include mobile {
     padding: 80px 16px;
     flex-direction: column;
@@ -15,15 +16,16 @@
 }
 
 .title {
-  text-align: left;
+  width: 100%;
+  text-align: center;
   margin-bottom: 24px;
-  width: 40%;
+  width: 100%;
   @include mobile {
     width: 100%;
   }
   h1 {
     color: #0c1021;
-    text-align: left;
+    text-align: center;
     font-family: Urbanist;
     font-size: 48px;
     font-style: normal;
@@ -33,7 +35,7 @@
       color: #4268ff;
     }
     @include mobile {
-      font-size: 48px;
+      font-size: 32px;
     }
   }
   p {
@@ -43,19 +45,21 @@
     font-weight: 400;
     line-height: normal;
   }
-  .video{
-    border-radius: 12px;
-    margin-top: 64px;
-    overflow: hidden;
+}
+.video {
+  border-radius: 12px;
+  overflow: hidden;
+  width: 40%;
+  @include mobile {
+    width: 100%;
   }
 }
-
 .calendar {
   background: #fff;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 60%;
+  width: calc(60% - 64px);
   @include mobile {
     width: 100%;
   }
