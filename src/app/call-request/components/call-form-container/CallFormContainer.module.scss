@@ -60,3 +60,38 @@
   height: 8px;
   width: 50%;
 }
+
+.col {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  width: 100%;
+  border-radius: 48px;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+  background: #fff;
+  overflow: visible; // щоб випадаючий список країн (телефон) не обрізався
+  @include mobile {
+    width: 100%;
+    padding: 24px;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    h3 {
+      color: #0c1021;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      @include mobile {
+        font-size: 24px;
+      }
+    }
+  }
+}
