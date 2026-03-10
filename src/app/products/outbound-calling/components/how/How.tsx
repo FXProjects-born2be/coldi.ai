@@ -40,23 +40,23 @@ function PlayIcon({ className }: { className?: string }) {
 const steps = [
   {
     num: '01',
-    title: 'A lead comes in',
-    text: 'From ads, forms, cold lists or your CRM.',
+    title: 'Upload contacts or connect your CRM',
+    text: 'Import leads from ads, forms, databases or outbound lists.',
   },
   {
     num: '02',
-    title: 'AI Voice Agent calls instantly',
-    text: 'Qualifies the lead, asks the right questions, and detects intent.',
+    title: 'AI Outbound Calling Agent starts calling',
+    text: 'AI handles the first conversation instantly.',
   },
   {
     num: '03',
-    title: 'Sales-ready leads get booked',
-    text: 'Calls are scheduled directly on your sales team\u2019s calendar.',
+    title: 'Lead qualification in real time',
+    text: 'Intent detection and smart qualification logic.',
   },
   {
     num: '04',
-    title: 'Everything is tracked',
-    text: 'Full visibility across leads, calls, and outcomes.',
+    title: 'Handoff or meeting scheduling',
+    text: 'Qualified leads get transferred live or booked directly into your calendar.',
   },
 ];
 
@@ -79,7 +79,7 @@ export const How = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          Why teams choose AI Voice Agents
+          From lead list to booked call — fully automated
         </motion.p>
       </div>
 
