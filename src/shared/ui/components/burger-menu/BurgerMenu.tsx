@@ -87,6 +87,20 @@ export const BurgerMenu = () => {
                   <span itemProp="name">Pricing</span>
                 </Link>
                 <Link
+                  href="/healthcare"
+                  className={cn({ [st.active]: pathname === '/healthcare' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">Healthcare</span>
+                </Link>
+                <Link
+                  href="/products/outbound-calling"
+                  className={cn({ [st.active]: pathname === '/products/outbound-calling' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">Outbound Calling</span>
+                </Link>
+                <Link
                   className={st.bookMeeting}
                   href="https://calendly.com/coldi/30min"
                   target="_blank"
