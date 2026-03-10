@@ -104,10 +104,22 @@ const Navigation = () => {
           News
         </Link>
       </li>
-      <li className={cn({ [st.active]: pathname === '/products' })} itemProp="name">
+      <li
+        className={cn(st.hasDropdown, {
+          [st.active]: pathname.startsWith('/products'),
+        })}
+        itemProp="name"
+      >
         <Link href="/products" itemProp="url">
           Products
         </Link>
+        <ul className={st.dropdown}>
+          <li itemProp="name">
+            <Link href="/products/outbound-calling" itemProp="url">
+              Outbound Calling
+            </Link>
+          </li>
+        </ul>
       </li>
       <li className={cn({ [st.active]: pathname === '/pricing' })} itemProp="name">
         <Link href="/pricing" itemProp="url">
@@ -119,25 +131,20 @@ const Navigation = () => {
           About
         </Link>
       </li>
-      <li className={cn({ [st.active]: pathname === '/industries' })} itemProp="name">
-        <Link href="#" itemProp="url">
-          Industries
-        </Link>
-      </li>
-      <li className={cn({ [st.active]: pathname === '/industries/healthcare' })} itemProp="name">
-        <Link href="/healthcare" itemProp="url">
-          Healthcare
-        </Link>
-      </li>
       <li
-        className={cn({
-          [st.active]: pathname === '/products/outbound-calling',
+        className={cn(st.hasDropdown, {
+          [st.active]: pathname.startsWith('/healthcare') || pathname.startsWith('/industries'),
         })}
         itemProp="name"
       >
-        <Link href="/products/outbound-calling" itemProp="url">
-          Outbound Calling
-        </Link>
+        <span>Industries</span>
+        <ul className={st.dropdown}>
+          <li itemProp="name">
+            <Link href="/healthcare" itemProp="url">
+              Healthcare
+            </Link>
+          </li>
+        </ul>
       </li>
     </ul>
   );

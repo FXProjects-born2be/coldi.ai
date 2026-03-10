@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Different, Faq, Hero, How, Why } from './components';
+import { Different, Faq, Hero, How, Multilingual, Results, UseCases, Why } from './components';
 
 export const metadata: Metadata = {
   title: 'Outbound Calling AI Agents for Sales Teams',
@@ -18,9 +18,12 @@ export default function OutboundCallingPage() {
   return (
     <main>
       <Hero />
+      <Results />
       <How />
       <Why />
       <Different />
+      <UseCases />
+      <Multilingual />
       <Faq />
     </main>
   );
