@@ -74,7 +74,7 @@ export const Footer = () => {
                   </Link>
                 </li>
                 <li itemProp="name">
-                  <Link href="/industries/healthcare" itemProp="url">
+                  <Link href="/healthcare" itemProp="url">
                     Healthcare
                   </Link>
                 </li>

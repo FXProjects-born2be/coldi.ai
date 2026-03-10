@@ -119,13 +119,20 @@ const Navigation = () => {
           About
         </Link>
       </li>
+      <li className={cn({ [st.active]: pathname === '/industries' })} itemProp="name">
+        <Link href="#" itemProp="url">
+          Industries
+        </Link>
+      </li>
       <li className={cn({ [st.active]: pathname === '/industries/healthcare' })} itemProp="name">
-        <Link href="/industries/healthcare" itemProp="url">
+        <Link href="/healthcare" itemProp="url">
           Healthcare
         </Link>
       </li>
       <li
-        className={cn({ [st.active]: pathname === '/products/outbound-calling' })}
+        className={cn({
+          [st.active]: pathname === '/products/outbound-calling',
+        })}
         itemProp="name"
       >
         <Link href="/products/outbound-calling" itemProp="url">
