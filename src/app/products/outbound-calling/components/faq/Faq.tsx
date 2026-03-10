@@ -17,27 +17,24 @@ type FaqItem = {
 
 const faqs: FaqItem[] = [
   {
-    question: 'What are AI agents in healthcare?',
-    answer:
-      'AI agents in healthcare are intelligent voice assistants that automate patient communication, handle calls, and support administrative workflows.',
+    question: 'Who is this for?',
+    answer: 'Teams handling large outbound sales or lead generation campaigns.',
   },
   {
-    question: 'Can AI voice agents replace healthcare staff?',
-    answer:
-      'No. AI agents handle repetitive communication tasks so healthcare professionals can focus on care.',
+    question: 'Is this replacing my sales team?',
+    answer: 'No. AI qualifies and routes leads — humans close deals.',
   },
   {
-    question: 'Do AI agents support multiple languages?',
-    answer: 'Yes. Coldi.ai supports more than 30 languages for multilingual patient communication.',
+    question: 'Is this just a dialer?',
+    answer: 'No. This is conversational AI that speaks, qualifies and books meetings.',
   },
   {
-    question: 'How fast can Coldi.ai be deployed?',
-    answer: 'Most healthcare teams can launch in days, not months.',
+    question: 'Can it integrate with our stack?',
+    answer: 'Yes. CRM, calendar and telephony integrations included.',
   },
   {
-    question: 'Is this suitable for high-volume healthcare providers?',
-    answer:
-      'Yes. Coldi.ai is built for organizations handling large numbers of patient calls daily.',
+    question: 'How fast can we launch?',
+    answer: 'Usually in days.',
   },
 ];
 

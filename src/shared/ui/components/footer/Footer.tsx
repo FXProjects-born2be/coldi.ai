@@ -73,6 +73,16 @@ export const Footer = () => {
                     About
                   </Link>
                 </li>
+                <li itemProp="name">
+                  <Link href="/industries/healthcare" itemProp="url">
+                    Healthcare
+                  </Link>
+                </li>
+                <li itemProp="name">
+                  <Link href="/products/outbound-calling" itemProp="url">
+                    Outbound Calling
+                  </Link>
+                </li>
               </ul>
               <ul
                 className={st.footer__list}
