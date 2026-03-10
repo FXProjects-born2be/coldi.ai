@@ -3,13 +3,13 @@ import type { Metadata } from 'next';
 import { Different, Faq, Hero, How, Why } from './components';
 
 export const metadata: Metadata = {
-  title: 'AI Outbound Calling | Coldi.ai',
+  title: 'Outbound Calling AI Agents for Sales Teams | Coldi',
   description:
-    'AI Voice Agents trained to qualify leads and handoff opportunities to your sales team.',
+    'AI outbound calling agents that qualify leads, book meetings, and scale sales outreach. Automate outbound calls and increase contact rates.',
   openGraph: {
-    title: 'AI Outbound Calling | Coldi.ai',
+    title: 'Outbound Calling AI Agents for Sales Teams | Coldi',
     description:
-      'AI Voice Agents trained to qualify leads and handoff opportunities to your sales team.',
+      'AI outbound calling agents that qualify leads, book meetings, and scale sales outreach. Automate outbound calls and increase contact rates.',
     images: 'https://coldi.ai/images/meta.png',
   },
 };
