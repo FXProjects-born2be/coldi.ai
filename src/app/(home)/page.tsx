@@ -9,7 +9,6 @@ import {
   Infrustructure,
   Reviews,
   Tools,
-  Voices,
   VoicesList,
   WhatCanDo,
   WhatIs,
@@ -19,7 +18,6 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Voices />
 
       <Advantages />
       <Infrustructure />
