@@ -20,7 +20,7 @@ export const SectorSelect = ({
   items,
   value,
   onChange,
-  placeholder = 'Sector',
+  placeholder = 'Industry',
   onOpenChange,
 }: SectorSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -124,7 +124,7 @@ export const SectorSelect = ({
               <input
                 ref={otherInputRef}
                 type="text"
-                placeholder="Please specify your sector"
+                placeholder="Please specify your industry"
                 value={otherText}
                 onChange={(e) => setOtherText(e.target.value)}
                 onKeyDown={(e) => {

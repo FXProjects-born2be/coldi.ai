@@ -193,7 +193,7 @@ export const RequestDialog = () => {
                 items={SECTOR_OPTIONS}
                 value={field.state.value}
                 onChange={field.handleChange}
-                placeholder="Sector"
+                placeholder="Industry"
                 onOpenChange={setIsSectorOpen}
               />
             )}
