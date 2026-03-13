@@ -50,3 +50,11 @@
     background: #008f4d;
   }
 }
+
+.red {
+  background: #FF3F68;
+
+  &:hover {
+    background: #e62244;
+  }
+}

@@ -6,7 +6,7 @@ import { cn } from '@/shared/lib/helpers';
 
 import st from './Button.module.scss';
 
-export type ButtonVariants = 'primary' | 'secondary' | 'success';
+export type ButtonVariants = 'primary' | 'secondary' | 'success' | 'red';
 
 export const Button = ({
   children,
