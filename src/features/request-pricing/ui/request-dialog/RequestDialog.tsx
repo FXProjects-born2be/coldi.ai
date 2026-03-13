@@ -212,7 +212,7 @@ export const RequestDialog = ({
                         <TextField
                           name={field.name}
                           type="email"
-                          placeholder="Email"
+                          placeholder="Work email"
                           value={String(field.state.value ?? '')}
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
