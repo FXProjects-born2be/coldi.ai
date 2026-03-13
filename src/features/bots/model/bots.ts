@@ -22,4 +22,11 @@ export const getBots = (): BotPreview[] => [
     btnVariant: 'success',
     audioUrl: '/audio/investment.wav',
   },
+  {
+    videoUrl: '/videos/voices/variant-4.mp4',
+    name: 'Healthcare',
+    text: 'Appointment scheduling & patient inquiry handlin',
+    btnVariant: 'red',
+    audioUrl: '#',
+  },
 ];
