@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 
 import { motion } from 'framer-motion';
@@ -82,41 +83,84 @@ const cards = [
 ];
 
 export const ContentCards = () => {
+  const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
+
+  const toggleCard = (index: number) => {
+    setExpandedCards((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+      return next;
+    });
+  };
+
   return (
     <section className={st.layout}>
       <div className={st.grid}>
-        {cards.map((card) => (
-          <motion.div
-            key={card.title}
-            className={st.card}
-            variants={blurInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <div className={st.iconWrap}>
-              <Image src={card.icon} alt={card.title} width={80} height={80} unoptimized />
-            </div>
-            <h3>{card.title}</h3>
-            <p className={st.description}>{card.description}</p>
-            {card.listTitle && (
-              <div className={st.listBlock}>
-                <span className={st.listTitle}>{card.listTitle}</span>
-                {card.bullets && (
-                  <ul className={st.bullets}>
-                    {card.bullets.map((bullet) => (
-                      <li key={bullet}>
-                        <span className={st.dot} />
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+        {cards.map((card, index) => {
+          const isExpanded = expandedCards.has(index);
+
+          return (
+            <motion.div
+              key={card.title}
+              className={st.card}
+              variants={blurInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className={st.iconWrap}>
+                <Image src={card.icon} alt={card.title} width={80} height={80} unoptimized />
               </div>
-            )}
-            {card.footer && <p className={st.footer}>{card.footer}</p>}
-          </motion.div>
-        ))}
+              <h3>{card.title}</h3>
+
+              {isExpanded && (
+                <div className={st.expandedContent}>
+                  <p className={st.description}>{card.description}</p>
+                  {card.listTitle && (
+                    <div className={st.listBlock}>
+                      <span className={st.listTitle}>{card.listTitle}</span>
+                      {card.bullets && (
+                        <ul className={st.bullets}>
+                          {card.bullets.map((bullet) => (
+                            <li key={bullet}>
+                              <span className={st.dot} />
+                              {bullet}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  )}
+                  {card.footer && <p className={st.footer}>{card.footer}</p>}
+                </div>
+              )}
+
+              <button className={st.toggleBtn} onClick={() => toggleCard(index)} type="button">
+                <span>{isExpanded ? 'Show less' : 'Show more'}</span>
+                <svg
+                  className={`${st.arrow} ${isExpanded ? st.arrowUp : ''}`}
+                  width="20"
+                  height="10"
+                  viewBox="0 0 20 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 1L10 6L15 1"
+                    stroke="#535662"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );
