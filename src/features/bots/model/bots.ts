@@ -27,6 +27,6 @@ export const getBots = (): BotPreview[] => [
     name: 'Healthcare',
     text: 'Appointment scheduling & patient inquiry handlin',
     btnVariant: 'red',
-    audioUrl: '#',
+    audioUrl: '/audio/healthcare.wav',
   },
 ];
