@@ -150,7 +150,7 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
                 {(field) => (
                   <TextField
                     name={field.name}
-                    placeholder="Email"
+                    placeholder="Work email"
                     value={String(field.state.value)}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
