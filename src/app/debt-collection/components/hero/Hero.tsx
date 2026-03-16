@@ -29,10 +29,26 @@ export const Hero = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          AI agents for financial institutions, lenders, and collection agencies are designed to
-          improve repayment recovery, automate debtor communication, and scale credit and debt
-          collection services without increasing operational costs. Faster recovery. Smarter
-          outreach. Better borrower engagement.
+          AI agents for financial institutions, lenders, and collection agencies:
+        </motion.p>
+        <motion.ul
+          className={st.bullets}
+          variants={blurInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <li>Repayment recovery</li>
+          <li>Automate debtor communication</li>
+          <li>Scale credit and debt collection services</li>
+        </motion.ul>
+        <motion.p
+          variants={blurInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          Without increasing operational costs.
         </motion.p>
       </div>
       <motion.div
