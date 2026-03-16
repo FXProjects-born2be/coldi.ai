@@ -3,13 +3,13 @@ import type { Metadata } from 'next';
 import './layout.scss';
 
 export const metadata: Metadata = {
-  title: 'AI Agents for Debt Collection',
+  title: 'AI Voice Agents for Debt Collection Software',
   description:
-    'AI agents for debt collection that automate borrower outreach, repayment conversations, and recovery workflows without increasing operational costs.',
+    'AI debt collection software that automates borrower communication, payment reminders, and recovery workflows. Scale credit and debit collection services with AI voice agents.',
   openGraph: {
-    title: 'AI Agents for Debt Collection',
+    title: 'AI Voice Agents for Debt Collection Software',
     description:
-      'AI agents for debt collection that automate borrower outreach, repayment conversations, and recovery workflows without increasing operational costs.',
+      'AI debt collection software that automates borrower communication, payment reminders, and recovery workflows. Scale credit and debit collection services with AI voice agents.',
     images: 'https://coldi.ai/images/meta.png',
   },
 };
