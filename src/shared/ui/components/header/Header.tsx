@@ -133,7 +133,10 @@ const Navigation = () => {
       </li>
       <li
         className={cn(st.hasDropdown, {
-          [st.active]: pathname.startsWith('/healthcare') || pathname.startsWith('/industries'),
+          [st.active]:
+            pathname.startsWith('/healthcare') ||
+            pathname.startsWith('/debt-collection') ||
+            pathname.startsWith('/industries'),
         })}
         itemProp="name"
       >
@@ -144,6 +147,11 @@ const Navigation = () => {
               Healthcare
             </Link>
           </li>
+          {/* <li itemProp="name">
+            <Link href="/debt-collection" itemProp="url">
+              Debt Collection
+            </Link>
+          </li> */}
         </ul>
       </li>
     </ul>

@@ -79,6 +79,11 @@ export const Footer = () => {
                   </Link>
                 </li>
                 <li itemProp="name">
+                  <Link href="/debt-collection" itemProp="url">
+                    Debt Collection
+                  </Link>
+                </li>
+                <li itemProp="name">
                   <Link href="/products/outbound-calling" itemProp="url">
                     Outbound Calling
                   </Link>

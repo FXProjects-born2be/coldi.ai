@@ -1,9 +1,14 @@
 import { v } from '@/shared/lib/forms';
+import { isPhoneValid } from '@/shared/lib/validation';
 
 export const bookDemoSchema = v.object({
   name: v.pipe(v.string(), v.minLength(1, 'Name is required')),
   surname: v.pipe(v.string(), v.minLength(1, 'Surname is required')),
-  phone: v.pipe(v.string(), v.minLength(1, 'Please provide a valid phone number')),
+  phone: v.pipe(
+    v.string(),
+    v.minLength(5, 'Please provide a valid phone number'),
+    v.custom((value) => isPhoneValid(String(`+${value}`)), 'Please provide a valid phone number')
+  ),
   email: v.pipe(
     v.string(),
     v.minLength(1, 'Email is required'),

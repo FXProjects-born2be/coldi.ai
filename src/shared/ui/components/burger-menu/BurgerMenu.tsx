@@ -94,6 +94,13 @@ export const BurgerMenu = () => {
                   <span itemProp="name">Healthcare</span>
                 </Link>
                 <Link
+                  href="/debt-collection"
+                  className={cn({ [st.active]: pathname === '/debt-collection' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">Debt Collection</span>
+                </Link>
+                <Link
                   href="/products/outbound-calling"
                   className={cn({ [st.active]: pathname === '/products/outbound-calling' })}
                   itemProp="url"
