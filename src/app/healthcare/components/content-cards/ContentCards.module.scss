@@ -55,7 +55,6 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    flex: 1 0 0;
 
     @include mobile {
       font-size: 24px;
@@ -157,6 +156,7 @@
   cursor: pointer;
   width: fit-content;
   transition: background 0.2s;
+  margin-top: auto;
 
   &:hover {
     background: rgba(83, 86, 98, 0.1);
