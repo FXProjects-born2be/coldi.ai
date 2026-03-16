@@ -1,18 +1,16 @@
 'use client';
 
 import { type ReactNode, useState } from 'react';
+import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
 import { blurInUp } from '@/shared/lib/helpers';
 
-import { DebtCollectionContentIcon } from '../shared/visuals';
 import st from './ContentCards.module.scss';
 
-type CardIconVariant = 'first-call' | 'brain' | 'voice' | 'chart' | 'globe' | 'speed';
-
 type Card = {
-  icon: CardIconVariant;
+  icon: string;
   title: string;
   description: ReactNode;
   listTitle?: ReactNode;
@@ -22,7 +20,7 @@ type Card = {
 
 const cards: Card[] = [
   {
-    icon: 'first-call',
+    icon: '/images/debt-collection/card1.svg',
     title: 'AI Agent First-Call Resolution for Debt Recovery',
     description:
       'Traditional collection workflows rely heavily on repeated manual calls that often go unanswered. AI in debt collection transforms this process by identifying intent and offering repayment options immediately.',
@@ -37,7 +35,7 @@ const cards: Card[] = [
       'AI agents can also follow up automatically, ensuring debtors receive consistent reminders without overwhelming your team.',
   },
   {
-    icon: 'brain',
+    icon: '/images/debt-collection/card2.svg',
     title: 'Best AI Debt Collection Software for Modern Agencies',
     description:
       'The best AI debt collection software combines intelligent communication, compliance automation, and seamless system integrations.',
@@ -51,7 +49,7 @@ const cards: Card[] = [
     ],
   },
   {
-    icon: 'voice',
+    icon: '/images/debt-collection/card3.svg',
     title: 'AI Voice Agents for Collection Teams',
     description: (
       <>
@@ -76,7 +74,7 @@ const cards: Card[] = [
       'This makes AI agents especially valuable for collection groups and organizations that rely heavily on phone-based communication.',
   },
   {
-    icon: 'chart',
+    icon: '/images/debt-collection/card4.svg',
     title: 'Better Than Traditional Debt Collection Automation',
     description: (
       <>
@@ -99,7 +97,7 @@ const cards: Card[] = [
     ],
   },
   {
-    icon: 'globe',
+    icon: '/images/debt-collection/card5.svg',
     title: 'Multilingual Debt Recovery for Global Finance',
     description: (
       <>
@@ -117,7 +115,7 @@ const cards: Card[] = [
     ),
   },
   {
-    icon: 'speed',
+    icon: '/images/debt-collection/card6.svg',
     title: 'Operational Efficiency Without Increasing Headcount',
     description: (
       <>
@@ -166,7 +164,7 @@ export const ContentCards = () => {
               viewport={{ once: true }}
             >
               <div className={st.iconWrap}>
-                <DebtCollectionContentIcon variant={card.icon} />
+                <Image src={card.icon} alt={card.title} width={80} height={80} unoptimized />
               </div>
               <h3>{card.title}</h3>
 
