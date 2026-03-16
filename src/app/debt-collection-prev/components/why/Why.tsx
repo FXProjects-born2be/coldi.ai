@@ -42,7 +42,7 @@ const features: Feature[] = [
   {
     title: 'Intelligent AI Debt Collection Conversations',
     description:
-      "Coldi's AI debt collection agents understand borrower intent, handle payment discussions professionally, and guide customers through repayment options. Instead of aggressive manual calls, AI uses structured, compliant conversations that increase engagement and recovery rates.",
+      "Coldi's AI debt collection agents understand borrower intent, handle payment discussions professionally, and guide customers through repayment options. \n\nInstead of aggressive manual calls, AI uses structured, compliant conversations that increase engagement and recovery rates.",
     visual: 'conversations',
     illustration: '/images/debt-collection/why-2.svg',
   },
@@ -95,7 +95,7 @@ const features: Feature[] = [
   {
     title: 'Multilingual Borrower Communication',
     description:
-      'Debt collection often involves diverse populations. Coldi AI supports 30+ languages, enabling agencies and lenders to communicate effectively across regions. Natural, human-like conversations increase repayment cooperation and reduce disputes.',
+      'Debt collection often involves diverse populations. Coldi AI supports 30+ languages, enabling agencies and lenders to communicate effectively across regions. \n\nNatural, human-like conversations increase repayment cooperation and reduce disputes.',
     visual: 'multilingual',
     illustration: '/images/debt-collection/why-7.svg',
   },
@@ -128,7 +128,13 @@ export const Why = () => {
             >
               <div className={st.card}>
                 <h3>{feature.title}</h3>
-                {feature.description && <p>{feature.description}</p>}
+                {feature.description && (
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: feature.description.replace(/\n/g, '<br />'),
+                    }}
+                  />
+                )}
                 {feature.listTitle && <p>{feature.listTitle}</p>}
                 {feature.bullets && (
                   <ul className={st.bullets}>
