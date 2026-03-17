@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "mcp__figma__get_design_context"
+      "mcp__figma__get_design_context",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/e2bace58-7e80-40fd-95a7-a142f488d9f4\" -o why-bg.png)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/0d81ba56-34f6-40a6-9186-b197f5ac36e4\" -o checkmark.svg)"
     ]
   }
 }

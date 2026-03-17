@@ -1,29 +1,13 @@
 'use client';
 
-import { useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 
 import st from './Hero.module.scss';
 
-const HUBSPOT_MEETINGS_BASE = 'https://meetings-eu1.hubspot.com/it-dep/appointment?embed=true';
-const HUBSPOT_MEETINGS_SCRIPT =
-  'https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js';
-
-const PREFILL_PARAMS = ['firstName', 'lastName', 'email'] as const;
+const CALENDLY_URL = 'https://calendly.com/coldi/30min';
+const CALENDLY_SCRIPT = 'https://assets.calendly.com/assets/external/widget.js';
 
 export const Hero = () => {
-  const searchParams = useSearchParams();
-  const embedUrl = useMemo(() => {
-    const params = new URLSearchParams();
-    PREFILL_PARAMS.forEach((key) => {
-      const value = searchParams.get(key);
-      if (value) params.set(key, value);
-    });
-    const query = params.toString();
-    return query ? `${HUBSPOT_MEETINGS_BASE}&${query}` : HUBSPOT_MEETINGS_BASE;
-  }, [searchParams]);
-
   return (
     <section className={st.layout}>
       <div className={st.title}>
@@ -61,8 +45,12 @@ vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.lo
         />
       </div>
       <div className={st.calendar}>
-        <div className={`${st.meetingsEmbed} meetings-iframe-container`} data-src={embedUrl} />
-        <Script src={HUBSPOT_MEETINGS_SCRIPT} strategy="afterInteractive" />
+        <div
+          className={`calendly-inline-widget ${st.meetingsEmbed}`}
+          data-url={CALENDLY_URL}
+          style={{ minWidth: 320, height: 700 }}
+        />
+        <Script src={CALENDLY_SCRIPT} strategy="afterInteractive" />
       </div>
     </section>
   );
