@@ -10,7 +10,7 @@ import type { BookDemoSchema } from '@/features/request-leads-demo/model/schemas
 import { bookDemoSchema, SECTOR_OPTIONS } from '@/features/request-leads-demo/model/schemas';
 import { SectorSelect } from '@/features/request-leads-demo/ui/sector-select';
 
-import { useForm, useStore } from '@/shared/lib/forms';
+import { useForm } from '@/shared/lib/forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { CloseIcon } from '@/shared/ui/icons/outline/close';
 import { Button } from '@/shared/ui/kit/button';
@@ -49,7 +49,7 @@ export const RequestDialog = ({
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [isSectorOpen, setIsSectorOpen] = useState(false);
 
-  const { Field, Subscribe, handleSubmit, store, reset } = useForm({
+  const { Field, Subscribe, handleSubmit, reset } = useForm({
     defaultValues: {
       name: '',
       surname: '',
@@ -58,28 +58,13 @@ export const RequestDialog = ({
       sector: '',
     },
     validators: {
-      onChange: bookDemoSchema,
       onSubmit: bookDemoSchema,
     },
     onSubmit: (data) => onSubmit(data.value),
   });
 
-  const errors = useStore(store, (state) => state.errorMap) as {
-    onChange?: {
-      name?: Array<{ message: string }>;
-      surname?: Array<{ message: string }>;
-      phone?: Array<{ message: string }>;
-      email?: Array<{ message: string }>;
-      sector?: Array<{ message: string }>;
-    };
-    onSubmit?: {
-      name?: Array<{ message: string }>;
-      surname?: Array<{ message: string }>;
-      phone?: Array<{ message: string }>;
-      email?: Array<{ message: string }>;
-      sector?: Array<{ message: string }>;
-    };
-  };
+  const getErrorMessage = (err: unknown) =>
+    typeof err === 'string' ? err : ((err as { message?: string })?.message ?? '');
 
   const onSubmit = (data: BookDemoSchema) => {
     setIsRedirecting(true);
@@ -141,106 +126,110 @@ export const RequestDialog = ({
               >
                 <section className={st.fields}>
                   <div className={st.formRow}>
-                    <div className={`${st.inputWrapper} ${errors.onSubmit?.name ? st.error : ''}`}>
+                    <div className={st.inputWrapper}>
                       <Field name="name">
                         {(field) => (
-                          <TextField
-                            name={field.name}
-                            placeholder="Name"
-                            value={String(field.state.value ?? '')}
-                            onBlur={field.handleBlur}
-                            onChange={(e) => field.handleChange(e.target.value)}
-                            intent={field.state.meta.errors.length ? 'danger' : 'default'}
-                          />
+                          <>
+                            <TextField
+                              name={field.name}
+                              placeholder="Name"
+                              value={String(field.state.value ?? '')}
+                              onBlur={field.handleBlur}
+                              onChange={(e) => field.handleChange(e.target.value)}
+                              intent={field.state.meta.errors.length ? 'danger' : 'default'}
+                            />
+                            {field.state.meta.errors?.map((err, i) => (
+                              <ErrorMessage key={i}>{getErrorMessage(err)}</ErrorMessage>
+                            ))}
+                          </>
                         )}
                       </Field>
-                      {errors.onSubmit?.name?.map((err) => (
-                        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-                      ))}
                     </div>
-                    <div
-                      className={`${st.inputWrapper} ${errors.onSubmit?.surname ? st.error : ''}`}
-                    >
+                    <div className={st.inputWrapper}>
                       <Field name="surname">
                         {(field) => (
+                          <>
+                            <TextField
+                              name={field.name}
+                              placeholder="Surname"
+                              value={String(field.state.value ?? '')}
+                              onBlur={field.handleBlur}
+                              onChange={(e) => field.handleChange(e.target.value)}
+                              intent={field.state.meta.errors.length ? 'danger' : 'default'}
+                            />
+                            {field.state.meta.errors?.map((err, i) => (
+                              <ErrorMessage key={i}>{getErrorMessage(err)}</ErrorMessage>
+                            ))}
+                          </>
+                        )}
+                      </Field>
+                    </div>
+                  </div>
+                  <div className={`${st.inputWrapper} ${st.full}`}>
+                    <Field name="phone">
+                      {(field) => (
+                        <>
+                          <div className={st.phoneInputContainer}>
+                            <PhoneInput
+                              country="gb"
+                              value={String(field.state.value)}
+                              onChange={(phone) => field.handleChange(phone)}
+                              onBlur={field.handleBlur}
+                              placeholder="Phone Number"
+                              inputClass={st.phoneInput}
+                              buttonClass={st.phoneInputButton}
+                              dropdownClass={st.phoneInputDropdown}
+                              enableSearch
+                              searchPlaceholder="Search country..."
+                              autoFormat
+                            />
+                          </div>
+                          {field.state.meta.errors?.map((err, i) => (
+                            <ErrorMessage key={i}>{getErrorMessage(err)}</ErrorMessage>
+                          ))}
+                        </>
+                      )}
+                    </Field>
+                  </div>
+                  <div className={`${st.inputWrapper} ${st.full}`}>
+                    <Field name="email">
+                      {(field) => (
+                        <>
                           <TextField
                             name={field.name}
-                            placeholder="Surname"
+                            type="email"
+                            placeholder="Work email"
                             value={String(field.state.value ?? '')}
                             onBlur={field.handleBlur}
                             onChange={(e) => field.handleChange(e.target.value)}
                             intent={field.state.meta.errors.length ? 'danger' : 'default'}
                           />
-                        )}
-                      </Field>
-                      {errors.onSubmit?.surname?.map((err) => (
-                        <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-                      ))}
-                    </div>
-                  </div>
-                  <div
-                    className={`${st.inputWrapper} ${st.full} ${errors.onSubmit?.phone ? st.error : ''}`}
-                  >
-                    <Field name="phone">
-                      {(field) => (
-                        <div className={st.phoneInputContainer}>
-                          <PhoneInput
-                            country="gb"
-                            value={String(field.state.value)}
-                            onChange={(phone) => field.handleChange(phone)}
-                            onBlur={field.handleBlur}
-                            placeholder="Phone Number"
-                            inputClass={st.phoneInput}
-                            buttonClass={st.phoneInputButton}
-                            dropdownClass={st.phoneInputDropdown}
-                            enableSearch
-                            searchPlaceholder="Search country..."
-                            autoFormat
-                          />
-                        </div>
+                          {field.state.meta.errors?.map((err, i) => (
+                            <ErrorMessage key={i}>{getErrorMessage(err)}</ErrorMessage>
+                          ))}
+                        </>
                       )}
                     </Field>
-                    {errors.onSubmit?.phone?.map((err) => (
-                      <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-                    ))}
                   </div>
                   <div
-                    className={`${st.inputWrapper} ${st.full} ${errors.onSubmit?.email ? st.error : ''}`}
-                  >
-                    <Field name="email">
-                      {(field) => (
-                        <TextField
-                          name={field.name}
-                          type="email"
-                          placeholder="Work email"
-                          value={String(field.state.value ?? '')}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          intent={field.state.meta.errors.length ? 'danger' : 'default'}
-                        />
-                      )}
-                    </Field>
-                    {errors.onSubmit?.email?.map((err) => (
-                      <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-                    ))}
-                  </div>
-                  <div
-                    className={`${st.inputWrapper} ${st.sector} ${st.full} ${errors.onSubmit?.sector ? st.error : ''} ${isSectorOpen ? st.sectorOpen : ''}`}
+                    className={`${st.inputWrapper} ${st.sector} ${st.full} ${isSectorOpen ? st.sectorOpen : ''}`}
                   >
                     <Field name="sector">
                       {(field) => (
-                        <SectorSelect
-                          items={SECTOR_OPTIONS}
-                          value={field.state.value}
-                          onChange={field.handleChange}
-                          placeholder="Industry"
-                          onOpenChange={setIsSectorOpen}
-                        />
+                        <>
+                          <SectorSelect
+                            items={SECTOR_OPTIONS}
+                            value={field.state.value}
+                            onChange={field.handleChange}
+                            placeholder="Industry"
+                            onOpenChange={setIsSectorOpen}
+                          />
+                          {field.state.meta.errors?.map((err, i) => (
+                            <ErrorMessage key={i}>{getErrorMessage(err)}</ErrorMessage>
+                          ))}
+                        </>
                       )}
                     </Field>
-                    {errors.onSubmit?.sector?.map((err) => (
-                      <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-                    ))}
                   </div>
                 </section>
                 <div className={st.footer}>

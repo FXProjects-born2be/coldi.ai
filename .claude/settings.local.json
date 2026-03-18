@@ -3,7 +3,22 @@
     "allow": [
       "mcp__figma__get_design_context",
       "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/e2bace58-7e80-40fd-95a7-a142f488d9f4\" -o why-bg.png)",
-      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/0d81ba56-34f6-40a6-9186-b197f5ac36e4\" -o checkmark.svg)"
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/0d81ba56-34f6-40a6-9186-b197f5ac36e4\" -o checkmark.svg)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/358408d0-8f04-4d0f-88c8-4fdca582e6b0\" -o card-call-centers.png)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/bc86872e-4e2a-4c86-af70-dd7d4b83ba4f\" -o card-forex.png)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/1cf41f1a-5d1e-4f49-830a-142d6e81e051\" -o card-debt.png)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/7429980f-4732-4d11-ba81-634ef54adbc9\" -o card-insurance.png)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/87a01458-807d-4d61-9510-f62dd4730841\" -o card-healthcare.png)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/63c944a8-9e87-4352-adb8-e696cf30bc60\" -o icon-technology.svg)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/dfbac73c-fe42-4448-96cc-2783f3ae72c8\" -o icon-retail.svg)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/efd4c02b-23de-45f5-843b-869ddfd150aa\" -o icon-manufacturing.svg)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/d7607cce-1878-4cf8-afbf-71ffe611c5e6\" -o icon-consulting.svg)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/1557a843-2021-4712-a997-eb0eef43f108\" -o icon-nonprofit.svg)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/c6c2a7b6-a94d-4157-bf10-905d4c788c8f\" -o ellipse-inner.svg)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/b215070b-70c0-426d-bbee-9d54c0ad322a\" -o ellipse-mid.svg)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/d5db4d20-7f28-4311-ab47-675945886240\" -o ellipse-outer.svg)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/1dee0b34-3819-4995-8692-6e2988cdd6e8\" -o dot-gray.svg)",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/54f1ca44-c438-40a4-9b6e-554f7e40dfb8\" -o dot-blue.svg)"
     ]
   }
 }

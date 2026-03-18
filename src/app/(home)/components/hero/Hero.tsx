@@ -41,7 +41,7 @@ export const Hero = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <Button size="md">Talk to Coldi</Button>
+            <Button size="md">Book a demo</Button>
           </motion.div>
         </Link>
       </section>

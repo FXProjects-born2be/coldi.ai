@@ -140,18 +140,30 @@ const Navigation = () => {
         })}
         itemProp="name"
       >
-        <span>Industries</span>
+        <Link href="/industries" itemProp="url">
+          Industries
+        </Link>
         <ul className={st.dropdown}>
           <li itemProp="name">
-            <Link href="/healthcare" itemProp="url">
+            <Link href="/industries/healthcare" itemProp="url">
               Healthcare
             </Link>
           </li>
-          {/* <li itemProp="name">
-            <Link href="/debt-collection" itemProp="url">
+          <li itemProp="name">
+            <Link href="/industries/debt-collection" itemProp="url">
               Debt Collection
             </Link>
-          </li> */}
+          </li>
+          <li itemProp="name">
+            <Link href="/industries/insurance" itemProp="url">
+              Insurance Agents
+            </Link>
+          </li>
+          <li itemProp="name">
+            <Link href="/industries/real-estate" itemProp="url">
+              Real Estate
+            </Link>
+          </li>
         </ul>
       </li>
     </ul>
