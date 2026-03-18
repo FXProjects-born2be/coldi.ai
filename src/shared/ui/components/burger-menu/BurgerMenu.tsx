@@ -87,14 +87,35 @@ export const BurgerMenu = () => {
                   <span itemProp="name">Pricing</span>
                 </Link>
                 <Link
-                  href="/healthcare"
+                  href="/industries"
+                  className={cn({ [st.active]: pathname === '/industries' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">Industries</span>
+                </Link>
+                <Link
+                  href="/industries/insurance"
+                  className={cn({ [st.active]: pathname === '/insurance-agents' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">Insurance Agents</span>
+                </Link>
+                <Link
+                  href="/industries/real-estate"
+                  className={cn({ [st.active]: pathname === '/real-estate' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">Real Estate</span>
+                </Link>
+                <Link
+                  href="/industries/healthcare"
                   className={cn({ [st.active]: pathname === '/healthcare' })}
                   itemProp="url"
                 >
                   <span itemProp="name">Healthcare</span>
                 </Link>
                 <Link
-                  href="/debt-collection"
+                  href="/industries/debt-collection"
                   className={cn({ [st.active]: pathname === '/debt-collection' })}
                   itemProp="url"
                 >

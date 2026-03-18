@@ -1,0 +1,233 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  padding: 64px 165px;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  align-self: stretch;
+  background: #fff;
+
+  @include mobile {
+    padding: 32px 16px;
+    gap: 32px;
+  }
+
+  h2 {
+    color: #0c1021;
+    text-align: center;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+}
+
+.highlight {
+  color: #4268ff;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  //max-width: 1110px;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.cardsWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 96px;
+
+  @include mobile {
+    flex-direction: column;
+    padding-right: 0;
+    padding-bottom: 20px;
+    width: 100%;
+  }
+}
+
+.cardWithout {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  border-radius: 48px;
+  background: #fafafa;
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  width: 350px;
+  gap: 16px;
+  margin-right: -96px;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: -20px;
+  }
+}
+
+.cardWith {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  border-radius: 48px;
+  background: #fff;
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  width: 350px;
+  gap: 16px;
+  margin-right: -96px;
+  z-index: 1;
+  box-shadow: -5px 0 25px 0 rgba(83, 86, 98, 0.05);
+  overflow: hidden;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: -20px;
+    box-shadow: 0 -5px 25px 0 rgba(83, 86, 98, 0.05);
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  span {
+    color: #0c1021;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.cardHeaderWith {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  span {
+    color: #0c1021;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(12, 16, 33, 0.1);
+}
+
+.cellWithout {
+  color: #535662;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.cellWith {
+  color: #0c1021;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+  gap: 24px;
+  flex-shrink: 0;
+  margin-left: -122px;
+  z-index: 1;
+  @include mobile {
+    display: none;
+  }
+}
+
+.categoryRow {
+  display: flex;
+  //align-items: center;
+  gap: 0;
+  height: 22px;
+  &:first-child {
+    margin-left: -88px;
+  }
+  &:nth-child(2) {
+    margin-left: -10px;
+  }
+  &:nth-child(3) {
+  }
+  &:nth-child(4) {
+    margin-left: -48px;
+    margin-top: 8px;
+  }
+  &:nth-child(5) {
+    margin-left: -75px;
+    margin-top: -5px;
+  }
+  &:nth-child(6) {
+    margin-left: -125px;
+    margin-top: -5px;
+  }
+  &:nth-child(7) {
+    margin-left: -10px;
+    margin-top: -5px;
+  }
+}
+.connector-1 {
+  width: 204px;
+  height: 17.5px;
+  margin-top: 8px;
+}
+.connector-2 {
+  width: 162px;
+  height: 17.5px;
+  margin-top: 8px;
+}
+.connector-3 {
+  width: 181px;
+  height: 14.5px;
+  margin-top: 6px;
+  margin-left: 10px;
+}
+.connector-4 {
+  width: 222px;
+  height: 9.5px;
+}
+.connector-5 {
+  width: 240px;
+  height: 13.5px;
+}
+.connector-6 {
+  width: 275px;
+  height: 13.5px;
+}
+.connector-7 {
+  width: 142px;
+  height: 18.5px;
+}
+
+.categoryLabel {
+  color: #4268ff;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+}

@@ -1,4 +1,5 @@
 import { v } from '@/shared/lib/forms';
+import { isFreeEmailDomain } from '@/shared/lib/validation';
 
 export const bookDemoSchema = v.object({
   name: v.pipe(v.string(), v.minLength(1, 'Name is required')),
@@ -7,7 +8,8 @@ export const bookDemoSchema = v.object({
   email: v.pipe(
     v.string(),
     v.minLength(1, 'Email is required'),
-    v.email('Please enter a valid email')
+    v.email('Please enter a valid email'),
+    v.check((email) => !isFreeEmailDomain(email), 'Please use your work email address')
   ),
   sector: v.pipe(v.string(), v.minLength(1, 'Please select a sector')),
 });
