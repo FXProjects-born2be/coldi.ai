@@ -72,7 +72,7 @@ const industries = [
       </>
     ),
     cta: 'Explore Debt Collection Solution',
-    href: '/debt-collection',
+    href: '/industries/debt-collection',
   },
   {
     image: '/images/industries/card-insurance.png',
@@ -81,7 +81,7 @@ const industries = [
       <>
         <p>
           From instant quote generation to complex policy inquiries, AI voice agents are built for
-          the fast-paced <Link href="/insurance-agents">insurance industry</Link>.
+          the fast-paced <Link href="/industries/insurance">insurance industry</Link>.
         </p>
         <p>
           They streamline the claims process by guiding policyholders through documentation with
@@ -95,7 +95,7 @@ const industries = [
       </>
     ),
     cta: 'Explore Insurance Solution',
-    href: '/insurance-agents',
+    href: '/industries/insurance',
   },
   {
     image: '/images/industries/card-healthcare.png',
@@ -117,7 +117,7 @@ const industries = [
       </>
     ),
     cta: 'Explore Healthcare Solution',
-    href: '/healthcare',
+    href: '/industries/healthcare',
   },
   {
     image: '/images/industries/card-real-estate.png',
@@ -125,9 +125,10 @@ const industries = [
     description: (
       <>
         <p>
-          The <Link href="/real-estate">real estate market</Link> never sleeps, and neither should
-          your lead engagement. Our AI agents qualify prospects through fluid, natural dialogue,
-          answering property specifications and booking viewings directly into your calendar.
+          The <Link href="/industries/real-estate">real estate market</Link> never sleeps, and
+          neither should your lead engagement. Our AI agents qualify prospects through fluid,
+          natural dialogue, answering property specifications and booking viewings directly into
+          your calendar.
         </p>
         <p>
           By pulling real-time market data and cross-referencing caller preferences with current
@@ -138,7 +139,7 @@ const industries = [
       </>
     ),
     cta: 'Explore Real Estate Solution',
-    href: '/real-estate',
+    href: '/industries/real-estate',
   },
 ];
 
