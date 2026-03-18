@@ -60,8 +60,9 @@ const industries = [
     description: (
       <>
         <p>
-          AI transforms <Link href="/debt-collection">debt recovery</Link> by automating routine
-          outreach, including payment reminders, installment discussions, and balance inquiries.
+          AI transforms <Link href="/industries/debt-collection">debt recovery</Link> by automating
+          routine outreach, including payment reminders, installment discussions, and balance
+          inquiries.
         </p>
         <p>
           This shift enables collection teams to focus on sensitive, high-stakes negotiations that
