@@ -164,6 +164,16 @@ const Navigation = () => {
               Real Estate
             </Link>
           </li>
+          <li itemProp="name">
+            <Link href="/industries/call-center" itemProp="url">
+              Call Center
+            </Link>
+          </li>
+          <li itemProp="name">
+            <Link href="/industries/fx-brokers" itemProp="url">
+              FX Brokers
+            </Link>
+          </li>
         </ul>
       </li>
     </ul>

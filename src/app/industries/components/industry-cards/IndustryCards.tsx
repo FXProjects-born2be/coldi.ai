@@ -16,8 +16,9 @@ const industries = [
     description: (
       <>
         <p>
-          <Link href="#">AI voice agents empower call centers</Link> to reach peak efficiency by
-          managing thousands of concurrent calls, effectively eliminating wait times.
+          <Link href="/industries/call-center">AI voice agents empower call centers</Link> to reach
+          peak efficiency by managing thousands of concurrent calls, effectively eliminating wait
+          times.
         </p>
         <p>
           Unlike traditional systems, these agents provide instant, 24/7 support without delays.
@@ -30,7 +31,7 @@ const industries = [
       </>
     ),
     cta: 'Explore Call Center Solution',
-    href: '#',
+    href: '/industries/call-center',
   },
   {
     image: '/images/industries/card-forex.png',
