@@ -1,0 +1,33 @@
+<svg width="427" height="427" viewBox="0 0 427 427" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="427" height="427" rx="22" fill="white"/>
+<rect x="0.46" y="0.46" width="426.08" height="426.08" rx="21.54" stroke="#0C1021" stroke-opacity="0.05" stroke-width="0.92"/>
+<!-- Title -->
+<text x="213.5" y="48" text-anchor="middle" font-family="Urbanist, sans-serif" font-weight="600" font-size="24" fill="#0C1021">First-Call Resolution</text>
+<!-- Chart area -->
+<!-- Grid lines -->
+<line x1="50" y1="100" x2="390" y2="100" stroke="#0C1021" stroke-opacity="0.05" stroke-width="1"/>
+<line x1="50" y1="150" x2="390" y2="150" stroke="#0C1021" stroke-opacity="0.05" stroke-width="1"/>
+<line x1="50" y1="200" x2="390" y2="200" stroke="#0C1021" stroke-opacity="0.05" stroke-width="1"/>
+<line x1="50" y1="250" x2="390" y2="250" stroke="#0C1021" stroke-opacity="0.05" stroke-width="1"/>
+<line x1="50" y1="300" x2="390" y2="300" stroke="#0C1021" stroke-opacity="0.05" stroke-width="1"/>
+<line x1="50" y1="350" x2="390" y2="350" stroke="#0C1021" stroke-opacity="0.05" stroke-width="1"/>
+<!-- Y axis line -->
+<line x1="50" y1="80" x2="50" y2="370" stroke="#0C1021" stroke-opacity="0.05" stroke-width="1"/>
+<!-- Area chart fill -->
+<path d="M50 350 Q100 340 150 310 Q200 280 250 220 Q300 160 330 130 Q360 110 390 90 L390 370 L50 370 Z" fill="url(#areaGradient)" opacity="0.3"/>
+<!-- Area chart line -->
+<path d="M50 350 Q100 340 150 310 Q200 280 250 220 Q300 160 330 130 Q360 110 390 90" stroke="#4268FF" stroke-width="2.5" fill="none"/>
+<!-- Vertical indicator line -->
+<line x1="310" y1="145" x2="310" y2="370" stroke="#4268FF" stroke-width="1.5" opacity="0.3"/>
+<!-- Data point -->
+<circle cx="310" cy="145" r="6" fill="#4268FF" stroke="white" stroke-width="2"/>
+<!-- Tooltip -->
+<rect x="276" y="108" width="52" height="26" rx="13" fill="#0C1021"/>
+<text x="302" y="126" text-anchor="middle" font-family="Urbanist, sans-serif" font-weight="400" font-size="15" fill="white">74%</text>
+<defs>
+<linearGradient id="areaGradient" x1="220" y1="80" x2="220" y2="370" gradientUnits="userSpaceOnUse">
+<stop stop-color="#4268FF" stop-opacity="0.3"/>
+<stop offset="1" stop-color="#4268FF" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

@@ -1,0 +1,94 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  padding: 0 165px 165px;
+  flex-direction: column;
+  align-items: center;
+  align-self: stretch;
+
+  @include mobile {
+    padding: 0 16px 32px;
+  }
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  width: 100%;
+
+  @include mobile {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px;
+  border-radius: 48px;
+  background: #fafafa;
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  overflow: clip;
+  width: calc(33.33% - 16px);
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 64px;
+  background: #4268ff;
+
+  img {
+    width: 32px;
+    height: auto;
+
+    @include mobile {
+      width: 28px;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+  width: 100%;
+
+  h3 {
+    color: #0c1021;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    @include mobile {
+      font-size: 20px;
+    }
+  }
+
+  p {
+    color: #535662;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    @include mobile {
+      font-size: 16px;
+    }
+  }
+}

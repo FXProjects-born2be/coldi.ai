@@ -95,7 +95,9 @@ export const BurgerMenu = () => {
                 </Link>
                 <Link
                   href="/industries/insurance"
-                  className={cn({ [st.active]: pathname === '/insurance-agents' })}
+                  className={cn({
+                    [st.active]: pathname === '/insurance-agents',
+                  })}
                   itemProp="url"
                 >
                   <span itemProp="name">Insurance Agents</span>
@@ -116,14 +118,32 @@ export const BurgerMenu = () => {
                 </Link>
                 <Link
                   href="/industries/debt-collection"
-                  className={cn({ [st.active]: pathname === '/debt-collection' })}
+                  className={cn({
+                    [st.active]: pathname === '/debt-collection',
+                  })}
                   itemProp="url"
                 >
                   <span itemProp="name">Debt Collection</span>
                 </Link>
                 <Link
+                  href="/industries/call-center"
+                  className={cn({ [st.active]: pathname === '/call-center' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">Call Center</span>
+                </Link>
+                <Link
+                  href="/industries/fx-brokers"
+                  className={cn({ [st.active]: pathname === '/fx-brokers' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">FX Brokers</span>
+                </Link>
+                <Link
                   href="/products/outbound-calling"
-                  className={cn({ [st.active]: pathname === '/products/outbound-calling' })}
+                  className={cn({
+                    [st.active]: pathname === '/products/outbound-calling',
+                  })}
                   itemProp="url"
                 >
                   <span itemProp="name">Outbound Calling</span>
