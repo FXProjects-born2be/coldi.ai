@@ -105,7 +105,7 @@
   justify-content: center;
   flex-shrink: 0;
   flex: 0 0 calc(50% - 32px);
-  padding: 64px ;
+  padding: 0;
   border-radius: 24px;
   background: #fafafa;
   overflow: clip;
@@ -116,6 +116,11 @@
     height: auto;
     aspect-ratio: 1;
     margin-bottom: 0;
+  }
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 }
 

@@ -26,20 +26,20 @@ const rows: WhyRow[] = [
       'No internal technical expertise required to launch sophisticated voice AI.',
       'You focus on the markets, while we manage the AI infrastructure and low-latency telephony.',
     ],
-    visual: '/images/brokers/why-1.svg',
+    visual: '/images/brokers/why-1.png',
   },
   {
     title: 'Smart Trade & Account Resolution',
     description:
       'AI agents understand trader intent, resolve common account queries (KYC status, deposit issues) instantly, and reduce repetitive ticket handling.',
-    visual: '/images/brokers/why-2.svg',
+    visual: '/images/brokers/why-2.png',
     reverse: true,
   },
   {
     title: 'Context-Aware Routing',
     description:
       'Calls are intelligently routed based on account tier, urgency, or specific market instruments, ensuring high-value traders get immediate attention.',
-    visual: '/images/brokers/why-3.svg',
+    visual: '/images/brokers/why-3.png',
   },
 ];
 
