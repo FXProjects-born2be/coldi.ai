@@ -105,7 +105,7 @@
   justify-content: center;
   flex-shrink: 0;
   flex: 0 0 calc(50% - 32px);
-  padding: 64px 0;
+  padding: 0;
   border-radius: 24px;
   background: #fafafa;
   overflow: clip;
@@ -119,8 +119,7 @@
   }
 
   img {
-    filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.05));
-    width: 80%;
+    width: 100%;
     height: auto;
     object-fit: contain;
   }

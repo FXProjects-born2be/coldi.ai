@@ -37,14 +37,14 @@ const features: Feature[] = [
       'Launch powerful AI debt collection software without building internal infrastructure.',
     ],
     visual: 'managed',
-    illustration: '/images/debt-collection/why-1.svg',
+    illustration: '/images/debt-collection/why-1.png',
   },
   {
     title: 'Intelligent AI Debt Collection Conversations',
     description:
       "Coldi's AI debt collection agents understand borrower intent, handle payment discussions professionally, and guide customers through repayment options. \n\nInstead of aggressive manual calls, AI uses structured, compliant conversations that increase engagement and recovery rates.",
     visual: 'conversations',
-    illustration: '/images/debt-collection/why-2.svg',
+    illustration: '/images/debt-collection/why-2.png',
   },
   {
     title: 'Smart Payment Resolution',
@@ -58,7 +58,7 @@ const features: Feature[] = [
     ],
     footer: 'This dramatically reduces manual work for collection teams.',
     visual: 'payments',
-    illustration: '/images/debt-collection/why-3.svg',
+    illustration: '/images/debt-collection/why-3.png',
   },
   {
     title: 'Context-Aware Routing',
@@ -67,7 +67,7 @@ const features: Feature[] = [
     listTitle: 'Routing can be based on:',
     bullets: ['Debt size', 'Payment history', 'Delinquency stage', 'Customer sentiment'],
     visual: 'routing',
-    illustration: '/images/debt-collection/why-4.svg',
+    illustration: '/images/debt-collection/why-4.png',
   },
   {
     title: 'Instant CRM & Collection System Logging',
@@ -76,7 +76,7 @@ const features: Feature[] = [
     listTitle: 'This ensures:',
     bullets: ['Complete audit trails', 'Accurate case records', 'Regulatory compliance'],
     visual: 'logging',
-    illustration: '/images/debt-collection/why-5.svg',
+    illustration: '/images/debt-collection/why-5.png',
   },
   {
     title: 'Automated Compliance & Verification',
@@ -90,14 +90,14 @@ const features: Feature[] = [
       'Audit-ready records',
     ],
     visual: 'compliance',
-    illustration: '/images/debt-collection/why-6.svg',
+    illustration: '/images/debt-collection/why-6.png',
   },
   {
     title: 'Multilingual Borrower Communication',
     description:
       'Debt collection often involves diverse populations. Coldi AI supports 30+ languages, enabling agencies and lenders to communicate effectively across regions. \n\nNatural, human-like conversations increase repayment cooperation and reduce disputes.',
     visual: 'multilingual',
-    illustration: '/images/debt-collection/why-7.svg',
+    illustration: '/images/debt-collection/why-7.png',
   },
 ];
 
