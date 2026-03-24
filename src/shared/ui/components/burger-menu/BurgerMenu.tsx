@@ -149,6 +149,13 @@ export const BurgerMenu = () => {
                   <span itemProp="name">Outbound Calling</span>
                 </Link>
                 <Link
+                  href="/products/inbound-calling"
+                  className={cn({ [st.active]: pathname === '/products/inbound-calling' })}
+                  itemProp="url"
+                >
+                  <span itemProp="name">Inbound Calling</span>
+                </Link>
+                <Link
                   className={st.bookMeeting}
                   href="https://calendly.com/coldi/30min"
                   target="_blank"

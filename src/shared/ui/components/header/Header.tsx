@@ -119,6 +119,11 @@ const Navigation = () => {
               Outbound Calling
             </Link>
           </li>
+          <li itemProp="name">
+            <Link href="/products/inbound-calling" itemProp="url">
+              Inbound Calling
+            </Link>
+          </li>
         </ul>
       </li>
       <li className={cn({ [st.active]: pathname === '/pricing' })} itemProp="name">
