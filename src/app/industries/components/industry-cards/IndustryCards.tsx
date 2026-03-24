@@ -53,7 +53,7 @@ const industries = [
       </>
     ),
     cta: 'Explore Trading Solution',
-    href: '#',
+    href: '/industries/fx-brokers',
   },
   {
     image: '/images/industries/card-debt.png',
