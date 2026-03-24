@@ -19,37 +19,37 @@ const features = [
       'No internal IT team or technical expertise required',
       'You focus on patient care — we manage the AI infrastructure and telephony',
     ],
-    illustration: '/images/healthcare/why-1.svg',
+    illustration: '/images/healthcare/why-1.png',
   },
   {
     title: 'Smart Issue Resolution',
     description:
       'AI agents understand patient intent, resolve common requests instantly, and reduce repetitive call handling.',
-    illustration: '/images/healthcare/why-2.svg',
+    illustration: '/images/healthcare/why-2.png',
   },
   {
     title: 'Context-Aware Routing',
     description:
       'Calls are intelligently routed based on context, urgency, and patient needs — ensuring faster resolutions.',
     cta: 'Stop missing Sale calls',
-    illustration: '/images/healthcare/why-3.svg',
+    illustration: '/images/healthcare/why-3.png',
   },
   {
     title: 'Instant Ticket Logging',
     description:
       'Every interaction is automatically documented and logged into your system in real time.',
-    illustration: '/images/healthcare/why-4.svg',
+    illustration: '/images/healthcare/why-4.png',
   },
   {
     title: 'Real-Time Scheduling',
     description: 'Patients can book, modify, or confirm appointments without human intervention.',
-    illustration: '/images/healthcare/why-5.svg',
+    illustration: '/images/healthcare/why-5.png',
   },
   {
     title: 'Multilingual Understanding',
     description: 'Support patients across 30+ languages with natural, human-like conversations.',
     cta: 'Hire AI Voice Agents',
-    illustration: '/images/healthcare/why-6.svg',
+    illustration: '/images/healthcare/why-6.png',
   },
 ];
 
