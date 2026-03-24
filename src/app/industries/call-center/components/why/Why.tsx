@@ -49,7 +49,7 @@ export const Why = () => {
 
         <div className={st.visualWrap}>
           <Image
-            src="/images/call-center/why.svg"
+            src="/images/call-center/why.png"
             alt="Fully managed setup"
             width={564}
             height={564}
