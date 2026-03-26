@@ -73,7 +73,7 @@ export const Advantages = () => {
               custom={0.2}
               className={st.chip}
             >
-              <Chip variant="secondary">Most AI tools fail on implementation.</Chip>
+              <Chip variant="secondary">Stop struggling with AI setup</Chip>
             </motion.div>
             <motion.div className={st.arrowLeft}>
               <motion.span
@@ -98,7 +98,7 @@ export const Advantages = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            Coldi doesn’t.
+            Coldi handles the heavy lifting.
           </motion.h2>
         </section>
         <motion.p
@@ -108,8 +108,7 @@ export const Advantages = () => {
           viewport={{ once: true }}
           className={st.desc}
         >
-          We handle everything — from voice selection to full setup and performance tuning. You get
-          a fully integrated AI voice agent that works for your business.
+          A fully managed, done-for-you solution. From custom voice selection to deep API integration, every detail is built and synced to ensure your AI voice agent works seamlessly within your business from day one
         </motion.p>
         <motion.p
           variants={blurInUp}
