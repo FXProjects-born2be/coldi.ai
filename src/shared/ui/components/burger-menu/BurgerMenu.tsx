@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -18,8 +19,23 @@ import { cn } from '@/shared/lib/helpers';
 
 import st from './BurgerMenu.module.scss';
 
+const industriesItems = [
+  { label: 'Healthcare', href: '/industries/healthcare', icon: '/icons/header/healthcare.svg' },
+  { label: 'Insurance Agents', href: '/industries/insurance', icon: '/icons/header/insurance.svg' },
+  { label: 'Real Estate', href: '/industries/real-estate', icon: '/icons/header/real-estate.svg' },
+  { label: 'Call Center', href: '/industries/call-center', icon: '/icons/header/call-center.svg' },
+  { label: 'FX Brokers', href: '/industries/fx-brokers', icon: '/icons/header/fx-brokers.svg' },
+];
+
+const productsItems = [
+  { label: 'Outbound Calling', href: '/products/outbound-calling' },
+  { label: 'Inbound Calling', href: '/products/inbound-calling' },
+];
+
 export const BurgerMenu = () => {
   const [open, setOpen] = useState(false);
+  const [openProducts, setOpenProducts] = useState(false);
+  const [openIndustries, setOpenIndustries] = useState(false);
 
   const pathname = usePathname();
 
@@ -65,20 +81,38 @@ export const BurgerMenu = () => {
                 >
                   <span itemProp="name">News</span>
                 </Link>
-                <Link
-                  href="/products"
-                  className={cn({ [st.active]: pathname === '/product' })}
-                  itemProp="url"
-                >
-                  <span itemProp="name">Products</span>
-                </Link>
-                <Link
-                  href="/about"
-                  className={cn({ [st.active]: pathname === '/about' })}
-                  itemProp="url"
-                >
-                  <span itemProp="name">About</span>
-                </Link>
+
+                <div className={st.group}>
+                  <button
+                    className={cn(st.groupTrigger, {
+                      [st.active]: pathname.startsWith('/products'),
+                      [st.groupOpen]: openProducts,
+                    })}
+                    onClick={() => setOpenProducts((v) => !v)}
+                  >
+                    <span itemProp="name">Products</span>
+                    <Image
+                      src="/icons/header/arrow.svg"
+                      alt=""
+                      width={16}
+                      height={8}
+                      className={st.groupArrow}
+                    />
+                  </button>
+                  <div className={cn(st.groupItems, { [st.groupItemsOpen]: openProducts })}>
+                    {productsItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={cn(st.subItem, { [st.active]: pathname === item.href })}
+                        itemProp="url"
+                      >
+                        <span itemProp="name">{item.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
                 <Link
                   href="/pricing"
                   className={cn({ [st.active]: pathname === '/pricing' })}
@@ -87,74 +121,45 @@ export const BurgerMenu = () => {
                   <span itemProp="name">Pricing</span>
                 </Link>
                 <Link
-                  href="/industries"
-                  className={cn({ [st.active]: pathname === '/industries' })}
+                  href="/about"
+                  className={cn({ [st.active]: pathname === '/about' })}
                   itemProp="url"
                 >
-                  <span itemProp="name">Industries</span>
+                  <span itemProp="name">About</span>
                 </Link>
-                <Link
-                  href="/industries/insurance"
-                  className={cn({
-                    [st.active]: pathname === '/insurance-agents',
-                  })}
-                  itemProp="url"
-                >
-                  <span itemProp="name">Insurance Agents</span>
-                </Link>
-                <Link
-                  href="/industries/real-estate"
-                  className={cn({ [st.active]: pathname === '/real-estate' })}
-                  itemProp="url"
-                >
-                  <span itemProp="name">Real Estate</span>
-                </Link>
-                <Link
-                  href="/industries/healthcare"
-                  className={cn({ [st.active]: pathname === '/healthcare' })}
-                  itemProp="url"
-                >
-                  <span itemProp="name">Healthcare</span>
-                </Link>
-                <Link
-                  href="/industries/debt-collection"
-                  className={cn({
-                    [st.active]: pathname === '/debt-collection',
-                  })}
-                  itemProp="url"
-                >
-                  <span itemProp="name">Debt Collection</span>
-                </Link>
-                <Link
-                  href="/industries/call-center"
-                  className={cn({ [st.active]: pathname === '/call-center' })}
-                  itemProp="url"
-                >
-                  <span itemProp="name">Call Center</span>
-                </Link>
-                <Link
-                  href="/industries/fx-brokers"
-                  className={cn({ [st.active]: pathname === '/fx-brokers' })}
-                  itemProp="url"
-                >
-                  <span itemProp="name">FX Brokers</span>
-                </Link>
-                <Link
-                  href="/products/outbound-calling"
-                  className={cn({
-                    [st.active]: pathname === '/products/outbound-calling',
-                  })}
-                  itemProp="url"
-                >
-                  <span itemProp="name">Outbound Calling</span>
-                </Link>
-                <Link
-                  href="/products/inbound-calling"
-                  className={cn({ [st.active]: pathname === '/products/inbound-calling' })}
-                  itemProp="url"
-                >
-                  <span itemProp="name">Inbound Calling</span>
-                </Link>
+
+                <div className={st.group}>
+                  <button
+                    className={cn(st.groupTrigger, {
+                      [st.active]: pathname.startsWith('/industries'),
+                      [st.groupOpen]: openIndustries,
+                    })}
+                    onClick={() => setOpenIndustries((v) => !v)}
+                  >
+                    <span itemProp="name">Industries</span>
+                    <Image
+                      src="/icons/header/arrow.svg"
+                      alt=""
+                      width={16}
+                      height={8}
+                      className={st.groupArrow}
+                    />
+                  </button>
+                  <div className={cn(st.groupItems, { [st.groupItemsOpen]: openIndustries })}>
+                    {industriesItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={cn(st.subItem, { [st.active]: pathname === item.href })}
+                        itemProp="url"
+                      >
+                        <Image src={item.icon} alt="" width={20} height={20} />
+                        <span itemProp="name">{item.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
                 <Link
                   className={st.bookMeeting}
                   href="https://calendly.com/coldi/30min"
@@ -178,7 +183,7 @@ export const BurgerMenu = () => {
                       fill="white"
                     />
                   </svg>
-                  AI Voice Demo
+                  Schedule a Meeting
                 </Link>
               </nav>
             </section>

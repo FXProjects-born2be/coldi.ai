@@ -1,0 +1,92 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  padding: 24px 165px;
+  background: #fff;
+
+  @include tablet {
+    padding: 64px 16px;
+  }
+}
+
+.row {
+  display: flex;
+  gap: 24px;
+
+  @include tablet {
+    flex-direction: column;
+  }
+}
+
+.card {
+  flex: 1;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+  border-radius: 48px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &__image {
+    position: relative;
+    height: 245px;
+    flex-shrink: 0;
+    width: 100%;
+
+    @include tablet {
+      height: 175px;
+    }
+  }
+
+  &__content {
+    background: #fff;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    h3 {
+      color: #0c1021;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    p {
+      color: #535662;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: normal;
+
+      @include mobileSmall {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__btn {
+    display: block;
+
+    @include tablet {
+      width: 100%;
+
+      button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+.link {
+  color: #4268ff;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+}

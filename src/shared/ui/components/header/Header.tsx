@@ -10,6 +10,14 @@ import { BurgerMenu } from '@/shared/ui/components/burger-menu';
 
 import st from './Header.module.scss';
 
+const industriesItems = [
+  { label: 'Healthcare', href: '/industries/healthcare', icon: '/icons/header/healthcare.svg' },
+  { label: 'Insurance Agents', href: '/industries/insurance', icon: '/icons/header/insurance.svg' },
+  { label: 'Real Estate', href: '/industries/real-estate', icon: '/icons/header/real-estate.svg' },
+  { label: 'Call Center', href: '/industries/call-center', icon: '/icons/header/call-center.svg' },
+  { label: 'FX Brokers', href: '/industries/fx-brokers', icon: '/icons/header/fx-brokers.svg' },
+];
+
 //https://calendly.com/coldi/30min
 
 const headerVisibilityOnScrollHandle = (set: (visible: boolean) => void) => {
@@ -113,6 +121,9 @@ const Navigation = () => {
         <Link href="/products" itemProp="url">
           Products
         </Link>
+        <span className={st.dropdownArrow}>
+          <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
+        </span>
         <ul className={st.dropdown}>
           <li itemProp="name">
             <Link href="/products/outbound-calling" itemProp="url">
@@ -138,47 +149,25 @@ const Navigation = () => {
       </li>
       <li
         className={cn(st.hasDropdown, {
-          [st.active]:
-            pathname.startsWith('/healthcare') ||
-            pathname.startsWith('/debt-collection') ||
-            pathname.startsWith('/industries'),
+          [st.active]: pathname.startsWith('/industries'),
         })}
         itemProp="name"
       >
         <Link href="/industries" itemProp="url">
           Industries
         </Link>
+        <span className={st.dropdownArrow}>
+          <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
+        </span>
         <ul className={st.dropdown}>
-          <li itemProp="name">
-            <Link href="/industries/healthcare" itemProp="url">
-              Healthcare
-            </Link>
-          </li>
-          <li itemProp="name">
-            <Link href="/industries/debt-collection" itemProp="url">
-              Debt Collection
-            </Link>
-          </li>
-          <li itemProp="name">
-            <Link href="/industries/insurance" itemProp="url">
-              Insurance Agents
-            </Link>
-          </li>
-          <li itemProp="name">
-            <Link href="/industries/real-estate" itemProp="url">
-              Real Estate
-            </Link>
-          </li>
-          <li itemProp="name">
-            <Link href="/industries/call-center" itemProp="url">
-              Call Center
-            </Link>
-          </li>
-          <li itemProp="name">
-            <Link href="/industries/fx-brokers" itemProp="url">
-              FX Brokers
-            </Link>
-          </li>
+          {industriesItems.map((item) => (
+            <li key={item.href} itemProp="name">
+              <Image className={st.dropdownIcon} src={item.icon} alt="" width={20} height={20} />
+              <Link href={item.href} itemProp="url">
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </li>
     </ul>
