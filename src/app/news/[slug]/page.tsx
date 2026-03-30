@@ -2,6 +2,8 @@ import Image from 'next/image';
 
 import { getNewsBySlug } from '@/features/news/news';
 
+import { BreadcrumbLabel } from '@/shared/ui/components/breadcrumbs';
+
 import { TestIt } from '../components/test-it/TestIt';
 import st from './NewsPage.module.scss';
 
@@ -12,6 +14,7 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
+      {news?.title && <BreadcrumbLabel segment={slug} label={news.title} />}
       <section className={st.layout}>
         <div className={st.newsItemTop}>
           <Image

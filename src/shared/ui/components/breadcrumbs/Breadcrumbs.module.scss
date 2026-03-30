@@ -14,11 +14,14 @@
   display: flex;
   align-items: center;
   list-style: none;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .item {
   display: flex;
   align-items: center;
+  max-width: 100%;
 }
 
 .link {
@@ -32,9 +35,13 @@
   line-height: 1.2;
   white-space: nowrap;
   transition: color 0.2s ease;
+  width: calc(100% - 20px);
 
   &:hover {
     color: #0c1021;
+  }
+  @include mobile {
+    white-space: wrap;
   }
 }
 
@@ -48,6 +55,10 @@
   font-weight: 500;
   line-height: 1.2;
   white-space: nowrap;
+  width: calc(100% - 20px);
+  @include mobile {
+    white-space: wrap;
+  }
 }
 
 .separator {
@@ -55,7 +66,8 @@
   align-items: center;
   justify-content: center;
   padding: 12px 6px;
-
+  width: 8px;
+  height: 16px;
   img {
     opacity: 0.4;
   }

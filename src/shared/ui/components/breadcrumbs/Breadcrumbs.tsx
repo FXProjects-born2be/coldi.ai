@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import st from './Breadcrumbs.module.scss';
+import { useBreadcrumbsContext } from './BreadcrumbsContext';
 
 const segmentLabels: Record<string, string> = {
   products: 'Products',
@@ -29,13 +30,14 @@ const segmentLabels: Record<string, string> = {
 
 export const Breadcrumbs = () => {
   const pathname = usePathname();
+  const { labelOverrides } = useBreadcrumbsContext();
 
   if (pathname === '/') return null;
 
   const segments = pathname.split('/').filter(Boolean);
 
   const crumbs = segments.map((seg, i) => ({
-    label: segmentLabels[seg] ?? seg,
+    label: labelOverrides[seg] ?? segmentLabels[seg] ?? seg,
     href: '/' + segments.slice(0, i + 1).join('/'),
   }));
 
