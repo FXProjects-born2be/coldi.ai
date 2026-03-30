@@ -47,11 +47,11 @@
   flex-direction: column;
   background-color: #fff;
   padding: 16px 16px 32px 16px;
-  gap: 12px;
+  gap: 4px;
 
   a {
     text-align: center;
-    padding: 10px 24px;
+    padding: 16px 24px;
     border-radius: 48px;
     color: #0c1021;
     font-size: 20px;
@@ -59,24 +59,12 @@
     line-height: 120%;
 
     &.active {
-      background-color: #f5f5f5;
-    }
-
-    &.call {
-      display: flex;
-      padding: 16px ;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      border-radius: 24px;
-      background: transparent;
-      border: 1px solid #4268ff;
-      color: #4268ff;
+      background-color: #eaeaeb;
     }
 
     &.bookMeeting {
       display: flex;
-      padding: 16px ;
+      padding: 16px;
       justify-content: center;
       align-items: center;
       gap: 10px;
@@ -84,6 +72,78 @@
       background: #4268ff;
       border: 1px solid #4268ff;
       color: #fff;
+      margin-top: 8px;
     }
+  }
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.groupTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border-radius: 48px;
+  color: #0c1021;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 120%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+
+  &.active {
+    background-color: #eaeaeb;
+  }
+
+  .groupArrow {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  &.groupOpen .groupArrow {
+    transform: rotate(180deg);
+  }
+}
+
+.groupItems {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  opacity: 0;
+  padding: 0 6px;
+
+  &.groupItemsOpen {
+    max-height: 400px;
+    opacity: 1;
+  }
+}
+
+.subItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 12px;
+  color: #535662;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+
+  &:hover,
+  &.active {
+    background: rgba(80, 85, 107, 0.04);
+    color: #0c1021;
   }
 }
