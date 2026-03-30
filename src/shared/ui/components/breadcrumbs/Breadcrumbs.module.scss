@@ -1,0 +1,74 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.breadcrumbs {
+  padding: 0 124px;
+  border-bottom: 1px solid rgba(80, 85, 107, 0.05);
+  position: relative;
+  z-index: 1;
+  @include mobile {
+    padding: 0 16px;
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 24px;
+  color: rgba(12, 16, 33, 0.65);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+  width: calc(100% - 20px);
+
+  &:hover {
+    color: #0c1021;
+  }
+  @include mobile {
+    white-space: wrap;
+  }
+}
+
+.current {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 24px;
+  color: #0c1021;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  width: calc(100% - 20px);
+  @include mobile {
+    white-space: wrap;
+  }
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 6px;
+  width: 8px;
+  height: 16px;
+  img {
+    opacity: 0.4;
+  }
+}

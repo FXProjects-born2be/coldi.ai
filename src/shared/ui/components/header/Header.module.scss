@@ -6,9 +6,7 @@
   z-index: 997;
   background: #fff;
   border-bottom: 1px solid rgba(80, 85, 107, 0.05);
-  transition:
-    transform 0.3s ease,
-    opacity 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   transform: translateY(-100%);
   opacity: 0;
   pointer-events: none;
@@ -135,9 +133,15 @@
           line-height: 1.2;
         }
 
+        img {
+          opacity: 0.5;
+        }
+
         &:hover {
           background: rgba(80, 85, 107, 0.04);
-
+          img {
+            opacity: 1;
+          }
           a {
             color: #0c1021;
           }

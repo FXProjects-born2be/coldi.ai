@@ -16,6 +16,11 @@ const industriesItems = [
   { label: 'Real Estate', href: '/industries/real-estate', icon: '/icons/header/real-estate.svg' },
   { label: 'Call Center', href: '/industries/call-center', icon: '/icons/header/call-center.svg' },
   { label: 'FX Brokers', href: '/industries/fx-brokers', icon: '/icons/header/fx-brokers.svg' },
+  {
+    label: 'Debt Collection',
+    href: '/industries/debt-collection',
+    icon: '/icons/header/debt-collection.svg',
+  },
 ];
 
 //https://calendly.com/coldi/30min
@@ -33,7 +38,7 @@ export const Header = () => {
   const pathname = usePathname();
   const isForcedVisible = requestRoutes.has(pathname);
 
-  const [visible, setVisible] = useState(isForcedVisible ? true : false);
+  const [visible, setVisible] = useState(isForcedVisible ? true : true);
 
   useEffect(() => {
     if (isForcedVisible) return;

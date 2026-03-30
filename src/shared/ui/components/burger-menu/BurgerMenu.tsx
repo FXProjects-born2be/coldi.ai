@@ -25,6 +25,11 @@ const industriesItems = [
   { label: 'Real Estate', href: '/industries/real-estate', icon: '/icons/header/real-estate.svg' },
   { label: 'Call Center', href: '/industries/call-center', icon: '/icons/header/call-center.svg' },
   { label: 'FX Brokers', href: '/industries/fx-brokers', icon: '/icons/header/fx-brokers.svg' },
+  {
+    label: 'Debt Collection',
+    href: '/industries/debt-collection',
+    icon: '/icons/header/debt-collection.svg',
+  },
 ];
 
 const productsItems = [
