@@ -6,6 +6,7 @@ import Script from 'next/script';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 
+import { Breadcrumbs } from '@/shared/ui/components/breadcrumbs';
 import { Footer } from '@/shared/ui/components/footer';
 import { Header } from '@/shared/ui/components/header';
 import RetellWidget from '@/shared/ui/components/RetellWidget';
@@ -87,6 +88,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </noscript>
         {/* End Google Tag Manager (noscript) */}
         {!isLiveDemo && <Header />}
+        {!isLiveDemo && <Breadcrumbs />}
         {children}
         {!isLiveDemo && <Footer />}
         <Script
