@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './ContentCards.module.scss';
@@ -151,7 +152,7 @@ export const ContentCards = () => {
             <div className={st.visualFrame}>
               <Image
                 src={row.visual as string}
-                alt={row.title}
+                alt={imageAlt('fxBrokers', row.title)}
                 width={564}
                 height={564}
                 unoptimized

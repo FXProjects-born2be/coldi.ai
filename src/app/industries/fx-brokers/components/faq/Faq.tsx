@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Faq.module.scss';
@@ -82,7 +83,12 @@ export const Faq = () => {
                   animate={{ rotate: isOpen ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Image src="/images/leads/faq.svg" alt="FAQ" width={32} height={32} />
+                  <Image
+                    src="/images/leads/faq.svg"
+                    alt={imageAlt('fxBrokers', 'FAQ')}
+                    width={32}
+                    height={32}
+                  />
                 </motion.span>
               </div>
               <AnimatePresence>

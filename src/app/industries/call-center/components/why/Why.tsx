@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Why.module.scss';
@@ -50,7 +51,7 @@ export const Why = () => {
         <div className={st.visualWrap}>
           <Image
             src="/images/call-center/why.png"
-            alt="Fully managed setup"
+            alt={imageAlt('callCenter', 'Fully managed setup — no IT team required')}
             width={564}
             height={564}
             unoptimized

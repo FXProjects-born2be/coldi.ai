@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 import { Button } from '@/shared/ui/kit/button';
 
@@ -57,7 +58,12 @@ export const Different = () => {
               viewport={{ once: true }}
             >
               <div className={st.illustWrap}>
-                <Image src={card.illustration} alt={card.title} width={427} height={202} />
+                <Image
+                  src={card.illustration}
+                  alt={imageAlt('outboundCalling', card.title)}
+                  width={427}
+                  height={202}
+                />
               </div>
               <div className={st.cardText}>
                 <h3>{card.title}</h3>
