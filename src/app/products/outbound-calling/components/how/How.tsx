@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 import { Button } from '@/shared/ui/kit/button';
 
@@ -120,7 +121,10 @@ export const How = () => {
               {/* eslint-disable-next-line @next/next/no-img-element -- YouTube thumbnail with fallback; source is external */}
               <img
                 src={YOUTUBE_THUMB}
-                alt=""
+                alt={imageAlt(
+                  'outboundCalling',
+                  'How it works — video thumbnail (play to watch on YouTube)'
+                )}
                 className={st.posterImage}
                 loading="lazy"
                 onError={(e) => {

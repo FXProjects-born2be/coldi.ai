@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Comparison.module.scss';
@@ -121,7 +122,7 @@ export const Comparison = () => {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`/images/healthcare/connector${index + 1}.svg`}
-                alt=""
+                alt={imageAlt('healthcare', `${row.category} — comparison connector`)}
                 className={st[`connector-${index + 1}`]}
               />
               <span className={st.categoryLabel}>{row.category}</span>

@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Multilingual.module.scss';
@@ -41,7 +42,7 @@ export const Multilingual = () => {
         <div className={st.illustration}>
           <Image
             src="/images/outbound/multilingual.svg"
-            alt="Multilingual outbound calling"
+            alt={imageAlt('outboundCalling', 'Multilingual outbound calling illustration')}
             width={357}
             height={352}
             unoptimized

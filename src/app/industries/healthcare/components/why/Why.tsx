@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 import { Button } from '@/shared/ui/kit/button';
 
@@ -100,7 +101,7 @@ export const Why = () => {
               <div className={st.illustration}>
                 <Image
                   src={feature.illustration}
-                  alt={feature.title}
+                  alt={imageAlt('healthcare', feature.title)}
                   width={427}
                   height={427}
                   unoptimized

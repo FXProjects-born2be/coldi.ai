@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Cards.module.scss';
@@ -43,7 +44,13 @@ export const Cards = () => {
             viewport={{ once: true }}
           >
             <div className={st.iconWrap}>
-              <Image src={card.icon} alt={card.title} width={32} height={32} unoptimized />
+              <Image
+                src={card.icon}
+                alt={imageAlt('fxBrokers', card.title)}
+                width={32}
+                height={32}
+                unoptimized
+              />
             </div>
             <div className={st.content}>
               <h3>{card.title}</h3>

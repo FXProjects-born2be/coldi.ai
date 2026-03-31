@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 import { Button } from '@/shared/ui/kit/button';
 
@@ -45,7 +46,7 @@ export const Infrastructure = () => {
         >
           <Image
             src="/images/healthcare/infrastructure.svg"
-            alt="Infrastructure"
+            alt={imageAlt('healthcare', 'Reliable infrastructure for healthcare communication')}
             width={427}
             height={427}
             unoptimized

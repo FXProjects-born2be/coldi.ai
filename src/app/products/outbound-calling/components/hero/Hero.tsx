@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 
 import { RequestDialog } from '@/features/request-leads-demo/ui/request-dialog/RequestDialog';
 
+import { IMAGE_ALT } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Hero.module.scss';
@@ -39,7 +40,13 @@ export const Hero = () => {
       >
         <div className={st.top}>
           <h3>Book a Demo</h3>
-          <Image src="/full-logo.svg" alt="Coldi" width={93} height={32} unoptimized />
+          <Image
+            src="/full-logo.svg"
+            alt={`${IMAGE_ALT.outboundCalling} — Coldi logo`}
+            width={93}
+            height={32}
+            unoptimized
+          />
         </div>
         <div className={st.bottom}>
           <RequestDialog />
