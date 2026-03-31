@@ -1,11 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
 import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
+import { Button } from '@/shared/ui/kit/button';
 
 import st from './Cards.module.scss';
 
@@ -70,6 +72,11 @@ export const Cards = () => {
             </div>
           </motion.div>
         ))}
+      </div>
+      <div className={st.button}>
+        <Link href="#demo">
+          <Button size="md">Build Your AI Voice Team</Button>
+        </Link>
       </div>
     </section>
   );
