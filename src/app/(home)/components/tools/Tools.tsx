@@ -54,6 +54,11 @@ const card = [
     alt: 'SendGrid',
     href: 'https://sendgrid.com/',
   },
+  {
+    image: '/images/home/tools/calleague.svg',
+    alt: 'Calleague',
+    href: 'https://calleague.com/',
+  },
 ];
 
 export const Tools = () => (
