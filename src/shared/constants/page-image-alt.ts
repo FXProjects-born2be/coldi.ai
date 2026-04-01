@@ -11,6 +11,7 @@ export const IMAGE_ALT = {
   debtCollection: 'AI Agents for Debt Collection',
   outboundCalling: 'AI Outbound Calling',
   inboundCalling: 'AI Inbound Calling',
+  agentDevelopment: 'AI Agent Development',
 } as const;
 
 export type ImageAltPage = keyof typeof IMAGE_ALT;

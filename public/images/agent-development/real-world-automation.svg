@@ -1,0 +1,19 @@
+<svg width="564" height="564" viewBox="0 0 564 564" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="564" height="564" rx="24" fill="#FAFAFA"/>
+  <rect x="68" y="121" width="427" height="322" rx="22" fill="white" filter="url(#shadow)"/>
+  <text x="282" y="166" text-anchor="middle" fill="#0C1021" font-size="24" font-family="Urbanist, Arial, sans-serif" font-weight="600">Real-world AI automation</text>
+  <rect x="92" y="198" width="183" height="104" rx="24" fill="white" stroke="rgba(12,16,33,0.1)"/>
+  <rect x="289" y="198" width="183" height="104" rx="24" fill="white" stroke="rgba(12,16,33,0.1)"/>
+  <rect x="92" y="316" width="380" height="104" rx="24" fill="white" stroke="rgba(12,16,33,0.1)"/>
+  <image href="/images/agent-development/support-automation.svg" x="172" y="228" width="24" height="24"/>
+  <image href="/images/agent-development/lead-qualification.svg" x="369" y="228" width="24" height="24"/>
+  <image href="/images/agent-development/call-handling.svg" x="270" y="348" width="24" height="24"/>
+  <text x="183.5" y="267" text-anchor="middle" fill="#0C1021" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="500">Support Automation</text>
+  <text x="380.5" y="267" text-anchor="middle" fill="#0C1021" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="500">Lead Qualification</text>
+  <text x="282" y="387" text-anchor="middle" fill="#0C1021" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="500">Call Handling</text>
+  <defs>
+    <filter id="shadow" x="32" y="85" width="499" height="394" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#0C1021" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+</svg>

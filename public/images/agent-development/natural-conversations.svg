@@ -1,0 +1,33 @@
+<svg width="564" height="564" viewBox="0 0 564 564" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="564" height="564" rx="24" fill="#FAFAFA"/>
+  <rect x="68" y="92" width="427" height="427" rx="16" fill="white" stroke="rgba(12,16,33,0.05)"/>
+  <rect x="74" y="101" width="415" height="415" rx="16" fill="white" stroke="rgba(12,16,33,0.05)"/>
+  <rect x="80" y="110" width="403" height="403" rx="16" fill="white" stroke="rgba(12,16,33,0.05)"/>
+  <text x="108" y="154" fill="#0C1021" font-size="24" font-family="Urbanist, Arial, sans-serif" font-weight="600">Natural Conversations</text>
+  <rect x="393" y="126" width="77" height="34" rx="17" fill="#DEF8E8"/>
+  <text x="431.5" y="147" text-anchor="middle" fill="#28BC62" font-size="14" font-family="Urbanist, Arial, sans-serif">AI Active</text>
+  <rect x="92" y="176" width="379" height="199" rx="24" fill="white" stroke="rgba(12,16,33,0.1)"/>
+  <pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="2" fill="#E7E8EC"/>
+  </pattern>
+  <rect x="92" y="176" width="379" height="199" rx="24" fill="url(#dots)" opacity="0.9"/>
+  <image href="/images/agent-development/user-avatar.png" x="114" y="198" width="37" height="37"/>
+  <text x="162" y="217" fill="#0C1021" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="600">User</text>
+  <rect x="162" y="224" width="127" height="37" rx="18" fill="white" filter="url(#bubbleShadow)"/>
+  <text x="225.5" y="247" text-anchor="middle" fill="#0C1021" font-size="14.5" font-family="Urbanist, Arial, sans-serif" font-weight="500">I need support</text>
+  <text x="344" y="300" fill="#0C1021" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="600">Coldi AI</text>
+  <rect x="209" y="312" width="191" height="39" rx="19.5" fill="#4268FF" filter="url(#bubbleShadow)"/>
+  <text x="304.5" y="337" text-anchor="middle" fill="white" font-size="14.5" font-family="Urbanist, Arial, sans-serif" font-weight="500">Sure, I can help with that</text>
+  <image href="/images/agent-development/ai-avatar.svg" x="412" y="300" width="37" height="37"/>
+  <rect x="92" y="401" width="183" height="68" rx="24" fill="white" stroke="rgba(12,16,33,0.1)"/>
+  <rect x="287" y="401" width="183" height="68" rx="24" fill="white" stroke="rgba(12,16,33,0.1)"/>
+  <text x="183.5" y="430" text-anchor="middle" fill="#0C1021" font-size="18" font-family="Urbanist, Arial, sans-serif" font-weight="600">4.7/5</text>
+  <text x="183.5" y="453" text-anchor="middle" fill="#535662" font-size="14" font-family="Urbanist, Arial, sans-serif">User Satisfaction</text>
+  <text x="378.5" y="430" text-anchor="middle" fill="#0C1021" font-size="18" font-family="Urbanist, Arial, sans-serif" font-weight="600">0.8s</text>
+  <text x="378.5" y="453" text-anchor="middle" fill="#535662" font-size="14" font-family="Urbanist, Arial, sans-serif">Avg Response Time</text>
+  <defs>
+    <filter id="bubbleShadow" x="120" y="190" width="360" height="200" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#0C1021" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+</svg>

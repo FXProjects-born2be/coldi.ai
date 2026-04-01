@@ -1,0 +1,47 @@
+<svg width="564" height="564" viewBox="0 0 564 564" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="564" height="564" rx="24" fill="#FAFAFA"/>
+  <rect x="198" y="92" width="142" height="76" rx="22" fill="white" filter="url(#shadow)"/>
+  <text x="269" y="138" text-anchor="middle" fill="#0C1021" font-size="24" font-family="Urbanist, Arial, sans-serif" font-weight="600">AI Agent</text>
+  <rect x="58" y="208" width="71" height="52" rx="22" fill="white" filter="url(#shadow)"/>
+  <rect x="175" y="262" width="58" height="52" rx="22" fill="white" filter="url(#shadow)"/>
+  <rect x="319" y="284" width="90" height="52" rx="22" fill="white" filter="url(#shadow)"/>
+  <rect x="436" y="200" width="72" height="52" rx="22" fill="white" filter="url(#shadow)"/>
+  <text x="93.5" y="240" text-anchor="middle" fill="#0C1021" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="600">CRM</text>
+  <text x="204" y="294" text-anchor="middle" fill="#0C1021" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="600">AI</text>
+  <text x="364" y="316" text-anchor="middle" fill="#0C1021" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="600">Support</text>
+  <text x="472" y="232" text-anchor="middle" fill="#0C1021" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="600">Voice</text>
+  <path d="M269 168V208H93" stroke="#6C87FF" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 8"/>
+  <path d="M269 168V232H204V262" stroke="#6C87FF" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 8"/>
+  <path d="M269 168V232H364V284" stroke="#6C87FF" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 8"/>
+  <path d="M269 168V200H472" stroke="#6C87FF" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 8"/>
+  <path d="M93 260V333" stroke="#7ED89F" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 8"/>
+  <path d="M204 314V401" stroke="#7ED89F" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 8"/>
+  <path d="M364 336V366" stroke="#7ED89F" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 8"/>
+  <path d="M472 252V425" stroke="#7ED89F" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 8"/>
+  <g>
+    <rect x="20" y="333" width="136" height="40" rx="20" fill="#DEF8E8" stroke="rgba(40,188,98,0.12)"/>
+    <image href="/images/agent-development/connected-check.svg" x="35" y="341" width="24" height="24"/>
+    <text x="95" y="358" text-anchor="middle" fill="#28BC62" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="500">Connected</text>
+  </g>
+  <g>
+    <rect x="135" y="401" width="136" height="40" rx="20" fill="#DEF8E8" stroke="rgba(40,188,98,0.12)"/>
+    <image href="/images/agent-development/connected-check.svg" x="150" y="409" width="24" height="24"/>
+    <text x="210" y="426" text-anchor="middle" fill="#28BC62" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="500">Connected</text>
+  </g>
+  <g>
+    <rect x="294" y="366" width="136" height="40" rx="20" fill="#DEF8E8" stroke="rgba(40,188,98,0.12)"/>
+    <image href="/images/agent-development/connected-check.svg" x="309" y="374" width="24" height="24"/>
+    <text x="369" y="391" text-anchor="middle" fill="#28BC62" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="500">Connected</text>
+  </g>
+  <g>
+    <rect x="388" y="426" width="136" height="40" rx="20" fill="#DEF8E8" stroke="rgba(40,188,98,0.12)"/>
+    <image href="/images/agent-development/connected-check.svg" x="403" y="434" width="24" height="24"/>
+    <text x="463" y="451" text-anchor="middle" fill="#28BC62" font-size="16" font-family="Urbanist, Arial, sans-serif" font-weight="500">Connected</text>
+  </g>
+  <text x="282" y="519" text-anchor="middle" fill="#0C1021" font-size="16" font-family="Urbanist, Arial, sans-serif">Seamless Integration Across Tools</text>
+  <defs>
+    <filter id="shadow" x="0" y="0" width="564" height="564" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="8" stdDeviation="18" flood-color="#0C1021" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+</svg>
