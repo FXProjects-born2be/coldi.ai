@@ -35,6 +35,7 @@ const industriesItems = [
 const productsItems = [
   { label: 'Outbound Calling', href: '/products/outbound-calling' },
   { label: 'Inbound Calling', href: '/products/inbound-calling' },
+  { label: 'AI Agent Development', href: '/products/agent-development' },
 ];
 
 export const BurgerMenu = () => {

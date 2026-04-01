@@ -11,11 +11,31 @@ import { BurgerMenu } from '@/shared/ui/components/burger-menu';
 import st from './Header.module.scss';
 
 const industriesItems = [
-  { label: 'Healthcare', href: '/industries/healthcare', icon: '/icons/header/healthcare.svg' },
-  { label: 'Insurance Agents', href: '/industries/insurance', icon: '/icons/header/insurance.svg' },
-  { label: 'Real Estate', href: '/industries/real-estate', icon: '/icons/header/real-estate.svg' },
-  { label: 'Call Center', href: '/industries/call-center', icon: '/icons/header/call-center.svg' },
-  { label: 'FX Brokers', href: '/industries/fx-brokers', icon: '/icons/header/fx-brokers.svg' },
+  {
+    label: 'Healthcare',
+    href: '/industries/healthcare',
+    icon: '/icons/header/healthcare.svg',
+  },
+  {
+    label: 'Insurance Agents',
+    href: '/industries/insurance',
+    icon: '/icons/header/insurance.svg',
+  },
+  {
+    label: 'Real Estate',
+    href: '/industries/real-estate',
+    icon: '/icons/header/real-estate.svg',
+  },
+  {
+    label: 'Call Center',
+    href: '/industries/call-center',
+    icon: '/icons/header/call-center.svg',
+  },
+  {
+    label: 'FX Brokers',
+    href: '/industries/fx-brokers',
+    icon: '/icons/header/fx-brokers.svg',
+  },
   {
     label: 'Debt Collection',
     href: '/industries/debt-collection',
@@ -138,6 +158,11 @@ const Navigation = () => {
           <li itemProp="name">
             <Link href="/products/inbound-calling" itemProp="url">
               Inbound Calling
+            </Link>
+          </li>
+          <li itemProp="name">
+            <Link href="/products/agent-development" itemProp="url">
+              AI Agent Development
             </Link>
           </li>
         </ul>
