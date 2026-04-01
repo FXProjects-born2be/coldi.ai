@@ -26,6 +26,8 @@ const segmentLabels: Record<string, string> = {
   calendar: 'Calendar',
   'coldi-in-action': 'Coldi in Action',
   'turn-leads-into-meetings': 'Turn Leads into Meetings',
+  'agent-development': 'AI Agent Development',
+  'meet-the-team': 'Meet the Team',
 };
 
 export const Breadcrumbs = () => {
