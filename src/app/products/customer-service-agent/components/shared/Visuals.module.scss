@@ -1,0 +1,368 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.surface {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #fafafa;
+
+  @include mobile {
+    border-radius: 20px;
+  }
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.implementationCard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  width: min(430px, calc(100% - 36px));
+  flex-direction: column;
+  gap: 12px;
+  padding: 32px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(12, 16, 33, 0.1);
+
+  p {
+    color: #0c1021;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  @include mobile {
+    width: calc(100% - 24px);
+    padding: 22px;
+    gap: 10px;
+
+    p {
+      font-size: 18px;
+    }
+  }
+}
+
+.progressTrack {
+  position: relative;
+  width: 100%;
+  height: 25px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #f1f1f1;
+}
+
+.progressFill {
+  width: 79.5%;
+  height: 100%;
+  border-radius: inherit;
+  background: #4268ff;
+  box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.progressDot {
+  position: absolute;
+  top: 50%;
+  left: 79.5%;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #4268ff;
+}
+
+.badge {
+  position: absolute;
+  top: 14px;
+  right: 32px;
+  padding: 6px 16px;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+  border-radius: 24px;
+  background: #0c1021;
+  box-shadow: 0 4px 4px rgba(66, 104, 255, 0.15);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1.2;
+
+  @include mobile {
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
+  }
+}
+
+.pointer {
+  position: absolute;
+  right: 56px;
+  bottom: 18px;
+
+  @include mobile {
+    right: 44px;
+    bottom: 14px;
+  }
+}
+
+.progressVisual {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 88px;
+  padding: 48px 24px;
+
+  h3 {
+    color: #0c1021;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  @include mobile {
+    gap: 32px;
+    padding: 32px 20px;
+  }
+}
+
+.progressPill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: min(374px, 100%);
+  padding: 25px 52px 25px 24px;
+  border: 0.741px solid rgba(12, 16, 33, 0.15);
+  border-radius: 52px;
+  background: #fff;
+
+  span {
+    background: linear-gradient(180deg, #7490ff 0%, #4268ff 100%);
+    background-clip: text;
+    color: transparent;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  @include mobile {
+    min-width: 100%;
+    padding: 18px 20px;
+
+    span {
+      font-size: 24px;
+    }
+  }
+}
+
+.decisionCard,
+.growthCard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(427px, calc(100% - 36px));
+  padding: 24px;
+  transform: translate(-50%, -50%);
+  border: 0.919px solid rgba(12, 16, 33, 0.05);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 3.677px 18.386px rgba(12, 16, 33, 0.1);
+
+  h3 {
+    color: #0c1021;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  @include mobile {
+    width: calc(100% - 24px);
+    padding: 20px;
+
+    h3 {
+      font-size: 22px;
+    }
+  }
+}
+
+.decisionCard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.metricGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.metricPill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+  border-radius: 24px;
+  background: #fff;
+
+  span {
+    color: #0c1021;
+    font-size: 14px;
+    line-height: normal;
+  }
+
+  strong {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    color: #28bc62;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(83, 86, 98, 0.15);
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stepRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  width: 100%;
+
+  p {
+    padding-top: 2px;
+    color: #535662;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.stepActive {
+  color: #0c1021 !important;
+  font-weight: 600 !important;
+}
+
+.stepRail {
+  display: flex;
+  width: 24px;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.lineBlue,
+.lineGrey {
+  width: 1px;
+  height: 12px;
+}
+
+.lineBlue {
+  background: #4268ff;
+}
+
+.lineGrey {
+  background: #d9d9d9;
+}
+
+.stepCircle {
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(83, 86, 98, 0.15);
+  border-radius: 50%;
+}
+
+.growthCard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  h3 {
+    text-align: center;
+  }
+}
+
+.chart {
+  position: relative;
+  width: 100%;
+  height: 277px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 40, 82, 0.05);
+
+  @include mobile {
+    height: 220px;
+  }
+}
+
+.gridLines {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(0, 40, 82, 0.05) 1px, transparent 1px) left 7px top 0 / calc(100% - 14px) 100%
+      no-repeat,
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 52px,
+      rgba(0, 40, 82, 0.05) 52px 53px
+    );
+}
+
+.chartArea,
+.chartLine {
+  object-fit: contain;
+}
+
+.chartPoint {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, 0);
+}
+
+.chartBadge {
+  margin-bottom: 10px;
+  padding: 4px 11px;
+  border: 0.707px solid rgba(12, 16, 33, 0.1);
+  border-radius: 17px;
+  background: #0c1021;
+  box-shadow: 0 2.829px 2.829px rgba(66, 104, 255, 0.15);
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.2;
+
+  @include mobile {
+    font-size: 13px;
+  }
+}
+
+.chartStem {
+  width: 2px;
+  flex: 1 1 auto;
+  min-height: 82px;
+  background: linear-gradient(180deg, #4268ff 0%, rgba(66, 104, 255, 0) 100%);
+}
+
+.chartDot {
+  margin-top: -2px;
+}

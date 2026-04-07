@@ -1,0 +1,108 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  padding: 64px 165px;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  align-self: stretch;
+
+  @include mobile {
+    padding: 32px 16px;
+    gap: 32px;
+  }
+
+  h2 {
+    max-width: 1110px;
+    color: #0c1021;
+    text-align: center;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+}
+
+.rowThree,
+.rowTwo {
+  display: grid;
+  width: 100%;
+  max-width: 1110px;
+  gap: 24px;
+}
+
+.rowThree {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.rowTwo {
+  grid-template-columns: repeat(2, minmax(0, 354px));
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  min-height: 316px;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px;
+  border-radius: 32px;
+  background: #fafafa;
+  text-align: center;
+}
+
+.iconWrap {
+  display: flex;
+  width: 96px;
+  height: 96px;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  h3 {
+    color: #0c1021;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+
+  p {
+    color: #535662;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+@include mobile {
+  .rowThree,
+  .rowTwo {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    min-height: auto;
+  }
+
+  .copy {
+    h3 {
+      font-size: 24px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
+}

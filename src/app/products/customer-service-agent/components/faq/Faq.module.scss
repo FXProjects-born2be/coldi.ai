@@ -1,0 +1,88 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  padding: 64px 165px 128px;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  align-self: stretch;
+
+  @include mobile {
+    padding: 32px 16px 64px;
+    gap: 32px;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  h2 {
+    color: #0c1021;
+    text-align: center;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+}
+
+.faq {
+  display: flex;
+  width: 900px;
+  max-width: 100%;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.item {
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 32px;
+  background: #fafafa;
+  cursor: pointer;
+
+  @include mobile {
+    padding: 24px;
+  }
+}
+
+.question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  h3 {
+    color: #0c1021;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.answerWrap {
+  overflow: hidden;
+}
+
+.answer {
+  color: #535662;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  @include mobile {
+    font-size: 16px;
+  }
+}

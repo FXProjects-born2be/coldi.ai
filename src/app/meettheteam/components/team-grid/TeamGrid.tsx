@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './TeamGrid.module.scss';
@@ -139,7 +140,7 @@ export const TeamGrid = () => {
             <div className={st.imageWrap}>
               <Image
                 src={member.image}
-                alt={member.alt}
+                alt={imageAlt('meettheteam')}
                 width={348}
                 height={348}
                 className={st.image}
