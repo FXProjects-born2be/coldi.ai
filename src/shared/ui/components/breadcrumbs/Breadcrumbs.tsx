@@ -28,6 +28,7 @@ const segmentLabels: Record<string, string> = {
   'turn-leads-into-meetings': 'Turn Leads into Meetings',
   'agent-development': 'AI Agent Development',
   meettheteam: 'Meet the Team',
+  'customer-service-agent': 'AI Customer Service',
 };
 
 export const Breadcrumbs = () => {

@@ -56,6 +56,7 @@ const productsItems = [
   { label: 'Outbound Calling', href: '/products/outbound-calling' },
   { label: 'Inbound Calling', href: '/products/inbound-calling' },
   { label: 'AI Agent Development', href: '/products/agent-development' },
+  { label: 'AI Customer Service', href: '/products/customer-service-agent' },
 ];
 
 const aboutItems = [{ label: 'Meet the Team', href: '/meettheteam' }];
