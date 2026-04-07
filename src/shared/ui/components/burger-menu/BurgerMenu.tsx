@@ -20,11 +20,31 @@ import { cn } from '@/shared/lib/helpers';
 import st from './BurgerMenu.module.scss';
 
 const industriesItems = [
-  { label: 'Healthcare', href: '/industries/healthcare', icon: '/icons/header/healthcare.svg' },
-  { label: 'Insurance Agents', href: '/industries/insurance', icon: '/icons/header/insurance.svg' },
-  { label: 'Real Estate', href: '/industries/real-estate', icon: '/icons/header/real-estate.svg' },
-  { label: 'Call Center', href: '/industries/call-center', icon: '/icons/header/call-center.svg' },
-  { label: 'FX Brokers', href: '/industries/fx-brokers', icon: '/icons/header/fx-brokers.svg' },
+  {
+    label: 'Healthcare',
+    href: '/industries/healthcare',
+    icon: '/icons/header/healthcare.svg',
+  },
+  {
+    label: 'Insurance Agents',
+    href: '/industries/insurance',
+    icon: '/icons/header/insurance.svg',
+  },
+  {
+    label: 'Real Estate',
+    href: '/industries/real-estate',
+    icon: '/icons/header/real-estate.svg',
+  },
+  {
+    label: 'Call Center',
+    href: '/industries/call-center',
+    icon: '/icons/header/call-center.svg',
+  },
+  {
+    label: 'FX Brokers',
+    href: '/industries/fx-brokers',
+    icon: '/icons/header/fx-brokers.svg',
+  },
   {
     label: 'Debt Collection',
     href: '/industries/debt-collection',
@@ -38,11 +58,13 @@ const productsItems = [
   { label: 'AI Agent Development', href: '/products/agent-development' },
 ];
 
+const aboutItems = [{ label: 'Meet the Team', href: '/meettheteam' }];
+
 export const BurgerMenu = () => {
   const [open, setOpen] = useState(false);
   const [openProducts, setOpenProducts] = useState(false);
   const [openIndustries, setOpenIndustries] = useState(false);
-
+  const [openAbout, setOpenAbout] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -105,12 +127,18 @@ export const BurgerMenu = () => {
                       className={st.groupArrow}
                     />
                   </button>
-                  <div className={cn(st.groupItems, { [st.groupItemsOpen]: openProducts })}>
+                  <div
+                    className={cn(st.groupItems, {
+                      [st.groupItemsOpen]: openProducts,
+                    })}
+                  >
                     {productsItems.map((item) => (
                       <Link
                         key={item.href}
                         href={item.href}
-                        className={cn(st.subItem, { [st.active]: pathname === item.href })}
+                        className={cn(st.subItem, {
+                          [st.active]: pathname === item.href,
+                        })}
                         itemProp="url"
                       >
                         <span itemProp="name">{item.label}</span>
@@ -126,13 +154,42 @@ export const BurgerMenu = () => {
                 >
                   <span itemProp="name">Pricing</span>
                 </Link>
-                <Link
-                  href="/about"
-                  className={cn({ [st.active]: pathname === '/about' })}
-                  itemProp="url"
-                >
-                  <span itemProp="name">About</span>
-                </Link>
+                <div className={st.group}>
+                  <button
+                    className={cn(st.groupTrigger, {
+                      [st.active]: pathname.startsWith('/about'),
+                      [st.groupOpen]: openProducts,
+                    })}
+                    onClick={() => setOpenAbout((v) => !v)}
+                  >
+                    <span itemProp="name">About</span>
+                    <Image
+                      src="/icons/header/arrow.svg"
+                      alt=""
+                      width={16}
+                      height={8}
+                      className={st.groupArrow}
+                    />
+                  </button>
+                  <div
+                    className={cn(st.groupItems, {
+                      [st.groupItemsOpen]: openAbout,
+                    })}
+                  >
+                    {aboutItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={cn(st.subItem, {
+                          [st.active]: pathname === item.href,
+                        })}
+                        itemProp="url"
+                      >
+                        <span itemProp="name">{item.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
 
                 <div className={st.group}>
                   <button
@@ -151,12 +208,18 @@ export const BurgerMenu = () => {
                       className={st.groupArrow}
                     />
                   </button>
-                  <div className={cn(st.groupItems, { [st.groupItemsOpen]: openIndustries })}>
+                  <div
+                    className={cn(st.groupItems, {
+                      [st.groupItemsOpen]: openIndustries,
+                    })}
+                  >
                     {industriesItems.map((item) => (
                       <Link
                         key={item.href}
                         href={item.href}
-                        className={cn(st.subItem, { [st.active]: pathname === item.href })}
+                        className={cn(st.subItem, {
+                          [st.active]: pathname === item.href,
+                        })}
                         itemProp="url"
                       >
                         <Image src={item.icon} alt="" width={20} height={20} />

@@ -109,12 +109,22 @@ const teamMembers: TeamMember[] = [
 ];
 
 function resolveLinkedinHref(value: string) {
-  return value === LINKEDIN_PLACEHOLDER ? 'https://www.linkedin.com/' : value;
+  return value && value !== LINKEDIN_PLACEHOLDER ? value : 'https://www.linkedin.com/';
 }
 
 export const TeamGrid = () => {
   return (
     <section className={st.layout}>
+      <motion.h2
+        className={st.heading}
+        variants={blurInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        Meet the Team
+      </motion.h2>
+
       <div className={st.grid}>
         {teamMembers.map((member, index) => (
           <motion.article
