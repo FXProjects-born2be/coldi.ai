@@ -1,0 +1,54 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  min-height: 654px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 165px 124px;
+  background: url('/images/meet-the-team/hero.png') center center / cover no-repeat;
+
+  @include mobile {
+    min-height: 384px;
+    padding: 64px 16px;
+    background-position: center 62%;
+  }
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+
+  @include mobile {
+    max-width: 100%;
+  }
+
+  h1 {
+    display: flex;
+    flex-direction: column;
+    color: #0c1021;
+    font-size: 90px;
+    font-weight: 400;
+    line-height: 1.2;
+
+    @include mobile {
+      width: 100%;
+      font-size: 42px;
+    }
+  }
+
+  p {
+    color: #50556b;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    max-width: 575px;
+    @include mobile {
+      max-width: 100%;
+    }
+  }
+}

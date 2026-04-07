@@ -172,10 +172,25 @@ const Navigation = () => {
           Pricing
         </Link>
       </li>
-      <li className={cn({ [st.active]: pathname === '/about' })} itemProp="name">
+      <li
+        className={cn(st.hasDropdown, {
+          [st.active]: pathname.startsWith('/about'),
+        })}
+        itemProp="name"
+      >
         <Link href="/about" itemProp="url">
           About
         </Link>
+        <span className={st.dropdownArrow}>
+          <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
+        </span>
+        <ul className={st.dropdown}>
+          <li itemProp="name">
+            <Link href="/meettheteam" itemProp="url">
+              Meet the Team
+            </Link>
+          </li>
+        </ul>
       </li>
       <li
         className={cn(st.hasDropdown, {
