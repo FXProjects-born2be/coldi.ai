@@ -9,8 +9,6 @@ import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Impact.module.scss';
 
-const t = (key: string, fallback: string) => fallback;
-
 type ImpactSection = {
   title: string;
   intro?: string;
@@ -22,62 +20,26 @@ type ImpactSection = {
 
 const sections: ImpactSection[] = [
   {
-    title: t(
-      'products.customerServiceAgent.impact.sections.0.title',
-      'How AI Enhances Customer Service'
-    ),
+    title: 'How AI Enhances Customer Service',
     body: [
-      t(
-        'products.customerServiceAgent.impact.sections.0.body.0',
-        'AI in customer service refers to the deployment of intelligent systems capable of delivering fast, accurate, and personalized support at scale. These systems automate repetitive tasks, reduce manual workloads, and allow human agents to focus on more complex and high-value interactions.'
-      ),
-      t(
-        'products.customerServiceAgent.impact.sections.0.body.1',
-        'Unlike traditional rule-based chatbots that follow rigid scripts, Coldi’s conversational AI agents dynamically interpret user intent, retrieve relevant data, and execute appropriate actions in real time. This results in smoother conversations, faster resolutions, and a significantly improved customer experience.'
-      ),
-      t(
-        'products.customerServiceAgent.impact.sections.0.body.2',
-        'By embedding AI into your support infrastructure, you create a more agile, efficient, and customer-centric operation.'
-      ),
+      'AI in customer service refers to the deployment of intelligent systems capable of delivering fast, accurate, and personalized support at scale. These systems automate repetitive tasks, reduce manual workloads, and allow human agents to focus on more complex and high-value interactions.',
+      'Unlike traditional rule-based chatbots that follow rigid scripts, Coldi’s conversational AI agents dynamically interpret user intent, retrieve relevant data, and execute appropriate actions in real time. This results in smoother conversations, faster resolutions, and a significantly improved customer experience.',
+      'By embedding AI into your support infrastructure, you create a more agile, efficient, and customer-centric operation.',
     ],
     visual: '/images/customer-service-agent/impact-1.png',
   },
   {
-    title: t(
-      'products.customerServiceAgent.impact.sections.1.title',
-      'Future-Ready AI Customer Service'
-    ),
-    intro: t(
-      'products.customerServiceAgent.impact.sections.1.intro',
-      'Coldi’s AI customer service agents enable your business to:'
-    ),
+    title: 'Future-Ready AI Customer Service',
+    intro: 'Coldi’s AI customer service agents enable your business to:',
     bullets: [
-      t(
-        'products.customerServiceAgent.impact.sections.1.bullets.0',
-        'Deliver instant, intelligent support to customers anywhere in the world'
-      ),
-      t(
-        'products.customerServiceAgent.impact.sections.1.bullets.1',
-        'Reduce operational overhead while maintaining or improving service quality'
-      ),
-      t(
-        'products.customerServiceAgent.impact.sections.1.bullets.2',
-        'Scale support capabilities without increasing headcount'
-      ),
-      t(
-        'products.customerServiceAgent.impact.sections.1.bullets.3',
-        'Improve key performance metrics such as first response time and resolution rates'
-      ),
+      'Deliver instant, intelligent support to customers anywhere in the world',
+      'Reduce operational overhead while maintaining or improving service quality',
+      'Scale support capabilities without increasing headcount',
+      'Improve key performance metrics such as first response time and resolution rates',
     ],
     body: [
-      t(
-        'products.customerServiceAgent.impact.sections.1.body.0',
-        'From initial strategy and system design to deployment and continuous optimization, Coldi AI serves as your long-term partner in building the best AI customer service agent for your organization.'
-      ),
-      t(
-        'products.customerServiceAgent.impact.sections.1.body.1',
-        'With Coldi, you don’t just adopt AI — you implement a robust, scalable support system that drives measurable business outcomes and long-term competitive advantage.'
-      ),
+      'From initial strategy and system design to deployment and continuous optimization, Coldi AI serves as your long-term partner in building the best AI customer service agent for your organization.',
+      'With Coldi, you don’t just adopt AI — you implement a robust, scalable support system that drives measurable business outcomes and long-term competitive advantage.',
     ],
     visual: '/images/customer-service-agent/impact-2.png',
     reverse: true,

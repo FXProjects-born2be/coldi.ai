@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 564 564" fill="none">
+  <defs>
+    <clipPath id="why-1-clip">
+      <rect width="564" height="564" rx="24" />
+    </clipPath>
+    <filter id="why-1-shadow" x="0" y="0" width="564" height="564" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="20" stdDeviation="25" flood-color="#0C1021" flood-opacity="0.15" />
+    </filter>
+    <linearGradient id="why-1-overlay" x1="282" y1="0" x2="282" y2="564" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0C1021" stop-opacity=".18" />
+      <stop offset=".35" stop-color="#0C1021" stop-opacity=".04" />
+      <stop offset="1" stop-color="#0C1021" stop-opacity=".1" />
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#why-1-clip)">
+    <image href="/images/voip-phone-service/why-1-photo.png" width="564" height="564" preserveAspectRatio="xMidYMid slice" />
+    <rect width="564" height="564" fill="url(#why-1-overlay)" />
+    <path d="M403 146C403 180 394 195 359 195H156C133 195 120 209 120 233V271C120 301 133 315 160 315H360C383 315 397 328 397 351V375C397 404 384 420 355 420H184C159 420 145 434 145 458" stroke="white" stroke-opacity=".8" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 8" />
+    <text x="282" y="73" fill="white" font-family="Urbanist, Arial, sans-serif" font-size="22" font-weight="600" text-anchor="middle">
+      All-in-one VoIP solution
+    </text>
+
+    <g filter="url(#why-1-shadow)">
+      <rect x="392" y="128" width="127" height="52" rx="26" fill="white" />
+      <image href="/images/voip-phone-service/check-circle-green.svg" x="404" y="140" width="28" height="28" />
+      <text x="442" y="160" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="14" font-weight="500">Setup</text>
+
+      <rect x="63" y="232" width="143" height="52" rx="26" fill="white" />
+      <image href="/images/voip-phone-service/check-circle-green.svg" x="75" y="244" width="28" height="28" />
+      <text x="114" y="264" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="14" font-weight="500">Configure</text>
+
+      <rect x="300" y="350" width="128" height="52" rx="26" fill="white" />
+      <image href="/images/voip-phone-service/check-circle-green.svg" x="312" y="362" width="28" height="28" />
+      <text x="350" y="382" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="14" font-weight="500">Deploy</text>
+
+      <rect x="88" y="466" width="126" height="52" rx="26" fill="white" />
+      <image href="/images/voip-phone-service/check-circle-green.svg" x="100" y="478" width="28" height="28" />
+      <text x="139" y="498" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="14" font-weight="500">Support</text>
+    </g>
+  </g>
+</svg>
