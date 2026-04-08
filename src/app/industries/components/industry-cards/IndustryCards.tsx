@@ -105,8 +105,9 @@ const industries = [
     description: (
       <>
         <p>
-          AI voice agents optimize patient coordination by managing appointment scheduling,
-          prescription refills, and post-discharge follow-ups.
+          Our <Link href="/industries/healthcare">AI agent first-call resolution</Link> capabilities
+          optimize patient coordination by instantly managing appointment scheduling, prescription
+          refills, and post-discharge follow-ups.
         </p>
         <p>
           By handling these high-volume administrative workflows with HIPAA-compliant security, they
