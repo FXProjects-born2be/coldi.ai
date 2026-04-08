@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 import { Comparison, ContentCards, Faq, Hero, Infrastructure, Why } from './components';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/industries/healthcare',
+  },
   title: 'AI Agents for Healthcare Operations',
   description:
     'AI agents for healthcare that automate patient calls, scheduling, and support. Improve first-call resolution and scale patient communication.',

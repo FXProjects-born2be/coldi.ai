@@ -1,5 +1,13 @@
+import type { Metadata } from 'next';
+
 import { CallFormContainer } from './components';
 import st from './page.module.scss';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/demo-call-request',
+  },
+};
 
 export default async function CallRequest({
   searchParams,

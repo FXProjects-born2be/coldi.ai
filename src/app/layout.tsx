@@ -6,7 +6,6 @@ import Script from 'next/script';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 
-import { getCanonicalUrl, shouldHaveSelfCanonical } from '@/shared/lib/seo/canonical';
 import { Breadcrumbs, BreadcrumbsProvider } from '@/shared/ui/components/breadcrumbs';
 import { Footer } from '@/shared/ui/components/footer';
 import { Header } from '@/shared/ui/components/header';
@@ -21,6 +20,7 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://coldi.ai'),
   verification: {
     google: 'xwxPBu6sQqKwZ2sx5fphyZV8rM-oyAvHww_SZNUXevQ',
   },
@@ -54,17 +54,14 @@ export default async function RootLayout({
   const { locale } = await params;
 
   const headersList = await headers();
-  const pathname = headersList.get('x-pathname');
-  const canonicalHref =
-    pathname && shouldHaveSelfCanonical(pathname) ? getCanonicalUrl(pathname) : null;
+  const pathname = headersList.get('x-pathname') ?? '';
 
-  const isLiveDemo = pathname?.includes('/live-demo') ?? false;
+  const isLiveDemo = pathname.includes('/live-demo');
   //const showRetellWidget =
   //!pathname.includes('/turn-leads-into-meetings') && !pathname.includes('/calendar');
   const showRetellWidget = false;
   return (
     <html lang={locale}>
-      <head>{canonicalHref && <link rel="canonical" href={canonicalHref} />}</head>
       <GoogleAnalytics gaId="G-RCPHXB9V3B" />
       {showRetellWidget && <RetellWidget />}
       <body className={urbanist.variable}>

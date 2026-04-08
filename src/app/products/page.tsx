@@ -14,6 +14,9 @@ import {
 } from './components';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/products',
+  },
   title: 'Our Voice Agents and Solutions',
   description:
     'Explore AI call center software and AI voice agents designed for real workflows. From AI outbound calling to scheduling and multilingual support, Coldi handles it all 24/7. Explore top AI calling solutions now!',

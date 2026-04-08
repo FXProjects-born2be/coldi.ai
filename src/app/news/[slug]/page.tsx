@@ -1,11 +1,27 @@
 import Image from 'next/image';
 
+import type { Metadata } from 'next';
+
 import { getNewsBySlug } from '@/features/news/news';
 
 import { BreadcrumbLabel } from '@/shared/ui/components/breadcrumbs';
 
 import { TestIt } from '../components/test-it/TestIt';
 import st from './NewsPage.module.scss';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  return {
+    alternates: {
+      canonical: `/news/${slug}`,
+    },
+  };
+}
 
 export default async function NewsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

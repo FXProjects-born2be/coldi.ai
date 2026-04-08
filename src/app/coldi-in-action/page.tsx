@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 import { BotCard, Choose, Hero } from './components';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/coldi-in-action',
+  },
   title: 'Listen to Recorded Calls',
   description:
     'Discover how Coldi’s AI voice sounds in action — a smooth, natural conversation that demonstrates real-world engagement and response flow.',

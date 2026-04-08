@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 import { Advantages, HearColdi, Hero, Voices } from './components';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/demo',
+  },
   title: 'Coldi Demo – Try Real AI Call Agents Live',
   description:
     'Test Coldi’s AI voice agents in real conversations. Choose a voice, receive a live call, or listen to recorded demos across different scenarios.',

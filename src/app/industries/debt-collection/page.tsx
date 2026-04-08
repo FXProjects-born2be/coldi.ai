@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 import { Comparison, ContentCards, Faq, Hero, Why } from './components';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/industries/debt-collection',
+  },
   title: 'AI Voice Agents for Debt Collection Software',
   description:
     'AI debt collection software that automates borrower communication, payment reminders, and recovery workflows. Scale credit and debit collection services with AI voice agents.',
