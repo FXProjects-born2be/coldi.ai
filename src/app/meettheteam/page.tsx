@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 import { Hero, MissionVision, QuoteSection, TeamGrid, ValuesSection } from './components';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/meettheteam',
+  },
   title: 'Meet the team',
   description:
     'We don’t just build technology; we design the bridge between your business strategy and automated execution.',

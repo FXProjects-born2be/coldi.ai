@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 import { Different, Faq, Hero, How, Multilingual, Results, UseCases, Why } from './components';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/products/outbound-calling',
+  },
   title: 'Outbound Calling AI Agents for Sales Teams',
   description:
     'AI outbound calling agents that qualify leads, book meetings, and scale sales outreach. Automate outbound calls and increase contact rates.',

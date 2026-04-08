@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 import { Cards, Comparison, ContentCards, Faq, Hero, Why } from './components';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/industries/real-estate',
+  },
   title: 'AI for Real Estate Agents: Leads & Showings Automated',
   description:
     'Automate real estate lead qualification, property inquiries, and showing scheduling with AI voice agents available 24/7. Never miss a buyer again.',

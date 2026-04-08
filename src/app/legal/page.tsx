@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 import { Files, Hero } from './components';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/legal',
+  },
   title: 'Coldi Live',
   description: '',
   openGraph: {

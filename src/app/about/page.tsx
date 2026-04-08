@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 import { Details, Hero, ReadyToHear } from './components';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/about',
+  },
   title: 'Expert AI Calling Solutions Provider',
   description:
     'Discover Coldi – an expert AI calling solutions provider delivering AI voice agents that answer calls, schedule, and support your business 24/7.',

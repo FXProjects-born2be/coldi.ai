@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 import { Hero } from './components';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/live-demo',
+  },
   title: 'Coldi Live',
   description: '',
   openGraph: {

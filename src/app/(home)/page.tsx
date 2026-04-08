@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 import { DashboardSlider } from '@/shared/ui/components/dashboard-slider/DashboardSlider';
 
 import {
@@ -13,6 +15,12 @@ import {
   WhatCanDo,
   WhatIs,
 } from './components';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
 
 export default function Home() {
   return (
