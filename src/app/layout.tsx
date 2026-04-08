@@ -8,6 +8,7 @@ import type { Metadata } from 'next';
 
 import { getCanonicalUrl, shouldHaveSelfCanonical } from '@/shared/lib/seo/canonical';
 import { Breadcrumbs, BreadcrumbsProvider } from '@/shared/ui/components/breadcrumbs';
+import { CanonicalLink } from '@/shared/ui/components/canonical-link/CanonicalLink';
 import { Footer } from '@/shared/ui/components/footer';
 import { Header } from '@/shared/ui/components/header';
 import RetellWidget from '@/shared/ui/components/RetellWidget';
@@ -64,10 +65,13 @@ export default async function RootLayout({
   const showRetellWidget = false;
   return (
     <html lang={locale}>
-      <head>{canonicalHref && <link rel="canonical" href={canonicalHref} />}</head>
+      <head>
+        {canonicalHref && <link rel="canonical" href={canonicalHref} data-self-canonical="true" />}
+      </head>
       <GoogleAnalytics gaId="G-RCPHXB9V3B" />
       {showRetellWidget && <RetellWidget />}
       <body className={urbanist.variable}>
+        <CanonicalLink />
         {/* Google Tag Manager */}
         <Script
           id="gtm"
