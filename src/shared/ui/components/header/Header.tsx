@@ -165,6 +165,16 @@ const Navigation = () => {
               AI Agent Development
             </Link>
           </li>
+          <li itemProp="name">
+            <Link href="/products/customer-service-agent" itemProp="url">
+              AI Customer Service
+            </Link>
+          </li>
+          <li itemProp="name">
+            <Link href="/products/voip-phone-service" itemProp="url">
+              VoIP Phone Service
+            </Link>
+          </li>
         </ul>
       </li>
       <li className={cn({ [st.active]: pathname === '/pricing' })} itemProp="name">

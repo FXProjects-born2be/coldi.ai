@@ -1,0 +1,104 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  padding: 64px 165px 165px;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  align-self: stretch;
+
+  @include mobile {
+    padding: 32px 16px;
+    gap: 32px;
+  }
+}
+
+.header {
+  width: 100%;
+  max-width: 1110px;
+
+  h2 {
+    color: #0c1021;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 120%;
+    text-align: center;
+
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+}
+
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 900px;
+
+  @include mobile {
+    max-width: 100%;
+  }
+}
+
+.item {
+  border-radius: 32px;
+  border: 1px solid rgba(12, 16, 33, 0.08);
+  background: #fff;
+  overflow: hidden;
+
+  @include mobile {
+    border-radius: 24px;
+  }
+}
+
+.question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 32px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+
+  @include mobile {
+    padding: 24px;
+  }
+
+  h3 {
+    color: #0c1021;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: normal;
+
+    @include mobile {
+      font-size: 20px;
+    }
+  }
+}
+
+.chevron {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.answerWrap {
+  overflow: hidden;
+}
+
+.answer {
+  padding: 0 32px 32px;
+  color: #535662;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+
+  @include mobile {
+    padding: 0 24px 24px;
+  }
+}

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 564 564" fill="none">
+  <rect width="564" height="564" rx="24" fill="#FAFAFA" />
+  <rect x="68" y="68" width="428" height="428" rx="24" fill="white" stroke="rgba(12,16,33,.05)" />
+  <text x="282" y="118" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="20" font-weight="600" text-anchor="middle">VoIP System</text>
+
+  <path d="M191 228V290C191 312 213 332 235 332H282" stroke="#4268FF" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 7" />
+  <path d="M353 228V290C353 312 331 332 309 332H282" stroke="#4268FF" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 7" />
+  <path d="M136 278V334C136 360 174 376 198 376H282" stroke="#4268FF" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 7" />
+  <path d="M428 278V334C428 360 390 376 366 376H282" stroke="#4268FF" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 7" />
+  <path d="M282 376V422" stroke="#4268FF" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 7" />
+
+  <g>
+    <rect x="173" y="166" width="126" height="40" rx="20" fill="white" stroke="rgba(45,45,45,.1)" />
+    <image href="/images/voip-phone-service/check-circle-green.svg" x="186" y="174" width="24" height="24" />
+    <text x="220" y="191" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="13" font-weight="500">Helpdesk</text>
+  </g>
+  <g>
+    <rect x="311" y="166" width="126" height="40" rx="20" fill="white" stroke="rgba(45,45,45,.1)" />
+    <image href="/images/voip-phone-service/check-circle-green.svg" x="324" y="174" width="24" height="24" />
+    <text x="359" y="191" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="13" font-weight="500">Calendar</text>
+  </g>
+  <g>
+    <rect x="92" y="248" width="100" height="40" rx="20" fill="white" stroke="rgba(45,45,45,.1)" />
+    <image href="/images/voip-phone-service/check-circle-green.svg" x="104" y="256" width="24" height="24" />
+    <text x="136" y="273" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="13" font-weight="500">CRM</text>
+  </g>
+  <g>
+    <rect x="372" y="248" width="108" height="40" rx="20" fill="white" stroke="rgba(45,45,45,.1)" />
+    <image href="/images/voip-phone-service/check-circle-green.svg" x="384" y="256" width="24" height="24" />
+    <text x="418" y="273" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="13" font-weight="500">Database</text>
+  </g>
+
+  <g>
+    <rect x="229" y="424" width="106" height="40" rx="20" fill="#DEF8E8" stroke="rgba(40,188,98,.1)" />
+    <image href="/images/voip-phone-service/check-circle-green.svg" x="242" y="432" width="24" height="24" />
+    <text x="282" y="449" fill="#28BC62" font-family="Urbanist, Arial, sans-serif" font-size="13" font-weight="500" text-anchor="middle">Active</text>
+  </g>
+</svg>

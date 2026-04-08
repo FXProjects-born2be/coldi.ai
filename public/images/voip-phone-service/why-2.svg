@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 564 564" fill="none">
+  <rect width="564" height="564" rx="24" fill="#FAFAFA" />
+  <rect x="76" y="106" width="412" height="412" rx="24" fill="#EEF1FA" />
+  <rect x="72" y="92" width="420" height="420" rx="24" fill="#F6F8FC" />
+  <rect x="68" y="68" width="428" height="428" rx="24" fill="white" stroke="rgba(12,16,33,.05)" />
+  <text x="92" y="117" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="24" font-weight="600">Works everywhere</text>
+  <rect x="376" y="82" width="92" height="34" rx="17" fill="#DEF8E8" />
+  <text x="422" y="104" fill="#28BC62" font-family="Urbanist, Arial, sans-serif" font-size="14" font-weight="400" text-anchor="middle">Cloud-Based</text>
+
+  <path d="M214 246C214 226 232 212 252 212H312C332 212 350 226 350 246V286C350 306 332 320 312 320H252C232 320 214 306 214 286V246Z" stroke="#4268FF" stroke-width="2" stroke-dasharray="8 8" />
+  <path d="M162 286H214" stroke="#4268FF" stroke-width="2" stroke-dasharray="8 8" />
+  <path d="M350 286H402" stroke="#4268FF" stroke-width="2" stroke-dasharray="8 8" />
+
+  <g>
+    <circle cx="150" cy="286" r="32" fill="#4268FF" />
+    <image href="/images/voip-phone-service/icon-desktop.svg" x="126" y="262" width="48" height="48" />
+    <text x="150" y="344" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="middle">Desktop</text>
+  </g>
+
+  <g>
+    <circle cx="282" cy="196" r="32" fill="#4268FF" />
+    <image href="/images/voip-phone-service/icon-mobile.svg" x="258" y="172" width="48" height="48" />
+    <text x="282" y="254" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="middle">Mobile</text>
+  </g>
+
+  <g>
+    <circle cx="282" cy="376" r="32" fill="#4268FF" />
+    <image href="/images/voip-phone-service/icon-cloud.svg" x="258" y="352" width="48" height="48" />
+    <text x="282" y="434" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="middle">Cloud</text>
+  </g>
+
+  <g>
+    <circle cx="414" cy="286" r="32" fill="#4268FF" />
+    <image href="/images/voip-phone-service/icon-crm.svg" x="390" y="262" width="48" height="48" />
+    <text x="414" y="344" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="middle">CRM</text>
+  </g>
+</svg>

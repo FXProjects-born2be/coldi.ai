@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 564 564" fill="none">
+  <rect width="564" height="564" rx="24" fill="#FAFAFA" />
+  <rect x="68" y="68" width="428" height="428" rx="24" fill="white" stroke="rgba(12,16,33,.05)" />
+  <text x="282" y="118" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="24" font-weight="600" text-anchor="middle">Smart Routing</text>
+  <image href="/images/voip-phone-service/globe-lines.svg" x="82" y="138" width="400" height="310" opacity=".95" />
+
+  <g>
+    <rect x="118" y="190" width="118" height="52" rx="26" fill="white" stroke="rgba(45,45,45,.1)" />
+    <image href="/images/voip-phone-service/check-circle-green.svg" x="130" y="202" width="28" height="28" />
+    <text x="170" y="222" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="14" font-weight="500">Local</text>
+    <path d="M220 233L269 296" stroke="#4268FF" stroke-width="2.5" />
+  </g>
+
+  <g>
+    <rect x="214" y="324" width="184" height="56" rx="28" fill="white" stroke="rgba(45,45,45,.1)" />
+    <image href="/images/voip-phone-service/check-circle-green.svg" x="226" y="338" width="28" height="28" />
+    <text x="271" y="359" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="16" font-weight="500">International</text>
+    <path d="M286 324V242" stroke="#4268FF" stroke-width="2.5" />
+    <path d="M286 324L365 268" stroke="#4268FF" stroke-width="2.5" />
+  </g>
+</svg>

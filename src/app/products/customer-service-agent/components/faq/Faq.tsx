@@ -10,48 +10,26 @@ import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Faq.module.scss';
 
-const t = (key: string, fallback: string) => fallback;
-
 const faqItems = [
   {
-    question: t(
-      'products.customerServiceAgent.faq.items.0.question',
-      'Will AI replace customer service?'
-    ),
-    answer: t(
-      'products.customerServiceAgent.faq.items.0.answer',
-      'AI is not designed to fully replace human customer service. Instead, it complements human teams by handling repetitive and high-volume inquiries. This allows human agents to focus on complex, emotionally nuanced, and strategic interactions where human judgment is essential.'
-    ),
+    question: 'Will AI replace customer service?',
+    answer:
+      'AI is not designed to fully replace human customer service. Instead, it complements human teams by handling repetitive and high-volume inquiries. This allows human agents to focus on complex, emotionally nuanced, and strategic interactions where human judgment is essential.',
   },
   {
-    question: t(
-      'products.customerServiceAgent.faq.items.1.question',
-      'How to use AI in customer service?'
-    ),
-    answer: t(
-      'products.customerServiceAgent.faq.items.1.answer',
-      'AI can be deployed to automate responses, resolve common issues instantly, triage and route incoming requests, and provide continuous 24/7 support. The most effective implementations integrate AI directly into existing systems and workflows to ensure seamless operation.'
-    ),
+    question: 'How to use AI in customer service?',
+    answer:
+      'AI can be deployed to automate responses, resolve common issues instantly, triage and route incoming requests, and provide continuous 24/7 support. The most effective implementations integrate AI directly into existing systems and workflows to ensure seamless operation.',
   },
   {
-    question: t(
-      'products.customerServiceAgent.faq.items.2.question',
-      'How can AI help customer service?'
-    ),
-    answer: t(
-      'products.customerServiceAgent.faq.items.2.answer',
-      'AI significantly improves response times, reduces operational costs, and increases customer satisfaction. It enables businesses to handle large volumes of inquiries simultaneously while maintaining consistent quality and personalization.'
-    ),
+    question: 'How can AI help customer service?',
+    answer:
+      'AI significantly improves response times, reduces operational costs, and increases customer satisfaction. It enables businesses to handle large volumes of inquiries simultaneously while maintaining consistent quality and personalization.',
   },
   {
-    question: t(
-      'products.customerServiceAgent.faq.items.3.question',
-      'Will AI replace customer service jobs?'
-    ),
-    answer: t(
-      'products.customerServiceAgent.faq.items.3.answer',
-      'AI shifts the role of customer service teams rather than eliminating them. By automating routine tasks, it empowers employees to focus on higher-value activities such as relationship building, problem-solving, and customer retention strategies.'
-    ),
+    question: 'Will AI replace customer service jobs?',
+    answer:
+      'AI shifts the role of customer service teams rather than eliminating them. By automating routine tasks, it empowers employees to focus on higher-value activities such as relationship building, problem-solving, and customer retention strategies.',
   },
 ];
 
@@ -71,7 +49,7 @@ export const Faq = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {t('products.customerServiceAgent.faq.title', 'FAQS')}
+          FAQs
         </motion.h2>
       </div>
 
@@ -95,7 +73,7 @@ export const Faq = () => {
                 <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
                   <Image
                     src="/images/leads/faq.svg"
-                    alt={imageAlt('customerServiceAgent', 'FAQ')}
+                    alt={imageAlt('customerServiceAgent')}
                     width={32}
                     height={32}
                   />

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 564 564" fill="none">
+  <rect width="564" height="564" rx="24" fill="#FAFAFA" />
+  <rect x="68" y="68" width="428" height="428" rx="24" fill="white" stroke="rgba(12,16,33,.05)" />
+  <text x="282" y="122" fill="#0C1021" font-family="Urbanist, Arial, sans-serif" font-size="24" font-weight="600" text-anchor="middle">Secure &amp; Reliable</text>
+
+  <image href="/images/voip-phone-service/content-wrap.svg" x="144" y="160" width="276" height="276" />
+  <image href="/images/voip-phone-service/content-dot.svg" x="344" y="180" width="16" height="16" />
+  <image href="/images/voip-phone-service/content-dot.svg" x="188" y="338" width="16" height="16" />
+
+  <g>
+    <rect x="356" y="160" width="82" height="58" rx="18" fill="#0C1021" />
+    <text x="397" y="188" fill="white" font-family="Urbanist, Arial, sans-serif" font-size="18" font-weight="400" text-anchor="middle">&lt;0.1%</text>
+    <text x="397" y="207" fill="rgba(255,255,255,.8)" font-family="Urbanist, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle">Error Rate</text>
+  </g>
+  <g>
+    <rect x="112" y="332" width="104" height="74" rx="22" fill="#0C1021" />
+    <text x="164" y="366" fill="white" font-family="Urbanist, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle">99.99%</text>
+    <text x="164" y="392" fill="rgba(255,255,255,.8)" font-family="Urbanist, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="middle">Uptime</text>
+  </g>
+</svg>

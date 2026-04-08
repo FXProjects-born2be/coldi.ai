@@ -6,41 +6,27 @@ import { motion } from 'framer-motion';
 
 import { RequestDialog } from '@/features/request-leads-demo/ui/request-dialog/RequestDialog';
 
-import { IMAGE_ALT } from '@/shared/constants/page-image-alt';
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Hero.module.scss';
 
-const t = (key: string, fallback: string) => fallback;
-
 const bullets = [
   {
-    label: t('products.customerServiceAgent.hero.bullets.0.label', 'Action, Not Just Chat:'),
-    text: t(
-      'products.customerServiceAgent.hero.bullets.0.text',
-      'AI agents that understand intent and resolve complex tasks through deep system integration.'
-    ),
+    label: 'Action, Not Just Chat:',
+    text: 'AI agents that understand intent and resolve complex tasks through deep system integration.',
   },
   {
-    label: t('products.customerServiceAgent.hero.bullets.1.label', 'End-to-End Execution:'),
-    text: t(
-      'products.customerServiceAgent.hero.bullets.1.text',
-      'We handle the full deployment and optimization, no DIY required.'
-    ),
+    label: 'End-to-End Execution:',
+    text: 'We handle the full deployment and optimization, no DIY required.',
   },
   {
-    label: t('products.customerServiceAgent.hero.bullets.2.label', '24/7 Precision:'),
-    text: t(
-      'products.customerServiceAgent.hero.bullets.2.text',
-      'Reliable, 100% automated resolution that learns and improves with every interaction.'
-    ),
+    label: '24/7 Precision:',
+    text: 'Reliable, 100% automated resolution that learns and improves with every interaction.',
   },
   {
-    label: t('products.customerServiceAgent.hero.bullets.3.label', 'Strategic Growth:'),
-    text: t(
-      'products.customerServiceAgent.hero.bullets.3.text',
-      'More than a tool, a long-term partner to scale your customer experience.'
-    ),
+    label: 'Strategic Growth:',
+    text: 'More than a tool, a long-term partner to scale your customer experience.',
   },
 ];
 
@@ -55,8 +41,7 @@ export const Hero = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <span>{t('products.customerServiceAgent.hero.titleAccent', 'AI')}</span>{' '}
-            {t('products.customerServiceAgent.hero.title', 'Customer Service Agent')}
+            <span>AI</span> Customer Service Agent
           </motion.h1>
           <motion.p
             className={st.description}
@@ -65,10 +50,8 @@ export const Hero = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {t(
-              'products.customerServiceAgent.hero.description',
-              'Transform your customer service with AI agents that do more than just talk, they execute.'
-            )}
+            Transform your customer service with AI agents that do more than just talk, they
+            execute.
           </motion.p>
           <motion.ul
             className={st.bullets}
@@ -99,7 +82,7 @@ export const Hero = () => {
             <h3>Book a Demo</h3>
             <Image
               src="/full-logo.svg"
-              alt={`${IMAGE_ALT.customerServiceAgent} - Coldi logo`}
+              alt={imageAlt('customerServiceAgent')}
               width={93}
               height={32}
               unoptimized
