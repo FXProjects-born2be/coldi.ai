@@ -144,10 +144,10 @@ const INDUSTRY_CARDS: IndustryCard[] = [
     description: (
       <>
         <p>
-          The <Link href="/industries/real-estate">real estate market</Link> never sleeps, and
-          neither should your lead engagement. Our AI agents qualify prospects through fluid,
-          natural dialogue, answering property specifications and booking viewings directly into
-          your calendar.
+          The real estate market never sleeps, and neither should your lead engagement.{' '}
+          <Link href="/industries/real-estate">Our AI real estate Agents</Link> qualify prospects
+          through fluid, natural dialogue, answering property specifications and booking viewings
+          directly into your calendar.
         </p>
         <p>
           By pulling real-time market data and cross-referencing caller preferences with current
