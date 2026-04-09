@@ -67,6 +67,7 @@
 .slide {
   width: 400px;
   height: auto;
+  min-height: 450px;
 
   @include mobile {
     width: calc(100vw - 32px);
@@ -105,6 +106,10 @@
   border-radius: 64px;
   background: #4268ff;
   flex-shrink: 0;
+  img{
+    width: 48px;
+    height: auto;
+  }
 }
 
 .cardBody {
@@ -266,7 +271,7 @@
 }
 
 :global(.swiper-slide-active) .card {
-  //min-height: 450px;
+  min-height: 450px;
 }
 
 @include desktop {

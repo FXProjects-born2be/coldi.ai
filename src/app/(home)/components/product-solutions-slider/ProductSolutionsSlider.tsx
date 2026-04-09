@@ -117,7 +117,7 @@ export const ProductSolutionsSlider = () => {
           loop
           initialSlide={2}
           autoplay={{
-            delay: 3200,
+            delay: 4000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}

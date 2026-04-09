@@ -190,7 +190,7 @@ export const IndustrySolutionsSlider = () => {
           loop
           speed={900}
           autoplay={{
-            delay: 3200,
+            delay: 4000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
