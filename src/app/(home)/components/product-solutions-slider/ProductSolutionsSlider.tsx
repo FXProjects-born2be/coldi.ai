@@ -93,7 +93,7 @@ export const ProductSolutionsSlider = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        AI Voice Solutions Built for Scale
+        Our Solutions Built for Scale
       </motion.h2>
 
       <div className={st.sliderShell}>

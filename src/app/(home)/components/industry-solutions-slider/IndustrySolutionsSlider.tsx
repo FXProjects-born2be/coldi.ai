@@ -33,17 +33,9 @@ const INDUSTRY_CARDS: IndustryCard[] = [
     description: (
       <>
         <p>
-          <Link href="/industries/call-center">AI voice agents empower call centers</Link> to reach
+          <Link href="/industries/call-center">AI voice agents empower call</Link> centers to reach
           peak efficiency by managing thousands of concurrent calls, effectively eliminating wait
           times.
-        </p>
-        <p>
-          Unlike traditional systems, these agents provide instant, 24/7 support without delays.
-        </p>
-        <p>
-          By automating high-volume interactions, organizations can slash operational costs,
-          accelerate response speeds, and deliver a consistently superior customer experience while
-          scaling effortlessly.
         </p>
       </>
     ),
@@ -59,14 +51,6 @@ const INDUSTRY_CARDS: IndustryCard[] = [
           Our AI voice agents serve as a 24/7 support layer, assisting traders with platform
           navigation, account inquiries, and complex verification processes (KYC).
         </p>
-        <p>
-          This allows account managers and advisory teams to pivot their focus toward high-value
-          risk management and personalized client consulting.
-        </p>
-        <p>
-          Traders gain real-time access to account balances and market updates through natural
-          dialogue, ensuring premium support even during periods of extreme market volatility.
-        </p>
       </>
     ),
   },
@@ -78,15 +62,8 @@ const INDUSTRY_CARDS: IndustryCard[] = [
     description: (
       <>
         <p>
-          AI transforms <Link href="/industries/debt-collection">debt recovery</Link> by automating
-          routine outreach, including payment reminders, installment discussions, and balance
-          inquiries.
-        </p>
-        <p>
-          This shift enables collection teams to focus on sensitive, high-stakes negotiations that
-          require a human touch. Operating with strict compliance, these agents manage thousands of
-          simultaneous borrower interactions, significantly increasing recovery rates and ensuring
-          no repayment opportunity is overlooked.
+          AI transforms debt recovery by automating routine outreach, including payment reminders,
+          installment discussions, and balance inquiries.
         </p>
       </>
     ),
@@ -100,16 +77,7 @@ const INDUSTRY_CARDS: IndustryCard[] = [
       <>
         <p>
           From instant quote generation to complex policy inquiries, AI voice agents are built for
-          the fast-paced <Link href="/industries/insurance">insurance industry</Link>.
-        </p>
-        <p>
-          They streamline the claims process by guiding policyholders through documentation with
-          precision, reducing emotional friction and accelerating settlements.
-        </p>
-        <p>
-          Engineered with enterprise-grade security, these agents securely verify identities and
-          process sensitive data, maintaining a high-efficiency workflow for high-volume
-          administrative tasks.
+          the fast-paced insurance industry.
         </p>
       </>
     ),
@@ -125,14 +93,6 @@ const INDUSTRY_CARDS: IndustryCard[] = [
           AI voice agents optimize patient coordination by managing appointment scheduling,
           prescription refills, and post-discharge follow-ups.
         </p>
-        <p>
-          By handling these high-volume administrative workflows with HIPAA-compliant security, they
-          reduce &quot;no-show&quot; rates and free up medical staff to focus on clinical care.
-        </p>
-        <p>
-          Patients receive immediate, compassionate responses, ensuring a seamless journey from the
-          first call to the final recovery stage.
-        </p>
       </>
     ),
   },
@@ -144,16 +104,9 @@ const INDUSTRY_CARDS: IndustryCard[] = [
     description: (
       <>
         <p>
-          The real estate market never sleeps, and neither should your lead engagement.{' '}
-          <Link href="/industries/real-estate">Our AI real estate Agents</Link> qualify prospects
-          through fluid, natural dialogue, answering property specifications and booking viewings
-          directly into your calendar.
-        </p>
-        <p>
-          By pulling real-time market data and cross-referencing caller preferences with current
-          listings, these agents act as a scalable extension of your team. They turn cold inquiries
-          into &quot;ready-to-sign&quot; leads while maintaining a consistent professional brand
-          voice within your CRM.
+          The real estate market never sleeps, and neither should your lead engagement. Our AI
+          agents qualify prospects through fluid, natural dialogue, answering property
+          specifications and booking viewings directly into your calendar.
         </p>
       </>
     ),
