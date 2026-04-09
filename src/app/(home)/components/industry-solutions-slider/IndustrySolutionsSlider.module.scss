@@ -1,0 +1,186 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  padding: 64px 0;
+  background: #fff;
+  overflow: clip;
+
+  h2 {
+    color: #0c1021;
+    text-align: center;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  @include tablet {
+    padding-inline: 32px;
+
+    h2 {
+      font-size: 48px;
+    }
+  }
+
+  @include mobile {
+    gap: 64px;
+    padding: 32px 16px;
+
+    h2 {
+      font-size: 32px;
+    }
+  }
+}
+
+.sliderShell {
+  width: 100%;
+  padding-left: 165px;
+  @include tablet {
+    padding-left: 32px;
+  }
+  @include mobile {
+    padding-left: 16px;
+  }
+}
+
+.swiper {
+  overflow: visible;
+}
+
+.slide {
+  width: 400px;
+  height: auto;
+
+  @include mobile {
+    width: calc(100vw - 32px);
+    max-width: 358px;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-height: 650px;
+  padding: 32px;
+  border-radius: 48px;
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  background: #fff;
+  box-shadow: 0 5px 25px 0 rgba(83, 86, 98, 0.05);
+  height: 100%;
+
+  @include mobile {
+    min-height: 668px;
+  }
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 64px;
+  background: #4268ff;
+  flex-shrink: 0;
+}
+
+.cardBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.cardText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+
+  h3 {
+    margin: 0;
+    color: #0c1021;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+}
+
+.description {
+  color: #535662;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.35;
+
+  p {
+    margin: 0;
+  }
+
+  p + p {
+    margin-top: 16px;
+  }
+
+  a {
+    color: #4268ff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @include mobile {
+    font-size: 16px;
+  }
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: #4268ff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px;
+  border-radius: 24px;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(5px);
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(12, 16, 33, 0.1);
+  cursor: pointer;
+  transition:
+    width 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.dotActive {
+  width: 36px;
+  background: #4268ff;
+}

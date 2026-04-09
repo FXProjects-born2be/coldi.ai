@@ -46,13 +46,9 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 }>) {
-  const { locale } = await params;
-
   const headersList = await headers();
   const pathname = headersList.get('x-pathname') ?? '';
 
@@ -61,7 +57,7 @@ export default async function RootLayout({
   //!pathname.includes('/turn-leads-into-meetings') && !pathname.includes('/calendar');
   const showRetellWidget = false;
   return (
-    <html lang={locale}>
+    <html lang="en">
       <GoogleAnalytics gaId="G-RCPHXB9V3B" />
       {showRetellWidget && <RetellWidget />}
       <body className={urbanist.variable}>

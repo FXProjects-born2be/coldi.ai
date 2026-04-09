@@ -8,7 +8,9 @@ import {
   Delivers,
   HearColdi,
   Hero,
+  IndustrySolutionsSlider,
   Infrustructure,
+  ProductSolutionsSlider,
   Reviews,
   Tools,
   VoicesList,
@@ -36,9 +38,12 @@ export default function Home() {
         title="<span>Easily Track</span> How Coldi Works"
         subtitle="See all results in one place: review calls, compare performance, <br/>and optimize your campaigns with clear, real-time data."
       />
+
       <HearColdi />
       <Delivers />
       <ColdiInNews />
+      <IndustrySolutionsSlider />
+      <ProductSolutionsSlider />
       <Reviews />
       <WhatIs />
     </main>
