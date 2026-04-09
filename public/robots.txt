@@ -3,6 +3,10 @@ Disallow: /news-admin
 Disallow: /api/auth/
 Disallow: /api/news/
 
+Disallow: /it/
+Disallow: /et/
+Disallow: /de/
+
 # Allow all other pages
 Allow: /
 
