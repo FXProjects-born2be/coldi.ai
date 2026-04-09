@@ -15,7 +15,6 @@
 
 .inner {
   width: 100%;
-  max-width: 1110px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -56,7 +55,7 @@
 
 .split {
   display: grid;
-  grid-template-columns: minmax(0, 482px) minmax(0, 564px);
+  grid-template-columns: 1fr 1fr;
   justify-content: space-between;
   align-items: center;
   gap: 64px;

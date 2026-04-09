@@ -15,7 +15,6 @@
 .rows {
   display: flex;
   width: 100%;
-  max-width: 1110px;
   flex-direction: column;
   gap: 124px;
 
@@ -26,7 +25,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: minmax(0, 482px) minmax(0, 564px);
+  grid-template-columns: 1fr 1fr;
   justify-content: space-between;
   align-items: center;
   gap: 64px;
@@ -38,7 +37,7 @@
 }
 
 .reverse {
-  grid-template-columns: minmax(0, 564px) minmax(0, 482px);
+  grid-template-columns: 1fr 1fr;
 
   .content {
     order: 2;
