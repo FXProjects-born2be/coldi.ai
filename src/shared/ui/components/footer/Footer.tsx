@@ -73,19 +73,73 @@ export const Footer = () => {
                     About
                   </Link>
                 </li>
+              </ul>
+              <ul
+                className={st.footer__list}
+                itemScope
+                itemType="http://schema.org/SiteNavigationElement"
+              >
+                <h4>Products</h4>
                 <li itemProp="name">
-                  <Link href="/healthcare" itemProp="url">
+                  <Link href="/products/outbound-calling" itemProp="url">
+                    Outbound AI Calling
+                  </Link>
+                </li>
+                <li itemProp="name">
+                  <Link href="/products/inbound-calling" itemProp="url">
+                    Inbound AI Calling
+                  </Link>
+                </li>
+                <li itemProp="name">
+                  <Link href="/products/agent-development" itemProp="url">
+                    AI Agent Development
+                  </Link>
+                </li>
+                <li itemProp="name">
+                  <Link href="/products/customer-service-agent" itemProp="url">
+                    AI Customer Service
+                  </Link>
+                </li>
+                <li itemProp="name">
+                  <Link href="/products/voip-phone-service" itemProp="url">
+                    VoIP Phone Service
+                  </Link>
+                </li>
+              </ul>
+              <ul
+                className={st.footer__list}
+                itemScope
+                itemType="http://schema.org/SiteNavigationElement"
+              >
+                <h4>Industries</h4>
+                <li itemProp="name">
+                  <Link href="/industries/healthcare" itemProp="url">
                     Healthcare
                   </Link>
                 </li>
                 <li itemProp="name">
-                  <Link href="/debt-collection" itemProp="url">
-                    Debt Collection
+                  <Link href="/industries/insurance" itemProp="url">
+                    Insurance
                   </Link>
                 </li>
                 <li itemProp="name">
-                  <Link href="/products/outbound-calling" itemProp="url">
-                    Outbound Calling
+                  <Link href="/industries/real-estate" itemProp="url">
+                    Real Estate
+                  </Link>
+                </li>
+                <li itemProp="name">
+                  <Link href="/industries/call-center" itemProp="url">
+                    Call Centers
+                  </Link>
+                </li>
+                <li itemProp="name">
+                  <Link href="/industries/fx-brokers" itemProp="url">
+                    Trading Platforms
+                  </Link>
+                </li>
+                <li itemProp="name">
+                  <Link href="/industries/debt-collection" itemProp="url">
+                    Debt Collection
                   </Link>
                 </li>
               </ul>
@@ -105,8 +159,7 @@ export const Footer = () => {
                     Privacy Policy
                   </Link>
                 </li>
-              </ul>
-              <ul className={st.footer__list}>
+                <br />
                 <h4>Contact Us</h4>
                 <li>
                   <Link href="mailto:info@coldi.ai">
