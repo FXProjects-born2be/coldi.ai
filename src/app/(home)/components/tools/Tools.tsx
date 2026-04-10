@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
@@ -69,15 +68,9 @@ export const Tools = () => (
     </motion.h2>
     <section className={st.cards}>
       {card.map((item) => (
-        <Link
-          href={item.href}
-          key={item.alt}
-          className={st.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <span key={item.alt} className={st.card}>
           <Image src={item.image} alt={item.alt} width={100} height={100} unoptimized />
-        </Link>
+        </span>
       ))}
     </section>
   </section>
