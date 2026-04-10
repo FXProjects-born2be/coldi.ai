@@ -31,7 +31,7 @@
 
   &__container {
     margin: 24px 24px 0 24px;
-    padding: 165px 165px;
+    padding: 165px 100px;
     display: flex;
     flex-direction: column;
     gap: 64px;
@@ -102,11 +102,13 @@
 
   &__links {
     display: flex;
-    gap: 128px;
+    gap: 64px;
 
     @include mobile {
-      flex-direction: column;
-      gap: 64px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      row-gap: 40px;
+      column-gap: 20px;
     }
   }
 
@@ -114,23 +116,30 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-
+    @include mobile {
+      width: calc(50% - 10px);
+    }
     h4 {
       color: #0c1021;
-      font-size: 24px;
+      font-size: 20px;
       font-style: normal;
       font-weight: 500;
       line-height: normal;
+      @include largeDesktop {
+        font-size: 24px;
+      }
     }
 
     li {
       color: #535662;
       font-family: Urbanist;
-      font-size: 20px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
-
+      @include largeDesktop {
+        font-size: 20px;
+      }
       a {
         display: flex;
         align-items: center;
