@@ -6,7 +6,7 @@ import { getDemoStatus } from '@/shared/lib/system';
 //import { areFormsEnabled } from '@/shared/lib/system';
 
 const RETELL_API_URL = 'https://api.retellai.com/v2/create-phone-call';
-const RETELL_DEMO_API_KEY = 'key_798c7db6a871dbd4661d3f8201ba';
+const RETELL_DEMO_API_KEY = 'key_f7b58cf9771ee47bdf115065031b';
 // Default agent ID (fallback if not provided)
 const RETELL_DEMO_AGENT_ID = 'agent_6fc05cc128bcee73ca7d0007c5';
 
