@@ -91,7 +91,7 @@ export const Why = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            Why Coldi for VoIP Phone Service
+            Why VoIP Phone Service
           </motion.h2>
         </div>
 

@@ -26,7 +26,7 @@ export const Why = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        Why Coldi for AI Agents in Insurance
+        Why AI Agents in Insurance
       </motion.h2>
 
       <motion.div

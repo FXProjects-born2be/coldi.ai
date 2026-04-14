@@ -63,7 +63,7 @@ export const Why = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        Why Coldi for AI Agents in Healthcare
+        Why AI Agents in Healthcare
       </motion.h2>
 
       <div className={st.features}>

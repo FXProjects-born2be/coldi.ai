@@ -26,7 +26,7 @@ export const Why = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        Why Coldi for AI Inbound Call Solutions
+        Why AI Inbound Call Solutions
       </motion.h2>
 
       <motion.div

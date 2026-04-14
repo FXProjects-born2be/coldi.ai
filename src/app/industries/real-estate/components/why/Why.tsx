@@ -26,7 +26,7 @@ export const Why = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        Why Coldi for AI Agents in Real Estate
+        Why AI Agents in Real Estate
       </motion.h2>
 
       <motion.div
