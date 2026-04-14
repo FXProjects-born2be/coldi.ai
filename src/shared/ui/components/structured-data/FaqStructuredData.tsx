@@ -12,5 +12,5 @@ export const FaqStructuredData = ({ faqs, id }: FaqStructuredDataProps) => {
     return null;
   }
 
-  return <StructuredData id={id} type="FAQ" data={getFaqStructuredData(faqs)} />;
+  return <StructuredData id={id} type="FAQPage" data={getFaqStructuredData(faqs)} />;
 };
