@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 import { blurInUp } from '@/shared/lib/helpers';
+import { FaqStructuredData } from '@/shared/ui/components/structured-data/FaqStructuredData';
 import { ChevronDownIcon } from '@/shared/ui/icons/outline/chevron-down';
 
 import st from './Faq.module.scss';
@@ -132,6 +133,7 @@ export const Faq = () => {
 
   return (
     <section className={st.faq}>
+      <FaqStructuredData id="products-faq-jsonld" faqs={faq} />
       <section className={st.faq__content}>
         <div className={st.faq__title}>
           <motion.h1
