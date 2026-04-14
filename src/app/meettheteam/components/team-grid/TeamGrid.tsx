@@ -107,6 +107,20 @@ const teamMembers: TeamMember[] = [
     alt: 'Portrait of Iryna Mykolenko',
     linkedinUrl: '',
   },
+  {
+    name: 'Alina Denysenko',
+    role: 'Quality Control',
+    image: '/images/meet-the-team/alina-denysenko.png',
+    alt: 'Portrait of Alina Denysenko',
+    linkedinUrl: 'https://www.linkedin.com/in/alina-d-20ab1a401/',
+  },
+  {
+    name: 'Thomas Angelo',
+    role: 'Quality Control',
+    image: '/images/meet-the-team/thomas-angelo.png',
+    alt: 'Portrait of Thomas Angelo',
+    linkedinUrl: '',
+  },
 ];
 
 function resolveLinkedinHref(value: string) {

@@ -35,24 +35,28 @@
   width: 100%;
   max-width: 1110px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 348px));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+
   gap: 32px;
 
-  @include tablet {
-    grid-template-columns: repeat(2, minmax(0, 348px));
-  }
-
-  @include mobile {
-    grid-template-columns: minmax(0, 348px);
-  }
 }
 
 .card {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: calc(33.33% - 22px);
+
+  @include tablet {
+    width: calc(50% - 16px);
+  }
+
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .imageWrap {
