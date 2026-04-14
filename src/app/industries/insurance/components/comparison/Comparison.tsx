@@ -99,7 +99,7 @@ export const Comparison = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <span className={st.highlight}>WITH COLDI</span> VS WITHOUT COLDI
+        <span className={st.highlight}>WITH US</span> VS WITHOUT US
       </motion.h2>
 
       <motion.div
