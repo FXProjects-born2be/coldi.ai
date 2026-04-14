@@ -89,7 +89,6 @@ export const Header = () => {
           />
         </Link>
         <Navigation />
-        <BurgerMenu />
         <div className={st.header__buttons}>
           <Link className={st.header__bookMeeting} href="/calendar" target="_blank">
             <svg
@@ -113,6 +112,7 @@ export const Header = () => {
             Schedule a Meeting
           </Link>
         </div>
+        <BurgerMenu />
       </div>
     </header>
   );
