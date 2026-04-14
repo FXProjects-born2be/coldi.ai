@@ -1,0 +1,93 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  padding: 0 165px 165px;
+
+  @include fourteenInch {
+    padding: 0 64px 132px;
+  }
+
+  @include mobile {
+    padding: 0 16px 32px;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 64px;
+  text-align: center;
+
+  h2 {
+    color: #0c1021;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: normal;
+
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+
+  p {
+    color: #535662;
+    font-size: 20px;
+    line-height: normal;
+
+    @include mobile {
+      font-size: 18px;
+      br{
+        display: none;
+      }
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+
+  @include tablet {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 249px;
+  padding: 16px;
+  border-radius: 48px;
+  background: #fff;
+  border: 1px solid rgba(12, 16, 33, 0.06);
+
+  h3 {
+    color: #0c1021;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 16px;
+  }
+
+  p {
+    color: #535662;
+    font-size: 18px;
+    line-height: normal;
+  }
+}
+
+.number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 64px;
+  background: #4268ff;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 400;
+}

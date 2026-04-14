@@ -1,0 +1,124 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  padding: 0 165px 64px;
+
+  @include fourteenInch {
+    padding: 0 64px 64px;
+  }
+
+  @include mobile {
+    padding: 0 16px 32px;
+  }
+}
+
+.rows {
+  display: grid;
+  gap: 124px;
+
+  @include mobile {
+    gap: 32px;
+  }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 64px;
+
+  @include tablet {
+    grid-template-columns: 1fr;
+  }
+}
+
+.reverse {
+  .content {
+    order: 2;
+  }
+
+  .visual {
+    order: 1;
+  }
+
+  @include tablet {
+    grid-template-columns: 1fr;
+
+    .content,
+    .visual {
+      order: initial;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  h2 {
+    color: #0c1021;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: normal;
+
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+}
+
+.description {
+  p {
+    color: #535662;
+    font-size: 20px;
+    line-height: normal;
+    margin: 0;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+}
+
+.visual {
+  min-width: 0;
+
+  @include mobile {
+    order: -1;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    padding-left: 18px;
+    color: #535662;
+    font-size: 20px;
+    line-height: normal;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #4268ff;
+      transform: translateY(-50%);
+    }
+  }
+}

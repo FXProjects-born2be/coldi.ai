@@ -6,6 +6,7 @@ import {
   Advantages,
   ColdiInNews,
   Delivers,
+  Faq,
   HearColdi,
   Hero,
   IndustrySolutionsSlider,
@@ -46,6 +47,7 @@ export default function Home() {
       <ProductSolutionsSlider />
       <Reviews />
       <WhatIs />
+      <Faq />
     </main>
   );
 }
