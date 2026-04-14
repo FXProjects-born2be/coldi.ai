@@ -57,6 +57,7 @@ const productsItems = [
   { label: 'Inbound Calling', href: '/products/inbound-calling' },
   { label: 'AI Agent Development', href: '/products/agent-development' },
   { label: 'AI Customer Service', href: '/products/customer-service-agent' },
+  { label: 'AI for Quality Control', href: '/products/ai-for-quality-control' },
   { label: 'VoIP Phone Service', href: '/products/voip-phone-service' },
 ];
 

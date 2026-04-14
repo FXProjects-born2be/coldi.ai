@@ -13,6 +13,7 @@ export const IMAGE_ALT = {
   inboundCalling: 'AI Inbound Calling',
   agentDevelopment: 'AI Agent Development',
   customerServiceAgent: 'AI Customer Service Agent',
+  aiForQualityControl: 'AI for Quality Control',
   voipPhoneService: 'VoIP Phone Service',
   meettheteam: 'Meet the Team',
 } as const;

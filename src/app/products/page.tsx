@@ -5,7 +5,6 @@ import { DashboardSlider } from '@/shared/ui/components/dashboard-slider/Dashboa
 import {
   ColdiAgentsBuilt,
   ColdiSpeaks,
-  Faq,
   Hero,
   InboundOutbound,
   NeverMiss,
@@ -42,7 +41,6 @@ export default function Products() {
         subtitle="Track your core metrics in one view: clients, campaigns, calls, and VoiceAI pods."
       />
       <ColdiSpeaks />
-      <Faq />
     </main>
   );
 }

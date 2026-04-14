@@ -1,6 +1,7 @@
 export * from './advantages/Advantages';
 export * from './coldi-in-news/ColdiInNews';
 export * from './delivers/Delivers';
+export * from './faq/Faq';
 export * from './hear-coldi/HearColdi';
 export * from './hero/Hero';
 export * from './industry-solutions-slider/IndustrySolutionsSlider';
