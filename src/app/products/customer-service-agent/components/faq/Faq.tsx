@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
+import { FaqStructuredData } from '@/shared/ui/components/structured-data/FaqStructuredData';
 
 import st from './Faq.module.scss';
 
@@ -42,6 +43,7 @@ export const Faq = () => {
 
   return (
     <section className={st.layout}>
+      <FaqStructuredData id="customer-service-agent-faq-jsonld" faqs={faqItems} />
       <div className={st.header}>
         <motion.h2
           variants={blurInUp}

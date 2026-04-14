@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { blurInUp } from '@/shared/lib/helpers';
+import { FaqStructuredData } from '@/shared/ui/components/structured-data/FaqStructuredData';
 
 import st from './Faq.module.scss';
 
@@ -72,6 +73,7 @@ export const Faq = () => {
 
   return (
     <section className={st.layout}>
+      <FaqStructuredData id="voip-phone-service-faq-jsonld" faqs={faqs} />
       <div className={st.header}>
         <motion.h2
           variants={blurInUp}
