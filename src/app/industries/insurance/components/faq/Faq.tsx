@@ -52,6 +52,11 @@ const faqs: FaqItem[] = [
     answer:
       'AI adoption in the insurance sector is accelerating rapidly. The global market for AI in insurance surpassed $10 billion in 2025, and most insurers are actively implementing AI across claims processing, underwriting, and customer service operations. AI technologies can also deliver 50–75% faster processing speeds and significant operational cost savings.',
   },
+  {
+    question: 'Who offers multilingual support for policyholder interactions?',
+    answer:
+      'We offer a leading solution that supports more than 30 different languages and regional dialects globally. <br/><br/>This allows your <b>voice agents for insurance</b> to handle claims and renewals with native-level fluency, ensuring clear communication and higher satisfaction across your entire international customer base.',
+  },
 ];
 
 export const Faq = () => {
@@ -112,7 +117,10 @@ export const Faq = () => {
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className={st.faq__answer_wrapper}
                   >
-                    <div className={st.faq__answer}>{faq.answer}</div>
+                    <div
+                      className={st.faq__answer}
+                      dangerouslySetInnerHTML={{ __html: faq.answer }}
+                    />
                   </motion.div>
                 )}
               </AnimatePresence>
