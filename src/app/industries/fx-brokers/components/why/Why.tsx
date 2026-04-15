@@ -30,17 +30,29 @@ const rows: WhyRow[] = [
     visual: '/images/brokers/why-1.png',
   },
   {
+    title: 'Outbound Engine: Turn Registrations into Deposits',
+    description:
+      'Convert cold leads into active traders and reactivate dormant accounts with high-fidelity automated calls.',
+    bullets: [
+      "<b>Hot Lead Warm-up (Speed to Lead):</b>We call every new registration in less than 15 seconds. The AI Agent qualifies the lead's interest, explains your platform\'s unique selling points, and schedules a closing call with your senior Account Manager while the lead is still browsing your site.",
+      "<b>Cold Lead Nurturing:</b>Do you have old databases? Coldi contacts thousands of leads simultaneously to detect who is ready to jump back into the market. We filter out 'wrong numbers' and deliver only high-intent, qualified leads to your desk.",
+      '<b>Account Reactivation (Churn Prevention):</b>Identify traders with declining activity and proactively reach out with personalized offers, deposit bonuses, or market updates to bring them back to the platform before they churn.',
+    ],
+    visual: '/images/brokers/why-1-2.png',
+    reverse: true,
+  },
+  {
     title: 'Smart Trade & Account Resolution',
     description:
       'AI agents understand trader intent, resolve common account queries (KYC status, deposit issues) instantly, and reduce repetitive ticket handling.',
     visual: '/images/brokers/why-2.png',
-    reverse: true,
   },
   {
     title: 'Context-Aware Routing',
     description:
       'Calls are intelligently routed based on account tier, urgency, or specific market instruments, ensuring high-value traders get immediate attention.',
     visual: '/images/brokers/why-3.png',
+    reverse: true,
   },
 ];
 
@@ -77,7 +89,7 @@ export const Why = () => {
                 {row.bullets.map((bullet) => (
                   <li key={bullet}>
                     <span className={st.dot} />
-                    {bullet}
+                    <p dangerouslySetInnerHTML={{ __html: bullet }} />
                   </li>
                 ))}
               </ul>
