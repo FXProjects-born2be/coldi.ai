@@ -170,11 +170,11 @@ const Navigation = () => {
               AI Customer Service
             </Link>
           </li>
-          {/**<li itemProp="name">
+          <li itemProp="name">
             <Link href="/products/ai-for-quality-control" itemProp="url">
               AI for Quality Control
             </Link>
-          </li> */}
+          </li>
           <li itemProp="name">
             <Link href="/products/voip-phone-service" itemProp="url">
               VoIP Phone Service
