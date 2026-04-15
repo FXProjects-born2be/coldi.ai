@@ -21,7 +21,7 @@ export const CallFormContainerNew = () => {
         viewport={{ once: true }}
       >
         <div className={st.top}>
-          <h3>Book a Demo</h3>
+          <h1>Book a Demo</h1>
           <Image src="/full-logo.svg" alt="Book a Demo" width={93} height={32} unoptimized />
         </div>
         <div className={st.bottom}>

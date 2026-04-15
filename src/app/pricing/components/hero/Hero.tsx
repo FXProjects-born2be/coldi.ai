@@ -12,14 +12,14 @@ export const Hero = () => {
       <section className={st.layout}>
         <div className={st.header}>
           <section className={st.title}>
-            <motion.h2
+            <motion.h1
               variants={blurInUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
               Simple Pricing. Scalable Power.
-            </motion.h2>
+            </motion.h1>
           </section>
           <motion.p
             variants={blurInUp}

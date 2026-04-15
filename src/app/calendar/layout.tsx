@@ -11,9 +11,9 @@ import './layout.scss';
 
 export const metadata: Metadata = {
   robots: {
-    index: false,
-    follow: false,
-    googleBot: { index: false, follow: false },
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
   },
 };
 
