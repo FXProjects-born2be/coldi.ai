@@ -1,0 +1,143 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  padding: 64px 165px;
+  background: #fff;
+
+  @include fourteenInch {
+    padding-inline: 64px;
+  }
+
+  @include mobile {
+    padding: 32px 16px;
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  width: 100%;
+  //max-width: 1110px;
+  margin: 0 auto;
+
+  @include mobile {
+    gap: 32px;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+
+  h2 {
+    margin: 0;
+    color: #0c1021;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 1.2;
+
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+
+  p {
+    max-width: 688px;
+    margin: 0;
+    color: #535662;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 8px 12px;
+  border-radius: 16px;
+  background: rgba(66, 104, 255, 0.15);
+  color: #4268ff;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+
+  @include tablet {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px;
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  border-radius: 48px;
+  background: #fff;
+  text-align: center;
+
+  @include mobile {
+    border-radius: 32px;
+  }
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 64px;
+  background: #4268ff;
+
+  @include mobile {
+    width: 64px;
+    height: 64px;
+  }
+
+  img {
+    width: 48px;
+    height: 48px;
+
+    @include mobile {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  h3 {
+    margin: 0;
+    color: #0c1021;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  p {
+    margin: 0;
+    color: #535662;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+}

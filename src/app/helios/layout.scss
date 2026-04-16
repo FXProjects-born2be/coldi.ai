@@ -1,0 +1,17 @@
+header {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
+}
+
+body {
+  > a {
+    display: none !important;
+  }
+
+  > div {
+    &:last-child {
+      display: none !important;
+    }
+  }
+}
