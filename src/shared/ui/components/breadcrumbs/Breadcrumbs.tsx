@@ -31,6 +31,8 @@ const segmentLabels: Record<string, string> = {
   'customer-service-agent': 'AI Customer Service',
   'voip-phone-service': 'VoIP Phone Service',
   'ai-for-quality-control': 'AI for Quality Control',
+  'use-cases': 'Use Cases',
+  legal: 'Legal',
 };
 
 export const Breadcrumbs = () => {
