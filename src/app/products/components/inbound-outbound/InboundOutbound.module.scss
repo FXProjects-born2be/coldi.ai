@@ -10,16 +10,18 @@
 }
 
 .row {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
 
   @include tablet {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
+
+  
 }
 
 .card {
-  flex: 1;
   border: 1px solid rgba(12, 16, 33, 0.1);
   border-radius: 48px;
   overflow: hidden;
@@ -45,6 +47,10 @@
     gap: 32px;
     flex: 1;
     justify-content: space-between;
+
+    @include tablet {
+      padding: 24px;
+    }
   }
 
   &__text {
@@ -73,6 +79,13 @@
 
   &__btn {
     display: block;
+
+    button{
+      width: fit-content;
+      @include tablet {
+        width: 100%;
+      }
+    }
 
     @include tablet {
       width: 100%;
