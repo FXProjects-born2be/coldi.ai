@@ -33,6 +33,7 @@ const segmentLabels: Record<string, string> = {
   'ai-for-quality-control': 'AI for Quality Control',
   'use-cases': 'Use Cases',
   legal: 'Legal',
+  silverbellgroup: 'Silverbell Group',
 };
 
 export const Breadcrumbs = () => {
