@@ -12,11 +12,13 @@ import {
 } from '@/shared/lib/captcha/config';
 import { useForm, useStore } from '@/shared/lib/forms';
 import { getHoneypotValue } from '@/shared/lib/security/honeypot';
+import { REQUEST_LEAD_FORM_ENABLED } from '@/shared/lib/system/request-forms';
 import { isValidName, requiresSmsVerification, validateEmail } from '@/shared/lib/validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { HCaptcha } from '@/shared/ui/components/HCaptcha';
 import { Recaptcha } from '@/shared/ui/components/Recaptcha';
 import { Selected } from '@/shared/ui/components/selected';
+import { TemporarilyDisabledForm } from '@/shared/ui/components/temporarily-disabled-form';
 import { Button } from '@/shared/ui/kit/button';
 import { Dropdown } from '@/shared/ui/kit/dropdown';
 import { TextArea } from '@/shared/ui/kit/text-area/TextArea';
@@ -110,6 +112,10 @@ export const SecondLeadStep = ({
       onSubmit: secondLeadStepSchema,
     },
     onSubmit: async (data) => {
+      if (!REQUEST_LEAD_FORM_ENABLED) {
+        return;
+      }
+
       if (!captchaToken) {
         console.error('Captcha token is missing');
         return;
@@ -418,247 +424,258 @@ export const SecondLeadStep = ({
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
+          if (!REQUEST_LEAD_FORM_ENABLED) {
+            return;
+          }
           handleSubmit().catch(console.error);
         }}
       >
-        <section className={st.fields}>
-          <FormRow>
-            <div className={st.inputWrapper}>
-              <Field name="industry">
-                {(field) => (
-                  <TextField
-                    name={field.name}
-                    placeholder="Industry"
-                    value={String(field.state.value)}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    intent={field.state.meta.errors.length ? 'danger' : 'default'}
-                  />
-                )}
-              </Field>
-            </div>
-            <div className={st.inputWrapper}>
-              <Field name="monthlyLeadVolume">
-                {(field) => (
-                  <TextField
-                    name={field.name}
-                    placeholder="Monthly Lead Volume"
-                    value={String(field.state.value)}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    intent={field.state.meta.errors.length ? 'danger' : 'default'}
-                  />
-                )}
-              </Field>
-            </div>
-          </FormRow>
-          <div className={st.formGroup}>
-            <p className={st.label}>Primary Goal</p>
-            <div className={st.inputWrapper}>
-              <Field name="primaryGoal">
-                {(field) => (
-                  <Dropdown
-                    trigger={
-                      <>
-                        {field.state.value.map((item) => (
-                          <Selected key={item}>{item}</Selected>
-                        ))}
-                      </>
-                    }
-                    items={[
-                      { label: 'Lead Generation', value: 'Lead Generation' },
-                      { label: 'Appointment Setting', value: 'Appointment Setting' },
-                      { label: 'Cost Reduction', value: 'Cost Reduction' },
-                      { label: 'Inbound Call Handling', value: 'Inbound Call Handling' },
-                      { label: 'Missed Call Recovery', value: 'Missed Call Recovery' },
-                      { label: 'Lead Qualification', value: 'Lead Qualification' },
-                      { label: 'Cold Outreach', value: 'Cold Outreach' },
-                      { label: 'Customer Re-engagement', value: 'Customer Re-engagement' },
-                      {
-                        label: 'Survey & Feedback Collection',
-                        value: 'Survey & Feedback Collection',
-                      },
-                      { label: 'Objection Handling', value: 'Objection Handling' },
-                      { label: 'Pre-Sales Screening', value: 'Pre-Sales Screening' },
-                      { label: 'Database Reactivation', value: 'Database Reactivation' },
-                      { label: 'Order Confirmation', value: 'Order Confirmation' },
-                      { label: 'Payment Collection', value: 'Payment Collection' },
-                      { label: 'Support Call Deflection', value: 'Support Call Deflection' },
-                      { label: 'Upselling / Cross-selling', value: 'Upselling / Cross-selling' },
-                      { label: 'Product/Service Promotion', value: 'Product/Service Promotion' },
-                      { label: 'Callback Scheduling', value: 'Callback Scheduling' },
-                    ]}
-                    selectedItems={field.state.value}
-                    onChange={(newSelected) => field.handleChange(newSelected)}
-                  />
-                )}
-              </Field>
-            </div>
-          </div>
-          <div className={st.inputWrapper}>
-            <Field name="message">
-              {(field) => (
-                <TextArea
-                  name={field.name}
-                  placeholder="Message"
-                  value={String(field.state.value)}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  intent={field.state.meta.errors.length ? 'danger' : 'default'}
-                />
-              )}
-            </Field>
-          </div>
-          <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
-            <input
-              type="text"
-              name={HONEYPOT_FIELD}
-              tabIndex={-1}
-              autoComplete="off"
-              style={{ display: 'none' }}
-            />
-          </div>
-          <div className={`${st.inputWrapper} ${errors.onSubmit?.captchaToken ? st.error : ''}`}>
-            <Field name="captchaToken">
-              {(field) => (
-                <>
-                  {TURNSTILE_ENABLED ? (
-                    <Turnstile
-                      key={captchaKey}
-                      siteKey={TURNSTILE_SITE_KEY}
-                      onSuccess={(token) => {
-                        setCaptchaToken(token);
-                        field.handleChange(token);
-                      }}
-                      onError={() => {
-                        setCaptchaToken(null);
-                        field.handleChange('');
-                      }}
-                      onExpire={() => {
-                        setCaptchaToken(null);
-                        field.handleChange('');
-                      }}
+        <TemporarilyDisabledForm disabled={!REQUEST_LEAD_FORM_ENABLED}>
+          <section className={st.fields}>
+            <FormRow>
+              <div className={st.inputWrapper}>
+                <Field name="industry">
+                  {(field) => (
+                    <TextField
+                      name={field.name}
+                      placeholder="Industry"
+                      value={String(field.state.value)}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      intent={field.state.meta.errors.length ? 'danger' : 'default'}
                     />
-                  ) : HCAPTCHA_ENABLED ? (
-                    <HCaptcha
-                      resetKey={captchaKey}
-                      onSuccess={(token) => {
-                        setCaptchaToken(token);
-                        field.handleChange(token);
-                      }}
-                      onError={() => {
-                        setCaptchaToken(null);
-                        field.handleChange('');
-                      }}
-                      onExpire={() => {
-                        setCaptchaToken(null);
-                        field.handleChange('');
-                      }}
-                    />
-                  ) : RECAPTCHA_ENABLED ? (
-                    <Recaptcha
-                      resetKey={captchaKey}
-                      onSuccess={(token) => {
-                        setCaptchaToken(token);
-                        field.handleChange(token);
-                      }}
-                      onError={() => {
-                        setCaptchaToken(null);
-                        field.handleChange('');
-                      }}
-                      onExpire={() => {
-                        setCaptchaToken(null);
-                        field.handleChange('');
-                      }}
-                    />
-                  ) : null}
-                </>
-              )}
-            </Field>
-            {errors.onSubmit?.captchaToken?.map((err: { message: string }) => (
-              <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-            ))}
-          </div>
-          {needsSmsVerification && captchaToken && (
-            <div className={st.inputWrapper}>
-              {!smsCodeSent ? (
-                <>
-                  <Button
-                    type="button"
-                    onClick={handleSendSmsCode}
-                    disabled={smsSending || !firstStepData.phone}
-                    variant="secondary"
-                  >
-                    {smsSending ? 'Sending...' : 'Send SMS'}
-                  </Button>
-                  {smsError && (
-                    <div style={{ marginBottom: '8px' }}>
-                      <ErrorMessage>{smsError}</ErrorMessage>
-                    </div>
                   )}
-                </>
-              ) : !smsVerified ? (
-                <div>
-                  <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
-                    <Field name="smsCode">
-                      {(smsField) => (
-                        <TextField
-                          name={smsField.name}
-                          placeholder="Enter 6-digit code"
-                          value={String(smsField.state.value || '')}
-                          onChange={(e) => smsField.handleChange(e.target.value)}
-                          maxLength={6}
-                          style={{ flex: 1 }}
-                          intent={smsField.state.meta.errors.length ? 'danger' : 'default'}
-                        />
-                      )}
-                    </Field>
+                </Field>
+              </div>
+              <div className={st.inputWrapper}>
+                <Field name="monthlyLeadVolume">
+                  {(field) => (
+                    <TextField
+                      name={field.name}
+                      placeholder="Monthly Lead Volume"
+                      value={String(field.state.value)}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      intent={field.state.meta.errors.length ? 'danger' : 'default'}
+                    />
+                  )}
+                </Field>
+              </div>
+            </FormRow>
+            <div className={st.formGroup}>
+              <p className={st.label}>Primary Goal</p>
+              <div className={st.inputWrapper}>
+                <Field name="primaryGoal">
+                  {(field) => (
+                    <Dropdown
+                      trigger={
+                        <>
+                          {field.state.value.map((item) => (
+                            <Selected key={item}>{item}</Selected>
+                          ))}
+                        </>
+                      }
+                      items={[
+                        { label: 'Lead Generation', value: 'Lead Generation' },
+                        { label: 'Appointment Setting', value: 'Appointment Setting' },
+                        { label: 'Cost Reduction', value: 'Cost Reduction' },
+                        { label: 'Inbound Call Handling', value: 'Inbound Call Handling' },
+                        { label: 'Missed Call Recovery', value: 'Missed Call Recovery' },
+                        { label: 'Lead Qualification', value: 'Lead Qualification' },
+                        { label: 'Cold Outreach', value: 'Cold Outreach' },
+                        { label: 'Customer Re-engagement', value: 'Customer Re-engagement' },
+                        {
+                          label: 'Survey & Feedback Collection',
+                          value: 'Survey & Feedback Collection',
+                        },
+                        { label: 'Objection Handling', value: 'Objection Handling' },
+                        { label: 'Pre-Sales Screening', value: 'Pre-Sales Screening' },
+                        { label: 'Database Reactivation', value: 'Database Reactivation' },
+                        { label: 'Order Confirmation', value: 'Order Confirmation' },
+                        { label: 'Payment Collection', value: 'Payment Collection' },
+                        { label: 'Support Call Deflection', value: 'Support Call Deflection' },
+                        { label: 'Upselling / Cross-selling', value: 'Upselling / Cross-selling' },
+                        { label: 'Product/Service Promotion', value: 'Product/Service Promotion' },
+                        { label: 'Callback Scheduling', value: 'Callback Scheduling' },
+                      ]}
+                      selectedItems={field.state.value}
+                      onChange={(newSelected) => field.handleChange(newSelected)}
+                    />
+                  )}
+                </Field>
+              </div>
+            </div>
+            <div className={st.inputWrapper}>
+              <Field name="message">
+                {(field) => (
+                  <TextArea
+                    name={field.name}
+                    placeholder="Message"
+                    value={String(field.state.value)}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    intent={field.state.meta.errors.length ? 'danger' : 'default'}
+                  />
+                )}
+              </Field>
+            </div>
+            <div
+              style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}
+            >
+              <input
+                type="text"
+                name={HONEYPOT_FIELD}
+                tabIndex={-1}
+                autoComplete="off"
+                style={{ display: 'none' }}
+              />
+            </div>
+            <div className={`${st.inputWrapper} ${errors.onSubmit?.captchaToken ? st.error : ''}`}>
+              <Field name="captchaToken">
+                {(field) => (
+                  <>
+                    {TURNSTILE_ENABLED ? (
+                      <Turnstile
+                        key={captchaKey}
+                        siteKey={TURNSTILE_SITE_KEY}
+                        onSuccess={(token) => {
+                          setCaptchaToken(token);
+                          field.handleChange(token);
+                        }}
+                        onError={() => {
+                          setCaptchaToken(null);
+                          field.handleChange('');
+                        }}
+                        onExpire={() => {
+                          setCaptchaToken(null);
+                          field.handleChange('');
+                        }}
+                      />
+                    ) : HCAPTCHA_ENABLED ? (
+                      <HCaptcha
+                        resetKey={captchaKey}
+                        onSuccess={(token) => {
+                          setCaptchaToken(token);
+                          field.handleChange(token);
+                        }}
+                        onError={() => {
+                          setCaptchaToken(null);
+                          field.handleChange('');
+                        }}
+                        onExpire={() => {
+                          setCaptchaToken(null);
+                          field.handleChange('');
+                        }}
+                      />
+                    ) : RECAPTCHA_ENABLED ? (
+                      <Recaptcha
+                        resetKey={captchaKey}
+                        onSuccess={(token) => {
+                          setCaptchaToken(token);
+                          field.handleChange(token);
+                        }}
+                        onError={() => {
+                          setCaptchaToken(null);
+                          field.handleChange('');
+                        }}
+                        onExpire={() => {
+                          setCaptchaToken(null);
+                          field.handleChange('');
+                        }}
+                      />
+                    ) : null}
+                  </>
+                )}
+              </Field>
+              {errors.onSubmit?.captchaToken?.map((err: { message: string }) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
+            {needsSmsVerification && captchaToken && (
+              <div className={st.inputWrapper}>
+                {!smsCodeSent ? (
+                  <>
                     <Button
                       type="button"
                       onClick={handleSendSmsCode}
                       disabled={smsSending || !firstStepData.phone}
                       variant="secondary"
-                      style={{ whiteSpace: 'nowrap' }}
                     >
-                      {smsSending ? 'Sending...' : 'Resend Code'}
+                      {smsSending ? 'Sending...' : 'Send SMS'}
                     </Button>
-                    <Button
-                      type="button"
-                      onClick={handleVerifySmsCode}
-                      disabled={smsVerifying || !formValues.smsCode}
-                    >
-                      {smsVerifying ? 'Verifying...' : 'Verify'}
-                    </Button>
-                  </div>
-                  {smsError && (
-                    <div style={{ marginBottom: '8px' }}>
-                      <ErrorMessage>{smsError}</ErrorMessage>
+                    {smsError && (
+                      <div style={{ marginBottom: '8px' }}>
+                        <ErrorMessage>{smsError}</ErrorMessage>
+                      </div>
+                    )}
+                  </>
+                ) : !smsVerified ? (
+                  <div>
+                    <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+                      <Field name="smsCode">
+                        {(smsField) => (
+                          <TextField
+                            name={smsField.name}
+                            placeholder="Enter 6-digit code"
+                            value={String(smsField.state.value || '')}
+                            onChange={(e) => smsField.handleChange(e.target.value)}
+                            maxLength={6}
+                            style={{ flex: 1 }}
+                            intent={smsField.state.meta.errors.length ? 'danger' : 'default'}
+                          />
+                        )}
+                      </Field>
+                      <Button
+                        type="button"
+                        onClick={handleSendSmsCode}
+                        disabled={smsSending || !firstStepData.phone}
+                        variant="secondary"
+                        style={{ whiteSpace: 'nowrap' }}
+                      >
+                        {smsSending ? 'Sending...' : 'Resend Code'}
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={handleVerifySmsCode}
+                        disabled={smsVerifying || !formValues.smsCode}
+                      >
+                        {smsVerifying ? 'Verifying...' : 'Verify'}
+                      </Button>
                     </div>
-                  )}
-                </div>
-              ) : (
-                <div style={{ color: 'green', fontSize: '14px' }}>✓ Phone number verified</div>
-              )}
+                    {smsError && (
+                      <div style={{ marginBottom: '8px' }}>
+                        <ErrorMessage>{smsError}</ErrorMessage>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div style={{ color: 'green', fontSize: '14px' }}>✓ Phone number verified</div>
+                )}
+              </div>
+            )}
+          </section>
+          {emailValidationError && (
+            <div style={{ marginBottom: '16px' }}>
+              <ErrorMessage>{emailValidationError}</ErrorMessage>
             </div>
           )}
-        </section>
-        {emailValidationError && (
-          <div style={{ marginBottom: '16px' }}>
-            <ErrorMessage>{emailValidationError}</ErrorMessage>
-          </div>
-        )}
-        <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-          {([canSubmit, isSubmitting]) => {
-            const isSmsVerificationRequired = needsSmsVerification && !smsVerified;
-            const isDisabled = !canSubmit || isSubmitting || isSmsVerificationRequired;
+          <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+            {([canSubmit, isSubmitting]) => {
+              const isSmsVerificationRequired = needsSmsVerification && !smsVerified;
+              const isDisabled =
+                !REQUEST_LEAD_FORM_ENABLED ||
+                !canSubmit ||
+                isSubmitting ||
+                isSmsVerificationRequired;
 
-            return (
-              <Button disabled={isDisabled} type="submit" fullWidth>
-                {isSubmitting || emailValidating ? 'Submitting...' : 'Submit'}
-              </Button>
-            );
-          }}
-        </Subscribe>
+              return (
+                <Button disabled={isDisabled} type="submit" fullWidth>
+                  {isSubmitting || emailValidating ? 'Submitting...' : 'Submit'}
+                </Button>
+              );
+            }}
+          </Subscribe>
+        </TemporarilyDisabledForm>
       </form>
     </section>
   );

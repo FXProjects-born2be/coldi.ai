@@ -5,8 +5,10 @@ import type { ReactNode } from 'react';
 import PhoneInput from 'react-phone-input-2';
 
 import { useForm, useStore } from '@/shared/lib/forms';
+import { REQUEST_LEAD_FORM_ENABLED } from '@/shared/lib/system/request-forms';
 import { validateEmail } from '@/shared/lib/validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
+import { TemporarilyDisabledForm } from '@/shared/ui/components/temporarily-disabled-form';
 import { Button } from '@/shared/ui/kit/button';
 import { TextField } from '@/shared/ui/kit/text-field';
 
@@ -41,6 +43,10 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
       onSubmit: firstLeadStepSchema,
     },
     onSubmit: async (data) => {
+      if (!REQUEST_LEAD_FORM_ENABLED) {
+        return;
+      }
+
       // Validate email on submit
       const email = formValues.email?.trim();
       if (!email) {
@@ -102,104 +108,115 @@ export const FirstLeadStep = ({ onSubmit }: { onSubmit: (data: FirstLeadStepSche
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
+          if (!REQUEST_LEAD_FORM_ENABLED) {
+            return;
+          }
           handleSubmit().catch(console.error);
         }}
       >
-        <section className={st.fields}>
-          <FormRow>
-            <div className={`${st.inputWrapper} ${errors.onSubmit?.fullName ? st.error : ''}`}>
-              <Field name="fullName">
-                {(field) => (
-                  <TextField
-                    name={field.name}
-                    placeholder="Full Name"
-                    value={String(field.state.value)}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    intent={errors.onSubmit?.fullName?.length ? 'danger' : 'default'}
-                  />
-                )}
-              </Field>
-              {errors.onSubmit?.fullName?.map((err) => (
-                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-              ))}
-            </div>
-            <div className={`${st.inputWrapper} ${errors.onSubmit?.company ? st.error : ''}`}>
-              <Field name="company">
-                {(field) => (
-                  <TextField
-                    name={field.name}
-                    placeholder="Company"
-                    value={String(field.state.value)}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    intent={field.state.meta.errors.length ? 'danger' : 'default'}
-                  />
-                )}
-              </Field>
-              {errors.onSubmit?.company?.map((err) => (
-                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-              ))}
-            </div>
-          </FormRow>
-          <FormRow>
-            <div
-              className={`${st.inputWrapper} ${errors.onSubmit?.email || emailValidationError ? st.error : ''}`}
-            >
-              <Field name="email">
-                {(field) => (
-                  <TextField
-                    name={field.name}
-                    placeholder="Work email"
-                    value={String(field.state.value)}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    intent={
-                      field.state.meta.errors.length || emailValidationError ? 'danger' : 'default'
-                    }
-                  />
-                )}
-              </Field>
-              {errors.onSubmit?.email?.map((err) => (
-                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-              ))}
-              {emailValidationError && <ErrorMessage>{emailValidationError}</ErrorMessage>}
-            </div>
-            <div className={`${st.inputWrapper} ${errors.onSubmit?.phone ? st.error : ''}`}>
-              <Field name="phone">
-                {(field) => (
-                  <div className={st.phoneInputContainer}>
-                    <PhoneInput
-                      country={'us'}
+        <TemporarilyDisabledForm disabled={!REQUEST_LEAD_FORM_ENABLED}>
+          <section className={st.fields}>
+            <FormRow>
+              <div className={`${st.inputWrapper} ${errors.onSubmit?.fullName ? st.error : ''}`}>
+                <Field name="fullName">
+                  {(field) => (
+                    <TextField
+                      name={field.name}
+                      placeholder="Full Name"
                       value={String(field.state.value)}
-                      onChange={(phone) => field.handleChange(phone)}
                       onBlur={field.handleBlur}
-                      placeholder="Phone"
-                      inputClass={st.phoneInput}
-                      buttonClass={st.phoneInputButton}
-                      dropdownClass={st.phoneInputDropdown}
-                      enableSearch={true}
-                      searchPlaceholder="Search country..."
-                      autoFormat={true}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      intent={errors.onSubmit?.fullName?.length ? 'danger' : 'default'}
                     />
-                  </div>
-                )}
-              </Field>
-              {errors.onSubmit?.phone?.map((err) => (
-                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-              ))}
-            </div>
-          </FormRow>
-        </section>
-        <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-          {([canSubmit, isSubmitting]) => {
-            return (
-              <Button disabled={!canSubmit || isSubmitting} type="submit" fullWidth>
-                {isSubmitting || emailValidating ? 'Loading...' : 'Next'}
-              </Button>
-            );
-          }}
-        </Subscribe>
+                  )}
+                </Field>
+                {errors.onSubmit?.fullName?.map((err) => (
+                  <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+                ))}
+              </div>
+              <div className={`${st.inputWrapper} ${errors.onSubmit?.company ? st.error : ''}`}>
+                <Field name="company">
+                  {(field) => (
+                    <TextField
+                      name={field.name}
+                      placeholder="Company"
+                      value={String(field.state.value)}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      intent={field.state.meta.errors.length ? 'danger' : 'default'}
+                    />
+                  )}
+                </Field>
+                {errors.onSubmit?.company?.map((err) => (
+                  <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+                ))}
+              </div>
+            </FormRow>
+            <FormRow>
+              <div
+                className={`${st.inputWrapper} ${errors.onSubmit?.email || emailValidationError ? st.error : ''}`}
+              >
+                <Field name="email">
+                  {(field) => (
+                    <TextField
+                      name={field.name}
+                      placeholder="Work email"
+                      value={String(field.state.value)}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      intent={
+                        field.state.meta.errors.length || emailValidationError
+                          ? 'danger'
+                          : 'default'
+                      }
+                    />
+                  )}
+                </Field>
+                {errors.onSubmit?.email?.map((err) => (
+                  <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+                ))}
+                {emailValidationError && <ErrorMessage>{emailValidationError}</ErrorMessage>}
+              </div>
+              <div className={`${st.inputWrapper} ${errors.onSubmit?.phone ? st.error : ''}`}>
+                <Field name="phone">
+                  {(field) => (
+                    <div className={st.phoneInputContainer}>
+                      <PhoneInput
+                        country={'us'}
+                        value={String(field.state.value)}
+                        onChange={(phone) => field.handleChange(phone)}
+                        onBlur={field.handleBlur}
+                        placeholder="Phone"
+                        inputClass={st.phoneInput}
+                        buttonClass={st.phoneInputButton}
+                        dropdownClass={st.phoneInputDropdown}
+                        enableSearch={true}
+                        searchPlaceholder="Search country..."
+                        autoFormat={true}
+                      />
+                    </div>
+                  )}
+                </Field>
+                {errors.onSubmit?.phone?.map((err) => (
+                  <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+                ))}
+              </div>
+            </FormRow>
+          </section>
+          <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+            {([canSubmit, isSubmitting]) => {
+              return (
+                <Button
+                  disabled={!REQUEST_LEAD_FORM_ENABLED || !canSubmit || isSubmitting}
+                  type="submit"
+                  fullWidth
+                >
+                  {isSubmitting || emailValidating ? 'Loading...' : 'Next'}
+                </Button>
+              );
+            }}
+          </Subscribe>
+        </TemporarilyDisabledForm>
       </form>
     </section>
   );

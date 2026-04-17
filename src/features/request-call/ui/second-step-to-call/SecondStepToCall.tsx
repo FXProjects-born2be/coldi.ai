@@ -13,6 +13,7 @@ import {
 import { useForm, useStore } from '@/shared/lib/forms';
 import { getHoneypotValue } from '@/shared/lib/security/honeypot';
 import { useFormToken } from '@/shared/lib/security/useFormToken';
+import { REQUEST_CALL_FORM_ENABLED } from '@/shared/lib/system/request-forms';
 import {
   checkDisposableEmail,
   isValidName,
@@ -22,6 +23,7 @@ import {
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { HCaptcha } from '@/shared/ui/components/HCaptcha';
 import { Recaptcha } from '@/shared/ui/components/Recaptcha';
+import { TemporarilyDisabledForm } from '@/shared/ui/components/temporarily-disabled-form';
 import { Button } from '@/shared/ui/kit/button';
 import { Select } from '@/shared/ui/kit/select';
 import { TextField } from '@/shared/ui/kit/text-field';
@@ -159,6 +161,10 @@ export const SecondStepToCall = ({
       onSubmit: secondStepCallSchema,
     },
     onSubmit: async (data) => {
+      if (!REQUEST_CALL_FORM_ENABLED) {
+        return;
+      }
+
       const elapsed = Date.now() - formMountedAt;
 
       if (elapsed < MIN_FILL_TIME_MS) {
@@ -539,6 +545,9 @@ export const SecondStepToCall = ({
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
+          if (!REQUEST_CALL_FORM_ENABLED) {
+            return;
+          }
           if (needsSmsVerification && !smsVerified) {
             setSmsError('Please verify your phone number with SMS code');
             return;
@@ -546,229 +555,237 @@ export const SecondStepToCall = ({
           handleSubmit().catch(console.error);
         }}
       >
-        <section className={st.fields}>
-          <FormRow>
-            <div className={`${st.inputWrapper} ${errors.onSubmit?.name ? st.error : ''}`}>
-              <Field name="name">
-                {(field) => (
-                  <TextField
-                    name={field.name}
-                    placeholder="Name"
-                    value={String(field.state.value)}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                )}
-              </Field>
-              {errors.onSubmit?.name?.map((err) => (
-                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-              ))}
-            </div>
-            <div
-              className={`${st.inputWrapper} ${errors.onSubmit?.email || emailValidationError ? st.error : ''}`}
-            >
-              <Field name="email">
-                {(field) => (
-                  <TextField
-                    name={field.name}
-                    placeholder="Work email"
-                    value={String(field.state.value)}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                )}
-              </Field>
-              {errors.onSubmit?.email?.map((err) => (
-                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-              ))}
-              {emailValidationError && <ErrorMessage>{emailValidationError}</ErrorMessage>}
-            </div>
-          </FormRow>
-          <FormRow>
-            <div className={`${st.inputWrapper} ${errors.onSubmit?.industry ? st.error : ''}`}>
-              <Field name="industry">
-                {(field) => (
-                  <Select
-                    items={industries.map((industry) => ({ label: industry, value: industry }))}
-                    value={field.state.value}
-                    onChange={field.handleChange}
-                    placeholder="Industry"
-                    showOtherInput={true}
-                    otherPlaceholder="Please specify your industry"
-                  />
-                )}
-              </Field>
-              {errors.onSubmit?.industry?.map((err) => (
-                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-              ))}
-            </div>
-            <div className={`${st.inputWrapper} ${errors.onSubmit?.company ? st.error : ''}`}>
-              <Field name="company">
-                {(field) => (
-                  <Select
-                    items={companySizes.map((size) => ({ label: size, value: size }))}
-                    value={field.state.value}
-                    onChange={field.handleChange}
-                    placeholder="Company size"
-                  />
-                )}
-              </Field>
-              {errors.onSubmit?.company?.map((err) => (
-                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-              ))}
-            </div>
-          </FormRow>
-          <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
-            <input
-              type="text"
-              name={HONEYPOT_FIELDS.url}
-              tabIndex={-1}
-              autoComplete="off"
-              style={{ display: 'none' }}
-            />
-          </div>
-          <div style={{ display: 'none' }}>
-            <input type="text" name={HONEYPOT_FIELDS.zip} tabIndex={-1} autoComplete="off" />
-          </div>
-          <div className={`${st.inputWrapper} ${errors.onSubmit?.captchaToken ? st.error : ''}`}>
-            <Field name="captchaToken">
-              {(field) => (
-                <>
-                  {TURNSTILE_ENABLED ? (
-                    <Turnstile
-                      key={captchaKey}
-                      siteKey={TURNSTILE_SITE_KEY}
-                      onSuccess={(token) => {
-                        setCaptchaToken(token);
-                        field.handleChange(token);
-                      }}
-                      onError={() => {
-                        setCaptchaToken(null);
-                        field.handleChange('');
-                      }}
-                      onExpire={() => {
-                        setCaptchaToken(null);
-                        field.handleChange('');
-                      }}
+        <TemporarilyDisabledForm disabled={!REQUEST_CALL_FORM_ENABLED}>
+          <section className={st.fields}>
+            <FormRow>
+              <div className={`${st.inputWrapper} ${errors.onSubmit?.name ? st.error : ''}`}>
+                <Field name="name">
+                  {(field) => (
+                    <TextField
+                      name={field.name}
+                      placeholder="Name"
+                      value={String(field.state.value)}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
                     />
-                  ) : HCAPTCHA_ENABLED ? (
-                    <HCaptcha
-                      resetKey={captchaKey}
-                      onSuccess={(token) => {
-                        setCaptchaToken(token);
-                        field.handleChange(token);
-                      }}
-                      onError={() => {
-                        setCaptchaToken(null);
-                        field.handleChange('');
-                      }}
-                      onExpire={() => {
-                        setCaptchaToken(null);
-                        field.handleChange('');
-                      }}
-                    />
-                  ) : RECAPTCHA_ENABLED ? (
-                    <Recaptcha
-                      resetKey={captchaKey}
-                      onSuccess={(token) => {
-                        setCaptchaToken(token);
-                        field.handleChange(token);
-                      }}
-                      onError={() => {
-                        setCaptchaToken(null);
-                        field.handleChange('');
-                      }}
-                      onExpire={() => {
-                        setCaptchaToken(null);
-                        field.handleChange('');
-                      }}
-                    />
-                  ) : null}
-                </>
-              )}
-            </Field>
-            {errors.onSubmit?.captchaToken?.map((err) => (
-              <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
-            ))}
-          </div>
-          {needsSmsVerification && captchaToken && (
-            <div className={st.inputWrapper}>
-              {!smsCodeSent ? (
-                <>
-                  <Button
-                    type="button"
-                    onClick={handleSendSmsCode}
-                    disabled={smsSending || !firstStepData.phone}
-                    variant="secondary"
-                  >
-                    {smsSending ? 'Sending...' : 'Send SMS'}
-                  </Button>
-                  {smsError && (
-                    <div style={{ marginBottom: '8px' }}>
-                      <ErrorMessage>{smsError}</ErrorMessage>
-                    </div>
                   )}
-                </>
-              ) : !smsVerified ? (
-                <div style={{ width: '100%' }}>
-                  <div className={st.smsCodeInputWrapper}>
-                    <Field name="smsCode">
-                      {(smsField) => (
-                        <TextField
-                          name={smsField.name}
-                          placeholder="Enter 6-digit code"
-                          value={String(smsField.state.value || '')}
-                          onChange={(e) => smsField.handleChange(e.target.value)}
-                          maxLength={6}
-                          style={{ flex: 1 }}
-                        />
-                      )}
-                    </Field>
+                </Field>
+                {errors.onSubmit?.name?.map((err) => (
+                  <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+                ))}
+              </div>
+              <div
+                className={`${st.inputWrapper} ${errors.onSubmit?.email || emailValidationError ? st.error : ''}`}
+              >
+                <Field name="email">
+                  {(field) => (
+                    <TextField
+                      name={field.name}
+                      placeholder="Work email"
+                      value={String(field.state.value)}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    />
+                  )}
+                </Field>
+                {errors.onSubmit?.email?.map((err) => (
+                  <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+                ))}
+                {emailValidationError && <ErrorMessage>{emailValidationError}</ErrorMessage>}
+              </div>
+            </FormRow>
+            <FormRow>
+              <div className={`${st.inputWrapper} ${errors.onSubmit?.industry ? st.error : ''}`}>
+                <Field name="industry">
+                  {(field) => (
+                    <Select
+                      items={industries.map((industry) => ({ label: industry, value: industry }))}
+                      value={field.state.value}
+                      onChange={field.handleChange}
+                      placeholder="Industry"
+                      showOtherInput={true}
+                      otherPlaceholder="Please specify your industry"
+                    />
+                  )}
+                </Field>
+                {errors.onSubmit?.industry?.map((err) => (
+                  <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+                ))}
+              </div>
+              <div className={`${st.inputWrapper} ${errors.onSubmit?.company ? st.error : ''}`}>
+                <Field name="company">
+                  {(field) => (
+                    <Select
+                      items={companySizes.map((size) => ({ label: size, value: size }))}
+                      value={field.state.value}
+                      onChange={field.handleChange}
+                      placeholder="Company size"
+                    />
+                  )}
+                </Field>
+                {errors.onSubmit?.company?.map((err) => (
+                  <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+                ))}
+              </div>
+            </FormRow>
+            <div
+              style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}
+            >
+              <input
+                type="text"
+                name={HONEYPOT_FIELDS.url}
+                tabIndex={-1}
+                autoComplete="off"
+                style={{ display: 'none' }}
+              />
+            </div>
+            <div style={{ display: 'none' }}>
+              <input type="text" name={HONEYPOT_FIELDS.zip} tabIndex={-1} autoComplete="off" />
+            </div>
+            <div className={`${st.inputWrapper} ${errors.onSubmit?.captchaToken ? st.error : ''}`}>
+              <Field name="captchaToken">
+                {(field) => (
+                  <>
+                    {TURNSTILE_ENABLED ? (
+                      <Turnstile
+                        key={captchaKey}
+                        siteKey={TURNSTILE_SITE_KEY}
+                        onSuccess={(token) => {
+                          setCaptchaToken(token);
+                          field.handleChange(token);
+                        }}
+                        onError={() => {
+                          setCaptchaToken(null);
+                          field.handleChange('');
+                        }}
+                        onExpire={() => {
+                          setCaptchaToken(null);
+                          field.handleChange('');
+                        }}
+                      />
+                    ) : HCAPTCHA_ENABLED ? (
+                      <HCaptcha
+                        resetKey={captchaKey}
+                        onSuccess={(token) => {
+                          setCaptchaToken(token);
+                          field.handleChange(token);
+                        }}
+                        onError={() => {
+                          setCaptchaToken(null);
+                          field.handleChange('');
+                        }}
+                        onExpire={() => {
+                          setCaptchaToken(null);
+                          field.handleChange('');
+                        }}
+                      />
+                    ) : RECAPTCHA_ENABLED ? (
+                      <Recaptcha
+                        resetKey={captchaKey}
+                        onSuccess={(token) => {
+                          setCaptchaToken(token);
+                          field.handleChange(token);
+                        }}
+                        onError={() => {
+                          setCaptchaToken(null);
+                          field.handleChange('');
+                        }}
+                        onExpire={() => {
+                          setCaptchaToken(null);
+                          field.handleChange('');
+                        }}
+                      />
+                    ) : null}
+                  </>
+                )}
+              </Field>
+              {errors.onSubmit?.captchaToken?.map((err) => (
+                <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+              ))}
+            </div>
+            {needsSmsVerification && captchaToken && (
+              <div className={st.inputWrapper}>
+                {!smsCodeSent ? (
+                  <>
                     <Button
                       type="button"
                       onClick={handleSendSmsCode}
                       disabled={smsSending || !firstStepData.phone}
                       variant="secondary"
-                      style={{ whiteSpace: 'nowrap' }}
                     >
-                      {smsSending ? 'Sending...' : 'Resend Code'}
+                      {smsSending ? 'Sending...' : 'Send SMS'}
                     </Button>
-                    <Button
-                      type="button"
-                      onClick={handleVerifySmsCode}
-                      disabled={smsVerifying || !formValues.smsCode}
-                    >
-                      {smsVerifying ? 'Verifying...' : 'Verify'}
-                    </Button>
-                  </div>
-                  {smsError && (
-                    <div style={{ marginBottom: '8px' }}>
-                      <ErrorMessage>{smsError}</ErrorMessage>
+                    {smsError && (
+                      <div style={{ marginBottom: '8px' }}>
+                        <ErrorMessage>{smsError}</ErrorMessage>
+                      </div>
+                    )}
+                  </>
+                ) : !smsVerified ? (
+                  <div style={{ width: '100%' }}>
+                    <div className={st.smsCodeInputWrapper}>
+                      <Field name="smsCode">
+                        {(smsField) => (
+                          <TextField
+                            name={smsField.name}
+                            placeholder="Enter 6-digit code"
+                            value={String(smsField.state.value || '')}
+                            onChange={(e) => smsField.handleChange(e.target.value)}
+                            maxLength={6}
+                            style={{ flex: 1 }}
+                          />
+                        )}
+                      </Field>
+                      <Button
+                        type="button"
+                        onClick={handleSendSmsCode}
+                        disabled={smsSending || !firstStepData.phone}
+                        variant="secondary"
+                        style={{ whiteSpace: 'nowrap' }}
+                      >
+                        {smsSending ? 'Sending...' : 'Resend Code'}
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={handleVerifySmsCode}
+                        disabled={smsVerifying || !formValues.smsCode}
+                      >
+                        {smsVerifying ? 'Verifying...' : 'Verify'}
+                      </Button>
                     </div>
-                  )}
-                </div>
-              ) : (
-                <div style={{ color: 'green', fontSize: '14px' }}>✓ Phone number verified</div>
-              )}
-            </div>
-          )}
-        </section>
-        <footer className={st.footer}>
-          <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-            {([canSubmit, isSubmitting]) => {
-              const isSmsVerificationRequired = needsSmsVerification && !smsVerified;
-              const isDisabled = !canSubmit || isSubmitting || isSmsVerificationRequired;
-              return (
-                <Button disabled={isDisabled} type="submit" fullWidth>
-                  {isSubmitting || emailValidating ? 'Loading...' : 'Next'}
-                </Button>
-              );
-            }}
-          </Subscribe>
-          {/**<span className={st.appendix}>
+                    {smsError && (
+                      <div style={{ marginBottom: '8px' }}>
+                        <ErrorMessage>{smsError}</ErrorMessage>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div style={{ color: 'green', fontSize: '14px' }}>✓ Phone number verified</div>
+                )}
+              </div>
+            )}
+          </section>
+          <footer className={st.footer}>
+            <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+              {([canSubmit, isSubmitting]) => {
+                const isSmsVerificationRequired = needsSmsVerification && !smsVerified;
+                const isDisabled =
+                  !REQUEST_CALL_FORM_ENABLED ||
+                  !canSubmit ||
+                  isSubmitting ||
+                  isSmsVerificationRequired;
+                return (
+                  <Button disabled={isDisabled} type="submit" fullWidth>
+                    {isSubmitting || emailValidating ? 'Loading...' : 'Next'}
+                  </Button>
+                );
+              }}
+            </Subscribe>
+            {/**<span className={st.appendix}>
             <span className={st.name}>Agent</span> will call you immediately.
           </span> */}
-        </footer>
+          </footer>
+        </TemporarilyDisabledForm>
       </form>
     </section>
   );
