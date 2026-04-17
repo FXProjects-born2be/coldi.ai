@@ -4,7 +4,7 @@ import { LeadFormContainer } from './components';
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: '/lead-request',
+    canonical: '/call-request',
   },
 };
 

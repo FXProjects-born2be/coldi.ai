@@ -5,7 +5,9 @@ import { useEffect, useMemo } from 'react';
 import PhoneInput from 'react-phone-input-2';
 
 import { useForm, useStore } from '@/shared/lib/forms';
+import { REQUEST_CALL_FORM_ENABLED } from '@/shared/lib/system/request-forms';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
+import { TemporarilyDisabledForm } from '@/shared/ui/components/temporarily-disabled-form';
 import { Button } from '@/shared/ui/kit/button';
 import { Option } from '@/shared/ui/kit/option';
 
@@ -59,6 +61,10 @@ export const FirstStepToCall = ({
       onSubmit: firstStepCallSchema,
     },
     onSubmit: (data) => {
+      if (!REQUEST_CALL_FORM_ENABLED) {
+        return;
+      }
+
       onSubmit(data.value);
       localStorage?.setItem('CallRequestFirstStepData', JSON.stringify(data.value));
     },
@@ -86,75 +92,84 @@ export const FirstStepToCall = ({
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
+          if (!REQUEST_CALL_FORM_ENABLED) {
+            return;
+          }
           handleSubmit().catch(console.error);
         }}
       >
-        <header className={st.header}>
-          <h2>Mark the call scenarios you are interested in</h2>
-          <span className={st.divider} />
-          <Field name="scenario">
-            {(field) => (
-              <div className={st.optionsContainer}>
-                {scenarios.map((scenario) => (
-                  <Option
-                    key={scenario}
-                    selected={field.state.value.includes(scenario)}
-                    onClick={() => {
-                      const currentValue = field.state.value;
-                      if (currentValue.includes(scenario)) {
-                        field.handleChange(currentValue.filter((s: string) => s !== scenario));
-                      } else {
-                        field.handleChange([...currentValue, scenario]);
-                      }
-                    }}
-                  >
-                    {scenario}
-                  </Option>
-                ))}
-              </div>
-            )}
-          </Field>
-        </header>
-        <Field name="phone">
-          {(field) => (
-            <Field name="countryCode">
-              {(countryCodeField) => (
-                <div className={st.phoneInputContainer}>
-                  <PhoneInput
-                    country={'us'}
-                    value={String(field.state.value)}
-                    onChange={(phone, country) => {
-                      field.handleChange(phone);
-                      if (country && typeof country === 'object' && 'dialCode' in country) {
-                        const dialCode = `+${country.dialCode}`;
-                        countryCodeField.handleChange(dialCode);
-                      }
-                    }}
-                    onBlur={field.handleBlur}
-                    placeholder="Phone Number"
-                    inputClass={`${st.phoneInput} ${errors.onSubmit?.phone ? st.error : ''}`}
-                    buttonClass={st.phoneInputButton}
-                    dropdownClass={st.phoneInputDropdown}
-                    enableSearch={true}
-                    searchPlaceholder="Search country..."
-                    autoFormat={true}
-                  />
-                  {errors.onSubmit?.phone?.map((err) => (
-                    <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+        <TemporarilyDisabledForm disabled={!REQUEST_CALL_FORM_ENABLED}>
+          <header className={st.header}>
+            <h2>Mark the call scenarios you are interested in</h2>
+            <span className={st.divider} />
+            <Field name="scenario">
+              {(field) => (
+                <div className={st.optionsContainer}>
+                  {scenarios.map((scenario) => (
+                    <Option
+                      key={scenario}
+                      selected={field.state.value.includes(scenario)}
+                      onClick={() => {
+                        const currentValue = field.state.value;
+                        if (currentValue.includes(scenario)) {
+                          field.handleChange(currentValue.filter((s: string) => s !== scenario));
+                        } else {
+                          field.handleChange([...currentValue, scenario]);
+                        }
+                      }}
+                    >
+                      {scenario}
+                    </Option>
                   ))}
                 </div>
               )}
             </Field>
-          )}
-        </Field>
+          </header>
+          <Field name="phone">
+            {(field) => (
+              <Field name="countryCode">
+                {(countryCodeField) => (
+                  <div className={st.phoneInputContainer}>
+                    <PhoneInput
+                      country={'us'}
+                      value={String(field.state.value)}
+                      onChange={(phone, country) => {
+                        field.handleChange(phone);
+                        if (country && typeof country === 'object' && 'dialCode' in country) {
+                          const dialCode = `+${country.dialCode}`;
+                          countryCodeField.handleChange(dialCode);
+                        }
+                      }}
+                      onBlur={field.handleBlur}
+                      placeholder="Phone Number"
+                      inputClass={`${st.phoneInput} ${errors.onSubmit?.phone ? st.error : ''}`}
+                      buttonClass={st.phoneInputButton}
+                      dropdownClass={st.phoneInputDropdown}
+                      enableSearch={true}
+                      searchPlaceholder="Search country..."
+                      autoFormat={true}
+                    />
+                    {errors.onSubmit?.phone?.map((err) => (
+                      <ErrorMessage key={err.message}>{err.message}</ErrorMessage>
+                    ))}
+                  </div>
+                )}
+              </Field>
+            )}
+          </Field>
 
-        <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-          {([canSubmit, isSubmitting]) => (
-            <Button disabled={!canSubmit || isSubmitting} type="submit" fullWidth>
-              {isSubmitting ? 'Loading...' : 'Next'}
-            </Button>
-          )}
-        </Subscribe>
+          <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+            {([canSubmit, isSubmitting]) => (
+              <Button
+                disabled={!REQUEST_CALL_FORM_ENABLED || !canSubmit || isSubmitting}
+                type="submit"
+                fullWidth
+              >
+                {isSubmitting ? 'Loading...' : 'Next'}
+              </Button>
+            )}
+          </Subscribe>
+        </TemporarilyDisabledForm>
       </form>
     </section>
   );

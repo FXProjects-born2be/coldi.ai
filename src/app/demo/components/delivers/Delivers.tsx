@@ -104,7 +104,7 @@ export const Delivers = () => {
           <Card {...cards[3]} reverse />
         </motion.div>
       </section>
-      <Link href="/lead-request" className={st.button}>
+      <Link href="/call-request" className={st.button}>
         <motion.div
           variants={blurInUp}
           initial="hidden"

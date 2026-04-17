@@ -34,7 +34,7 @@ export const Hero = () => {
             Hired and Ready Before You Even Say &quot;Engage!&quot;
           </motion.p>
         </div>
-        <Link href="/lead-request">
+        <Link href="/call-request">
           <motion.div
             variants={blurInUp}
             initial="hidden"

@@ -156,7 +156,7 @@ export const Advantages = () => {
         viewport={{ once: true }}
         className={st.button}
       >
-        <Link href="/lead-request">
+        <Link href="/call-request">
           <motion.div
             variants={blurInUp}
             initial="hidden"
