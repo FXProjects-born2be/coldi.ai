@@ -43,6 +43,12 @@ const industriesItems = [
   },
 ];
 
+const useCasesItems = [
+  {
+    label: 'Helios',
+    href: '/helios',
+  },
+];
 //https://calendly.com/coldi/30min
 
 const headerVisibilityOnScrollHandle = (set: (visible: boolean) => void) => {
@@ -223,6 +229,23 @@ const Navigation = () => {
           {industriesItems.map((item) => (
             <li key={item.href} itemProp="name">
               <Image className={st.dropdownIcon} src={item.icon} alt="" width={20} height={20} />
+              <Link href={item.href} itemProp="url">
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </li>
+      <li
+        className={cn(st.hasDropdown, {
+          [st.active]: pathname.startsWith('/use-cases'),
+        })}
+        itemProp="name"
+      >
+        <span>Use Cases</span>
+        <ul className={st.dropdown}>
+          {useCasesItems.map((item) => (
+            <li key={item.href} itemProp="name">
               <Link href={item.href} itemProp="url">
                 {item.label}
               </Link>

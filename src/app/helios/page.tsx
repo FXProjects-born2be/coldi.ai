@@ -1,6 +1,3 @@
-import { redirect } from 'next/navigation';
-
-/*
 import type { Metadata } from 'next';
 
 import { CaseStudies, Hero, NextSteps, Overview } from './components';
@@ -19,12 +16,8 @@ export const metadata: Metadata = {
     images: 'https://coldi.ai/images/meta.png',
   },
 };
-*/
 
 export default function UseCasesPage() {
-  redirect('/');
-
-  /*
   return (
     <main>
       <Hero />
@@ -33,5 +26,4 @@ export default function UseCasesPage() {
       <NextSteps />
     </main>
   );
-  */
 }

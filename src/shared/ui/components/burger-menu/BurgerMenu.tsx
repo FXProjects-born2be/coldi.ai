@@ -61,6 +61,8 @@ const productsItems = [
   { label: 'VoIP Phone Service', href: '/products/voip-phone-service' },
 ];
 
+const useCasesItems = [{ label: 'Helios', href: '/helios' }];
+
 const aboutItems = [{ label: 'Meet the Team', href: '/meettheteam' }];
 
 export const BurgerMenu = () => {
@@ -68,6 +70,7 @@ export const BurgerMenu = () => {
   const [openProducts, setOpenProducts] = useState(false);
   const [openIndustries, setOpenIndustries] = useState(false);
   const [openAbout, setOpenAbout] = useState(false);
+  const [openUseCases, setOpenUseCases] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -226,6 +229,43 @@ export const BurgerMenu = () => {
                         itemProp="url"
                       >
                         <Image src={item.icon} alt="" width={20} height={20} />
+                        <span itemProp="name">{item.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                <div className={st.group}>
+                  <button
+                    className={cn(st.groupTrigger, {
+                      [st.active]: pathname.startsWith('/use-cases'),
+                      [st.groupOpen]: openUseCases,
+                    })}
+                    onClick={() => setOpenUseCases((v) => !v)}
+                  >
+                    <span itemProp="name">Use Cases</span>
+                    <Image
+                      src="/icons/header/arrow.svg"
+                      alt=""
+                      width={16}
+                      height={8}
+                      className={st.groupArrow}
+                    />
+                  </button>
+                  <div
+                    className={cn(st.groupItems, {
+                      [st.groupItemsOpen]: openUseCases,
+                    })}
+                  >
+                    {useCasesItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={cn(st.subItem, {
+                          [st.active]: pathname === item.href,
+                        })}
+                        itemProp="url"
+                      >
                         <span itemProp="name">{item.label}</span>
                       </Link>
                     ))}
