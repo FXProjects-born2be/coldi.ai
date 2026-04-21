@@ -111,7 +111,7 @@ export const Why = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        Why Coldi AI Agents for Debt Collection
+        Why AI Agents for Debt Collection
       </motion.h2>
 
       <div className={st.features}>

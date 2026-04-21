@@ -4,7 +4,7 @@ import { CaseStudies, Hero, NextSteps, Overview } from './components';
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: '/use-cases',
+    canonical: '/helios',
   },
   title: 'How Helios Cut Costs by 30% & Scaled with AI',
   description:

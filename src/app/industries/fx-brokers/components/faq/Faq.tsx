@@ -42,6 +42,11 @@ const faqs: FaqItem[] = [
     answer:
       'Most trading platforms can integrate and launch their first automated voice flows in just a few days.',
   },
+  {
+    question: 'Is AI forex trading profitable​?',
+    answer:
+      'AI in forex trading enhances profitability by automating lead outreach and reactivating dormant traders through high-speed, 24/7 communication. These AI voice agents improve broker margins by resolving support queries instantly and providing a seamless, multilingual experience for global users. By integrating advanced technology, brokerage firms can scale operations and increase retention without growing their human workforce.',
+  },
 ];
 
 export const Faq = () => {

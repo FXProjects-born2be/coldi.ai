@@ -39,8 +39,8 @@ const industries = [
     description: (
       <>
         <p>
-          Our AI voice agents serve as a 24/7 support layer, assisting traders with platform
-          navigation, account inquiries, and complex verification processes (KYC).
+          Our AI voice agents serve as a 24/7 for{' '}
+          <Link href="/industries/fx-brokers">AI for forex trading</Link> serve as a 24/7.
         </p>
         <p>
           This allows account managers and advisory teams to pivot their focus toward high-value
