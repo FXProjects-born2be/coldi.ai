@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { ProductStructuredData } from '@/shared/ui/components/structured-data/ProductStructuredData';
+
 import { Cards, Comparison, ContentCards, Faq, Hero, Why } from './components';
 
 export const metadata: Metadata = {
@@ -20,6 +22,13 @@ export const metadata: Metadata = {
 export default function InboundCallingPage() {
   return (
     <main>
+      <ProductStructuredData
+        id="inbound-calling-product-jsonld"
+        name="AI Inbound Calling System"
+        image={['https://coldi.ai/images/products/card-inbound-v2.png']}
+        description="Smart AI inbound calling systems that handle customer inquiries instantly without the overhead of a traditional call center. Features include real-time automation, smart routing, multilingual support in 30+ languages, and seamless CRM integration."
+        url="https://coldi.ai/products/inbound-calling"
+      />
       <Hero />
       <Why />
       <Cards />

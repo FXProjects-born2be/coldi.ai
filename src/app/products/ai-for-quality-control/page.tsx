@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { ProductStructuredData } from '@/shared/ui/components/structured-data/ProductStructuredData';
+
 import { Faq, Hero, Optimization, Results, Traceability, Why, Workflow } from './components';
 
 export const metadata: Metadata = {
@@ -20,6 +22,13 @@ export const metadata: Metadata = {
 export default function AiForQualityControlPage() {
   return (
     <main>
+      <ProductStructuredData
+        id="ai-for-quality-control-product-jsonld"
+        name="AI-Powered Call Monitoring & Quality Control"
+        image={['https://coldi.ai/images/ai-for-quality-control/hero-visual.png']}
+        description="Transform operational oversight with a fully configurable, AI-driven quality control system. Automatically review, score, and analyze every conversation to ensure compliance, script adherence, and lead qualification with zero-touch CRM sync."
+        url="https://coldi.ai/products/ai-for-quality-control"
+      />
       <Hero />
       <Why />
       <Workflow />
