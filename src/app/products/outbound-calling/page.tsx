@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { ProductStructuredData } from '@/shared/ui/components/structured-data/ProductStructuredData';
+
 import { Different, Faq, Hero, How, Multilingual, Results, UseCases, Why } from './components';
 
 export const metadata: Metadata = {
@@ -20,6 +22,13 @@ export const metadata: Metadata = {
 export default function OutboundCallingPage() {
   return (
     <main>
+      <ProductStructuredData
+        id="outbound-calling-product-jsonld"
+        name="AI Outbound Calling Agents"
+        image={['https://coldi.ai/images/products/card-outbound-v2.png']}
+        description="AI Voice Agents trained to engage, qualify leads, and handoff opportunities to your sales team. Coldi provides human-like natural conversation flow, multi-language support, and 24/7 availability for scalable outbound sales processes."
+        url="https://coldi.ai/products/outbound-calling"
+      />
       <Hero />
       <Results />
       <How />

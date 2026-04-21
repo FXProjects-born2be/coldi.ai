@@ -30,7 +30,7 @@ const PRODUCT_CARDS: ProductCard[] = [
     cta: 'Explore Outbound',
     icon: '/images/home/solution-sliders/product-outbound.svg',
     description:
-      'Automate outbound campaigns, lead qualification, and follow-ups with AI voice agents that scale your sales and outreach efforts.',
+      'Leverage <a href="/products/outbound-calling">AI outbound calling agents</a> to automate high-volume outreach, qualify leads instantly, and manage follow-ups. Build a relentless sales pipeline that scales without the need for additional headcount.',
   },
   {
     title: 'Inbound AI Calling',
@@ -147,7 +147,7 @@ export const ProductSolutionsSlider = () => {
                 <div className={st.cardBody}>
                   <div className={st.cardText}>
                     <h3>{card.title}</h3>
-                    <p>{card.description}</p>
+                    <p dangerouslySetInnerHTML={{ __html: card.description }} />
                   </div>
 
                   <Link href={card.href} className={st.button}>

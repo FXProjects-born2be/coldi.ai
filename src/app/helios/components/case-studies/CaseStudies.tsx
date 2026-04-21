@@ -50,7 +50,7 @@ const CaseStudyCard = ({
       className={st.stickyItem}
       style={
         {
-          '--stack-offset': `${index * 28}px`,
+          '--stack-offset': `${index * 5}px`,
           '--stack-z': index + 1,
         } as CSSProperties
       }

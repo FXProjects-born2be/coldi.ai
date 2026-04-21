@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { ProductStructuredData } from '@/shared/ui/components/structured-data/ProductStructuredData';
+
 import { Comparison, Cost, Faq, Future, Hero, Practical, Why } from './components';
 
 export const metadata: Metadata = {
@@ -20,6 +22,13 @@ export const metadata: Metadata = {
 export default function AgentDevelopmentPage() {
   return (
     <main>
+      <ProductStructuredData
+        id="agent-development-product-jsonld"
+        name="Custom AI Agent Development Services"
+        image={['https://coldi.ai/images/products/card-agent-development-v2.png']}
+        description="Premium AI Agent Development services designed to automate conversations and launch intelligent voice solutions. Coldi delivers bespoke conversational agents that understand context, carry natural conversations, and integrate seamlessly with CRMs and existing workflows."
+        url="https://coldi.ai/products/agent-development"
+      />
       <Hero />
       <Why />
       <Comparison />
