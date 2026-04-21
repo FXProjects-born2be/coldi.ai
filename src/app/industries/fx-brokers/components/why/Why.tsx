@@ -65,7 +65,7 @@ export const Why = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        Why Coldi AI Agents for <br />
+        Why AI Agents for <br />
         Trading Platforms & Brokerage
       </motion.h2>
 
