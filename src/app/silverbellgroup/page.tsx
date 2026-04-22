@@ -1,6 +1,3 @@
-import { redirect } from 'next/navigation';
-
-/*
 import type { Metadata } from 'next';
 
 import { CaseStudies, Hero } from './components';
@@ -19,17 +16,12 @@ export const metadata: Metadata = {
     images: 'https://coldi.ai/images/meta.png',
   },
 };
-*/
 
 export default function SilverbellGroupPage() {
-  redirect('/');
-
-  /*
   return (
     <main>
       <Hero />
       <CaseStudies />
     </main>
   );
-  */
 }
