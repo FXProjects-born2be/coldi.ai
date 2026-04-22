@@ -61,7 +61,10 @@ const productsItems = [
   { label: 'VoIP Phone Service', href: '/products/voip-phone-service' },
 ];
 
-const useCasesItems = [{ label: 'Helios', href: '/helios' }];
+const useCasesItems = [
+  { label: 'Helios', href: '/helios' },
+  { label: 'Silverbell Group', href: '/silverbellgroup' },
+];
 
 const aboutItems = [{ label: 'Meet the Team', href: '/meettheteam' }];
 

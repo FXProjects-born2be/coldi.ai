@@ -22,7 +22,7 @@ type ContentRow = {
 
 const rows: ContentRow[] = [
   {
-    title: 'AI Agent First-Call Resolution for Ai Forex Trading Frist-Call Resolution',
+    title: 'Ai Forex Trading Frist-Call Resolution',
     description:
       'In the fast-paced world of trading, timing is everything. Coldi.ai AI agents identify intent, verify identity, and resolve trader needs during the first interaction.',
     listTitle: 'This means:',

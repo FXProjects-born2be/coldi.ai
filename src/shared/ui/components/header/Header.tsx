@@ -48,6 +48,10 @@ const useCasesItems = [
     label: 'Helios',
     href: '/helios',
   },
+  {
+    label: 'Silverbell Group',
+    href: '/silverbellgroup',
+  },
 ];
 //https://calendly.com/coldi/30min
 
@@ -243,6 +247,9 @@ const Navigation = () => {
         itemProp="name"
       >
         <span>Use Cases</span>
+        <span className={st.dropdownArrow}>
+          <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
+        </span>
         <ul className={st.dropdown}>
           {useCasesItems.map((item) => (
             <li key={item.href} itemProp="name">
