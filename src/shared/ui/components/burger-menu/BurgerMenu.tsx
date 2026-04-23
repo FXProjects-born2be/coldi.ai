@@ -62,8 +62,8 @@ const productsItems = [
 ];
 
 const useCasesItems = [
-  { label: 'Helios', href: '/helios' },
-  { label: 'Silverbell Group', href: '/silverbellgroup' },
+  { label: 'Helios (FX)', href: '/helios' },
+  { label: 'Silverbell Group (Outsourcing)', href: '/silverbellgroup' },
 ];
 
 const aboutItems = [{ label: 'Meet the Team', href: '/meettheteam' }];
