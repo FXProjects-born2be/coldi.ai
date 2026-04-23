@@ -52,7 +52,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: 'Serhii Zhakhovskyi',
-    role: 'Sales Manager',
+    role: 'Partnerships & Growth Manager',
     image: '/images/meet-the-team/serhii-zhakhovskyi.png',
     alt: 'Portrait of Serhii Zhakhovskyi',
     linkedinUrl: 'https://www.linkedin.com/in/serhiizhaks/',

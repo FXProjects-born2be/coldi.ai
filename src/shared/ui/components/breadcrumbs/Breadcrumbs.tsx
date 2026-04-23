@@ -34,6 +34,8 @@ const segmentLabels: Record<string, string> = {
   'use-cases': 'Use Cases',
   legal: 'Legal',
   silverbellgroup: 'Silverbell Group',
+  helios: 'Helios',
+  'residential-service-automation': 'Residential Service Automation',
 };
 
 export const Breadcrumbs = () => {
