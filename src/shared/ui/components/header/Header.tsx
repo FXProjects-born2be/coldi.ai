@@ -45,11 +45,11 @@ const industriesItems = [
 
 const useCasesItems = [
   {
-    label: 'Helios',
+    label: 'Helios (FX)',
     href: '/helios',
   },
   {
-    label: 'Silverbell Group',
+    label: 'Silverbell Group (Outsourcing)',
     href: '/silverbellgroup',
   },
 ];
