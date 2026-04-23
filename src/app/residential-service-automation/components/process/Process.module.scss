@@ -1,0 +1,548 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  padding: 64px 165px 165px;
+  background: #fff;
+  overflow: clip;
+
+  @include fourteenInch {
+    padding-inline: 64px;
+  }
+
+  @include mobile {
+    padding: 32px 16px 64px;
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  margin: 0 auto;
+
+  @include mobile {
+    gap: 24px;
+  }
+}
+
+.stickyItem {
+  position: sticky;
+  top: calc(90px + var(--stack-offset, 0px));
+  z-index: var(--stack-z, 1);
+  padding-bottom: 24px;
+
+  @include mobile {
+    position: static;
+    top: auto;
+    z-index: auto;
+    padding-bottom: 0;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 48px;
+  border: 1px solid rgba(83, 86, 98, 0.1);
+  border-radius: 48px;
+  background: #fff;
+  box-shadow: 0 15px 32px 0 rgba(83, 86, 98, 0.05);
+  transform-origin: center top;
+  will-change: transform, opacity;
+
+  @include mobile {
+    gap: 24px;
+    padding: 24px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+
+  @include mobile {
+    flex-direction: column-reverse;
+    gap: 32px;
+  }
+}
+
+.headerCopy {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+
+  h2 {
+    margin: 0;
+    color: #0c1021;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1.2;
+
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+
+  p {
+    margin: 0;
+    color: #535662;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 8px 12px;
+  border-radius: 16px;
+  background: rgba(66, 104, 255, 0.15);
+  color: #4268ff;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 64px;
+  background: #4268ff;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.visual {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle, rgba(66, 104, 255, 0.08) 1.2px, transparent 1.2px),
+    #fafafa;
+  background-size: 14px 14px;
+  img {
+    width: 100%;
+    height: auto;
+    &.desktopImage {
+      display: block;
+      @include mobile {
+        display: none;
+      }
+    }
+    &.mobileImage {
+      display: none;
+      @include mobile {
+        display: block;
+      }
+    }
+  }
+}
+
+.visualTriage {
+  height: 292px;
+
+  @include mobile {
+    height: 350px;
+  }
+}
+
+.visualCapture {
+  height: 243px;
+
+  @include mobile {
+    height: 350px;
+  }
+}
+
+.visualScheduling {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 243px;
+
+  @include mobile {
+    height: 350px;
+  }
+}
+
+.diagramDesktop,
+.diagramMobile {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.diagramMobile {
+  display: none;
+}
+
+.connectorLine {
+  stroke: rgba(66, 104, 255, 0.85);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 10 10;
+}
+
+.flowNode {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 3.677px 18.386px 0 rgba(12, 16, 33, 0.1);
+  color: #0c1021;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.flowNodePrimary {
+  background: #4268ff;
+  color: #fff;
+}
+
+.incomingCall {
+  left: 10%;
+  top: 44%;
+}
+
+.intentCheck {
+  left: 27%;
+  top: 44%;
+}
+
+.emergency {
+  left: 43.5%;
+  top: 44%;
+}
+
+.transfer {
+  left: 58%;
+  top: 15%;
+}
+
+.standard {
+  left: 43%;
+  top: 68%;
+}
+
+.zipValidation {
+  left: 58%;
+  top: 68%;
+}
+
+.qualifiedLead {
+  left: 77%;
+  top: 68%;
+}
+
+.captureChip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 11.5px;
+  padding: 7px 22px 7px 7px;
+  border: 1px solid rgba(45, 45, 45, 0.1);
+  border-radius: 58px;
+  background: #fff;
+  box-shadow: 0 3.677px 18.386px 0 rgba(12, 16, 33, 0.08);
+
+  @include mobile {
+    transform: scale(0.9);
+    transform-origin: top left;
+  }
+}
+
+.captureChipIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  padding: 7px;
+  border: 1px solid rgba(40, 188, 98, 0.1);
+  border-radius: 58px;
+  background: rgba(61, 236, 130, 0.15);
+}
+
+.captureChipText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  span {
+    color: #4268ff;
+    font-family: var(--font-urbanist), sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  strong {
+    color: #0c1021;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+}
+
+.captureCollect {
+  left: 46px;
+  top: 113px;
+}
+
+.captureTrust {
+  left: 317px;
+  top: 45px;
+}
+
+.captureTransfer {
+  left: 503px;
+  top: 146px;
+}
+
+.captureContinue {
+  left: 735px;
+  top: 71px;
+}
+
+.scheduleCard {
+  display: flex;
+  width: 427px;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 3.677px 18.386px 0 rgba(12, 16, 33, 0.1);
+
+  @include mobile {
+    width: min(265px, calc(100% - 32px));
+  }
+}
+
+.scheduleHeader {
+  color: #0c1021;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.scheduleSlots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.scheduleSlot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+  border-radius: 24px;
+  background: rgba(12, 16, 33, 0.03);
+  opacity: 0.6;
+  color: #0c1021;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.scheduleSlotSelected {
+  background: #fff;
+  opacity: 1;
+}
+
+.checkbox,
+.checkboxSelected {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.checkbox {
+  border: 1px solid rgba(12, 16, 33, 0.1);
+  background: #f6f6f6;
+}
+
+.checkboxSelected {
+  background: #4268ff;
+}
+
+.scheduleFooter {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  span {
+    color: #535662;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  strong {
+    color: #28bc62;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(83, 86, 98, 0.15);
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.summaryCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+  border-radius: 32px;
+
+  h3 {
+    margin: 0;
+    color: #0c1021;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  p {
+    margin: 0;
+    color: #535662;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+}
+
+@include mobile {
+  .diagramDesktop {
+    display: none;
+  }
+
+  .diagramMobile {
+    display: block;
+  }
+
+  .flowNode {
+    white-space: normal;
+  }
+
+  .incomingCall {
+    left: 110px;
+    top: 16px;
+    width: 90px;
+  }
+
+  .intentCheck {
+    left: 102px;
+    top: 84px;
+    width: 106px;
+  }
+
+  .emergency {
+    left: 98px;
+    top: 162px;
+    width: 114px;
+  }
+
+  .standard {
+    left: 12px;
+    top: 268px;
+    width: 106px;
+  }
+
+  .transfer {
+    left: 214px;
+    top: 268px;
+    width: 84px;
+  }
+
+  .zipValidation {
+    left: 104px;
+    top: 236px;
+    width: 104px;
+  }
+
+  .qualifiedLead {
+    left: 205px;
+    top: 300px;
+    width: 96px;
+  }
+
+  .captureCollect {
+    left: 14px;
+    top: 186px;
+  }
+
+  .captureTrust {
+    left: 22px;
+    top: 24px;
+  }
+
+  .captureContinue {
+    left: 100px;
+    top: 105px;
+  }
+
+  .captureTransfer {
+    left: 106px;
+    top: 264px;
+  }
+}

@@ -52,6 +52,10 @@ const useCasesItems = [
     label: 'Silverbell Group (Outsourcing)',
     href: '/silverbellgroup',
   },
+  {
+    label: 'Residential Service Automation',
+    href: '/residential-service-automation',
+  },
 ];
 //https://calendly.com/coldi/30min
 

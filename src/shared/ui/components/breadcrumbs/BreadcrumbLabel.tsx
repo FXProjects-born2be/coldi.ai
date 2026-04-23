@@ -9,7 +9,7 @@ export const BreadcrumbLabel = ({ segment, label }: { segment: string; label: st
 
   useEffect(() => {
     setLabelOverride(segment, label);
-  }, [segment, label]);
+  }, [label, segment, setLabelOverride]);
 
   return null;
 };
