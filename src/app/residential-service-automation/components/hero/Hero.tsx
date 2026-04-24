@@ -19,6 +19,11 @@ export const Hero = () => {
       >
         <span className={st.badge}>{heroContent.label}</span>
         <h1>{heroContent.title}</h1>
+        <div className={st.copy}>
+          {heroContent.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
       </motion.div>
     </section>
   );
