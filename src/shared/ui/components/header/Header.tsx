@@ -53,7 +53,7 @@ const useCasesItems = [
     href: '/silverbellgroup',
   },
   {
-    label: 'Residential Service Automation',
+    label: 'Residential Service Automation (Stone Electric)',
     href: '/residential-service-automation',
   },
 ];

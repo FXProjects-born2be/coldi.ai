@@ -25,6 +25,7 @@ export type AudioScenario = {
 export const heroContent = {
   label: 'Case Study',
   title: 'Residential Service Automation',
+  paragraphs: ['See how we helped Stone Electric Company grow with AI voice agents.'],
 };
 
 export const processSections: ProcessSection[] = [
