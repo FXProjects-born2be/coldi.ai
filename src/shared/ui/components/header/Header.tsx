@@ -45,15 +45,15 @@ const industriesItems = [
 
 const useCasesItems = [
   {
-    label: 'Helios (FX)',
+    label: 'Fintech (Helios)',
     href: '/helios',
   },
   {
-    label: 'Silverbell Group (Outsourcing)',
+    label: 'BPO (Silverbell Group)',
     href: '/silverbellgroup',
   },
   {
-    label: 'Residential Service Automation (Stone Electric)',
+    label: 'Residential Service (Stone Electric)',
     href: '/residential-service-automation',
   },
 ];
