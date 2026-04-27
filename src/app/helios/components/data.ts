@@ -17,7 +17,7 @@ export const overview = {
   label: 'Case Study',
   title: 'Helios - Scaling Performance & Slashing Operational Costs with Conversational AI',
   description:
-    'Helios, a leading firm in the FX (Foreign Exchange) industry with a global footprint, faced the challenge of scaling their sales operations while keeping fixed costs under control. By integrating our AI solution, they reduced their human sales force by 64% while quintupling call volume and maintaining a steady conversion rate.',
+    'Helios, a leading firm in the FX (<a href="/industries/fx-brokers">Foreign Exchange</a>) industry with a global footprint, faced the challenge of scaling their sales operations while keeping fixed costs under control. By integrating our AI solution, they reduced their human sales force by 64% while quintupling call volume and maintaining a steady conversion rate.',
 };
 
 export const studySections: StudySection[] = [

@@ -21,7 +21,7 @@ export const Overview = () => {
           viewport={{ once: true }}
         >
           <h2>Project Overview</h2>
-          <p>{overview.description}</p>
+          <p dangerouslySetInnerHTML={{ __html: overview.description }} />
         </motion.article>
 
         <motion.div
