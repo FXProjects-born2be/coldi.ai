@@ -1,0 +1,107 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  position: relative;
+  overflow: hidden;
+  padding: 165px 165px 96px;
+  background-color: #fff;
+  background-image: url("/images/residential-service-automation/hero.png");
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+
+  @include fourteenInch {
+    padding-inline: 64px;
+  }
+
+  @include mobile {
+    padding: 112px 16px 32px;
+  }
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin: 0 auto;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    right: -156px;
+    border: 1px solid rgba(66, 104, 255, 0.08);
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
+  &::before {
+    top: -88px;
+    width: 420px;
+    height: 168px;
+    transform: rotate(-16deg);
+  }
+
+  &::after {
+    top: -26px;
+    width: 320px;
+    height: 120px;
+    transform: rotate(-12deg);
+  }
+
+  @include mobile {
+    &::before {
+      right: -98px;
+      top: -52px;
+      width: 238px;
+      height: 92px;
+    }
+
+    &::after {
+      right: -70px;
+      top: -18px;
+      width: 186px;
+      height: 70px;
+    }
+  }
+}
+
+.badge {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 16px;
+  background: rgba(66, 104, 255, 0.15);
+  color: #4268ff;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.inner h1 {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  color: #0c1021;
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1.05;
+
+  @include mobile {
+    max-width: 100%;
+    font-size: 32px;
+    line-height: 1.2;
+  }
+}
+
+.inner p {
+  margin: 0;
+  color: #535662;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.55;
+}

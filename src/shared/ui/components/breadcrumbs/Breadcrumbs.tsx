@@ -37,6 +37,7 @@ const segmentLabels: Record<string, string> = {
   helios: 'Helios',
   'residential-service-automation': 'Residential Service Automation',
   'agro-industry': 'Agro-Industry',
+  'hvac-leads': 'HVAC Leads',
 };
 
 export const Breadcrumbs = () => {

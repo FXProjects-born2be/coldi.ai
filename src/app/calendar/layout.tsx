@@ -10,10 +10,17 @@ import type { Metadata } from 'next';
 import './layout.scss';
 
 export const metadata: Metadata = {
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
+  alternates: {
+    canonical: '/calendar',
+  },
+  title: 'Book a demo with us',
+  description:
+    'Book a demo to see Coldi in action. Our AI voice agents automate bookings 24/7 and sync with your tools to scale your business. Start scheduling smarter today',
+  openGraph: {
+    title: 'Book a demo with us',
+    description:
+      'Book a demo to see Coldi in action. Our AI voice agents automate bookings 24/7 and sync with your tools to scale your business. Start scheduling smarter today',
+    images: 'https://coldi.ai/images/meta.png',
   },
 };
 

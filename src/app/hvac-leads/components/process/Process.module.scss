@@ -1,0 +1,188 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding: 69px 165px 64px;
+  background: #fff;
+  overflow: clip;
+
+  @include fourteenInch {
+    padding-inline: 64px;
+  }
+
+  @include mobile {
+    gap: 32px;
+    padding: 32px 16px 64px;
+  }
+}
+
+.heroImage {
+  overflow: hidden;
+  border-radius: 42px;
+  background: #eef3ff;
+
+  @include mobile {
+    border-radius: 16px;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.inner {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  flex-direction: column;
+  gap: 0;
+
+  @include mobile {
+    gap: 24px;
+  }
+}
+
+.stickyItem {
+  position: sticky;
+  top: calc(90px + var(--stack-offset, 0px));
+  z-index: var(--stack-z, 1);
+  padding-bottom: 24px;
+
+  @include mobile {
+    position: static;
+    top: auto;
+    z-index: auto;
+    padding-bottom: 0;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 48px;
+  border: 1px solid rgba(83, 86, 98, 0.1);
+  border-radius: 48px;
+  background: #fff;
+  box-shadow: 0 15px 32px 0 rgba(83, 86, 98, 0.05);
+  transform-origin: center top;
+  will-change: transform, opacity;
+
+  @include mobile {
+    gap: 24px;
+    padding: 24px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+
+  @include mobile {
+    flex-direction: column-reverse;
+    gap: 32px;
+  }
+}
+
+.headerCopy {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-direction: column;
+  gap: 16px;
+
+  h2 {
+    margin: 0;
+    color: #0c1021;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1.2;
+
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+
+  p {
+    margin: 0;
+    color: #535662;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+}
+
+.number {
+  display: inline-flex;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 64px;
+  background: #4268ff;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.visual {
+  display: flex;
+  min-height: 294px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #fafafa;
+
+  @include mobile {
+    min-height: auto;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.summaryCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid rgba(12, 16, 33, 0.1);
+  border-radius: 32px;
+
+  h3 {
+    margin: 0;
+    color: #0c1021;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  p {
+    margin: 0;
+    color: #535662;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+}
