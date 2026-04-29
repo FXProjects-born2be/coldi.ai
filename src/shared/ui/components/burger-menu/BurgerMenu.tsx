@@ -68,6 +68,10 @@ const useCasesItems = [
     label: 'Residential Service (Stone Electric)',
     href: '/residential-service-automation',
   },
+  {
+    label: 'Agro-Industry',
+    href: '/agro-industry',
+  },
 ];
 
 const aboutItems = [{ label: 'Meet the Team', href: '/meettheteam' }];

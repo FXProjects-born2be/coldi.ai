@@ -36,6 +36,7 @@ const segmentLabels: Record<string, string> = {
   silverbellgroup: 'Silverbell Group',
   helios: 'Helios',
   'residential-service-automation': 'Residential Service Automation',
+  'agro-industry': 'Agro-Industry',
 };
 
 export const Breadcrumbs = () => {
