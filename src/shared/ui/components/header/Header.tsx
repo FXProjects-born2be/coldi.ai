@@ -56,6 +56,10 @@ const useCasesItems = [
     label: 'Residential Service (Stone Electric)',
     href: '/residential-service-automation',
   },
+  {
+    label: 'Agro-Industry',
+    href: '/agro-industry',
+  },
 ];
 //https://calendly.com/coldi/30min
 
