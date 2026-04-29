@@ -136,14 +136,14 @@ export const Faq = () => {
       <FaqStructuredData id="products-faq-jsonld" faqs={faq} />
       <section className={st.faq__content}>
         <div className={st.faq__title}>
-          <motion.h1
+          <motion.h2
             variants={blurInUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
             Frequently <br /> <span className={st.highlighted}>Asked Questions</span>
-          </motion.h1>
+          </motion.h2>
           <motion.p
             variants={blurInUp}
             initial="hidden"

@@ -60,6 +60,10 @@ const useCasesItems = [
     label: 'Agro-Industry',
     href: '/agro-industry',
   },
+  {
+    label: 'HVAC Leads',
+    href: '/hvac-leads',
+  },
 ];
 //https://calendly.com/coldi/30min
 

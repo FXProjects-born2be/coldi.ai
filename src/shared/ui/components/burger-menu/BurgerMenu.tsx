@@ -72,6 +72,10 @@ const useCasesItems = [
     label: 'Agro-Industry',
     href: '/agro-industry',
   },
+  {
+    label: 'HVAC Leads',
+    href: '/hvac-leads',
+  },
 ];
 
 const aboutItems = [{ label: 'Meet the Team', href: '/meettheteam' }];
