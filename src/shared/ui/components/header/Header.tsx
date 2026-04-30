@@ -45,10 +45,6 @@ const industriesItems = [
 
 const useCasesItems = [
   {
-    label: 'Fintech (Helios)',
-    href: '/helios',
-  },
-  {
     label: 'BPO (Silverbell Group)',
     href: '/silverbellgroup',
   },
