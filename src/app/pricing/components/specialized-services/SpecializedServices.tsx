@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { motion } from 'framer-motion';
 
 import { blurInUp } from '@/shared/lib/helpers';
@@ -9,11 +11,9 @@ import st from './SpecializedServices.module.scss';
 
 import { services } from '@/app/pricing/model/content';
 
-export const SpecializedServices = ({
-  onRequest,
-}: {
-  onRequest: (plan: { label: string; title: string; price: string }) => void;
-}) => {
+export const SpecializedServices = ({}) => {
+  const router = useRouter();
+
   return (
     <section className={st.layout}>
       <motion.h2
@@ -44,17 +44,7 @@ export const SpecializedServices = ({
                 <strong>{service.price}</strong>
               </div>
               <span className={st.divider} />
-              <Button
-                size="md"
-                fullWidth
-                onClick={() =>
-                  onRequest({
-                    label: 'Specialized Services',
-                    title: service.title,
-                    price: service.price,
-                  })
-                }
-              >
+              <Button size="md" fullWidth onClick={() => router.push('/calendar')}>
                 Get Pricing Quote
               </Button>
             </div>

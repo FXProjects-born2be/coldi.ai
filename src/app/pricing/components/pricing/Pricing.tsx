@@ -29,7 +29,7 @@ export const Pricing = () => {
     <>
       <Hero />
       <PricingPlans onRequest={handleRequest} />
-      <SpecializedServices onRequest={handleRequest} />
+      <SpecializedServices />
       <Process />
       <RequestDialog open={open} setOpen={setOpen} />
     </>
