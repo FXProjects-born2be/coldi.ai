@@ -1,0 +1,82 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  align-items: center;
+  padding: 0 165px 64px;
+  background: #fff;
+
+  h2 {
+    color: #0c1021;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 120%;
+    text-align: center;
+  }
+
+  @include tablet {
+    padding-inline: 64px;
+  }
+
+  @include mobile {
+    padding: 0 16px 64px;
+
+    h2 {
+      font-size: 32px;
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 1190px;
+
+  @include tablet {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px;
+  border: 1px solid rgba(12, 16, 33, 0.05);
+  border-radius: 48px;
+  background: #fafafa;
+  text-align: center;
+
+  h3 {
+    color: #0c1021;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  p {
+    color: #535662;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 64px;
+  background: #4268ff;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: normal;
+}

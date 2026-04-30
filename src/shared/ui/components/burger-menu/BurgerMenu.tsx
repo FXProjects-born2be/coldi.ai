@@ -62,7 +62,6 @@ const productsItems = [
 ];
 
 const useCasesItems = [
-  { label: 'Fintech (Helios)', href: '/helios' },
   { label: 'BPO (Silverbell Group)', href: '/silverbellgroup' },
   {
     label: 'Residential Service (Stone Electric)',
