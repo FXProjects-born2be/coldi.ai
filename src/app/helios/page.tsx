@@ -1,5 +1,3 @@
-import { redirect } from 'next/navigation';
-
 import type { Metadata } from 'next';
 
 import { CaseStudies, Hero, NextSteps, Overview } from './components';
@@ -20,8 +18,6 @@ export const metadata: Metadata = {
 };
 
 export default function UseCasesPage() {
-  redirect('/');
-
   return (
     <main>
       <Hero />
