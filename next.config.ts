@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       'www.facebook.com',
       'dashboard.retellai.com',
       'cdn-b.saashub.com',
+      'i.ytimg.com',
     ],
   },
 };

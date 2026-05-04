@@ -4,12 +4,13 @@ export type StudyItem = {
 };
 
 export type StudySection = {
-  label: string;
+  label?: string;
   number: string;
   title: string;
-  description: string;
-  variant: 'diagram' | 'three';
+  description?: string;
+  variant: 'diagram' | 'three' | 'video';
   items?: StudyItem[];
+  videoId?: string;
 };
 
 export const heroContent = {
@@ -56,8 +57,14 @@ export const studySections: StudySection[] = [
     ],
   },
   {
-    label: 'Referral Fit',
     number: '03',
+    title: 'Watch AI Bot in Action.',
+    variant: 'video',
+    videoId: '2BtXNjpLgVg',
+  },
+  {
+    label: 'Referral Fit',
+    number: '04',
     title: 'Why We Are the Perfect Fit for Referrals',
     description:
       'As partners, our collaboration with Silverbell Group serves as a blueprint for how we treat every integration. We specialize in creating high-impact, "Plug-and-Play" solutions where Coldi.ai handles the heavy lifting of support and technical integration.',

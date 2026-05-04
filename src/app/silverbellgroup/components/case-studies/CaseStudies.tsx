@@ -1,12 +1,50 @@
 'use client';
 
-import { type CSSProperties, useRef } from 'react';
+import { type CSSProperties, useRef, useState } from 'react';
+import Image from 'next/image';
 
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+
+import { PlayIcon } from '@/shared/ui/icons/fill/play';
 
 import { studySections } from '../data';
 import st from './CaseStudies.module.scss';
 import { ProcessDiagram } from './ProcessDiagram';
+
+const VideoCaseStudy = ({ videoId, title }: { videoId: string; title: string }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const thumbnailSrc = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+  const embedSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+
+  return (
+    <div className={st.videoFrame}>
+      <div className={st.videoInner}>
+        {isPlaying ? (
+          <iframe
+            className={st.videoEmbed}
+            src={embedSrc}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        ) : (
+          <>
+            <Image className={st.videoPoster} src={thumbnailSrc} alt="" fill sizes="100vw" />
+            <button
+              type="button"
+              className={st.playButton}
+              onClick={() => setIsPlaying(true)}
+              aria-label={`Play video: ${title}`}
+            >
+              <PlayIcon />
+              <span>Play</span>
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
 
 const CaseStudyCard = ({
   index,
@@ -32,7 +70,7 @@ const CaseStudyCard = ({
       className={st.stickyItem}
       style={
         {
-          '--stack-offset': `${index * 28}px`,
+          '--stack-offset': `${index * 4}px`,
           '--stack-z': index + 1,
         } as CSSProperties
       }
@@ -43,15 +81,17 @@ const CaseStudyCard = ({
       >
         <div className={st.header}>
           <div className={st.headerCopy}>
-            <span className={st.badge}>{section.label}</span>
+            {section.label && <span className={st.badge}>{section.label}</span>}
             <h2>{section.title}</h2>
-            <p>{section.description}</p>
+            {section.description && <p>{section.description}</p>}
           </div>
           <div className={st.number}>{section.number}</div>
         </div>
 
         {section.variant === 'diagram' ? (
           <ProcessDiagram />
+        ) : section.variant === 'video' && section.videoId ? (
+          <VideoCaseStudy videoId={section.videoId} title={section.title} />
         ) : (
           <>
             <div className={st.divider} />
