@@ -1,0 +1,70 @@
+.editorWrapper {
+  border: 1px solid #d9dfef;
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid #eef2fb;
+  background: #f7f9fd;
+}
+
+.toolbarButton {
+  border: 1px solid #d9dfef;
+  background: #fff;
+  color: #23304d;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: #eef4ff;
+    border-color: #b9caf8;
+  }
+}
+
+.editor {
+  min-height: 320px;
+  padding: 16px;
+  outline: none;
+  color: #23304d;
+  font-size: 16px;
+  line-height: 1.6;
+
+  &:empty::before {
+    content: attr(data-placeholder);
+    color: #8a94a8;
+  }
+
+  h2,
+  h3,
+  p,
+  blockquote,
+  ul,
+  ol {
+    margin: 0 0 16px;
+  }
+
+  blockquote {
+    border-left: 4px solid #4268ff;
+    padding-left: 12px;
+    color: #53627f;
+  }
+
+  ul,
+  ol {
+    padding-left: 24px;
+  }
+
+  a {
+    color: #4268ff;
+    text-decoration: underline;
+  }
+}

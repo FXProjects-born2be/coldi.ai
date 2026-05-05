@@ -2,7 +2,14 @@ import Script from 'next/script';
 
 type StructuredDataProps = {
   id?: string;
-  type: 'Organization' | 'WebSite' | 'Product' | 'Article' | 'BreadcrumbList' | 'FAQPage';
+  type:
+    | 'Organization'
+    | 'WebSite'
+    | 'Product'
+    | 'Article'
+    | 'NewsArticle'
+    | 'BreadcrumbList'
+    | 'FAQPage';
   data: Record<string, unknown>;
 };
 

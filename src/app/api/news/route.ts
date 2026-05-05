@@ -1,17 +1,43 @@
-import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { getNewsByCategory } from '@/features/news/news';
+import {
+  createAdminSupabaseClient,
+  parseNewsFormData,
+  uploadArticleImage,
+} from './news-admin-shared';
 
-export async function GET(req: NextRequest) {
+export async function POST(req: Request) {
   try {
-    const { searchParams } = new URL(req.url);
-    const category = searchParams.get('category');
+    const formData = await req.formData();
+    const article = await parseNewsFormData(formData);
+    const supabase = createAdminSupabaseClient();
 
-    const news = await getNewsByCategory(category || undefined);
+    const imageUrl = article.imageFile
+      ? await uploadArticleImage(article.imageFile, article.slug)
+      : article.image || '';
 
-    return NextResponse.json({ success: true, data: news });
-  } catch (error: unknown) {
+    const { data, error } = await supabase
+      .from('posts')
+      .insert([
+        {
+          title: article.title,
+          slug: article.slug,
+          content: article.content,
+          image: imageUrl,
+          category: article.category,
+          seo_title: article.seo_title || article.title,
+          seo_description: article.seo_description || '',
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true, article: data });
+  } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });
   }

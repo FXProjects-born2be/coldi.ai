@@ -1,14 +1,14 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+import {
+  createAdminSupabaseClient,
+  parseNewsFormData,
+  uploadArticleImage,
+} from '../news-admin-shared';
 
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const supabase = createAdminSupabaseClient();
     const { id } = await params;
 
     // Check if ID is a valid UUID or numeric ID
@@ -29,6 +29,44 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
 
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const supabase = createAdminSupabaseClient();
+    const { id } = await params;
+    const formData = await req.formData();
+    const article = await parseNewsFormData(formData);
+
+    const imageUrl = article.imageFile
+      ? await uploadArticleImage(article.imageFile, article.slug)
+      : article.image || '';
+
+    const { data, error } = await supabase
+      .from('posts')
+      .update({
+        title: article.title,
+        slug: article.slug,
+        content: article.content,
+        image: imageUrl,
+        category: article.category,
+        seo_title: article.seo_title || article.title,
+        seo_description: article.seo_description || '',
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true, article: data });
+  } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });
   }
