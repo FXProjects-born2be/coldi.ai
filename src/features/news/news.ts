@@ -14,6 +14,8 @@ export type NewsArticle = {
   category: string;
   created_at: string;
   updated_at: string;
+  seo_title?: string;
+  seo_description?: string;
 };
 
 export const getNewsByCategory = async (category?: string): Promise<NewsArticle[]> => {
