@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 import {
   createAdminSupabaseClient,
+  hasMissingColumnError,
   hasMissingSeoColumnError,
   parseNewsFormData,
   uploadArticleImage,
@@ -46,7 +47,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       ? await uploadArticleImage(article.imageFile, article.slug)
       : article.image || '';
 
-    const primaryPayload = {
+    const seoPayload = {
       title: article.title,
       slug: article.slug,
       content: article.content,
@@ -54,6 +55,10 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       category: article.category,
       seo_title: article.seo_title || article.title,
       seo_description: article.seo_description || '',
+    };
+
+    const primaryPayload = {
+      ...seoPayload,
       updated_at: new Date().toISOString(),
     };
 
@@ -63,6 +68,15 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       .eq('id', id)
       .select()
       .single();
+
+    if (error && hasMissingColumnError(error.message, 'updated_at')) {
+      ({ data, error } = await supabase
+        .from('posts')
+        .update(seoPayload)
+        .eq('id', id)
+        .select()
+        .single());
+    }
 
     if (error && hasMissingSeoColumnError(error.message)) {
       ({ data, error } = await supabase

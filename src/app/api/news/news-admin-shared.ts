@@ -58,3 +58,6 @@ export const uploadArticleImage = async (file: File, slug: string) => {
 
 export const hasMissingSeoColumnError = (message: string) =>
   /seo_title|seo_description/i.test(message) && /(could not find|column)/i.test(message);
+
+export const hasMissingColumnError = (message: string, column: string) =>
+  new RegExp(column, 'i').test(message) && /(could not find|column)/i.test(message);

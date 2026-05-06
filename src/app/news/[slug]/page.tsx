@@ -67,6 +67,7 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
 
   const news = await getNewsBySlug(slug);
+  //console.log(news);
   const articleUrl = `${SITE_URL}/news/${slug}`;
   const articleImage = news?.image || DEFAULT_NEWS_IMAGE;
   const description = getArticleDescription(news || undefined);
