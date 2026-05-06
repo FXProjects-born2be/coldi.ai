@@ -18,6 +18,26 @@ const AUTHOR_NAME = 'Or Gold';
 const AUTHOR_JOB_TITLE = 'Co-Founder';
 const AUTHOR_URL = 'https://www.linkedin.com/in/or-g-602606119/';
 
+const stripHtml = (value: string) =>
+  value
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const getArticleDescription = (news?: {
+  title?: string;
+  content?: string;
+  seo_description?: string;
+}) => {
+  if (!news) return '';
+  if (news.seo_description?.trim()) return news.seo_description;
+
+  const plainText = stripHtml(news.content || '')
+    .slice(0, 160)
+    .trim();
+  return plainText || news.title || '';
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -25,18 +45,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const news = await getNewsBySlug(slug);
+  const description = getArticleDescription(news || undefined);
 
   return {
     alternates: {
       canonical: `/news/${slug}`,
     },
-    title: news?.seo_title || '',
-    description: news?.seo_description || '',
+    title: news?.seo_title || news?.title || '',
+    description,
     authors: [{ name: AUTHOR_NAME, url: AUTHOR_URL }],
     publisher: PUBLISHER_NAME,
     openGraph: {
-      title: news?.seo_title || '',
-      description: news?.seo_description || '',
+      title: news?.seo_title || news?.title || '',
+      description,
       images: [news?.image || DEFAULT_NEWS_IMAGE],
     },
   };
@@ -48,6 +69,7 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
   const news = await getNewsBySlug(slug);
   const articleUrl = `${SITE_URL}/news/${slug}`;
   const articleImage = news?.image || DEFAULT_NEWS_IMAGE;
+  const description = getArticleDescription(news || undefined);
 
   return (
     <>
@@ -61,7 +83,7 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
               '@id': articleUrl,
             },
             headline: news.title,
-            description: news.seo_description || '',
+            description,
             image: [articleImage],
             datePublished: news.created_at,
             dateModified: news.updated_at || news.created_at,

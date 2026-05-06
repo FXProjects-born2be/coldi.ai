@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 import {
   createAdminSupabaseClient,
+  hasMissingSeoColumnError,
   parseNewsFormData,
   uploadArticleImage,
 } from '../news-admin-shared';
@@ -45,21 +46,39 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       ? await uploadArticleImage(article.imageFile, article.slug)
       : article.image || '';
 
-    const { data, error } = await supabase
+    const primaryPayload = {
+      title: article.title,
+      slug: article.slug,
+      content: article.content,
+      image: imageUrl,
+      category: article.category,
+      seo_title: article.seo_title || article.title,
+      seo_description: article.seo_description || '',
+      updated_at: new Date().toISOString(),
+    };
+
+    let { data, error } = await supabase
       .from('posts')
-      .update({
-        title: article.title,
-        slug: article.slug,
-        content: article.content,
-        image: imageUrl,
-        category: article.category,
-        seo_title: article.seo_title || article.title,
-        seo_description: article.seo_description || '',
-        updated_at: new Date().toISOString(),
-      })
+      .update(primaryPayload)
       .eq('id', id)
       .select()
       .single();
+
+    if (error && hasMissingSeoColumnError(error.message)) {
+      ({ data, error } = await supabase
+        .from('posts')
+        .update({
+          title: article.title,
+          slug: article.slug,
+          content: article.content,
+          image: imageUrl,
+          category: article.category,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', id)
+        .select()
+        .single());
+    }
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });

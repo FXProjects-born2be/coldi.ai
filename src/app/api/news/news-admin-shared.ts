@@ -55,3 +55,6 @@ export const uploadArticleImage = async (file: File, slug: string) => {
 
   return data.publicUrl;
 };
+
+export const hasMissingSeoColumnError = (message: string) =>
+  /seo_title|seo_description/i.test(message) && /(could not find|column)/i.test(message);
