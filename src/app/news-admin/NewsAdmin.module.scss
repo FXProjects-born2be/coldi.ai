@@ -71,6 +71,31 @@
   }
 }
 
+.topNav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.topNavLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 10px 16px;
+  background: #fff;
+  color: #23304d;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(26, 39, 70, 0.06);
+
+  &:hover {
+    background: #eef2fb;
+  }
+}
+
 .editorCard {
   padding: 24px;
   margin-bottom: 24px;
@@ -164,6 +189,9 @@
 .primaryButton,
 .secondaryButton,
 .editButton,
+.primaryLinkButton,
+.secondaryLinkButton,
+.editLinkButton,
 .deleteButton,
 .loginButton,
 .logoutButton {
@@ -187,6 +215,7 @@
 }
 
 .primaryButton,
+.primaryLinkButton,
 .loginButton {
   background: #4268ff;
   color: white;
@@ -196,12 +225,14 @@
   }
 }
 
-.secondaryButton {
+.secondaryButton,
+.secondaryLinkButton {
   background: #eef2fb;
   color: #23304d;
 }
 
-.editButton {
+.editButton,
+.editLinkButton {
   background: #1f9d6c;
   color: white;
 }
@@ -231,6 +262,15 @@
   background: #fbe7ea;
   color: #8b2331;
   border: 1px solid #f4c9cf;
+}
+
+.primaryLinkButton,
+.secondaryLinkButton,
+.editLinkButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .loading {

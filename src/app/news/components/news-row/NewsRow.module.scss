@@ -18,10 +18,10 @@
     display: flex;
     justify-content: flex-start;
     overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    //scrollbar-width: none;
+    //-ms-overflow-style: none;
     &::-webkit-scrollbar {
-      display: none;
+      //display: none;
     }
     @include mobile {
       justify-content: flex-start;
@@ -29,7 +29,7 @@
 
     > div {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 10px;
       min-width: 100%;
       @include mobile {
