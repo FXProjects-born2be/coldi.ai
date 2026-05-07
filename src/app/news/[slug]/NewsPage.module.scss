@@ -21,7 +21,7 @@
     display: block;
     margin-bottom: 128px;
     @include mobile {
-      margin-bottom: 64px;
+      margin-bottom:24px;
     }
   }
 
@@ -55,6 +55,9 @@
 
 .newsItemTop {
   width: 100%;
+  @include mobile {
+    order: 2;
+  }
 }
 
 .toc {
@@ -65,7 +68,10 @@
   padding: 24px;
 
   @include mobile {
-    display: none;
+    order: 1;
+    position: static;
+    top:unset;
+    margin-bottom: 48px;
   }
 
   nav ul {
