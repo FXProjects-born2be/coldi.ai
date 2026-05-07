@@ -138,11 +138,6 @@ export const Footer = () => {
                   </Link>
                 </li>
                 <li itemProp="name">
-                  <Link href="/industries/fx-brokers" itemProp="url">
-                    Trading Platforms
-                  </Link>
-                </li>
-                <li itemProp="name">
                   <Link href="/industries/debt-collection" itemProp="url">
                     Debt Collection
                   </Link>
