@@ -9,6 +9,7 @@ import { StructuredData } from '@/shared/ui/components/structured-data/Structure
 
 import { TestIt } from '../components/test-it/TestIt';
 import st from './NewsPage.module.scss';
+import { TocSidebar } from './TocSidebar';
 
 const SITE_URL = 'https://coldi.ai';
 const DEFAULT_NEWS_IMAGE = `${SITE_URL}/images/news/news-item-image.png`;
@@ -18,11 +19,56 @@ const AUTHOR_NAME = 'Or Gold';
 const AUTHOR_JOB_TITLE = 'Co-Founder';
 const AUTHOR_URL = 'https://www.linkedin.com/in/or-g-602606119/';
 
+type TocItem = {
+  id: string;
+  text: string;
+};
+
 const stripHtml = (value: string) =>
   value
     .replace(/<[^>]+>/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+
+const slugifyHeading = (value: string) =>
+  stripHtml(value)
+    .toLowerCase()
+    .replace(/&nbsp;/g, ' ')
+    .replace(/[^\p{L}\p{N}\s-]/gu, '')
+    .trim()
+    .replace(/\s+/g, '-');
+
+const addTableOfContents = (content: string): { content: string; tocItems: TocItem[] } => {
+  const tocItems: TocItem[] = [];
+  const slugCounts = new Map<string, number>();
+
+  const normalizedContent = content.replace(/NN/g, '<br />');
+  const contentWithAnchors = normalizedContent.replace(
+    /<h2([^>]*)>([\s\S]*?)<\/h2>/gi,
+    (_match, attrs: string, headingHtml: string) => {
+      const headingText = stripHtml(headingHtml);
+      if (!headingText) {
+        return `<h2${attrs}>${headingHtml}</h2>`;
+      }
+
+      const baseId = slugifyHeading(headingText) || 'section';
+      const currentCount = slugCounts.get(baseId) || 0;
+      const nextCount = currentCount + 1;
+      slugCounts.set(baseId, nextCount);
+
+      const id = currentCount === 0 ? baseId : `${baseId}-${nextCount}`;
+      tocItems.push({ id, text: headingText });
+
+      if (/\sid\s*=\s*["'][^"']+["']/i.test(attrs)) {
+        return `<h2${attrs}>${headingHtml}</h2>`;
+      }
+
+      return `<h2${attrs} id="${id}">${headingHtml}</h2>`;
+    }
+  );
+
+  return { content: contentWithAnchors, tocItems };
+};
 
 const getArticleDescription = (news?: {
   title?: string;
@@ -67,10 +113,11 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
 
   const news = await getNewsBySlug(slug);
-  //console.log(news);
   const articleUrl = `${SITE_URL}/news/${slug}`;
   const articleImage = news?.image || DEFAULT_NEWS_IMAGE;
   const description = getArticleDescription(news || undefined);
+  const { content: contentWithAnchors, tocItems } = addTableOfContents(news?.content || '');
+  const hasToc = tocItems.length > 0;
 
   return (
     <>
@@ -108,20 +155,23 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
       )}
       {news?.title && <BreadcrumbLabel segment={slug} label={news.title} />}
       <section className={st.layout}>
-        <div className={st.newsItemTop}>
-          <Image
-            src={news?.image || '/images/news/news-item-image.png'}
-            alt={news?.title || ''}
-            width={413}
-            height={230}
-          />
-          <h1 className={st.title}>{news?.title}</h1>
-          <div
-            className={st.content}
-            dangerouslySetInnerHTML={{
-              __html: news?.content?.replace(/NN/g, '<br />') || '',
-            }}
-          />
+        <div className={`${st.articleGrid} ${hasToc ? st.articleGridWithToc : ''}`}>
+          <div className={st.newsItemTop}>
+            <Image
+              src={news?.image || '/images/news/news-item-image.png'}
+              alt={news?.title || ''}
+              width={413}
+              height={230}
+            />
+            <h1 className={st.title}>{news?.title}</h1>
+            <div
+              className={st.content}
+              dangerouslySetInnerHTML={{
+                __html: contentWithAnchors,
+              }}
+            />
+          </div>
+          {hasToc && <TocSidebar items={tocItems} />}
         </div>
       </section>
       <TestIt />
