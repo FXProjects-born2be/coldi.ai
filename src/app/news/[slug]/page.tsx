@@ -158,8 +158,8 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
         <Image
           src={news?.image || '/images/news/news-item-image.png'}
           alt={news?.title || ''}
-          width={413}
-          height={230}
+          width={1278}
+          height={712}
         />
         <div className={`${st.articleGrid} ${hasToc ? st.articleGridWithToc : ''}`}>
           <div className={st.newsItemTop}>
