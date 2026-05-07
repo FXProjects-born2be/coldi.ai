@@ -16,7 +16,7 @@ export const ColdiAgentsBuilt = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        Coldi Agents Built <br />
+        Our Agents Built <br />
         <span className={st.highlighted}>for Your Business</span>
       </motion.h2>
       <div className={st.row}>

@@ -17,7 +17,7 @@ export const OutboundCalling = () => {
   const data = [
     {
       title: 'Unlimited Global Dialing',
-      desc: 'Reach thousands across time zones. Coldi works non-stop without losing tone or quality.',
+      desc: 'Reach thousands across time zones. We work non-stop without losing tone or quality.',
     },
     {
       title: 'Calendar Integration',
@@ -55,9 +55,9 @@ export const OutboundCalling = () => {
         viewport={{ once: true }}
         className={st.desc}
       >
-        Coldi handles your outreach at scale - any time zone, any volume, no burnout. From lead gen
-        to follow-ups, Coldi makes every call sound human, relevant, and timely - day or night,
-        wherever your market is.
+        We handle your outreach at scale - any time zone, any volume, no burnout. From lead gen to
+        follow-ups, we make every call sound human, relevant, and timely - day or night, wherever
+        your market is.
       </motion.p>
       <div className={st.row}>
         <div className={st.col}>
