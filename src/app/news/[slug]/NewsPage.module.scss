@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 124px 124px 24px 124px;
+  padding: 60px 124px 24px 124px;
   background: #ffffff;
   position: relative;
   z-index: 1;
@@ -41,25 +41,28 @@
   gap: 48px;
   align-items: start;
   &.articleGridWithToc {
-    grid-template-columns: minmax(0, 1fr) 280px;
+    grid-template-columns: minmax(0, 1fr) 400px;
   }
   @include mobile {
     grid-template-columns: 1fr;
     gap: 0;
+    &.articleGridWithToc {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
   }
 }
 
 .newsItemTop {
-  min-width: 0;
+  width: 100%;
 }
 
 .toc {
   position: sticky;
   top: 120px;
-  padding: 24px;
-  border: 1px solid #e5e7ef;
   border-radius: 24px;
-  background: #f8f9fc;
+  border: 1px solid rgba(12, 16, 33, 0.15);
+  padding: 24px;
 
   @include mobile {
     display: none;
@@ -86,7 +89,6 @@
 
 .tocLinkActive {
   color: #4268ff !important;
-  font-weight: 600;
 }
 
 .tocTitle {
@@ -98,21 +100,38 @@
 }
 
 .content {
-
-  table{
-      width: 100%;
-      border-collapse: collapse;
-      border: 1px solid #50556b;
-      margin-bottom: 24px;
-      th, td{
-        border: 1px solid #50556b;
-        padding: 12px;
-        text-align: left;
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border: none;
+    margin-bottom: 24px;
+    border-spacing: 10px;
+    th,
+    td {
+      text-align: center;
+      color: rgba(12, 16, 33, 0.65);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%; /* 24px */
+      padding: 24px;
+      border-radius: 24px;
+      box-sizing: border-box;
+      @include mobile {
+        padding: 10px;
+        font-size: 14px;
       }
-      th{
-        background: #f0f0f0;
+      strong {
+        font-weight: 500;
       }
     }
+    th {
+      border: 1px solid #4268ff;
+    }
+    td {
+      border: 1px solid rgba(12, 16, 33, 0.15);
+    }
+  }
 
   h2 {
     scroll-margin-top: 120px;
@@ -131,9 +150,10 @@
     font-weight: 600;
     line-height: normal;
   }
-  a{
+  a {
     color: #4268ff;
-    strong, b{
+    strong,
+    b {
       font-weight: 400;
     }
   }
@@ -145,11 +165,11 @@
     font-weight: 400;
     line-height: normal;
   }
-  ul{
+  ul {
     margin-bottom: 24px;
     list-style-type: disc;
     margin-left: 24px;
-    li{
+    li {
       list-style-type: disc;
       color: #50556b;
       font-size: 20px;
@@ -158,10 +178,10 @@
       line-height: normal;
     }
   }
-  ol{
+  ol {
     margin-bottom: 24px;
     margin-left: 24px;
-    li{
+    li {
       color: #50556b;
       font-size: 20px;
       font-style: normal;

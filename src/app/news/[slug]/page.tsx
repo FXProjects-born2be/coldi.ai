@@ -155,14 +155,14 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
       )}
       {news?.title && <BreadcrumbLabel segment={slug} label={news.title} />}
       <section className={st.layout}>
+        <Image
+          src={news?.image || '/images/news/news-item-image.png'}
+          alt={news?.title || ''}
+          width={413}
+          height={230}
+        />
         <div className={`${st.articleGrid} ${hasToc ? st.articleGridWithToc : ''}`}>
           <div className={st.newsItemTop}>
-            <Image
-              src={news?.image || '/images/news/news-item-image.png'}
-              alt={news?.title || ''}
-              width={413}
-              height={230}
-            />
             <h1 className={st.title}>{news?.title}</h1>
             <div
               className={st.content}

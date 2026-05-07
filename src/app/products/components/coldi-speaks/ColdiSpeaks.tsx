@@ -21,7 +21,7 @@ export const ColdiSpeaks = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            Coldi Speaks <br /> <span className={st.highlighted}>Your Language</span>
+            We Speak <br /> <span className={st.highlighted}>Your Language</span>
           </motion.h1>
           <motion.p
             variants={blurInUp}
@@ -29,7 +29,7 @@ export const ColdiSpeaks = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            Serve your customers in their native tongue. Coldi supports X+ languages and dialects.
+            Serve your customers in their native tongue. We support X+ languages and dialects.
           </motion.p>
         </div>
       </section>
@@ -79,7 +79,7 @@ export const ColdiSpeaks = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <Button size="md">Talk to Coldi</Button>
+          <Button size="md">Talk to us</Button>
         </motion.div>
       </Link>
     </section>

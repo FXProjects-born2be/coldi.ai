@@ -86,7 +86,7 @@ export const Hero = () => {
             viewport={{ once: true }}
             className={st.desc}
           >
-            Coldi voices step into real workflows and deliver real results.
+            Our voices step into real workflows and deliver real results.
           </motion.p>
 
           <Link href="/call-request">

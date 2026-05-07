@@ -52,7 +52,7 @@ export const NeverMiss = () => (
       viewport={{ once: true }}
       className={st.desc}
     >
-      You never know how important the next one might be - Coldi answers, <br />
+      You never know how important the next one might be - we answer, <br />
       understands, and gets things done.
     </motion.p>
     <section className={st.cards}>

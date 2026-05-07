@@ -58,7 +58,7 @@ export const TocSidebar = ({ items }: TocSidebarProps) => {
 
   return (
     <aside className={st.toc}>
-      <p className={st.tocTitle}>On this page</p>
+      <p className={st.tocTitle}>Content</p>
       <nav aria-label="Table of contents">
         <ul>
           {items.map((item) => (
