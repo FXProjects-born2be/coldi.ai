@@ -41,11 +41,6 @@ const industriesItems = [
     icon: '/icons/header/call-center.svg',
   },
   {
-    label: 'FX Brokers',
-    href: '/industries/fx-brokers',
-    icon: '/icons/header/fx-brokers.svg',
-  },
-  {
     label: 'Debt Collection',
     href: '/industries/debt-collection',
     icon: '/icons/header/debt-collection.svg',
