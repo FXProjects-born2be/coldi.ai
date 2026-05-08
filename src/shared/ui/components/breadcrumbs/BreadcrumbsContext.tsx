@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
 type BreadcrumbsContextType = {
   labelOverrides: Record<string, string>;
@@ -15,15 +15,25 @@ const BreadcrumbsContext = createContext<BreadcrumbsContextType>({
 export const BreadcrumbsProvider = ({ children }: { children: React.ReactNode }) => {
   const [labelOverrides, setLabelOverrides] = useState<Record<string, string>>({});
 
-  const setLabelOverride = (segment: string, label: string) => {
-    setLabelOverrides((prev) => ({ ...prev, [segment]: label }));
-  };
+  const setLabelOverride = useCallback((segment: string, label: string) => {
+    setLabelOverrides((prev) => {
+      if (prev[segment] === label) {
+        return prev;
+      }
 
-  return (
-    <BreadcrumbsContext.Provider value={{ labelOverrides, setLabelOverride }}>
-      {children}
-    </BreadcrumbsContext.Provider>
+      return { ...prev, [segment]: label };
+    });
+  }, []);
+
+  const value = useMemo(
+    () => ({
+      labelOverrides,
+      setLabelOverride,
+    }),
+    [labelOverrides, setLabelOverride]
   );
+
+  return <BreadcrumbsContext.Provider value={value}>{children}</BreadcrumbsContext.Provider>;
 };
 
 export const useBreadcrumbsContext = () => useContext(BreadcrumbsContext);
