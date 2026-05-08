@@ -76,7 +76,7 @@ export const Hero = () => {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              Meet Coldi Agents
+              Meet Our Agents
             </motion.h2>
           </section>
           <motion.p
