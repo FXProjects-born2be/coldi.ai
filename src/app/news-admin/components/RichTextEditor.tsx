@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import st from './RichTextEditor.module.scss';
 
@@ -28,6 +28,13 @@ export function RichTextEditor({
 }: RichTextEditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
   const savedRangeRef = useRef<Range | null>(null);
+  const imageFileInputRef = useRef<HTMLInputElement>(null);
+  const [isImagePanelOpen, setIsImagePanelOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
+  const [imageAlt, setImageAlt] = useState('');
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageError, setImageError] = useState('');
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   useEffect(() => {
     const editor = editorRef.current;
@@ -74,6 +81,102 @@ export function RichTextEditor({
     handleInput();
   };
 
+  const resetImagePanel = () => {
+    setImageUrl('');
+    setImageAlt('');
+    setImageFile(null);
+    setImageError('');
+
+    if (imageFileInputRef.current) {
+      imageFileInputRef.current.value = '';
+    }
+  };
+
+  const toggleImagePanel = () => {
+    saveSelection();
+    setImageError('');
+    setIsImagePanelOpen((current) => {
+      const next = !current;
+
+      if (!next) {
+        resetImagePanel();
+      }
+
+      return next;
+    });
+  };
+
+  const escapeHtml = (input: string) =>
+    input
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+
+  const insertImage = async () => {
+    const trimmedAlt = imageAlt.trim();
+    const trimmedUrl = imageUrl.trim();
+
+    if (!trimmedAlt) {
+      setImageError('Alt text is required');
+      return;
+    }
+
+    if (!trimmedUrl && !imageFile) {
+      setImageError('Add an image URL or choose a file');
+      return;
+    }
+
+    setImageError('');
+
+    let finalImageUrl = trimmedUrl;
+
+    if (imageFile) {
+      setIsUploadingImage(true);
+
+      try {
+        const formData = new FormData();
+        formData.append('imageFile', imageFile);
+
+        const response = await fetch('/api/news/upload-image', {
+          method: 'POST',
+          body: formData,
+        });
+        const data = (await response.json()) as { error?: string; url?: string };
+
+        if (!response.ok || !data.url) {
+          setImageError(data.error || 'Failed to upload image');
+          return;
+        }
+
+        finalImageUrl = data.url;
+      } catch (error) {
+        console.error('Error uploading inline image:', error);
+        setImageError('Failed to upload image');
+        return;
+      } finally {
+        setIsUploadingImage(false);
+      }
+    }
+
+    if (!finalImageUrl) {
+      setImageError('Image URL is required');
+      return;
+    }
+
+    editorRef.current?.focus();
+    restoreSelection();
+    document.execCommand(
+      'insertHTML',
+      false,
+      `<p><img src="${escapeHtml(finalImageUrl)}" alt="${escapeHtml(trimmedAlt)}" /></p>`
+    );
+    saveSelection();
+    handleInput();
+    setIsImagePanelOpen(false);
+    resetImagePanel();
+  };
+
   const insertLink = () => {
     const url = window.prompt('Enter URL');
 
@@ -117,11 +220,72 @@ export function RichTextEditor({
           className={st.toolbarButton}
           type="button"
           onMouseDown={(event) => event.preventDefault()}
+          onClick={toggleImagePanel}
+        >
+          Image
+        </button>
+        <button
+          className={st.toolbarButton}
+          type="button"
+          onMouseDown={(event) => event.preventDefault()}
           onClick={clearFormatting}
         >
           Clear
         </button>
       </div>
+
+      {isImagePanelOpen && (
+        <div className={st.imagePanel}>
+          <div className={st.imagePanelGrid}>
+            <label className={st.imageField}>
+              <span>Image URL</span>
+              <input
+                type="url"
+                value={imageUrl}
+                onChange={(event) => setImageUrl(event.target.value)}
+                placeholder="https://..."
+              />
+            </label>
+
+            <label className={st.imageField}>
+              <span>Alt text</span>
+              <input
+                type="text"
+                value={imageAlt}
+                onChange={(event) => setImageAlt(event.target.value)}
+                placeholder="Describe the image"
+              />
+            </label>
+
+            <label className={st.imageField}>
+              <span>Or upload image</span>
+              <input
+                ref={imageFileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={(event) => setImageFile(event.target.files?.[0] || null)}
+              />
+            </label>
+          </div>
+
+          {imageFile && <div className={st.imageMeta}>Selected: {imageFile.name}</div>}
+          {imageError && <div className={st.imageError}>{imageError}</div>}
+
+          <div className={st.imagePanelActions}>
+            <button
+              className={st.toolbarButton}
+              type="button"
+              onClick={insertImage}
+              disabled={isUploadingImage}
+            >
+              {isUploadingImage ? 'Uploading...' : 'Insert image'}
+            </button>
+            <button className={st.toolbarButton} type="button" onClick={toggleImagePanel}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
 
       <div
         ref={editorRef}

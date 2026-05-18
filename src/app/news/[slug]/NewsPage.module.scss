@@ -187,6 +187,14 @@
       line-height: normal;
     }
   }
+  img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 32px 0;
+    border-radius: 24px;
+  }
   ol {
     margin-bottom: 24px;
     margin-left: 24px;
