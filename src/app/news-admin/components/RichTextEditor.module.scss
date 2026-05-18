@@ -30,6 +30,61 @@
   }
 }
 
+.toolbarButton:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.imagePanel {
+  padding: 16px;
+  border-bottom: 1px solid #eef2fb;
+  background: #fcfdff;
+}
+
+.imagePanelGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.imageField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #23304d;
+  font-size: 13px;
+  font-weight: 600;
+
+  input {
+    border: 1px solid #d9dfef;
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: #23304d;
+    font-size: 14px;
+    background: #fff;
+  }
+}
+
+.imagePanelActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.imageMeta {
+  margin-top: 10px;
+  color: #5f6d8b;
+  font-size: 13px;
+}
+
+.imageError {
+  margin-top: 10px;
+  color: #c53333;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .editor {
   min-height: 320px;
   padding: 16px;
@@ -99,5 +154,14 @@
   a {
     color: #4268ff;
     text-decoration: underline;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 24px 0;
+    border-radius: 18px;
   }
 }
