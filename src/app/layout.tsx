@@ -130,13 +130,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           async
           defer
           id="hs-script-loader"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="//js-eu1.hs-scripts.com/146476440.js"
         />
 
         <Script
           id="facebook-pixel"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               !function(f,b,e,v,n,t,s)

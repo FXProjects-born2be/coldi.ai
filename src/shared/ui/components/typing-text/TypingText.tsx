@@ -1,8 +1,6 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 
-import { motion } from 'framer-motion';
-
 type TypingTextProps = {
   text: string | string[];
   speed?: number;
@@ -53,15 +51,7 @@ export const TypingText = ({ text, speed = 100, delay = 0, className }: TypingTe
   return (
     <span className={className}>
       {displayedText}
-      {hasStarted && (
-        <motion.span
-          animate={{ opacity: [1, 0, 1] }}
-          transition={{ duration: 0.8, repeat: Infinity }}
-          style={{ display: 'inline-block' }}
-        >
-          |
-        </motion.span>
-      )}
+      {hasStarted && <span style={{ display: 'inline-block' }}>|</span>}
     </span>
   );
 };

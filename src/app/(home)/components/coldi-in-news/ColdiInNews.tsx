@@ -1,30 +1,10 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
-import { blurInUp } from '@/shared/lib/helpers';
-
 import st from './ColdiInNews.module.scss';
 
 export const ColdiInNews = () => {
   return (
     <section className={st.layout}>
-      <motion.h2
-        variants={blurInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className={st.title}
-      >
-        Coldi Featured in News
-      </motion.h2>
-      <motion.div
-        variants={blurInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className={st.brands}
-      >
+      <h2 className={st.title}>Coldi Featured in News</h2>
+      <div className={st.brands}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="208"
@@ -158,7 +138,7 @@ export const ColdiInNews = () => {
             fillOpacity="0.5"
           />
         </svg>
-      </motion.div>
+      </div>
     </section>
   );
 };

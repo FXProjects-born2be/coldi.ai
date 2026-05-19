@@ -1,6 +1,6 @@
 'use client';
 
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import st from './Reviews.module.scss';
@@ -68,8 +68,7 @@ export const ReviewsSlider = () => {
       slidesPerView={1}
       spaceBetween={12}
       pagination={pagination}
-      modules={[Pagination, Autoplay]}
-      autoplay={false}
+      modules={[Pagination]}
       loop
       grabCursor
       breakpoints={{
