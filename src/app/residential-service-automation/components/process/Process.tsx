@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import type { CSSProperties } from 'react';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
+
 import { processSections } from '../data';
 import st from './Process.module.scss';
 
@@ -68,7 +70,7 @@ const ProcessCard = ({
             {section.variant === 'triage' && section.desktopImage && (
               <Image
                 src={section.desktopImage}
-                alt=""
+                alt={imageAlt('residentialServiceAutomation')}
                 width={1000}
                 height={280}
                 className={st.desktopImage}
@@ -77,7 +79,7 @@ const ProcessCard = ({
             {section.variant === 'triage' && section.mobileImage && (
               <Image
                 src={section.mobileImage}
-                alt=""
+                alt={imageAlt('residentialServiceAutomation')}
                 width={1000}
                 height={280}
                 className={st.mobileImage}
@@ -86,7 +88,7 @@ const ProcessCard = ({
             {section.variant === 'capture' && section.desktopImage && (
               <Image
                 src={section.desktopImage}
-                alt=""
+                alt={imageAlt('residentialServiceAutomation')}
                 width={1000}
                 height={280}
                 className={st.desktopImage}
@@ -95,7 +97,7 @@ const ProcessCard = ({
             {section.variant === 'capture' && section.mobileImage && (
               <Image
                 src={section.mobileImage}
-                alt=""
+                alt={imageAlt('residentialServiceAutomation')}
                 width={1000}
                 height={280}
                 className={st.mobileImage}
@@ -104,7 +106,7 @@ const ProcessCard = ({
             {section.variant === 'scheduling' && section.desktopImage && (
               <Image
                 src={section.desktopImage}
-                alt=""
+                alt={imageAlt('residentialServiceAutomation')}
                 width={1000}
                 height={280}
                 className={st.desktopImage}
@@ -113,7 +115,7 @@ const ProcessCard = ({
             {section.variant === 'scheduling' && section.mobileImage && (
               <Image
                 src={section.mobileImage}
-                alt=""
+                alt={imageAlt('residentialServiceAutomation')}
                 width={1000}
                 height={280}
                 className={st.mobileImage}

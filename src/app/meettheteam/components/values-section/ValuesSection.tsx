@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './ValuesSection.module.scss';
@@ -94,7 +95,13 @@ const ValueItem = ({ card, index }: { card: ValueCard; index: number }) => {
       custom={index * 0.05}
     >
       <div className={st.iconWrap}>
-        <Image src={card.icon} alt="" width={48} height={48} aria-hidden="true" />
+        <Image
+          src={card.icon}
+          alt={imageAlt('meettheteam')}
+          width={48}
+          height={48}
+          aria-hidden="true"
+        />
       </div>
 
       <div className={st.text}>

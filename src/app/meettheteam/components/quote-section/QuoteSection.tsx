@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './QuoteSection.module.scss';
@@ -20,7 +21,7 @@ export const QuoteSection = () => {
       >
         <Image
           src="/images/meet-the-team/quote-open.svg"
-          alt=""
+          alt={imageAlt('meettheteam')}
           width={48}
           height={48}
           aria-hidden="true"
@@ -44,7 +45,7 @@ export const QuoteSection = () => {
 
         <Image
           src="/images/meet-the-team/quote-close.svg"
-          alt=""
+          alt={imageAlt('meettheteam')}
           width={48}
           height={48}
           aria-hidden="true"

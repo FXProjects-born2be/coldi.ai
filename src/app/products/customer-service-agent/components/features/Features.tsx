@@ -69,7 +69,13 @@ export const Features = () => {
             custom={index * 0.1}
           >
             <div className={st.iconWrap}>
-              <Image src={card.icon} alt="" width={96} height={96} unoptimized />
+              <Image
+                src={card.icon}
+                alt={imageAlt('customerServiceAgent')}
+                width={96}
+                height={96}
+                unoptimized
+              />
             </div>
             <div className={st.copy}>
               <h3>{card.title}</h3>

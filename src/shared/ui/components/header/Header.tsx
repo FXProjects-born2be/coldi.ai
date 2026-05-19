@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { cn, requestRoutes } from '@/shared/lib/helpers';
+import { cn, getPageHeadingFromPath, requestRoutes } from '@/shared/lib/helpers';
 import { BurgerMenu } from '@/shared/ui/components/burger-menu';
 
 import st from './Header.module.scss';
@@ -69,6 +69,7 @@ const headerVisibilityOnScrollHandle = (set: (visible: boolean) => void) => {
 export const Header = () => {
   const pathname = usePathname();
   const isForcedVisible = requestRoutes.has(pathname);
+  const pageHeading = getPageHeadingFromPath(pathname);
 
   const [visible, setVisible] = useState(isForcedVisible ? true : true);
 
@@ -95,7 +96,7 @@ export const Header = () => {
           <Image
             className={st.header__logo}
             src="/full-logo.svg"
-            alt="logo"
+            alt={pageHeading}
             width={145}
             height={50}
           />
@@ -132,6 +133,7 @@ export const Header = () => {
 
 const Navigation = () => {
   const pathname = usePathname();
+  const pageHeading = getPageHeadingFromPath(pathname);
   const router = useRouter();
   const prefetchedRoutesRef = useRef(new Set<string>());
 
@@ -201,7 +203,7 @@ const Navigation = () => {
         <Link className={st.navTrigger} href="/products" itemProp="url" prefetch={false}>
           <span>Products</span>
           <span className={st.dropdownArrow}>
-            <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
+            <Image src="/icons/header/arrow.svg" alt={pageHeading} width={16} height={8} />
           </span>
         </Link>
         <ul className={st.dropdown}>
@@ -283,7 +285,7 @@ const Navigation = () => {
         <Link className={st.navTrigger} href="/about" itemProp="url" prefetch={false}>
           <span>About</span>
           <span className={st.dropdownArrow}>
-            <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
+            <Image src="/icons/header/arrow.svg" alt={pageHeading} width={16} height={8} />
           </span>
         </Link>
         <ul className={st.dropdown}>
@@ -307,14 +309,20 @@ const Navigation = () => {
         <Link className={st.navTrigger} href="/industries" itemProp="url" prefetch={false}>
           <span>Industries</span>
           <span className={st.dropdownArrow}>
-            <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
+            <Image src="/icons/header/arrow.svg" alt={pageHeading} width={16} height={8} />
           </span>
         </Link>
         <ul className={st.dropdown}>
           {industriesItems.map((item) => (
             <li key={item.href} itemProp="name">
               <Link className={st.dropdownLink} href={item.href} itemProp="url" prefetch={false}>
-                <Image className={st.dropdownIcon} src={item.icon} alt="" width={20} height={20} />
+                <Image
+                  className={st.dropdownIcon}
+                  src={item.icon}
+                  alt={pageHeading}
+                  width={20}
+                  height={20}
+                />
                 {item.label}
               </Link>
             </li>
@@ -337,7 +345,7 @@ const Navigation = () => {
         >
           <span>Use Cases</span>
           <span className={st.dropdownArrow}>
-            <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
+            <Image src="/icons/header/arrow.svg" alt={pageHeading} width={16} height={8} />
           </span>
         </span>
         <ul className={st.dropdown}>

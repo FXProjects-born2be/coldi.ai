@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './MissionVision.module.scss';
@@ -47,7 +48,12 @@ export const MissionVision = () => {
           custom={index * 0.08}
         >
           <div className={st.visual}>
-            <Image src={section.illustration} alt="" width={564} height={564} />
+            <Image
+              src={section.illustration}
+              alt={imageAlt('meettheteam')}
+              width={564}
+              height={564}
+            />
           </div>
 
           <div className={st.content}>

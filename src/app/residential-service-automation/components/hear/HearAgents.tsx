@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
+import { imageAlt } from '@/shared/constants/page-image-alt';
 import { blurInUp } from '@/shared/lib/helpers';
 import { Button } from '@/shared/ui/kit/button';
 
@@ -108,7 +109,12 @@ const AudioScenarioCard = ({
         </div>
 
         <Button variant={buttonVariant} fullWidth onClick={isPlaying ? handlePause : handlePlay}>
-          <Image src={iconPath} alt="" width={24} height={24} />
+          <Image
+            src={iconPath}
+            alt={imageAlt('residentialServiceAutomation')}
+            width={24}
+            height={24}
+          />
           {isPlaying ? 'Pause' : 'Play'}
         </Button>
       </div>
