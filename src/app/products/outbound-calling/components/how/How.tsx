@@ -11,7 +11,7 @@ import { Button } from '@/shared/ui/kit/button';
 
 import st from './How.module.scss';
 
-const YOUTUBE_VIDEO_ID = 'wTg_XClaLFI';
+const YOUTUBE_VIDEO_ID = 'bgnBqLd2e0Y';
 const YOUTUBE_THUMB = `https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg`;
 
 function PlayIcon({ className }: { className?: string }) {
