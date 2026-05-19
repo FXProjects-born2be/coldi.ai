@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Script from 'next/script';
 
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 
 import { Breadcrumbs, BreadcrumbsProvider } from '@/shared/ui/components/breadcrumbs';
@@ -87,6 +88,7 @@ export default async function RootLayout({
   const showRetellWidget = false;
   return (
     <html lang="en">
+      <SpeedInsights />
       <GoogleAnalytics gaId="G-RCPHXB9V3B" />
       {showRetellWidget && <RetellWidget />}
       <body className={urbanist.variable}>
