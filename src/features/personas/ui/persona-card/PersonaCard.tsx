@@ -38,7 +38,7 @@ export const PersonaCard = ({
     <div className={st.card}>
       <div className={st.card__content}>
         <div className={st.card__top}>
-          <Image src={imgUrl} alt={name} width={509} height={484} unoptimized />
+          <Image src={imgUrl} alt={name} width={509} height={484} />
           <div>
             <h4>{name}</h4>
             <span>{type}</span>

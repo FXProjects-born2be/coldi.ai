@@ -1,12 +1,9 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
-import { blurInUp, cn } from '@/shared/lib/helpers';
+import { cn } from '@/shared/lib/helpers';
 import { Counter } from '@/shared/ui/components/counter';
 import { Button } from '@/shared/ui/kit/button';
 
@@ -61,58 +58,28 @@ const cards = [
 export const Delivers = () => {
   return (
     <section className={st.layout}>
-      <motion.h2
-        variants={blurInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
+      <h2>
         What Coldi <br />
         <span className={st.highlight}>Delivers at Scale</span>
-      </motion.h2>
+      </h2>
       <section className={st.cards}>
-        <motion.div
-          variants={blurInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
+        <div>
           <Card {...cards[0]} />
-        </motion.div>
-        <motion.div
-          variants={blurInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
+        </div>
+        <div>
           <Card {...cards[1]} reverse />
-        </motion.div>
-        <motion.div
-          variants={blurInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
+        </div>
+        <div>
           <Card {...cards[2]} />
-        </motion.div>
-        <motion.div
-          variants={blurInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
+        </div>
+        <div>
           <Card {...cards[3]} reverse />
-        </motion.div>
+        </div>
       </section>
       <Link href="/call-request" className={st.button}>
-        <motion.div
-          variants={blurInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
+        <div>
           <Button size="md">Get Started with Coldi</Button>
-        </motion.div>
+        </div>
       </Link>
     </section>
   );
@@ -130,7 +97,7 @@ const Card = ({
   reverse?: boolean;
 }) => (
   <article className={cn(st.card, reverse && st.card__reverse)}>
-    <Image src={imgUrl} alt={`${title.end}${title.suffix}`} width={296} height={296} unoptimized />
+    <Image src={imgUrl} alt={`${title.end}${title.suffix}`} width={296} height={296} />
     <div className={st.card__content}>
       <h3>
         <Counter

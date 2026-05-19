@@ -1,12 +1,8 @@
-'use client';
 import Link from 'next/link';
-
-import { motion } from 'framer-motion';
 
 import { getPersonas } from '@/features/personas/model/personas';
 import { PersonaCard } from '@/features/personas/ui/persona-card';
 
-import { blurInUp } from '@/shared/lib/helpers';
 import { Button } from '@/shared/ui/kit/button';
 
 import st from './VoicesList.module.scss';
@@ -44,24 +40,11 @@ export const VoicesList = () => {
     <section className={st.layout}>
       <header className={st.header}>
         <section className={st.title}>
-          <motion.h2
-            variants={blurInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            Select Your Perfect Brand Voice
-          </motion.h2>
+          <h2>Select Your Perfect Brand Voice</h2>
         </section>
-        <motion.p
-          variants={blurInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className={st.desc}
-        >
+        <p className={st.desc}>
           Listen to our 15 AI voices and pick the one that resonates with your brand.
-        </motion.p>
+        </p>
       </header>
 
       <section className={st.voicesList}>

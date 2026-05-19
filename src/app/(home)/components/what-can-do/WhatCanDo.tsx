@@ -1,9 +1,5 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import type { JSX } from 'react';
 
-import { blurInUp } from '@/shared/lib/helpers';
 import { CalendarIcon } from '@/shared/ui/icons/outline/calendar';
 import { CheckListIcon } from '@/shared/ui/icons/outline/check-list';
 import { DollarIcon } from '@/shared/ui/icons/outline/dollar';
@@ -60,9 +56,9 @@ const card = [
 
 export const WhatCanDo = () => (
   <section className={st.layout}>
-    <motion.h2 variants={blurInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+    <h2>
       What Coldi Can <br /> <span className={st.highlighted}>Do for Your Business</span>
-    </motion.h2>
+    </h2>
     <section className={st.cards}>
       {card.map((item, index) => (
         <Card key={item.name} {...item} index={index} />
@@ -82,27 +78,14 @@ const Card = ({
   text: string;
   index: number;
 }) => {
-  const totalDuration = card.length * 0.5; // 1.6s для 8 елементів
-
-  const shakeAnimation = {
-    rotate: [0, -5, 0, 5, 0],
-    transition: {
-      duration: 0.2,
-      repeat: Infinity,
-      repeatDelay: totalDuration - 0.5, // Затримка до наступного циклу
-      delay: index * 0.5,
-      ease: 'easeInOut' as const,
-    },
-  };
-
   return (
     <article className={st.card}>
       <div className={st.card__content}>
         <div className={st.card__front}>
           <h3>
-            <motion.div animate={shakeAnimation} style={{ display: 'inline-block' }}>
+            <div className={st.card__icon} style={{ animationDelay: `${index * 0.5}s` }}>
               <Icon />
-            </motion.div>
+            </div>
             <span>{name}</span>
           </h3>
         </div>
