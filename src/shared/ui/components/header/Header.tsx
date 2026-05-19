@@ -57,21 +57,6 @@ const useCasesItems = [
   },
 ];
 
-const primaryNavRoutes = ['/', '/news', '/products', '/pricing', '/about', '/industries'];
-const dropdownNavRoutes = [
-  ...industriesItems.map((item) => item.href),
-  ...useCasesItems.map((item) => item.href),
-  '/products/outbound-calling',
-  '/products/inbound-calling',
-  '/products/agent-development',
-  '/products/customer-service-agent',
-  '/products/ai-for-quality-control',
-  '/products/voip-phone-service',
-  '/meettheteam',
-];
-const headerPrefetchRoutes = [...new Set([...primaryNavRoutes, ...dropdownNavRoutes])];
-//https://calendly.com/coldi/30min
-
 const headerVisibilityOnScrollHandle = (set: (visible: boolean) => void) => {
   const scrollY = window.scrollY;
   set(scrollY > 0);
@@ -162,20 +147,6 @@ const Navigation = () => {
     [pathname, router]
   );
 
-  useEffect(() => {
-    const schedulePrefetch = () => prefetchRoutes(headerPrefetchRoutes);
-
-    if (typeof globalThis.requestIdleCallback === 'function') {
-      const idleId = globalThis.requestIdleCallback(schedulePrefetch, { timeout: 2000 });
-
-      return () => globalThis.cancelIdleCallback(idleId);
-    }
-
-    const timeoutId = globalThis.setTimeout(schedulePrefetch, 1200);
-
-    return () => globalThis.clearTimeout(timeoutId);
-  }, [prefetchRoutes]);
-
   const handleKeyNavigation = (event: React.KeyboardEvent, href: string) => {
     if (event.key !== 'Enter' && event.key !== ' ') return;
 
@@ -190,12 +161,12 @@ const Navigation = () => {
       itemType="http://schema.org/SiteNavigationElement"
     >
       <li className={cn({ [st.active]: pathname === '/' })} itemProp="name">
-        <Link className={st.navLink} href="/" itemProp="url">
+        <Link className={st.navLink} href="/" itemProp="url" prefetch={false}>
           Home
         </Link>
       </li>
       <li className={cn({ [st.active]: pathname === '/news' })} itemProp="name">
-        <Link className={st.navLink} href="/news" itemProp="url">
+        <Link className={st.navLink} href="/news" itemProp="url" prefetch={false}>
           News
         </Link>
       </li>
@@ -227,7 +198,7 @@ const Navigation = () => {
           ])
         }
       >
-        <Link className={st.navTrigger} href="/products" itemProp="url" prefetch>
+        <Link className={st.navTrigger} href="/products" itemProp="url" prefetch={false}>
           <span>Products</span>
           <span className={st.dropdownArrow}>
             <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
@@ -235,17 +206,32 @@ const Navigation = () => {
         </Link>
         <ul className={st.dropdown}>
           <li itemProp="name">
-            <Link className={st.dropdownLink} href="/products/outbound-calling" itemProp="url">
+            <Link
+              className={st.dropdownLink}
+              href="/products/outbound-calling"
+              itemProp="url"
+              prefetch={false}
+            >
               Outbound Calling
             </Link>
           </li>
           <li itemProp="name">
-            <Link className={st.dropdownLink} href="/products/inbound-calling" itemProp="url">
+            <Link
+              className={st.dropdownLink}
+              href="/products/inbound-calling"
+              itemProp="url"
+              prefetch={false}
+            >
               Inbound Calling
             </Link>
           </li>
           <li itemProp="name">
-            <Link className={st.dropdownLink} href="/products/agent-development" itemProp="url">
+            <Link
+              className={st.dropdownLink}
+              href="/products/agent-development"
+              itemProp="url"
+              prefetch={false}
+            >
               AI Agent Development
             </Link>
           </li>
@@ -254,6 +240,7 @@ const Navigation = () => {
               className={st.dropdownLink}
               href="/products/customer-service-agent"
               itemProp="url"
+              prefetch={false}
             >
               AI Customer Service
             </Link>
@@ -263,19 +250,25 @@ const Navigation = () => {
               className={st.dropdownLink}
               href="/products/ai-for-quality-control"
               itemProp="url"
+              prefetch={false}
             >
               AI for Quality Control
             </Link>
           </li>
           <li itemProp="name">
-            <Link className={st.dropdownLink} href="/products/voip-phone-service" itemProp="url">
+            <Link
+              className={st.dropdownLink}
+              href="/products/voip-phone-service"
+              itemProp="url"
+              prefetch={false}
+            >
               VoIP Phone Service
             </Link>
           </li>
         </ul>
       </li>
       <li className={cn({ [st.active]: pathname === '/pricing' })} itemProp="name">
-        <Link className={st.navLink} href="/pricing" itemProp="url" prefetch>
+        <Link className={st.navLink} href="/pricing" itemProp="url" prefetch={false}>
           Pricing
         </Link>
       </li>
@@ -287,7 +280,7 @@ const Navigation = () => {
         onMouseEnter={() => prefetchRoutes(['/about', '/meettheteam'])}
         onFocus={() => prefetchRoutes(['/about', '/meettheteam'])}
       >
-        <Link className={st.navTrigger} href="/about" itemProp="url" prefetch>
+        <Link className={st.navTrigger} href="/about" itemProp="url" prefetch={false}>
           <span>About</span>
           <span className={st.dropdownArrow}>
             <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
@@ -295,7 +288,7 @@ const Navigation = () => {
         </Link>
         <ul className={st.dropdown}>
           <li itemProp="name">
-            <Link className={st.dropdownLink} href="/meettheteam" itemProp="url">
+            <Link className={st.dropdownLink} href="/meettheteam" itemProp="url" prefetch={false}>
               Meet the Team
             </Link>
           </li>
@@ -311,7 +304,7 @@ const Navigation = () => {
         }
         onFocus={() => prefetchRoutes(['/industries', ...industriesItems.map((item) => item.href)])}
       >
-        <Link className={st.navTrigger} href="/industries" itemProp="url" prefetch>
+        <Link className={st.navTrigger} href="/industries" itemProp="url" prefetch={false}>
           <span>Industries</span>
           <span className={st.dropdownArrow}>
             <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
@@ -320,7 +313,7 @@ const Navigation = () => {
         <ul className={st.dropdown}>
           {industriesItems.map((item) => (
             <li key={item.href} itemProp="name">
-              <Link className={st.dropdownLink} href={item.href} itemProp="url">
+              <Link className={st.dropdownLink} href={item.href} itemProp="url" prefetch={false}>
                 <Image className={st.dropdownIcon} src={item.icon} alt="" width={20} height={20} />
                 {item.label}
               </Link>
@@ -350,7 +343,7 @@ const Navigation = () => {
         <ul className={st.dropdown}>
           {useCasesItems.map((item) => (
             <li key={item.href} itemProp="name">
-              <Link className={st.dropdownLink} href={item.href} itemProp="url">
+              <Link className={st.dropdownLink} href={item.href} itemProp="url" prefetch={false}>
                 {item.label}
               </Link>
             </li>

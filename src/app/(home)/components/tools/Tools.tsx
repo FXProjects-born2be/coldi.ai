@@ -1,9 +1,4 @@
-'use client';
 import Image from 'next/image';
-
-import { motion } from 'framer-motion';
-
-import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Tools.module.scss';
 
@@ -62,14 +57,14 @@ const card = [
 
 export const Tools = () => (
   <section className={st.layout}>
-    <motion.h2 variants={blurInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+    <h2>
       Coldi is Already Integrated <br />
       <span className={st.highlighted}>with Leading Business Tools</span>
-    </motion.h2>
+    </h2>
     <section className={st.cards}>
       {card.map((item) => (
         <span key={item.alt} className={st.card}>
-          <Image src={item.image} alt={item.alt} width={100} height={100} unoptimized />
+          <Image src={item.image} alt={item.alt} width={100} height={100} />
         </span>
       ))}
     </section>

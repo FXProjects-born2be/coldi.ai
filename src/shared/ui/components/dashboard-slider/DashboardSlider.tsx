@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { motion } from 'framer-motion';
@@ -15,15 +15,12 @@ import st from './DashboardSlider.module.scss';
 import 'swiper/css';
 
 export const DashboardSlider = ({ title, subtitle }: { title: string; subtitle: string }) => {
-  const images = useMemo(
-    () => [
-      '/images/dashboard/slide-1.png',
-      '/images/dashboard/slide-2.png',
-      '/images/dashboard/slide-3.png',
-      '/images/dashboard/slide-4.png',
-    ],
-    []
-  );
+  const images = [
+    '/images/dashboard/slide-1.png',
+    '/images/dashboard/slide-2.png',
+    '/images/dashboard/slide-3.png',
+    '/images/dashboard/slide-4.png',
+  ];
 
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef<SwiperInstance | null>(null);
@@ -74,7 +71,6 @@ export const DashboardSlider = ({ title, subtitle }: { title: string; subtitle: 
                 height={800}
                 sizes="(max-width: 1200px) 100vw, 1200px"
                 priority={index === 0}
-                unoptimized
               />
             </SwiperSlide>
           ))}

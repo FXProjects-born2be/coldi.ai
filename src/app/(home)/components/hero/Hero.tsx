@@ -1,10 +1,5 @@
-'use client';
-
 import Link from 'next/link';
 
-import { motion } from 'framer-motion';
-
-import { blurInUp } from '@/shared/lib/helpers';
 import { TypingText } from '@/shared/ui/components/typing-text';
 import { Button } from '@/shared/ui/kit/button';
 
@@ -15,34 +10,17 @@ export const Hero = () => {
     <section className={st.hero}>
       <section className={st.hero__content}>
         <div className={st.hero__title}>
-          <motion.h1
-            variants={blurInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
+          <h1>
             Coldi <br />
             Brand-Tuned
             <br /> <span className={st.highlighted}>AI Talkers</span>
-          </motion.h1>
-          <motion.p
-            variants={blurInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            Hired and Ready Before You Even Say &quot;Engage!&quot;
-          </motion.p>
+          </h1>
+          <p>Hired and Ready Before You Even Say &quot;Engage!&quot;</p>
         </div>
         <Link href="/call-request">
-          <motion.div
-            variants={blurInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
+          <div>
             <Button size="md">Book a demo</Button>
-          </motion.div>
+          </div>
         </Link>
       </section>
       <section className={st.hero__video}>
@@ -79,7 +57,7 @@ export const Hero = () => {
           playsInline
           muted
           loop
-          preload="auto"
+          preload="metadata"
           controls={false}
           poster="/videos/home/hero.svg"
         />
