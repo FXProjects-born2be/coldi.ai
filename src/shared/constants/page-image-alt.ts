@@ -3,6 +3,7 @@
  * Use {@link imageAlt} to combine with section-specific detail.
  */
 export const IMAGE_ALT = {
+  home: 'Coldi Brand-Tuned AI Talkers',
   healthcare: 'AI Agents in Healthcare',
   insurance: 'AI Insurance Agents',
   realEstate: 'AI Real Estate Agents',
@@ -16,6 +17,7 @@ export const IMAGE_ALT = {
   aiForQualityControl: 'AI for Quality Control',
   voipPhoneService: 'VoIP Phone Service',
   meettheteam: 'Meet the Team',
+  residentialServiceAutomation: 'Residential Service Automation',
 } as const;
 
 export type ImageAltPage = keyof typeof IMAGE_ALT;

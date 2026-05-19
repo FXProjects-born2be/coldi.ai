@@ -162,7 +162,7 @@ export const TeamGrid = () => {
               />
               <Image
                 src="/images/meet-the-team/team-badge.svg"
-                alt=""
+                alt={imageAlt('meettheteam')}
                 width={62}
                 height={22}
                 className={st.badge}
@@ -186,7 +186,7 @@ export const TeamGrid = () => {
               >
                 <Image
                   src="/images/meet-the-team/linkedin.svg"
-                  alt=""
+                  alt={imageAlt('meettheteam')}
                   width={16}
                   height={16}
                   unoptimized

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { requestRoutes } from '@/shared/lib/helpers';
+import { getPageHeadingFromPath, requestRoutes } from '@/shared/lib/helpers';
 import { MessageIcon } from '@/shared/ui/icons/fill/message';
 import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
 import { Facebook } from '@/shared/ui/icons/fill/socials/facebook';
@@ -19,6 +19,7 @@ import st from './Footer.module.scss';
 export const Footer = () => {
   const pathname = usePathname();
   const phoneNumber = '+441299667777'; // Static phone number
+  const pageHeading = getPageHeadingFromPath(pathname);
 
   return !requestRoutes.has(pathname) ? (
     <>
@@ -26,7 +27,7 @@ export const Footer = () => {
         <div className={st.footer__container}>
           <section className={st.footer__content}>
             <div className={st.footer__logo}>
-              <Image src="/full-logo.svg" alt="Coldi" width={145} height={50} />
+              <Image src="/full-logo.svg" alt={pageHeading} width={145} height={50} />
               <p>Brand-Tuned Ai Talkers. Always On.</p>
               <div className={st.footer__socials}>
                 <Link href="https://x.com/Coldiai" target="_blank">
@@ -185,7 +186,7 @@ export const Footer = () => {
             >
               <Image
                 src="https://cdn-b.saashub.com/img/badges/approved-color.png?v=1"
-                alt="Coldi badge"
+                alt={pageHeading}
                 width={126}
                 height={42}
               />

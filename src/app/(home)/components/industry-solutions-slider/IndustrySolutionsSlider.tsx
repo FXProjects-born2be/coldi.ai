@@ -167,7 +167,14 @@ export const IndustrySolutionsSlider = () => {
             <SwiperSlide key={card.title} className={st.slide}>
               <article className={st.card}>
                 <div className={st.iconWrap}>
-                  <Image src={card.icon} alt="" width={48} height={48} aria-hidden unoptimized />
+                  <Image
+                    src={card.icon}
+                    alt={'Coldi Brand-Tuned AI Talkers'}
+                    width={48}
+                    height={48}
+                    aria-hidden
+                    unoptimized
+                  />
                 </div>
 
                 <div className={st.cardBody}>

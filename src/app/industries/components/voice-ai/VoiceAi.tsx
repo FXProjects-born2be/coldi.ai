@@ -56,15 +56,15 @@ export const VoiceAi = () => {
           <div className={st.circles}>
             <Image
               src="/images/industries/ellipse-inner.svg"
-              alt=""
               width={378}
               height={378}
               className={st.circleInner}
               unoptimized
+              alt={'AI Voice Solution for more than 10 industries'}
             />
             <Image
               src="/images/industries/ellipse-mid.svg"
-              alt=""
+              alt={'AI Voice Solution for more than 10 industries'}
               width={560}
               height={560}
               className={st.circleMid}
@@ -72,7 +72,7 @@ export const VoiceAi = () => {
             />
             <Image
               src="/images/industries/ellipse-outer.svg"
-              alt=""
+              alt={'AI Voice Solution for more than 10 industries'}
               width={734}
               height={734}
               className={st.circleOuter}
@@ -88,7 +88,7 @@ export const VoiceAi = () => {
                   <div key={item} className={st.tag}>
                     <Image
                       src="/images/industries/dot-gray.svg"
-                      alt=""
+                      alt={'AI Voice Solution for more than 10 industries'}
                       width={7}
                       height={7}
                       unoptimized
@@ -108,7 +108,7 @@ export const VoiceAi = () => {
                   <div key={item} className={st.tag}>
                     <Image
                       src="/images/industries/dot-blue.svg"
-                      alt=""
+                      alt={'AI Voice Solution for more than 10 industries'}
                       width={7}
                       height={7}
                       unoptimized

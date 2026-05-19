@@ -103,7 +103,7 @@ export const ProductSolutionsSlider = () => {
         <button type="button" className={`${st.navButton} ${st.prev}`} onClick={handlePrev}>
           <Image
             src="/images/home/solution-sliders/slider-arrow.svg"
-            alt=""
+            alt={'Coldi Brand-Tuned AI Talkers'}
             width={24}
             height={24}
             unoptimized
@@ -141,7 +141,14 @@ export const ProductSolutionsSlider = () => {
             <SwiperSlide key={card.title} className={st.slide}>
               <article className={st.card}>
                 <div className={st.iconWrap}>
-                  <Image src={card.icon} alt="" width={48} height={48} aria-hidden unoptimized />
+                  <Image
+                    src={card.icon}
+                    alt={'Coldi Brand-Tuned AI Talkers'}
+                    width={48}
+                    height={48}
+                    aria-hidden
+                    unoptimized
+                  />
                 </div>
 
                 <div className={st.cardBody}>
@@ -162,7 +169,7 @@ export const ProductSolutionsSlider = () => {
         <button type="button" className={`${st.navButton} ${st.next}`} onClick={handleNext}>
           <Image
             src="/images/home/solution-sliders/slider-arrow.svg"
-            alt=""
+            alt={'Coldi Brand-Tuned AI Talkers'}
             width={24}
             height={24}
             unoptimized
