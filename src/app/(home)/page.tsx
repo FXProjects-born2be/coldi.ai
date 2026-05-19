@@ -1,23 +1,7 @@
 import type { Metadata } from 'next';
 
-import { DashboardSlider } from '@/shared/ui/components/dashboard-slider/DashboardSlider';
-
-import {
-  Advantages,
-  ColdiInNews,
-  Delivers,
-  Faq,
-  HearColdi,
-  Hero,
-  IndustrySolutionsSlider,
-  Infrustructure,
-  ProductSolutionsSlider,
-  Reviews,
-  Tools,
-  VoicesList,
-  WhatCanDo,
-  WhatIs,
-} from './components';
+import { Advantages, Hero, Infrustructure, Tools } from './components';
+import { HomeDeferredSections } from './components/HomeDeferredSections';
 
 export const metadata: Metadata = {
   alternates: {
@@ -33,21 +17,7 @@ export default function Home() {
       <Advantages />
       <Infrustructure />
       <Tools />
-      <VoicesList />
-      <WhatCanDo />
-      <DashboardSlider
-        title="<span>Easily Track</span> How Coldi Works"
-        subtitle="See all results in one place: review calls, compare performance, <br/>and optimize your campaigns with clear, real-time data."
-      />
-
-      <HearColdi />
-      <Delivers />
-      <ColdiInNews />
-      <IndustrySolutionsSlider />
-      <ProductSolutionsSlider />
-      <Reviews />
-      <WhatIs />
-      <Faq />
+      <HomeDeferredSections />
     </main>
   );
 }
