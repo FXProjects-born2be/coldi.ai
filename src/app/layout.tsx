@@ -3,7 +3,6 @@ import { headers } from 'next/headers';
 import Image from 'next/image';
 import Script from 'next/script';
 
-import { GoogleAnalytics } from '@next/third-parties/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 
@@ -83,13 +82,14 @@ export default async function RootLayout({
   const pathname = headersList.get('x-pathname') ?? '';
 
   const isLiveDemo = pathname.includes('/live-demo');
+  const isAdminRoute = pathname.startsWith('/news-admin');
+  const shouldLoadMarketingScripts = !isAdminRoute;
   //const showRetellWidget =
   //!pathname.includes('/turn-leads-into-meetings') && !pathname.includes('/calendar');
   const showRetellWidget = false;
   return (
     <html lang="en">
       <SpeedInsights />
-      <GoogleAnalytics gaId="G-RCPHXB9V3B" />
       {showRetellWidget && <RetellWidget />}
       <body className={urbanist.variable}>
         <Script
@@ -99,48 +99,71 @@ export default async function RootLayout({
             __html: JSON.stringify(organizationStructuredData),
           }}
         />
-        {/* Google Tag Manager */}
-        <Script
-          id="gtm"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        {shouldLoadMarketingScripts && (
+          <>
+            <Script
+              id="google-analytics-src"
+              strategy="lazyOnload"
+              src="https://www.googletagmanager.com/gtag/js?id=G-RCPHXB9V3B"
+            />
+            <Script
+              id="google-analytics"
+              strategy="lazyOnload"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', 'G-RCPHXB9V3B');
+                `,
+              }}
+            />
+            {/* Google Tag Manager */}
+            <Script
+              id="gtm"
+              strategy="lazyOnload"
+              dangerouslySetInnerHTML={{
+                __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-MLLM3R8B');`,
-          }}
-        />
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-MLLM3R8B"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-            title="Google Tag Manager"
-          />
-        </noscript>
-        {/* End Google Tag Manager (noscript) */}
+              }}
+            />
+            {/* Google Tag Manager (noscript) */}
+            <noscript>
+              <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-MLLM3R8B"
+                height="0"
+                width="0"
+                style={{ display: 'none', visibility: 'hidden' }}
+                title="Google Tag Manager"
+              />
+            </noscript>
+            {/* End Google Tag Manager (noscript) */}
+          </>
+        )}
         <BreadcrumbsProvider>
           {!isLiveDemo && <Header />}
           {!isLiveDemo && <Breadcrumbs />}
           {children}
         </BreadcrumbsProvider>
         {!isLiveDemo && <Footer />}
-        <Script
-          async
-          defer
-          id="hs-script-loader"
-          strategy="lazyOnload"
-          src="//js-eu1.hs-scripts.com/146476440.js"
-        />
+        {shouldLoadMarketingScripts && (
+          <>
+            <Script
+              async
+              defer
+              id="hs-script-loader"
+              strategy="lazyOnload"
+              src="//js-eu1.hs-scripts.com/146476440.js"
+            />
 
-        <Script
-          id="facebook-pixel"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
+            <Script
+              id="facebook-pixel"
+              strategy="lazyOnload"
+              dangerouslySetInnerHTML={{
+                __html: `
               !function(f,b,e,v,n,t,s)
               {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
               n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -152,17 +175,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               fbq('init', '24367361056214270');
               fbq('track', 'PageView');
             `,
-          }}
-        />
-        <noscript>
-          <Image
-            height="1"
-            width="1"
-            style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=24367361056214270&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
+              }}
+            />
+            <noscript>
+              <Image
+                height="1"
+                width="1"
+                style={{ display: 'none' }}
+                src="https://www.facebook.com/tr?id=24367361056214270&ev=PageView&noscript=1"
+                alt=""
+              />
+            </noscript>
+          </>
+        )}
       </body>
     </html>
   );
