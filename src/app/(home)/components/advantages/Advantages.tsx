@@ -1,11 +1,5 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-import { motion } from 'framer-motion';
-
-import { blurInUp } from '@/shared/lib/helpers';
 import { Chip } from '@/shared/ui/kit/chip';
 
 import st from './Advantages.module.scss';
@@ -34,100 +28,34 @@ const cards = [
 ];
 
 export const Advantages = () => {
-  const [isSmall, setIsSmall] = useState(false);
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmall(window.innerWidth < 1300);
-    };
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
     <section className={st.layout}>
       <header className={st.header}>
         <section className={st.title}>
           <div className={st.chipContainer}>
-            <motion.div className={st.arrowRight}>
-              <motion.span
-                className={st.line}
-                initial={{ width: 0 }}
-                whileInView={{ width: '100%' }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, ease: 'easeInOut' }}
-              />
-              <motion.span
-                className={st.dot}
-                initial={{ x: isSmall ? -128 : -256 }}
-                whileInView={{ x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, ease: 'easeInOut' }}
-              />
-            </motion.div>
-            <motion.div
-              variants={blurInUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0.2}
-              className={st.chip}
-            >
+            <div className={st.arrowRight}>
+              <span className={st.line} />
+              <span className={st.dot} />
+            </div>
+            <div className={st.chip}>
               <Chip variant="secondary">Stop struggling with AI setup</Chip>
-            </motion.div>
-            <motion.div className={st.arrowLeft}>
-              <motion.span
-                className={st.line}
-                initial={{ width: 0 }}
-                whileInView={{ width: '100%' }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, ease: 'easeInOut' }}
-              />
-              <motion.span
-                className={st.dot}
-                initial={{ x: 0 }}
-                whileInView={{ x: isSmall ? 116 : 235 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, ease: 'easeInOut' }}
-              />
-            </motion.div>
+            </div>
+            <div className={st.arrowLeft}>
+              <span className={st.line} />
+              <span className={st.dot} />
+            </div>
           </div>
-          <motion.h2
-            variants={blurInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            Coldi handles the heavy lifting.
-          </motion.h2>
+          <h2>Coldi handles the heavy lifting.</h2>
         </section>
-        <motion.p
-          variants={blurInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className={st.desc}
-        >
-          A fully managed, done-for-you solution. From custom voice selection to deep API integration, every detail is built and synced to ensure your AI voice agent works seamlessly within your business from day one
-        </motion.p>
-        <motion.p
-          variants={blurInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className={st.subtitle}
-        >
-          The Advantages of Implementation
-        </motion.p>
+        <p className={st.desc}>
+          A fully managed, done-for-you solution. From custom voice selection to deep API
+          integration, every detail is built and synced to ensure your AI voice agent works
+          seamlessly within your business from day one
+        </p>
+        <p className={st.subtitle}>The Advantages of Implementation</p>
       </header>
 
-      <motion.div
-        variants={blurInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className={st.image}
-      >
+      <div className={st.image}>
         <Image
           src="/images/home/adv.svg"
           className={st.desktop}
@@ -144,21 +72,13 @@ export const Advantages = () => {
           height={500}
           quality={100}
         />
-      </motion.div>
+      </div>
 
       <section className={st.cards}>
         {cards.map((card, index) => (
-          <motion.div key={index}>
-            <motion.div
-              variants={blurInUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0.2}
-            >
-              <Card {...card} />
-            </motion.div>
-          </motion.div>
+          <div key={index}>
+            <Card {...card} />
+          </div>
         ))}
       </section>
     </section>

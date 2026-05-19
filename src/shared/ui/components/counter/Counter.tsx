@@ -1,7 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
-
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 
 type CounterProps = {
   start: number;
@@ -24,6 +22,27 @@ export const Counter = ({
 }: CounterProps) => {
   const [count, setCount] = useState(start);
   const [isInView, setIsInView] = useState(false);
+  const ref = useRef<HTMLSpanElement | null>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+
+    if (!element || isInView) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+
+        setIsInView(true);
+        observer.disconnect();
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [isInView]);
 
   useEffect(() => {
     if (isInView) {
@@ -54,14 +73,10 @@ export const Counter = ({
   }, [isInView, start, end, duration, delay]);
 
   return (
-    <motion.span
-      className={className}
-      onViewportEnter={() => setIsInView(true)}
-      viewport={{ once: true }}
-    >
+    <span ref={ref} className={className}>
       <span>{prefix}</span>
       {count}
       <span>{suffix}</span>
-    </motion.span>
+    </span>
   );
 };

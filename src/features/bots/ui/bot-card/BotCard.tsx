@@ -55,7 +55,7 @@ export const BotCard = ({ text, name, btnVariant, videoUrl, audioUrl }: BotPrevi
           playsInline
           muted
           loop
-          preload="auto"
+          preload="metadata"
           controls={false}
           ref={videoRef}
         />

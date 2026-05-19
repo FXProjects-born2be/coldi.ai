@@ -97,6 +97,11 @@
     }
   }
 
+  &__icon {
+    display: inline-block;
+    animation: icon-shake 4s ease-in-out infinite;
+  }
+
   &__front,
   &__back {
     display: flex;
@@ -164,5 +169,25 @@
         font-size: 16px;
       }
     }
+  }
+}
+
+@keyframes icon-shake {
+  0%,
+  85%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  88% {
+    transform: rotate(-5deg);
+  }
+
+  92% {
+    transform: rotate(5deg);
+  }
+
+  96% {
+    transform: rotate(0deg);
   }
 }
