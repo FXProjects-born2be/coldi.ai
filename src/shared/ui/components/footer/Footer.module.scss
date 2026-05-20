@@ -110,6 +110,23 @@
       row-gap: 40px;
       column-gap: 20px;
     }
+
+    >div{
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      h4 {
+        color: #0c1021;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        @include largeDesktop {
+          font-size: 24px;
+        }
+      }
+    }
+
   }
 
   &__list {
@@ -119,16 +136,7 @@
     @include mobile {
       width: calc(50% - 10px);
     }
-    h4 {
-      color: #0c1021;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-      @include largeDesktop {
-        font-size: 24px;
-      }
-    }
+    
 
     li {
       color: #535662;

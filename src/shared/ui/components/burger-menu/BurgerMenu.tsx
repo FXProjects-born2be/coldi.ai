@@ -90,7 +90,7 @@ export const BurgerMenu = () => {
   return (
     <Root open={open} onOpenChange={setOpen}>
       <Trigger asChild>
-        <button name="open-burger-menu" className={st.burger}>
+        <button aria-label="Open burger menu" name="open-burger-menu" className={st.burger}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -128,6 +128,7 @@ export const BurgerMenu = () => {
 
                 <div className={st.group}>
                   <button
+                    aria-label="Toggle products group"
                     name="toggle-products-group"
                     className={cn(st.groupTrigger, {
                       [st.active]: pathname.startsWith('/products'),
@@ -173,6 +174,7 @@ export const BurgerMenu = () => {
                 </Link>
                 <div className={st.group}>
                   <button
+                    aria-label="Toggle about group"
                     name="toggle-about-group"
                     className={cn(st.groupTrigger, {
                       [st.active]: pathname.startsWith('/about'),
@@ -211,6 +213,7 @@ export const BurgerMenu = () => {
 
                 <div className={st.group}>
                   <button
+                    aria-label="Toggle industries group"
                     name="toggle-industries-group"
                     className={cn(st.groupTrigger, {
                       [st.active]: pathname.startsWith('/industries'),
@@ -250,6 +253,7 @@ export const BurgerMenu = () => {
 
                 <div className={st.group}>
                   <button
+                    aria-label="Toggle use cases group"
                     name="toggle-use-cases-group"
                     className={cn(st.groupTrigger, {
                       [st.active]: pathname.startsWith('/use-cases'),

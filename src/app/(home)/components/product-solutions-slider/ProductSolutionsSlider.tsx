@@ -105,6 +105,7 @@ export const ProductSolutionsSlider = () => {
           type="button"
           className={`${st.navButton} ${st.prev}`}
           onClick={handlePrev}
+          aria-label="Go to previous product slide"
         >
           <Image
             src="/images/home/solution-sliders/slider-arrow.svg"
@@ -176,6 +177,7 @@ export const ProductSolutionsSlider = () => {
           type="button"
           className={`${st.navButton} ${st.next}`}
           onClick={handleNext}
+          aria-label="Go to next product slide"
         >
           <Image
             src="/images/home/solution-sliders/slider-arrow.svg"

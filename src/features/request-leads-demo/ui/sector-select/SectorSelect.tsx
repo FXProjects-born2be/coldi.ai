@@ -91,6 +91,7 @@ export const SectorSelect = ({
   return (
     <div className={st.wrapper} ref={containerRef}>
       <button
+        aria-label="Toggle sector select"
         name="toggle-sector-select"
         type="button"
         className={`${st.trigger} ${isOpen ? st.open : ''}`}
@@ -110,6 +111,7 @@ export const SectorSelect = ({
                   : value === item.value;
               return (
                 <button
+                  aria-label="Select sector"
                   name="select-sector"
                   key={item.value}
                   type="button"

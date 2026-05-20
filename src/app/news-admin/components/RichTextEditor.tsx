@@ -199,6 +199,7 @@ export function RichTextEditor({
       <div className={st.toolbar}>
         {toolbarActions.map((action) => (
           <button
+            aria-label="Apply command"
             name="apply-command"
             key={`${action.command}-${action.label}`}
             className={st.toolbarButton}
@@ -210,6 +211,7 @@ export function RichTextEditor({
           </button>
         ))}
         <button
+          aria-label="Insert link"
           name="insert-link"
           className={st.toolbarButton}
           type="button"
@@ -219,6 +221,7 @@ export function RichTextEditor({
           Link
         </button>
         <button
+          aria-label="Toggle image panel"
           name="toggle-image-panel"
           className={st.toolbarButton}
           type="button"
@@ -228,6 +231,7 @@ export function RichTextEditor({
           Image
         </button>
         <button
+          aria-label="Clear formatting"
           name="clear-formatting"
           className={st.toolbarButton}
           type="button"
@@ -277,6 +281,7 @@ export function RichTextEditor({
 
           <div className={st.imagePanelActions}>
             <button
+              aria-label="Insert image"
               name="insert-image"
               className={st.toolbarButton}
               type="button"
@@ -286,6 +291,7 @@ export function RichTextEditor({
               {isUploadingImage ? 'Uploading...' : 'Insert image'}
             </button>
             <button
+              aria-label="Cancel image panel"
               name="cancel-image-panel"
               className={st.toolbarButton}
               type="button"

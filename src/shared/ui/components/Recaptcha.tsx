@@ -337,6 +337,7 @@ export const Recaptcha = ({ onSuccess, onError, onExpire, resetKey }: RecaptchaP
           <br />• That the site key is configured for this domain in Google reCAPTCHA Console
         </p>
         <button
+          aria-label="Retry reCAPTCHA"
           name="retry-recaptcha"
           onClick={() => {
             setLoadError(null);

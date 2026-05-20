@@ -58,6 +58,7 @@ const PricingCard = ({
           </ul>
           {hasMoreFeatures && (
             <button
+              aria-label="Toggle more options"
               name="toggle-more-options"
               className={st.moreOptions}
               onClick={() => setShowAllFeatures(!showAllFeatures)}
@@ -113,6 +114,7 @@ export const PricingTabs = () => {
       <section className={st.layout}>
         <div className={`${st.tabs} ${st[activeTab]}`}>
           <button
+            aria-label="Switch to inbound tab"
             name="switch-to-inbound-tab"
             onClick={() => setActiveTab('inbound')}
             className={cn(st.tab, { [st.active]: activeTab === 'inbound' })}
@@ -120,6 +122,7 @@ export const PricingTabs = () => {
             Inbound calls
           </button>
           <button
+            aria-label="Switch to outbound tab"
             name="switch-to-outbound-tab"
             onClick={() => setActiveTab('outbound')}
             className={cn(st.tab, { [st.active]: activeTab === 'outbound' })}

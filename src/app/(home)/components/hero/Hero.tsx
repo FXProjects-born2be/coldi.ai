@@ -23,6 +23,7 @@ export const Hero = () => {
         <Link href="/call-request">
           <div>
             <button
+              aria-label="Book a demo"
               name="book-demo"
               type="button"
               className={cn(
