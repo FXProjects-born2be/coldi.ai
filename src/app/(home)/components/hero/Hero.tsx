@@ -5,6 +5,8 @@ import { Button } from '@/shared/ui/kit/button';
 
 import st from './Hero.module.scss';
 
+const lcpVideoPriorityProps = { fetchpriority: 'high' } as const;
+
 export const Hero = () => {
   return (
     <section className={st.hero}>
@@ -52,6 +54,7 @@ export const Hero = () => {
           className={st.hero__subtitle}
         />
         <video
+          {...lcpVideoPriorityProps}
           src="/videos/voices/variant-1.mp4"
           autoPlay
           playsInline
