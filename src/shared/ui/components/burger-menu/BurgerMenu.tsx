@@ -15,7 +15,7 @@ import {
   Trigger,
 } from '@radix-ui/react-dialog';
 
-import { cn } from '@/shared/lib/helpers';
+import { cn, getPageHeadingFromPath } from '@/shared/lib/helpers';
 
 import st from './BurgerMenu.module.scss';
 
@@ -81,6 +81,7 @@ export const BurgerMenu = () => {
   const [openAbout, setOpenAbout] = useState(false);
   const [openUseCases, setOpenUseCases] = useState(false);
   const pathname = usePathname();
+  const pageHeading = getPageHeadingFromPath(pathname);
 
   useEffect(() => {
     setOpen(false);
@@ -136,7 +137,7 @@ export const BurgerMenu = () => {
                     <span itemProp="name">Products</span>
                     <Image
                       src="/icons/header/arrow.svg"
-                      alt=""
+                      alt={pageHeading}
                       width={16}
                       height={8}
                       className={st.groupArrow}
@@ -180,7 +181,7 @@ export const BurgerMenu = () => {
                     <span itemProp="name">About</span>
                     <Image
                       src="/icons/header/arrow.svg"
-                      alt=""
+                      alt={pageHeading}
                       width={16}
                       height={8}
                       className={st.groupArrow}
@@ -217,7 +218,7 @@ export const BurgerMenu = () => {
                     <span itemProp="name">Industries</span>
                     <Image
                       src="/icons/header/arrow.svg"
-                      alt=""
+                      alt={pageHeading}
                       width={16}
                       height={8}
                       className={st.groupArrow}
@@ -237,7 +238,7 @@ export const BurgerMenu = () => {
                         })}
                         itemProp="url"
                       >
-                        <Image src={item.icon} alt="" width={20} height={20} />
+                        <Image src={item.icon} alt={pageHeading} width={20} height={20} />
                         <span itemProp="name">{item.label}</span>
                       </Link>
                     ))}
@@ -255,7 +256,7 @@ export const BurgerMenu = () => {
                     <span itemProp="name">Use Cases</span>
                     <Image
                       src="/icons/header/arrow.svg"
-                      alt=""
+                      alt={pageHeading}
                       width={16}
                       height={8}
                       className={st.groupArrow}

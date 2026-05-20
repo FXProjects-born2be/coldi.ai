@@ -1,8 +1,5 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 import { getPageHeadingFromPath, requestRoutes } from '@/shared/lib/helpers';
 import { MessageIcon } from '@/shared/ui/icons/fill/message';
@@ -16,8 +13,7 @@ import { Youtube } from '@/shared/ui/icons/fill/socials/youtube';
 
 import st from './Footer.module.scss';
 
-export const Footer = () => {
-  const pathname = usePathname();
+export const Footer = ({ pathname }: { pathname: string }) => {
   const phoneNumber = '+441299667777'; // Static phone number
   const pageHeading = getPageHeadingFromPath(pathname);
 
