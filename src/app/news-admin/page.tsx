@@ -106,7 +106,11 @@ export default function NewsAdminPage() {
                 <Link href={`/news-admin/edit?id=${article.id}`} className={st.editLinkButton}>
                   Edit
                 </Link>
-                <button onClick={() => handleDeleteArticle(article.id)} className={st.deleteButton}>
+                <button
+                  name="delete-article"
+                  onClick={() => handleDeleteArticle(article.id)}
+                  className={st.deleteButton}
+                >
                   Delete
                 </button>
               </div>

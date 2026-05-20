@@ -90,7 +90,7 @@ export const BurgerMenu = () => {
   return (
     <Root open={open} onOpenChange={setOpen}>
       <Trigger asChild>
-        <button className={st.burger}>
+        <button name="open-burger-menu" className={st.burger}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -128,6 +128,7 @@ export const BurgerMenu = () => {
 
                 <div className={st.group}>
                   <button
+                    name="toggle-products-group"
                     className={cn(st.groupTrigger, {
                       [st.active]: pathname.startsWith('/products'),
                       [st.groupOpen]: openProducts,
@@ -172,6 +173,7 @@ export const BurgerMenu = () => {
                 </Link>
                 <div className={st.group}>
                   <button
+                    name="toggle-about-group"
                     className={cn(st.groupTrigger, {
                       [st.active]: pathname.startsWith('/about'),
                       [st.groupOpen]: openProducts,
@@ -209,6 +211,7 @@ export const BurgerMenu = () => {
 
                 <div className={st.group}>
                   <button
+                    name="toggle-industries-group"
                     className={cn(st.groupTrigger, {
                       [st.active]: pathname.startsWith('/industries'),
                       [st.groupOpen]: openIndustries,
@@ -247,6 +250,7 @@ export const BurgerMenu = () => {
 
                 <div className={st.group}>
                   <button
+                    name="toggle-use-cases-group"
                     className={cn(st.groupTrigger, {
                       [st.active]: pathname.startsWith('/use-cases'),
                       [st.groupOpen]: openUseCases,

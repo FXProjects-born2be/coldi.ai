@@ -196,6 +196,7 @@ export const IndustrySolutionsSlider = () => {
       <div className={st.pagination}>
         {Array.from({ length: PAGE_COUNT }).map((_, index) => (
           <button
+            name="go-to-industry-slide"
             key={index}
             type="button"
             aria-label={`Go to industry slide ${index + 1}`}

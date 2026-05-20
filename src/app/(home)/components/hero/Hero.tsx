@@ -23,6 +23,7 @@ export const Hero = () => {
         <Link href="/call-request">
           <div>
             <button
+              name="book-demo"
               type="button"
               className={cn(
                 buttonStyles.button,

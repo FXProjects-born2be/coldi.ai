@@ -49,7 +49,7 @@ export const PersonaCard = ({
       </div>
       <div className={st.card__button}>
         <audio ref={audioRef} src={audioUrl} onEnded={handlePause} style={{ display: 'none' }} />
-        <button onClick={isPlaying ? handlePause : handlePlay}>
+        <button name="play-audio" onClick={isPlaying ? handlePause : handlePlay}>
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
         </button>
       </div>

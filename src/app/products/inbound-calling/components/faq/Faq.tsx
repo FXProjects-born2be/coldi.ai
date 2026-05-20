@@ -103,7 +103,12 @@ export const Faq = () => {
               custom={index * 0.1}
               className={st.item}
             >
-              <button className={st.question} onClick={() => toggleFaq(index)} type="button">
+              <button
+                name="toggle-faq"
+                className={st.question}
+                onClick={() => toggleFaq(index)}
+                type="button"
+              >
                 <h3>{faq.question}</h3>
                 <ChevronIcon open={isOpen} />
               </button>

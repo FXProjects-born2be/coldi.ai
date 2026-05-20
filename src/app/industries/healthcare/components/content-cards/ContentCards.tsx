@@ -146,7 +146,12 @@ export const ContentCards = () => {
                 </div>
               )}
 
-              <button className={st.toggleBtn} onClick={() => toggleCard(index)} type="button">
+              <button
+                name="toggle-card"
+                className={st.toggleBtn}
+                onClick={() => toggleCard(index)}
+                type="button"
+              >
                 <span>{isExpanded ? 'Show less' : 'Show more'}</span>
                 <svg
                   className={`${st.arrow} ${isExpanded ? st.arrowUp : ''}`}

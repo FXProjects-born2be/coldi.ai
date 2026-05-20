@@ -245,10 +245,20 @@ export function NewsArticleForm({
         </div>
 
         <div className={st.formActions}>
-          <button type="submit" className={st.primaryButton} disabled={isSaving}>
+          <button
+            name="submit-article"
+            type="submit"
+            className={st.primaryButton}
+            disabled={isSaving}
+          >
             {isSaving ? submittingLabel : submitLabel}
           </button>
-          <button type="button" className={st.secondaryButton} onClick={resetForm}>
+          <button
+            name="reset-form"
+            type="button"
+            className={st.secondaryButton}
+            onClick={resetForm}
+          >
             Reset form
           </button>
         </div>

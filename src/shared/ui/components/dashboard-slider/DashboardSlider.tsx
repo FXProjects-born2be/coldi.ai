@@ -78,6 +78,7 @@ export const DashboardSlider = ({ title, subtitle }: { title: string; subtitle: 
         <div className={st.pagination}>
           {images.map((_, index) => (
             <button
+              name="go-to-slide"
               key={index}
               type="button"
               aria-label={`Go to slide ${index + 1}`}

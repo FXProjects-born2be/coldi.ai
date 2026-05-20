@@ -102,6 +102,7 @@ export const RequestDialog = ({
           <Description asChild>
             <section>
               <button
+                name="close-dialog"
                 className={st.closeButton}
                 onClick={() => setOpen(false)}
                 type="button"

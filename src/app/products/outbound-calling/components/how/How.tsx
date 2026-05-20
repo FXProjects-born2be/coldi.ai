@@ -113,6 +113,7 @@ export const How = () => {
         >
           {!playing ? (
             <button
+              name="play-video"
               type="button"
               className={st.poster}
               onClick={() => setPlaying(true)}
