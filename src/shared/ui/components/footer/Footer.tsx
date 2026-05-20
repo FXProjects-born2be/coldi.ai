@@ -26,19 +26,44 @@ export const Footer = ({ pathname }: { pathname: string }) => {
               <Image src="/full-logo.svg" alt={pageHeading} width={145} height={50} />
               <p>Brand-Tuned Ai Talkers. Always On.</p>
               <div className={st.footer__socials}>
-                <Link href="https://x.com/Coldiai" target="_blank">
+                <Link
+                  href="https://x.com/Coldiai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit Coldi on X"
+                >
                   <X />
                 </Link>
-                <Link href="https://www.facebook.com/coldiai/" target="_blank">
+                <Link
+                  href="https://www.facebook.com/coldiai/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit Coldi on Facebook"
+                >
                   <Facebook />
                 </Link>
-                <Link href="https://www.linkedin.com/company/coldiai/" target="_blank">
+                <Link
+                  href="https://www.linkedin.com/company/coldiai/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit Coldi on LinkedIn"
+                >
                   <Linkedin />
                 </Link>
-                <Link href="https://www.youtube.com/@coldi_ai" target="_blank">
+                <Link
+                  href="https://www.youtube.com/@coldi_ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit Coldi on YouTube"
+                >
                   <Youtube />
                 </Link>
-                <Link href="https://wa.me/447955534986" target="_blank">
+                <Link
+                  href="https://wa.me/447955534986"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Chat with Coldi on WhatsApp"
+                >
                   <Whatsapp />
                 </Link>
               </div>
@@ -146,6 +171,7 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                   </li>
                 </ul>
               </div>
+
               <div>
                 <h4>Legal</h4>
                 <ul
@@ -163,8 +189,14 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                       Privacy Policy
                     </Link>
                   </li>
-                  <br />
-                  <h4>Contact Us</h4>
+                </ul>
+                <br />
+                <h4>Contact Us</h4>
+                <ul
+                  className={st.footer__list}
+                  itemScope
+                  itemType="http://schema.org/SiteNavigationElement"
+                >
                   <li>
                     <Link href="mailto:info@coldi.ai">
                       <MessageIcon />
@@ -187,6 +219,8 @@ export const Footer = ({ pathname }: { pathname: string }) => {
             <a
               href="https://www.saashub.com/coldi?utm_source=badge&utm_campaign=badge&utm_content=coldi&badge_variant=color&badge_kind=approved"
               target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Coldi on SaaSHub"
             >
               <Image
                 src="https://cdn-b.saashub.com/img/badges/approved-color.png?v=1"
@@ -198,7 +232,13 @@ export const Footer = ({ pathname }: { pathname: string }) => {
           </div>
         </div>
       </footer>
-      <Link href="https://wa.me/447955534986" target="_blank" className={st.whatsappFixedLink}>
+      <Link
+        href="https://wa.me/447955534986"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open WhatsApp chat with Coldi"
+        className={st.whatsappFixedLink}
+      >
         <WhatsappFixed />
       </Link>
     </>
