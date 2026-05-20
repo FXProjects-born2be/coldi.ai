@@ -246,6 +246,7 @@ export function NewsArticleForm({
 
         <div className={st.formActions}>
           <button
+            aria-label="Submit article"
             name="submit-article"
             type="submit"
             className={st.primaryButton}
@@ -254,6 +255,7 @@ export function NewsArticleForm({
             {isSaving ? submittingLabel : submitLabel}
           </button>
           <button
+            aria-label="Reset form"
             name="reset-form"
             type="button"
             className={st.secondaryButton}

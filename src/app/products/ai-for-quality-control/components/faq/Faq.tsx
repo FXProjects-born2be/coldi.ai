@@ -83,6 +83,7 @@ export const Faq = () => {
               viewport={{ once: true }}
             >
               <button
+                aria-label="Toggle FAQ"
                 name="toggle-faq"
                 className={st.question}
                 type="button"

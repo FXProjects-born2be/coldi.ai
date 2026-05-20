@@ -107,6 +107,7 @@ export default function NewsAdminPage() {
                   Edit
                 </Link>
                 <button
+                  aria-label="Delete article"
                   name="delete-article"
                   onClick={() => handleDeleteArticle(article.id)}
                   className={st.deleteButton}

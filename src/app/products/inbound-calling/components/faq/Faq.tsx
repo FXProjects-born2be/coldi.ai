@@ -104,6 +104,7 @@ export const Faq = () => {
               className={st.item}
             >
               <button
+                aria-label="Toggle FAQ"
                 name="toggle-faq"
                 className={st.question}
                 onClick={() => toggleFaq(index)}

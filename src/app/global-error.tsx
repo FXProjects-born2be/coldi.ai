@@ -37,6 +37,7 @@ export default function GlobalError({
               background: '#fff',
             }}
             name="try-again"
+            aria-label="Try again"
           >
             Try again
           </button>

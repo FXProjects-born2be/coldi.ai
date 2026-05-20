@@ -44,133 +44,141 @@ export const Footer = ({ pathname }: { pathname: string }) => {
               </div>
             </div>
             <div className={st.footer__links}>
-              <ul
-                className={st.footer__list}
-                itemScope
-                itemType="http://schema.org/SiteNavigationElement"
-              >
+              <div>
                 <h4>Explore</h4>
-                <li itemProp="name">
-                  <Link href="/products" itemProp="url">
-                    Products
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/pricing" itemProp="url">
-                    Pricing
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/news" itemProp="url">
-                    News
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/about" itemProp="url">
-                    About
-                  </Link>
-                </li>
-              </ul>
-              <ul
-                className={st.footer__list}
-                itemScope
-                itemType="http://schema.org/SiteNavigationElement"
-              >
+                <ul
+                  className={st.footer__list}
+                  itemScope
+                  itemType="http://schema.org/SiteNavigationElement"
+                >
+                  <li itemProp="name">
+                    <Link href="/products" itemProp="url">
+                      Products
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/pricing" itemProp="url">
+                      Pricing
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/news" itemProp="url">
+                      News
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/about" itemProp="url">
+                      About
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
                 <h4>Products</h4>
-                <li itemProp="name">
-                  <Link href="/products/outbound-calling" itemProp="url">
-                    Outbound AI Calling
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/products/inbound-calling" itemProp="url">
-                    Inbound AI Calling
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/products/agent-development" itemProp="url">
-                    AI Agent Development
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/products/customer-service-agent" itemProp="url">
-                    AI Customer Service
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/products/ai-for-quality-control" itemProp="url">
-                    AI for Quality Control
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/products/voip-phone-service" itemProp="url">
-                    VoIP Phone Service
-                  </Link>
-                </li>
-              </ul>
-              <ul
-                className={st.footer__list}
-                itemScope
-                itemType="http://schema.org/SiteNavigationElement"
-              >
+                <ul
+                  className={st.footer__list}
+                  itemScope
+                  itemType="http://schema.org/SiteNavigationElement"
+                >
+                  <li itemProp="name">
+                    <Link href="/products/outbound-calling" itemProp="url">
+                      Outbound AI Calling
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/products/inbound-calling" itemProp="url">
+                      Inbound AI Calling
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/products/agent-development" itemProp="url">
+                      AI Agent Development
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/products/customer-service-agent" itemProp="url">
+                      AI Customer Service
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/products/ai-for-quality-control" itemProp="url">
+                      AI for Quality Control
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/products/voip-phone-service" itemProp="url">
+                      VoIP Phone Service
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
                 <h4>Industries</h4>
-                <li itemProp="name">
-                  <Link href="/industries/healthcare" itemProp="url">
-                    Healthcare
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/industries/insurance" itemProp="url">
-                    Insurance
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/industries/real-estate" itemProp="url">
-                    Real Estate
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/industries/call-center" itemProp="url">
-                    Call Centers
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/industries/debt-collection" itemProp="url">
-                    Debt Collection
-                  </Link>
-                </li>
-              </ul>
-              <ul
-                className={st.footer__list}
-                itemScope
-                itemType="http://schema.org/SiteNavigationElement"
-              >
+                <ul
+                  className={st.footer__list}
+                  itemScope
+                  itemType="http://schema.org/SiteNavigationElement"
+                >
+                  <li itemProp="name">
+                    <Link href="/industries/healthcare" itemProp="url">
+                      Healthcare
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/industries/insurance" itemProp="url">
+                      Insurance
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/industries/real-estate" itemProp="url">
+                      Real Estate
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/industries/call-center" itemProp="url">
+                      Call Centers
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/industries/debt-collection" itemProp="url">
+                      Debt Collection
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
                 <h4>Legal</h4>
-                <li itemProp="name">
-                  <Link href="/legal" itemProp="url">
-                    Terms of Service
-                  </Link>
-                </li>
-                <li itemProp="name">
-                  <Link href="/legal" itemProp="url">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <br />
-                <h4>Contact Us</h4>
-                <li>
-                  <Link href="mailto:info@coldi.ai">
-                    <MessageIcon />
-                    info@coldi.ai
-                  </Link>
-                </li>
-                <li>
-                  <Link href={`tel:${phoneNumber}`}>
-                    <PhoneIcon />
-                    {phoneNumber}
-                  </Link>
-                </li>
-              </ul>
+                <ul
+                  className={st.footer__list}
+                  itemScope
+                  itemType="http://schema.org/SiteNavigationElement"
+                >
+                  <li itemProp="name">
+                    <Link href="/legal" itemProp="url">
+                      Terms of Service
+                    </Link>
+                  </li>
+                  <li itemProp="name">
+                    <Link href="/legal" itemProp="url">
+                      Privacy Policy
+                    </Link>
+                  </li>
+                  <br />
+                  <h4>Contact Us</h4>
+                  <li>
+                    <Link href="mailto:info@coldi.ai">
+                      <MessageIcon />
+                      info@coldi.ai
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={`tel:${phoneNumber}`}>
+                      <PhoneIcon />
+                      {phoneNumber}
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </section>
           <span className={st.divider} />

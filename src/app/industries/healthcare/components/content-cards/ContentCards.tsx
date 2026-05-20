@@ -147,6 +147,7 @@ export const ContentCards = () => {
               )}
 
               <button
+                aria-label="Toggle card"
                 name="toggle-card"
                 className={st.toggleBtn}
                 onClick={() => toggleCard(index)}

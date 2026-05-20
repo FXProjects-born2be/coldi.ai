@@ -22,6 +22,7 @@ export const Button = ({
 }) => {
   return (
     <button
+      aria-label={props['aria-label'] ?? 'Click button'}
       name={props.name ?? 'button'}
       className={cn(
         st.button,
