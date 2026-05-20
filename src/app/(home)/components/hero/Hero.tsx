@@ -58,6 +58,7 @@ export const Hero = () => {
           muted
           loop
           preload="metadata"
+          fetchpriority="high"
           controls={false}
           poster="/videos/home/hero.svg"
         />
