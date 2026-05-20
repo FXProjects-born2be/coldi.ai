@@ -1,11 +1,7 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 import st from './Breadcrumbs.module.scss';
-import { useBreadcrumbsContext } from './BreadcrumbsContext';
 
 const segmentLabels: Record<string, string> = {
   products: 'Products',
@@ -40,16 +36,18 @@ const segmentLabels: Record<string, string> = {
   'hvac-leads': 'HVAC Leads',
 };
 
-export const Breadcrumbs = () => {
-  const pathname = usePathname();
-  const { labelOverrides } = useBreadcrumbsContext();
+type BreadcrumbsProps = {
+  pathname: string;
+  currentLabel?: string;
+};
 
+export const Breadcrumbs = ({ pathname, currentLabel }: BreadcrumbsProps) => {
   if (pathname === '/') return null;
 
   const segments = pathname.split('/').filter(Boolean);
 
   const crumbs = segments.map((seg, i) => ({
-    label: labelOverrides[seg] ?? segmentLabels[seg] ?? seg,
+    label: i === segments.length - 1 && currentLabel ? currentLabel : (segmentLabels[seg] ?? seg),
     href: '/' + segments.slice(0, i + 1).join('/'),
   }));
 

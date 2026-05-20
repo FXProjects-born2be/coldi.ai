@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 
 import { getNewsBySlug } from '@/features/news/news';
 
-import { BreadcrumbLabel } from '@/shared/ui/components/breadcrumbs';
+import { Breadcrumbs } from '@/shared/ui/components/breadcrumbs';
 import { StructuredData } from '@/shared/ui/components/structured-data/StructuredData';
 
 import { TestIt } from '../components/test-it/TestIt';
@@ -153,7 +153,7 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
           }}
         />
       )}
-      {news?.title && <BreadcrumbLabel segment={slug} label={news.title} />}
+      {news?.title && <Breadcrumbs pathname={`/news/${slug}`} currentLabel={news.title} />}
       <section className={st.layout}>
         <Image
           src={news?.image || '/images/news/news-item-image.png'}

@@ -1,12 +1,8 @@
-'use client';
-
-import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
 
-import { cn, getPageHeadingFromPath, requestRoutes } from '@/shared/lib/helpers';
-import { BurgerMenu } from '@/shared/ui/components/burger-menu';
+import { cn, getPageHeadingFromPath } from '@/shared/lib/helpers';
+import { HeaderBurgerMenu } from '@/shared/ui/components/header/HeaderBurgerMenu';
 
 import st from './Header.module.scss';
 
@@ -57,40 +53,11 @@ const useCasesItems = [
   },
 ];
 
-const headerVisibilityOnScrollHandle = (set: (visible: boolean) => void) => {
-  const scrollY = window.scrollY;
-  set(scrollY > 0);
-
-  if (window.innerWidth < 768) {
-    set(true);
-  }
-};
-
-export const Header = () => {
-  const pathname = usePathname();
-  const isForcedVisible = requestRoutes.has(pathname);
+export const Header = ({ pathname }: { pathname: string }) => {
   const pageHeading = getPageHeadingFromPath(pathname);
 
-  const [visible, setVisible] = useState(isForcedVisible ? true : true);
-
-  useEffect(() => {
-    if (isForcedVisible) return;
-
-    if (window.innerWidth < 768) {
-      setVisible(true);
-    }
-
-    const onScroll = () => headerVisibilityOnScrollHandle(setVisible);
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, [isForcedVisible]);
-
   return (
-    <header className={cn(st.header, { [st.visible]: visible })}>
+    <header className={st.header}>
       <div className={st.header__container}>
         <Link href="/">
           <Image
@@ -101,7 +68,7 @@ export const Header = () => {
             height={50}
           />
         </Link>
-        <Navigation />
+        <Navigation pathname={pathname} />
         <div className={st.header__buttons}>
           <Link className={st.header__bookMeeting} href="/calendar">
             <svg
@@ -125,36 +92,14 @@ export const Header = () => {
             Schedule a Meeting
           </Link>
         </div>
-        <BurgerMenu />
+        <HeaderBurgerMenu />
       </div>
     </header>
   );
 };
 
-const Navigation = () => {
-  const pathname = usePathname();
+const Navigation = ({ pathname }: { pathname: string }) => {
   const pageHeading = getPageHeadingFromPath(pathname);
-  const router = useRouter();
-  const prefetchedRoutesRef = useRef(new Set<string>());
-
-  const prefetchRoutes = useCallback(
-    (routes: string[]) => {
-      routes.forEach((route) => {
-        if (route === pathname || prefetchedRoutesRef.current.has(route)) return;
-
-        prefetchedRoutesRef.current.add(route);
-        router.prefetch(route);
-      });
-    },
-    [pathname, router]
-  );
-
-  const handleKeyNavigation = (event: React.KeyboardEvent, href: string) => {
-    if (event.key !== 'Enter' && event.key !== ' ') return;
-
-    event.preventDefault();
-    router.push(href);
-  };
 
   return (
     <ul
@@ -177,28 +122,6 @@ const Navigation = () => {
           [st.active]: pathname.startsWith('/products'),
         })}
         itemProp="name"
-        onMouseEnter={() =>
-          prefetchRoutes([
-            '/products',
-            '/products/outbound-calling',
-            '/products/inbound-calling',
-            '/products/agent-development',
-            '/products/customer-service-agent',
-            '/products/ai-for-quality-control',
-            '/products/voip-phone-service',
-          ])
-        }
-        onFocus={() =>
-          prefetchRoutes([
-            '/products',
-            '/products/outbound-calling',
-            '/products/inbound-calling',
-            '/products/agent-development',
-            '/products/customer-service-agent',
-            '/products/ai-for-quality-control',
-            '/products/voip-phone-service',
-          ])
-        }
       >
         <Link className={st.navTrigger} href="/products" itemProp="url" prefetch={false}>
           <span>Products</span>
@@ -279,8 +202,6 @@ const Navigation = () => {
           [st.active]: pathname.startsWith('/about'),
         })}
         itemProp="name"
-        onMouseEnter={() => prefetchRoutes(['/about', '/meettheteam'])}
-        onFocus={() => prefetchRoutes(['/about', '/meettheteam'])}
       >
         <Link className={st.navTrigger} href="/about" itemProp="url" prefetch={false}>
           <span>About</span>
@@ -301,10 +222,6 @@ const Navigation = () => {
           [st.active]: pathname.startsWith('/industries'),
         })}
         itemProp="name"
-        onMouseEnter={() =>
-          prefetchRoutes(['/industries', ...industriesItems.map((item) => item.href)])
-        }
-        onFocus={() => prefetchRoutes(['/industries', ...industriesItems.map((item) => item.href)])}
       >
         <Link className={st.navTrigger} href="/industries" itemProp="url" prefetch={false}>
           <span>Industries</span>
@@ -334,15 +251,8 @@ const Navigation = () => {
           [st.active]: pathname.startsWith('/use-cases'),
         })}
         itemProp="name"
-        onMouseEnter={() => prefetchRoutes(useCasesItems.map((item) => item.href))}
-        onFocus={() => prefetchRoutes(useCasesItems.map((item) => item.href))}
       >
-        <span
-          className={st.navLabel}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(event) => handleKeyNavigation(event, useCasesItems[0].href)}
-        >
+        <span className={st.navLabel}>
           <span>Use Cases</span>
           <span className={st.dropdownArrow}>
             <Image src="/icons/header/arrow.svg" alt={pageHeading} width={16} height={8} />

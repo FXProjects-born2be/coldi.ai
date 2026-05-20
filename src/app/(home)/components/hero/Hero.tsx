@@ -1,7 +1,8 @@
 import Link from 'next/link';
 
+import { cn } from '@/shared/lib/helpers';
 import { TypingText } from '@/shared/ui/components/typing-text';
-import { Button } from '@/shared/ui/kit/button';
+import buttonStyles from '@/shared/ui/kit/button/Button.module.scss';
 
 import st from './Hero.module.scss';
 
@@ -21,7 +22,17 @@ export const Hero = () => {
         </div>
         <Link href="/call-request">
           <div>
-            <Button size="md">Book a demo</Button>
+            <button
+              type="button"
+              className={cn(
+                buttonStyles.button,
+                buttonStyles.primary,
+                buttonStyles.md,
+                buttonStyles.defaultWidth
+              )}
+            >
+              Book a demo
+            </button>
           </div>
         </Link>
       </section>

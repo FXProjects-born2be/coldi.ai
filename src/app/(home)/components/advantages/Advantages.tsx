@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
-import { Chip } from '@/shared/ui/kit/chip';
+import { cn } from '@/shared/lib/helpers';
+import chipStyles from '@/shared/ui/kit/chip/Chip.module.scss';
 
 import st from './Advantages.module.scss';
 
@@ -38,7 +39,9 @@ export const Advantages = () => {
               <span className={st.dot} />
             </div>
             <div className={st.chip}>
-              <Chip variant="secondary">Stop struggling with AI setup</Chip>
+              <span className={cn(chipStyles.chip, chipStyles.secondary)}>
+                Stop struggling with AI setup
+              </span>
             </div>
             <div className={st.arrowLeft}>
               <span className={st.line} />
