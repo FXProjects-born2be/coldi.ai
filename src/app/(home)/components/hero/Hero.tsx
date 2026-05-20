@@ -10,7 +10,7 @@ import buttonStyles from '@/shared/ui/kit/button/Button.module.scss';
 
 import st from './Hero.module.scss';
 
-const lcpVideoPriorityProps = { fetchpriority: 'high' } as const;
+const lcpVideoPriorityProps = { fetchPriority: 'high' } as const;
 const MOBILE_BREAKPOINT = 768;
 
 export const Hero = () => {
