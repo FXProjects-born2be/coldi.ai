@@ -88,6 +88,7 @@ export const StillLikeGetCall = () => {
           <Description asChild>
             <section className={st.content}>
               <button
+                name="close-dialog"
                 className={st.closeButton}
                 onClick={confirmLeave}
                 type="button"

@@ -57,7 +57,11 @@ const PricingCard = ({
             ))}
           </ul>
           {hasMoreFeatures && (
-            <button className={st.moreOptions} onClick={() => setShowAllFeatures(!showAllFeatures)}>
+            <button
+              name="toggle-more-options"
+              className={st.moreOptions}
+              onClick={() => setShowAllFeatures(!showAllFeatures)}
+            >
               {showAllFeatures ? 'Show Less' : 'More Options'}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -109,12 +113,14 @@ export const PricingTabs = () => {
       <section className={st.layout}>
         <div className={`${st.tabs} ${st[activeTab]}`}>
           <button
+            name="switch-to-inbound-tab"
             onClick={() => setActiveTab('inbound')}
             className={cn(st.tab, { [st.active]: activeTab === 'inbound' })}
           >
             Inbound calls
           </button>
           <button
+            name="switch-to-outbound-tab"
             onClick={() => setActiveTab('outbound')}
             className={cn(st.tab, { [st.active]: activeTab === 'outbound' })}
           >

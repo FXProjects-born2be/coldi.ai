@@ -31,6 +31,7 @@ const VideoCaseStudy = ({ videoId, title }: { videoId: string; title: string }) 
           <>
             <Image className={st.videoPoster} src={thumbnailSrc} alt="" fill sizes="100vw" />
             <button
+              name="play-video"
               type="button"
               className={st.playButton}
               onClick={() => setIsPlaying(true)}

@@ -100,7 +100,12 @@ export const ProductSolutionsSlider = () => {
         <div className={`${st.edgeFade} ${st.edgeFadeLeft}`} />
         <div className={`${st.edgeFade} ${st.edgeFadeRight}`} />
 
-        <button type="button" className={`${st.navButton} ${st.prev}`} onClick={handlePrev}>
+        <button
+          name="go-to-product-slide-prev"
+          type="button"
+          className={`${st.navButton} ${st.prev}`}
+          onClick={handlePrev}
+        >
           <Image
             src="/images/home/solution-sliders/slider-arrow.svg"
             alt={'Coldi Brand-Tuned AI Talkers'}
@@ -166,7 +171,12 @@ export const ProductSolutionsSlider = () => {
           ))}
         </Swiper>
 
-        <button type="button" className={`${st.navButton} ${st.next}`} onClick={handleNext}>
+        <button
+          name="go-to-product-slide-next"
+          type="button"
+          className={`${st.navButton} ${st.next}`}
+          onClick={handleNext}
+        >
           <Image
             src="/images/home/solution-sliders/slider-arrow.svg"
             alt={'Coldi Brand-Tuned AI Talkers'}
@@ -180,6 +190,7 @@ export const ProductSolutionsSlider = () => {
       <div className={st.pagination}>
         {Array.from({ length: PAGE_COUNT }).map((_, index) => (
           <button
+            name="go-to-product-slide"
             key={index}
             type="button"
             aria-label={`Go to product slide ${index + 1}`}

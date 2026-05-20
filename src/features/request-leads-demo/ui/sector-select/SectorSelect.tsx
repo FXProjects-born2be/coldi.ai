@@ -91,6 +91,7 @@ export const SectorSelect = ({
   return (
     <div className={st.wrapper} ref={containerRef}>
       <button
+        name="toggle-sector-select"
         type="button"
         className={`${st.trigger} ${isOpen ? st.open : ''}`}
         onClick={() => setIsOpen((prev) => !prev)}
@@ -109,6 +110,7 @@ export const SectorSelect = ({
                   : value === item.value;
               return (
                 <button
+                  name="select-sector"
                   key={item.value}
                   type="button"
                   className={`${st.option} ${isActive ? st.active : ''}`}

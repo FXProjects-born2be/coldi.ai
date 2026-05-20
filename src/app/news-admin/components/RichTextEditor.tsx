@@ -199,6 +199,7 @@ export function RichTextEditor({
       <div className={st.toolbar}>
         {toolbarActions.map((action) => (
           <button
+            name="apply-command"
             key={`${action.command}-${action.label}`}
             className={st.toolbarButton}
             type="button"
@@ -209,6 +210,7 @@ export function RichTextEditor({
           </button>
         ))}
         <button
+          name="insert-link"
           className={st.toolbarButton}
           type="button"
           onMouseDown={(event) => event.preventDefault()}
@@ -217,6 +219,7 @@ export function RichTextEditor({
           Link
         </button>
         <button
+          name="toggle-image-panel"
           className={st.toolbarButton}
           type="button"
           onMouseDown={(event) => event.preventDefault()}
@@ -225,6 +228,7 @@ export function RichTextEditor({
           Image
         </button>
         <button
+          name="clear-formatting"
           className={st.toolbarButton}
           type="button"
           onMouseDown={(event) => event.preventDefault()}
@@ -273,6 +277,7 @@ export function RichTextEditor({
 
           <div className={st.imagePanelActions}>
             <button
+              name="insert-image"
               className={st.toolbarButton}
               type="button"
               onClick={insertImage}
@@ -280,7 +285,12 @@ export function RichTextEditor({
             >
               {isUploadingImage ? 'Uploading...' : 'Insert image'}
             </button>
-            <button className={st.toolbarButton} type="button" onClick={toggleImagePanel}>
+            <button
+              name="cancel-image-panel"
+              className={st.toolbarButton}
+              type="button"
+              onClick={toggleImagePanel}
+            >
               Cancel
             </button>
           </div>

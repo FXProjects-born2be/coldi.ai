@@ -96,7 +96,7 @@ export function NewsAdminShell({ title, children }: NewsAdminShellProps) {
               />
             </div>
             {error && <div className={st.error}>{error}</div>}
-            <button type="submit" className={st.loginButton}>
+            <button name="login" type="submit" className={st.loginButton}>
               Login
             </button>
           </form>
@@ -109,7 +109,7 @@ export function NewsAdminShell({ title, children }: NewsAdminShellProps) {
     <div className={st.adminContainer}>
       <div className={st.header}>
         <h1>{title}</h1>
-        <button onClick={handleLogout} className={st.logoutButton}>
+        <button name="logout" onClick={handleLogout} className={st.logoutButton}>
           Logout
         </button>
       </div>

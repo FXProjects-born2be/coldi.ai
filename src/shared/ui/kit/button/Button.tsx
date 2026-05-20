@@ -22,6 +22,7 @@ export const Button = ({
 }) => {
   return (
     <button
+      name={props.name ?? 'button'}
       className={cn(
         st.button,
         st[variant],

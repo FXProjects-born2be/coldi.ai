@@ -93,6 +93,7 @@ export const Faq = () => {
               viewport={{ once: true }}
             >
               <button
+                name="toggle-faq"
                 className={st.question}
                 type="button"
                 onClick={() => setOpenIndex(isOpen ? null : index)}

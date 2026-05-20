@@ -36,6 +36,7 @@ export default function GlobalError({
               border: '1px solid #ccc',
               background: '#fff',
             }}
+            name="try-again"
           >
             Try again
           </button>
