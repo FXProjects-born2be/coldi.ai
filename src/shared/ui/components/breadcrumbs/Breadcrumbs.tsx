@@ -30,6 +30,7 @@ const segmentLabels: Record<string, string> = {
   'use-cases': 'Use Cases',
   legal: 'Legal',
   silverbellgroup: 'Silverbell Group',
+  'clarity-global': 'Clarity Global',
   helios: 'Helios',
   'residential-service-automation': 'Residential Service Automation',
   'agro-industry': 'Agro-Industry',
