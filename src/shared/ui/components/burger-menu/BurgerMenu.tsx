@@ -58,6 +58,7 @@ const productsItems = [
 
 const useCasesItems = [
   { label: 'BPO (Silverbell Group)', href: '/silverbellgroup' },
+  { label: 'Clarity Global', href: '/clarity-global' },
   {
     label: 'Residential Service (Stone Electric)',
     href: '/residential-service-automation',
@@ -82,6 +83,8 @@ export const BurgerMenu = () => {
   const [openUseCases, setOpenUseCases] = useState(false);
   const pathname = usePathname();
   const pageHeading = getPageHeadingFromPath(pathname);
+  const isUseCasesPath =
+    pathname.startsWith('/use-cases') || useCasesItems.some((item) => item.href === pathname);
 
   useEffect(() => {
     setOpen(false);
@@ -256,7 +259,7 @@ export const BurgerMenu = () => {
                     aria-label="Toggle use cases group"
                     name="toggle-use-cases-group"
                     className={cn(st.groupTrigger, {
-                      [st.active]: pathname.startsWith('/use-cases'),
+                      [st.active]: isUseCasesPath,
                       [st.groupOpen]: openUseCases,
                     })}
                     onClick={() => setOpenUseCases((v) => !v)}

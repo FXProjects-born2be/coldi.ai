@@ -40,6 +40,10 @@ const useCasesItems = [
     href: '/silverbellgroup',
   },
   {
+    label: 'Clarity Global',
+    href: '/clarity-global',
+  },
+  {
     label: 'Residential Service (Stone Electric)',
     href: '/residential-service-automation',
   },
@@ -100,6 +104,8 @@ export const Header = ({ pathname }: { pathname: string }) => {
 
 const Navigation = ({ pathname }: { pathname: string }) => {
   const pageHeading = getPageHeadingFromPath(pathname);
+  const isUseCasesPath =
+    pathname.startsWith('/use-cases') || useCasesItems.some((item) => item.href === pathname);
 
   return (
     <ul
@@ -248,7 +254,7 @@ const Navigation = ({ pathname }: { pathname: string }) => {
       </li>
       <li
         className={cn(st.hasDropdown, {
-          [st.active]: pathname.startsWith('/use-cases'),
+          [st.active]: isUseCasesPath,
         })}
         itemProp="name"
       >

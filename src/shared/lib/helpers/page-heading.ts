@@ -13,6 +13,7 @@ export function getPageHeadingFromPath(pathname: string): string {
   if (pathname === '/meettheteam') return 'Meet the team';
   if (pathname === '/legal') return 'Coldi Live';
   if (pathname === '/agro-industry') return 'Lead Qualification in the Global Agro-Industry';
+  if (pathname === '/clarity-global') return 'Clarity Global use case';
   if (pathname === '/hvac-leads') return 'High-Volume Lead Re-engagement for SaaS and HVAC';
   if (pathname === '/helios') return 'How Helios Cut Costs by 30% & Scaled with AI';
   if (pathname === '/turn-leads-into-meetings' || pathname === '/turn-leads-into-meetings-2') {
