@@ -62,14 +62,16 @@ function CardHeader({
   title,
   description,
   label,
+  className,
 }: {
   number: string;
   title: string;
   description?: string;
   label?: string;
+  className?: string;
 }) {
   return (
-    <div className={st.header}>
+    <div className={className ? `${st.header} ${className}` : st.header}>
       <div className={st.headerCopy}>
         {label ? <span className={st.sectionBadge}>{label}</span> : null}
         <h2>{title}</h2>
@@ -117,28 +119,35 @@ function NeedSection() {
         label={needSection.label}
         title={needSection.title}
         description={needSection.description}
+        className={st.needHeader}
       />
       <div className={st.needGrid}>
-        <div className={st.needCopy}>
-          {needSection.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+        <div className={st.needCards}>
+          {needSection.cards.map((item) => (
+            <article key={item.title} className={st.needInfoCard}>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
           ))}
         </div>
-        <div className={st.automationVisual}>
-          <div className={st.automationPills}>
+        <div className={st.needAside}>
+          <article className={st.needCallout}>
+            <p>{needSection.callout}</p>
+          </article>
+          <div className={st.automationVisual}>
             <Image
               src="/images/clarity-global/automationPills-desktop.svg"
               alt=""
               width={100}
               height={100}
-              className={st.automationPillsDesktop}
+              className={st.automationVisualDesktop}
             />
             <Image
               src="/images/clarity-global/automationPills-mobile.svg"
               alt=""
               width={100}
               height={100}
-              className={st.automationPillsMobile}
+              className={st.automationVisualMobile}
             />
           </div>
         </div>
