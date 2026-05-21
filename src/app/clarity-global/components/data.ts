@@ -28,12 +28,26 @@ export const needSection = {
   title: 'Why a fintech company needed AI agents',
   description:
     'Operating in regulated markets means Clarity Global runs mandatory periodic compliance reviews for every client in their portfolio every six months, without exception.',
-  paragraphs: [
-    'Each cycle involves reaching out to hundreds of clients, gathering confirmations or change declarations, notifying internal compliance teams, and maintaining a full audit trail. Done manually, this is a repetitive, time-consuming process with significant room for human error.',
-    'As their client base grows, the compliance team faces a familiar scaling problem: the volume of work increases faster than headcount. Reminders get missed. Response tracking is inconsistent. Monthly reporting consumes hours that could be spent on higher-value tasks.',
-    'And any delay in flagging a "changes reported" response to the compliance department introduces regulatory risk.',
-    'They need a system that can handle the entire communication lifecycle autonomously, reaching out, reminding, classifying responses, escalating when needed, and reporting, with zero manual intervention.',
+  cards: [
+    {
+      title: 'The Efficiency Gap',
+      description:
+        'Each cycle involves reaching out to hundreds of clients, gathering confirmations or change declarations, notifying internal compliance teams, and maintaining a full audit trail. Done manually, this is a repetitive, time-consuming process with significant room for human error.',
+    },
+    {
+      title: 'Current State Challenges',
+      description:
+        'As their client base grows, the compliance team faces a familiar scaling problem: the volume of work increases faster than headcount. Reminders get missed.',
+    },
+    {
+      title: 'The Compliance Bottleneck',
+      description:
+        'Response tracking is inconsistent. Monthly reporting consumes hours that could be spent on higher-value tasks. And any delay in flagging a "changes reported" response to the compliance department introduces regulatory risk.',
+    },
   ],
+  callout:
+    'They need a system that can handle the entire communication lifecycle autonomously, reaching out, reminding, classifying responses, escalating when needed, and reporting, with zero manual intervention.',
+  automationTitle: 'Ai Agent Automation',
   automationSteps: ['communication', 'reaching out', 'reminding', 'escalating', 'reporting'],
 };
 
