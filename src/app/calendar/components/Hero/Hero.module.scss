@@ -50,6 +50,7 @@
   border-radius: 12px;
   overflow: hidden;
   width: 40%;
+
   @include mobile {
     width: 100%;
   }
@@ -59,7 +60,7 @@
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: calc(60% - 64px);
+  width: 100%;
   @include mobile {
     width: 100%;
   }

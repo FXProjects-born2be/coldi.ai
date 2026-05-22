@@ -32,16 +32,23 @@ export const Hero = () => {
       <section className={st.hero__content}>
         <div className={st.hero__title}>
           <h1>
-            Coldi <br />
-            Brand-Tuned
-            <br /> <span className={st.highlighted}>AI Talkers</span>
+            Never Miss Another <br />
+            <span className={st.highlighted}>
+              {' '}
+              Lead, Call, or
+              <br /> Opportunity
+            </span>
           </h1>
-          <p>Hired and Ready Before You Even Say &quot;Engage!&quot;</p>
+          <p>
+            <b>AI Voice Agents for Inbound Calls, Outreach, and Customer Support.</b>
+            <br />
+            Get 72% more qualified leads.
+          </p>
         </div>
-        <Link href="/call-request">
+        <Link href="/products">
           <div>
             <button
-              aria-label="Book a demo"
+              aria-label="Explore"
               name="book-demo"
               type="button"
               className={cn(
@@ -51,7 +58,7 @@ export const Hero = () => {
                 buttonStyles.defaultWidth
               )}
             >
-              Book a demo
+              Explore
             </button>
           </div>
         </Link>

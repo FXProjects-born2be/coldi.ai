@@ -55,8 +55,8 @@ export const HomeDeferredSections = () => {
       <VoicesList />
       <WhatCanDo />
       <DashboardSlider
-        title="<span>Easily Track</span> How Coldi Works"
-        subtitle="See all results in one place: review calls, compare performance, <br/>and optimize your campaigns with clear, real-time data."
+        title="<span>Monitor Performance.</span> <br/>Optimise Results. In Real Time. "
+        subtitle="Track call outcomes, review campaign performance, measure agent effectiveness, <br/>and act on insights — all from one centralised dashboard."
       />
       <HearColdi />
       <Delivers />

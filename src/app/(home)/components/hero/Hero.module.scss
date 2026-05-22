@@ -44,12 +44,10 @@
     font-weight: 400;
     line-height: normal;
     width: 60%;
-    
 
     @include desktop {
       font-size: 42px;
       width: 60%;
-      
     }
 
     @include tablet {
@@ -128,12 +126,18 @@
     }
 
     .highlighted {
-      color: #4268ff;
+      background: var(
+        --icon-gradient,
+        linear-gradient(180deg, #4268ff 0%, #5cb0ff 100%)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     p {
       color: #50556b;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 400;
       line-height: normal;
       @include mobileSmall {

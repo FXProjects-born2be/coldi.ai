@@ -11,13 +11,10 @@ export const Hero = () => {
   return (
     <section className={st.layout}>
       <div className={st.title}>
-        <h1>
-          <span>Your subscription</span> <br />
-          is not fully confirmed
-        </h1>
-        <p>Watch this video until the end (only 1 minute).</p>
+        <h1>You’re one step away!</h1>
+        <p>Pick a time that works for you and see Coldi in action.</p>
       </div>
-      <div className={st.video}>
+      {/**<div className={st.video}>
         <div
           id="vidalytics_embed_7GATnpENZk_o6u6D"
           style={{
@@ -43,7 +40,7 @@ vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.lo
               `,
           }}
         />
-      </div>
+      </div> */}
       <div className={st.calendar}>
         <div
           className={`calendly-inline-widget ${st.meetingsEmbed}`}

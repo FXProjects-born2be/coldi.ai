@@ -15,42 +15,40 @@ const slides = [
     title:
       'Coldi cut our sales response time by 70% and helped us reconnect with leads we’d already written off.',
     review:
-      'We were skeptical at first, but the improvement in engagement and the sheer volume Coldi can handle completely changed our minds. What surprised us most was how smoothly it integrated into our workflow – with no disruption and no learning curve. It just started working. It’s now a key part of how we run outreach.',
+      'We were skeptical at first, but the improvement in engagement and the sheer volume Coldi handled changed our minds. It integrated into our workflow and just started working.',
     name: 'Lara Jensen',
     position: 'Growth Manager',
     company: 'SilverPoint Media',
   },
   {
     title:
-      'We saw a 40% drop in manual call workload within weeks, and Coldi now handles all our initial outreach.',
+      '40% drop in manual call workload within first weeks, and Coldi now handles all our initial outreach.',
     review:
-      'It’s not perfect – we still fine-tune it for specific edge cases – but the time and cost savings have been undeniable. What really impressed us was how quickly Coldi became part of our process. No heavy setup, no disruption – just real results from day one.',
+      'It still needs fine-tuning for edge cases, but the time and cost savings are undeniable. For the first time, we’ve significantly reduced our workload.',
     name: 'Alan Rodrigues',
     position: 'Director of Customer Operations',
     company: 'BrightLane Energy',
   },
   {
-    title:
-      'Coldi helped us engage leads faster than ever—our average response time dropped to under a minute.',
+    title: 'Our average response time dropped to under a minute with Coldi.',
     review:
-      'There’s still room to refine tone for niche cases, but overall, we’ve seen a clear lift in qualified appointments – and the integration was smoother than we expected. Coldi quickly became a natural part of our process.',
+      'Qualified appointments increased, and we were able to maintain fast response times even during high-volume periods.',
     name: 'Nina Feldman',
     position: 'Sales Operations Director',
     company: 'Beaconware CRM',
   },
   {
-    title: 'Coldi is what helped us take our calls to a whole new level.',
+    title: 'Coldi boosted our conversion rate by +8,74% in the first month.',
     review:
-      'Hundreds of calls, Coldi keeps consistent performance throughout the day. The results of the first month are amazing. We got +8,74% in conversion rate, just imagine. No other tweak in our work has ever provided the same result. We got +8,74% of customers saying yes to us. Bravo, Coldi!',
+      'Hundreds of calls, Coldi keeps consistent performance throughout the day. No other tweak in our work has ever provided the same result.',
     name: 'Alex Moreno',
     position: 'Head of Sales',
     company: 'LightBridge Solutions',
   },
   {
-    title:
-      'We used to miss a lot of follow-ups, and clients would get frustrated repeating themselves. Coldi changed that fast.',
+    title: '11% increase in customer satisfaction, Coldi helped us stop missing follow-ups.',
     review:
-      'Now every call gets handled, and people feel heard the first time. We witness an 11% increase in customer satisfaction — and honestly, that says it all.',
+      'We missed a lot of follow-ups, and clients would get frustrated repeating themselves. Now every call gets handled, and people feel finally heard!',
     name: 'Daniela Martines',
     position: 'Client Services Lead',
     company: 'Westmoor Realty',
