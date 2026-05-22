@@ -5,13 +5,15 @@ export const Infrustructure = () => {
     <section className={st.layout}>
       <div className={st.row}>
         <div className={st.col}>
-          <h3>Global Telephony Infrastructure</h3>
+          <h3>
+            Global Reach. <br />
+            Local Presence.
+          </h3>
           <p>
-            Coldi operates a fully managed, high-quality telephony network across dozens of
-            countries. You can choose to use your own telephony provider (such as Twilio,
-            RingCentral, Aircall), or use Coldi’s infrastructure with localized landline access.
-            Telephony rates vary by region and traffic volume, and our team will assist in choosing
-            the most efficient and cost-effective setup for your needs.
+            Coldi operates across 50+ countries with localised calling infrastructure,
+            enterprise-grade routing, and full flexibility to bring your own telephony provider
+            (Twilio, RingCentral, Aircall) or use Coldi&apos;s managed network — launch globally in
+            days, not months.
           </p>
         </div>
         <div className={st.video}>

@@ -22,14 +22,8 @@ const cards = [
   },
   {
     imgUrl: '/images/home/delivers/phone.svg',
-    title: { start: 0, end: 0, suffix: '' },
-    text: (
-      <p>
-        missed follow-ups
-        <br />
-        with Coldi&apos;s built-in call logic
-      </p>
-    ),
+    title: { start: 0, end: 98, suffix: '%' },
+    text: <p>follow-up connection rate.</p>,
   },
   {
     imgUrl: '/images/home/delivers/counter.svg',

@@ -93,7 +93,7 @@ export const Header = ({ pathname }: { pathname: string }) => {
                 fill="white"
               />
             </svg>
-            Schedule a Meeting
+            Book a demo
           </Link>
         </div>
         <HeaderBurgerMenu />
