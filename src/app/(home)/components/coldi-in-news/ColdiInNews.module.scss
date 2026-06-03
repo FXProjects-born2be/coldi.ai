@@ -1,7 +1,7 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .layout {
-  padding: 165px 165px;
+  padding: 165px 100px;
   display: flex;
   flex-direction: column;
   gap: 64px;
@@ -35,17 +35,22 @@
   display: flex;
   align-items: center;
   justify-content:center;
-  gap: 128px;
+  gap: 64px 80px;
   flex-wrap: wrap;
 
   @include mobile {
     flex-direction: column;
-    gap: 48px;
+    gap: 64px;
     justify-content: center;
+  }
+
+  a{
+    display: flex;
   }
 
   img{
     opacity: 0.5;
+    filter: grayscale(100%);
     &:nth-child(5){
       opacity: 0.7;
     }
