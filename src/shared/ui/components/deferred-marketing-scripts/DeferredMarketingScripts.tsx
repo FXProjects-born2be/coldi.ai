@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import Script from 'next/script';
 
 const MARKETING_FALLBACK_DELAY = 15000;
@@ -49,12 +48,11 @@ export const DeferredMarketingScripts = () => {
           />
         </noscript>
         <noscript>
-          <Image
-            height="1"
-            width="1"
+          {/* eslint-disable-next-line @next/next/no-img-element -- Facebook Pixel; source is external */}
+          <img
             style={{ display: 'none' }}
             src="https://www.facebook.com/tr?id=24367361056214270&ev=PageView&noscript=1"
-            alt=""
+            alt="Facebook Pixel"
           />
         </noscript>
       </>

@@ -1,8 +1,8 @@
 'use client';
 
 import { type CSSProperties, useRef, useState } from 'react';
-import Image from 'next/image';
 
+//import Image from 'next/image';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 
 import { PlayIcon } from '@/shared/ui/icons/fill/play';
@@ -29,7 +29,8 @@ const VideoCaseStudy = ({ videoId, title }: { videoId: string; title: string }) 
           />
         ) : (
           <>
-            <Image className={st.videoPoster} src={thumbnailSrc} alt="" fill sizes="100vw" />
+            {/* eslint-disable-next-line @next/next/no-img-element -- YouTube thumbnail with fallback; source is external */}
+            <img className={st.videoPoster} src={thumbnailSrc} alt={title} />
             <button
               name="play-video"
               type="button"
