@@ -40,7 +40,7 @@
 
     @include mobile {
       margin: 16px 16px 0 16px;
-      padding: 32px;
+      padding: 16px;
       gap: 32px;
     }
   }
@@ -86,6 +86,31 @@
       line-height: normal;
       @include tablet {
         text-align: center;
+      }
+    }
+
+  }
+
+  &__badges {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    @include mobile {
+      width: 100%;
+      gap: 20px;
+    }
+    a {
+      display: flex;
+      flex-grow: 1;
+      &:last-child{
+        max-width: 90px;
+      }
+      img{
+        @include mobile {
+          width: 100%;
+          height: auto;
+          
+        }
       }
     }
   }

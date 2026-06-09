@@ -216,19 +216,42 @@ export const Footer = ({ pathname }: { pathname: string }) => {
           <span className={st.divider} />
           <div className={st.footer__copyright}>
             <p>© {new Date().getFullYear()} Coldi. Voice-Powered. Rights Reserved.</p>
-            <a
-              href="https://www.saashub.com/coldi?utm_source=badge&utm_campaign=badge&utm_content=coldi&badge_variant=color&badge_kind=approved"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Coldi on SaaSHub"
-            >
-              <Image
-                src="https://cdn-b.saashub.com/img/badges/approved-color.png?v=1"
-                alt={pageHeading}
-                width={126}
-                height={42}
-              />
-            </a>
+            <div className={st.footer__badges}>
+              <a
+                href="https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Coldi on Star AI"
+              >
+                <Image src="/images/home/star-ai.png" alt={pageHeading} width={140} height={140} />
+              </a>
+              <a
+                href="https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd/services/coldi-ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Coldi on Star AI"
+              >
+                <Image
+                  src="/images/home/star-level.png"
+                  alt={pageHeading}
+                  width={140}
+                  height={140}
+                />
+              </a>
+              <a
+                href="https://www.saashub.com/coldi?utm_source=badge&utm_campaign=badge&utm_content=coldi&badge_variant=color&badge_kind=approved"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Coldi on SaaSHub"
+              >
+                <Image
+                  src="https://cdn-b.saashub.com/img/badges/approved-color.png?v=1"
+                  alt={pageHeading}
+                  width={126}
+                  height={42}
+                />
+              </a>
+            </div>
           </div>
         </div>
       </footer>
