@@ -189,6 +189,11 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                       Privacy Policy
                     </Link>
                   </li>
+                  <li itemProp="name">
+                    <Link href="/legal" itemProp="url">
+                      Data Processing Agreement
+                    </Link>
+                  </li>
                 </ul>
                 <br />
                 <h4>Contact Us</h4>
