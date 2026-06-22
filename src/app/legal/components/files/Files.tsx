@@ -75,7 +75,7 @@ export const Files = () => {
             className={st.file}
           >
             <div>
-              <h3>DATA PROCESSING AGREEMENT</h3>
+              <h3>Data Processing Agreement</h3>
               <p>PDF ・ Last updated 22 March 2026</p>
             </div>
             <Link href="/dpa.pdf" target="_blank">
