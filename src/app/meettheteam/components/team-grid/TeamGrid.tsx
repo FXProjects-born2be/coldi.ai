@@ -16,6 +16,8 @@ type TeamMember = {
   image: string;
   alt: string;
   linkedinUrl: string;
+  // Set to true to temporarily hide a member from the grid without deleting their data.
+  hidden?: boolean;
 };
 
 const LINKEDIN_PLACEHOLDER = 'Linkedin';
@@ -63,6 +65,7 @@ const teamMembers: TeamMember[] = [
     image: '/images/meet-the-team/jacob-berkun.png',
     alt: 'Portrait of Jacob Berkun',
     linkedinUrl: 'https://www.linkedin.com/in/jacob-berkun-b5671014b/',
+    hidden: true,
   },
   {
     name: 'Leeron Ben Zion',
@@ -70,6 +73,7 @@ const teamMembers: TeamMember[] = [
     image: '/images/meet-the-team/leeron-ben-zion.png',
     alt: 'Portrait of Leeron Ben Zion',
     linkedinUrl: 'https://www.linkedin.com/in/leeron-ben-zion',
+    hidden: true,
   },
   {
     name: 'Natalia Kunytsyna',
@@ -77,6 +81,7 @@ const teamMembers: TeamMember[] = [
     image: '/images/meet-the-team/natalia-kunytsyna.png',
     alt: 'Portrait of Natalia Kunytsyna',
     linkedinUrl: 'https://www.linkedin.com/in/natalia-kunytsyna-15781361',
+    hidden: true,
   },
   {
     name: 'Vladyslav Kachanov',
@@ -120,6 +125,7 @@ const teamMembers: TeamMember[] = [
     image: '/images/meet-the-team/thomas-angelo.png',
     alt: 'Portrait of Thomas Angelo',
     linkedinUrl: '',
+    hidden: true,
   },
 ];
 
@@ -141,60 +147,62 @@ export const TeamGrid = () => {
       </motion.h2>
 
       <div className={st.grid}>
-        {teamMembers.map((member, index) => (
-          <motion.article
-            key={member.name}
-            className={st.card}
-            variants={blurInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={index * 0.05}
-          >
-            <div className={st.imageWrap}>
-              <Image
-                src={member.image}
-                alt={imageAlt('meettheteam')}
-                width={348}
-                height={348}
-                className={st.image}
-                unoptimized
-              />
-              <Image
-                src="/images/meet-the-team/team-badge.svg"
-                alt={imageAlt('meettheteam')}
-                width={62}
-                height={22}
-                className={st.badge}
-                unoptimized
-              />
-            </div>
-
-            <div className={st.info}>
-              <div className={st.text}>
-                <h2>{member.name}</h2>
-                <p>{member.role}</p>
-              </div>
-
-              <Link
-                href={resolveLinkedinHref(member.linkedinUrl)}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={member.linkedinUrl}
-                aria-label={`${member.name} Linkedin`}
-                className={st.linkedin}
-              >
+        {teamMembers
+          .filter((member) => !member.hidden)
+          .map((member, index) => (
+            <motion.article
+              key={member.name}
+              className={st.card}
+              variants={blurInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={index * 0.05}
+            >
+              <div className={st.imageWrap}>
                 <Image
-                  src="/images/meet-the-team/linkedin.svg"
+                  src={member.image}
                   alt={imageAlt('meettheteam')}
-                  width={16}
-                  height={16}
+                  width={348}
+                  height={348}
+                  className={st.image}
                   unoptimized
                 />
-              </Link>
-            </div>
-          </motion.article>
-        ))}
+                <Image
+                  src="/images/meet-the-team/team-badge.svg"
+                  alt={imageAlt('meettheteam')}
+                  width={62}
+                  height={22}
+                  className={st.badge}
+                  unoptimized
+                />
+              </div>
+
+              <div className={st.info}>
+                <div className={st.text}>
+                  <h2>{member.name}</h2>
+                  <p>{member.role}</p>
+                </div>
+
+                <Link
+                  href={resolveLinkedinHref(member.linkedinUrl)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={member.linkedinUrl}
+                  aria-label={`${member.name} Linkedin`}
+                  className={st.linkedin}
+                >
+                  <Image
+                    src="/images/meet-the-team/linkedin.svg"
+                    alt={imageAlt('meettheteam')}
+                    width={16}
+                    height={16}
+                    unoptimized
+                  />
+                </Link>
+              </div>
+            </motion.article>
+          ))}
       </div>
     </section>
   );
