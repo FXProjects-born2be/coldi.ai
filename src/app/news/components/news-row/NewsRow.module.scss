@@ -29,6 +29,7 @@
 
     > div {
       display: flex;
+      flex-wrap: wrap;
       justify-content: flex-start;
       gap: 10px;
       min-width: 100%;
@@ -107,7 +108,6 @@
 
     .newsItem {
       width: 33.33333333333333%;
-      display: flex;
       display: flex;
       padding: 48px;
       flex-direction: column;
