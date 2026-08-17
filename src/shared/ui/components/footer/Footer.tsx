@@ -135,12 +135,7 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                   rel="noopener noreferrer"
                   aria-label="View Coldi on Star AI"
                 >
-                  <Image
-                    src="/images/home/star-ai.png"
-                    alt={pageHeading}
-                    width={140}
-                    height={140}
-                  />
+                  <Image src="/images/star-ai.png" alt={pageHeading} width={140} height={140} />
                 </a>
                 <a
                   href="https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd/services/coldi-ai"
@@ -148,12 +143,7 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                   rel="noopener noreferrer"
                   aria-label="View Coldi on Star AI"
                 >
-                  <Image
-                    src="/images/home/star-level.png"
-                    alt={pageHeading}
-                    width={140}
-                    height={140}
-                  />
+                  <Image src="/images/star-level.png" alt={pageHeading} width={140} height={140} />
                 </a>
                 <a
                   href="https://www.saashub.com/coldi?utm_source=badge&utm_campaign=badge&utm_content=coldi&badge_variant=color&badge_kind=approved"
