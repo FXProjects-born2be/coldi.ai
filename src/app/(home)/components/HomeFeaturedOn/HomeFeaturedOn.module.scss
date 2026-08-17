@@ -1,0 +1,71 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.home_featured_on {
+  padding-block: 136px;
+
+  img {
+    width: auto;
+  }
+
+  @include tablet {
+    padding-block: 40px;
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: 360px 0.91fr;
+    gap: 40px;
+    justify-content: space-between;
+    align-items: center;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__title {
+    font-size: 40px;
+    line-height: 1.2;
+
+    @include tablet {
+      font-size: 32px;
+    }
+  }
+
+  &__images {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  &__track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: home-featured-on-scroll 30s linear infinite;
+  }
+
+  &__images:hover .home_featured_on__track {
+    animation-play-state: paused;
+  }
+
+  .card {
+    flex-shrink: 0;
+    margin-right: 40px;
+  }
+}
+
+@keyframes home-featured-on-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home_featured_on__track {
+    animation: none;
+  }
+}

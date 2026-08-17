@@ -1,0 +1,85 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.home_tools {
+  padding-block: 80px;
+
+  @include tablet {
+    padding-block: 40px;
+  }
+
+  img {
+    width: auto;
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: 360px 0.91fr;
+    gap: 40px;
+    justify-content: space-between;
+    align-items: center;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__title {
+    font-size: 40px;
+    line-height: 1.2;
+
+    @include tablet {
+      font-size: 32px;
+    }
+  }
+
+  &__images {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  &__track {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    width: max-content;
+    animation: home-tools-scroll 30s linear infinite;
+
+    &.reverse {
+      animation-name: home-tools-scroll-reverse;
+      animation-duration: 35s;
+    }
+  }
+
+  &__images:hover .home_tools__track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes home-tools-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes home-tools-scroll-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home_tools__track {
+    animation: none;
+  }
+}
