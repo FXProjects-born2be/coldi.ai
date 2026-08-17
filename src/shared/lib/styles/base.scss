@@ -2,9 +2,6 @@
 
 * {
   box-sizing: border-box;
-  padding: 0px;
-  margin: 0px;
-  border: 0px;
 }
 
 *,
@@ -46,14 +43,8 @@ body {
     border-radius: 100px;
   }
 
-  @include fourteenInch {
-    font-size: 14px;
-    zoom: 0.9;
-  }
-
-  a,
-  button {
-  }
+  color: #000;
+  font-weight: 400;
 }
 
 font {
@@ -65,8 +56,9 @@ input::-ms-clear {
 }
 
 img {
-  vertical-align: top;
+  display: block;
   max-width: 100%;
+  height: auto;
 }
 
 * {
@@ -74,15 +66,11 @@ img {
   -webkit-tap-highlight-color: transparent;
 }
 
-._container {
-  padding: 0 124px;
+.container {
   width: 100%;
-  @include largeDesktop {
-    padding: 0 124px;
-  }
-  @include tablet {
-    padding: 0 16px;
-  }
+  max-width: 1312px;
+  margin-inline: auto;
+  padding-inline: 16px;
 }
 .react-tel-input {
   .selected-flag {
@@ -132,4 +120,29 @@ html, body {
 // Legacy reCAPTCHA badge hiding - no longer needed with Turnstile
 .grecaptcha-badge{
   opacity: 0;
+}
+
+.btn {
+  padding: 14px 32px;
+  border-radius: 9999px;
+  font-size: 16px;
+  color: #FFF;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.btn-primary {
+  background: var(--Dark-Blue, #2544BD);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+button {
+  cursor: pointer;
 }

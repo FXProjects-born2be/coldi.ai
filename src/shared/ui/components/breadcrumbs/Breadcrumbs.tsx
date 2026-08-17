@@ -53,31 +53,35 @@ export const Breadcrumbs = ({ pathname, currentLabel }: BreadcrumbsProps) => {
   }));
 
   return (
-    <nav className={st.breadcrumbs} aria-label="Breadcrumb">
-      <ol className={st.list}>
-        <li className={st.item}>
-          <Link href="/" className={st.link}>
-            Home
-          </Link>
-        </li>
-        {crumbs.map((crumb, i) => {
-          const isLast = i === crumbs.length - 1;
-          return (
-            <li key={crumb.href} className={st.item}>
-              <span className={st.separator}>
-                <Image src="/icons/header/breadcrumbs-arrow.svg" alt="" width={8} height={16} />
-              </span>
-              {isLast ? (
-                <span className={st.current}>{crumb.label}</span>
-              ) : (
-                <Link href={crumb.href} className={st.link}>
-                  {crumb.label}
-                </Link>
-              )}
+    <div className={st.breadcrumbs_wrapper}>
+      <div className="container">
+        <nav className={st.breadcrumbs} aria-label="Breadcrumb">
+          <ol className={st.list}>
+            <li className={st.item}>
+              <Link href="/" className={st.link}>
+                Home
+              </Link>
             </li>
-          );
-        })}
-      </ol>
-    </nav>
+            {crumbs.map((crumb, i) => {
+              const isLast = i === crumbs.length - 1;
+              return (
+                <li key={crumb.href} className={st.item}>
+                  <span className={st.separator}>
+                    <Image src="/icons/header/breadcrumbs-arrow.svg" alt="" width={8} height={16} />
+                  </span>
+                  {isLast ? (
+                    <span className={st.current}>{crumb.label}</span>
+                  ) : (
+                    <Link href={crumb.href} className={st.link}>
+                      {crumb.label}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
+      </div>
+    </div>
   );
 };

@@ -1,18 +1,17 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 997;
-  background: #fff;
-  border-bottom: 1px solid rgba(80, 85, 107, 0.05);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
+  background: transparent;
+  transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+
+  &.scrolled {
+    background: #fff;
+  }
 
   &__logo {
     @include tablet {
@@ -28,7 +27,7 @@
   }
 
   &__container {
-    padding: 16px 124px;
+    padding-block: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,16 +39,8 @@
   }
 
   &__navigation {
-    flex-shrink: 0;
-    padding: 4px;
-    border-radius: 48px;
-    background: #f6f6f6;
     display: flex;
     align-items: center;
-
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
 
     @include tablet {
       display: none;
@@ -63,22 +54,22 @@
       &.active > .navLink,
       &.active > .navTrigger,
       &.active > .navLabel {
-        background: #eaeaeb;
+        color: #2544BD;
       }
     }
 
     .navLink,
     .navTrigger,
     .navLabel {
-      flex-shrink: 0;
-      padding: 16px;
-      border-radius: 48px;
+      padding: 6px 20px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 7px;
       color: inherit;
       text-decoration: none;
       cursor: pointer;
+      font-size: 14px;
+      line-height: 1.4;
     }
 
     .hasDropdown {
@@ -91,17 +82,7 @@
       }
 
       .dropdownArrow {
-        width: 16px;
-        height: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         flex-shrink: 0;
-
-        img {
-          width: 100%;
-          height: 100%;
-        }
       }
     }
 
@@ -171,15 +152,6 @@
     }
   }
 
-  &__buttons {
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
-    @include mobile {
-      //display: none;
-    }
-  }
-
   &__call {
     display: flex;
     padding: 10px 16px 10px 12px;
@@ -206,25 +178,11 @@
   }
 
   &__bookMeeting {
-    display: flex;
-    padding: 10px 16px 10px 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 24px;
-    background: #4268ff;
-    border: 1px solid #4268ff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+    padding: 12px 20px;
     color: #fff;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%; /* 24px */
-    @include mobile {
-      //display: none;
-      font-size: 12px;
-      svg{
-        width: 16px;
-        height: 16px;
-      }
-    }
+    border-radius: 9999px;
   }
 }

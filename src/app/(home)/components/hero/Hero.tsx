@@ -1,120 +1,61 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { cn } from '@/shared/lib/helpers';
-import { TypingText } from '@/shared/ui/components/typing-text';
-import buttonStyles from '@/shared/ui/kit/button/Button.module.scss';
-
 import st from './Hero.module.scss';
 
-const lcpVideoPriorityProps = { fetchPriority: 'high' } as const;
-const MOBILE_BREAKPOINT = 768;
+const rings = [
+  { src: '/images/home/one.svg', width: 1440, height: 676 },
+  { src: '/images/home/two.svg', width: 1440, height: 676 },
+  { src: '/images/home/three.svg', width: 1440, height: 676 },
+  { src: '/images/home/four.svg', width: 1440, height: 676 },
+  { src: '/images/home/five.svg', width: 1372, height: 586 },
+  { src: '/images/home/six.svg', width: 1098, height: 449 },
+  { src: '/images/home/seven.svg', width: 1143, height: 472 },
+  { src: '/images/home/eight.svg', width: 915, height: 357 },
+  { src: '/images/home/nine.svg', width: 686, height: 243 },
+];
 
 export const Hero = () => {
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    const syncViewport = () => {
-      setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
-    };
-
-    syncViewport();
-    window.addEventListener('resize', syncViewport);
-
-    return () => window.removeEventListener('resize', syncViewport);
-  }, []);
-
   return (
     <section className={st.hero}>
-      <section className={st.hero__content}>
-        <div className={st.hero__title}>
-          <h1>
-            Never Miss Another <br />
-            <span className={st.highlighted}>
-              {' '}
-              Lead, Call, or
-              <br /> Opportunity
-            </span>
-          </h1>
-          <p>
-            <b>AI Voice Agents for Inbound Calls, Outreach, and Customer Support.</b>
-            <br />
-            Get 72% more qualified leads.
-          </p>
-        </div>
-        <Link href="/products">
-          <div>
-            <button
-              aria-label="Explore"
-              name="book-demo"
-              type="button"
-              className={cn(
-                buttonStyles.button,
-                buttonStyles.primary,
-                buttonStyles.md,
-                buttonStyles.defaultWidth
-              )}
-            >
-              Explore
-            </button>
+      <div className={st.hero__bg} aria-hidden>
+        {rings.map((ring, index) => (
+          <div
+            key={ring.src}
+            className={st.hero__ring}
+            style={{
+              animationDelay: `${index * 0.35}s, ${index * 0.45}s`,
+            }}
+          >
+            <Image
+              src={ring.src}
+              alt=""
+              width={ring.width}
+              height={ring.height}
+              style={{ width: `${(ring.width / 1440) * 100}%`, height: 'auto' }}
+            />
           </div>
-        </Link>
-      </section>
-      <section className={st.hero__video}>
-        <TypingText
-          text={[
-            'Hi!',
-            'Welcome to Coldi!',
-            'I can be your first AI employee.',
-            'Would you like to test me?',
-            '¡Hola!',
-            'Bienvenido a Coldi.',
-            'Puedo ser tu primer empleado de IA.',
-            '¿Te gustaría probarme?',
-            'Salut!',
-            'Bienvenue chez Coldi.',
-            'Je peux être votre premier employé IA.',
-            'Vous voulez me tester?',
-            'Hallo!',
-            'Willkommen bei Coldi.',
-            'Ich kann Ihr erster KI-Mitarbeiter sein.',
-            'Möchten Sie mich ausprobieren?',
-            'Ciao!',
-            'Benvenuto su Coldi.',
-            'Posso essere il tuo primo dipendente IA.',
-            'Vuoi mettermi alla prova?',
-          ]}
-          speed={150}
-          delay={500}
-          className={st.hero__subtitle}
-        />
-        {isMobile !== false ? (
-          <Image
-            className={st.hero__poster}
-            src="/videos/home/hero.svg"
-            alt=""
-            width={720}
-            height={720}
-            sizes="100vw"
-            priority
-          />
-        ) : (
-          <video
-            {...lcpVideoPriorityProps}
-            src="/videos/voices/variant-1.mp4"
-            autoPlay
-            playsInline
-            muted
-            loop
-            preload="metadata"
-            controls={false}
-            poster="/videos/home/hero.svg"
-          />
-        )}
-      </section>
+        ))}
+      </div>
+      <div className={st.hero__glow} aria-hidden />
+
+      <div className={`container ${st.hero__content}`}>
+        <h1 className={st.hero__title}>
+          AI Workforce
+          <br />
+          Built for the next generation of <br />
+          <span>Insurance brokers</span>
+        </h1>
+        <p className={st.hero__subtitle}>
+          Production-ready AI voice agents, fully managed from day one.
+        </p>
+
+        <div className="text-center">
+          <Link href="/products" className="btn btn-primary d-inline-block">
+            Book a Demo
+          </Link>
+        </div>
+      </div>
     </section>
   );
 };

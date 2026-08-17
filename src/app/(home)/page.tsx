@@ -1,7 +1,14 @@
 import type { Metadata } from 'next';
 
-import { Advantages, Hero, Infrustructure, Tools } from './components';
-import { HomeDeferredSections } from './components/HomeDeferredSections';
+import {
+  Hero,
+  HomeBuiltFor,
+  HomeFeaturedOn,
+  HomeHearVoice,
+  HomeManaged,
+  HomeTools,
+  HomeWhatCanDo,
+} from './components';
 
 export const metadata: Metadata = {
   alternates: {
@@ -13,11 +20,12 @@ export default function Home() {
   return (
     <main>
       <Hero />
-
-      <Advantages />
-      <Infrustructure />
-      <Tools />
-      <HomeDeferredSections />
+      <HomeBuiltFor />
+      <HomeTools />
+      <HomeWhatCanDo />
+      <HomeHearVoice />
+      <HomeFeaturedOn />
+      <HomeManaged />
     </main>
   );
 }

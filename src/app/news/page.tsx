@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Hero, NewsRow, ReadyToHear } from './components';
+import { Hero, NewsOutbound, NewsRow, ReadyToHear } from './components';
 
 export const metadata: Metadata = {
   alternates: {
@@ -21,6 +21,7 @@ export default function News() {
   return (
     <main>
       <Hero />
+      <NewsOutbound />
       <NewsRow />
       <ReadyToHear />
     </main>

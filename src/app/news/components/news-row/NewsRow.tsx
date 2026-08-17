@@ -11,7 +11,28 @@ import {
   type NewsArticle,
 } from '@/features/news/news';
 
+import { cn } from '@/shared/lib/helpers';
+
 import st from './NewsRow.module.scss';
+
+const formatNewsDate = (value: string) => {
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) return '';
+
+  const day = date.getDate();
+  const ordinal =
+    day % 10 === 1 && day !== 11
+      ? 'st'
+      : day % 10 === 2 && day !== 12
+        ? 'nd'
+        : day % 10 === 3 && day !== 13
+          ? 'rd'
+          : 'th';
+  const month = date.toLocaleString('en-GB', { month: 'long' });
+
+  return `${day}${ordinal} ${month} ${date.getFullYear()}`;
+};
 
 export const NewsRow = () => {
   const [categories, setCategories] = useState<string[]>([]);
@@ -37,7 +58,6 @@ export const NewsRow = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       const categories = await getNewsCategories();
-      // Convert all categories to lowercase and remove duplicates
       const uniqueCategories = [...new Set(categories.map((cat) => cat.toLowerCase()))];
       setCategories(uniqueCategories);
     };
@@ -45,97 +65,105 @@ export const NewsRow = () => {
   }, []);
 
   return (
-    <section className={st.layout}>
-      <div className={st.categories}>
-        <div>
-          <div
-            className={`${st.category} ${activeCategory === 'all' ? st.active : ''}`}
+    <section className={st.news_row}>
+      <div className="container">
+        <div className={st.news_row__tabs}>
+          <button
+            type="button"
+            className={cn(st.news_row__tab, activeCategory === 'all' && st.active)}
             onClick={() => setActiveCategory('all')}
           >
             All
-          </div>
+          </button>
           {categories.map((category) => (
-            <div
+            <button
               key={category}
+              type="button"
               onClick={() => setActiveCategory(category)}
-              className={`${st.category} ${activeCategory === category ? st.active : ''}`}
+              className={cn(st.news_row__tab, activeCategory === category && st.active)}
             >
               {category}
-            </div>
+            </button>
           ))}
           {!categories.includes('industry insight') && (
-            <div
-              className={`${st.category} ${activeCategory === 'industry insight' ? st.active : ''}`}
+            <button
+              type="button"
+              className={cn(st.news_row__tab, activeCategory === 'industry insight' && st.active)}
               onClick={() => setActiveCategory('industry insight')}
             >
               Industry Insight
-            </div>
+            </button>
           )}
           {!categories.includes('best practices') && (
-            <div
-              className={`${st.category} ${activeCategory === 'best practices' ? st.active : ''}`}
+            <button
+              type="button"
+              className={cn(st.news_row__tab, activeCategory === 'best practices' && st.active)}
               onClick={() => setActiveCategory('best practices')}
             >
               Best Practices
-            </div>
+            </button>
           )}
           {!categories.includes('trends & predictions') && (
-            <div
-              className={`${st.category} ${activeCategory === 'trends & predictions' ? st.active : ''}`}
+            <button
+              type="button"
+              className={cn(
+                st.news_row__tab,
+                activeCategory === 'trends & predictions' && st.active
+              )}
               onClick={() => setActiveCategory('trends & predictions')}
             >
               Trends & Predictions
-            </div>
+            </button>
           )}
           {!categories.includes('use cases') && (
-            <div
-              className={`${st.category} ${activeCategory === 'use cases' ? st.active : ''}`}
+            <button
+              type="button"
+              className={cn(st.news_row__tab, activeCategory === 'use cases' && st.active)}
               onClick={() => setActiveCategory('use cases')}
             >
               Use cases
-            </div>
+            </button>
           )}
         </div>
-      </div>
-      <div className={st.news}>
-        {isLoading ? (
-          <div className={st.loading}>
-            {Array.from({ length: 9 }).map((_, index) => (
-              <div className={st.loadingItem} key={index}></div>
-            ))}
-          </div>
-        ) : news.length > 0 ? (
-          news.map((item) => (
-            <div className={st.newsItem} key={item.id}>
-              <Link href={`/news/${item.slug}`} className={st.newsItemTop}>
-                <Image
-                  src={item.image || '/images/news/news-item-image.png'}
-                  alt={item.title}
-                  width={413}
-                  height={230}
-                />
-                <div className={st.title}>{item.title}</div>
-              </Link>
-              <Link href={`/news/${item.slug}`} className={st.readMore}>
-                Read{' '}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="24"
-                  viewBox="0 0 12 24"
-                  fill="none"
-                >
-                  <path
-                    d="M2.45199 6.57999L3.51299 5.51999L9.29199 11.297C9.38514 11.3896 9.45907 11.4996 9.50952 11.6209C9.55997 11.7421 9.58594 11.8722 9.58594 12.0035C9.58594 12.1348 9.55997 12.2648 9.50952 12.3861C9.45907 12.5073 9.38514 12.6174 9.29199 12.71L3.51299 18.49L2.45299 17.43L7.87699 12.005L2.45199 6.57999Z"
-                    fill="#4268FF"
-                  />
-                </svg>
-              </Link>
+
+        <h2 className={st.news_row__title}>{activeCategory === 'all' ? 'All' : activeCategory}</h2>
+
+        <div className={st.news_row__list}>
+          {isLoading ? (
+            <div className={st.news_row__loading}>
+              {Array.from({ length: 9 }).map((_, index) => (
+                <div className={st.news_row__loading_item} key={index} />
+              ))}
             </div>
-          ))
-        ) : (
-          <div className={st.noNews}>No news found</div>
-        )}
+          ) : news.length > 0 ? (
+            news.map((item) => (
+              <article className={st.news_row__item} key={item.id}>
+                <Link href={`/news/${item.slug}`} className={st.news_row__item_top}>
+                  <div className={st.news_row__item_title}>{item.title}</div>
+                </Link>
+
+                <div>
+                  {item.created_at && (
+                    <time className={st.news_row__item_date} dateTime={item.created_at}>
+                      {formatNewsDate(item.created_at)}
+                    </time>
+                  )}
+
+                  <div className={st.news_row__item_image}>
+                    <Image
+                      src={item.image || '/images/news/news-item-image.png'}
+                      alt={item.title}
+                      width={413}
+                      height={230}
+                    />
+                  </div>
+                </div>
+              </article>
+            ))
+          ) : (
+            <div className={st.news_row__empty}>No news found</div>
+          )}
+        </div>
       </div>
     </section>
   );

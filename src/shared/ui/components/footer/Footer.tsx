@@ -1,17 +1,53 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getPageHeadingFromPath, requestRoutes } from '@/shared/lib/helpers';
+import { cn, getPageHeadingFromPath, requestRoutes } from '@/shared/lib/helpers';
 import { MessageIcon } from '@/shared/ui/icons/fill/message';
 import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
-import { Facebook } from '@/shared/ui/icons/fill/socials/facebook';
-import { Linkedin } from '@/shared/ui/icons/fill/socials/linkedin';
 import { Whatsapp } from '@/shared/ui/icons/fill/socials/whatsapp';
-import { WhatsappFixed } from '@/shared/ui/icons/fill/socials/whatsapp-fixed';
-import { X } from '@/shared/ui/icons/fill/socials/x';
-import { Youtube } from '@/shared/ui/icons/fill/socials/youtube';
 
 import st from './Footer.module.scss';
+
+const menu = [
+  {
+    title: 'Explore',
+    links: [
+      { href: '/products', label: 'Products' },
+      { href: '/pricing', label: 'Pricing' },
+      { href: '/news', label: 'News' },
+      { href: '/about', label: 'About' },
+    ],
+  },
+  {
+    title: 'Products',
+    links: [
+      { href: '/products/outbound-calling', label: 'Outbound AI Calling' },
+      { href: '/products/inbound-calling', label: 'Inbound AI Calling' },
+      { href: '/products/agent-development', label: 'AI Agent Development' },
+      { href: '/products/customer-service-agent', label: 'AI Customer Service' },
+      { href: '/products/ai-for-quality-control', label: 'AI for Quality Control' },
+      { href: '/products/voip-phone-service', label: 'VoIP Phone Service' },
+    ],
+  },
+  {
+    title: 'Industries',
+    links: [
+      { href: '/industries/healthcare', label: 'Healthcare' },
+      { href: '/industries/insurance', label: 'Insurance' },
+      { href: '/industries/real-estate', label: 'Real Estate' },
+      { href: '/industries/call-center', label: 'Call Centers' },
+      { href: '/industries/debt-collection', label: 'Debt Collection' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { href: '/legal', label: 'Terms of Service' },
+      { href: '/legal', label: 'Privacy Policy' },
+      { href: '/legal', label: 'Data Processing Agreement' },
+    ],
+  },
+];
 
 export const Footer = ({ pathname }: { pathname: string }) => {
   const phoneNumber = '+441299667777'; // Static phone number
@@ -20,255 +56,123 @@ export const Footer = ({ pathname }: { pathname: string }) => {
   return !requestRoutes.has(pathname) ? (
     <>
       <footer className={st.footer}>
-        <div className={st.footer__container}>
-          <section className={st.footer__content}>
-            <div className={st.footer__logo}>
-              <Image src="/full-logo.svg" alt={pageHeading} width={145} height={50} />
-              <p>Brand-Tuned Ai Talkers. Always On.</p>
-              <div className={st.footer__socials}>
-                <Link
-                  href="https://x.com/Coldiai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visit Coldi on X"
-                >
-                  <X />
-                </Link>
-                <Link
-                  href="https://www.facebook.com/coldiai/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visit Coldi on Facebook"
-                >
-                  <Facebook />
-                </Link>
-                <Link
-                  href="https://www.linkedin.com/company/coldiai/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visit Coldi on LinkedIn"
-                >
-                  <Linkedin />
-                </Link>
-                <Link
-                  href="https://www.youtube.com/@coldi_ai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visit Coldi on YouTube"
-                >
-                  <Youtube />
-                </Link>
-                <Link
-                  href="https://wa.me/447955534986"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Chat with Coldi on WhatsApp"
-                >
-                  <Whatsapp />
-                </Link>
-              </div>
-            </div>
-            <div className={st.footer__links}>
+        <div className={cn('container', st.footer__container)}>
+          <div className={st.footer__inner}>
+            <div className={st.footer__top}>
               <div>
-                <h4>Explore</h4>
-                <ul
-                  className={st.footer__list}
-                  itemScope
-                  itemType="http://schema.org/SiteNavigationElement"
-                >
-                  <li itemProp="name">
-                    <Link href="/products" itemProp="url">
-                      Products
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/pricing" itemProp="url">
-                      Pricing
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/news" itemProp="url">
-                      News
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/about" itemProp="url">
-                      About
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4>Products</h4>
-                <ul
-                  className={st.footer__list}
-                  itemScope
-                  itemType="http://schema.org/SiteNavigationElement"
-                >
-                  <li itemProp="name">
-                    <Link href="/products/outbound-calling" itemProp="url">
-                      Outbound AI Calling
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/products/inbound-calling" itemProp="url">
-                      Inbound AI Calling
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/products/agent-development" itemProp="url">
-                      AI Agent Development
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/products/customer-service-agent" itemProp="url">
-                      AI Customer Service
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/products/ai-for-quality-control" itemProp="url">
-                      AI for Quality Control
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/products/voip-phone-service" itemProp="url">
-                      VoIP Phone Service
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4>Industries</h4>
-                <ul
-                  className={st.footer__list}
-                  itemScope
-                  itemType="http://schema.org/SiteNavigationElement"
-                >
-                  <li itemProp="name">
-                    <Link href="/industries/healthcare" itemProp="url">
-                      Healthcare
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/industries/insurance" itemProp="url">
-                      Insurance
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/industries/real-estate" itemProp="url">
-                      Real Estate
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/industries/call-center" itemProp="url">
-                      Call Centers
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/industries/debt-collection" itemProp="url">
-                      Debt Collection
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+                <a href={'/'} className={st.footer__logo}>
+                  <Image
+                    src="/footer-logo.svg"
+                    alt={pageHeading}
+                    width={292}
+                    height={180}
+                    loading={'lazy'}
+                  />
+                </a>
+                <p className={st.footer__subtitle}>Brand-Tuned Ai Talkers. Always On.</p>
 
-              <div>
-                <h4>Legal</h4>
                 <ul
-                  className={st.footer__list}
+                  className={st.footer__contact}
                   itemScope
                   itemType="http://schema.org/SiteNavigationElement"
                 >
-                  <li itemProp="name">
-                    <Link href="/legal" itemProp="url">
-                      Terms of Service
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/legal" itemProp="url">
-                      Privacy Policy
-                    </Link>
-                  </li>
-                  <li itemProp="name">
-                    <Link href="/legal" itemProp="url">
-                      Data Processing Agreement
-                    </Link>
-                  </li>
-                </ul>
-                <br />
-                <h4>Contact Us</h4>
-                <ul
-                  className={st.footer__list}
-                  itemScope
-                  itemType="http://schema.org/SiteNavigationElement"
-                >
-                  <li>
-                    <Link href="mailto:info@coldi.ai">
+                  <li className={st.footer__contact_item}>
+                    <Link href="mailto:info@coldi.ai" className={st.footer__contact_link}>
                       <MessageIcon />
                       info@coldi.ai
                     </Link>
                   </li>
-                  <li>
-                    <Link href={`tel:${phoneNumber}`}>
+                  <li className={st.footer__contact_item}>
+                    <Link href={`tel:${phoneNumber}`} className={st.footer__contact_link}>
                       <PhoneIcon />
                       {phoneNumber}
                     </Link>
                   </li>
+                  <li className={st.footer__contact_item}>
+                    <Link
+                      href="https://wa.me/447955534986"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Open WhatsApp chat with Coldi"
+                      className={st.footer__contact_link}
+                    >
+                      <Whatsapp />
+                      Whatsapp
+                    </Link>
+                  </li>
                 </ul>
               </div>
+              <div className={st.footer__menu}>
+                {menu.map((column) => (
+                  <div key={column.title}>
+                    <h4 className={st.footer__menu_title}>{column.title}</h4>
+                    <ul
+                      className={st.footer__menu_list}
+                      itemScope
+                      itemType="http://schema.org/SiteNavigationElement"
+                    >
+                      {column.links.map((link) => (
+                        <li key={link.label} itemProp="name">
+                          <Link href={link.href} itemProp="url" className={st.footer__menu_link}>
+                            {link.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
-          </section>
-          <span className={st.divider} />
-          <div className={st.footer__copyright}>
-            <p>© {new Date().getFullYear()} Coldi. Voice-Powered. Rights Reserved.</p>
-            <div className={st.footer__badges}>
-              <a
-                href="https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View Coldi on Star AI"
-              >
-                <Image src="/images/home/star-ai.png" alt={pageHeading} width={140} height={140} />
-              </a>
-              <a
-                href="https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd/services/coldi-ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View Coldi on Star AI"
-              >
-                <Image
-                  src="/images/home/star-level.png"
-                  alt={pageHeading}
-                  width={140}
-                  height={140}
-                />
-              </a>
-              <a
-                href="https://www.saashub.com/coldi?utm_source=badge&utm_campaign=badge&utm_content=coldi&badge_variant=color&badge_kind=approved"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View Coldi on SaaSHub"
-              >
-                <Image
-                  src="https://cdn-b.saashub.com/img/badges/approved-color.png?v=1"
-                  alt={pageHeading}
-                  width={126}
-                  height={42}
-                />
-              </a>
+
+            <div className={st.footer__bottom}>
+              <p className={st.footer__copyright}>
+                © {new Date().getFullYear()} Coldi. Voice-Powered. Rights Reserved.
+              </p>
+              <div className={st.footer__badges}>
+                <a
+                  href="https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View Coldi on Star AI"
+                >
+                  <Image
+                    src="/images/home/star-ai.png"
+                    alt={pageHeading}
+                    width={140}
+                    height={140}
+                  />
+                </a>
+                <a
+                  href="https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd/services/coldi-ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View Coldi on Star AI"
+                >
+                  <Image
+                    src="/images/home/star-level.png"
+                    alt={pageHeading}
+                    width={140}
+                    height={140}
+                  />
+                </a>
+                <a
+                  href="https://www.saashub.com/coldi?utm_source=badge&utm_campaign=badge&utm_content=coldi&badge_variant=color&badge_kind=approved"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View Coldi on SaaSHub"
+                >
+                  <Image
+                    src="https://cdn-b.saashub.com/img/badges/approved-color.png?v=1"
+                    alt={pageHeading}
+                    width={126}
+                    height={42}
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </footer>
-      <Link
-        href="https://wa.me/447955534986"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Open WhatsApp chat with Coldi"
-        className={st.whatsappFixedLink}
-      >
-        <WhatsappFixed />
-      </Link>
     </>
   ) : null;
 };

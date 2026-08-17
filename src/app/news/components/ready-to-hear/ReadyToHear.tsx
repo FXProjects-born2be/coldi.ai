@@ -1,58 +1,30 @@
-'use client';
+import Image from 'next/image';
 import Link from 'next/link';
-
-import { motion } from 'framer-motion';
-
-import { blurInUp } from '@/shared/lib/helpers';
-import { Button } from '@/shared/ui/kit/button';
 
 import st from './ReadyToHear.module.scss';
 
-export const ReadyToHear = () => {
-  return (
-    <>
-      <section className={st.layout}>
-        <div className={st.header}>
-          <section className={st.title}>
-            <motion.h2
-              variants={blurInUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              Ready to go?
-            </motion.h2>
-          </section>
-          <motion.p
-            variants={blurInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className={st.desc}
-          >
+export const ReadyToHear = () => (
+  <section className={st.ready_to_hear}>
+    <div className="container">
+      <div className={st.ready_to_hear__inner}>
+        <div>
+          <h2 className={st.ready_to_hear__title}>Ready to go?</h2>
+          <p className={st.ready_to_hear__subtitle}>
             Explore Coldi voices and find your perfect call agent!
-          </motion.p>
+          </p>
+          <Link href="/call-request" className={`btn btn-primary ${st.ready_to_hear__cta}`}>
+            Book demo
+          </Link>
         </div>
-        <Link href="/call-request" className={st.button}>
-          <motion.div
-            variants={blurInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <Button size="md">Get Started</Button>
-          </motion.div>
-        </Link>
-        <video
-          src="/videos/about/hero.mp4"
-          autoPlay
-          playsInline
-          muted
-          loop
-          preload="auto"
-          controls={false}
+        <Image
+          src="/images/news/news-ready.png"
+          alt="Image"
+          className={st.ready_to_hear__image}
+          width={850}
+          height={308}
+          layout="lazy"
         />
-      </section>
-    </>
-  );
-};
+      </div>
+    </div>
+  </section>
+);

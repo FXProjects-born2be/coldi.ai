@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -82,13 +82,15 @@ export const BurgerMenu = () => {
   const [openAbout, setOpenAbout] = useState(false);
   const [openUseCases, setOpenUseCases] = useState(false);
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
   const pageHeading = getPageHeadingFromPath(pathname);
   const isUseCasesPath =
     pathname.startsWith('/use-cases') || useCasesItems.some((item) => item.href === pathname);
 
-  useEffect(() => {
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   return (
     <Root open={open} onOpenChange={setOpen}>

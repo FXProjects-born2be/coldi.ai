@@ -1,12 +1,32 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import type { ReactNode } from 'react';
 
 import st from '../NewsAdmin.module.scss';
+
+const AUTH_KEY = 'news-admin-auth';
+const authListeners = new Set<() => void>();
+
+const subscribeAuth = (onStoreChange: () => void) => {
+  authListeners.add(onStoreChange);
+  return () => {
+    authListeners.delete(onStoreChange);
+  };
+};
+
+const getAuthSnapshot = () => localStorage.getItem(AUTH_KEY) === 'true';
+const getAuthServerSnapshot = () => false;
+const getIsClientSnapshot = () => true;
+const getIsClientServerSnapshot = () => false;
+const subscribeClient = () => () => undefined;
+
+const emitAuthChange = () => {
+  authListeners.forEach((listener) => listener());
+};
 
 type NewsAdminShellProps = {
   title: string;
@@ -15,21 +35,19 @@ type NewsAdminShellProps = {
 
 export function NewsAdminShell({ title, children }: NewsAdminShellProps) {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const isClient = useSyncExternalStore(
+    subscribeClient,
+    getIsClientSnapshot,
+    getIsClientServerSnapshot
+  );
+  const isAuthenticated = useSyncExternalStore(
+    subscribeAuth,
+    getAuthSnapshot,
+    getAuthServerSnapshot
+  );
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    const auth = localStorage.getItem('news-admin-auth');
-
-    if (auth === 'true') {
-      setIsAuthenticated(true);
-    }
-
-    setIsCheckingAuth(false);
-  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,8 +64,8 @@ export function NewsAdminShell({ title, children }: NewsAdminShellProps) {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        localStorage.setItem('news-admin-auth', 'true');
-        setIsAuthenticated(true);
+        localStorage.setItem(AUTH_KEY, 'true');
+        emitAuthChange();
         router.refresh();
         return;
       }
@@ -60,12 +78,12 @@ export function NewsAdminShell({ title, children }: NewsAdminShellProps) {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('news-admin-auth');
-    setIsAuthenticated(false);
+    localStorage.removeItem(AUTH_KEY);
+    emitAuthChange();
     router.push('/news-admin');
   };
 
-  if (isCheckingAuth) {
+  if (!isClient) {
     return <div className={st.loading}>Checking access...</div>;
   }
 

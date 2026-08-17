@@ -376,14 +376,19 @@ export const SecondStepToCall = ({
   const [emailValidating, setEmailValidating] = useState(false);
   const [emailValidationError, setEmailValidationError] = useState<string | null>(null);
 
-  // Check if email requires SMS verification (guarded by feature flag)
   const needsSmsVerification =
     SMS_VERIFICATION_ENABLED && formValues.email
       ? requiresSmsVerification(formValues.email)
       : false;
 
-  // Reset SMS state when email changes or captcha expires
-  useEffect(() => {
+  const [prevNeedsSmsVerification, setPrevNeedsSmsVerification] = useState(needsSmsVerification);
+  const [prevEmail, setPrevEmail] = useState(formValues.email);
+  const [prevCaptchaToken, setPrevCaptchaToken] = useState(captchaToken);
+
+  if (needsSmsVerification !== prevNeedsSmsVerification || formValues.email !== prevEmail) {
+    setPrevNeedsSmsVerification(needsSmsVerification);
+    setPrevEmail(formValues.email);
+
     if (!needsSmsVerification) {
       setSmsCodeSent(false);
       setSmsVerified(false);
@@ -391,7 +396,17 @@ export const SecondStepToCall = ({
     } else {
       setSmsVerified(false);
     }
-  }, [needsSmsVerification, formValues.email]);
+  }
+
+  if (captchaToken !== prevCaptchaToken) {
+    setPrevCaptchaToken(captchaToken);
+
+    if (!captchaToken) {
+      setSmsCodeSent(false);
+      setSmsVerified(false);
+      setSmsError(null);
+    }
+  }
 
   // Get CSRF token on mount
   useEffect(() => {
@@ -408,15 +423,6 @@ export const SecondStepToCall = ({
     };
     fetchCsrfToken();
   }, []);
-
-  // Reset SMS verification when captcha expires or is cleared
-  useEffect(() => {
-    if (!captchaToken) {
-      setSmsCodeSent(false);
-      setSmsVerified(false);
-      setSmsError(null);
-    }
-  }, [captchaToken]);
 
   const handleSendSmsCode = async () => {
     if (!firstStepData.phone) {

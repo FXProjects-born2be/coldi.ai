@@ -1,101 +1,55 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
-.layout {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  align-items: center;
-  padding: 165px 165px 165px 165px;
-  background: #ffffff;
-  position: relative;
+.ready_to_hear {
+  padding-block: 80px;
 
-  @include mobile {
-    padding: 64px 12px 64px 12px;
+  @include tablet {
+    padding-block: 40px;
   }
 
-  > video {
-    position: absolute;
-    width: 100%;
-    height: auto;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 0;
-    opacity: 0.5;
-  }
-}
-
-.button {
-  position: relative;
-  z-index: 1;
-}
-
-.header {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-
-  .desc {
-    color: #535662;
-    text-align: center;
-    font-size: 24px;
-    font-weight: 400;
-    line-height: normal;
-    width: 800px;
-    margin-top: 0;
-
-    @include fourteenInch {
-      font-size: 20px;
-    }
+  &__inner {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    padding: 60px 60px 0 60px;
+    background: linear-gradient(0deg, rgba(66, 104, 255, 0.6) 0%, rgba(66, 104, 255, 0.6) 100%);
 
     @include tablet {
-      width: 100%;
-      font-size: 20px;
-      br {
-        display: none;
-      }
-    }
-
-    @include mobileSmall {
-      font-size: 16px;
+      padding: 60px 20px 120px 20px;
     }
   }
 
-  .title {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    align-items: center;
+  &__image {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
 
-    h2 {
-      color: #0c1021;
-      text-align: center;
-      font-size: 64px;
-      font-weight: 400;
-      line-height: 120%;
-      width: 850px;
+  &__title {
+    color: #FFF;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 10px;
 
-      @include fourteenInch {
-        font-size: 64px;
-      }
-
-      @include tablet {
-        width: 100%;
-        font-size: 42px;
-      }
-
-      @include mobile {
-        font-size: 42px;
-        line-height: 120%;
-      }
-
-      @include mobileSmall {
-        font-size: 32px;
-      }
+    @include tablet {
+      font-size: 40px;
+      line-height: 1.2;
     }
+  }
+
+  &__subtitle {
+    color: #FFF;
+    font-size: 20px;
+    line-height: 1.4;
+    margin-bottom: 32px;
+
+    @include tablet {
+      font-size: 20px;
+    }
+  }
+
+  &__cta {
+    display: inline-block;
   }
 }

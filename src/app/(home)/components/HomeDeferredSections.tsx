@@ -5,9 +5,6 @@ import dynamic from 'next/dynamic';
 const VoicesList = dynamic(() => import('./voices-list/VoicesList').then((mod) => mod.VoicesList), {
   ssr: false,
 });
-const WhatCanDo = dynamic(() => import('./what-can-do/WhatCanDo').then((mod) => mod.WhatCanDo), {
-  ssr: false,
-});
 const DashboardSlider = dynamic(
   () =>
     import('@/shared/ui/components/dashboard-slider/DashboardSlider').then(
@@ -53,7 +50,6 @@ export const HomeDeferredSections = () => {
   return (
     <>
       <VoicesList />
-      <WhatCanDo />
       <DashboardSlider
         title="<span>Monitor Performance.</span> <br/>Optimise Results. In Real Time. "
         subtitle="Track call outcomes, review campaign performance, measure agent effectiveness, <br/>and act on insights — all from one centralised dashboard."

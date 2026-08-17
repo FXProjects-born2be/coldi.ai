@@ -1,148 +1,136 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .hero {
-  width: 100%;
-  display: flex;
-  padding: 80px 165px 124px 165px;
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
-  align-items: center;
-  overflow: hidden;
-
-  @include desktop {
-    padding: 80px 50px 124px 50px;
-    margin-top: -140px;
-  }
-
-  @media (min-height: 900px) and (max-height: 1000px) {
-    margin-top: -50px;
-  }
-
-  @include largeDesktop {
-    padding: 0 0 124px 124px;
-    margin-top: -160px;
-  }
+  padding-top: 196px;
+  padding-bottom: 80px;
 
   @include tablet {
-    flex-direction: column;
-    padding: 60px 0 64px 16px;
+    padding-top: 186px;
+    padding-bottom: 40px;
   }
 
-  @include mobile {
-    padding: 60px 0 64px 16px;
-  }
-
-  &__subtitle {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  &__bg {
     position: absolute;
-    color: #4268ff;
-    text-align: center;
-    font-size: 52px;
-    font-weight: 400;
-    line-height: normal;
-    width: 60%;
+    top: 0;
+    left: 50%;
+    translate: -50% 0;
+    width: min(100%, 1440px);
+    aspect-ratio: 1440 / 676;
+    pointer-events: none;
+    z-index: 0;
+    mask-image: linear-gradient(#000 0%, #000 55%, transparent 100%);
+    -webkit-mask-image: linear-gradient(#000 0%, #000 55%, transparent 100%);
+  }
 
-    @include desktop {
-      font-size: 42px;
-      width: 60%;
-    }
+  &__glow {
+    position: absolute;
+    right: 220px;
+    bottom: -551px;
+    width: 800px;
+    height: 800px;
+    border-radius: 999999px;
+    background: #fff;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 1;
 
     @include tablet {
-      font-size: 32px;
-      z-index: 1;
+      right: 50%;
+      translate: 50% 0;
+      bottom: -40%;
+      width: 70vw;
+      height: 70vw;
+      filter: blur(60px);
     }
   }
 
-  &__video {
-    width: 50%;
+  &__ring {
+    position: absolute;
+    inset: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+    align-items: flex-end;
+    transform-origin: 50% 115%;
+    animation:
+      hero-ring-opacity 2.4s linear infinite,
+      hero-ring-scale 10s linear infinite;
 
-    @include tablet {
-      width: 100%;
+    img {
+      height: auto;
+      max-width: none;
     }
-    video {
-      width: 115%;
-      height: 115%;
-    }
-  }
-
-  &__poster {
-    width: 100%;
-    height: auto;
-    display: block;
-    transform: scale(1.15);
-    z-index: 0;
-    position: relative;
   }
 
   &__content {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    width: 50%;
     position: relative;
-    z-index: 1;
-    @include tablet {
-      width: 100%;
-    }
+    z-index: 2;
   }
 
   &__title {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    color: #000;
+    text-align: center;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 4px;
 
-    h1 {
-      color: #0c1021;
-      font-size: 96px;
-      font-weight: 400;
-      line-height: 120%;
-
-      @include mobile {
-        font-size: 48px;
-      }
-
-      @include mobileSmall {
-        font-size: 32px;
-      }
-
-      @include fourteenInch {
-        font-size: 64px;
-      }
-
-      @include desktop-1300 {
-        font-size: 80px;
-      }
-      @include largeDesktop {
-        font-size: 96px;
-      }
+    @include tablet {
+      font-size: 32px;
+      margin-bottom: 10px;
     }
 
-    .highlighted {
-      background: var(
-        --icon-gradient,
-        linear-gradient(180deg, #4268ff 0%, #5cb0ff 100%)
-      );
+    span {
+      background: linear-gradient(180deg, #2544bd 0%, #4268ff 100%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+  }
 
-    p {
-      color: #50556b;
-      font-size: 20px;
-      font-weight: 400;
-      line-height: normal;
-      @include mobileSmall {
-        font-size: 16px;
-      }
+  &__subtitle {
+    color: #000;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 32px;
+
+    @include tablet {
+      font-size: 14px;
     }
+  }
+}
+
+@keyframes hero-ring-opacity {
+  0%,
+  40% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 0.84;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-ring-scale {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__ring {
+    animation: none;
   }
 }
