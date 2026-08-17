@@ -14,12 +14,19 @@ type Workflow = {
   icon: string;
 };
 
+type ChatMessage = {
+  role: 'user' | 'assistant' | 'status';
+  text: string;
+};
+
 type Industry = {
   id: string;
   label: string;
   href: string;
   cta: string;
   image: string;
+  secondImage: string;
+  messages: ChatMessage[];
   workflows: Workflow[];
 };
 
@@ -29,7 +36,15 @@ const industries: Industry[] = [
     label: 'Insurance',
     href: '/industries/insurance',
     cta: 'Explore Insurance',
-    image: '/images/home/home-built-for-one.png',
+    image: '/images/home/home-built-for-one.jpg',
+    secondImage: '/images/home/home-built-for-one-second.png',
+    messages: [
+      { role: 'user', text: 'When does my policy expire?' },
+      { role: 'assistant', text: 'Let me check. Can you confirm your policy number?' },
+      { role: 'user', text: 'INS-88213' },
+      { role: 'status', text: 'Thinking...' },
+      { role: 'assistant', text: 'Renews August 3rd. Want me to lock in your rate?' },
+    ],
     workflows: [
       {
         id: 'policy-renewals',
@@ -59,6 +74,14 @@ const industries: Industry[] = [
     href: '/industries',
     cta: 'Explore Fintech',
     image: '/images/home/home-built-for-two.png',
+    secondImage: '/images/home/home-built-for-two-second.png',
+    messages: [
+      { role: 'user', text: "My deposit isn't showing up" },
+      { role: 'assistant', text: "Let's check. Amount and method?" },
+      { role: 'user', text: '$500, bank transfer' },
+      { role: 'status', text: 'Thinking...' },
+      { role: 'assistant', text: 'Found it. Processing, live in 10 minutes.' },
+    ],
     workflows: [
       {
         id: 'customer-support',
@@ -88,6 +111,14 @@ const industries: Industry[] = [
     href: '/industries/fx-brokers',
     cta: 'Explore Trading Platforms',
     image: '/images/home/home-built-for-three.png',
+    secondImage: '/images/home/home-built-for-three-second.png',
+    messages: [
+      { role: 'user', text: 'Can I move my payment to next week?' },
+      { role: 'assistant', text: 'Sure. What date works?' },
+      { role: 'user', text: 'The 15th' },
+      { role: 'status', text: 'Thinking...' },
+      { role: 'assistant', text: 'Confirmed. New date is the 15th.' },
+    ],
     workflows: [
       {
         id: 'lead-qualification',
@@ -117,6 +148,14 @@ const industries: Industry[] = [
     href: '/industries/debt-collection',
     cta: 'Explore Debt Collection',
     image: '/images/home/home-built-for-four.png',
+    secondImage: '/images/home/home-built-for-four-second.png',
+    messages: [
+      { role: 'user', text: "Why isn't my verification going through?" },
+      { role: 'assistant', text: 'Have you uploaded a photo ID?' },
+      { role: 'user', text: 'Not yet, only address proof' },
+      { role: 'status', text: 'Thinking...' },
+      { role: 'assistant', text: "That's it. Sending a secure upload link now." },
+    ],
     workflows: [
       {
         id: 'debt-payment-reminders',
@@ -144,20 +183,8 @@ const industries: Industry[] = [
 
 export const HomeBuiltFor = () => {
   const [industryId, setIndustryId] = useState(industries[0].id);
-  const [workflowId, setWorkflowId] = useState(industries[0].workflows[0].id);
 
   const industry = industries.find((item) => item.id === industryId) ?? industries[0];
-  const workflow =
-    industry.workflows.find((item) => item.id === workflowId) ?? industry.workflows[0];
-
-  const selectIndustry = (id: string) => {
-    const nextIndustry = industries.find((item) => item.id === id);
-
-    if (!nextIndustry) return;
-
-    setIndustryId(nextIndustry.id);
-    setWorkflowId(nextIndustry.workflows[0].id);
-  };
 
   return (
     <section className={st.home_built_for}>
@@ -178,7 +205,7 @@ export const HomeBuiltFor = () => {
               role="tab"
               aria-selected={item.id === industry.id}
               className={cn(st.home_built_for__tab, item.id === industry.id && st.active)}
-              onClick={() => selectIndustry(item.id)}
+              onClick={() => setIndustryId(item.id)}
             >
               {item.label}
             </button>
@@ -188,22 +215,12 @@ export const HomeBuiltFor = () => {
         <div className={st.home_built_for__panel}>
           <h3 className={st.home_built_for__content_title}>{industry.label}</h3>
 
-          <div className={st.home_built_for__content_items} role="tablist" aria-label="Workflows">
+          <div className={st.home_built_for__content_items}>
             {industry.workflows.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                role="tab"
-                aria-selected={item.id === workflow.id}
-                className={cn(
-                  st.home_built_for__content_item,
-                  item.id === workflow.id && st.active
-                )}
-                onClick={() => setWorkflowId(item.id)}
-              >
-                <Image src={item.icon} alt="icon" width={20} height={20} />
+              <div key={item.id} className={st.home_built_for__content_item}>
+                <Image src={item.icon} alt="" width={20} height={20} />
                 <span>{item.label}</span>
-              </button>
+              </div>
             ))}
           </div>
 
@@ -214,10 +231,31 @@ export const HomeBuiltFor = () => {
           <div className={st.home_built_for__visual}>
             <Image
               src={industry.image}
-              alt={workflow.label}
+              alt={industry.label}
               width={700}
               height={474}
               layout="lazy"
+              className={st.home_built_for__visual_bg_image}
+            />
+
+            <div key={industry.id} className={st.home_built_for__visual_chat}>
+              {industry.messages.map((item, index) => (
+                <p
+                  key={`${item.role}-${index}`}
+                  className={cn(st.home_built_for__visual_text, st[item.role])}
+                >
+                  {item.text}
+                </p>
+              ))}
+            </div>
+
+            <Image
+              src={industry.secondImage}
+              alt={industry.label}
+              width={1077}
+              height={1077}
+              layout="lazy"
+              className={st.home_built_for__visual_second_image}
             />
           </div>
         </div>

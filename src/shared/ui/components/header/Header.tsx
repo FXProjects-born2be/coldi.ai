@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { cn, getPageHeadingFromPath } from '@/shared/lib/helpers';
 import { HeaderBurgerMenu } from '@/shared/ui/components/header/HeaderBurgerMenu';
@@ -60,7 +61,8 @@ const useCasesItems = [
   },
 ];
 
-export const Header = ({ pathname }: { pathname: string }) => {
+export const Header = ({ pathname: pathnameProp }: { pathname: string }) => {
+  const pathname = usePathname() || pathnameProp;
   const pageHeading = getPageHeadingFromPath(pathname);
   const headerRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);

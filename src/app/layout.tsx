@@ -82,7 +82,6 @@ export default async function RootLayout({
 
   const isLiveDemo = pathname.includes('/live-demo');
   const isAdminRoute = pathname.startsWith('/news-admin');
-  const isNewsArticleRoute = pathname.startsWith('/news/') && pathname !== '/news';
   const shouldLoadMarketingScripts = !isAdminRoute;
   return (
     <html lang="en">
@@ -97,7 +96,7 @@ export default async function RootLayout({
         />
         {shouldLoadMarketingScripts && <DeferredMarketingScripts />}
         {!isLiveDemo && <Header pathname={pathname} />}
-        {!isLiveDemo && !isNewsArticleRoute && <Breadcrumbs pathname={pathname} />}
+        <Breadcrumbs />
         {children}
         {!isLiveDemo && <Footer pathname={pathname} />}
       </body>

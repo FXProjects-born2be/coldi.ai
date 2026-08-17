@@ -82,10 +82,21 @@
     }
 
     span {
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 0;
+      margin-inline: auto;
+      --hero-span-width: 462px;
       background: linear-gradient(180deg, #2544bd 0%, #4268ff 100%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: hero-title-span 2.4s linear forwards;
+
+      @include tablet {
+        --hero-span-width: 246px;
+      }
     }
   }
 
@@ -129,8 +140,26 @@
   }
 }
 
+@keyframes hero-title-span {
+  0% {
+    animation-timing-function: ease;
+    width: 0;
+  }
+
+  62.5%,
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+    width: var(--hero-span-width);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero__ring {
+  .hero__ring,
+  .hero__title span {
     animation: none;
+  }
+
+  .hero__title span {
+    width: auto;
   }
 }

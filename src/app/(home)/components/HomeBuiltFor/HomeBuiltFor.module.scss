@@ -123,10 +123,6 @@
       flex-shrink: 0;
     }
 
-    &.active {
-      border-color: #4268FF;
-    }
-
     @include desktop {
       min-height: 64px;
     }
@@ -147,6 +143,7 @@
 
   &__visual {
     position: relative;
+    z-index: 1;
     overflow: hidden;
     border-radius: 10px;
 
@@ -160,5 +157,262 @@
       order: 3;
       margin-bottom: 24px;
     }
+  }
+
+  &__visual_bg_image {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__visual_chat {
+    padding: 60px;
+
+    &>*:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    @include desktop {
+      width: max-content;
+    }
+
+    @include tablet {
+      padding: 38px;
+    }
+  }
+
+  &__visual_text {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+    opacity: 0;
+    translate: 0 -40px;
+    width: max-content;
+
+    @include tablet {
+      font-size: 12px;
+    }
+
+    &:nth-child(1) {
+      animation:
+        home-built-for-msg-1-opacity 2.4s linear forwards,
+        home-built-for-msg-1-translate 2.999s linear forwards;
+    }
+
+    &:nth-child(2) {
+      animation:
+        home-built-for-msg-2-opacity 2.4s linear forwards,
+        home-built-for-msg-2-translate 2.999s linear forwards;
+    }
+
+    &:nth-child(3) {
+      animation:
+        home-built-for-msg-3-opacity 2.4s linear forwards,
+        home-built-for-msg-3-translate 2.999s linear forwards;
+    }
+
+    &:nth-child(4) {
+      animation:
+        home-built-for-msg-4-opacity 2.4s linear forwards,
+        home-built-for-msg-4-translate 2.999s linear forwards;
+    }
+
+    &:nth-child(5) {
+      animation:
+        home-built-for-msg-5-opacity 2.4s linear forwards,
+        home-built-for-msg-5-translate 2.999s linear forwards;
+    }
+
+    &.user {
+      color: #fff;
+      border-radius: 13307.492px;
+      background: rgba(255, 255, 255, 0.00);
+      box-shadow: 0 0 0 0 #FFF inset, 0 0 0 1.331px rgba(255, 255, 255, 0.60) inset;
+      padding: 14px 18px;
+      margin-left: auto;
+
+      @include tablet {
+        padding: 8px 11px;
+      }
+    }
+
+    &.assistant {
+      border-radius: 26.618px;
+      background: #fff;
+      box-shadow: 0 0 0 0.665px rgba(0, 0, 0, 0.08), 0 2.232px 4.464px 0 rgba(0, 0, 0, 0.04);
+      padding: 14px 18px;
+      max-width: 320px;
+      width: 100%;
+
+      @include tablet {
+        padding: 8px 11px;
+      }
+    }
+
+    &.status {
+      color: #FFF;
+    }
+  }
+
+  &__visual_second_image {
+    width: 359px;
+    height: 359px;
+
+    @include desktop {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: -23%;
+      z-index: -1;
+    }
+
+    @include tablet {
+      width: 267px;
+      height: 267px;
+      margin: 0 auto -70px auto;
+    }
+  }
+}
+
+@keyframes home-built-for-msg-1-opacity {
+  0% {
+    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+    opacity: 0;
+  }
+
+  16.667%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes home-built-for-msg-1-translate {
+  0% {
+    animation-timing-function: cubic-bezier(0.05, 0.4, 0.5, 1);
+    translate: 0 -40px;
+  }
+
+  20.007%,
+  100% {
+    translate: 0 0;
+  }
+}
+
+@keyframes home-built-for-msg-2-opacity {
+  0%,
+  24.958% {
+    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+    opacity: 0;
+  }
+
+  41.625%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes home-built-for-msg-2-translate {
+  0%,
+  19.973% {
+    animation-timing-function: cubic-bezier(0.05, 0.4, 0.5, 1);
+    translate: 0 -40px;
+  }
+
+  39.98%,
+  100% {
+    translate: 0 0;
+  }
+}
+
+@keyframes home-built-for-msg-3-opacity {
+  0%,
+  49.875% {
+    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+    opacity: 0;
+  }
+
+  66.542%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes home-built-for-msg-3-translate {
+  0%,
+  39.913% {
+    animation-timing-function: cubic-bezier(0.05, 0.4, 0.5, 1);
+    translate: 0 -40px;
+  }
+
+  59.92%,
+  100% {
+    translate: 0 0;
+  }
+}
+
+@keyframes home-built-for-msg-4-opacity {
+  0%,
+  74.875% {
+    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+    opacity: 0;
+  }
+
+  91.542%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes home-built-for-msg-4-translate {
+  0%,
+  59.92% {
+    animation-timing-function: cubic-bezier(0.05, 0.4, 0.5, 1);
+    translate: 0 -40px;
+  }
+
+  79.927%,
+  100% {
+    translate: 0 0;
+  }
+}
+
+@keyframes home-built-for-msg-5-opacity {
+  0%,
+  99.958% {
+    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes home-built-for-msg-5-translate {
+  0%,
+  79.993% {
+    animation-timing-function: cubic-bezier(0.05, 0.4, 0.5, 1);
+    translate: 0 -40px;
+  }
+
+  100% {
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home_built_for__visual_text {
+    opacity: 1;
+    translate: 0;
+    animation: none;
   }
 }

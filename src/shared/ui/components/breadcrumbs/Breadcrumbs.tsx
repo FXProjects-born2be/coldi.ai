@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import st from './Breadcrumbs.module.scss';
 
@@ -38,12 +41,19 @@ const segmentLabels: Record<string, string> = {
 };
 
 type BreadcrumbsProps = {
-  pathname: string;
+  pathname?: string;
   currentLabel?: string;
 };
 
-export const Breadcrumbs = ({ pathname, currentLabel }: BreadcrumbsProps) => {
-  if (pathname === '/') return null;
+export const Breadcrumbs = ({ pathname: pathnameProp, currentLabel }: BreadcrumbsProps) => {
+  const clientPathname = usePathname();
+  const pathname = pathnameProp ?? clientPathname ?? '';
+
+  if (!pathname || pathname === '/') return null;
+  if (pathname.includes('/live-demo')) return null;
+
+  const isNewsArticle = pathname.startsWith('/news/') && pathname !== '/news';
+  if (isNewsArticle && !currentLabel) return null;
 
   const segments = pathname.split('/').filter(Boolean);
 
