@@ -4,6 +4,7 @@ import Script from 'next/script';
 
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 
 import { Breadcrumbs } from '@/shared/ui/components/breadcrumbs';
 import { DeferredMarketingScripts } from '@/shared/ui/components/deferred-marketing-scripts/DeferredMarketingScripts';
@@ -57,17 +58,17 @@ export const metadata: Metadata = {
   },
   title: {
     template: '%s | Coldi',
-    default: 'AI Voice Agents and Call Center for Business | Coldi',
+    default: 'Fully Managed AI Voice Agents for Fintech | Coldi AI',
   },
   description:
-    "Boost your customer service with Coldi's AI call center. Try our AI voice agents to handle calls, bookings, and support – fast, efficient, and always on.",
+    'Automate customer conversations with AI voice agents built for FinTech. Handle calls, qualify leads, collect payments, and scale customer operations.',
   openGraph: {
     title: {
       template: '%s | Coldi',
-      default: 'AI Voice Agents and Call Center for Business | Coldi',
+      default: 'Fully Managed AI Voice Agents for Fintech | Coldi AI',
     },
     description:
-      "Boost your customer service with Coldi's AI call center. Try our AI voice agents to handle calls, bookings, and support – fast, efficient, and always on.",
+      'Automate customer conversations with AI voice agents built for FinTech. Handle calls, qualify leads, collect payments, and scale customer operations.',
     images: 'https://coldi.ai/images/meta.png',
   },
 };
@@ -75,7 +76,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   const headersList = await headers();
   const pathname = headersList.get('x-pathname') ?? '';

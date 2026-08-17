@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/news',
   },
-  title: 'AI Calling & Industry News',
+  title: 'Coldi News: Guides & Industry Insights on AI in Fintech',
   description:
-    'Stay informed with the latest news and updates on AI calling, AI call center software, and AI voice agents. Explore updates on AI call solutions shaping how businesses handle calls.',
+    'Explore AI voice agent trends, use cases and industry insights for call centers, insurance, healthcare and real estate. Read now.',
   openGraph: {
-    title: 'AI Calling & Industry News',
+    title: 'Coldi News: Guides & Industry Insights on AI in Fintech',
     description:
-      'Stay informed with the latest news and updates on AI calling, AI call center software, and AI voice agents. Explore updates on AI call solutions shaping how businesses handle calls.',
+      'Explore AI voice agent trends, use cases and industry insights for call centers, insurance, healthcare and real estate. Read now.',
     images: 'https://coldi.ai/images/meta.png',
   },
 };
