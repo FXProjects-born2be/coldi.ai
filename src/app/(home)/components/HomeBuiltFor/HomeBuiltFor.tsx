@@ -73,7 +73,7 @@ const industries: Industry[] = [
     label: 'Fintech',
     href: '/industries',
     cta: 'Explore Fintech',
-    image: '/images/home/home-built-for-two.png',
+    image: '/images/home/home-built-for-two.jpg',
     secondImage: '/images/home/home-built-for-two-second.png',
     messages: [
       { role: 'user', text: "My deposit isn't showing up" },
@@ -110,7 +110,7 @@ const industries: Industry[] = [
     label: 'Trading Platforms',
     href: '/industries/fx-brokers',
     cta: 'Explore Trading Platforms',
-    image: '/images/home/home-built-for-three.png',
+    image: '/images/home/home-built-for-three.jpg',
     secondImage: '/images/home/home-built-for-three-second.png',
     messages: [
       { role: 'user', text: 'Can I move my payment to next week?' },
@@ -147,7 +147,7 @@ const industries: Industry[] = [
     label: 'Debt Collection',
     href: '/industries/debt-collection',
     cta: 'Explore Debt Collection',
-    image: '/images/home/home-built-for-four.png',
+    image: '/images/home/home-built-for-four.jpg',
     secondImage: '/images/home/home-built-for-four-second.png',
     messages: [
       { role: 'user', text: "Why isn't my verification going through?" },
