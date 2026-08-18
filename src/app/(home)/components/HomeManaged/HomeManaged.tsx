@@ -49,22 +49,19 @@ const tabs: ManagedTab[] = [
 
 export const HomeManaged = () => {
   const [activeId, setActiveId] = useState(tabs[0].id);
-  const [paused, setPaused] = useState(false);
 
   const activeTab = tabs.find((tab) => tab.id === activeId) ?? tabs[0];
 
   useEffect(() => {
-    if (paused) return;
-
     const timer = window.setInterval(() => {
       setActiveId((current) => {
         const index = tabs.findIndex((tab) => tab.id === current);
         return tabs[(index + 1) % tabs.length].id;
       });
-    }, 4000);
+    }, 2000);
 
     return () => window.clearInterval(timer);
-  }, [activeId, paused]);
+  }, [activeId]);
 
   return (
     <section className={st.home_managed}>
@@ -77,11 +74,7 @@ export const HomeManaged = () => {
           </p>
         </div>
 
-        <div
-          className={st.home_managed__panel}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
+        <div className={st.home_managed__panel}>
           <div className={st.home_managed__tabs} role="tablist" aria-label="Managed features">
             {tabs.map((tab) => (
               <button

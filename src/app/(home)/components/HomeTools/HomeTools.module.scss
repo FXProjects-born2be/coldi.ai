@@ -45,11 +45,11 @@
     gap: 40px;
     align-items: center;
     width: max-content;
-    animation: home-tools-scroll 30s linear infinite;
+    animation: home-tools-scroll 50s linear infinite;
 
     &.reverse {
       animation-name: home-tools-scroll-reverse;
-      animation-duration: 35s;
+      animation-duration: 50s;
     }
   }
 

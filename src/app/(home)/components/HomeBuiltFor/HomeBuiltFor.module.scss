@@ -49,12 +49,13 @@
     border-radius: 14px;
     padding: 11px 20px;
     color: #000;
-    font-size: 20px;
+    font-size: 14px;
     line-height: 1.4;
     transition: color 0.2s ease, border-color 0.2s ease;
 
     &.active {
       color: #4268FF;
+      font-size: 20px;
       border-color: rgba(0, 0, 0, 0.20);
 
     }
@@ -204,32 +205,32 @@
 
     &:nth-child(1) {
       animation:
-        home-built-for-msg-1-opacity 2.4s linear forwards,
-        home-built-for-msg-1-translate 2.999s linear forwards;
+        home-built-for-msg-1-opacity 10s linear infinite,
+        home-built-for-msg-1-translate 10s linear infinite;
     }
 
     &:nth-child(2) {
       animation:
-        home-built-for-msg-2-opacity 2.4s linear forwards,
-        home-built-for-msg-2-translate 2.999s linear forwards;
+        home-built-for-msg-2-opacity 10s linear infinite,
+        home-built-for-msg-2-translate 10s linear infinite;
     }
 
     &:nth-child(3) {
       animation:
-        home-built-for-msg-3-opacity 2.4s linear forwards,
-        home-built-for-msg-3-translate 2.999s linear forwards;
+        home-built-for-msg-3-opacity 10s linear infinite,
+        home-built-for-msg-3-translate 10s linear infinite;
     }
 
     &:nth-child(4) {
       animation:
-        home-built-for-msg-4-opacity 2.4s linear forwards,
-        home-built-for-msg-4-translate 2.999s linear forwards;
+        home-built-for-msg-4-opacity 10s linear infinite,
+        home-built-for-msg-4-translate 10s linear infinite;
     }
 
     &:nth-child(5) {
       animation:
-        home-built-for-msg-5-opacity 2.4s linear forwards,
-        home-built-for-msg-5-translate 2.999s linear forwards;
+        home-built-for-msg-5-opacity 10s linear infinite,
+        home-built-for-msg-5-translate 10s linear infinite;
     }
 
     &.user {
@@ -263,15 +264,59 @@
     }
   }
 
+  &__visual_dots {
+    display: inline-flex;
+
+    span {
+      animation: home-built-for-thinking-dot-1 10s linear infinite;
+
+      &:nth-child(2) {
+        animation-name: home-built-for-thinking-dot-2;
+      }
+
+      &:nth-child(3) {
+        animation-name: home-built-for-thinking-dot-3;
+      }
+    }
+  }
+
   &__visual_second_image {
+    position: relative;
+    overflow: hidden;
     width: 359px;
     height: 359px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: 0 4px 20px 0 rgba(255, 255, 255, 0.5) inset;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 130%;
+      height: 130%;
+      max-width: none;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      animation: home-built-for-second-float 2.999s linear infinite;
+    }
 
     @include desktop {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      right: -23%;
+      right: -22%;
       z-index: -1;
     }
 
@@ -279,6 +324,58 @@
       width: 267px;
       height: 267px;
       margin: 0 auto -70px auto;
+    }
+  }
+
+  &__visual_second_image_block {
+    position: relative;
+    z-index: 2;
+    width: 122px;
+    height: 122px;
+    border-radius: 814px;
+    border: 1px solid rgba(255, 255, 255, 0.40);
+    background: transparent;
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(22px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+
+    &>* {
+      width: 4px;
+      border-radius: 99px;
+      background: #F6F6F6;
+      transform-origin: center;
+    }
+
+    &>*:nth-child(odd) {
+      height: 24px;
+    }
+
+    &>*:nth-child(even) {
+      height: 36px;
+    }
+
+    &>*:nth-child(1) {
+      animation: home-built-for-bar-1 2.4s linear infinite;
+    }
+
+    &>*:nth-child(2) {
+      animation: home-built-for-bar-2 2.4s linear infinite;
+    }
+
+    &>*:nth-child(3) {
+      animation: home-built-for-bar-3 2.4s linear infinite;
+    }
+
+    &>*:nth-child(4) {
+      animation: home-built-for-bar-4 2.4s linear infinite;
+    }
+
+    &>*:nth-child(5) {
+      animation: home-built-for-bar-5 2.4s linear infinite;
     }
   }
 }
@@ -289,7 +386,7 @@
     opacity: 0;
   }
 
-  16.667%,
+  4%,
   100% {
     opacity: 1;
   }
@@ -301,7 +398,7 @@
     translate: 0 -40px;
   }
 
-  20.007%,
+  6%,
   100% {
     translate: 0 0;
   }
@@ -309,12 +406,12 @@
 
 @keyframes home-built-for-msg-2-opacity {
   0%,
-  24.958% {
+  20% {
     animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
     opacity: 0;
   }
 
-  41.625%,
+  24%,
   100% {
     opacity: 1;
   }
@@ -322,12 +419,12 @@
 
 @keyframes home-built-for-msg-2-translate {
   0%,
-  19.973% {
+  20% {
     animation-timing-function: cubic-bezier(0.05, 0.4, 0.5, 1);
     translate: 0 -40px;
   }
 
-  39.98%,
+  26%,
   100% {
     translate: 0 0;
   }
@@ -335,12 +432,12 @@
 
 @keyframes home-built-for-msg-3-opacity {
   0%,
-  49.875% {
+  40% {
     animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
     opacity: 0;
   }
 
-  66.542%,
+  44%,
   100% {
     opacity: 1;
   }
@@ -348,12 +445,12 @@
 
 @keyframes home-built-for-msg-3-translate {
   0%,
-  39.913% {
+  40% {
     animation-timing-function: cubic-bezier(0.05, 0.4, 0.5, 1);
     translate: 0 -40px;
   }
 
-  59.92%,
+  46%,
   100% {
     translate: 0 0;
   }
@@ -361,12 +458,12 @@
 
 @keyframes home-built-for-msg-4-opacity {
   0%,
-  74.875% {
+  60% {
     animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
     opacity: 0;
   }
 
-  91.542%,
+  64%,
   100% {
     opacity: 1;
   }
@@ -374,12 +471,12 @@
 
 @keyframes home-built-for-msg-4-translate {
   0%,
-  59.92% {
+  60% {
     animation-timing-function: cubic-bezier(0.05, 0.4, 0.5, 1);
     translate: 0 -40px;
   }
 
-  79.927%,
+  66%,
   100% {
     translate: 0 0;
   }
@@ -387,11 +484,12 @@
 
 @keyframes home-built-for-msg-5-opacity {
   0%,
-  99.958% {
+  80% {
     animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
     opacity: 0;
   }
 
+  84%,
   100% {
     opacity: 1;
   }
@@ -399,9 +497,136 @@
 
 @keyframes home-built-for-msg-5-translate {
   0%,
-  79.993% {
+  80% {
     animation-timing-function: cubic-bezier(0.05, 0.4, 0.5, 1);
     translate: 0 -40px;
+  }
+
+  86%,
+  100% {
+    translate: 0 0;
+  }
+}
+
+@keyframes home-built-for-second-float {
+  0% {
+    translate: 0 0;
+  }
+
+  3.334% {
+    translate: -0.623px -0.108px;
+  }
+
+  6.669% {
+    translate: -1.166px -0.426px;
+  }
+
+  10.003% {
+    translate: -1.607px -0.942px;
+  }
+
+  13.338% {
+    translate: -1.905px -1.637px;
+  }
+
+  16.672% {
+    translate: -2px -2.482px;
+  }
+
+  20.007% {
+    translate: -1.615px -3.442px;
+  }
+
+  23.341% {
+    translate: -0.608px -4.474px;
+  }
+
+  26.676% {
+    translate: 0.642px -5.531px;
+  }
+
+  30.01% {
+    translate: 1.636px -6.563px;
+  }
+
+  33.344% {
+    translate: 2px -7.522px;
+  }
+
+  36.679% {
+    translate: 1.901px -8.367px;
+  }
+
+  40.013% {
+    translate: 1.619px -9.061px;
+  }
+
+  43.348% {
+    translate: 1.178px -9.576px;
+  }
+
+  46.682% {
+    translate: 0.619px -9.893px;
+  }
+
+  50.017% {
+    translate: -0.003px -10px;
+  }
+
+  53.351% {
+    translate: -0.625px -9.891px;
+  }
+
+  56.686% {
+    translate: -1.183px -9.572px;
+  }
+
+  60.02% {
+    translate: -1.622px -9.055px;
+  }
+
+  63.354% {
+    translate: -1.902px -8.359px;
+  }
+
+  66.689% {
+    translate: -2px -7.513px;
+  }
+
+  70.023% {
+    translate: -1.629px -6.553px;
+  }
+
+  73.358% {
+    translate: -0.63px -5.52px;
+  }
+
+  76.692% {
+    translate: 0.62px -4.464px;
+  }
+
+  80.027% {
+    translate: 1.622px -3.432px;
+  }
+
+  83.361% {
+    translate: 2px -2.473px;
+  }
+
+  86.696% {
+    translate: 1.903px -1.629px;
+  }
+
+  90.03% {
+    translate: 1.603px -0.936px;
+  }
+
+  93.364% {
+    translate: 1.161px -0.421px;
+  }
+
+  96.699% {
+    translate: 0.617px -0.105px;
   }
 
   100% {
@@ -409,10 +634,204 @@
   }
 }
 
+@keyframes home-built-for-bar-1 {
+  0%,
+  25%,
+  50%,
+  100% {
+    animation-timing-function: ease-in-out;
+    scale: 1 1;
+  }
+
+  12.5% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.4;
+  }
+
+  37.5% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.6;
+  }
+}
+
+@keyframes home-built-for-bar-2 {
+  0%,
+  50%,
+  100% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.5;
+  }
+
+  10% {
+    animation-timing-function: ease-in-out;
+    scale: 1 1;
+  }
+
+  22.5% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.35;
+  }
+
+  35% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.85;
+  }
+}
+
+@keyframes home-built-for-bar-3 {
+  0%,
+  50%,
+  100% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.7;
+  }
+
+  11% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.3;
+  }
+
+  24% {
+    animation-timing-function: ease-in-out;
+    scale: 1 1;
+  }
+
+  36% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.4;
+  }
+}
+
+@keyframes home-built-for-bar-4 {
+  0%,
+  50%,
+  100% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.4;
+  }
+
+  9% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.9;
+  }
+
+  21% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.3;
+  }
+
+  34% {
+    animation-timing-function: ease-in-out;
+    scale: 1 1;
+  }
+}
+
+@keyframes home-built-for-bar-5 {
+  0%,
+  50%,
+  100% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.6;
+  }
+
+  14% {
+    animation-timing-function: ease-in-out;
+    scale: 1 1;
+  }
+
+  26% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.5;
+  }
+
+  39% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.35;
+  }
+}
+
+@keyframes home-built-for-thinking-dot-1 {
+  0%,
+  60% {
+    opacity: 0.2;
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.2;
+  }
+
+  77% {
+    opacity: 1;
+  }
+
+  80%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes home-built-for-thinking-dot-2 {
+  0%,
+  62% {
+    opacity: 0.2;
+  }
+
+  67% {
+    opacity: 1;
+  }
+
+  72% {
+    opacity: 0.2;
+  }
+
+  79% {
+    opacity: 1;
+  }
+
+  80%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes home-built-for-thinking-dot-3 {
+  0%,
+  64% {
+    opacity: 0.2;
+  }
+
+  69% {
+    opacity: 1;
+  }
+
+  74% {
+    opacity: 0.2;
+  }
+
+  80%,
+  100% {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home_built_for__visual_text {
     opacity: 1;
     translate: 0;
+    animation: none;
+  }
+
+  .home_built_for__visual_dots span {
+    animation: none;
+    opacity: 1;
+  }
+
+  .home_built_for__visual_second_image img,
+  .home_built_for__visual_second_image_block > * {
     animation: none;
   }
 }

@@ -38,29 +38,6 @@ const industriesItems = [
   },
 ];
 
-const useCasesItems = [
-  {
-    label: 'BPO (Silverbell Group)',
-    href: '/silverbellgroup',
-  },
-  {
-    label: 'Clarity Global',
-    href: '/clarity-global',
-  },
-  {
-    label: 'Residential Service (Stone Electric)',
-    href: '/residential-service-automation',
-  },
-  {
-    label: 'Agro-Industry',
-    href: '/agro-industry',
-  },
-  {
-    label: 'HVAC Leads',
-    href: '/hvac-leads',
-  },
-];
-
 export const Header = ({ pathname: pathnameProp }: { pathname: string }) => {
   const pathname = usePathname() || pathnameProp;
   const pageHeading = getPageHeadingFromPath(pathname);
@@ -108,8 +85,6 @@ export const Header = ({ pathname: pathnameProp }: { pathname: string }) => {
 
 const Navigation = ({ pathname }: { pathname: string }) => {
   const pageHeading = getPageHeadingFromPath(pathname);
-  const isUseCasesPath =
-    pathname.startsWith('/use-cases') || useCasesItems.some((item) => item.href === pathname);
 
   return (
     <ul
@@ -256,28 +231,28 @@ const Navigation = ({ pathname }: { pathname: string }) => {
           ))}
         </ul>
       </li>
-      <li
-        className={cn(st.hasDropdown, {
-          [st.active]: isUseCasesPath,
-        })}
-        itemProp="name"
-      >
-        <span className={st.navLabel}>
-          <span>Use Cases</span>
-          <span className={st.dropdownArrow}>
-            <Image src="/icons/header/arrow.svg" alt={pageHeading} width={16} height={8} />
-          </span>
-        </span>
-        <ul className={st.dropdown}>
-          {useCasesItems.map((item) => (
-            <li key={item.href} itemProp="name">
-              <Link className={st.dropdownLink} href={item.href} itemProp="url" prefetch={false}>
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </li>
+      {/*<li*/}
+      {/*  className={cn(st.hasDropdown, {*/}
+      {/*    [st.active]: isUseCasesPath,*/}
+      {/*  })}*/}
+      {/*  itemProp="name"*/}
+      {/*>*/}
+      {/*  <span className={st.navLabel}>*/}
+      {/*    <span>Use Cases</span>*/}
+      {/*    <span className={st.dropdownArrow}>*/}
+      {/*      <Image src="/icons/header/arrow.svg" alt={pageHeading} width={16} height={8} />*/}
+      {/*    </span>*/}
+      {/*  </span>*/}
+      {/*  <ul className={st.dropdown}>*/}
+      {/*    {useCasesItems.map((item) => (*/}
+      {/*      <li key={item.href} itemProp="name">*/}
+      {/*        <Link className={st.dropdownLink} href={item.href} itemProp="url" prefetch={false}>*/}
+      {/*          {item.label}*/}
+      {/*        </Link>*/}
+      {/*      </li>*/}
+      {/*    ))}*/}
+      {/*  </ul>*/}
+      {/*</li>*/}
     </ul>
   );
 };

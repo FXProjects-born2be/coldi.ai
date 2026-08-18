@@ -1,14 +1,16 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .home_featured_on {
-  padding-block: 136px;
+  padding-block: 40px;
+
+  @include desktop {
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+  }
 
   img {
     width: auto;
-  }
-
-  @include tablet {
-    padding-block: 40px;
   }
 
   &__container {
@@ -41,7 +43,7 @@
     display: flex;
     align-items: center;
     width: max-content;
-    animation: home-featured-on-scroll 30s linear infinite;
+    animation: home-featured-on-scroll 50s linear infinite;
   }
 
   &__images:hover .home_featured_on__track {

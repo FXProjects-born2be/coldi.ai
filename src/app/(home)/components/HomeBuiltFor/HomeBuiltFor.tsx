@@ -244,19 +244,38 @@ export const HomeBuiltFor = () => {
                   key={`${item.role}-${index}`}
                   className={cn(st.home_built_for__visual_text, st[item.role])}
                 >
-                  {item.text}
+                  {item.role === 'status' ? (
+                    <>
+                      {item.text.replace(/\.+$/, '')}
+                      <span className={st.home_built_for__visual_dots} aria-hidden>
+                        <span>.</span>
+                        <span>.</span>
+                        <span>.</span>
+                      </span>
+                    </>
+                  ) : (
+                    item.text
+                  )}
                 </p>
               ))}
             </div>
 
-            <Image
-              src={industry.secondImage}
-              alt={industry.label}
-              width={1077}
-              height={1077}
-              layout="lazy"
-              className={st.home_built_for__visual_second_image}
-            />
+            <div className={st.home_built_for__visual_second_image}>
+              <Image
+                src={industry.secondImage}
+                alt={industry.label}
+                width={1077}
+                height={1077}
+                layout="lazy"
+              />
+              <div className={st.home_built_for__visual_second_image_block}>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

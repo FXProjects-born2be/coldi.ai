@@ -184,5 +184,9 @@
     padding: 12px 20px;
     color: #fff;
     border-radius: 9999px;
+
+    @include tablet {
+      display: none;
+    }
   }
 }

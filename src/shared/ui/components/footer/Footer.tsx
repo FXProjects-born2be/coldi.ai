@@ -56,6 +56,15 @@ export const Footer = ({ pathname }: { pathname: string }) => {
   return !requestRoutes.has(pathname) ? (
     <>
       <footer className={st.footer}>
+        <Image
+          src="/images/footer-top.png"
+          alt={pageHeading}
+          width={1440}
+          height={254}
+          loading={'lazy'}
+          className={st.footer__top_image}
+        />
+
         <div className={cn('container', st.footer__container)}>
           <div className={st.footer__inner}>
             <div className={st.footer__top}>
@@ -162,6 +171,15 @@ export const Footer = ({ pathname }: { pathname: string }) => {
             </div>
           </div>
         </div>
+
+        <Image
+          src="/images/footer-bottom.png"
+          alt={pageHeading}
+          width={1440}
+          height={253}
+          loading={'lazy'}
+          className={st.footer__bottom_image}
+        />
       </footer>
     </>
   ) : null;

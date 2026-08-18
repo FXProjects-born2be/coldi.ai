@@ -2,8 +2,23 @@
 
 .footer {
     padding-block: 80px;
-    background: url('/images/footer.png') no-repeat center top;
-    background-size: cover;
+    position: relative;
+    z-index: 1;
+
+    &__top_image,
+    &__bottom_image {
+        position: absolute;
+        z-index: -1;
+        left: 0;
+    }
+
+    &__top_image {
+        top: 0;
+    }
+
+    &__bottom_image {
+        bottom: 0;
+    }
 
     &__container {
         max-width: 1328px !important;
