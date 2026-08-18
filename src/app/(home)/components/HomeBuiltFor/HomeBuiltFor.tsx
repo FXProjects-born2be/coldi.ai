@@ -49,12 +49,12 @@ const industries: Industry[] = [
       {
         id: 'policy-renewals',
         label: 'Policy Renewals',
-        icon: '/images/icons/payment-reminders.svg',
+        icon: '/images/icons/policy-renewals.png',
       },
       {
         id: 'claims-follow-up',
         label: 'Claims Follow-up',
-        icon: '/images/icons/payment-reminders.svg',
+        icon: '/images/icons/claims-follow-up.png',
       },
       {
         id: 'quote-qualification',
