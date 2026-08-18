@@ -48,8 +48,20 @@ const organizationStructuredData = {
   ],
 };
 
+const getMetadataBase = () => {
+  if (process.env.VERCEL_GIT_COMMIT_REF === 'dev') {
+    return new URL('https://staging.coldi.ai');
+  }
+
+  if (process.env.VERCEL_ENV === 'production') {
+    return new URL('https://coldi.ai');
+  }
+
+  return new URL('http://localhost:3000');
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://coldi.ai'),
+  metadataBase: getMetadataBase(),
   verification: {
     google: 'xwxPBu6sQqKwZ2sx5fphyZV8rM-oyAvHww_SZNUXevQ',
   },
