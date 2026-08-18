@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'High-Volume Lead Re-engagement for SaaS and HVAC',
     description:
       'Re-engage cold SaaS & HVAC leads with ultra-low latency AI. Handle objections automatically and send Calendly links via SMS to book more software demos.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

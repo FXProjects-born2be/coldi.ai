@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Listen to Recorded Calls',
     description:
       'Discover how Coldi’s AI voice sounds in action — a smooth, natural conversation that demonstrates real-world engagement and response flow.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

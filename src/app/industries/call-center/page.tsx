@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'AI for Call Centers: Reduce Costs & Scale Call Volume',
     description:
       'Discover how AI for call centers reduces costs and handles higher call volumes with AI call center agents, bots, and voice-based automation that improves efficiency and customer support.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: 'VoIP Phone Service for Business',
     description:
       'A modern VoIP phone service with AI-powered call handling, seamless integrations, global coverage, and fully managed deployment by Coldi.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

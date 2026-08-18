@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: 'AI Inbound Calling Solution for Businesses',
     description:
       'AI inbound calling that answers, routes, and manages inbound calls automatically. A smarter inbound answering service and contact center solution powered by voice AI.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

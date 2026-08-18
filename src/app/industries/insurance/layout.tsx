@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'AI Insurance Agents: Voice & Claims Automation | Coldi',
     description:
       'Automate policyholder calls and claims with AI voice agents. 24/7 multilingual support with CRM integration. Streamline your operations today.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

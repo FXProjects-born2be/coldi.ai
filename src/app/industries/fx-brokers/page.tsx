@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'AI Agents for FX Brokers More FTDs & Retention',
     description:
       'Convert more leads and retain more traders with AI voice agents built for FX brokers. Instant calls, reactivation, and 30+ languages. Book a demo.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

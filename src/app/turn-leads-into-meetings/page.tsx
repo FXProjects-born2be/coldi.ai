@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Turn Leads into Meetings',
     description: '',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

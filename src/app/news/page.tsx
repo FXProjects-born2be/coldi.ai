@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Coldi News: Guides & Industry Insights on AI in Fintech',
     description:
       'Explore AI voice agent trends, use cases and industry insights for call centers, insurance, healthcare and real estate. Read now.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

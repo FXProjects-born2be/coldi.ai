@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Residential Service Use case',
     description:
       'Case Study: Automating electrical service calls with AI. Learn how ZIP-code validation and live scheduling transform inbound lead management.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

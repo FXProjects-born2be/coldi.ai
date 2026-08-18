@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     },
     description:
       'Automate customer conversations with AI voice agents built for FinTech. Handle calls, qualify leads, collect payments, and scale customer operations.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

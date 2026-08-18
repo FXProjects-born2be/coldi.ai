@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: 'Custom AI Agent Development Services',
     description:
       'Expert AI agent development for business automation. We design, build, and deploy custom conversational agents and voice solutions with end-to-end delivery.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

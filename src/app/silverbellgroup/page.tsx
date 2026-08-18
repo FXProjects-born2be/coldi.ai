@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'AI Operational Excellence: Silverbell Group Case Study',
     description:
       'Discover how Coldi and Silverbell Group built a strategic partnership through AI integration. Our Autonomous AI Agent provides 24/7 expert support and proactive appointment setting to enhance global service standards.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

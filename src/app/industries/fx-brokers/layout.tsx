@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'AI Voice Agents for FX Brokers & Trading Platforms | Coldi',
     description:
       'Instantly call new leads, reactivate dormant traders, and automate broker support with AI voice agents built for trading platforms and FX teams.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Clarity Global use case',
     description:
       'How Clarity Global is eliminating manual follow-up work across hundreds of client reviews and cutting response lag to zero.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

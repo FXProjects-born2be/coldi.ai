@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: 'Outbound Calling AI Agents for Sales Teams',
     description:
       'AI outbound calling agents that qualify leads, book meetings, and scale sales outreach. Automate outbound calls and increase contact rates.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

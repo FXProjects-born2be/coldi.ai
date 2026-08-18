@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Lead Qualification in the Global Agro-Industry',
     description:
       'Scale your agro-industrial sales with Sara, an AI assistant built to screen inbound inquiries, capture structured data, and schedule high-value turnkey projects.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

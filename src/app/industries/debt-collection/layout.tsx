@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'AI Voice Agents for Debt Collection Software',
     description:
       'AI debt collection software that automates borrower communication, payment reminders, and recovery workflows. Scale credit and debit collection services with AI voice agents.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: 'AI Customer Service & Support Solutions',
     description:
       'Deploy end-to-end AI customer service agents that work in the real world. Automate inquiries 24/7 with seamless system integration and full-cycle support.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

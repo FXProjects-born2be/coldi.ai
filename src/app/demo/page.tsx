@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Coldi Demo – Try Real AI Call Agents Live',
     description:
       'Test Coldi’s AI voice agents in real conversations. Choose a voice, receive a live call, or listen to recorded demos across different scenarios.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

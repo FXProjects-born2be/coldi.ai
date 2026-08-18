@@ -78,7 +78,7 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                     loading={'lazy'}
                   />
                 </a>
-                <p className={st.footer__subtitle}>Brand-Tuned Ai Talkers. Always On.</p>
+                <p className={st.footer__subtitle}>Making voice AI work for Fintech</p>
 
                 <ul
                   className={st.footer__contact}

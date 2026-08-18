@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Request a Call or Demo',
     description: 'Request a call today and see how Coldi’s AI agents automate your phone outreach.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

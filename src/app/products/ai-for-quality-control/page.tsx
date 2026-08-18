@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: 'Best AI Voice Agent Solutions for Quality Control',
     description:
       'Automate your inspections with the best AI voice agent solutions and vision systems. Coldi optimizes quality control in automated AI processes to eliminate waste.',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 

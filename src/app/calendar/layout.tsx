@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Book a demo with us',
     description:
       'Book a demo to see Coldi in action. Our AI voice agents automate bookings 24/7 and sync with your tools to scale your business. Start scheduling smarter today',
-    images: 'https://coldi.ai/images/meta.png',
+    images: '/images/meta.png',
   },
 };
 
