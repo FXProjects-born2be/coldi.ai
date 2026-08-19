@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import st from './Hero.module.scss';
+import { HeroBookDemo } from './HeroBookDemo';
 import { HeroRotatingPhrase } from './HeroRotatingPhrase';
 
 const rings = [
@@ -57,11 +57,7 @@ export const Hero = () => {
           Production-ready AI voice agents, fully managed from day one.
         </p>
 
-        <div className="text-center">
-          <Link href="/calendar" className="btn btn-primary d-inline-block">
-            Book a Demo
-          </Link>
-        </div>
+        <HeroBookDemo />
       </div>
     </section>
   );

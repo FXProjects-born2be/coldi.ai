@@ -36,20 +36,9 @@ section {
 }
 
 button {
-  all: unset;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  user-select: none;
-  text-align: center;
-  border: none;
-  background: none;
-  font: inherit;
+  background: transparent;
   padding: 0;
-  margin: 0;
-  outline: none;
-  box-sizing: border-box;
+  font-family: inherit;
 }
 
 button::-moz-focus-inner {

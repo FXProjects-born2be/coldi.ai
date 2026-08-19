@@ -2,6 +2,13 @@
 
 .burger {
   display: none;
+  color: #2544BD;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  padding: 11px 19px;
+  border-radius: 9999px;
+  border: 1px solid #2544BD;
 
   @include tablet {
     display: block;

@@ -14,11 +14,14 @@
   &__title {
     font-size: 40px;
     line-height: 1.2;
-    text-align: center;
     margin-bottom: 18px;
 
+    @include desktop {
+      text-align: center;
+    }
+
     @include tablet {
-      font-size: 32px;
+      font-size: 30px;
     }
   }
 
@@ -27,7 +30,10 @@
     margin-inline: auto;
     font-size: 20px;
     line-height: 1.4;
-    text-align: center;
+
+    @include desktop {
+      text-align: center;
+    }
 
     @include tablet {
       font-size: 14px;
@@ -37,13 +43,16 @@
   &__panel {
     display: grid;
     grid-template-columns: 360px 1fr;
-    gap: 40px;
+    gap: 24px 40px;
     align-items: stretch;
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.40), 0 1px 1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px 0 rgba(0, 0, 0, 0.04);
     border: 1px solid rgba(0, 0, 0, 0.12);
     background: #fff;
+
+    @include desktop {
+      box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.40), 0 1px 1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+    }
 
     @include tablet {
       grid-template-columns: 1fr;
@@ -51,42 +60,80 @@
     }
   }
 
-  &__tabs>*:not(:last-child) {
-   margin-bottom: 10px;
+  &__tabs {
+    &>*:not(:last-child) {
+      @include desktop {
+        margin-bottom: 10px;
+      }
+    }
+
+    @include tablet {
+      display: flex;
+      gap: 4px;
+      overflow: auto;
+      padding-bottom: 10px;
+    }
   }
 
   &__tab {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 4px;
+    gap: 8px;
     padding: 15px 16px;
     border-radius: 16px;
-    border: 1px solid #F6F6F6;
     background: transparent;
     text-align: left;
     cursor: pointer;
     transition: background 0.2s ease;
+    border: 1px solid #F6F6F6;
+
+    @include tablet {
+      padding: 12px 20px;
+      border-color: transparent;
+    }
 
     &.active {
-      background: #F6F6F6;
+      @include desktop {
+        background: #F6F6F6;
+      }
+
+      @include tablet {
+        border-color: rgba(0, 0, 0, 0.10);
+        color: #4268FF;
+      }
     }
   }
 
   &__tab_title {
     font-size: 18px;
     line-height: 1.4;
-    margin-bottom: 8px;
+
+    @include tablet {
+      white-space: nowrap;
+    }
   }
 
   &__tab_text {
     color: rgba(0, 0, 0, 0.50);
     font-size: 14px;
     line-height: 1.4;
+
+    &--desktop {
+      @include tablet {
+        display: none;
+      }
+    }
   }
 
   &__visual {
     position: relative;
+
+    @include tablet {
+      border-radius: 16px;
+      background: #F6F6F6;
+      padding: 16px;
+    }
 
     img {
       @include desktop {
@@ -96,6 +143,20 @@
         object-fit: cover;
         border-radius: 20px;
       }
+
+       @include tablet {
+         margin-bottom: 20px;
+       }
+    }
+  }
+
+  &__tabs_mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    @include desktop {
+      display: none;
     }
   }
 }

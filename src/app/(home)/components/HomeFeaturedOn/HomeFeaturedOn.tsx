@@ -10,31 +10,11 @@ type Logo = {
 };
 
 const logos: Logo[] = [
-  { image: '/images/home/tools/logo-twilio.svg', alt: 'Twilio' },
-  { image: '/images/home/tools/logo-telnyx.svg', alt: 'Telnyx' },
-  { image: '/images/home/tools/logo-zadarma.svg', alt: 'Zadarma' },
-  { image: '/images/home/tools/logo-didlogic.svg', alt: 'DIDLogic' },
-  { image: '/images/home/tools/logo-did-global.svg', alt: 'DID Global' },
-  { image: '/images/home/tools/logo-voiso.svg', alt: 'Voiso' },
-  { image: '/images/home/tools/logo-tel-tel.svg', alt: 'Tel.Tel' },
-  { image: '/images/home/tools/logo-slack.svg', alt: 'Slack' },
-  { image: '/images/home/tools/logo-zapier.svg', alt: 'Zapier' },
-  { image: '/images/home/tools/logo-sendgrid.svg', alt: 'SendGrid' },
-  { image: '/images/home/tools/logo-calleague.svg', alt: 'Calleague' },
-  { image: '/images/home/tools/logo-hubspot.svg', alt: 'HubSpot' },
-  { image: '/images/home/tools/logo-gitHub.svg', alt: 'GitHub' },
-  { image: '/images/home/tools/logo-calendly.svg', alt: 'Calendly' },
-  { image: '/images/home/tools/logo-housecall-pro.svg', alt: 'Housecall Pro' },
-  { image: '/images/home/tools/logo-google-calendar.svg', alt: 'Google Calendar' },
-  { image: '/images/home/tools/logo-grafana-labs.svg', alt: 'Grafana Labs' },
-  { image: '/images/home/tools/logo-google-sheets.svg', alt: 'Google Sheets' },
-  { image: '/images/home/tools/logo-bitly.svg', alt: 'Bitly' },
-  { image: '/images/home/tools/logo-zoho.svg', alt: 'Zoho' },
-  { image: '/images/home/tools/logo-n8n.svg', alt: 'n8n' },
-  { image: '/images/home/tools/logo-phone.svg', alt: 'Phone' },
-  { image: '/images/home/tools/logo-hiya.svg', alt: 'Hiya' },
-  { image: '/images/home/tools/logo-jira.svg', alt: 'Jira' },
-  { image: '/images/home/tools/logo-commpeack.svg', alt: 'CommPeak' },
+  { image: '/images/home/tools/logo-yahoo.svg', alt: 'Yahoo' },
+  { image: '/images/home/tools/logo-morningstar.svg', alt: 'Morningstar' },
+  { image: '/images/home/tools/logo-benzinga.svg', alt: 'Benzinga' },
+  { image: '/images/home/tools/logo-newswire.svg', alt: 'Newswire' },
+  { image: '/images/home/tools/logo-street.svg', alt: 'TheStreet' },
 ];
 
 export const HomeFeaturedOn = () => (
@@ -52,8 +32,8 @@ export const HomeFeaturedOn = () => (
               <Image
                 src={item.image}
                 alt={index >= logos.length ? '' : item.alt}
-                width={148}
-                height={47}
+                width={420}
+                height={50}
                 loading="lazy"
               />
             </div>

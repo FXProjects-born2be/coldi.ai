@@ -59,9 +59,6 @@ importers:
       framer-motion:
         specifier: ^12.16.0
         version: 12.24.12(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      fs:
-        specifier: ^0.0.1-security
-        version: 0.0.1-security
       google-libphonenumber:
         specifier: ^3.2.42
         version: 3.2.43
@@ -2101,9 +2098,6 @@ packages:
 
   fs-constants@1.0.0:
     resolution: {integrity: sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==}
-
-  fs@0.0.1-security:
-    resolution: {integrity: sha512-3XY9e1pP0CVEUCdj5BmfIZxRBTSDycnbqhIOGec9QYtmVH2fbLpj86CFWkrNOkt/Fvty4KZG5lTglL9j/gJ87w==}
 
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
@@ -5404,8 +5398,6 @@ snapshots:
       react-dom: 19.2.3(react@19.2.3)
 
   fs-constants@1.0.0: {}
-
-  fs@0.0.1-security: {}
 
   function-bind@1.1.2: {}
 

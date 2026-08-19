@@ -4,7 +4,11 @@ import Link from 'next/link';
 import { cn, getPageHeadingFromPath, requestRoutes } from '@/shared/lib/helpers';
 import { MessageIcon } from '@/shared/ui/icons/fill/message';
 import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
-import { Whatsapp } from '@/shared/ui/icons/fill/socials/whatsapp';
+import { Facebook } from '@/shared/ui/icons/fill/socials/facebook';
+import { Linkedin } from '@/shared/ui/icons/fill/socials/linkedin';
+// import { Whatsapp } from '@/shared/ui/icons/fill/socials/whatsapp';
+import { X } from '@/shared/ui/icons/fill/socials/x';
+import { Youtube } from '@/shared/ui/icons/fill/socials/youtube';
 
 import st from './Footer.module.scss';
 
@@ -56,14 +60,23 @@ export const Footer = ({ pathname }: { pathname: string }) => {
   return !requestRoutes.has(pathname) ? (
     <>
       <footer className={st.footer}>
-        <Image
-          src="/images/footer-top.png"
-          alt={pageHeading}
-          width={1440}
-          height={254}
-          loading={'lazy'}
-          className={st.footer__top_image}
-        />
+        <div className={st.footer__top_image}>
+          <Image
+            src="/images/footer-top.png"
+            alt={pageHeading}
+            width={1440}
+            height={254}
+            loading={'lazy'}
+          />
+
+          <Image
+            src="/images/footer-top-mobile.png"
+            alt={pageHeading}
+            width={390}
+            height={531}
+            loading={'lazy'}
+          />
+        </div>
 
         <div className={cn('container', st.footer__container)}>
           <div className={st.footer__inner}>
@@ -78,13 +91,45 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                     loading={'lazy'}
                   />
                 </a>
+
                 <p className={st.footer__subtitle}>Making voice AI work for Fintech</p>
 
-                <ul
-                  className={st.footer__contact}
-                  itemScope
-                  itemType="http://schema.org/SiteNavigationElement"
-                >
+                <ul className={st.footer__socials}>
+                  <li>
+                    <Link href="https://x.com/Coldiai" className={st.footer__socials_link}>
+                      <X />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://www.facebook.com/coldiai/"
+                      className={st.footer__socials_link}
+                    >
+                      <Facebook />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://www.linkedin.com/company/coldiai/"
+                      target="_blank"
+                      className={st.footer__socials_link}
+                    >
+                      <Linkedin />
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      href="https://www.youtube.com/@coldi_ai"
+                      target="_blank"
+                      className={st.footer__socials_link}
+                    >
+                      <Youtube />
+                    </Link>
+                  </li>
+                </ul>
+
+                <ul className={st.footer__contact}>
                   <li className={st.footer__contact_item}>
                     <Link href="mailto:info@coldi.ai" className={st.footer__contact_link}>
                       <MessageIcon />
@@ -97,18 +142,18 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                       {phoneNumber}
                     </Link>
                   </li>
-                  <li className={st.footer__contact_item}>
-                    <Link
-                      href="https://wa.me/447955534986"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Open WhatsApp chat with Coldi"
-                      className={st.footer__contact_link}
-                    >
-                      <Whatsapp />
-                      Whatsapp
-                    </Link>
-                  </li>
+                  {/*<li className={st.footer__contact_item}>*/}
+                  {/*  <Link*/}
+                  {/*    href="https://wa.me/447955534986"*/}
+                  {/*    target="_blank"*/}
+                  {/*    rel="noopener noreferrer"*/}
+                  {/*    aria-label="Open WhatsApp chat with Coldi"*/}
+                  {/*    className={st.footer__contact_link}*/}
+                  {/*  >*/}
+                  {/*    <Whatsapp />*/}
+                  {/*    Whatsapp*/}
+                  {/*  </Link>*/}
+                  {/*</li>*/}
                 </ul>
               </div>
               <div className={st.footer__menu}>
@@ -172,14 +217,23 @@ export const Footer = ({ pathname }: { pathname: string }) => {
           </div>
         </div>
 
-        <Image
-          src="/images/footer-bottom.png"
-          alt={pageHeading}
-          width={1440}
-          height={253}
-          loading={'lazy'}
-          className={st.footer__bottom_image}
-        />
+        <div className={st.footer__bottom_image}>
+          <Image
+            src="/images/footer-bottom.png"
+            alt={pageHeading}
+            width={1440}
+            height={253}
+            loading={'lazy'}
+          />
+
+          <Image
+            src="/images/footer-bottom-mobile.png"
+            alt={pageHeading}
+            width={390}
+            height={424}
+            loading={'lazy'}
+          />
+        </div>
       </footer>
     </>
   ) : null;

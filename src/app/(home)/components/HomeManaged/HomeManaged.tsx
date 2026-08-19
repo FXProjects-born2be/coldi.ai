@@ -53,15 +53,35 @@ export const HomeManaged = () => {
   const activeTab = tabs.find((tab) => tab.id === activeId) ?? tabs[0];
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveId((current) => {
-        const index = tabs.findIndex((tab) => tab.id === current);
-        return tabs[(index + 1) % tabs.length].id;
-      });
-    }, 2000);
+    const media = window.matchMedia('(min-width: 1025px)');
+    let timer: number | undefined;
 
-    return () => window.clearInterval(timer);
-  }, [activeId]);
+    const stop = () => {
+      if (timer === undefined) return;
+      window.clearInterval(timer);
+      timer = undefined;
+    };
+
+    const start = () => {
+      stop();
+      if (!media.matches) return;
+
+      timer = window.setInterval(() => {
+        setActiveId((current) => {
+          const index = tabs.findIndex((tab) => tab.id === current);
+          return tabs[(index + 1) % tabs.length].id;
+        });
+      }, 2000);
+    };
+
+    start();
+    media.addEventListener('change', start);
+
+    return () => {
+      stop();
+      media.removeEventListener('change', start);
+    };
+  }, []);
 
   return (
     <section className={st.home_managed}>
@@ -86,7 +106,11 @@ export const HomeManaged = () => {
                 onClick={() => setActiveId(tab.id)}
               >
                 <span className={st.home_managed__tab_title}>{tab.title}</span>
-                <span className={st.home_managed__tab_text}>{tab.description}</span>
+                <span
+                  className={cn(st.home_managed__tab_text, st['home_managed__tab_text--desktop'])}
+                >
+                  {tab.description}
+                </span>
               </button>
             ))}
           </div>
@@ -99,6 +123,11 @@ export const HomeManaged = () => {
               height={'600'}
               loading={'lazy'}
             />
+
+            <div className={st.home_managed__tabs_mobile}>
+              <span className={st.home_managed__tab_title}>{activeTab.title}</span>
+              <span className={st.home_managed__tab_text}>{activeTab.description}</span>
+            </div>
           </div>
         </div>
       </div>

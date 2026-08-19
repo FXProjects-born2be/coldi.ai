@@ -17,6 +17,7 @@ type Workflow = {
 type ChatMessage = {
   role: 'user' | 'assistant' | 'status';
   text: string;
+  icon?: string;
 };
 
 type Industry = {
@@ -35,7 +36,7 @@ const industries: Industry[] = [
     id: 'insurance',
     label: 'Insurance',
     href: '/industries/insurance',
-    cta: 'Explore Insurance',
+    cta: 'Learn more',
     image: '/images/home/home-built-for-one.jpg',
     secondImage: '/images/home/home-built-for-one-second.png',
     messages: [
@@ -43,7 +44,11 @@ const industries: Industry[] = [
       { role: 'assistant', text: 'Let me check. Can you confirm your policy number?' },
       { role: 'user', text: 'INS-88213' },
       { role: 'status', text: 'Thinking...' },
-      { role: 'assistant', text: 'Renews August 3rd. Want me to lock in your rate?' },
+      {
+        role: 'assistant',
+        text: 'Renews August 3rd. Want me to lock in your rate?',
+        icon: '/images/home/buit-for-icon.png',
+      },
     ],
     workflows: [
       {
@@ -69,47 +74,10 @@ const industries: Industry[] = [
     ],
   },
   {
-    id: 'fintech',
-    label: 'Fintech',
-    href: '/industries',
-    cta: 'Explore Fintech',
-    image: '/images/home/home-built-for-two.jpg',
-    secondImage: '/images/home/home-built-for-two-second.png',
-    messages: [
-      { role: 'user', text: "My deposit isn't showing up" },
-      { role: 'assistant', text: "Let's check. Amount and method?" },
-      { role: 'user', text: '$500, bank transfer' },
-      { role: 'status', text: 'Thinking...' },
-      { role: 'assistant', text: 'Found it. Processing, live in 10 minutes.' },
-    ],
-    workflows: [
-      {
-        id: 'customer-support',
-        label: 'Customer Support',
-        icon: '/images/icons/customer-support.svg',
-      },
-      {
-        id: 'verification-calls',
-        label: 'Verification Calls',
-        icon: '/images/icons/verification-calls.svg',
-      },
-      {
-        id: 'appointment-booking',
-        label: 'Appointment Booking',
-        icon: '/images/icons/appointment-booking.svg',
-      },
-      {
-        id: 'custom-automations',
-        label: 'Custom Automations',
-        icon: '/images/icons/custom-automations.svg',
-      },
-    ],
-  },
-  {
     id: 'trading',
     label: 'Trading Platforms',
     href: '/industries/fx-brokers',
-    cta: 'Explore Trading Platforms',
+    cta: 'Learn more',
     image: '/images/home/home-built-for-three.jpg',
     secondImage: '/images/home/home-built-for-three-second.png',
     messages: [
@@ -117,7 +85,11 @@ const industries: Industry[] = [
       { role: 'assistant', text: 'Sure. What date works?' },
       { role: 'user', text: 'The 15th' },
       { role: 'status', text: 'Thinking...' },
-      { role: 'assistant', text: 'Confirmed. New date is the 15th.' },
+      {
+        role: 'assistant',
+        text: 'Confirmed. New date is the 15th.',
+        icon: '/images/home/buit-for-icon.png',
+      },
     ],
     workflows: [
       {
@@ -146,7 +118,7 @@ const industries: Industry[] = [
     id: 'debt-collection',
     label: 'Debt Collection',
     href: '/industries/debt-collection',
-    cta: 'Explore Debt Collection',
+    cta: 'Learn more',
     image: '/images/home/home-built-for-four.jpg',
     secondImage: '/images/home/home-built-for-four-second.png',
     messages: [
@@ -154,7 +126,11 @@ const industries: Industry[] = [
       { role: 'assistant', text: 'Have you uploaded a photo ID?' },
       { role: 'user', text: 'Not yet, only address proof' },
       { role: 'status', text: 'Thinking...' },
-      { role: 'assistant', text: "That's it. Sending a secure upload link now." },
+      {
+        role: 'assistant',
+        text: "That's it. Sending a secure upload link now.",
+        icon: '/images/home/buit-for-icon.png',
+      },
     ],
     workflows: [
       {
@@ -176,6 +152,47 @@ const industries: Industry[] = [
         id: 'recovery-campaigns',
         label: 'Recovery Campaigns',
         icon: '/images/icons/recovery-campaigns.svg',
+      },
+    ],
+  },
+  {
+    id: 'emis',
+    label: 'EMIs',
+    href: '/industries',
+    cta: 'Learn more',
+    image: '/images/home/home-built-for-two.jpg',
+    secondImage: '/images/home/home-built-for-two-second.png',
+    messages: [
+      { role: 'user', text: "My deposit isn't showing up" },
+      { role: 'assistant', text: "Let's check. Amount and method?" },
+      { role: 'user', text: '$500, bank transfer' },
+      { role: 'status', text: 'Thinking...' },
+      {
+        role: 'assistant',
+        text: 'Found it. Processing, live in 10 minutes.',
+        icon: '/images/home/buit-for-icon.png',
+      },
+    ],
+    workflows: [
+      {
+        id: 'customer-support',
+        label: 'Customer Support',
+        icon: '/images/icons/customer-support.svg',
+      },
+      {
+        id: 'verification-calls',
+        label: 'Verification Calls',
+        icon: '/images/icons/verification-calls.svg',
+      },
+      {
+        id: 'appointment-booking',
+        label: 'Appointment Booking',
+        icon: '/images/icons/appointment-booking.svg',
+      },
+      {
+        id: 'custom-automations',
+        label: 'Custom Automations',
+        icon: '/images/icons/custom-automations.svg',
       },
     ],
   },
@@ -244,6 +261,15 @@ export const HomeBuiltFor = () => {
                   key={`${item.role}-${index}`}
                   className={cn(st.home_built_for__visual_text, st[item.role])}
                 >
+                  {item.icon ? (
+                    <Image
+                      src={item.icon}
+                      alt="Icon"
+                      width={35}
+                      height={35}
+                      className={st.home_built_for__visual_icon}
+                    />
+                  ) : null}
                   {item.role === 'status' ? (
                     <>
                       {item.text.replace(/\.+$/, '')}
@@ -254,7 +280,7 @@ export const HomeBuiltFor = () => {
                       </span>
                     </>
                   ) : (
-                    item.text
+                    <span>{item.text}</span>
                   )}
                 </p>
               ))}

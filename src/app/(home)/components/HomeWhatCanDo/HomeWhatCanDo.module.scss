@@ -7,7 +7,14 @@
     font-size: 40px;
     line-height: 1.2;
     margin-bottom: 60px;
-    text-align: center;
+
+    @include desktop {
+      text-align: center;
+    }
+
+    @include tablet {
+      font-size: 32px;
+    }
   }
 
   &__row {

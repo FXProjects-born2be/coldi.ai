@@ -49,15 +49,17 @@
     border-radius: 14px;
     padding: 11px 20px;
     color: #000;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.4;
     transition: color 0.2s ease, border-color 0.2s ease;
 
     &.active {
       color: #4268FF;
-      font-size: 20px;
       border-color: rgba(0, 0, 0, 0.20);
 
+      @include desktop {
+        font-size: 20px;
+      }
     }
   }
 
@@ -247,6 +249,9 @@
     }
 
     &.assistant {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       border-radius: 26.618px;
       background: #fff;
       box-shadow: 0 0 0 0.665px rgba(0, 0, 0, 0.08), 0 2.232px 4.464px 0 rgba(0, 0, 0, 0.04);
@@ -256,12 +261,17 @@
 
       @include tablet {
         padding: 8px 11px;
+        border-radius: 16px;
       }
     }
 
     &.status {
       color: #FFF;
     }
+  }
+
+  &__visual_icon {
+    flex: 0 0 35px;
   }
 
   &__visual_dots {

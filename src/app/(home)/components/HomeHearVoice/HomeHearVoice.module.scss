@@ -47,12 +47,30 @@
   }
 
   &__item {
-    overflow: hidden;
+    position: relative;
+    isolation: isolate;
     border-radius: 28.708px;
     background: linear-gradient(180deg, #FFF 0%, #4268FF 100%), #000;
     box-shadow: -183.017px 0 50.958px 0 rgba(66, 104, 255, 0.00), -116.987px 0 46.651px 0 rgba(66, 104, 255, 0.01), -66.03px 0 39.474px 0 rgba(66, 104, 255, 0.03), -29.426px 0 29.426px 0 rgba(66, 104, 255, 0.06), -7.177px 0 15.79px 0 rgba(66, 104, 255, 0.06);
     text-align: center;
     padding-bottom: 28px;
+    min-height: 389px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    @include mobile {
+      border-radius: 17px;
+    }
+  }
+
+  &__item_visual {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
   }
 
   &__item_image {
@@ -64,6 +82,13 @@
     &.spinning {
       animation: hear-voice-spin 15s linear infinite;
     }
+  }
+
+  &__item_title,
+  &__item_subtitle,
+  &__item_btn {
+    position: relative;
+    z-index: 1;
   }
 
   &__item_title {
@@ -89,11 +114,6 @@
   }
 
   &__item_btn {
-    border-radius: 63.876px;
-    border: 1.405px solid rgba(255, 255, 255, 0.40);
-    background: transparent;
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(26.642070770263672px);
     width: 66px;
     height: 66px;
     display: flex;
@@ -101,20 +121,38 @@
     justify-content: center;
     gap: 3px;
     margin-inline: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    @include mobile {
+      gap: 2px;
+    }
 
     @include tablet {
       width: 40px;
       height: 40px;
     }
 
-    & > * {
+    & > span {
       border-radius: 99px;
       background: #F6F6F6;
       width: 3px;
       transform-origin: center;
+
+      @include mobile {
+        width: 2px;
+      }
     }
 
-    & > *:nth-child(odd) {
+    & > span:nth-child(odd) {
       height: 19px;
 
       @include tablet {
@@ -122,7 +160,7 @@
       }
     }
 
-    & > *:nth-child(even) {
+    & > span:nth-child(even) {
       height: 29px;
 
       @include tablet {

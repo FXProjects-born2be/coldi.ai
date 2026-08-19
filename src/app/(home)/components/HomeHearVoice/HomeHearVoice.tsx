@@ -58,35 +58,39 @@ export const HomeHearVoice = () => {
         <ul className={st.home_hear_voice__list}>
           {voices.map((item, index) => (
             <li key={item.title} className={st.home_hear_voice__item}>
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={320}
-                height={420}
-                className={cn(st.home_hear_voice__item_image, activeIndex === index && st.spinning)}
-                loading="lazy"
-              />
+              <div className={st.home_hear_voice__item_visual}>
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={320}
+                  height={420}
+                  className={cn(
+                    st.home_hear_voice__item_image,
+                    activeIndex === index && st.spinning
+                  )}
+                  loading="lazy"
+                />
+              </div>
               <h3 className={st.home_hear_voice__item_title}>{item.title}</h3>
               <p className={st.home_hear_voice__item_subtitle}>{item.subtitle}</p>
-              <button
-                type="button"
+              <div
                 className={cn(st.home_hear_voice__item_btn, activeIndex === index && st.playing)}
                 aria-label={activeIndex === index ? `Stop ${item.title}` : `Play ${item.title}`}
                 onClick={() => togglePlay(index)}
               >
-                {/*<Image*/}
-                {/*  src="/images/icons/voice.png"*/}
-                {/*  alt=""*/}
-                {/*  width={67}*/}
-                {/*  height={67}*/}
-                {/*  loading="lazy"*/}
-                {/*/>*/}
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
-              </button>
+                <Image
+                  src="/images/icons/voice.png"
+                  alt="Icon"
+                  width={67}
+                  height={67}
+                  loading="lazy"
+                />
+              </div>
             </li>
           ))}
         </ul>

@@ -76,6 +76,7 @@ img {
   .selected-flag {
     background: transparent !important;
     border: none !important;
+    padding-left: 24px !important;
   }
   .flag-dropdown {
     background: transparent !important;
@@ -129,6 +130,10 @@ html, body {
   color: #FFF;
   font-weight: 600;
   line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
 }
 
 .btn-primary {
@@ -145,4 +150,8 @@ html, body {
 
 button {
   cursor: pointer;
+}
+
+.w-max {
+  width: max-content;
 }
