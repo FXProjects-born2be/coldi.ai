@@ -6,7 +6,7 @@ import { MessageIcon } from '@/shared/ui/icons/fill/message';
 import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
 import { Facebook } from '@/shared/ui/icons/fill/socials/facebook';
 import { Linkedin } from '@/shared/ui/icons/fill/socials/linkedin';
-// import { Whatsapp } from '@/shared/ui/icons/fill/socials/whatsapp';
+import { WhatsappFixed } from '@/shared/ui/icons/fill/socials/whatsapp-fixed';
 import { X } from '@/shared/ui/icons/fill/socials/x';
 import { Youtube } from '@/shared/ui/icons/fill/socials/youtube';
 
@@ -234,6 +234,16 @@ export const Footer = ({ pathname }: { pathname: string }) => {
             loading={'lazy'}
           />
         </div>
+
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open WhatsApp chat with Coldi"
+          className={st.footer__whatsapp}
+          href="https://wa.me/447955534986"
+        >
+          <WhatsappFixed />
+        </a>
       </footer>
     </>
   ) : null;
