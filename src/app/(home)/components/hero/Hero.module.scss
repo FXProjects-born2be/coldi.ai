@@ -11,6 +11,11 @@
     padding-bottom: 40px;
   }
 
+  @include mobile {
+    height: 100vh;
+    padding-bottom: 0;
+  }
+
   &:before,
   &:after {
     content: "";
@@ -44,6 +49,10 @@
     @include tablet {
       right: -355px;
       bottom: -621px;
+    }
+
+    @include mobile {
+      bottom: -394px;
     }
   }
 

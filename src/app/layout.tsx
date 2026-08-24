@@ -10,6 +10,7 @@ import { Breadcrumbs } from '@/shared/ui/components/breadcrumbs';
 import { DeferredMarketingScripts } from '@/shared/ui/components/deferred-marketing-scripts/DeferredMarketingScripts';
 import { Footer } from '@/shared/ui/components/footer';
 import { Header } from '@/shared/ui/components/header';
+import { HideOnPath } from '@/shared/ui/components/hide-on-path';
 
 import '@/shared/lib/styles/null.scss';
 import '@/shared/lib/styles/base.scss';
@@ -108,10 +109,18 @@ export default async function RootLayout({
           }}
         />
         {shouldLoadMarketingScripts && <DeferredMarketingScripts />}
-        {!isLiveDemo && <Header pathname={pathname} />}
+        {!isLiveDemo && (
+          <HideOnPath>
+            <Header pathname={pathname} />
+          </HideOnPath>
+        )}
         <Breadcrumbs />
         {children}
-        {!isLiveDemo && <Footer pathname={pathname} />}
+        {!isLiveDemo && (
+          <HideOnPath>
+            <Footer pathname={pathname} />
+          </HideOnPath>
+        )}
       </body>
     </html>
   );

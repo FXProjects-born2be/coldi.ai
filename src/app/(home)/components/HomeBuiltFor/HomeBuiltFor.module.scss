@@ -38,9 +38,25 @@
   &__tabs {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
     gap: 16px;
     margin-bottom: 16px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #4268ff transparent;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #4268ff;
+      border-radius: 100px;
+    }
+
+    @include mobile {
+      padding-bottom: 10px;
+      justify-content: flex-start;
+    }
   }
 
   &__tab {
@@ -52,6 +68,7 @@
     font-size: 16px;
     line-height: 1.4;
     transition: color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
 
     &.active {
       color: #4268FF;

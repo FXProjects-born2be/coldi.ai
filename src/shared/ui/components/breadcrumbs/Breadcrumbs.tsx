@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { cn } from '@/shared/lib/helpers';
+
 import st from './Breadcrumbs.module.scss';
 
 const segmentLabels: Record<string, string> = {
@@ -62,8 +64,10 @@ export const Breadcrumbs = ({ pathname: pathnameProp, currentLabel }: Breadcrumb
     href: '/' + segments.slice(0, i + 1).join('/'),
   }));
 
+  const isCalendar = pathname === '/calendar' || pathname.startsWith('/calendar/');
+
   return (
-    <div className={st.breadcrumbs_wrapper}>
+    <div className={cn(st.breadcrumbs_wrapper, isCalendar && st.calendar)}>
       <div className="container">
         <nav className={st.breadcrumbs} aria-label="Breadcrumb">
           <ol className={st.list}>

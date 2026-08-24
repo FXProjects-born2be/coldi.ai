@@ -17,18 +17,9 @@ body {
   height: 100%;
   scroll-behavior: smooth;
   font-family: var(--font-urbanist), sans-serif;
-}
+  scrollbar-width: thin;
+  scrollbar-color: #4268ff #fff;
 
-body {
-  line-height: 1.2;
-  -ms-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  top: 0 !important;
-  background: #fff;
-  margin: 0;
-  height: auto;
-  min-height: 100vh;
   &::-webkit-scrollbar {
     background: transparent;
     width: 10px;
@@ -42,7 +33,18 @@ body {
     background-color: #4268ff;
     border-radius: 100px;
   }
+}
 
+body {
+  line-height: 1.2;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  top: 0 !important;
+  background: #fff;
+  margin: 0;
+  height: auto;
+  min-height: 100vh;
   color: #000;
   font-weight: 400;
 }

@@ -1,13 +1,6 @@
-/**
- * Live Demo Layout
- * This layout wraps only the live-demo pages and excludes Header/Footer
- * It's a nested layout that extends the root layout
- */
 import Script from 'next/script';
 
 import type { Metadata } from 'next';
-
-import './layout.scss';
 
 export const metadata: Metadata = {
   alternates: {
