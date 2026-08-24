@@ -105,16 +105,17 @@
 
     span {
       display: block;
+      line-height: 1.18;
       overflow: hidden;
       white-space: nowrap;
       width: max-content;
-      max-width: 0;
       margin-inline: auto;
       background: linear-gradient(180deg, #2544bd 0%, #4268ff 100%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: hero-title-span 3s linear forwards;
+      clip-path: inset(0 100% 0 0);
+      animation: hero-title-span 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
   }
 
@@ -155,23 +156,19 @@
 
 @keyframes hero-title-span {
   0% {
-    animation-timing-function: ease;
-    max-width: 0;
+    clip-path: inset(0 100% 0 0);
   }
 
-  55% {
-    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
-    max-width: 100%;
+  42% {
+    clip-path: inset(0 0 0 0);
   }
 
-  70% {
-    animation-timing-function: ease;
-    max-width: 100%;
+  68% {
+    clip-path: inset(0 0 0 0);
   }
 
   100% {
-    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
-    max-width: 0;
+    clip-path: inset(0 100% 0 0);
   }
 }
 
@@ -182,6 +179,6 @@
   }
 
   .hero__title span {
-    max-width: 100%;
+    clip-path: none;
   }
 }
