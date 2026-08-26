@@ -8,7 +8,7 @@ import { Button } from '@/shared/ui/kit/button';
 
 import st from './PricingPlans.module.scss';
 
-import { plans } from '@/app/pricing/model/content';
+import { plans } from '@/app/[locale]/pricing/model/content';
 
 export const PricingPlans = ({
   onRequest,

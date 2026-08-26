@@ -2,15 +2,18 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+
+import { useTranslations } from 'next-intl';
 
 import { cn, getPageHeadingFromPath } from '@/shared/lib/helpers';
 import { HeaderBurgerMenu } from '@/shared/ui/components/header/HeaderBurgerMenu';
 
 import st from './Header.module.scss';
 
+import { Link, usePathname } from '@/i18n/navigation';
+
 export const Header = ({ pathname: pathnameProp }: { pathname: string }) => {
+  const t = useTranslations('Header');
   const pathname = usePathname() || pathnameProp;
   const pageHeading = getPageHeadingFromPath(pathname);
   const headerRef = useRef<HTMLElement>(null);
@@ -43,10 +46,10 @@ export const Header = ({ pathname: pathnameProp }: { pathname: string }) => {
             height={32}
           />
         </Link>
-        <Navigation pathname={pathname} />
+        <Navigation pathname={pathname} homeLabel={t('home')} newsLabel={t('news')} />
 
         <Link className={cn(st.header__bookMeeting, 'btn-primary')} href="/calendar">
-          Schedule a Meeting
+          {t('scheduleMeeting')}
         </Link>
 
         <HeaderBurgerMenu />
@@ -55,7 +58,15 @@ export const Header = ({ pathname: pathnameProp }: { pathname: string }) => {
   );
 };
 
-const Navigation = ({ pathname }: { pathname: string }) => {
+const Navigation = ({
+  pathname,
+  homeLabel,
+  newsLabel,
+}: {
+  pathname: string;
+  homeLabel: string;
+  newsLabel: string;
+}) => {
   return (
     <ul
       className={st.header__navigation}
@@ -64,12 +75,12 @@ const Navigation = ({ pathname }: { pathname: string }) => {
     >
       <li className={cn({ [st.active]: pathname === '/' })} itemProp="name">
         <Link className={st.navLink} href="/" itemProp="url" prefetch={false}>
-          Home
+          {homeLabel}
         </Link>
       </li>
       <li className={cn({ [st.active]: pathname === '/news' })} itemProp="name">
         <Link className={st.navLink} href="/news" itemProp="url" prefetch={false}>
-          News
+          {newsLabel}
         </Link>
       </li>
     </ul>

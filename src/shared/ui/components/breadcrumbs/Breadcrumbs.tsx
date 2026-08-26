@@ -1,12 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 import { cn } from '@/shared/lib/helpers';
 
 import st from './Breadcrumbs.module.scss';
+
+import { Link, usePathname } from '@/i18n/navigation';
 
 const segmentLabels: Record<string, string> = {
   products: 'Products',

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
+import { useLocale, useTranslations } from 'next-intl';
 import PhoneInput from 'react-phone-input-2';
 
 import { cn } from '@/shared/lib/helpers';
@@ -18,68 +19,70 @@ import st from './HeroBookDemo.module.scss';
 
 import 'react-phone-input-2/lib/style.css';
 
+import { getPathname } from '@/i18n/navigation';
+
 const OptionIcon = ({ src }: { src: string }) => <Image src={src} alt="" width={20} height={20} />;
 
 const INDUSTRIES = [
   {
-    label: 'Trading',
+    id: 'trading',
     value: 'Trading',
     icon: <OptionIcon src="/icons/modal-form/trading.svg" />,
   },
   {
-    label: 'Insurance',
+    id: 'insurance',
     value: 'Insurance',
     icon: <OptionIcon src="/icons/modal-form/insurance.svg" />,
   },
   {
-    label: 'Lending',
+    id: 'lending',
     value: 'Lending',
     icon: <OptionIcon src="/icons/modal-form/lending.svg" />,
   },
   {
-    label: 'Other',
+    id: 'other',
     value: 'Other',
     icon: <OptionIcon src="/icons/modal-form/other.svg" />,
   },
   {
-    label: 'Debt Collection',
+    id: 'debtCollection',
     value: 'Debt Collection',
     icon: <OptionIcon src="/icons/modal-form/debt-collection.svg" />,
   },
-];
+] as const;
 
 const USE_CASES = [
   {
-    label: 'Sales',
+    id: 'sales',
     value: 'Sales',
     icon: <OptionIcon src="/icons/modal-form/sales.svg" />,
   },
   {
-    label: 'Lead Qualification',
+    id: 'leadQualification',
     value: 'Lead Qualification',
     icon: <OptionIcon src="/icons/modal-form/lead-qualification.svg" />,
   },
   {
-    label: 'Customer Support',
+    id: 'customerSupport',
     value: 'Customer Support',
     icon: <OptionIcon src="/icons/modal-form/customer-support.svg" />,
   },
   {
-    label: 'Customer Engagement',
+    id: 'customerEngagement',
     value: 'Customer Engagement',
     icon: <OptionIcon src="/icons/modal-form/customer-engagement.svg" />,
   },
   {
-    label: 'Collections',
+    id: 'collections',
     value: 'Collections',
     icon: <OptionIcon src="/icons/modal-form/collections.svg" />,
   },
   {
-    label: 'Other',
+    id: 'other',
     value: 'Other (Please specify)',
     icon: <OptionIcon src="/icons/modal-form/other-one.svg" />,
   },
-];
+] as const;
 
 type Step = 1 | 2;
 
@@ -100,6 +103,8 @@ const getUtmParams = () => {
 };
 
 export const HeroBookDemo = () => {
+  const t = useTranslations('Hero');
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<Step>(1);
   const [useCase, setUseCase] = useState('');
@@ -110,6 +115,16 @@ export const HeroBookDemo = () => {
   const [company, setCompany] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const industries = INDUSTRIES.map((item) => ({
+    ...item,
+    label: t(`bookDemo.industries.${item.id}`),
+  }));
+
+  const useCases = USE_CASES.map((item) => ({
+    ...item,
+    label: t(`bookDemo.useCases.${item.id}`),
+  }));
 
   const reset = () => {
     setStep(1);
@@ -131,12 +146,12 @@ export const HeroBookDemo = () => {
   const goNext = () => {
     const nextErrors: Record<string, string> = {};
 
-    if (!name.trim()) nextErrors.name = 'Please introduce yourself';
+    if (!name.trim()) nextErrors.name = t('bookDemo.errors.name');
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      nextErrors.email = "We can't send you the call results without your email address.";
+      nextErrors.email = t('bookDemo.errors.email');
     }
     if (!phone || !isPhoneValid(`+${phone}`)) nextErrors.phone = 'invalid';
-    if (!company.trim()) nextErrors.company = 'Please enter your company.';
+    if (!company.trim()) nextErrors.company = t('bookDemo.errors.company');
 
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) return;
@@ -147,8 +162,8 @@ export const HeroBookDemo = () => {
   const submit = async () => {
     const nextErrors: Record<string, string> = {};
 
-    if (!industry) nextErrors.industry = 'Please select your industry.';
-    if (!useCase) nextErrors.useCase = 'Please select what you want to use AI voice for.';
+    if (!industry) nextErrors.industry = t('bookDemo.errors.industry');
+    if (!useCase) nextErrors.useCase = t('bookDemo.errors.useCase');
 
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length || isSubmitting) return;
@@ -156,7 +171,7 @@ export const HeroBookDemo = () => {
     setIsSubmitting(true);
     setErrors((current) => ({ ...current, submit: '' }));
 
-    const useCaseLabel = USE_CASES.find((item) => item.value === useCase)?.label ?? useCase;
+    const useCaseValue = USE_CASES.find((item) => item.value === useCase)?.value ?? useCase;
 
     try {
       const res = await fetch('/api/leads-book-demo', {
@@ -170,7 +185,7 @@ export const HeroBookDemo = () => {
           email: email.trim(),
           sector: industry,
           company: company.trim(),
-          call_scenarios: useCaseLabel,
+          call_scenarios: useCaseValue,
           ...getUtmParams(),
         }),
       });
@@ -178,7 +193,7 @@ export const HeroBookDemo = () => {
       if (!res.ok) {
         setErrors((current) => ({
           ...current,
-          submit: 'Failed to send. Please try again.',
+          submit: t('bookDemo.errors.submit'),
         }));
         setIsSubmitting(false);
         return;
@@ -188,11 +203,12 @@ export const HeroBookDemo = () => {
       if (name.trim()) params.set('firstName', name.trim());
       if (email.trim()) params.set('email', email.trim());
       const query = params.toString();
-      window.location.assign(query ? `/calendar?${query}` : '/calendar');
+      const calendarHref = getPathname({ href: '/calendar', locale });
+      window.location.assign(query ? `${calendarHref}?${query}` : calendarHref);
     } catch {
       setErrors((current) => ({
         ...current,
-        submit: 'Failed to send. Please try again.',
+        submit: t('bookDemo.errors.submit'),
       }));
       setIsSubmitting(false);
     }
@@ -206,7 +222,7 @@ export const HeroBookDemo = () => {
           className="btn btn-primary d-inline-block"
           onClick={() => setOpen(true)}
         >
-          Book a Demo
+          {t('cta')}
         </button>
       </div>
 
@@ -218,18 +234,16 @@ export const HeroBookDemo = () => {
               type="button"
               className={st.hero_book_demo__close}
               onClick={() => handleOpenChange(false)}
-              aria-label="Close dialog"
+              aria-label={t('bookDemo.closeAria')}
             >
               <CloseIcon />
             </button>
 
             <div className={st.hero_book_demo__top}>
-              <Title className={st.hero_book_demo__title}>
-                Let’s tailor the demo to your business
-              </Title>
+              <Title className={st.hero_book_demo__title}>{t('bookDemo.title')}</Title>
 
               <Description className={st.hero_book_demo__subtitle}>
-                Tell us a little about your needs so we can focus on what matters most to you.
+                {t('bookDemo.subtitle')}
               </Description>
 
               <div className={st.hero_book_demo__progress} aria-hidden>
@@ -244,7 +258,7 @@ export const HeroBookDemo = () => {
                   <div>
                     <TextField
                       name="name"
-                      placeholder="Name*"
+                      placeholder={t('bookDemo.name')}
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       intent={errors.name ? 'danger' : 'default'}
@@ -255,7 +269,7 @@ export const HeroBookDemo = () => {
                   <div>
                     <TextField
                       name="email"
-                      placeholder="Work email*"
+                      placeholder={t('bookDemo.email')}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       intent={errors.email ? 'danger' : 'default'}
@@ -271,19 +285,19 @@ export const HeroBookDemo = () => {
                         setPhone(value);
                         setErrors((current) => ({ ...current, phone: '' }));
                       }}
-                      placeholder="Phone number*"
+                      placeholder={t('bookDemo.phone')}
                       inputClass={cn(st.hero_book_demo__phone_input, errors.phone && st.error)}
                       buttonClass={st.hero_book_demo__phone_button}
                       dropdownClass={st.hero_book_demo__phone_dropdown}
                       enableSearch
-                      searchPlaceholder="Search country..."
+                      searchPlaceholder={t('bookDemo.searchCountry')}
                       autoFormat
                     />
                   </div>
                   <div>
                     <TextField
                       name="company"
-                      placeholder="Company*"
+                      placeholder={t('bookDemo.company')}
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
                       intent={errors.company ? 'danger' : 'default'}
@@ -294,7 +308,7 @@ export const HeroBookDemo = () => {
                 </div>
 
                 <button type="button" onClick={goNext} className="btn btn-primary w-max">
-                  Next
+                  {t('bookDemo.next')}
                 </button>
               </div>
             ) : (
@@ -302,23 +316,23 @@ export const HeroBookDemo = () => {
                 <div className={st.hero_book_demo__selects}>
                   <div>
                     <Select
-                      items={INDUSTRIES}
+                      items={industries}
                       value={industry}
                       onChange={setIndustry}
-                      placeholder="Industry*"
+                      placeholder={t('bookDemo.industry')}
                       showOtherInput
-                      otherPlaceholder="Please specify your industry"
+                      otherPlaceholder={t('bookDemo.industryOther')}
                     />
                     {errors.industry ? <ErrorMessage>{errors.industry}</ErrorMessage> : null}
                   </div>
                   <div>
                     <Select
-                      items={USE_CASES}
+                      items={useCases}
                       value={useCase}
                       onChange={setUseCase}
-                      placeholder="What are you looking to use AI voice for?*"
+                      placeholder={t('bookDemo.useCase')}
                       showOtherInput
-                      otherPlaceholder="Please specify"
+                      otherPlaceholder={t('bookDemo.useCaseOther')}
                     />
                     {errors.useCase ? <ErrorMessage>{errors.useCase}</ErrorMessage> : null}
                   </div>
@@ -332,12 +346,10 @@ export const HeroBookDemo = () => {
                     disabled={isSubmitting}
                   >
                     <CallMeIcon />
-                    {isSubmitting ? 'Sending...' : 'Call Me'}
+                    {isSubmitting ? t('bookDemo.sending') : t('bookDemo.callMe')}
                   </button>
                   {errors.submit ? <ErrorMessage>{errors.submit}</ErrorMessage> : null}
-                  <p className={st.hero_book_demo__hint}>
-                    Help us focus the demo on what matters most to your business.
-                  </p>
+                  <p className={st.hero_book_demo__hint}>{t('bookDemo.hint')}</p>
                 </div>
               </div>
             )}

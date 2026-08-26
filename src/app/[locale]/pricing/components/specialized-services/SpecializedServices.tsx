@@ -9,7 +9,7 @@ import { Button } from '@/shared/ui/kit/button';
 
 import st from './SpecializedServices.module.scss';
 
-import { services } from '@/app/pricing/model/content';
+import { services } from '@/app/[locale]/pricing/model/content';
 
 export const SpecializedServices = ({}) => {
   const router = useRouter();

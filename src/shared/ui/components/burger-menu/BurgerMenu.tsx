@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 import {
   Content,
@@ -14,68 +12,63 @@ import {
   Title,
   Trigger,
 } from '@radix-ui/react-dialog';
+import { useTranslations } from 'next-intl';
 
 import { cn, getPageHeadingFromPath } from '@/shared/lib/helpers';
 
 import st from './BurgerMenu.module.scss';
 
+import { Link, usePathname } from '@/i18n/navigation';
+
 const industriesItems = [
   {
-    label: 'Healthcare',
+    id: 'healthcare',
     href: '/industries/healthcare',
     icon: '/icons/header/healthcare.svg',
   },
   {
-    label: 'Insurance Agents',
+    id: 'insurance',
     href: '/industries/insurance',
     icon: '/icons/header/insurance.svg',
   },
   {
-    label: 'Real Estate',
+    id: 'real-estate',
     href: '/industries/real-estate',
     icon: '/icons/header/real-estate.svg',
   },
   {
-    label: 'Call Center',
+    id: 'call-center',
     href: '/industries/call-center',
     icon: '/icons/header/call-center.svg',
   },
   {
-    label: 'Debt Collection',
+    id: 'debt-collection',
     href: '/industries/debt-collection',
     icon: '/icons/header/debt-collection.svg',
   },
 ];
 
 const productsItems = [
-  { label: 'Outbound Calling', href: '/products/outbound-calling' },
-  { label: 'Inbound Calling', href: '/products/inbound-calling' },
-  { label: 'AI Agent Development', href: '/products/agent-development' },
-  { label: 'AI Customer Service', href: '/products/customer-service-agent' },
-  { label: 'AI for Quality Control', href: '/products/ai-for-quality-control' },
-  { label: 'VoIP Phone Service', href: '/products/voip-phone-service' },
+  { id: 'outbound-calling', href: '/products/outbound-calling' },
+  { id: 'inbound-calling', href: '/products/inbound-calling' },
+  { id: 'agent-development', href: '/products/agent-development' },
+  { id: 'customer-service-agent', href: '/products/customer-service-agent' },
+  { id: 'ai-for-quality-control', href: '/products/ai-for-quality-control' },
+  { id: 'voip-phone-service', href: '/products/voip-phone-service' },
 ];
 
 const useCasesItems = [
-  { label: 'BPO (Silverbell Group)', href: '/silverbellgroup' },
-  { label: 'Clarity Global', href: '/clarity-global' },
-  {
-    label: 'Residential Service (Stone Electric)',
-    href: '/residential-service-automation',
-  },
-  {
-    label: 'Agro-Industry',
-    href: '/agro-industry',
-  },
-  {
-    label: 'HVAC Leads',
-    href: '/hvac-leads',
-  },
+  { id: 'silverbell', href: '/silverbellgroup' },
+  { id: 'clarity-global', href: '/clarity-global' },
+  { id: 'residential-service', href: '/residential-service-automation' },
+  { id: 'agro-industry', href: '/agro-industry' },
+  { id: 'hvac-leads', href: '/hvac-leads' },
 ];
 
-const aboutItems = [{ label: 'Meet the Team', href: '/meettheteam' }];
+const aboutItems = [{ id: 'meet-the-team', href: '/meettheteam' }];
 
 export const BurgerMenu = () => {
+  const t = useTranslations('Header');
   const [open, setOpen] = useState(false);
   const [openProducts, setOpenProducts] = useState(false);
   const [openIndustries, setOpenIndustries] = useState(false);
@@ -95,8 +88,8 @@ export const BurgerMenu = () => {
   return (
     <Root open={open} onOpenChange={setOpen}>
       <Trigger asChild>
-        <button aria-label="Open burger menu" name="open-burger-menu" className={st.burger}>
-          Menu
+        <button aria-label={t('openMenuAria')} name="open-burger-menu" className={st.burger}>
+          {t('menu')}
         </button>
       </Trigger>
       <Portal>
@@ -107,19 +100,19 @@ export const BurgerMenu = () => {
             <section className={cn(st.content, { [st.open]: open })}>
               <nav className={st.nav} itemScope itemType="http://schema.org/SiteNavigationElement">
                 <Link href="/" className={cn({ [st.active]: pathname === '/' })} itemProp="url">
-                  <span itemProp="name">Home</span>
+                  <span itemProp="name">{t('home')}</span>
                 </Link>
                 <Link
                   href="/news"
                   className={cn({ [st.active]: pathname === '/news' })}
                   itemProp="url"
                 >
-                  <span itemProp="name">News</span>
+                  <span itemProp="name">{t('news')}</span>
                 </Link>
 
                 <div className={st.group}>
                   <button
-                    aria-label="Toggle products group"
+                    aria-label={t('toggleProducts')}
                     name="toggle-products-group"
                     className={cn(st.groupTrigger, {
                       [st.active]: pathname.startsWith('/products'),
@@ -127,7 +120,7 @@ export const BurgerMenu = () => {
                     })}
                     onClick={() => setOpenProducts((v) => !v)}
                   >
-                    <span itemProp="name">Products</span>
+                    <span itemProp="name">{t('products')}</span>
                     <Image
                       src="/icons/header/arrow.svg"
                       alt={pageHeading}
@@ -150,7 +143,7 @@ export const BurgerMenu = () => {
                         })}
                         itemProp="url"
                       >
-                        <span itemProp="name">{item.label}</span>
+                        <span itemProp="name">{t(`productItems.${item.id}`)}</span>
                       </Link>
                     ))}
                   </div>
@@ -161,19 +154,19 @@ export const BurgerMenu = () => {
                   className={cn({ [st.active]: pathname === '/pricing' })}
                   itemProp="url"
                 >
-                  <span itemProp="name">Pricing</span>
+                  <span itemProp="name">{t('pricing')}</span>
                 </Link>
                 <div className={st.group}>
                   <button
-                    aria-label="Toggle about group"
+                    aria-label={t('toggleAbout')}
                     name="toggle-about-group"
                     className={cn(st.groupTrigger, {
                       [st.active]: pathname.startsWith('/about'),
-                      [st.groupOpen]: openProducts,
+                      [st.groupOpen]: openAbout,
                     })}
                     onClick={() => setOpenAbout((v) => !v)}
                   >
-                    <span itemProp="name">About</span>
+                    <span itemProp="name">{t('about')}</span>
                     <Image
                       src="/icons/header/arrow.svg"
                       alt={pageHeading}
@@ -196,7 +189,7 @@ export const BurgerMenu = () => {
                         })}
                         itemProp="url"
                       >
-                        <span itemProp="name">{item.label}</span>
+                        <span itemProp="name">{t(`aboutItems.${item.id}`)}</span>
                       </Link>
                     ))}
                   </div>
@@ -204,7 +197,7 @@ export const BurgerMenu = () => {
 
                 <div className={st.group}>
                   <button
-                    aria-label="Toggle industries group"
+                    aria-label={t('toggleIndustries')}
                     name="toggle-industries-group"
                     className={cn(st.groupTrigger, {
                       [st.active]: pathname.startsWith('/industries'),
@@ -212,7 +205,7 @@ export const BurgerMenu = () => {
                     })}
                     onClick={() => setOpenIndustries((v) => !v)}
                   >
-                    <span itemProp="name">Industries</span>
+                    <span itemProp="name">{t('industries')}</span>
                     <Image
                       src="/icons/header/arrow.svg"
                       alt={pageHeading}
@@ -236,7 +229,7 @@ export const BurgerMenu = () => {
                         itemProp="url"
                       >
                         <Image src={item.icon} alt={pageHeading} width={20} height={20} />
-                        <span itemProp="name">{item.label}</span>
+                        <span itemProp="name">{t(`industryItems.${item.id}`)}</span>
                       </Link>
                     ))}
                   </div>
@@ -244,7 +237,7 @@ export const BurgerMenu = () => {
 
                 <div className={st.group}>
                   <button
-                    aria-label="Toggle use cases group"
+                    aria-label={t('toggleUseCases')}
                     name="toggle-use-cases-group"
                     className={cn(st.groupTrigger, {
                       [st.active]: isUseCasesPath,
@@ -252,7 +245,7 @@ export const BurgerMenu = () => {
                     })}
                     onClick={() => setOpenUseCases((v) => !v)}
                   >
-                    <span itemProp="name">Use Cases</span>
+                    <span itemProp="name">{t('useCases')}</span>
                     <Image
                       src="/icons/header/arrow.svg"
                       alt={pageHeading}
@@ -275,19 +268,14 @@ export const BurgerMenu = () => {
                         })}
                         itemProp="url"
                       >
-                        <span itemProp="name">{item.label}</span>
+                        <span itemProp="name">{t(`useCaseItems.${item.id}`)}</span>
                       </Link>
                     ))}
                   </div>
                 </div>
 
-                <Link
-                  className={st.bookMeeting}
-                  // href="https://calendly.com/coldi/30min"
-                  href="/calendar"
-                  target="_blank"
-                >
-                  Schedule a Meeting
+                <Link className={st.bookMeeting} href="/calendar" target="_blank">
+                  {t('scheduleMeeting')}
                 </Link>
               </nav>
             </section>

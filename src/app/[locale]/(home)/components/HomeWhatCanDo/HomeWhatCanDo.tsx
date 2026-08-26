@@ -3,35 +3,32 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
+import { useTranslations } from 'next-intl';
+
 import { cn } from '@/shared/lib/helpers';
 
 import st from './HomeWhatCanDo.module.scss';
 
 type WhatCanDoItem = {
   id: string;
-  label: string;
   icon: string;
 };
 
 const salesGrowth: WhatCanDoItem[] = [
   {
     id: 'qualify-leads',
-    label: 'Qualify leads at scale, automatically',
     icon: '/images/icons/qualify-leads.svg',
   },
   {
     id: 're-engage-leads',
-    label: 'Re-engage abandoned leads',
     icon: '/images/icons/re-engage-leads.svg',
   },
   {
     id: 'outbound-campaigns',
-    label: 'Run outbound campaigns at any volume',
     icon: '/images/icons/outbound-campaigns.svg',
   },
   {
     id: 'win-back-accounts',
-    label: 'Win back dormant accounts',
     icon: '/images/icons/win-back-accounts.svg',
   },
 ];
@@ -39,22 +36,18 @@ const salesGrowth: WhatCanDoItem[] = [
 const customerSupport: WhatCanDoItem[] = [
   {
     id: 'collect-feedback',
-    label: 'Collect feedback after every call',
     icon: '/images/icons/collect-feedback.svg',
   },
   {
     id: 'inbound-calls',
-    label: 'Handle inbound calls, 24/7',
     icon: '/images/icons/inbound-calls.svg',
   },
   {
     id: 'multilingual-support',
-    label: 'Deliver multilingual customer support',
     icon: '/images/icons/multilingual-support.svg',
   },
   {
     id: 'route-calls',
-    label: 'Route calls to the right desk instantly',
     icon: '/images/icons/route-calls.svg',
   },
 ];
@@ -62,27 +55,22 @@ const customerSupport: WhatCanDoItem[] = [
 const complianceScheduling: WhatCanDoItem[] = [
   {
     id: 'schedule-appointments',
-    label: 'Schedule appointments and send reminders',
     icon: '/images/icons/schedule-appointments.svg',
   },
   {
     id: 'verify-identity',
-    label: 'Verify identity documents instantly',
     icon: '/images/icons/verify-identity.svg',
   },
   {
     id: 'policy-renewals',
-    label: 'Confirm policy renewals before they lapse',
     icon: '/images/icons/policy-renewals.svg',
   },
   {
     id: 'review-calls',
-    label: 'Review 100% of calls for compliance',
     icon: '/images/icons/review-calls.svg',
   },
   {
     id: 'kyc-documents',
-    label: 'Chase missing KYC documents',
     icon: '/images/icons/kyc-documents.svg',
   },
 ];
@@ -90,24 +78,20 @@ const complianceScheduling: WhatCanDoItem[] = [
 const paymentsPlatform: WhatCanDoItem[] = [
   {
     id: 'custom-agents',
-    label: 'Deploy custom AI agents for any workflow',
     icon: '/images/icons/custom-agents.svg',
   },
   {
     id: 'payment-plans',
-    label: 'Set up payment plans automatically',
     icon: '/images/icons/payment-plans.svg',
   },
   {
     id: 'payment-promises',
-    label: 'Follow up on broken payment promises',
     icon: '/images/icons/payment-promises.svg',
   },
 ];
 
 type WhatCanDoColumn = {
   id: string;
-  title: string;
   items: WhatCanDoItem[];
   accent?: boolean;
 };
@@ -115,13 +99,11 @@ type WhatCanDoColumn = {
 const leftColumns: WhatCanDoColumn[] = [
   {
     id: 'sales-growth',
-    title: 'Sales & growth',
     items: salesGrowth,
     accent: true,
   },
   {
     id: 'customer-support',
-    title: 'Customer support',
     items: customerSupport,
   },
 ];
@@ -129,28 +111,26 @@ const leftColumns: WhatCanDoColumn[] = [
 const rightColumns: WhatCanDoColumn[] = [
   {
     id: 'compliance-scheduling',
-    title: 'Compliance & scheduling',
     items: complianceScheduling,
   },
   {
     id: 'payments-platform',
-    title: 'Payments & platform',
     items: paymentsPlatform,
   },
 ];
 
-const renderColumns = (columns: WhatCanDoColumn[]) => (
+const renderColumns = (columns: WhatCanDoColumn[], t: ReturnType<typeof useTranslations>) => (
   <div className={st.home_what_do__left}>
     {columns.map((column) => (
       <article key={column.id} className={cn(st.home_what_do__card, column.accent && st.accent)}>
-        <h3 className={st.home_what_do__card_title}>{column.title}</h3>
+        <h3 className={st.home_what_do__card_title}>{t(`columns.${column.id}`)}</h3>
         <ul className={st.home_what_do__list}>
           {column.items.map((item) => (
             <li key={item.id} className={st.home_what_do__item}>
               <div className={st.home_what_do__item_image}>
-                <Image src={item.icon} alt="Icon" width={18} height={18} loading={'lazy'} />
+                <Image src={item.icon} alt="" width={18} height={18} loading={'lazy'} />
               </div>
-              <span className={st.home_what_do__item_title}>{item.label}</span>
+              <span className={st.home_what_do__item_title}>{t(`items.${item.id}`)}</span>
             </li>
           ))}
         </ul>
@@ -160,6 +140,7 @@ const renderColumns = (columns: WhatCanDoColumn[]) => (
 );
 
 export const HomeWhatCanDo = () => {
+  const t = useTranslations('HomeWhatCanDo');
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
 
@@ -191,10 +172,10 @@ export const HomeWhatCanDo = () => {
   return (
     <section ref={sectionRef} className={cn(st.home_what_do, inView && st.in_view)}>
       <div className="container">
-        <h2 className={st.home_what_do__title}>What Coldi Can Do for Your Business</h2>
+        <h2 className={st.home_what_do__title}>{t('title')}</h2>
 
         <div className={st.home_what_do__row}>
-          {renderColumns(leftColumns)}
+          {renderColumns(leftColumns, t)}
 
           <div className={st.home_what_do__left_icons_wrapper}>
             <div>
@@ -377,7 +358,7 @@ export const HomeWhatCanDo = () => {
             </div>
           </div>
 
-          {renderColumns(rightColumns)}
+          {renderColumns(rightColumns, t)}
         </div>
       </div>
     </section>

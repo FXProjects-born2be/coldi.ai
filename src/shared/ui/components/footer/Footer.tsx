@@ -1,5 +1,8 @@
+import { Suspense } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import NextLink from 'next/link';
+
+import { getTranslations } from 'next-intl/server';
 
 import { cn, getPageHeadingFromPath, requestRoutes } from '@/shared/lib/helpers';
 import { MessageIcon } from '@/shared/ui/icons/fill/message';
@@ -11,50 +14,54 @@ import { X } from '@/shared/ui/icons/fill/socials/x';
 import { Youtube } from '@/shared/ui/icons/fill/socials/youtube';
 
 import st from './Footer.module.scss';
+import { FooterLanguageSelect } from './FooterLanguageSelect';
+
+import { Link } from '@/i18n/navigation';
 
 const menu = [
   {
-    title: 'Explore',
+    id: 'explore',
     links: [
-      { href: '/products', label: 'Products' },
-      { href: '/pricing', label: 'Pricing' },
-      { href: '/news', label: 'News' },
-      { href: '/about', label: 'About' },
+      { id: 'products', href: '/products' },
+      { id: 'pricing', href: '/pricing' },
+      { id: 'news', href: '/news' },
+      { id: 'about', href: '/about' },
     ],
   },
   {
-    title: 'Products',
+    id: 'products',
     links: [
-      { href: '/products/outbound-calling', label: 'Outbound AI Calling' },
-      { href: '/products/inbound-calling', label: 'Inbound AI Calling' },
-      { href: '/products/agent-development', label: 'AI Agent Development' },
-      { href: '/products/customer-service-agent', label: 'AI Customer Service' },
-      { href: '/products/ai-for-quality-control', label: 'AI for Quality Control' },
-      { href: '/products/voip-phone-service', label: 'VoIP Phone Service' },
+      { id: 'outbound-calling', href: '/products/outbound-calling' },
+      { id: 'inbound-calling', href: '/products/inbound-calling' },
+      { id: 'agent-development', href: '/products/agent-development' },
+      { id: 'customer-service-agent', href: '/products/customer-service-agent' },
+      { id: 'ai-for-quality-control', href: '/products/ai-for-quality-control' },
+      { id: 'voip-phone-service', href: '/products/voip-phone-service' },
     ],
   },
   {
-    title: 'Industries',
+    id: 'industries',
     links: [
-      { href: '/industries/healthcare', label: 'Healthcare' },
-      { href: '/industries/insurance', label: 'Insurance' },
-      { href: '/industries/real-estate', label: 'Real Estate' },
-      { href: '/industries/call-center', label: 'Call Centers' },
-      { href: '/industries/debt-collection', label: 'Debt Collection' },
+      { id: 'healthcare', href: '/industries/healthcare' },
+      { id: 'insurance', href: '/industries/insurance' },
+      { id: 'real-estate', href: '/industries/real-estate' },
+      { id: 'call-center', href: '/industries/call-center' },
+      { id: 'debt-collection', href: '/industries/debt-collection' },
     ],
   },
   {
-    title: 'Legal',
+    id: 'legal',
     links: [
-      { href: '/legal', label: 'Terms of Service' },
-      { href: '/legal', label: 'Privacy Policy' },
-      { href: '/legal', label: 'Data Processing Agreement' },
+      { id: 'terms', href: '/legal' },
+      { id: 'privacy', href: '/legal' },
+      { id: 'dpa', href: '/legal' },
     ],
   },
 ];
 
-export const Footer = ({ pathname }: { pathname: string }) => {
-  const phoneNumber = '+441299667777'; // Static phone number
+export const Footer = async ({ pathname }: { pathname: string }) => {
+  const t = await getTranslations('Footer');
+  const phoneNumber = '+441299667777';
   const pageHeading = getPageHeadingFromPath(pathname);
 
   return !requestRoutes.has(pathname) ? (
@@ -64,7 +71,7 @@ export const Footer = ({ pathname }: { pathname: string }) => {
           <div className={st.footer__inner}>
             <div className={st.footer__top}>
               <div>
-                <a href={'/'} className={st.footer__logo}>
+                <Link href="/" className={st.footer__logo}>
                   <Image
                     src="/footer-logo.svg"
                     alt={pageHeading}
@@ -72,85 +79,79 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                     height={100}
                     loading={'lazy'}
                   />
-                </a>
+                </Link>
 
-                <p className={st.footer__subtitle}>Making voice AI work for Fintech</p>
+                <p className={st.footer__subtitle}>{t('subtitle')}</p>
 
-                <ul className={st.footer__socials}>
-                  <li>
-                    <Link href="https://x.com/Coldiai" className={st.footer__socials_link}>
-                      <X />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="https://www.facebook.com/coldiai/"
-                      className={st.footer__socials_link}
-                    >
-                      <Facebook />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="https://www.linkedin.com/company/coldiai/"
-                      target="_blank"
-                      className={st.footer__socials_link}
-                    >
-                      <Linkedin />
-                    </Link>
-                  </li>
+                <div className={st.footer__socials_wrapper}>
+                  <Suspense fallback={null}>
+                    <FooterLanguageSelect />
+                  </Suspense>
 
-                  <li>
-                    <Link
-                      href="https://www.youtube.com/@coldi_ai"
-                      target="_blank"
-                      className={st.footer__socials_link}
-                    >
-                      <Youtube />
-                    </Link>
-                  </li>
-                </ul>
+                  <ul className={st.footer__socials}>
+                    <li>
+                      <NextLink href="https://x.com/Coldiai" className={st.footer__socials_link}>
+                        <X />
+                      </NextLink>
+                    </li>
+                    <li>
+                      <NextLink
+                        href="https://www.facebook.com/coldiai/"
+                        className={st.footer__socials_link}
+                      >
+                        <Facebook />
+                      </NextLink>
+                    </li>
+                    <li>
+                      <NextLink
+                        href="https://www.linkedin.com/company/coldiai/"
+                        target="_blank"
+                        className={st.footer__socials_link}
+                      >
+                        <Linkedin />
+                      </NextLink>
+                    </li>
+
+                    <li>
+                      <NextLink
+                        href="https://www.youtube.com/@coldi_ai"
+                        target="_blank"
+                        className={st.footer__socials_link}
+                      >
+                        <Youtube />
+                      </NextLink>
+                    </li>
+                  </ul>
+                </div>
 
                 <ul className={st.footer__contact}>
                   <li className={st.footer__contact_item}>
-                    <Link href="mailto:info@coldi.ai" className={st.footer__contact_link}>
+                    <NextLink href="mailto:info@coldi.ai" className={st.footer__contact_link}>
                       <MessageIcon />
                       info@coldi.ai
-                    </Link>
+                    </NextLink>
                   </li>
                   <li className={st.footer__contact_item}>
-                    <Link href={`tel:${phoneNumber}`} className={st.footer__contact_link}>
+                    <NextLink href={`tel:${phoneNumber}`} className={st.footer__contact_link}>
                       <PhoneIcon />
                       {phoneNumber}
-                    </Link>
+                    </NextLink>
                   </li>
-                  {/*<li className={st.footer__contact_item}>*/}
-                  {/*  <Link*/}
-                  {/*    href="https://wa.me/447955534986"*/}
-                  {/*    target="_blank"*/}
-                  {/*    rel="noopener noreferrer"*/}
-                  {/*    aria-label="Open WhatsApp chat with Coldi"*/}
-                  {/*    className={st.footer__contact_link}*/}
-                  {/*  >*/}
-                  {/*    <Whatsapp />*/}
-                  {/*    Whatsapp*/}
-                  {/*  </Link>*/}
-                  {/*</li>*/}
                 </ul>
               </div>
               <div className={st.footer__menu}>
                 {menu.map((column) => (
-                  <div key={column.title}>
-                    <h4 className={st.footer__menu_title}>{column.title}</h4>
+                  <div key={column.id}>
+                    <h4 className={st.footer__menu_title}>{t(`columns.${column.id}`)}</h4>
                     <ul
                       className={st.footer__menu_list}
                       itemScope
                       itemType="http://schema.org/SiteNavigationElement"
                     >
                       {column.links.map((link) => (
-                        <li key={link.label} itemProp="name">
+                        <li key={link.id} itemProp="name">
                           <Link href={link.href} itemProp="url" className={st.footer__menu_link}>
-                            {link.label}
+                            {t(`${column.id}.${link.id}`)}
                           </Link>
                         </li>
                       ))}
@@ -162,14 +163,14 @@ export const Footer = ({ pathname }: { pathname: string }) => {
 
             <div className={st.footer__bottom}>
               <p className={st.footer__copyright}>
-                © {new Date().getFullYear()} Coldi. Voice-Powered. Rights Reserved.
+                {t('copyright', { year: new Date().getFullYear() })}
               </p>
               <div className={st.footer__badges}>
                 <a
                   href="https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="View Coldi on Star AI"
+                  aria-label={t('starAria')}
                 >
                   <Image
                     src="/images/footer/star-ai.png"
@@ -183,7 +184,7 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                   href="https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd/services/coldi-ai"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="View Coldi on Star AI"
+                  aria-label={t('starAria')}
                 >
                   <Image
                     src="/images/footer/star-level.png"
@@ -197,11 +198,11 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                   href="https://www.saashub.com/coldi?utm_source=badge&utm_campaign=badge&utm_content=coldi&badge_variant=color&badge_kind=approved"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="View Coldi on SaaSHub"
+                  aria-label={t('saasHubAria')}
                 >
                   <Image
                     src="/images/footer/saas-hub.png"
-                    alt="View Coldi on SaaSHub"
+                    alt={t('saasHubAria')}
                     width={126}
                     height={42}
                   />
@@ -211,23 +212,10 @@ export const Footer = ({ pathname }: { pathname: string }) => {
           </div>
         </div>
 
-        {/*<div className={st.footer__bottom_image}>*/}
-        {/*  <video*/}
-        {/*    src="/videos/footer/footer-video.mp4"*/}
-        {/*    autoPlay*/}
-        {/*    playsInline*/}
-        {/*    muted*/}
-        {/*    loop*/}
-        {/*    preload="metadata"*/}
-        {/*    controls={false}*/}
-        {/*    aria-hidden*/}
-        {/*  />*/}
-        {/*</div>*/}
-
         <a
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Open WhatsApp chat with Coldi"
+          aria-label={t('whatsappAria')}
           className={st.footer__whatsapp}
           href="https://wa.me/447955534986"
         >

@@ -6,7 +6,7 @@ import { blurInUp } from '@/shared/lib/helpers';
 
 import st from './Process.module.scss';
 
-import { processSteps } from '@/app/pricing/model/content';
+import { processSteps } from '@/app/[locale]/pricing/model/content';
 
 export const Process = () => {
   return (

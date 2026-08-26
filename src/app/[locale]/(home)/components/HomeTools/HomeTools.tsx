@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import { getTranslations } from 'next-intl/server';
+
 import { cn } from '@/shared/lib/helpers';
 
 import st from './HomeTools.module.scss';
@@ -57,14 +59,18 @@ const ToolsRow = ({ items, reverse }: { items: Tool[]; reverse?: boolean }) => (
   </div>
 );
 
-export const HomeTools = () => (
-  <section className={st.home_tools}>
-    <div className={cn('container', st.home_tools__container)}>
-      <h2 className={st.home_tools__title}>Works With the Tools You Already Use</h2>
-      <div className={st.home_tools__images}>
-        <ToolsRow items={rowOne} />
-        <ToolsRow items={rowTwo} reverse />
+export const HomeTools = async () => {
+  const t = await getTranslations('HomeTools');
+
+  return (
+    <section className={st.home_tools}>
+      <div className={cn('container', st.home_tools__container)}>
+        <h2 className={st.home_tools__title}>{t('title')}</h2>
+        <div className={st.home_tools__images}>
+          <ToolsRow items={rowOne} />
+          <ToolsRow items={rowTwo} reverse />
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};

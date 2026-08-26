@@ -2,29 +2,28 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
 
 import st from './HomeBuiltFor.module.scss';
 
+import { Link } from '@/i18n/navigation';
+
 type Workflow = {
   id: string;
-  label: string;
   icon: string;
 };
 
 type ChatMessage = {
   role: 'user' | 'assistant' | 'status';
-  text: string;
   icon?: string;
 };
 
 type Industry = {
   id: string;
-  label: string;
   href: string;
-  cta: string;
   image: string;
   secondImage: string;
   messages: ChatMessage[];
@@ -34,162 +33,74 @@ type Industry = {
 const industries: Industry[] = [
   {
     id: 'insurance',
-    label: 'Insurance',
     href: '/industries/insurance',
-    cta: 'Learn more',
     image: '/images/home/home-built-for-one.jpg',
     secondImage: '/images/home/home-built-for-one-second.png',
     messages: [
-      { role: 'user', text: 'When does my policy expire?' },
-      { role: 'assistant', text: 'Let me check. Can you confirm your policy number?' },
-      { role: 'user', text: 'INS-88213' },
-      {
-        role: 'assistant',
-        text: 'Renews August 3rd. Want me to lock in your rate?',
-        icon: '/images/home/buit-for-icon.png',
-      },
+      { role: 'user' },
+      { role: 'assistant' },
+      { role: 'user' },
+      { role: 'assistant', icon: '/images/home/buit-for-icon.png' },
     ],
     workflows: [
-      {
-        id: 'policy-renewals',
-        label: 'Policy Renewals',
-        icon: '/images/icons/policy-renewals.png',
-      },
-      {
-        id: 'claims-follow-up',
-        label: 'Claims Follow-up',
-        icon: '/images/icons/claims-follow-up.png',
-      },
-      {
-        id: 'quote-qualification',
-        label: 'Quote Qualification',
-        icon: '/images/icons/quote-qualification.svg',
-      },
-      {
-        id: 'payment-reminders',
-        label: 'Payment Reminders',
-        icon: '/images/icons/payment-reminders.svg',
-      },
+      { id: 'policy-renewals', icon: '/images/icons/policy-renewals.png' },
+      { id: 'claims-follow-up', icon: '/images/icons/claims-follow-up.png' },
+      { id: 'quote-qualification', icon: '/images/icons/quote-qualification.svg' },
+      { id: 'payment-reminders', icon: '/images/icons/payment-reminders.svg' },
     ],
   },
   {
     id: 'trading',
-    label: 'Trading Platforms',
     href: '/industries/brokers-and-trading-platforms',
-    cta: 'Learn more',
     image: '/images/home/home-built-for-three.jpg',
     secondImage: '/images/home/home-built-for-three-second.png',
     messages: [
-      { role: 'user', text: 'Can I move my payment to next week?' },
-      { role: 'assistant', text: 'Sure. What date works?' },
-      { role: 'user', text: 'The 15th' },
-      {
-        role: 'assistant',
-        text: 'Confirmed. New date is the 15th.',
-        icon: '/images/home/buit-for-icon.png',
-      },
+      { role: 'user' },
+      { role: 'assistant' },
+      { role: 'user' },
+      { role: 'assistant', icon: '/images/home/buit-for-icon.png' },
     ],
     workflows: [
-      {
-        id: 'lead-qualification',
-        label: 'Lead Qualification',
-        icon: '/images/icons/lead-qualification.svg',
-      },
-      {
-        id: 'deposit-activation',
-        label: 'Deposit Activation',
-        icon: '/images/icons/deposit-activation.svg',
-      },
-      {
-        id: 'kyc-follow-up',
-        label: 'KYC Follow-up',
-        icon: '/images/icons/kys-follow-up.svg',
-      },
-      {
-        id: 'client-reactivation',
-        label: 'Client Reactivation',
-        icon: '/images/icons/client-reactivation.svg',
-      },
+      { id: 'lead-qualification', icon: '/images/icons/lead-qualification.svg' },
+      { id: 'deposit-activation', icon: '/images/icons/deposit-activation.svg' },
+      { id: 'kyc-follow-up', icon: '/images/icons/kys-follow-up.svg' },
+      { id: 'client-reactivation', icon: '/images/icons/client-reactivation.svg' },
     ],
   },
   {
     id: 'debt-collection',
-    label: 'Learn more',
     href: '/industries/debt-collection',
-    cta: 'Explore Debt Collection',
     image: '/images/home/home-built-for-four.jpg',
     secondImage: '/images/home/home-built-for-four-second.png',
     messages: [
-      { role: 'user', text: "Why isn't my verification going through?" },
-      { role: 'assistant', text: 'Have you uploaded a photo ID?' },
-      { role: 'user', text: 'Not yet, only address proof' },
-      {
-        role: 'assistant',
-        text: "That's it. Sending a secure upload link now.",
-        icon: '/images/home/buit-for-icon.png',
-      },
+      { role: 'user' },
+      { role: 'assistant' },
+      { role: 'user' },
+      { role: 'assistant', icon: '/images/home/buit-for-icon.png' },
     ],
     workflows: [
-      {
-        id: 'debt-payment-reminders',
-        label: 'Payment Reminders',
-        icon: '/images/icons/payment-reminders.svg',
-      },
-      {
-        id: 'promise-to-pay',
-        label: 'Promise to Pay',
-        icon: '/images/icons/promise-to-pay.svg',
-      },
-      {
-        id: 'payment-plans',
-        label: 'Payment Plans',
-        icon: '/images/icons/build-payment-plans.svg',
-      },
-      {
-        id: 'recovery-campaigns',
-        label: 'Recovery Campaigns',
-        icon: '/images/icons/recovery-campaigns.svg',
-      },
+      { id: 'debt-payment-reminders', icon: '/images/icons/payment-reminders.svg' },
+      { id: 'promise-to-pay', icon: '/images/icons/promise-to-pay.svg' },
+      { id: 'payment-plans', icon: '/images/icons/build-payment-plans.svg' },
+      { id: 'recovery-campaigns', icon: '/images/icons/recovery-campaigns.svg' },
     ],
   },
   {
     id: 'emis',
-    label: 'EMIs',
     href: '/fintech-Industry',
-    cta: 'Learn more',
     image: '/images/home/home-built-for-two.jpg',
     secondImage: '/images/home/home-built-for-two-second.png',
     messages: [
-      { role: 'user', text: "My deposit isn't showing up" },
-      { role: 'assistant', text: "Let's check. Amount and method?" },
-      { role: 'user', text: '$500, bank transfer' },
-      {
-        role: 'assistant',
-        text: 'Found it. Processing, live in 10 minutes.',
-        icon: '/images/home/buit-for-icon.png',
-      },
+      { role: 'user' },
+      { role: 'assistant' },
+      { role: 'user' },
+      { role: 'assistant', icon: '/images/home/buit-for-icon.png' },
     ],
     workflows: [
-      {
-        id: 'customer-support',
-        label: 'Customer Support',
-        icon: '/images/icons/customer-support.svg',
-      },
-      {
-        id: 'verification-calls',
-        label: 'Verification Calls',
-        icon: '/images/icons/verification-calls.svg',
-      },
-      {
-        id: 'appointment-booking',
-        label: 'Appointment Booking',
-        icon: '/images/icons/appointment-booking.svg',
-      },
-      {
-        id: 'custom-automations',
-        label: 'Custom Automations',
-        icon: '/images/icons/custom-automations.svg',
-      },
+      { id: 'customer-support', icon: '/images/icons/customer-support.svg' },
+      { id: 'verification-calls', icon: '/images/icons/verification-calls.svg' },
+      { id: 'appointment-booking', icon: '/images/icons/appointment-booking.svg' },
+      { id: 'custom-automations', icon: '/images/icons/custom-automations.svg' },
     ],
   },
 ];
@@ -208,10 +119,12 @@ const SliderChevron = () => (
 );
 
 export const HomeBuiltFor = () => {
+  const t = useTranslations('HomeBuiltFor');
   const [industryId, setIndustryId] = useState(industries[0].id);
 
   const industryIndex = industries.findIndex((item) => item.id === industryId);
   const industry = industries[industryIndex] ?? industries[0];
+  const industryLabel = t(`industries.${industry.id}.label`);
 
   const goToIndustry = (direction: -1 | 1) => {
     const nextIndex = (industryIndex + direction + industries.length) % industries.length;
@@ -222,14 +135,11 @@ export const HomeBuiltFor = () => {
     <section className={st.home_built_for}>
       <div className="container">
         <div className={st.home_built_for__top}>
-          <h2 className={st.home_built_for__title}>Built for Your Business</h2>
-          <p className={st.home_built_for__description}>
-            Every fintech business has different customer conversations. Select your industry to
-            explore the Voice AI workflows we build, manage and optimize for teams like yours.
-          </p>
+          <h2 className={st.home_built_for__title}>{t('title')}</h2>
+          <p className={st.home_built_for__description}>{t('description')}</p>
         </div>
 
-        <div className={st.home_built_for__tabs} role="tablist" aria-label="Industries">
+        <div className={st.home_built_for__tabs} role="tablist" aria-label={t('tabsAria')}>
           {industries.map((item) => (
             <button
               key={item.id}
@@ -239,7 +149,7 @@ export const HomeBuiltFor = () => {
               className={cn(st.home_built_for__tab, item.id === industry.id && st.active)}
               onClick={() => setIndustryId(item.id)}
             >
-              {item.label}
+              {t(`industries.${item.id}.label`)}
             </button>
           ))}
         </div>
@@ -248,16 +158,16 @@ export const HomeBuiltFor = () => {
           <button
             type="button"
             className={cn(st.home_built_for__slider_btn, 'rotate-180')}
-            aria-label="Previous industry"
+            aria-label={t('prevIndustry')}
             onClick={() => goToIndustry(-1)}
           >
             <SliderChevron />
           </button>
-          <p className={st.home_built_for__slider_label}>{industry.label}</p>
+          <p className={st.home_built_for__slider_label}>{industryLabel}</p>
           <button
             type="button"
             className={st.home_built_for__slider_btn}
-            aria-label="Next industry"
+            aria-label={t('nextIndustry')}
             onClick={() => goToIndustry(1)}
           >
             <SliderChevron />
@@ -265,27 +175,29 @@ export const HomeBuiltFor = () => {
         </div>
 
         <div className={st.home_built_for__panel}>
-          <h3 className={st.home_built_for__content_title}>{industry.label}</h3>
+          <h3 className={st.home_built_for__content_title}>{industryLabel}</h3>
 
           <div className={st.home_built_for__content_items}>
             {industry.workflows.map((item) => (
               <div key={item.id} className={st.home_built_for__content_item}>
                 <div className={st.home_built_for__content_item_image}>
-                  <Image src={item.icon} alt="Icon" width={20} height={20} loading={'lazy'} />
+                  <Image src={item.icon} alt="" width={20} height={20} loading={'lazy'} />
                 </div>
-                <p className={st.home_built_for__content_item_title}>{item.label}</p>
+                <p className={st.home_built_for__content_item_title}>
+                  {t(`industries.${industry.id}.workflows.${item.id}`)}
+                </p>
               </div>
             ))}
           </div>
 
           <Link href={industry.href} className={cn('btn', 'btn-primary', st.home_built_for__cta)}>
-            {industry.cta}
+            {t(`industries.${industry.id}.cta`)}
           </Link>
 
           <div className={st.home_built_for__visual}>
             <Image
               src={industry.image}
-              alt={industry.label}
+              alt={industryLabel}
               width={700}
               height={474}
               className={st.home_built_for__visual_bg_image}
@@ -300,7 +212,7 @@ export const HomeBuiltFor = () => {
                   {item.icon ? (
                     <Image
                       src={item.icon}
-                      alt="Icon"
+                      alt=""
                       width={35}
                       height={35}
                       className={st.home_built_for__visual_icon}
@@ -308,7 +220,7 @@ export const HomeBuiltFor = () => {
                   ) : null}
                   {item.role === 'status' ? (
                     <>
-                      {item.text.replace(/\.+$/, '')}
+                      {t(`industries.${industry.id}.messages.${index}`).replace(/\.+$/, '')}
                       <span className={st.home_built_for__visual_dots} aria-hidden>
                         <span>.</span>
                         <span>.</span>
@@ -316,14 +228,14 @@ export const HomeBuiltFor = () => {
                       </span>
                     </>
                   ) : (
-                    <span>{item.text}</span>
+                    <span>{t(`industries.${industry.id}.messages.${index}`)}</span>
                   )}
                 </p>
               ))}
             </div>
 
             <div className={st.home_built_for__visual_second_image}>
-              <Image src={industry.secondImage} alt={industry.label} width={1077} height={1077} />
+              <Image src={industry.secondImage} alt={industryLabel} width={1077} height={1077} />
               <div className={st.home_built_for__visual_second_image_block}>
                 <span></span>
                 <span></span>

@@ -1,1 +1,304 @@
-{}
+{
+  "Hero": {
+    "titleLine1": "AI Workforce",
+    "titleLine2": "Built for the Next Generation of",
+    "subtitle": "Production-ready AI voice agents, fully managed from day one.",
+    "cta": "Book a Demo",
+    "phrases": {
+      "insuranceBrokers": "Insurance Brokers",
+      "tradingPlatforms": "Trading Platforms",
+      "debtCollection": "Debt Collection",
+      "salesTeams": "Sales Teams"
+    },
+    "bookDemo": {
+      "closeAria": "Close dialog",
+      "title": "Let’s tailor the demo to your business",
+      "subtitle": "Tell us a little about your needs so we can focus on what matters most to you.",
+      "name": "Name*",
+      "email": "Work email*",
+      "phone": "Phone number*",
+      "searchCountry": "Search country...",
+      "company": "Company*",
+      "next": "Next",
+      "industry": "Industry*",
+      "industryOther": "Please specify your industry",
+      "useCase": "What are you looking to use AI voice for?*",
+      "useCaseOther": "Please specify",
+      "callMe": "Call Me",
+      "sending": "Sending...",
+      "hint": "Help us focus the demo on what matters most to your business.",
+      "errors": {
+        "name": "Please introduce yourself",
+        "email": "We can't send you the call results without your email address.",
+        "company": "Please enter your company.",
+        "industry": "Please select your industry.",
+        "useCase": "Please select what you want to use AI voice for.",
+        "submit": "Failed to send. Please try again."
+      },
+      "industries": {
+        "trading": "Trading",
+        "insurance": "Insurance",
+        "lending": "Lending",
+        "other": "Other",
+        "debtCollection": "Debt Collection"
+      },
+      "useCases": {
+        "sales": "Sales",
+        "leadQualification": "Lead Qualification",
+        "customerSupport": "Customer Support",
+        "customerEngagement": "Customer Engagement",
+        "collections": "Collections",
+        "other": "Other"
+      }
+    }
+  },
+  "HomeBuiltFor": {
+    "title": "Built for Your Business",
+    "description": "Every fintech business has different customer conversations. Select your industry to explore the Voice AI workflows we build, manage and optimize for teams like yours.",
+    "tabsAria": "Industries",
+    "prevIndustry": "Previous industry",
+    "nextIndustry": "Next industry",
+    "industries": {
+      "insurance": {
+        "label": "Insurance",
+        "cta": "Learn more",
+        "messages": [
+          "When does my policy expire?",
+          "Let me check. Can you confirm your policy number?",
+          "INS-88213",
+          "Renews August 3rd. Want me to lock in your rate?"
+        ],
+        "workflows": {
+          "policy-renewals": "Policy Renewals",
+          "claims-follow-up": "Claims Follow-up",
+          "quote-qualification": "Quote Qualification",
+          "payment-reminders": "Payment Reminders"
+        }
+      },
+      "trading": {
+        "label": "Trading Platforms",
+        "cta": "Learn more",
+        "messages": [
+          "Can I move my payment to next week?",
+          "Sure. What date works?",
+          "The 15th",
+          "Confirmed. New date is the 15th."
+        ],
+        "workflows": {
+          "lead-qualification": "Lead Qualification",
+          "deposit-activation": "Deposit Activation",
+          "kyc-follow-up": "KYC Follow-up",
+          "client-reactivation": "Client Reactivation"
+        }
+      },
+      "debt-collection": {
+        "label": "Debt Collection",
+        "cta": "Explore Debt Collection",
+        "messages": [
+          "Why isn't my verification going through?",
+          "Have you uploaded a photo ID?",
+          "Not yet, only address proof",
+          "That's it. Sending a secure upload link now."
+        ],
+        "workflows": {
+          "debt-payment-reminders": "Payment Reminders",
+          "promise-to-pay": "Promise to Pay",
+          "payment-plans": "Payment Plans",
+          "recovery-campaigns": "Recovery Campaigns"
+        }
+      },
+      "emis": {
+        "label": "EMIs",
+        "cta": "Learn more",
+        "messages": [
+          "My deposit isn't showing up",
+          "Let's check. Amount and method?",
+          "$500, bank transfer",
+          "Found it. Processing, live in 10 minutes."
+        ],
+        "workflows": {
+          "customer-support": "Customer Support",
+          "verification-calls": "Verification Calls",
+          "appointment-booking": "Appointment Booking",
+          "custom-automations": "Custom Automations"
+        }
+      }
+    }
+  },
+  "HomeTools": {
+    "title": "Works With the Tools You Already Use"
+  },
+  "HomeWhatCanDo": {
+    "title": "What Coldi Can Do for Your Business",
+    "columns": {
+      "sales-growth": "Sales & growth",
+      "customer-support": "Customer support",
+      "compliance-scheduling": "Compliance & scheduling",
+      "payments-platform": "Payments & platform"
+    },
+    "items": {
+      "qualify-leads": "Qualify leads at scale, automatically",
+      "re-engage-leads": "Re-engage abandoned leads",
+      "outbound-campaigns": "Run outbound campaigns at any volume",
+      "win-back-accounts": "Win back dormant accounts",
+      "collect-feedback": "Collect feedback after every call",
+      "inbound-calls": "Handle inbound calls, 24/7",
+      "multilingual-support": "Deliver multilingual customer support",
+      "route-calls": "Route calls to the right desk instantly",
+      "schedule-appointments": "Schedule appointments and send reminders",
+      "verify-identity": "Verify identity documents instantly",
+      "policy-renewals": "Confirm policy renewals before they lapse",
+      "review-calls": "Review 100% of calls for compliance",
+      "kyc-documents": "Chase missing KYC documents",
+      "custom-agents": "Deploy custom AI agents for any workflow",
+      "payment-plans": "Set up payment plans automatically",
+      "payment-promises": "Follow up on broken payment promises"
+    }
+  },
+  "HomeHearVoice": {
+    "title": "Hear Voice AI in Action",
+    "description": "Listen to real conversations across insurance, trading platforms, and debt collection, and hear how Coldi handles customer interactions naturally and professionally.",
+    "selectAria": "Select voice example",
+    "play": "Play {title}",
+    "stop": "Stop {title}",
+    "exploreProducts": "Explore Products",
+    "items": {
+      "insurance": {
+        "title": "Insurance Cases",
+        "subtitle": "Policy Renewal"
+      },
+      "trading": {
+        "title": "Trading Platforms",
+        "subtitle": "Lead Qualification"
+      },
+      "debt-collection": {
+        "title": "Debt Collection",
+        "subtitle": "Payment Reminder"
+      },
+      "customer-support": {
+        "title": "Customer Support",
+        "subtitle": "Verification Call"
+      }
+    }
+  },
+  "HomeFeaturedOn": {
+    "title": "Featured on"
+  },
+  "HomeManaged": {
+    "title": "Managed Beyond Launch",
+    "description": "Coldi continuously monitors conversations, analyzes performance, and optimizes every workflow to maximize business outcomes.",
+    "tabsAria": "Managed features",
+    "prevTab": "Previous tab",
+    "nextTab": "Next tab",
+    "close": "Close",
+    "viewScreenshot": "View {title} screenshot",
+    "tabs": {
+      "calls": {
+        "title": "Calls",
+        "description": "View call activity, duration, outcomes, and call details."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Track call results, response rates, and key performance metrics."
+      },
+      "agents": {
+        "title": "Agents",
+        "description": "Configure agents, calling settings, scripts, and workflows."
+      },
+      "leads": {
+        "title": "Leads",
+        "description": "Track leads generated and captured from your calling campaigns."
+      },
+      "campaign-performance": {
+        "title": "Campaign Performance",
+        "description": "Monitor overall campaign results, efficiency, and outcomes."
+      }
+    }
+  },
+  "Header": {
+    "home": "Home",
+    "news": "News",
+    "scheduleMeeting": "Schedule a Meeting",
+    "menu": "Menu",
+    "openMenuAria": "Open burger menu",
+    "products": "Products",
+    "pricing": "Pricing",
+    "about": "About",
+    "industries": "Industries",
+    "useCases": "Use Cases",
+    "toggleProducts": "Toggle products group",
+    "toggleAbout": "Toggle about group",
+    "toggleIndustries": "Toggle industries group",
+    "toggleUseCases": "Toggle use cases group",
+    "productItems": {
+      "outbound-calling": "Outbound Calling",
+      "inbound-calling": "Inbound Calling",
+      "agent-development": "AI Agent Development",
+      "customer-service-agent": "AI Customer Service",
+      "ai-for-quality-control": "AI for Quality Control",
+      "voip-phone-service": "VoIP Phone Service"
+    },
+    "industryItems": {
+      "healthcare": "Healthcare",
+      "insurance": "Insurance Agents",
+      "real-estate": "Real Estate",
+      "call-center": "Call Center",
+      "debt-collection": "Debt Collection"
+    },
+    "useCaseItems": {
+      "silverbell": "BPO (Silverbell Group)",
+      "clarity-global": "Clarity Global",
+      "residential-service": "Residential Service (Stone Electric)",
+      "agro-industry": "Agro-Industry",
+      "hvac-leads": "HVAC Leads"
+    },
+    "aboutItems": {
+      "meet-the-team": "Meet the Team"
+    }
+  },
+  "Footer": {
+    "subtitle": "Making voice AI work for Fintech",
+    "copyright": "© {year} Coldi. Voice-Powered. Rights Reserved.",
+    "starAria": "View Coldi on Star AI",
+    "saasHubAria": "View Coldi on SaaSHub",
+    "whatsappAria": "Open WhatsApp chat with Coldi",
+    "selectLanguage": "Select language",
+    "languageIconAlt": "Language",
+    "locales": {
+      "en": "English",
+      "uk": "Ukrainian"
+    },
+    "columns": {
+      "explore": "Explore",
+      "products": "Products",
+      "industries": "Industries",
+      "legal": "Legal"
+    },
+    "explore": {
+      "products": "Products",
+      "pricing": "Pricing",
+      "news": "News",
+      "about": "About"
+    },
+    "products": {
+      "outbound-calling": "Outbound AI Calling",
+      "inbound-calling": "Inbound AI Calling",
+      "agent-development": "AI Agent Development",
+      "customer-service-agent": "AI Customer Service",
+      "ai-for-quality-control": "AI for Quality Control",
+      "voip-phone-service": "VoIP Phone Service"
+    },
+    "industries": {
+      "healthcare": "Healthcare",
+      "insurance": "Insurance",
+      "real-estate": "Real Estate",
+      "call-center": "Call Centers",
+      "debt-collection": "Debt Collection"
+    },
+    "legal": {
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "dpa": "Data Processing Agreement"
+    }
+  }
+}

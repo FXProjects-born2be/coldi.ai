@@ -1,5 +1,8 @@
-// import { withBotId } from 'botid/next/config'; // temporarily disabled to debug 429 on static chunks
 import type { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
+import path from 'node:path';
+
+const withNextIntl = createNextIntlPlugin();
 
 // Security headers applied to every response.
 // CSP starts with a safe baseline (`upgrade-insecure-requests`) that does NOT
@@ -38,6 +41,19 @@ const nextConfig: NextConfig = {
       'i.ytimg.com',
     ],
   },
+  turbopack: {
+    resolveAlias: {
+      'next-intl/config': './src/i18n/request.ts',
+    },
+  },
+  webpack(config) {
+    config.resolve = config.resolve ?? {};
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'next-intl/config': path.resolve(process.cwd(), 'src/i18n/request.ts'),
+    };
+    return config;
+  },
   async headers() {
     return [
       {
@@ -49,4 +65,4 @@ const nextConfig: NextConfig = {
 };
 
 // export default withBotId(nextConfig); // temporarily disabled to debug 429 on static chunks
-export default nextConfig;
+export default withNextIntl(nextConfig);

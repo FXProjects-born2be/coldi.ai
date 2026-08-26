@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import { getTranslations } from 'next-intl/server';
+
 import st from './Hero.module.scss';
 import { HeroBookDemo } from './HeroBookDemo';
 import { HeroRotatingPhrase } from './HeroRotatingPhrase';
@@ -32,7 +34,9 @@ const Rings = () => (
   </>
 );
 
-export const Hero = () => {
+export const Hero = async () => {
+  const t = await getTranslations('Hero');
+
   return (
     <section className={st.hero}>
       <div className={st.hero__bg} aria-hidden>
@@ -48,14 +52,12 @@ export const Hero = () => {
 
       <div className={`container ${st.hero__content}`}>
         <h1 className={st.hero__title}>
-          AI Workforce
+          {t('titleLine1')}
           <br />
-          Built for the Next Generation of <br />
+          {t('titleLine2')} <br />
           <HeroRotatingPhrase />
         </h1>
-        <p className={st.hero__subtitle}>
-          Production-ready AI voice agents, fully managed from day one.
-        </p>
+        <p className={st.hero__subtitle}>{t('subtitle')}</p>
 
         <HeroBookDemo />
       </div>

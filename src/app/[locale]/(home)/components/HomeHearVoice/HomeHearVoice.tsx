@@ -2,15 +2,17 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
 
 import st from './HomeHearVoice.module.scss';
 
+import { Link } from '@/i18n/navigation';
+
 type HearVoiceItem = {
-  title: string;
-  subtitle: string;
+  id: string;
   image: string;
   secondImage: string;
   audio?: string;
@@ -30,29 +32,25 @@ const SelectChevron = () => (
 
 const voices: HearVoiceItem[] = [
   {
-    title: 'Insurance Cases',
-    subtitle: 'Policy Renewal',
+    id: 'insurance',
     image: '/images/home/home-built-for-one.jpg',
     secondImage: '/images/home/home-built-for-one-second.png',
     audio: '/audio/insurance.wav',
   },
   {
-    title: 'Trading Platforms',
-    subtitle: 'Lead Qualification',
+    id: 'trading',
     image: '/images/home/home-built-for-two.jpg',
     secondImage: '/images/home/home-built-for-two-second.png',
     audio: '/audio/trading-platforms.wav',
   },
   {
-    title: 'Debt Collection',
-    subtitle: 'Payment Reminder',
+    id: 'debt-collection',
     image: '/images/home/home-built-for-three.jpg',
     secondImage: '/images/home/home-built-for-three-second.png',
     audio: '/audio/insurance.wav',
   },
   {
-    title: 'Customer Support',
-    subtitle: 'Verification Call',
+    id: 'customer-support',
     image: '/images/home/home-built-for-four.jpg',
     secondImage: '/images/home/home-built-for-four-second.png',
     audio: '/audio/insurance.wav',
@@ -60,6 +58,7 @@ const voices: HearVoiceItem[] = [
 ];
 
 export const HomeHearVoice = () => {
+  const t = useTranslations('HomeHearVoice');
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isSelectOpen, setIsSelectOpen] = useState(false);
@@ -134,18 +133,15 @@ export const HomeHearVoice = () => {
       <audio ref={audioRef} onEnded={() => setActiveIndex(null)} preload="none" />
       <div className="container">
         <div className={st.home_hear_voice__top}>
-          <h2 className={st.home_hear_voice__title}>Hear Voice AI in Action</h2>
+          <h2 className={st.home_hear_voice__title}>{t('title')}</h2>
 
-          <p className={st.home_hear_voice__description}>
-            Listen to real conversations across insurance, trading platforms, and debt collection,
-            and hear how Coldi handles customer interactions naturally and professionally.
-          </p>
+          <p className={st.home_hear_voice__description}>{t('description')}</p>
         </div>
 
         <ul className={st.home_hear_voice__list}>
           {voices.map((item, index) => (
             <li
-              key={item.title}
+              key={item.id}
               className={cn(st.home_hear_voice__item, selectedIndex === index && st.selected)}
             >
               <div className={st.home_hear_voice__item_visual}>
@@ -161,11 +157,15 @@ export const HomeHearVoice = () => {
                   <Image src={item.secondImage} alt="" width={359} height={359} loading="lazy" />
                 </div>
               </div>
-              <h3 className={st.home_hear_voice__item_title}>{item.title}</h3>
-              <p className={st.home_hear_voice__item_subtitle}>{item.subtitle}</p>
+              <h3 className={st.home_hear_voice__item_title}>{t(`items.${item.id}.title`)}</h3>
+              <p className={st.home_hear_voice__item_subtitle}>{t(`items.${item.id}.subtitle`)}</p>
               <div
                 className={cn(st.home_hear_voice__item_btn, activeIndex === index && st.playing)}
-                aria-label={activeIndex === index ? `Stop ${item.title}` : `Play ${item.title}`}
+                aria-label={
+                  activeIndex === index
+                    ? t('stop', { title: t(`items.${item.id}.title`) })
+                    : t('play', { title: t(`items.${item.id}.title`) })
+                }
                 onClick={() => togglePlay(index)}
               >
                 <span></span>
@@ -184,13 +184,15 @@ export const HomeHearVoice = () => {
             className={st.home_hear_voice__select_trigger}
             aria-haspopup="listbox"
             aria-expanded={isSelectOpen}
-            aria-label="Select voice example"
+            aria-label={t('selectAria')}
             onClick={() => setIsSelectOpen((open) => !open)}
           >
             <span className={st.home_hear_voice__select_thumb}>
               <Image src={selectedVoice.image} alt="" fill sizes="40px" />
             </span>
-            <span className={st.home_hear_voice__select_label}>{selectedVoice.title}</span>
+            <span className={st.home_hear_voice__select_label}>
+              {t(`items.${selectedVoice.id}.title`)}
+            </span>
             <span
               className={cn(st.home_hear_voice__select_chevron, isSelectOpen && st.open)}
               aria-hidden
@@ -202,7 +204,7 @@ export const HomeHearVoice = () => {
           {isSelectOpen ? (
             <ul className={st.home_hear_voice__select_list} role="listbox">
               {voices.map((item, index) => (
-                <li key={item.title} role="presentation">
+                <li key={item.id} role="presentation">
                   <button
                     type="button"
                     role="option"
@@ -216,7 +218,9 @@ export const HomeHearVoice = () => {
                     <span className={st.home_hear_voice__select_thumb}>
                       <Image src={item.image} alt="" fill sizes="40px" />
                     </span>
-                    <span className={st.home_hear_voice__select_label}>{item.title}</span>
+                    <span className={st.home_hear_voice__select_label}>
+                      {t(`items.${item.id}.title`)}
+                    </span>
                   </button>
                 </li>
               ))}
@@ -226,7 +230,7 @@ export const HomeHearVoice = () => {
 
         <div className={st.home_hear_voice__btn}>
           <Link href={'/products'} className="btn btn-primary d-inline-block">
-            Explore Products
+            {t('exploreProducts')}
           </Link>
         </div>
       </div>

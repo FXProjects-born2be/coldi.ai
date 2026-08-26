@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
+import { useTranslations } from 'next-intl';
 import { createPortal } from 'react-dom';
 
 import { cn } from '@/shared/lib/helpers';
@@ -18,16 +19,12 @@ type ManagedTabImage = {
 
 type ManagedTab = {
   id: string;
-  title: string;
-  description: string;
   image: ManagedTabImage[];
 };
 
 const tabs: ManagedTab[] = [
   {
     id: 'calls',
-    title: 'Calls',
-    description: 'View call activity, duration, outcomes, and call details.',
     image: [
       {
         src: '/images/home/managed-one-main.png',
@@ -48,8 +45,6 @@ const tabs: ManagedTab[] = [
   },
   {
     id: 'analytics',
-    title: 'Analytics',
-    description: 'Track call results, response rates, and key performance metrics.',
     image: [
       {
         src: '/images/home/managed-two.png',
@@ -60,8 +55,6 @@ const tabs: ManagedTab[] = [
   },
   {
     id: 'agents',
-    title: 'Agents',
-    description: 'Configure agents, calling settings, scripts, and workflows.',
     image: [
       {
         src: '/images/home/managed-three.png',
@@ -72,8 +65,6 @@ const tabs: ManagedTab[] = [
   },
   {
     id: 'leads',
-    title: 'Leads',
-    description: 'Track leads generated and captured from your calling campaigns.',
     image: [
       {
         src: '/images/home/managed-four.png',
@@ -89,8 +80,6 @@ const tabs: ManagedTab[] = [
   },
   {
     id: 'campaign-performance',
-    title: 'Campaign Performance',
-    description: 'Monitor overall campaign results, efficiency, and outcomes.',
     image: [
       {
         src: '/images/home/managed-five.png',
@@ -200,10 +189,12 @@ const rotateClockwise = (order: number[], slot: number) => {
 const ManagedVisualImages = ({
   images,
   alt,
+  viewLabel,
   onPreview,
 }: {
   images: ManagedTabImage[];
   alt: string;
+  viewLabel: string;
   onPreview: (image: ManagedTabImage) => void;
 }) => {
   const [order, setOrder] = useState(() => images.map((_, index) => index));
@@ -245,7 +236,7 @@ const ManagedVisualImages = ({
               liftedSrc === image.src && st['home_managed__visual_image--lift']
             )}
             onClick={() => handleImageClick(slot, image)}
-            aria-label={`View ${alt} screenshot`}
+            aria-label={viewLabel}
           >
             <Image
               src={image.src}
@@ -275,11 +266,14 @@ const SliderChevron = () => (
 );
 
 export const HomeManaged = () => {
+  const t = useTranslations('HomeManaged');
   const [activeId, setActiveId] = useState(tabs[0].id);
   const [autoPlay, setAutoPlay] = useState(true);
   const [preview, setPreview] = useState<ManagedTabImage | null>(null);
 
   const activeTab = tabs.find((tab) => tab.id === activeId) ?? tabs[0];
+  const activeTitle = t(`tabs.${activeTab.id}.title`);
+  const activeDescription = t(`tabs.${activeTab.id}.description`);
 
   useEffect(() => {
     if (!autoPlay) return;
@@ -336,15 +330,12 @@ export const HomeManaged = () => {
     <section className={st.home_managed}>
       <div className="container">
         <div className={st.home_managed__top}>
-          <h2 className={st.home_managed__title}>Managed Beyond Launch</h2>
-          <p className={st.home_managed__description}>
-            Coldi continuously monitors conversations, analyzes performance, and optimizes every
-            workflow to maximize business outcomes.
-          </p>
+          <h2 className={st.home_managed__title}>{t('title')}</h2>
+          <p className={st.home_managed__description}>{t('description')}</p>
         </div>
 
         <div className={st.home_managed__panel}>
-          <div className={st.home_managed__tabs} role="tablist" aria-label="Managed features">
+          <div className={st.home_managed__tabs} role="tablist" aria-label={t('tabsAria')}>
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -354,11 +345,11 @@ export const HomeManaged = () => {
                 className={cn(st.home_managed__tab, tab.id === activeTab.id && st.active)}
                 onClick={() => selectTab(tab.id)}
               >
-                <span className={st.home_managed__tab_title}>{tab.title}</span>
+                <span className={st.home_managed__tab_title}>{t(`tabs.${tab.id}.title`)}</span>
                 <span
                   className={cn(st.home_managed__tab_text, st['home_managed__tab_text--desktop'])}
                 >
-                  {tab.description}
+                  {t(`tabs.${tab.id}.description`)}
                 </span>
                 {autoPlay && tab.id === activeTab.id ? (
                   <TabProgress durationMs={TAB_DURATION_MS} />
@@ -372,14 +363,15 @@ export const HomeManaged = () => {
               <ManagedVisualImages
                 key={activeTab.id}
                 images={activeTab.image}
-                alt={activeTab.title}
+                alt={activeTitle}
+                viewLabel={t('viewScreenshot', { title: activeTitle })}
                 onPreview={setPreview}
               />
             </div>
 
             <div className={st.home_managed__tabs_mobile}>
-              <span className={st.home_managed__tab_title}>{activeTab.title}</span>
-              <span className={st.home_managed__tab_text}>{activeTab.description}</span>
+              <span className={st.home_managed__tab_title}>{activeTitle}</span>
+              <span className={st.home_managed__tab_text}>{activeDescription}</span>
             </div>
           </div>
 
@@ -389,7 +381,7 @@ export const HomeManaged = () => {
                   className={st.home_managed__preview}
                   role="dialog"
                   aria-modal="true"
-                  aria-label={activeTab.title}
+                  aria-label={activeTitle}
                   onClick={closePreview}
                 >
                   <div
@@ -398,7 +390,7 @@ export const HomeManaged = () => {
                   >
                     <Image
                       src={preview.src}
-                      alt={activeTab.title}
+                      alt={activeTitle}
                       width={preview.width}
                       height={preview.height}
                     />
@@ -407,7 +399,7 @@ export const HomeManaged = () => {
                     type="button"
                     className={st.home_managed__preview_close}
                     onClick={closePreview}
-                    aria-label="Close"
+                    aria-label={t('close')}
                   >
                     <CloseIcon />
                   </button>
@@ -420,16 +412,16 @@ export const HomeManaged = () => {
             <button
               type="button"
               className={cn(st.home_managed__slider_btn, 'rotate-180')}
-              aria-label="Previous tab"
+              aria-label={t('prevTab')}
               onClick={() => goToTab(-1)}
             >
               <SliderChevron />
             </button>
-            <p className={st.home_managed__slider_label}>{activeTab.title}</p>
+            <p className={st.home_managed__slider_label}>{activeTitle}</p>
             <button
               type="button"
               className={st.home_managed__slider_btn}
-              aria-label="Next tab"
+              aria-label={t('nextTab')}
               onClick={() => goToTab(1)}
             >
               <SliderChevron />

@@ -1,8 +1,8 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-
 import type { ReactNode } from 'react';
+
+import { usePathname } from '@/i18n/navigation';
 
 const HIDDEN_PATHS = ['/calendar'];
 
