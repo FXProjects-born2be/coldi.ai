@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
 import PhoneInput from 'react-phone-input-2';
@@ -9,13 +10,7 @@ import { cn } from '@/shared/lib/helpers';
 import { isPhoneValid } from '@/shared/lib/validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { CallMeIcon } from '@/shared/ui/icons/fill/call-me';
-import { BillIcon } from '@/shared/ui/icons/outline/bill';
-import { ChatIcon } from '@/shared/ui/icons/outline/chat';
-import { ClipboardIcon } from '@/shared/ui/icons/outline/clipboard';
 import { CloseIcon } from '@/shared/ui/icons/outline/close';
-import { HeadsetIcon } from '@/shared/ui/icons/outline/headset';
-import { PhoneIcon } from '@/shared/ui/icons/outline/phone';
-import { SurveyIcon } from '@/shared/ui/icons/outline/survey';
 import { Select } from '@/shared/ui/kit/select';
 import { TextField } from '@/shared/ui/kit/text-field';
 
@@ -23,25 +18,67 @@ import st from './HeroBookDemo.module.scss';
 
 import 'react-phone-input-2/lib/style.css';
 
-const AGENT_NAME = 'Kate';
-
-const SCENARIOS = [
-  { id: 'inbound', label: 'Inbound Call Reception', icon: <PhoneIcon /> },
-  { id: 'appointment', label: 'Appointment Setting', icon: <ClipboardIcon /> },
-  { id: 'qualification', label: 'Lead Qualification', icon: <HeadsetIcon /> },
-  { id: 'surveys', label: 'Customer Surveys', icon: <SurveyIcon /> },
-  { id: 'support', label: 'Customer Support', icon: <ChatIcon /> },
-  { id: 'debt', label: 'Debt Recovery Calls', icon: <BillIcon /> },
-] as const;
-
-const DEFAULT_SCENARIO = SCENARIOS[0].id;
+const OptionIcon = ({ src }: { src: string }) => <Image src={src} alt="" width={20} height={20} />;
 
 const INDUSTRIES = [
-  { label: 'Insurance', value: 'Insurance' },
-  { label: 'Trading Platforms & Brokers', value: 'Trading Platforms & Brokers' },
-  { label: 'Debt Collection', value: 'Debt Collection' },
-  { label: 'EMIs & Payments', value: 'EMIs & Payments' },
-  { label: 'Other', value: 'Other (Please specify)' },
+  {
+    label: 'Trading',
+    value: 'Trading',
+    icon: <OptionIcon src="/icons/modal-form/trading.svg" />,
+  },
+  {
+    label: 'Insurance',
+    value: 'Insurance',
+    icon: <OptionIcon src="/icons/modal-form/insurance.svg" />,
+  },
+  {
+    label: 'Lending',
+    value: 'Lending',
+    icon: <OptionIcon src="/icons/modal-form/lending.svg" />,
+  },
+  {
+    label: 'Other',
+    value: 'Other',
+    icon: <OptionIcon src="/icons/modal-form/other.svg" />,
+  },
+  {
+    label: 'Debt Collection',
+    value: 'Debt Collection',
+    icon: <OptionIcon src="/icons/modal-form/debt-collection.svg" />,
+  },
+];
+
+const USE_CASES = [
+  {
+    label: 'Sales',
+    value: 'Sales',
+    icon: <OptionIcon src="/icons/modal-form/sales.svg" />,
+  },
+  {
+    label: 'Lead Qualification',
+    value: 'Lead Qualification',
+    icon: <OptionIcon src="/icons/modal-form/lead-qualification.svg" />,
+  },
+  {
+    label: 'Customer Support',
+    value: 'Customer Support',
+    icon: <OptionIcon src="/icons/modal-form/customer-support.svg" />,
+  },
+  {
+    label: 'Customer Engagement',
+    value: 'Customer Engagement',
+    icon: <OptionIcon src="/icons/modal-form/customer-engagement.svg" />,
+  },
+  {
+    label: 'Collections',
+    value: 'Collections',
+    icon: <OptionIcon src="/icons/modal-form/collections.svg" />,
+  },
+  {
+    label: 'Other',
+    value: 'Other (Please specify)',
+    icon: <OptionIcon src="/icons/modal-form/other-one.svg" />,
+  },
 ];
 
 type Step = 1 | 2;
@@ -65,7 +102,7 @@ const getUtmParams = () => {
 export const HeroBookDemo = () => {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<Step>(1);
-  const [scenarios, setScenarios] = useState<string[]>([DEFAULT_SCENARIO]);
+  const [useCase, setUseCase] = useState('');
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -76,7 +113,7 @@ export const HeroBookDemo = () => {
 
   const reset = () => {
     setStep(1);
-    setScenarios([DEFAULT_SCENARIO]);
+    setUseCase('');
     setPhone('');
     setName('');
     setEmail('');
@@ -91,35 +128,27 @@ export const HeroBookDemo = () => {
     if (!nextOpen) reset();
   };
 
-  const toggleScenario = (id: string) => {
-    setScenarios((current) => {
-      if (current.includes(id)) {
-        if (current.length === 1) return current;
-        return current.filter((item) => item !== id);
-      }
-      return [...current, id];
-    });
-  };
-
   const goNext = () => {
-    if (!phone || !isPhoneValid(`+${phone}`)) {
-      setErrors({ phone: 'invalid' });
-      return;
-    }
-
-    setErrors({});
-    setStep(2);
-  };
-
-  const submit = async () => {
     const nextErrors: Record<string, string> = {};
 
     if (!name.trim()) nextErrors.name = 'Please introduce yourself';
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       nextErrors.email = "We can't send you the call results without your email address.";
     }
+    if (!phone || !isPhoneValid(`+${phone}`)) nextErrors.phone = 'invalid';
+    if (!company.trim()) nextErrors.company = 'Please enter your company.';
+
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length) return;
+
+    setStep(2);
+  };
+
+  const submit = async () => {
+    const nextErrors: Record<string, string> = {};
+
     if (!industry) nextErrors.industry = 'Please select your industry.';
-    if (!company.trim()) nextErrors.company = 'Please enter your company size.';
+    if (!useCase) nextErrors.useCase = 'Please select what you want to use AI voice for.';
 
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length || isSubmitting) return;
@@ -127,9 +156,7 @@ export const HeroBookDemo = () => {
     setIsSubmitting(true);
     setErrors((current) => ({ ...current, submit: '' }));
 
-    const scenarioLabels = SCENARIOS.filter((item) => scenarios.includes(item.id))
-      .map((item) => item.label)
-      .join(', ');
+    const useCaseLabel = USE_CASES.find((item) => item.value === useCase)?.label ?? useCase;
 
     try {
       const res = await fetch('/api/leads-book-demo', {
@@ -143,7 +170,7 @@ export const HeroBookDemo = () => {
           email: email.trim(),
           sector: industry,
           company: company.trim(),
-          call_scenarios: scenarioLabels,
+          call_scenarios: useCaseLabel,
           ...getUtmParams(),
         }),
       });
@@ -198,14 +225,11 @@ export const HeroBookDemo = () => {
 
             <div className={st.hero_book_demo__top}>
               <Title className={st.hero_book_demo__title}>
-                Get your call from <br />
-                <span>{AGENT_NAME}</span>
+                Let’s tailor the demo to your business
               </Title>
 
               <Description className={st.hero_book_demo__subtitle}>
-                {step === 1
-                  ? 'Mark the call scenarios you are interested in.'
-                  : 'Fill out your data'}
+                Tell us a little about your needs so we can focus on what matters most to you.
               </Description>
 
               <div className={st.hero_book_demo__progress} aria-hidden>
@@ -216,51 +240,11 @@ export const HeroBookDemo = () => {
 
             {step === 1 ? (
               <div className={st.hero_book_demo__step}>
-                <div className={st.hero_book_demo__scenarios}>
-                  {SCENARIOS.map((item) => (
-                    <button
-                      key={item.id}
-                      type="button"
-                      className={cn(
-                        st.hero_book_demo__scenario,
-                        scenarios.includes(item.id) && st.active
-                      )}
-                      onClick={() => toggleScenario(item.id)}
-                    >
-                      {item.icon}
-                      <span>{item.label}</span>
-                    </button>
-                  ))}
-                </div>
-                <div className={st.hero_book_demo__phone}>
-                  <PhoneInput
-                    country="us"
-                    value={phone}
-                    onChange={(value) => {
-                      setPhone(value);
-                      setErrors((current) => ({ ...current, phone: '' }));
-                    }}
-                    placeholder="Phone Number"
-                    inputClass={cn(st.hero_book_demo__phone_input, errors.phone && st.error)}
-                    buttonClass={st.hero_book_demo__phone_button}
-                    dropdownClass={st.hero_book_demo__phone_dropdown}
-                    enableSearch
-                    searchPlaceholder="Search country..."
-                    autoFormat
-                  />
-                </div>
-
-                <button type="button" onClick={goNext} className="btn btn-primary w-max">
-                  Next
-                </button>
-              </div>
-            ) : (
-              <div className={st.hero_book_demo__step}>
                 <div className={st.hero_book_demo__fields}>
                   <div>
                     <TextField
                       name="name"
-                      placeholder="Name"
+                      placeholder="Name*"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       intent={errors.name ? 'danger' : 'default'}
@@ -271,7 +255,7 @@ export const HeroBookDemo = () => {
                   <div>
                     <TextField
                       name="email"
-                      placeholder="Email"
+                      placeholder="Work email*"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       intent={errors.email ? 'danger' : 'default'}
@@ -279,26 +263,64 @@ export const HeroBookDemo = () => {
                     />
                     {errors.email ? <ErrorMessage>{errors.email}</ErrorMessage> : null}
                   </div>
-                  <div>
-                    <Select
-                      items={INDUSTRIES}
-                      value={industry}
-                      onChange={setIndustry}
-                      placeholder="Industry"
-                      showOtherInput
+                  <div className={st.hero_book_demo__phone}>
+                    <PhoneInput
+                      country="us"
+                      value={phone}
+                      onChange={(value) => {
+                        setPhone(value);
+                        setErrors((current) => ({ ...current, phone: '' }));
+                      }}
+                      placeholder="Phone number*"
+                      inputClass={cn(st.hero_book_demo__phone_input, errors.phone && st.error)}
+                      buttonClass={st.hero_book_demo__phone_button}
+                      dropdownClass={st.hero_book_demo__phone_dropdown}
+                      enableSearch
+                      searchPlaceholder="Search country..."
+                      autoFormat
                     />
-                    {errors.industry ? <ErrorMessage>{errors.industry}</ErrorMessage> : null}
                   </div>
                   <div>
                     <TextField
                       name="company"
-                      placeholder="Company size"
+                      placeholder="Company*"
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
                       intent={errors.company ? 'danger' : 'default'}
                       className={st.hero_book_demo__field}
                     />
                     {errors.company ? <ErrorMessage>{errors.company}</ErrorMessage> : null}
+                  </div>
+                </div>
+
+                <button type="button" onClick={goNext} className="btn btn-primary w-max">
+                  Next
+                </button>
+              </div>
+            ) : (
+              <div className={st.hero_book_demo__step}>
+                <div className={st.hero_book_demo__selects}>
+                  <div>
+                    <Select
+                      items={INDUSTRIES}
+                      value={industry}
+                      onChange={setIndustry}
+                      placeholder="Industry*"
+                      showOtherInput
+                      otherPlaceholder="Please specify your industry"
+                    />
+                    {errors.industry ? <ErrorMessage>{errors.industry}</ErrorMessage> : null}
+                  </div>
+                  <div>
+                    <Select
+                      items={USE_CASES}
+                      value={useCase}
+                      onChange={setUseCase}
+                      placeholder="What are you looking to use AI voice for?*"
+                      showOtherInput
+                      otherPlaceholder="Please specify"
+                    />
+                    {errors.useCase ? <ErrorMessage>{errors.useCase}</ErrorMessage> : null}
                   </div>
                 </div>
 
@@ -314,7 +336,7 @@ export const HeroBookDemo = () => {
                   </button>
                   {errors.submit ? <ErrorMessage>{errors.submit}</ErrorMessage> : null}
                   <p className={st.hero_book_demo__hint}>
-                    <span>{AGENT_NAME}</span> will call you immediately.
+                    Help us focus the demo on what matters most to your business.
                   </p>
                 </div>
               </div>

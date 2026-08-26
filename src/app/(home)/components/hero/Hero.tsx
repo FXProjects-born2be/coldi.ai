@@ -50,7 +50,7 @@ export const Hero = () => {
         <h1 className={st.hero__title}>
           AI Workforce
           <br />
-          Built for the next generation of <br />
+          Built for the Next Generation of <br />
           <HeroRotatingPhrase />
         </h1>
         <p className={st.hero__subtitle}>

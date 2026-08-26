@@ -60,24 +60,6 @@ export const Footer = ({ pathname }: { pathname: string }) => {
   return !requestRoutes.has(pathname) ? (
     <>
       <footer className={st.footer}>
-        <div className={st.footer__top_image}>
-          <Image
-            src="/images/footer-top.png"
-            alt={pageHeading}
-            width={1440}
-            height={254}
-            loading={'lazy'}
-          />
-
-          <Image
-            src="/images/footer-top-mobile.png"
-            alt={pageHeading}
-            width={390}
-            height={531}
-            loading={'lazy'}
-          />
-        </div>
-
         <div className={cn('container', st.footer__container)}>
           <div className={st.footer__inner}>
             <div className={st.footer__top}>
@@ -87,7 +69,7 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                     src="/footer-logo.svg"
                     alt={pageHeading}
                     width={292}
-                    height={180}
+                    height={100}
                     loading={'lazy'}
                   />
                 </a>
@@ -189,7 +171,13 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                   rel="noopener noreferrer"
                   aria-label="View Coldi on Star AI"
                 >
-                  <Image src="/images/star-ai.png" alt={pageHeading} width={140} height={140} />
+                  <Image
+                    src="/images/footer/star-ai.png"
+                    alt={pageHeading}
+                    width={140}
+                    height={140}
+                    loading={'lazy'}
+                  />
                 </a>
                 <a
                   href="https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd/services/coldi-ai"
@@ -197,7 +185,13 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                   rel="noopener noreferrer"
                   aria-label="View Coldi on Star AI"
                 >
-                  <Image src="/images/star-level.png" alt={pageHeading} width={140} height={140} />
+                  <Image
+                    src="/images/footer/star-level.png"
+                    alt={pageHeading}
+                    width={140}
+                    height={140}
+                    loading={'lazy'}
+                  />
                 </a>
                 <a
                   href="https://www.saashub.com/coldi?utm_source=badge&utm_campaign=badge&utm_content=coldi&badge_variant=color&badge_kind=approved"
@@ -206,8 +200,8 @@ export const Footer = ({ pathname }: { pathname: string }) => {
                   aria-label="View Coldi on SaaSHub"
                 >
                   <Image
-                    src="https://cdn-b.saashub.com/img/badges/approved-color.png?v=1"
-                    alt={pageHeading}
+                    src="/images/footer/saas-hub.png"
+                    alt="View Coldi on SaaSHub"
                     width={126}
                     height={42}
                   />
@@ -217,23 +211,18 @@ export const Footer = ({ pathname }: { pathname: string }) => {
           </div>
         </div>
 
-        <div className={st.footer__bottom_image}>
-          <Image
-            src="/images/footer-bottom.png"
-            alt={pageHeading}
-            width={1440}
-            height={253}
-            loading={'lazy'}
-          />
-
-          <Image
-            src="/images/footer-bottom-mobile.png"
-            alt={pageHeading}
-            width={390}
-            height={424}
-            loading={'lazy'}
-          />
-        </div>
+        {/*<div className={st.footer__bottom_image}>*/}
+        {/*  <video*/}
+        {/*    src="/videos/footer/footer-video.mp4"*/}
+        {/*    autoPlay*/}
+        {/*    playsInline*/}
+        {/*    muted*/}
+        {/*    loop*/}
+        {/*    preload="metadata"*/}
+        {/*    controls={false}*/}
+        {/*    aria-hidden*/}
+        {/*  />*/}
+        {/*</div>*/}
 
         <a
           target="_blank"

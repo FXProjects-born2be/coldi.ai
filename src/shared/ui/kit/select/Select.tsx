@@ -1,8 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { type ReactNode, useState } from 'react';
 
 import { Content, Item, Portal, Root, Trigger } from '@radix-ui/react-dropdown-menu';
 
+import { cn } from '@/shared/lib/helpers';
 import { ArrowBottom } from '@/shared/ui/icons/fill/arrow-bottom';
 
 import { TextField } from '../text-field';
@@ -11,6 +12,7 @@ import st from './Select.module.scss';
 type SelectOption = {
   label: string;
   value: string;
+  icon?: ReactNode;
 };
 
 type SelectProps = {
@@ -34,7 +36,6 @@ export const Select = ({
   const [isOpen, setIsOpen] = useState(false);
   const [showOtherInputState, setShowOtherInputState] = useState(false);
 
-  // Find the selected item's label to display instead of value
   const selectedItem = items.find((item) => item.value === value);
   const displayValue = selectedItem ? selectedItem.label : value || placeholder;
 
@@ -74,12 +75,21 @@ export const Select = ({
     >
       <Trigger asChild>
         <div className={st.trigger}>
-          <section className={st.triggerContent}>{displayValue}</section>
+          <section className={cn(st.triggerContent, value && st.filled)}>
+            {selectedItem?.icon}
+            <span>{displayValue}</span>
+          </section>
           <ArrowBottom />
         </div>
       </Trigger>
       <Portal>
-        <Content className={st.content} sideOffset={6}>
+        <Content
+          className={st.content}
+          side="bottom"
+          align="start"
+          sideOffset={0}
+          avoidCollisions={false}
+        >
           {items.map((item, index) => (
             <Item
               key={index}
@@ -89,6 +99,7 @@ export const Select = ({
                 handleItemSelect(item.value);
               }}
             >
+              {item.icon}
               <p>{item.label}</p>
             </Item>
           ))}

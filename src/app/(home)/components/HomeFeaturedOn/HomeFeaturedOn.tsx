@@ -62,8 +62,9 @@ export const HomeFeaturedOn = () => (
                   src={item.image}
                   alt={isDuplicate ? '' : item.alt}
                   width={420}
-                  height={50}
+                  height={40}
                   loading="lazy"
+                  style={{ width: 'auto', height: 40 }}
                 />
               </Link>
             );

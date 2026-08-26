@@ -11,8 +11,11 @@ export const Hero = () => {
   return (
     <section className={st.layout}>
       <div className={st.title}>
-        <h1>You’re one step away!</h1>
-        <p>Pick a time that works for you and see Coldi in action.</p>
+        <h1>Let’s schedule your call</h1>
+        <p>
+          Pick a time that works for you. <br />
+          We’ll discuss your needs and show you how Coldi can support your business.
+        </p>
       </div>
       {/**<div className={st.video}>
         <div

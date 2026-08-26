@@ -43,7 +43,6 @@ const industries: Industry[] = [
       { role: 'user', text: 'When does my policy expire?' },
       { role: 'assistant', text: 'Let me check. Can you confirm your policy number?' },
       { role: 'user', text: 'INS-88213' },
-      { role: 'status', text: 'Thinking...' },
       {
         role: 'assistant',
         text: 'Renews August 3rd. Want me to lock in your rate?',
@@ -76,7 +75,7 @@ const industries: Industry[] = [
   {
     id: 'trading',
     label: 'Trading Platforms',
-    href: '/industries/fx-brokers',
+    href: '/industries/brokers-and-trading-platforms',
     cta: 'Learn more',
     image: '/images/home/home-built-for-three.jpg',
     secondImage: '/images/home/home-built-for-three-second.png',
@@ -84,7 +83,6 @@ const industries: Industry[] = [
       { role: 'user', text: 'Can I move my payment to next week?' },
       { role: 'assistant', text: 'Sure. What date works?' },
       { role: 'user', text: 'The 15th' },
-      { role: 'status', text: 'Thinking...' },
       {
         role: 'assistant',
         text: 'Confirmed. New date is the 15th.',
@@ -116,16 +114,15 @@ const industries: Industry[] = [
   },
   {
     id: 'debt-collection',
-    label: 'Debt Collection',
+    label: 'Learn more',
     href: '/industries/debt-collection',
-    cta: 'Learn more',
+    cta: 'Explore Debt Collection',
     image: '/images/home/home-built-for-four.jpg',
     secondImage: '/images/home/home-built-for-four-second.png',
     messages: [
       { role: 'user', text: "Why isn't my verification going through?" },
       { role: 'assistant', text: 'Have you uploaded a photo ID?' },
       { role: 'user', text: 'Not yet, only address proof' },
-      { role: 'status', text: 'Thinking...' },
       {
         role: 'assistant',
         text: "That's it. Sending a secure upload link now.",
@@ -158,7 +155,7 @@ const industries: Industry[] = [
   {
     id: 'emis',
     label: 'EMIs',
-    href: '/industries',
+    href: '/fintech-Industry',
     cta: 'Learn more',
     image: '/images/home/home-built-for-two.jpg',
     secondImage: '/images/home/home-built-for-two-second.png',
@@ -166,7 +163,6 @@ const industries: Industry[] = [
       { role: 'user', text: "My deposit isn't showing up" },
       { role: 'assistant', text: "Let's check. Amount and method?" },
       { role: 'user', text: '$500, bank transfer' },
-      { role: 'status', text: 'Thinking...' },
       {
         role: 'assistant',
         text: 'Found it. Processing, live in 10 minutes.',
@@ -198,10 +194,29 @@ const industries: Industry[] = [
   },
 ];
 
+const SliderChevron = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+    <path
+      d="M6.68262 14.94L11.5726 10.05C12.1501 9.4725 12.1501 8.5275 11.5726 7.95L6.68262 3.06"
+      stroke="#171717"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export const HomeBuiltFor = () => {
   const [industryId, setIndustryId] = useState(industries[0].id);
 
-  const industry = industries.find((item) => item.id === industryId) ?? industries[0];
+  const industryIndex = industries.findIndex((item) => item.id === industryId);
+  const industry = industries[industryIndex] ?? industries[0];
+
+  const goToIndustry = (direction: -1 | 1) => {
+    const nextIndex = (industryIndex + direction + industries.length) % industries.length;
+    setIndustryId(industries[nextIndex].id);
+  };
 
   return (
     <section className={st.home_built_for}>
@@ -229,14 +244,36 @@ export const HomeBuiltFor = () => {
           ))}
         </div>
 
+        <div className={st.home_built_for__slider}>
+          <button
+            type="button"
+            className={cn(st.home_built_for__slider_btn, 'rotate-180')}
+            aria-label="Previous industry"
+            onClick={() => goToIndustry(-1)}
+          >
+            <SliderChevron />
+          </button>
+          <p className={st.home_built_for__slider_label}>{industry.label}</p>
+          <button
+            type="button"
+            className={st.home_built_for__slider_btn}
+            aria-label="Next industry"
+            onClick={() => goToIndustry(1)}
+          >
+            <SliderChevron />
+          </button>
+        </div>
+
         <div className={st.home_built_for__panel}>
           <h3 className={st.home_built_for__content_title}>{industry.label}</h3>
 
           <div className={st.home_built_for__content_items}>
             {industry.workflows.map((item) => (
               <div key={item.id} className={st.home_built_for__content_item}>
-                <Image src={item.icon} alt="" width={20} height={20} />
-                <span>{item.label}</span>
+                <div className={st.home_built_for__content_item_image}>
+                  <Image src={item.icon} alt="Icon" width={20} height={20} loading={'lazy'} />
+                </div>
+                <p className={st.home_built_for__content_item_title}>{item.label}</p>
               </div>
             ))}
           </div>
@@ -251,7 +288,6 @@ export const HomeBuiltFor = () => {
               alt={industry.label}
               width={700}
               height={474}
-              layout="lazy"
               className={st.home_built_for__visual_bg_image}
             />
 
@@ -287,13 +323,7 @@ export const HomeBuiltFor = () => {
             </div>
 
             <div className={st.home_built_for__visual_second_image}>
-              <Image
-                src={industry.secondImage}
-                alt={industry.label}
-                width={1077}
-                height={1077}
-                layout="lazy"
-              />
+              <Image src={industry.secondImage} alt={industry.label} width={1077} height={1077} />
               <div className={st.home_built_for__visual_second_image_block}>
                 <span></span>
                 <span></span>

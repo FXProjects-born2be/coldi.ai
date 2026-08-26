@@ -39,35 +39,69 @@
   font-weight: 500;
   line-height: 120%;
   flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+
+  &.filled {
+    color: #0c1021;
+  }
+
+  img,
+  svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .content {
+  width: var(--radix-popper-anchor-width);
+  min-width: var(--radix-popper-anchor-width);
+  max-width: var(--radix-popper-anchor-width);
   border: 1px solid rgba(12, 16, 33, 0.1);
   border-radius: 24px;
-  background: #fff;
+  background: #FAFAFA;
   box-shadow: 0 4px 20px rgba(12, 16, 33, 0.1);
-  padding: 8px;
-  min-width: 200px;
-  max-height: 300px;
+  padding: 24px;
+  max-height: 200px;
   overflow-y: auto;
-  z-index: 9999 !important; // High z-index to ensure dropdown appears above all form fields and dialogs
-  position: relative;
+  z-index: 9999 !important;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
 }
 
 .item {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
-  border-radius: 8px;
+  gap: 8px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 0.5px solid rgba(0, 0, 0, 0.20);
+  background: #FFF;
   cursor: pointer;
   transition: all 0.2s ease;
   color: #0c1021;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 400;
   line-height: normal;
 
   &:hover {
-    background: rgba(12, 16, 33, 0.05);
+    color: #4268FF;
+  }
+
+  img,
+  svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
   }
 
   p {

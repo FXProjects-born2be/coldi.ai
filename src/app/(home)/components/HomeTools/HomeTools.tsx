@@ -48,8 +48,9 @@ const ToolsRow = ({ items, reverse }: { items: Tool[]; reverse?: boolean }) => (
           src={item.image}
           alt={index >= items.length ? '' : item.alt}
           width={148}
-          height={47}
+          height={40}
           loading="lazy"
+          style={{ width: 'auto', height: 40 }}
         />
       </div>
     ))}
