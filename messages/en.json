@@ -88,10 +88,10 @@
         "label": "Debt Collection",
         "cta": "Explore Debt Collection",
         "messages": [
-          "Why isn't my verification going through?",
-          "Have you uploaded a photo ID?",
-          "Not yet, only address proof",
-          "That's it. Sending a secure upload link now."
+          "Why am I getting this call?",
+          "Your payment of $240 is 5 days overdue.",
+          "Oh, I forgot",
+          "No problem. Want to pay now or set a reminder?"
         ],
         "workflows": {
           "debt-payment-reminders": "Payment Reminders",

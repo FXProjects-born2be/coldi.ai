@@ -238,38 +238,34 @@ export const HomeBuiltFor = () => {
                   className={st.home_built_for__visual_speaking_icon}
                 />
               </div>
-              {industry.messages.map((item, index) => {
-                if (index % 2 === 1) return null;
-
-                return (
-                  <p
-                    key={`${item.role}-${index}`}
-                    className={cn(st.home_built_for__visual_text, st[item.role])}
-                  >
-                    {item.icon ? (
-                      <Image
-                        src={item.icon}
-                        alt=""
-                        width={35}
-                        height={35}
-                        className={st.home_built_for__visual_icon}
-                      />
-                    ) : null}
-                    {item.role === 'status' ? (
-                      <>
-                        {t(`industries.${industry.id}.messages.${index}`).replace(/\.+$/, '')}
-                        <span className={st.home_built_for__visual_dots} aria-hidden>
-                          <span>.</span>
-                          <span>.</span>
-                          <span>.</span>
-                        </span>
-                      </>
-                    ) : (
-                      <span>{t(`industries.${industry.id}.messages.${index}`)}</span>
-                    )}
-                  </p>
-                );
-              })}
+              {industry.messages.map((item, index) => (
+                <p
+                  key={`${item.role}-${index}`}
+                  className={cn(st.home_built_for__visual_text, st[item.role])}
+                >
+                  {item.icon ? (
+                    <Image
+                      src={item.icon}
+                      alt=""
+                      width={35}
+                      height={35}
+                      className={st.home_built_for__visual_icon}
+                    />
+                  ) : null}
+                  {item.role === 'status' ? (
+                    <>
+                      {t(`industries.${industry.id}.messages.${index}`).replace(/\.+$/, '')}
+                      <span className={st.home_built_for__visual_dots} aria-hidden>
+                        <span>.</span>
+                        <span>.</span>
+                        <span>.</span>
+                      </span>
+                    </>
+                  ) : (
+                    <span>{t(`industries.${industry.id}.messages.${index}`)}</span>
+                  )}
+                </p>
+              ))}
             </div>
 
             {/*<div className={st.home_built_for__visual_second_image}>*/}
