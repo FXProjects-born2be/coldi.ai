@@ -307,43 +307,43 @@ export const HeroBookDemo = () => {
     return () => window.removeEventListener('resize', syncCalendarBox);
   }, [showCalendar]);
 
-  const initCalendly = () => {
-    const parent = calendlyRef.current;
-    const Calendly = getCalendly();
-    if (!parent || !Calendly) return false;
-
-    const prefillName = name.trim();
-    const prefillEmail = email.trim();
-    const prefillCompany = company.trim();
-    const prefillIndustry = industry.trim();
-
-    // Custom questions on this event, in order:
-    // a1 Phone, a2 Monthly call volume, a3 Company name (question_2), a4 Industry (question_3)
-    const url = new URL(CALENDLY_URL);
-    if (prefillName) url.searchParams.set('name', prefillName);
-    if (prefillEmail) url.searchParams.set('email', prefillEmail);
-    if (prefillCompany) url.searchParams.set('a3', prefillCompany);
-    if (prefillIndustry) url.searchParams.set('a4', prefillIndustry);
-
-    parent.innerHTML = '';
-    Calendly.initInlineWidget({
-      url: url.toString(),
-      parentElement: parent,
-      prefill: {
-        ...(prefillName ? { name: prefillName } : {}),
-        ...(prefillEmail ? { email: prefillEmail } : {}),
-        customAnswers: {
-          ...(prefillCompany ? { a3: prefillCompany } : {}),
-          ...(prefillIndustry ? { a4: prefillIndustry } : {}),
-        },
-      },
-    });
-
-    return true;
-  };
-
   useEffect(() => {
     if (!showCalendar) return;
+
+    const initCalendly = () => {
+      const parent = calendlyRef.current;
+      const Calendly = getCalendly();
+      if (!parent || !Calendly) return false;
+
+      const prefillName = name.trim();
+      const prefillEmail = email.trim();
+      const prefillCompany = company.trim();
+      const prefillIndustry = industry.trim();
+
+      // Custom questions on this event, in order:
+      // a1 Phone, a2 Monthly call volume, a3 Company name (question_2), a4 Industry (question_3)
+      const url = new URL(CALENDLY_URL);
+      if (prefillName) url.searchParams.set('name', prefillName);
+      if (prefillEmail) url.searchParams.set('email', prefillEmail);
+      if (prefillCompany) url.searchParams.set('a3', prefillCompany);
+      if (prefillIndustry) url.searchParams.set('a4', prefillIndustry);
+
+      parent.innerHTML = '';
+      Calendly.initInlineWidget({
+        url: url.toString(),
+        parentElement: parent,
+        prefill: {
+          ...(prefillName ? { name: prefillName } : {}),
+          ...(prefillEmail ? { email: prefillEmail } : {}),
+          customAnswers: {
+            ...(prefillCompany ? { a3: prefillCompany } : {}),
+            ...(prefillIndustry ? { a4: prefillIndustry } : {}),
+          },
+        },
+      });
+
+      return true;
+    };
 
     if (initCalendly()) return;
 
@@ -352,7 +352,7 @@ export const HeroBookDemo = () => {
     }, 80);
 
     return () => window.clearInterval(id);
-  }, [showCalendar]);
+  }, [showCalendar, name, email, company, industry]);
 
   return (
     <>
