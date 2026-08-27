@@ -31,7 +31,9 @@ const RotatingPhrase = () => {
     return () => window.clearInterval(id);
   }, []);
 
-  const phrase = t(PHRASE_KEYS[index]);
-
-  return <span style={{ animationDuration: `${PHRASE_DURATION_MS}ms` }}>{phrase}</span>;
+  return <AnimatedPhrase key={index} phrase={t(PHRASE_KEYS[index])} />;
 };
+
+const AnimatedPhrase = ({ phrase }: { phrase: string }) => (
+  <span style={{ animationDuration: `${PHRASE_DURATION_MS}ms` }}>{phrase}</span>
+);

@@ -12,42 +12,34 @@
     },
     "bookDemo": {
       "closeAria": "Close dialog",
-      "title": "Let’s tailor the demo to your business",
-      "subtitle": "Tell us a little about your needs so we can focus on what matters most to you.",
+      "title": "Let’s Schedule",
+      "titleHighlight": "Your Call",
+      "subtitle": "Pick a time that works for you.",
+      "subtitleSecond": "We’ll discuss your needs and show you how Coldi can support your business.",
+      "whatToExpect": "What to expect",
+      "infoItems": {
+        "conversation": "A 30-minute conversation with a Coldi specialist",
+        "cases": "Use cases relevant to your business",
+        "match": "A perfect match of a Coldi agent with your current business challenge"
+      },
+      "formTitle": "Ready to Try Coldi?",
       "name": "Name*",
       "email": "Work email*",
-      "phone": "Phone number*",
-      "searchCountry": "Search country...",
       "company": "Company*",
-      "next": "Next",
       "industry": "Industry*",
       "industryOther": "Please specify your industry",
-      "useCase": "What are you looking to use AI voice for?*",
-      "useCaseOther": "Please specify",
+      "selectTimeDate": "Select Time and Date",
+      "needs": "Tell us a little about your needs so we can focus on what matters most to you.",
       "callMe": "Call Me",
       "sending": "Sending...",
-      "hint": "Help us focus the demo on what matters most to your business.",
       "errors": {
-        "name": "Please introduce yourself",
-        "email": "We can't send you the call results without your email address.",
-        "company": "Please enter your company.",
-        "industry": "Please select your industry.",
-        "useCase": "Please select what you want to use AI voice for.",
         "submit": "Failed to send. Please try again."
       },
       "industries": {
-        "trading": "Trading",
         "insurance": "Insurance",
-        "lending": "Lending",
-        "other": "Other",
-        "debtCollection": "Debt Collection"
-      },
-      "useCases": {
-        "sales": "Sales",
-        "leadQualification": "Lead Qualification",
-        "customerSupport": "Customer Support",
-        "customerEngagement": "Customer Engagement",
-        "collections": "Collections",
+        "trading": "Trading Platforms & Brokers",
+        "debtCollection": "Debt Collection",
+        "emisPayments": "EMIs & Payments",
         "other": "Other"
       }
     }

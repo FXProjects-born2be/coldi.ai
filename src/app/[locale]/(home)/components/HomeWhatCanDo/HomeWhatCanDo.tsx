@@ -3,255 +3,229 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
-import { useTranslations } from 'next-intl';
-
 import { cn } from '@/shared/lib/helpers';
+import { FluentArrowTrendingLinesFilled } from '@/shared/ui/icons/FluentArrowTrendingLinesFilled';
+import { IconCheck } from '@/shared/ui/icons/IconCheck';
+import { IconCirclePartRoundedBottom } from '@/shared/ui/icons/IconCirclePartRoundedBottom';
+import { IconCirclePartRoundedBottomThumb } from '@/shared/ui/icons/IconCirclePartRoundedBottomThumb';
+import { IconCirclePartRoundedMobileFour } from '@/shared/ui/icons/IconCirclePartRoundedMobileFour';
+import { IconCirclePartRoundedMobileOne } from '@/shared/ui/icons/IconCirclePartRoundedMobileOne';
+import { IconCirclePartRoundedMobileThree } from '@/shared/ui/icons/IconCirclePartRoundedMobileThree';
+import { IconCirclePartRoundedMobileTwo } from '@/shared/ui/icons/IconCirclePartRoundedMobileTwo';
+import { IconCirclePartRoundedTop } from '@/shared/ui/icons/IconCirclePartRoundedTop';
+import { IconCirclePartRoundedTopThumb } from '@/shared/ui/icons/IconCirclePartRoundedTopThumb';
+import { IconFluentPersonSupport } from '@/shared/ui/icons/IconFluentPersonSupport';
+import { IconHugeIconsAiGenerative } from '@/shared/ui/icons/IconHugeIconsAiGenerative';
+import { IconHugeIconsAIScheduling } from '@/shared/ui/icons/IconHugeIconsAIScheduling';
+import { IconLine } from '@/shared/ui/icons/IconLine';
 
 import st from './HomeWhatCanDo.module.scss';
 
-type WhatCanDoItem = {
-  id: string;
-  icon: string;
-};
-
-const salesGrowth: WhatCanDoItem[] = [
-  {
-    id: 'qualify-leads',
-    icon: '/images/icons/qualify-leads.svg',
-  },
-  {
-    id: 're-engage-leads',
-    icon: '/images/icons/re-engage-leads.svg',
-  },
-  {
-    id: 'outbound-campaigns',
-    icon: '/images/icons/outbound-campaigns.svg',
-  },
-  {
-    id: 'win-back-accounts',
-    icon: '/images/icons/win-back-accounts.svg',
-  },
-];
-
-const customerSupport: WhatCanDoItem[] = [
-  {
-    id: 'collect-feedback',
-    icon: '/images/icons/collect-feedback.svg',
-  },
-  {
-    id: 'inbound-calls',
-    icon: '/images/icons/inbound-calls.svg',
-  },
-  {
-    id: 'multilingual-support',
-    icon: '/images/icons/multilingual-support.svg',
-  },
-  {
-    id: 'route-calls',
-    icon: '/images/icons/route-calls.svg',
-  },
-];
-
-const complianceScheduling: WhatCanDoItem[] = [
-  {
-    id: 'schedule-appointments',
-    icon: '/images/icons/schedule-appointments.svg',
-  },
-  {
-    id: 'verify-identity',
-    icon: '/images/icons/verify-identity.svg',
-  },
-  {
-    id: 'policy-renewals',
-    icon: '/images/icons/policy-renewals.svg',
-  },
-  {
-    id: 'review-calls',
-    icon: '/images/icons/review-calls.svg',
-  },
-  {
-    id: 'kyc-documents',
-    icon: '/images/icons/kyc-documents.svg',
-  },
-];
-
-const paymentsPlatform: WhatCanDoItem[] = [
-  {
-    id: 'custom-agents',
-    icon: '/images/icons/custom-agents.svg',
-  },
-  {
-    id: 'payment-plans',
-    icon: '/images/icons/payment-plans.svg',
-  },
-  {
-    id: 'payment-promises',
-    icon: '/images/icons/payment-promises.svg',
-  },
-];
-
-type WhatCanDoColumn = {
-  id: string;
-  items: WhatCanDoItem[];
-  accent?: boolean;
-};
-
-const leftColumns: WhatCanDoColumn[] = [
+const items = [
   {
     id: 'sales-growth',
-    items: salesGrowth,
-    accent: true,
+    title: 'Sales & growth',
+    titleIcon: FluentArrowTrendingLinesFilled,
+    list: [
+      {
+        id: 'qualify-leads',
+        title: 'Qualify leads at scale, automatically',
+      },
+      {
+        id: 're-engage-leads',
+        title: 'Re-engage abandoned leads',
+      },
+      {
+        id: 'outbound-campaigns',
+        title: 'Run outbound campaigns at any volume',
+      },
+      {
+        id: 'win-back-accounts',
+        title: 'Win back dormant accounts',
+      },
+    ],
   },
   {
     id: 'customer-support',
-    items: customerSupport,
+    title: 'Customer support',
+    titleIcon: IconFluentPersonSupport,
+    list: [
+      {
+        id: 'collect-feedback',
+        title: 'Collect feedback after every call',
+      },
+      {
+        id: 'inbound-calls',
+        title: 'Handle inbound calls, 24/7',
+      },
+      {
+        id: 'multilingual-support',
+        title: 'Deliver multilingual customer support',
+      },
+      {
+        id: 'route-calls',
+        title: 'Route calls to the right desk instantly',
+      },
+    ],
   },
-];
-
-const rightColumns: WhatCanDoColumn[] = [
   {
     id: 'compliance-scheduling',
-    items: complianceScheduling,
+    title: 'Compliance & scheduling',
+    titleIcon: IconHugeIconsAIScheduling,
+    list: [
+      {
+        id: 'schedule-appointments',
+        title: 'Schedule appointments and send reminders',
+      },
+      {
+        id: 'verify-identity',
+        title: 'Verify identity documents instantly',
+      },
+      {
+        id: 'policy-renewals',
+        title: 'Confirm policy renewals before they lapse',
+      },
+      {
+        id: 'review-calls',
+        title: 'Review 100% of calls for compliance',
+      },
+      {
+        id: 'kyc-documents',
+        title: 'Chase missing KYC documents',
+      },
+    ],
   },
   {
     id: 'payments-platform',
-    items: paymentsPlatform,
+    title: 'Payments & platform',
+    titleIcon: IconHugeIconsAiGenerative,
+    list: [
+      {
+        id: 'custom-agents',
+        title: 'Deploy custom AI agents for any workflow',
+      },
+      {
+        id: 'payment-plans',
+        title: 'Set up payment plans automatically',
+      },
+      {
+        id: 'payment-promises',
+        title: 'Follow up on broken payment promises',
+      },
+    ],
   },
 ];
 
-const renderColumns = (columns: WhatCanDoColumn[], t: ReturnType<typeof useTranslations>) => (
-  <div className={st.home_what_do__left}>
-    {columns.map((column) => (
-      <article key={column.id} className={cn(st.home_what_do__card, column.accent && st.accent)}>
-        <h3 className={st.home_what_do__card_title}>{t(`columns.${column.id}`)}</h3>
-        <ul className={st.home_what_do__list}>
-          {column.items.map((item) => (
-            <li key={item.id} className={st.home_what_do__item}>
-              <div className={st.home_what_do__item_image}>
-                <Image src={item.icon} alt="" width={18} height={18} loading={'lazy'} />
-              </div>
-              <span className={st.home_what_do__item_title}>{t(`items.${item.id}`)}</span>
-            </li>
-          ))}
-        </ul>
-      </article>
-    ))}
-  </div>
-);
+const IMAGE_MS = 800;
+const TAB_START_MS = 3400 + IMAGE_MS;
+const TAB_STEP_MS = 3400;
+const TAB_ANIM_MS = 3200;
+
+const connectors = [
+  { id: items[0].id, className: st.home_what_do__icon_circle_one, Icon: IconCirclePartRoundedTop },
+  {
+    id: items[1].id,
+    className: st.home_what_do__icon_circle_two,
+    Icon: IconCirclePartRoundedTopThumb,
+  },
+  {
+    id: items[2].id,
+    className: st.home_what_do__icon_circle_three,
+    Icon: IconCirclePartRoundedBottomThumb,
+  },
+  {
+    id: items[3].id,
+    className: st.home_what_do__icon_circle_four,
+    Icon: IconCirclePartRoundedBottom,
+  },
+];
+
+const mobileConnectors = [
+  {
+    id: items[0].id,
+    className: st.home_what_do__icon_circle_mobile_one,
+    Icon: IconCirclePartRoundedMobileOne,
+  },
+  {
+    id: items[1].id,
+    className: st.home_what_do__icon_circle_mobile_two,
+    Icon: IconCirclePartRoundedMobileTwo,
+  },
+  {
+    id: items[2].id,
+    className: st.home_what_do__icon_circle_mobile_three,
+    Icon: IconCirclePartRoundedMobileThree,
+  },
+  {
+    id: items[3].id,
+    className: st.home_what_do__icon_circle_mobile_four,
+    Icon: IconCirclePartRoundedMobileFour,
+  },
+];
 
 export const HomeWhatCanDo = () => {
-  const t = useTranslations('HomeWhatCanDo');
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
+  const [tabsReady, setTabsReady] = useState(false);
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
 
     if (!section) return;
 
-    let timeoutId: ReturnType<typeof setTimeout>;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
 
         observer.disconnect();
-        timeoutId = setTimeout(() => setInView(true), 500);
+        setInView(true);
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          setActiveId(items[items.length - 1].id);
+          setTabsReady(true);
+        }
       },
       { threshold: 0.3 }
     );
 
     observer.observe(section);
 
-    return () => {
-      observer.disconnect();
-      clearTimeout(timeoutId);
-    };
+    return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!inView) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const timeouts = items.map((item, index) =>
+      window.setTimeout(() => setActiveId(item.id), TAB_START_MS + index * TAB_STEP_MS)
+    );
+
+    timeouts.push(
+      window.setTimeout(
+        () => setTabsReady(true),
+        TAB_START_MS + (items.length - 1) * TAB_STEP_MS + TAB_ANIM_MS
+      )
+    );
+
+    return () => timeouts.forEach(window.clearTimeout);
+  }, [inView]);
+
+  const selectTab = (id: string) => {
+    if (!tabsReady || id === activeId) return;
+    setActiveId(id);
+  };
+
   return (
-    <section ref={sectionRef} className={cn(st.home_what_do, inView && st.in_view)}>
+    <section
+      ref={sectionRef}
+      className={cn(st.home_what_do, inView && st.in_view, tabsReady && st.tabs_ready)}
+    >
       <div className="container">
-        <h2 className={st.home_what_do__title}>{t('title')}</h2>
+        <h2 className={st.home_what_do__title}>What Coldi Can Do for Your Business</h2>
 
         <div className={st.home_what_do__row}>
-          {renderColumns(leftColumns, t)}
-
-          <div className={st.home_what_do__left_icons_wrapper}>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-one.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={94}
-                height={253}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-two.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={94}
-                height={182}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-three.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={94}
-                height={114}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-four.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={94}
-                height={45}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-five.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={91}
-                height={117}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-six.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={92}
-                height={187}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-seven.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={93}
-                height={258}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-eight.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={93}
-                height={327}
-              />
-            </div>
-          </div>
-
           <div className={st.home_what_do__image}>
             <Image
               src={'/images/home/what-can-image-main.png'}
@@ -262,103 +236,68 @@ export const HomeWhatCanDo = () => {
             />
           </div>
 
-          <div className={st.home_what_do__icons_mobile}>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-mobile-one.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={125}
-                height={60}
-              />
+          {connectors.map(({ id, className, Icon }) => (
+            <div key={id} className={cn(className, activeId === id && st.active)}>
+              <Icon />
             </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-mobile-two.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={125}
-                height={60}
-              />
+          ))}
+
+          {mobileConnectors.map(({ id, className, Icon }) => (
+            <div key={`mobile-${id}`} className={cn(className, activeId === id && st.active)}>
+              <Icon />
             </div>
+          ))}
+
+          <div className={st.home_what_do__items} role="tablist" aria-label="What Coldi can do">
+            {items.map((item) => {
+              const TitleIcon = item.titleIcon;
+              const isActive = activeId === item.id;
+
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-disabled={!tabsReady}
+                  className={cn(st.home_what_do__item, isActive && st.active)}
+                  onClick={() => selectTab(item.id)}
+                >
+                  <TitleIcon />
+                  <span
+                    className={cn(
+                      st.home_what_do__item_title,
+                      st['home_what_do__item_title--desktop']
+                    )}
+                  >
+                    {item.title}
+                  </span>
+                  <div className={st.home_what_do__item_icon_line}>
+                    <IconLine />
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
-          <div className={st.home_what_do__right_icons_wrapper}>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-nine.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={94}
-                height={252}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-ten.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={94}
-                height={177}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-eleven.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={94}
-                height={110}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-icon-twelve.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={94}
-                height={37}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-do-thirteen.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={94}
-                height={37}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-do-fourteen.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={94}
-                height={210}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-do-fifteen.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={94}
-                height={277}
-              />
-            </div>
-            <div>
-              <Image
-                src={'/images/home/what-can-do-sixteen.svg'}
-                alt="Icon"
-                loading={'lazy'}
-                width={94}
-                height={352}
-              />
-            </div>
+          <div className={st.home_what_do__content}>
+            {items.map((item) => (
+              <div
+                key={item.id}
+                role="tabpanel"
+                className={cn(st.home_what_do__content_panel, activeId === item.id && st.active)}
+              >
+                {item.list.map((itemList) => (
+                  <div key={itemList.id} className={st.home_what_do__content_item}>
+                    <div className={st.home_what_do__content_item_icon}>
+                      <IconCheck />
+                    </div>
+                    <p className={st.home_what_do__content_item_title}>{itemList.title}</p>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
-
-          {renderColumns(rightColumns, t)}
         </div>
       </div>
     </section>

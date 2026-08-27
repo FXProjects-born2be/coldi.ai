@@ -1,67 +1,49 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .footer {
-    padding-block: 80px;
+    padding-top: 40px;
+    padding-bottom: 80px;
     position: relative;
     z-index: 1;
+    overflow: hidden;
 
-    &__top_image,
-    &__bottom_image {
+    &__video {
         position: absolute;
         z-index: -1;
         left: 0;
-    }
-
-    &__top_image {
-        top: 0;
-    }
-
-    &__bottom_image {
         bottom: 0;
-        left: 0;
         width: 100%;
-        height: 253px;
-        overflow: hidden;
+        height: 100%;
 
-        @include mobile {
-            height: 424px;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 51.55%);
         }
 
         video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100vh;
-            height: 100vw;
-            max-width: none;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            transform: translate(-50%, -50%) rotate(270deg);
         }
     }
 
-    @include mobile-up {
-        &__top_image>*:last-child {
-            display: none;
-        }
-    }
-
-    @include mobile {
-        &__top_image>*:first-child {
-            display: none;
-        }
-    }
 
     &__container {
         max-width: 1328px !important;
     }
 
     &__inner {
-        //padding: 80px;
+        padding: 80px;
         background: #FFF;
 
-        //@include tablet {
-        //    padding: 20px;
-        //}
+        @include tablet {
+            padding: 20px;
+        }
     }
 
     &__top {

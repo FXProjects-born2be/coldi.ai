@@ -31,14 +31,43 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [
-      'localhost',
-      'localhost:3000',
-      'grqtgrzdalvrywluyqxe.supabase.co',
-      'www.facebook.com',
-      'dashboard.retellai.com',
-      'cdn-b.saashub.com',
-      'i.ytimg.com',
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'grqtgrzdalvrywluyqxe.supabase.co',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.facebook.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dashboard.retellai.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn-b.saashub.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+        pathname: '/**',
+      },
     ],
   },
   turbopack: {

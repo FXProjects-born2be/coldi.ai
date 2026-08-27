@@ -212,6 +212,18 @@ export const Footer = async ({ pathname }: { pathname: string }) => {
           </div>
         </div>
 
+        <div className={st.footer__video} aria-hidden>
+          <video
+            src="/videos/footer/footer-video.mp4"
+            autoPlay
+            playsInline
+            muted
+            loop
+            preload="metadata"
+            controls={false}
+          />
+        </div>
+
         <a
           target="_blank"
           rel="noopener noreferrer"

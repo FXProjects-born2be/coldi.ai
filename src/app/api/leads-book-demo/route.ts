@@ -63,9 +63,6 @@ export async function POST(req: NextRequest) {
   if (!email || !email.includes('@')) {
     return NextResponse.json({ error: 'Valid email is required' }, { status: 400 });
   }
-  if (!phone) {
-    return NextResponse.json({ error: 'Phone number is required' }, { status: 400 });
-  }
 
   const hubspotutk = req.cookies.get('hubspotutk')?.value || '';
   const refererHeader = req.headers.get('referer') || 'https://coldi.ai';
@@ -74,7 +71,7 @@ export async function POST(req: NextRequest) {
     lastSegment.split('-').join(' ').charAt(0).toUpperCase() +
     lastSegment.split('-').join(' ').slice(1);
 
-  const phoneWithPlus = phone.startsWith('+') ? phone : `+${phone}`;
+  const phoneWithPlus = phone ? (phone.startsWith('+') ? phone : `+${phone}`) : '';
 
   const fields: { name: string; value: string }[] = [
     { name: 'firstname', value: name },
@@ -82,7 +79,7 @@ export async function POST(req: NextRequest) {
     { name: 'lastname', value: surname },
     { name: 'referral', value: 'Ad form' },
     { name: 'email', value: email },
-    { name: 'phone', value: phoneWithPlus },
+    ...(phoneWithPlus ? [{ name: 'phone', value: phoneWithPlus }] : []),
     { name: 'industry', value: sector },
     { name: 'utm_campaign', value: utm_campaign },
     { name: 'utm_source', value: utm_source },

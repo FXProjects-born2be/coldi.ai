@@ -63,6 +63,10 @@ img {
   height: auto;
 }
 
+video {
+  display: block;
+}
+
 * {
   outline: none !important;
   -webkit-tap-highlight-color: transparent;
@@ -126,7 +130,7 @@ html, body {
 }
 
 .btn {
-  padding: 14px 32px;
+  padding: 13px 31px;
   border-radius: 9999px;
   font-size: 16px;
   color: #FFF;
@@ -136,10 +140,22 @@ html, body {
   align-items: center;
   gap: 8px;
   justify-content: center;
+  border: 1px solid transparent;
+  transition: all .3s ease-in-out;
 }
 
 .btn-primary {
   background: var(--Dark-Blue, #2544BD);
+}
+
+.btn-secondary {
+  border-color: #2544BD;
+  color: #2544BD;
+
+  &:hover {
+    background: #2544BD;
+    color: #fff;
+  }
 }
 
 .text-center {
@@ -152,6 +168,7 @@ html, body {
 
 button {
   cursor: pointer;
+  transition: all .3s ease-in-out;
 }
 
 .w-max {
@@ -160,4 +177,8 @@ button {
 
 .rotate-180 {
   transform: rotate(180deg);
+}
+
+svg {
+  display: block;
 }
