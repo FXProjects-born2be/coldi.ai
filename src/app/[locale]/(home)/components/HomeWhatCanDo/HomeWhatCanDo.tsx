@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
+import { useTranslations } from 'next-intl';
+
 import { cn } from '@/shared/lib/helpers';
 import { FluentArrowTrendingLinesFilled } from '@/shared/ui/icons/FluentArrowTrendingLinesFilled';
 import { IconCheck } from '@/shared/ui/icons/IconCheck';
@@ -24,95 +26,39 @@ import st from './HomeWhatCanDo.module.scss';
 const items = [
   {
     id: 'sales-growth',
-    title: 'Sales & growth',
     titleIcon: FluentArrowTrendingLinesFilled,
     list: [
-      {
-        id: 'qualify-leads',
-        title: 'Qualify leads at scale, automatically',
-      },
-      {
-        id: 're-engage-leads',
-        title: 'Re-engage abandoned leads',
-      },
-      {
-        id: 'outbound-campaigns',
-        title: 'Run outbound campaigns at any volume',
-      },
-      {
-        id: 'win-back-accounts',
-        title: 'Win back dormant accounts',
-      },
+      { id: 'qualify-leads' },
+      { id: 're-engage-leads' },
+      { id: 'outbound-campaigns' },
+      { id: 'win-back-accounts' },
     ],
   },
   {
     id: 'customer-support',
-    title: 'Customer support',
     titleIcon: IconFluentPersonSupport,
     list: [
-      {
-        id: 'collect-feedback',
-        title: 'Collect feedback after every call',
-      },
-      {
-        id: 'inbound-calls',
-        title: 'Handle inbound calls, 24/7',
-      },
-      {
-        id: 'multilingual-support',
-        title: 'Deliver multilingual customer support',
-      },
-      {
-        id: 'route-calls',
-        title: 'Route calls to the right desk instantly',
-      },
+      { id: 'collect-feedback' },
+      { id: 'inbound-calls' },
+      { id: 'multilingual-support' },
+      { id: 'route-calls' },
     ],
   },
   {
     id: 'compliance-scheduling',
-    title: 'Compliance & scheduling',
     titleIcon: IconHugeIconsAIScheduling,
     list: [
-      {
-        id: 'schedule-appointments',
-        title: 'Schedule appointments and send reminders',
-      },
-      {
-        id: 'verify-identity',
-        title: 'Verify identity documents instantly',
-      },
-      {
-        id: 'policy-renewals',
-        title: 'Confirm policy renewals before they lapse',
-      },
-      {
-        id: 'review-calls',
-        title: 'Review 100% of calls for compliance',
-      },
-      {
-        id: 'kyc-documents',
-        title: 'Chase missing KYC documents',
-      },
+      { id: 'schedule-appointments' },
+      { id: 'verify-identity' },
+      { id: 'policy-renewals' },
+      { id: 'review-calls' },
+      { id: 'kyc-documents' },
     ],
   },
   {
     id: 'payments-platform',
-    title: 'Payments & platform',
     titleIcon: IconHugeIconsAiGenerative,
-    list: [
-      {
-        id: 'custom-agents',
-        title: 'Deploy custom AI agents for any workflow',
-      },
-      {
-        id: 'payment-plans',
-        title: 'Set up payment plans automatically',
-      },
-      {
-        id: 'payment-promises',
-        title: 'Follow up on broken payment promises',
-      },
-    ],
+    list: [{ id: 'custom-agents' }, { id: 'payment-plans' }, { id: 'payment-promises' }],
   },
 ];
 
@@ -164,15 +110,16 @@ const mobileConnectors = [
 ];
 
 export const HomeWhatCanDo = () => {
-  const sectionRef = useRef<HTMLElement>(null);
+  const t = useTranslations('HomeWhatCanDo');
+  const rowRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [tabsReady, setTabsReady] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
+    const row = rowRef.current;
 
-    if (!section) return;
+    if (!row) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -186,10 +133,10 @@ export const HomeWhatCanDo = () => {
           setTabsReady(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0 }
     );
 
-    observer.observe(section);
+    observer.observe(row);
 
     return () => observer.disconnect();
   }, []);
@@ -218,18 +165,15 @@ export const HomeWhatCanDo = () => {
   };
 
   return (
-    <section
-      ref={sectionRef}
-      className={cn(st.home_what_do, inView && st.in_view, tabsReady && st.tabs_ready)}
-    >
+    <section className={cn(st.home_what_do, inView && st.in_view, tabsReady && st.tabs_ready)}>
       <div className="container">
-        <h2 className={st.home_what_do__title}>What Coldi Can Do for Your Business</h2>
+        <h2 className={st.home_what_do__title}>{t('title')}</h2>
 
-        <div className={st.home_what_do__row}>
+        <div ref={rowRef} className={st.home_what_do__row}>
           <div className={st.home_what_do__image}>
             <Image
               src={'/images/home/what-can-image-main.png'}
-              alt="Icon"
+              alt={t('title')}
               loading={'lazy'}
               width={293}
               height={293}
@@ -248,7 +192,7 @@ export const HomeWhatCanDo = () => {
             </div>
           ))}
 
-          <div className={st.home_what_do__items} role="tablist" aria-label="What Coldi can do">
+          <div className={st.home_what_do__items} role="tablist" aria-label={t('title')}>
             {items.map((item) => {
               const TitleIcon = item.titleIcon;
               const isActive = activeId === item.id;
@@ -270,7 +214,7 @@ export const HomeWhatCanDo = () => {
                       st['home_what_do__item_title--desktop']
                     )}
                   >
-                    {item.title}
+                    {t(`columns.${item.id}`)}
                   </span>
                   <div className={st.home_what_do__item_icon_line}>
                     <IconLine />
@@ -287,12 +231,15 @@ export const HomeWhatCanDo = () => {
                 role="tabpanel"
                 className={cn(st.home_what_do__content_panel, activeId === item.id && st.active)}
               >
+                <p className={st.home_what_do__content_title}>{t(`columns.${item.id}`)}</p>
                 {item.list.map((itemList) => (
                   <div key={itemList.id} className={st.home_what_do__content_item}>
                     <div className={st.home_what_do__content_item_icon}>
                       <IconCheck />
                     </div>
-                    <p className={st.home_what_do__content_item_title}>{itemList.title}</p>
+                    <p className={st.home_what_do__content_item_title}>
+                      {t(`items.${itemList.id}`)}
+                    </p>
                   </div>
                 ))}
               </div>

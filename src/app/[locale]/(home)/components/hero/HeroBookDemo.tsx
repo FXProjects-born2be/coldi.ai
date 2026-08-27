@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Script from 'next/script';
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
 import { ArrowBottom } from '@/shared/ui/icons/fill/arrow-bottom';
@@ -19,16 +19,22 @@ import { TextField } from '@/shared/ui/kit/text-field';
 
 import st from './HeroBookDemo.module.scss';
 
-import { getPathname, Link } from '@/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 
 const CALENDLY_URL = 'https://calendly.com/coldi/30min';
 const CALENDLY_SCRIPT = 'https://assets.calendly.com/assets/external/widget.js';
+
+type CalendlyPrefill = {
+  name?: string;
+  email?: string;
+  customAnswers?: Record<string, string>;
+};
 
 type CalendlyWidget = {
   initInlineWidget: (options: {
     url: string;
     parentElement: HTMLElement;
-    prefill?: { name?: string; email?: string };
+    prefill?: CalendlyPrefill;
   }) => void;
 };
 
@@ -233,32 +239,14 @@ const IndustrySelect = ({
   );
 };
 
-const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'] as const;
-
-const getUtmParams = () => {
-  if (typeof window === 'undefined') return {};
-
-  const search = new URLSearchParams(window.location.search);
-  const utm: Record<string, string> = {};
-
-  UTM_KEYS.forEach((key) => {
-    const value = search.get(key);
-    if (value) utm[key] = value;
-  });
-
-  return utm;
-};
-
 export const HeroBookDemo = () => {
   const t = useTranslations('Hero');
-  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [industry, setIndustry] = useState('');
   const [company, setCompany] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [shareNeeds, setShareNeeds] = useState(false);
   const [isIndustryOpen, setIsIndustryOpen] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
@@ -277,7 +265,6 @@ export const HeroBookDemo = () => {
     setIndustry('');
     setCompany('');
     setErrors({});
-    setIsSubmitting(false);
     setShareNeeds(false);
     setIsIndustryOpen(false);
     setShowCalendar(false);
@@ -296,6 +283,18 @@ export const HeroBookDemo = () => {
   };
 
   const openCalendar = () => {
+    const nextErrors: Record<string, string> = {};
+
+    if (!name.trim()) nextErrors.name = 'invalid';
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      nextErrors.email = 'invalid';
+    }
+    if (!industry) nextErrors.industry = 'invalid';
+    if (!company.trim()) nextErrors.company = 'invalid';
+
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length) return;
+
     syncCalendarBox();
     setShowCalendar(true);
   };
@@ -313,13 +312,30 @@ export const HeroBookDemo = () => {
     const Calendly = getCalendly();
     if (!parent || !Calendly) return false;
 
+    const prefillName = name.trim();
+    const prefillEmail = email.trim();
+    const prefillCompany = company.trim();
+    const prefillIndustry = industry.trim();
+
+    // Custom questions on this event, in order:
+    // a1 Phone, a2 Monthly call volume, a3 Company name (question_2), a4 Industry (question_3)
+    const url = new URL(CALENDLY_URL);
+    if (prefillName) url.searchParams.set('name', prefillName);
+    if (prefillEmail) url.searchParams.set('email', prefillEmail);
+    if (prefillCompany) url.searchParams.set('a3', prefillCompany);
+    if (prefillIndustry) url.searchParams.set('a4', prefillIndustry);
+
     parent.innerHTML = '';
     Calendly.initInlineWidget({
-      url: CALENDLY_URL,
+      url: url.toString(),
       parentElement: parent,
       prefill: {
-        ...(name.trim() ? { name: name.trim() } : {}),
-        ...(email.trim() ? { email: email.trim() } : {}),
+        ...(prefillName ? { name: prefillName } : {}),
+        ...(prefillEmail ? { email: prefillEmail } : {}),
+        customAnswers: {
+          ...(prefillCompany ? { a3: prefillCompany } : {}),
+          ...(prefillIndustry ? { a4: prefillIndustry } : {}),
+        },
       },
     });
 
@@ -337,61 +353,6 @@ export const HeroBookDemo = () => {
 
     return () => window.clearInterval(id);
   }, [showCalendar]);
-
-  const submit = async () => {
-    const nextErrors: Record<string, string> = {};
-
-    if (!name.trim()) nextErrors.name = 'invalid';
-    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      nextErrors.email = 'invalid';
-    }
-    if (!industry) nextErrors.industry = 'invalid';
-    if (!company.trim()) nextErrors.company = 'invalid';
-
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length || isSubmitting) return;
-
-    setIsSubmitting(true);
-    setErrors((current) => ({ ...current, submit: '' }));
-
-    try {
-      const res = await fetch('/api/leads-book-demo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({
-          name: name.trim(),
-          surname: '',
-          email: email.trim(),
-          sector: industry,
-          company: company.trim(),
-          ...getUtmParams(),
-        }),
-      });
-
-      if (!res.ok) {
-        setErrors((current) => ({
-          ...current,
-          submit: t('bookDemo.errors.submit'),
-        }));
-        setIsSubmitting(false);
-        return;
-      }
-
-      const params = new URLSearchParams();
-      if (name.trim()) params.set('firstName', name.trim());
-      if (email.trim()) params.set('email', email.trim());
-      const query = params.toString();
-      const calendarHref = getPathname({ href: '/calendar', locale });
-      window.location.assign(query ? `${calendarHref}?${query}` : calendarHref);
-    } catch {
-      setErrors((current) => ({
-        ...current,
-        submit: t('bookDemo.errors.submit'),
-      }));
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <>
@@ -520,14 +481,6 @@ export const HeroBookDemo = () => {
                     />
                   </div>
 
-                  <button
-                    type="button"
-                    className={cn('btn btn-secondary', st.hero_book_demo__form_btn_date)}
-                    onClick={openCalendar}
-                  >
-                    {t('bookDemo.selectTimeDate')}
-                  </button>
-
                   <div className={st.hero_book_demo__submit}>
                     <label className={st.hero_book_demo__needs}>
                       <input
@@ -541,11 +494,10 @@ export const HeroBookDemo = () => {
                     </label>
                     <button
                       type="button"
-                      onClick={() => void submit()}
+                      onClick={openCalendar}
                       className={cn('btn btn-primary', st.hero_book_demo__form_btn)}
-                      disabled={isSubmitting}
                     >
-                      {isSubmitting ? t('bookDemo.sending') : t('bookDemo.callMe')}
+                      {t('bookDemo.selectTimeDate')}
                     </button>
                   </div>
                 </div>

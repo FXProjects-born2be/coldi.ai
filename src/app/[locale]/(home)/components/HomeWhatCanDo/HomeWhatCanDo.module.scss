@@ -76,22 +76,22 @@
 
   &__icon_circle_one {
     top: 13%;
-    left: 20.5%;
+    left: 261px;
   }
 
   &__icon_circle_two {
     top: 38%;
-    left: 21.7%;
+    left: 277px;
   }
 
   &__icon_circle_three {
     top: 58%;
-    left: 21.6%;
+    left: 277px;
   }
 
   &__icon_circle_four {
     top: 69.5%;
-    left: 20%;
+    left: 256px;
   }
 
   &__icon_circle_mobile_one,
@@ -217,8 +217,13 @@
     fill: #4268FF;
   }
 
+  &__item:nth-child(3).active > svg path,
+  &__item:nth-child(4).active > svg path {
+    fill: none;
+    stroke: #4268FF;
+  }
+
   &__item_icon_line {
-    display: none;
     position: absolute;
     top: 65%;
     left: 100%;
@@ -228,6 +233,10 @@
     path:last-child {
       stroke-dasharray: 100;
       stroke-dashoffset: 100;
+    }
+
+    @include tablet {
+      display: none;
     }
   }
 
@@ -250,8 +259,8 @@
     align-self: start;
   }
 
-  &.in_view &__content {
-    animation: items-opacity 2.4s linear 3.2s forwards;
+  &.in_view &__content:has(.active) {
+    animation: tab-fade-in 0.8s linear 2.4s forwards;
   }
 
   &__content_panel {
@@ -268,6 +277,21 @@
       animation: tab-fade-in 0.8s linear 2.4s both;
     }
   }
+
+  &__content_panel &__content_title {
+    color: #4268FF;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    padding-bottom: 0;
+    border: none;
+
+    @include desktop {
+      display: none;
+    }
+  }
+
 
   &__content_item {
     display: flex;
@@ -311,6 +335,7 @@
     &.in_view &__icon_circle_mobile_four,
     &.in_view &__items,
     &.in_view &__content,
+    &.in_view &__content:has(.active),
     &.in_view &__image {
       animation: none;
       opacity: 1;
