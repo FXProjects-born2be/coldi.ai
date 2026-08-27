@@ -50,6 +50,7 @@
     "tabsAria": "Industries",
     "prevIndustry": "Previous industry",
     "nextIndustry": "Next industry",
+    "speaking": "Speaking...",
     "industries": {
       "insurance": {
         "label": "Insurance",
@@ -151,8 +152,8 @@
     "title": "Hear Voice AI in Action",
     "description": "Listen to real conversations across insurance, trading platforms, and debt collection, and hear how Coldi handles customer interactions naturally and professionally.",
     "selectAria": "Select voice example",
-    "play": "Play {title}",
-    "stop": "Stop {title}",
+    "play": "Play",
+    "pause": "Pause",
     "exploreProducts": "Explore Products",
     "items": {
       "insurance": {

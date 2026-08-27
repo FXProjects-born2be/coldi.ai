@@ -212,7 +212,9 @@
   }
 
   &__visual_chat {
-    padding: 60px;
+    padding-top: 52px;
+    padding-right: 99px;
+    margin-left: auto;
 
     &>*:not(:last-child) {
       margin-bottom: 10px;
@@ -223,7 +225,8 @@
     }
 
     @include tablet {
-      padding: 38px;
+      padding-right: 20px;
+      min-height: 580px;
     }
   }
 
@@ -271,11 +274,13 @@
 
     &.user {
       color: #fff;
-      border-radius: 13307.492px;
-      background: rgba(255, 255, 255, 0.00);
-      box-shadow: 0 0 0 0 #FFF inset, 0 0 0 1.331px rgba(255, 255, 255, 0.60) inset;
-      padding: 14px 18px;
       margin-left: auto;
+      border-radius: 399.6px;
+      border: 0.562px solid rgba(255, 255, 255, 0.40);
+      //background: rgba(128, 128, 128, 0.30);
+      background-blend-mode: luminosity;
+      backdrop-filter: blur(100px);
+      padding: 13px 19px;
 
       @include tablet {
         padding: 8px 11px;
@@ -333,28 +338,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      box-shadow: 0 4px 20px 0 rgba(255, 255, 255, 0.5) inset;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 130%;
-      height: 130%;
-      max-width: none;
-      object-fit: cover;
-      transform: translate(-50%, -50%);
-      animation: home-built-for-second-float 2.999s linear infinite;
-    }
 
     @include desktop {
       position: absolute;
@@ -421,6 +404,34 @@
     &>*:nth-child(5) {
       animation: home-built-for-bar-5 2.4s linear infinite;
     }
+  }
+
+  &__visual_logo {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 55px;
+  }
+
+  &__visual_speaking {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+    opacity: 0;
+    translate: 0 -40px;
+    animation:
+      home-built-for-msg-1-opacity 10s linear infinite,
+      home-built-for-msg-1-translate 10s linear infinite;
+  }
+
+  &__visual_speaking_title {
+    color: #FFF;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
   }
 }
 
@@ -863,7 +874,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home_built_for__visual_text {
+  .home_built_for__visual_text,
+  .home_built_for__visual_speaking {
     opacity: 1;
     translate: 0;
     animation: none;

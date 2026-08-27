@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
+import { IconCarbonPauseFilled } from '@/shared/ui/icons/IconCarbonPauseFilled';
+import { IconEntypoControllerPlay } from '@/shared/ui/icons/IconEntypoControllerPlay';
 
 import st from './HomeHearVoice.module.scss';
 
@@ -13,8 +15,9 @@ import { Link } from '@/i18n/navigation';
 
 type HearVoiceItem = {
   id: string;
-  image: string;
   secondImage: string;
+  width: number;
+  height: number;
   audio?: string;
 };
 
@@ -33,27 +36,31 @@ const SelectChevron = () => (
 const voices: HearVoiceItem[] = [
   {
     id: 'insurance',
-    image: '/images/home/home-built-for-one.jpg',
-    secondImage: '/images/home/home-built-for-one-second.png',
+    secondImage: '/images/home/home-built-for-one-second.svg',
+    width: 288,
+    height: 126,
     audio: '/audio/insurance.wav',
   },
   {
     id: 'trading',
-    image: '/images/home/home-built-for-two.jpg',
-    secondImage: '/images/home/home-built-for-two-second.png',
+    secondImage: '/images/home/home-built-for-two-second.svg',
+    width: 223,
+    height: 223,
     audio: '/audio/trading-platforms.wav',
   },
   {
     id: 'debt-collection',
-    image: '/images/home/home-built-for-three.jpg',
-    secondImage: '/images/home/home-built-for-three-second.png',
-    audio: '/audio/insurance.wav',
+    secondImage: '/images/home/home-built-for-three-second.svg',
+    width: 237,
+    height: 235,
+    audio: '/audio/debt-collection.wav',
   },
   {
     id: 'customer-support',
-    image: '/images/home/home-built-for-four.jpg',
-    secondImage: '/images/home/home-built-for-four-second.png',
-    audio: '/audio/insurance.wav',
+    secondImage: '/images/home/home-built-for-four-second.svg',
+    width: 287,
+    height: 159,
+    audio: '/audio/debt-collection.wav',
   },
 ];
 
@@ -142,38 +149,50 @@ export const HomeHearVoice = () => {
           {voices.map((item, index) => (
             <li
               key={item.id}
-              className={cn(st.home_hear_voice__item, selectedIndex === index && st.selected)}
+              className={cn(
+                st.home_hear_voice__item,
+                selectedIndex === index && st.selected,
+                activeIndex === index && st.playing
+              )}
             >
-              <div className={st.home_hear_voice__item_visual}>
+              <div>
+                <h3 className={st.home_hear_voice__item_title}>{t(`items.${item.id}.title`)}</h3>
+                <p className={st.home_hear_voice__item_subtitle}>
+                  {t(`items.${item.id}.subtitle`)}
+                </p>
+              </div>
+
+              <div className={st.home_hear_voice__item_second}>
                 <Image
-                  src={item.image}
+                  src={item.secondImage}
                   alt=""
-                  fill
-                  sizes="(max-width: 1024px) 50vw, 25vw"
-                  className={st.home_hear_voice__item_bg}
+                  width={item.width}
+                  height={item.height}
                   loading="lazy"
                 />
-                <div className={st.home_hear_voice__item_second}>
-                  <Image src={item.secondImage} alt="" width={359} height={359} loading="lazy" />
-                </div>
               </div>
-              <h3 className={st.home_hear_voice__item_title}>{t(`items.${item.id}.title`)}</h3>
-              <p className={st.home_hear_voice__item_subtitle}>{t(`items.${item.id}.subtitle`)}</p>
-              <div
-                className={cn(st.home_hear_voice__item_btn, activeIndex === index && st.playing)}
-                aria-label={
-                  activeIndex === index
-                    ? t('stop', { title: t(`items.${item.id}.title`) })
-                    : t('play', { title: t(`items.${item.id}.title`) })
-                }
+
+              <button
+                type="button"
+                className={cn(
+                  'btn',
+                  activeIndex === index ? 'btn-secondary' : 'btn-primary',
+                  st.home_hear_voice__item_btn
+                )}
                 onClick={() => togglePlay(index)}
               >
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
+                {activeIndex === index ? (
+                  <>
+                    {t('pause')}
+                    <IconCarbonPauseFilled />
+                  </>
+                ) : (
+                  <>
+                    {t('play')}
+                    <IconEntypoControllerPlay />
+                  </>
+                )}
+              </button>
             </li>
           ))}
         </ul>
@@ -188,7 +207,7 @@ export const HomeHearVoice = () => {
             onClick={() => setIsSelectOpen((open) => !open)}
           >
             <span className={st.home_hear_voice__select_thumb}>
-              <Image src={selectedVoice.image} alt="" fill sizes="40px" />
+              <Image src={selectedVoice.secondImage} alt="" fill sizes="40px" />
             </span>
             <span className={st.home_hear_voice__select_label}>
               {t(`items.${selectedVoice.id}.title`)}
@@ -216,7 +235,7 @@ export const HomeHearVoice = () => {
                     onClick={() => selectVoice(index)}
                   >
                     <span className={st.home_hear_voice__select_thumb}>
-                      <Image src={item.image} alt="" fill sizes="40px" />
+                      <Image src={item.secondImage} alt="" fill sizes="40px" />
                     </span>
                     <span className={st.home_hear_voice__select_label}>
                       {t(`items.${item.id}.title`)}

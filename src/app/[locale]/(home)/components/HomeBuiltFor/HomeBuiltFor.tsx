@@ -25,7 +25,6 @@ type Industry = {
   id: string;
   href: string;
   image: string;
-  secondImage: string;
   messages: ChatMessage[];
   workflows: Workflow[];
 };
@@ -34,14 +33,8 @@ const industries: Industry[] = [
   {
     id: 'insurance',
     href: '/industries/insurance',
-    image: '/images/home/home-built-for-one.jpg',
-    secondImage: '/images/home/home-built-for-one-second.png',
-    messages: [
-      { role: 'user' },
-      { role: 'assistant' },
-      { role: 'user' },
-      { role: 'assistant', icon: '/images/home/buit-for-icon.png' },
-    ],
+    image: '/images/home/home-built-for-one.png',
+    messages: [{ role: 'user' }, { role: 'user' }, { role: 'user' }, { role: 'user' }],
     workflows: [
       { id: 'policy-renewals', icon: '/images/icons/policy-renewals.png' },
       { id: 'claims-follow-up', icon: '/images/icons/claims-follow-up.png' },
@@ -52,14 +45,8 @@ const industries: Industry[] = [
   {
     id: 'trading',
     href: '/industries/brokers-and-trading-platforms',
-    image: '/images/home/home-built-for-three.jpg',
-    secondImage: '/images/home/home-built-for-three-second.png',
-    messages: [
-      { role: 'user' },
-      { role: 'assistant' },
-      { role: 'user' },
-      { role: 'assistant', icon: '/images/home/buit-for-icon.png' },
-    ],
+    image: '/images/home/home-built-for-two.png',
+    messages: [{ role: 'user' }, { role: 'user' }, { role: 'user' }, { role: 'user' }],
     workflows: [
       { id: 'lead-qualification', icon: '/images/icons/lead-qualification.svg' },
       { id: 'deposit-activation', icon: '/images/icons/deposit-activation.svg' },
@@ -70,14 +57,8 @@ const industries: Industry[] = [
   {
     id: 'debt-collection',
     href: '/industries/debt-collection',
-    image: '/images/home/home-built-for-four.jpg',
-    secondImage: '/images/home/home-built-for-four-second.png',
-    messages: [
-      { role: 'user' },
-      { role: 'assistant' },
-      { role: 'user' },
-      { role: 'assistant', icon: '/images/home/buit-for-icon.png' },
-    ],
+    image: '/images/home/home-built-for-three.png',
+    messages: [{ role: 'user' }, { role: 'user' }, { role: 'user' }, { role: 'user' }],
     workflows: [
       { id: 'debt-payment-reminders', icon: '/images/icons/payment-reminders.svg' },
       { id: 'promise-to-pay', icon: '/images/icons/promise-to-pay.svg' },
@@ -88,14 +69,8 @@ const industries: Industry[] = [
   {
     id: 'emis',
     href: '/fintech-Industry',
-    image: '/images/home/home-built-for-two.jpg',
-    secondImage: '/images/home/home-built-for-two-second.png',
-    messages: [
-      { role: 'user' },
-      { role: 'assistant' },
-      { role: 'user' },
-      { role: 'assistant', icon: '/images/home/buit-for-icon.png' },
-    ],
+    image: '/images/home/home-built-for-one.png',
+    messages: [{ role: 'user' }, { role: 'user' }, { role: 'user' }, { role: 'user' }],
     workflows: [
       { id: 'customer-support', icon: '/images/icons/customer-support.svg' },
       { id: 'verification-calls', icon: '/images/icons/verification-calls.svg' },
@@ -199,51 +174,122 @@ export const HomeBuiltFor = () => {
               src={industry.image}
               alt={industryLabel}
               width={700}
-              height={474}
+              height={580}
               className={st.home_built_for__visual_bg_image}
             />
 
             <div key={industry.id} className={st.home_built_for__visual_chat}>
-              {industry.messages.map((item, index) => (
-                <p
-                  key={`${item.role}-${index}`}
-                  className={cn(st.home_built_for__visual_text, st[item.role])}
+              <div className={st.home_built_for__visual_speaking}>
+                <p className={st.home_built_for__visual_speaking_title}>{t('speaking')}</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
+                  fill="none"
                 >
-                  {item.icon ? (
-                    <Image
-                      src={item.icon}
-                      alt=""
-                      width={35}
-                      height={35}
-                      className={st.home_built_for__visual_icon}
-                    />
-                  ) : null}
-                  {item.role === 'status' ? (
-                    <>
-                      {t(`industries.${industry.id}.messages.${index}`).replace(/\.+$/, '')}
-                      <span className={st.home_built_for__visual_dots} aria-hidden>
-                        <span>.</span>
-                        <span>.</span>
-                        <span>.</span>
-                      </span>
-                    </>
-                  ) : (
-                    <span>{t(`industries.${industry.id}.messages.${index}`)}</span>
-                  )}
-                </p>
-              ))}
+                  <rect
+                    x="6.40186"
+                    y="2.98746"
+                    width="1.70712"
+                    height="15.3641"
+                    rx="0.853561"
+                    fill="#F6F6F6"
+                  />
+                  <rect
+                    x="13.23"
+                    y="2.98746"
+                    width="1.70712"
+                    height="15.3641"
+                    rx="0.853561"
+                    fill="#F6F6F6"
+                  />
+                  <rect
+                    x="9.81592"
+                    y="5.54814"
+                    width="1.70712"
+                    height="10.2427"
+                    rx="0.853561"
+                    fill="#F6F6F6"
+                  />
+                  <rect
+                    x="2.9873"
+                    y="5.54814"
+                    width="1.70712"
+                    height="10.2427"
+                    rx="0.853561"
+                    fill="#F6F6F6"
+                  />
+                  <rect
+                    x="16.6445"
+                    y="5.54814"
+                    width="1.70712"
+                    height="10.2427"
+                    rx="0.853561"
+                    fill="#F6F6F6"
+                  />
+                </svg>
+                <Image
+                  src={'/images/home/home-built-for-speaking.png'}
+                  alt={industryLabel}
+                  width={60}
+                  height={60}
+                  loading={'lazy'}
+                  className={st.home_built_for__visual_speaking_icon}
+                />
+              </div>
+              {industry.messages.map((item, index) => {
+                if (index % 2 === 1) return null;
+
+                return (
+                  <p
+                    key={`${item.role}-${index}`}
+                    className={cn(st.home_built_for__visual_text, st[item.role])}
+                  >
+                    {item.icon ? (
+                      <Image
+                        src={item.icon}
+                        alt=""
+                        width={35}
+                        height={35}
+                        className={st.home_built_for__visual_icon}
+                      />
+                    ) : null}
+                    {item.role === 'status' ? (
+                      <>
+                        {t(`industries.${industry.id}.messages.${index}`).replace(/\.+$/, '')}
+                        <span className={st.home_built_for__visual_dots} aria-hidden>
+                          <span>.</span>
+                          <span>.</span>
+                          <span>.</span>
+                        </span>
+                      </>
+                    ) : (
+                      <span>{t(`industries.${industry.id}.messages.${index}`)}</span>
+                    )}
+                  </p>
+                );
+              })}
             </div>
 
-            <div className={st.home_built_for__visual_second_image}>
-              <Image src={industry.secondImage} alt={industryLabel} width={1077} height={1077} />
-              <div className={st.home_built_for__visual_second_image_block}>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
+            {/*<div className={st.home_built_for__visual_second_image}>*/}
+            {/*  <div className={st.home_built_for__visual_second_image_block}>*/}
+            {/*    <span></span>*/}
+            {/*    <span></span>*/}
+            {/*    <span></span>*/}
+            {/*    <span></span>*/}
+            {/*    <span></span>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
+
+            <Image
+              src={'/images/home/home-built-for-logo.png'}
+              alt={industryLabel}
+              width={118}
+              height={118}
+              loading={'lazy'}
+              className={st.home_built_for__visual_logo}
+            />
           </div>
         </div>
       </div>
