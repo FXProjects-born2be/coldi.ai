@@ -1,0 +1,186 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.pricing_contact {
+  padding-top: 80px;
+  overflow: hidden;
+
+  @include tablet {
+    padding-top: 40px;
+  }
+
+  &__row {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+
+    @include tablet {
+      flex-direction: column;
+    }
+  }
+
+  &__content {
+    max-width: 500px;
+    width: 100%;
+  }
+
+  &__eyebrow {
+    color: #0C1021;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+
+    @include tablet {
+      text-align: center;
+    }
+  }
+
+  &__title {
+    color: #0C1021;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 24px;
+
+    @include tablet {
+      font-size: 40px;
+      text-align: center;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  &__field {
+    width: 100%;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 23px;
+    border-radius: 24px;
+    border: 1px solid rgba(12, 16, 33, 0.10);
+    background: #FAFAFA;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+
+
+    &::placeholder {
+      color: rgba(12, 16, 33, 0.40);
+      font-weight: inherit;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #2544BD;
+    }
+  }
+
+  &__input_error {
+    border-color: #ff2643;
+  }
+
+  &__btn {
+    min-width: 160px;
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  &__success {
+    color: #0C1021;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  &__visual {
+    position: relative;
+    max-width: 580px;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    margin-bottom: -200px;
+
+    @include mobile {
+      max-width: 331px;
+      margin-bottom: -150px;
+    }
+  }
+
+  &__sphere {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &__sphere_bg {
+    position: absolute;
+    inset: -20%;
+    background: url('/images/pricing/contact-bg.png') center / cover no-repeat;
+    animation: pricing-contact-spin 24s linear infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  &__logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 210px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 168px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    isolation: isolate;
+
+    @include mobile {
+      width: 96px;
+      top: 84px;
+    }
+  }
+
+  &__logo_dim {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: transparent;
+    mix-blend-mode: overlay;
+    border: 1.576px solid rgba(255, 255, 255, 0.40);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(29.883533477783203px);
+  }
+
+  &__logo img {
+    position: relative;
+    z-index: 1;
+
+    @include mobile {
+      max-width: 48px;
+    }
+  }
+}
+
+@keyframes pricing-contact-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
