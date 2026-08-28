@@ -1,4 +1,10 @@
-import { SolutionsDeliver, SolutionsHero, SolutionsInfo } from './components';
+import {
+  SolutionsDeliver,
+  SolutionsHero,
+  SolutionsInfo,
+  SolutionsSpecific,
+  SolutionsUseCases,
+} from './components';
 
 export default function SolutionsPage() {
   return (
@@ -6,6 +12,8 @@ export default function SolutionsPage() {
       <SolutionsHero />
       <SolutionsInfo />
       <SolutionsDeliver />
+      <SolutionsUseCases />
+      <SolutionsSpecific />
     </main>
   );
 }

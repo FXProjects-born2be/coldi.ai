@@ -388,6 +388,33 @@
       "meet-the-team": "Meet the Team"
     }
   },
+  "SolutionsUseCases": {
+    "title": "Our Use Cases",
+    "readCase": "Read full case",
+    "items": {
+      "clickomi": {
+        "title": "Outbound Lead Qualification",
+        "description": "Coldi AI agent calls hot leads, qualifies interest, checks whether the call center is open, and either transfers the lead to a live specialist or books a suitable time automatically."
+      },
+      "payset": {
+        "title": "Automated Callback Booking",
+        "description": "Coldi AI agent calls new leads, identifies those ready to speak with a specialist, checks real-time availability, and books the callback directly into the calendar."
+      },
+      "clarity": {
+        "title": "Automated Compliance Follow-Up",
+        "description": "AI manages recurring client reviews from first outreach to reminders, response classification, internal escalation, reporting, and a complete activity trail."
+      },
+      "stone": {
+        "title": "Inbound Triage & Dispatch",
+        "description": "AI answers inbound calls, identifies emergencies, validates the service area, captures job details, and either transfers urgent cases or books an available appointment."
+      }
+    }
+  },
+  "SolutionsSpecific": {
+    "title": "Need Something More Specific?",
+    "description": "If your workflow isn't listed above, we build custom bots on request. Tell us the call, we'll tell you if it's a fit.",
+    "cta": "Book a Demo"
+  },
   "Footer": {
     "subtitle": "Making voice AI work for Fintech",
     "copyright": "© {year} Coldi. Voice-Powered. Rights Reserved.",

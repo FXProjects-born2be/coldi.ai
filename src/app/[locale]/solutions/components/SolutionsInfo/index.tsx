@@ -9,6 +9,19 @@ import st from './SolutionsInfo.module.scss';
 
 const ITEM_DURATION_MS = 5000;
 
+const SliderChevron = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+    <path
+      d="M6.68262 14.94L11.5726 10.05C12.1501 9.4725 12.1501 8.5275 11.5726 7.95L6.68262 3.06"
+      stroke="#171717"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const TABS = [
   {
     id: 'insurance',
@@ -132,6 +145,12 @@ export const SolutionsInfo = () => {
     setActiveIndex(0);
   };
 
+  const goToTab = (direction: -1 | 1) => {
+    const tabIndex = TABS.findIndex((tab) => tab.id === activeId);
+    const nextIndex = (tabIndex + direction + TABS.length) % TABS.length;
+    handleTabChange(TABS[nextIndex].id);
+  };
+
   useEffect(() => {
     if (items.length < 2) return;
 
@@ -146,6 +165,17 @@ export const SolutionsInfo = () => {
     <div className={st.solutions_info}>
       <div className="container">
         <div className={st.solutions_info__tabs}>
+          <button
+            type="button"
+            className={st.solutions_info__tabs_btn}
+            aria-label="Previous tab"
+            onClick={() => goToTab(-1)}
+          >
+            <span className="rotate-180">
+              <SliderChevron />
+            </span>
+          </button>
+          <p className={st.solutions_info__tabs_label}>{activeTab.label}</p>
           {TABS.map((tab) => (
             <button
               key={tab.id}
@@ -156,6 +186,14 @@ export const SolutionsInfo = () => {
               {tab.label}
             </button>
           ))}
+          <button
+            type="button"
+            className={st.solutions_info__tabs_btn}
+            aria-label="Next tab"
+            onClick={() => goToTab(1)}
+          >
+            <SliderChevron />
+          </button>
         </div>
 
         <div className={st.solutions_info__row}>

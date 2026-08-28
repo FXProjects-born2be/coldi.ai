@@ -7,6 +7,7 @@
     padding: 60px;
     border-radius: 8px;
     background: #F6F6F6;
+    overflow: hidden;
 
     @include tablet {
       padding: 24px 20px;
@@ -31,10 +32,50 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
 
-    @include tablet {
-      grid-template-columns: 1fr;
-      gap: 32px;
+    @include mobile {
+      display: none;
     }
+  }
+
+  &__slider {
+    display: none;
+
+    @include mobile {
+      display: block;
+      margin-inline: -20px;
+    }
+  }
+
+  &__swiper {
+    overflow: hidden;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+    padding-inline: 20px;
+  }
+
+  &__nav_prev,
+  &__nav_next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+  }
+
+  &__nav_prev {
+    padding: 11px;
+  }
+
+  &__nav_next {
+    padding: 11px 32px;
+    border-radius: 999px;
+    border: 0.5px solid rgba(0, 0, 0, 0.20);
+    background: #fff;
   }
 
   &__card {
@@ -43,6 +84,16 @@
     padding: 16px;
     margin: -16px;
     border-radius: 16px;
+
+    @include mobile {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  &__card:hover &__value {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
   }
 
   &__media {
@@ -51,6 +102,15 @@
     justify-content: center;
     min-height: 191px;
     margin-bottom: 8px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    @include mobile {
+      min-height: 140px;
+    }
   }
 
   &__value {
@@ -58,13 +118,22 @@
     font-size: 80px;
     line-height: 1.1;
     margin-bottom: 8px;
-    background: linear-gradient(180deg, #2544bd 0%, #4268ff 100%);
+    color: #0c1021;
+    background:
+      linear-gradient(0deg, rgba(66, 104, 255, 0.20) 0%, rgba(66, 104, 255, 0.20) 100%),
+      linear-gradient(180deg, #2544bd 0%, #4268ff 100%);
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #0c1021;
+    transition: color 0.25s ease, -webkit-text-fill-color 0.25s ease;
 
     @include tablet {
       font-size: 52px;
+    }
+
+    @include mobile {
+      text-align: center;
+      margin-inline: auto;
     }
   }
 
@@ -78,6 +147,11 @@
     @include tablet {
       font-size: 16px;
     }
+
+    @include mobile {
+      max-width: none;
+      text-align: center;
+    }
   }
 
   &__card_text {
@@ -87,6 +161,10 @@
 
     @include tablet {
       font-size: 12px;
+    }
+
+    @include mobile {
+      text-align: center;
     }
   }
 }
