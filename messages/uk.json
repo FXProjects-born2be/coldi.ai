@@ -169,7 +169,7 @@
         "subtitle": "Нагадування про оплату"
       },
       "customer-support": {
-        "title": "Підтримка клієнтів",
+        "title": "EMI",
         "subtitle": "Верифікаційний дзвінок"
       }
     }
@@ -273,6 +273,44 @@
     "success": "Дякуємо, ми скоро напишемо.",
     "errors": {
       "submit": "Не вдалося надіслати. Спробуйте ще раз."
+    }
+  },
+  "PricingRequest": {
+    "closeAria": "Закрити вікно",
+    "title": "Почніть з Coldi",
+    "subtitle": "Заповніть дані",
+    "name": "Ім’я",
+    "surname": "Прізвище",
+    "phone": "Номер телефону",
+    "email": "Робочий email",
+    "industry": "Галузь",
+    "searchCountry": "Пошук країни...",
+    "send": "Замовити демо",
+    "sending": "Надсилання...",
+    "errors": {
+      "name": "Вкажіть ім’я",
+      "surname": "Вкажіть прізвище",
+      "phone": "Вкажіть коректний номер телефону",
+      "emailRequired": "Вкажіть email",
+      "emailInvalid": "Введіть коректний email",
+      "emailWork": "Використайте робочий email",
+      "sector": "Оберіть галузь"
+    },
+    "sectors": {
+      "Technology": "Технології",
+      "Healthcare": "Охорона здоров’я",
+      "Finance": "Фінанси",
+      "E-commerce": "E-commerce",
+      "Real Estate": "Нерухомість",
+      "Education": "Освіта",
+      "Retail": "Рітейл",
+      "Telecommunications": "Телекомунікації",
+      "Manufacturing": "Виробництво",
+      "Hospitality": "Готельний бізнес",
+      "Consulting": "Консалтинг",
+      "Entertainment": "Розваги",
+      "Non-profit": "Некомерційна організація",
+      "Other": "Інше"
     }
   },
   "HomeFeaturedOn": {

@@ -4,14 +4,16 @@ import { useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
+import { useTranslations } from 'next-intl';
 import PhoneInput from 'react-phone-input-2';
 
 import type { BookDemoSchema } from '@/features/request-leads-demo/model/schemas';
-import { bookDemoSchema, SECTOR_OPTIONS } from '@/features/request-leads-demo/model/schemas';
+import { SECTOR_OPTIONS } from '@/features/request-leads-demo/model/schemas';
 import { SectorSelect } from '@/features/request-leads-demo/ui/sector-select';
 
-import { useForm } from '@/shared/lib/forms';
+import { useForm, v } from '@/shared/lib/forms';
 import { cn } from '@/shared/lib/helpers';
+import { isFreeEmailDomain } from '@/shared/lib/validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { CloseIcon } from '@/shared/ui/icons/outline/close';
 import { TextField } from '@/shared/ui/kit/text-field';
@@ -43,11 +45,34 @@ export const RequestDialog = ({
   setOpen: (open: boolean) => void;
 }) => {
   const plan = useRequestPricingStore((state) => state.plan);
+  const t = useTranslations('PricingRequest');
   const router = useRouter();
   const searchParams = useSearchParams();
   const utmParams = useMemo(() => getUtmFromSearchParams(searchParams), [searchParams]);
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [isSectorOpen, setIsSectorOpen] = useState(false);
+
+  const bookDemoSchema = useMemo(
+    () =>
+      v.object({
+        name: v.pipe(v.string(), v.minLength(1, t('errors.name'))),
+        surname: v.pipe(v.string(), v.minLength(1, t('errors.surname'))),
+        phone: v.pipe(v.string(), v.minLength(5, t('errors.phone'))),
+        email: v.pipe(
+          v.string(),
+          v.minLength(1, t('errors.emailRequired')),
+          v.email(t('errors.emailInvalid')),
+          v.check((email) => !isFreeEmailDomain(email), t('errors.emailWork'))
+        ),
+        sector: v.pipe(v.string(), v.minLength(1, t('errors.sector'))),
+      }),
+    [t]
+  );
+
+  const sectorItems = useMemo(
+    () => SECTOR_OPTIONS.map((item) => ({ ...item, label: t(`sectors.${item.value}`) })),
+    [t]
+  );
 
   const { Field, Subscribe, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -106,16 +131,16 @@ export const RequestDialog = ({
                 className={st.request_dialog__close}
                 onClick={() => setOpen(false)}
                 type="button"
-                aria-label="Close dialog"
+                aria-label={t('closeAria')}
               >
                 <CloseIcon />
               </button>
 
               <h3 className={st.request_dialog__title}>
-                Start with Coldi <span className={st.request_dialog__title_plan}>{plan.title}</span>
+                {t('title')} <span className={st.request_dialog__title_plan}>{plan.title}</span>
               </h3>
 
-              <h4 className={st.request_dialog__subtitle}>Fill out your data</h4>
+              <h4 className={st.request_dialog__subtitle}>{t('subtitle')}</h4>
 
               <form
                 className={st.request_dialog__form}
@@ -133,7 +158,7 @@ export const RequestDialog = ({
                           <>
                             <TextField
                               name={field.name}
-                              placeholder="Name"
+                              placeholder={t('name')}
                               value={String(field.state.value ?? '')}
                               onBlur={field.handleBlur}
                               onChange={(e) => field.handleChange(e.target.value)}
@@ -152,7 +177,7 @@ export const RequestDialog = ({
                           <>
                             <TextField
                               name={field.name}
-                              placeholder="Surname"
+                              placeholder={t('surname')}
                               value={String(field.state.value ?? '')}
                               onBlur={field.handleBlur}
                               onChange={(e) => field.handleChange(e.target.value)}
@@ -176,12 +201,12 @@ export const RequestDialog = ({
                               value={String(field.state.value)}
                               onChange={(phone) => field.handleChange(phone)}
                               onBlur={field.handleBlur}
-                              placeholder="Phone Number"
+                              placeholder={t('phone')}
                               inputClass={st.request_dialog__phone_input}
                               buttonClass={st.request_dialog__phone_button}
                               dropdownClass={st.request_dialog__phone_dropdown}
                               enableSearch
-                              searchPlaceholder="Search country..."
+                              searchPlaceholder={t('searchCountry')}
                               autoFormat
                             />
                           </div>
@@ -199,7 +224,7 @@ export const RequestDialog = ({
                           <TextField
                             name={field.name}
                             type="email"
-                            placeholder="Work email"
+                            placeholder={t('email')}
                             value={String(field.state.value ?? '')}
                             onBlur={field.handleBlur}
                             onChange={(e) => field.handleChange(e.target.value)}
@@ -224,10 +249,10 @@ export const RequestDialog = ({
                       {(field) => (
                         <>
                           <SectorSelect
-                            items={SECTOR_OPTIONS}
+                            items={sectorItems}
                             value={field.state.value}
                             onChange={field.handleChange}
-                            placeholder="Industry"
+                            placeholder={t('industry')}
                             onOpenChange={setIsSectorOpen}
                           />
                           {field.state.meta.errors?.map((err, i) => (
@@ -248,7 +273,7 @@ export const RequestDialog = ({
                           type="submit"
                           className="btn btn-primary"
                         >
-                          {pending ? 'Sending...' : 'Book a Demo'}
+                          {pending ? t('sending') : t('send')}
                         </button>
                       );
                     }}

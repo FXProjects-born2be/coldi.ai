@@ -169,7 +169,7 @@
         "subtitle": "Payment Reminder"
       },
       "customer-support": {
-        "title": "Customer Support",
+        "title": "EMIs",
         "subtitle": "Verification Call"
       }
     }
@@ -273,6 +273,44 @@
     "success": "Thanks, we'll be in touch.",
     "errors": {
       "submit": "Failed to send. Please try again."
+    }
+  },
+  "PricingRequest": {
+    "closeAria": "Close dialog",
+    "title": "Start with Coldi",
+    "subtitle": "Fill out your data",
+    "name": "Name",
+    "surname": "Surname",
+    "phone": "Phone Number",
+    "email": "Work email",
+    "industry": "Industry",
+    "searchCountry": "Search country...",
+    "send": "Book a Demo",
+    "sending": "Sending...",
+    "errors": {
+      "name": "Name is required",
+      "surname": "Surname is required",
+      "phone": "Please provide a valid phone number",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "emailWork": "Please use your work email address",
+      "sector": "Please select a sector"
+    },
+    "sectors": {
+      "Technology": "Technology",
+      "Healthcare": "Healthcare",
+      "Finance": "Finance",
+      "E-commerce": "E-commerce",
+      "Real Estate": "Real Estate",
+      "Education": "Education",
+      "Retail": "Retail",
+      "Telecommunications": "Telecommunications",
+      "Manufacturing": "Manufacturing",
+      "Hospitality": "Hospitality",
+      "Consulting": "Consulting",
+      "Entertainment": "Entertainment",
+      "Non-profit": "Non-profit",
+      "Other": "Other"
     }
   },
   "HomeFeaturedOn": {
