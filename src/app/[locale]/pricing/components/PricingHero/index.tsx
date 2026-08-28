@@ -1,18 +1,19 @@
+import { getTranslations } from 'next-intl/server';
+
 import { cn } from '@/shared/lib/helpers';
 
-import st from './Hero.module.scss';
+import st from './PricingHero.module.scss';
 
-export const PricingHero = () => {
+export const PricingHero = async () => {
+  const t = await getTranslations('PricingHero');
+
   return (
     <section className={st.pricing_hero}>
       <div className={cn('container', st.pricing_hero__container)}>
         <div className={st.pricing_hero__header}>
-          <h1 className={st.pricing_hero__title}>Simple Pricing. Scalable Power.</h1>
+          <h1 className={st.pricing_hero__title}>{t('title')}</h1>
 
-          <p className={st.pricing_hero__desc}>
-            Choose the plan that fits your stage - whether you&apos;re just testing or scaling full
-            operations.
-          </p>
+          <p className={st.pricing_hero__desc}>{t('description')}</p>
         </div>
       </div>
       <video

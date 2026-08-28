@@ -11,9 +11,9 @@ import { bookDemoSchema, SECTOR_OPTIONS } from '@/features/request-leads-demo/mo
 import { SectorSelect } from '@/features/request-leads-demo/ui/sector-select';
 
 import { useForm } from '@/shared/lib/forms';
+import { cn } from '@/shared/lib/helpers';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { CloseIcon } from '@/shared/ui/icons/outline/close';
-import { Button } from '@/shared/ui/kit/button';
 import { TextField } from '@/shared/ui/kit/text-field';
 
 import { useRequestPricingStore } from '../../store/store';
@@ -96,14 +96,14 @@ export const RequestDialog = ({
   return (
     <Root open={open} onOpenChange={setOpen}>
       <Portal>
-        <Overlay className={st.overlay} />
-        <Content className={st.content}>
+        <Overlay className={st.request_dialog__overlay} />
+        <Content className={st.request_dialog__content}>
           <Title />
           <Description asChild>
             <section>
               <button
                 name="close-dialog"
-                className={st.closeButton}
+                className={st.request_dialog__close}
                 onClick={() => setOpen(false)}
                 type="button"
                 aria-label="Close dialog"
@@ -111,23 +111,23 @@ export const RequestDialog = ({
                 <CloseIcon />
               </button>
 
-              <h3>
-                Start with Coldi <span>{plan.title}</span>
+              <h3 className={st.request_dialog__title}>
+                Start with Coldi <span className={st.request_dialog__title_plan}>{plan.title}</span>
               </h3>
 
-              <h4>Fill out your data</h4>
+              <h4 className={st.request_dialog__subtitle}>Fill out your data</h4>
 
               <form
-                className={st.layout}
+                className={st.request_dialog__form}
                 onSubmit={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   handleSubmit().catch(console.error);
                 }}
               >
-                <section className={st.fields}>
-                  <div className={st.formRow}>
-                    <div className={st.inputWrapper}>
+                <section className={st.request_dialog__fields}>
+                  <div className={st.request_dialog__row}>
+                    <div className={st.request_dialog__field}>
                       <Field name="name">
                         {(field) => (
                           <>
@@ -146,7 +146,7 @@ export const RequestDialog = ({
                         )}
                       </Field>
                     </div>
-                    <div className={st.inputWrapper}>
+                    <div className={st.request_dialog__field}>
                       <Field name="surname">
                         {(field) => (
                           <>
@@ -166,20 +166,20 @@ export const RequestDialog = ({
                       </Field>
                     </div>
                   </div>
-                  <div className={`${st.inputWrapper} ${st.full}`}>
+                  <div className={cn(st.request_dialog__field, st.request_dialog__field_full)}>
                     <Field name="phone">
                       {(field) => (
                         <>
-                          <div className={st.phoneInputContainer}>
+                          <div className={st.request_dialog__phone}>
                             <PhoneInput
                               country="gb"
                               value={String(field.state.value)}
                               onChange={(phone) => field.handleChange(phone)}
                               onBlur={field.handleBlur}
                               placeholder="Phone Number"
-                              inputClass={st.phoneInput}
-                              buttonClass={st.phoneInputButton}
-                              dropdownClass={st.phoneInputDropdown}
+                              inputClass={st.request_dialog__phone_input}
+                              buttonClass={st.request_dialog__phone_button}
+                              dropdownClass={st.request_dialog__phone_dropdown}
                               enableSearch
                               searchPlaceholder="Search country..."
                               autoFormat
@@ -192,7 +192,7 @@ export const RequestDialog = ({
                       )}
                     </Field>
                   </div>
-                  <div className={`${st.inputWrapper} ${st.full}`}>
+                  <div className={cn(st.request_dialog__field, st.request_dialog__field_full)}>
                     <Field name="email">
                       {(field) => (
                         <>
@@ -213,7 +213,12 @@ export const RequestDialog = ({
                     </Field>
                   </div>
                   <div
-                    className={`${st.inputWrapper} ${st.sector} ${st.full} ${isSectorOpen ? st.sectorOpen : ''}`}
+                    className={cn(
+                      st.request_dialog__field,
+                      st.request_dialog__field_full,
+                      st.request_dialog__sector,
+                      isSectorOpen && st.request_dialog__field_open
+                    )}
                   >
                     <Field name="sector">
                       {(field) => (
@@ -233,14 +238,18 @@ export const RequestDialog = ({
                     </Field>
                   </div>
                 </section>
-                <div className={st.footer}>
+                <div className={st.request_dialog__footer}>
                   <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
                     {([canSubmit, isSubmitting]) => {
                       const pending = isSubmitting || isRedirecting;
                       return (
-                        <Button disabled={!canSubmit || pending} type="submit" fullWidth>
+                        <button
+                          disabled={!canSubmit || pending}
+                          type="submit"
+                          className="btn btn-primary"
+                        >
                           {pending ? 'Sending...' : 'Book a Demo'}
-                        </Button>
+                        </button>
                       );
                     }}
                   </Subscribe>

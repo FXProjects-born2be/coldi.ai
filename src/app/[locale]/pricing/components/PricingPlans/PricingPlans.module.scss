@@ -4,6 +4,36 @@
   padding-block: 40px;
   background: #fafafa;
 
+  &__tabs {
+    display: none;
+
+    @include mobile {
+      display: flex;
+      width: 100%;
+      margin-bottom: 16px;
+      padding: 4px;
+      border-radius: 999px;
+      border: 0.5px solid rgba(0, 0, 0, 0.20);
+      background: #fff;
+    }
+  }
+
+  &__tab {
+    flex: 1;
+    border: 0.5px solid transparent;
+    border-radius: 999px;
+    padding: 11px 16px;
+    background: transparent;
+    color: #000;
+    font-size: 16px;
+    line-height: 1.4;
+
+    &.active {
+      background: #f6f6f6;
+      border-color: rgba(0, 0, 0, 0.20);
+    }
+  }
+
   &__grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -21,24 +51,56 @@
     border: 0.5px solid rgba(0, 0, 0, 0.20);
     background: #FFF;
     padding: 20px;
-  }
 
-  &__inner {
+    @include mobile {
+      display: none;
 
+      &.active {
+        display: block;
+      }
+    }
   }
 
   &__inner_top {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     min-height: 216px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 32px;
+    border-radius: 8px;
+    background: #F6F6F6;
+    padding: 20px;
+    transition: box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%), url('/images/pricing/plans-bg.jpg') lightgray -199.647px -40.971px / 220.714% 138.137% no-repeat;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 0;
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @include mobile {
+      min-height: 254px;
+    }
   }
 
   &__title {
     font-size: 32px;
     font-weight: 400;
     line-height: 1.2;
+    transition: color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   &__price_label {
@@ -47,6 +109,7 @@
     font-weight: 400;
     line-height: 1.4;
     margin-bottom: 8px;
+    transition: color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   &__price_line {
@@ -60,6 +123,7 @@
     font-size: 42px;
     font-weight: 600;
     line-height: normal;
+    transition: color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   &__price_suffix {
@@ -68,10 +132,21 @@
     font-weight: 600;
     line-height: normal;
     padding-bottom: 4px;
+    transition: color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   &__btn {
     width: 100%;
+    margin-bottom: 32px;
+    transition: background 0.7s cubic-bezier(0.22, 1, 0.36, 1), color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    border-color: #2544BD;
+    color: #2544BD;
+  }
+
+  &__description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
     margin-bottom: 32px;
   }
 
@@ -99,5 +174,47 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 1.4;
+  }
+
+  &__card:hover &__inner_top {
+    box-shadow: -183.017px 0 50.958px 0 rgba(66, 104, 255, 0.00), -116.987px 0 46.651px 0 rgba(66, 104, 255, 0.01), -66.03px 0 39.474px 0 rgba(66, 104, 255, 0.03), -29.426px 0 29.426px 0 rgba(66, 104, 255, 0.06), -7.177px 0 15.79px 0 rgba(66, 104, 255, 0.06);
+  }
+
+  &__card:hover &__inner_top::before {
+    opacity: 1;
+  }
+
+  &__card:hover &__title,
+  &__card:hover &__price_label,
+  &__card:hover &__price_value,
+  &__card:hover &__price_suffix {
+    color: #F6F6F6;
+  }
+
+  &__card:hover &__btn {
+    background: #2544BD;
+    color: #FFF;
+  }
+
+  @include mobile {
+    &__card.active &__inner_top {
+      box-shadow: -183.017px 0 50.958px 0 rgba(66, 104, 255, 0.00), -116.987px 0 46.651px 0 rgba(66, 104, 255, 0.01), -66.03px 0 39.474px 0 rgba(66, 104, 255, 0.03), -29.426px 0 29.426px 0 rgba(66, 104, 255, 0.06), -7.177px 0 15.79px 0 rgba(66, 104, 255, 0.06);
+    }
+
+    &__card.active &__inner_top::before {
+      opacity: 1;
+    }
+
+    &__card.active &__title,
+    &__card.active &__price_label,
+    &__card.active &__price_value,
+    &__card.active &__price_suffix {
+      color: #F6F6F6;
+    }
+
+    &__card.active &__btn {
+      background: #2544BD;
+      color: #FFF;
+    }
   }
 }
