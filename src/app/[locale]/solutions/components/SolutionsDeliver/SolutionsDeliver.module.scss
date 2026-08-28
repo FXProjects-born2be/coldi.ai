@@ -1,0 +1,92 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.solutions_deliver {
+  margin-bottom: 40px;
+
+  &__panel {
+    padding: 60px;
+    border-radius: 8px;
+    background: #F6F6F6;
+
+    @include tablet {
+      padding: 24px 20px;
+    }
+  }
+
+  &__title {
+    color: #0c1021;
+    text-align: center;
+    font-size: 48px;
+    line-height: 1.2;
+    margin-bottom: 60px;
+
+    @include tablet {
+      font-size: 32px;
+      margin-bottom: 32px;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    margin: -16px;
+    border-radius: 16px;
+  }
+
+  &__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 191px;
+    margin-bottom: 8px;
+  }
+
+  &__value {
+    width: max-content;
+    font-size: 80px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    background: linear-gradient(180deg, #2544bd 0%, #4268ff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    @include tablet {
+      font-size: 52px;
+    }
+  }
+
+  &__card_title {
+    color: #0c1021;
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    max-width: 190px;
+
+    @include tablet {
+      font-size: 16px;
+    }
+  }
+
+  &__card_text {
+    color: #50556B;
+    font-size: 14px;
+    line-height: 1.4;
+
+    @include tablet {
+      font-size: 12px;
+    }
+  }
+}
