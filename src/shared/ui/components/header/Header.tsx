@@ -46,7 +46,12 @@ export const Header = ({ pathname: pathnameProp }: { pathname: string }) => {
             height={32}
           />
         </Link>
-        <Navigation pathname={pathname} homeLabel={t('home')} newsLabel={t('news')} />
+        <Navigation
+          pathname={pathname}
+          homeLabel={t('home')}
+          newsLabel={t('news')}
+          pricingLabel={t('pricing')}
+        />
 
         <Link className={cn(st.header__bookMeeting, 'btn-primary')} href="/calendar">
           {t('scheduleMeeting')}
@@ -62,10 +67,12 @@ const Navigation = ({
   pathname,
   homeLabel,
   newsLabel,
+  pricingLabel,
 }: {
   pathname: string;
   homeLabel: string;
   newsLabel: string;
+  pricingLabel: string;
 }) => {
   return (
     <ul
@@ -81,6 +88,11 @@ const Navigation = ({
       <li className={cn({ [st.active]: pathname === '/news' })} itemProp="name">
         <Link className={st.navLink} href="/news" itemProp="url" prefetch={false}>
           {newsLabel}
+        </Link>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/pricing' })} itemProp="name">
+        <Link className={st.navLink} href="/pricing" itemProp="url" prefetch={false}>
+          {pricingLabel}
         </Link>
       </li>
     </ul>

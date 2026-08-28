@@ -6,7 +6,7 @@ export type Plan = {
   price: string;
   priceSuffix: string;
   requestPrice: string;
-  features: string[];
+  features: { text: string; icon: string }[];
 };
 
 export type Service = {
@@ -33,11 +33,26 @@ export const plans: Plan[] = [
     priceSuffix: '/per minute',
     requestPrice: '$0.40/per minute',
     features: [
-      'Strategy & Setup: High-conversion conversational flows',
-      'Dynamic Scripting: Real-time adaptive responses',
-      'Campaign Hours: Flexible timezone scheduling',
-      'Infrastructure: Your VoIP or Global Infrastructure',
-      'Performance Tracking & analytics',
+      {
+        text: 'Strategy & Setup: High-conversion conversational flows',
+        icon: '/icons/pricing/carbon_ai-agent-invocation.svg',
+      },
+      {
+        text: 'Dynamic Scripting: Real-time adaptive responses',
+        icon: '/icons/pricing/ix_code-ai.svg',
+      },
+      {
+        text: 'Campaign Hours: Flexible timezone scheduling',
+        icon: '/icons/pricing/mdi_clock-star-four-points-outline.svg',
+      },
+      {
+        text: 'Infrastructure: Your VoIP or Global Infrastructure',
+        icon: '/icons/pricing/boxicons_globe-alt.svg',
+      },
+      {
+        text: 'Performance Tracking & analytics',
+        icon: '/icons/pricing/ix_piechart-ai.svg',
+      },
     ],
   },
   {
@@ -50,11 +65,26 @@ export const plans: Plan[] = [
     priceSuffix: '/per agent',
     requestPrice: '$500/per agent',
     features: [
-      'Action-oriented AI: bookings, tickets, queries',
-      'CRM integration: Zendesk, Salesforce, and more',
-      '24/7 resolution with zero wait time',
-      'Omnichannel support: voice, chat, messaging',
-      'Intelligent escalation to human agents',
+      {
+        text: 'Action-oriented AI: bookings, tickets, queries',
+        icon: '/icons/pricing/hugeicons_ai-magic.svg',
+      },
+      {
+        text: 'CRM integration: Zendesk, Salesforce, and more',
+        icon: '/icons/pricing/hugeicons_ai-folder-01.svg',
+      },
+      {
+        text: '24/7 resolution with zero wait time',
+        icon: '/icons/pricing/reicon_twenty-four-hour-support.svg',
+      },
+      {
+        text: 'Omnichannel support: voice, chat, messaging',
+        icon: '/icons/pricing/mingcute_chat-4-ai-line.svg',
+      },
+      {
+        text: 'Intelligent escalation to human agents',
+        icon: '/icons/pricing/griddy-icons_ai-assistant.svg',
+      },
     ],
   },
 ];

@@ -1,0 +1,103 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.pricing_plans {
+  padding-block: 40px;
+  background: #fafafa;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    max-width: 952px;
+    margin-inline: auto;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    border-radius: 8px;
+    border: 0.5px solid rgba(0, 0, 0, 0.20);
+    background: #FFF;
+    padding: 20px;
+  }
+
+  &__inner {
+
+  }
+
+  &__inner_top {
+    min-height: 216px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+
+  &__title {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  &__price_label {
+    color: #50556B;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  &__price_line {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  &__price_value {
+    color: #0c1021;
+    font-size: 42px;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  &__price_suffix {
+    color: #0c1021;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: normal;
+    padding-bottom: 4px;
+  }
+
+  &__btn {
+    width: 100%;
+    margin-bottom: 32px;
+  }
+
+  &__features {
+    &>*:not(:last-child) {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+    }
+  }
+
+  &__feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__icon {
+    padding: 12px;
+    border-radius: 4px;
+    background: #F6F6F6;
+  }
+
+  &__feature_text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+}

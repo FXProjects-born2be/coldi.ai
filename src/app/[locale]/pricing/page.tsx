@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Pricing } from './components';
+import { Pricing, PricingHero } from './components';
 
 export const metadata: Metadata = {
   alternates: {
@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 export default function Products() {
   return (
     <main>
+      <PricingHero />
       <Pricing />
     </main>
   );

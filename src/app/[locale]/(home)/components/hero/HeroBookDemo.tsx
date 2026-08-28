@@ -1,21 +1,13 @@
 'use client';
 
-import { type ComponentType, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Script from 'next/script';
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
 import { useTranslations } from 'next-intl';
 
-import { cn } from '@/shared/lib/helpers';
-import { ArrowBottom } from '@/shared/ui/icons/fill/arrow-bottom';
-import { IconHugeIconsAddMoneyCircle } from '@/shared/ui/icons/IconHugeIconsAddMoneyCircle';
-import { IconHugeIconsAiBrowser } from '@/shared/ui/icons/IconHugeIconsAiBrowser';
-import { IconHugeIconsAiMagic } from '@/shared/ui/icons/IconHugeIconsAiMagic';
-import { IconHugeIconsAiSecurity } from '@/shared/ui/icons/IconHugeIconsAiSecurity';
-import { IconHugeIconsAiSheets } from '@/shared/ui/icons/IconHugeIconsAiSheets';
 import { CloseIcon } from '@/shared/ui/icons/outline/close';
-import { TextField } from '@/shared/ui/kit/text-field';
 
 import st from './HeroBookDemo.module.scss';
 
@@ -24,49 +16,11 @@ import { Link } from '@/i18n/navigation';
 const CALENDLY_URL = 'https://calendly.com/coldi/30min';
 const CALENDLY_SCRIPT = 'https://assets.calendly.com/assets/external/widget.js';
 
-type CalendlyPrefill = {
-  name?: string;
-  email?: string;
-  customAnswers?: Record<string, string>;
-};
-
 type CalendlyWidget = {
-  initInlineWidget: (options: {
-    url: string;
-    parentElement: HTMLElement;
-    prefill?: CalendlyPrefill;
-  }) => void;
+  initInlineWidget: (options: { url: string; parentElement: HTMLElement }) => void;
 };
 
 const getCalendly = () => (window as Window & { Calendly?: CalendlyWidget }).Calendly;
-
-const INDUSTRIES = [
-  {
-    id: 'insurance',
-    value: 'Insurance',
-    Icon: IconHugeIconsAiSecurity,
-  },
-  {
-    id: 'trading',
-    value: 'Trading Platforms & Brokers',
-    Icon: IconHugeIconsAiSheets,
-  },
-  {
-    id: 'debtCollection',
-    value: 'Debt Collection',
-    Icon: IconHugeIconsAiBrowser,
-  },
-  {
-    id: 'emisPayments',
-    value: 'EMIs & Payments',
-    Icon: IconHugeIconsAddMoneyCircle,
-  },
-  {
-    id: 'other',
-    value: 'Other',
-    Icon: IconHugeIconsAiMagic,
-  },
-] as const;
 
 const INFO_ITEMS = [
   {
@@ -83,263 +37,23 @@ const INFO_ITEMS = [
   },
 ] as const;
 
-const OTHER_VALUE = 'Other';
-
-type IndustryOption = {
-  id: string;
-  value: string;
-  label: string;
-  Icon: ComponentType;
-};
-
-const IndustrySelect = ({
-  items,
-  value,
-  onChange,
-  placeholder,
-  otherPlaceholder,
-  hasError,
-  onOpenChange,
-}: {
-  items: IndustryOption[];
-  value: string;
-  onChange: (value: string) => void;
-  placeholder: string;
-  otherPlaceholder: string;
-  hasError?: boolean;
-  onOpenChange?: (open: boolean) => void;
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [showOtherInput, setShowOtherInput] = useState(false);
-  const [otherText, setOtherText] = useState('');
-  const containerRef = useRef<HTMLDivElement>(null);
-  const otherInputRef = useRef<HTMLInputElement>(null);
-
-  const isKnownValue = items.some((item) => item.value === value);
-  const isCustomOther = !!value && !isKnownValue;
-  const displayValue = isCustomOther
-    ? value
-    : (items.find((item) => item.value === value)?.label ?? (value || placeholder));
-  const selectedItem = isCustomOther
-    ? items.find((item) => item.value === OTHER_VALUE)
-    : items.find((item) => item.value === value);
-  const SelectedIcon = selectedItem?.Icon;
-
-  useEffect(() => {
-    onOpenChange?.(isOpen);
-  }, [isOpen, onOpenChange]);
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        if (showOtherInput && otherText.trim()) onChange(otherText.trim());
-        setShowOtherInput(false);
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isOpen, showOtherInput, otherText, onChange]);
-
-  useEffect(() => {
-    if (showOtherInput) otherInputRef.current?.focus();
-  }, [showOtherInput]);
-
-  const handleOptionClick = (itemValue: string) => {
-    if (itemValue === OTHER_VALUE) {
-      setShowOtherInput(true);
-      setOtherText(isCustomOther ? value : '');
-      return;
-    }
-
-    onChange(itemValue);
-    setShowOtherInput(false);
-    setOtherText('');
-    setIsOpen(false);
-  };
-
-  const commitOther = () => {
-    onChange(otherText.trim() || OTHER_VALUE);
-    setShowOtherInput(false);
-    setIsOpen(false);
-  };
-
-  return (
-    <div className={st.hero_book_demo__select} ref={containerRef}>
-      <button
-        type="button"
-        className={cn(
-          st.hero_book_demo__select_trigger,
-          isOpen && st.hero_book_demo__select_trigger_open,
-          hasError && st.hero_book_demo__select_trigger_error
-        )}
-        onClick={() => setIsOpen((prev) => !prev)}
-        aria-expanded={isOpen}
-        aria-haspopup="listbox"
-      >
-        <span
-          className={cn(
-            st.hero_book_demo__select_value,
-            !value && st.hero_book_demo__select_placeholder
-          )}
-        >
-          {SelectedIcon ? <SelectedIcon /> : null}
-          {displayValue}
-        </span>
-        <ArrowBottom />
-      </button>
-
-      {isOpen ? (
-        <div className={st.hero_book_demo__select_dropdown} role="listbox">
-          {items.map((item) => {
-            const isActive =
-              item.value === OTHER_VALUE
-                ? isCustomOther || value === OTHER_VALUE
-                : value === item.value;
-
-            const OptionIcon = item.Icon;
-
-            return (
-              <button
-                key={item.value}
-                type="button"
-                role="option"
-                aria-selected={isActive}
-                className={cn(
-                  st.hero_book_demo__select_option,
-                  isActive && st.hero_book_demo__select_option_active
-                )}
-                onClick={() => handleOptionClick(item.value)}
-              >
-                <OptionIcon />
-                {item.label}
-              </button>
-            );
-          })}
-          {showOtherInput ? (
-            <input
-              ref={otherInputRef}
-              className={st.hero_book_demo__select_other}
-              type="text"
-              placeholder={otherPlaceholder}
-              value={otherText}
-              onChange={(e) => setOtherText(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  commitOther();
-                }
-              }}
-            />
-          ) : null}
-        </div>
-      ) : null}
-    </div>
-  );
-};
-
 export const HeroBookDemo = () => {
   const t = useTranslations('Hero');
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [industry, setIndustry] = useState('');
-  const [company, setCompany] = useState('');
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [shareNeeds, setShareNeeds] = useState(false);
-  const [isIndustryOpen, setIsIndustryOpen] = useState(false);
-  const [showCalendar, setShowCalendar] = useState(false);
   const calendlyRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [calendarBox, setCalendarBox] = useState<{ width: number; height: number } | null>(null);
-
-  const industries = INDUSTRIES.map((item) => ({
-    ...item,
-    label: t(`bookDemo.industries.${item.id}`),
-  }));
-
-  const reset = () => {
-    setName('');
-    setEmail('');
-    setIndustry('');
-    setCompany('');
-    setErrors({});
-    setShareNeeds(false);
-    setIsIndustryOpen(false);
-    setShowCalendar(false);
-    setCalendarBox(null);
-  };
-
-  const handleOpenChange = (nextOpen: boolean) => {
-    setOpen(nextOpen);
-    if (!nextOpen) reset();
-  };
-
-  const syncCalendarBox = () => {
-    const rect = contentRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    setCalendarBox({ width: rect.width, height: rect.height });
-  };
-
-  const openCalendar = () => {
-    const nextErrors: Record<string, string> = {};
-
-    if (!name.trim()) nextErrors.name = 'invalid';
-    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      nextErrors.email = 'invalid';
-    }
-    if (!industry) nextErrors.industry = 'invalid';
-    if (!company.trim()) nextErrors.company = 'invalid';
-
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length) return;
-
-    syncCalendarBox();
-    setShowCalendar(true);
-  };
 
   useEffect(() => {
-    if (!showCalendar) return;
-
-    syncCalendarBox();
-    window.addEventListener('resize', syncCalendarBox);
-    return () => window.removeEventListener('resize', syncCalendarBox);
-  }, [showCalendar]);
-
-  useEffect(() => {
-    if (!showCalendar) return;
+    if (!open) return;
 
     const initCalendly = () => {
       const parent = calendlyRef.current;
       const Calendly = getCalendly();
       if (!parent || !Calendly) return false;
 
-      const prefillName = name.trim();
-      const prefillEmail = email.trim();
-      const prefillCompany = company.trim();
-      const prefillIndustry = industry.trim();
-
-      // Custom questions on this event, in order:
-      // a1 Phone, a2 Monthly call volume, a3 Company name (question_2), a4 Industry (question_3)
-      const url = new URL(CALENDLY_URL);
-      if (prefillName) url.searchParams.set('name', prefillName);
-      if (prefillEmail) url.searchParams.set('email', prefillEmail);
-      if (prefillCompany) url.searchParams.set('a3', prefillCompany);
-      if (prefillIndustry) url.searchParams.set('a4', prefillIndustry);
-
       parent.innerHTML = '';
       Calendly.initInlineWidget({
-        url: url.toString(),
+        url: CALENDLY_URL,
         parentElement: parent,
-        prefill: {
-          ...(prefillName ? { name: prefillName } : {}),
-          ...(prefillEmail ? { email: prefillEmail } : {}),
-          customAnswers: {
-            ...(prefillCompany ? { a3: prefillCompany } : {}),
-            ...(prefillIndustry ? { a4: prefillIndustry } : {}),
-          },
-        },
       });
 
       return true;
@@ -352,7 +66,7 @@ export const HeroBookDemo = () => {
     }, 80);
 
     return () => window.clearInterval(id);
-  }, [showCalendar, name, email, company, industry]);
+  }, [open]);
 
   return (
     <>
@@ -366,23 +80,18 @@ export const HeroBookDemo = () => {
         </button>
       </div>
 
-      <Root open={open} onOpenChange={handleOpenChange}>
+      <Root open={open} onOpenChange={setOpen}>
         <Portal>
           <Overlay className={st.hero_book_demo__overlay} />
           <Content
-            ref={contentRef}
             className={st.hero_book_demo__content}
-            onPointerDownOutside={(event) => {
-              if (showCalendar) event.preventDefault();
-            }}
-            onFocusOutside={(event) => {
-              if (showCalendar) event.preventDefault();
-            }}
+            onPointerDownOutside={(event) => event.preventDefault()}
+            onFocusOutside={(event) => event.preventDefault()}
           >
             <button
               type="button"
               className={st.hero_book_demo__close}
-              onClick={() => handleOpenChange(false)}
+              onClick={() => setOpen(false)}
               aria-label={t('bookDemo.closeAria')}
             >
               <CloseIcon />
@@ -397,7 +106,7 @@ export const HeroBookDemo = () => {
                     alt="Coldi"
                     width={93}
                     height={32}
-                    loading={'lazy'}
+                    loading="lazy"
                   />
                 </Link>
 
@@ -431,98 +140,10 @@ export const HeroBookDemo = () => {
               </div>
 
               <div className={st.hero_book_demo__form_wrapper}>
-                <div className={st.hero_book_demo__fields}>
-                  <p className={st.hero_book_demo__form_title}>{t('bookDemo.formTitle')}</p>
-
-                  <div className={st.hero_book_demo__form_item}>
-                    <TextField
-                      name="name"
-                      placeholder={t('bookDemo.name')}
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      intent={errors.name ? 'danger' : 'default'}
-                      className={st.hero_book_demo__field}
-                    />
-                  </div>
-                  <div className={st.hero_book_demo__form_item}>
-                    <TextField
-                      name="email"
-                      placeholder={t('bookDemo.email')}
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      intent={errors.email ? 'danger' : 'default'}
-                      className={st.hero_book_demo__field}
-                    />
-                  </div>
-                  <div className={st.hero_book_demo__form_item}>
-                    <TextField
-                      name="company"
-                      placeholder={t('bookDemo.company')}
-                      value={company}
-                      onChange={(e) => setCompany(e.target.value)}
-                      intent={errors.company ? 'danger' : 'default'}
-                      className={st.hero_book_demo__field}
-                    />
-                  </div>
-                  <div
-                    className={cn(
-                      st.hero_book_demo__form_item,
-                      isIndustryOpen && st.hero_book_demo__form_item_select_open
-                    )}
-                  >
-                    <IndustrySelect
-                      items={industries}
-                      value={industry}
-                      onChange={setIndustry}
-                      placeholder={t('bookDemo.industry')}
-                      otherPlaceholder={t('bookDemo.industryOther')}
-                      hasError={Boolean(errors.industry)}
-                      onOpenChange={setIsIndustryOpen}
-                    />
-                  </div>
-
-                  <div className={st.hero_book_demo__submit}>
-                    <label className={st.hero_book_demo__needs}>
-                      <input
-                        type="checkbox"
-                        className={st.hero_book_demo__needs_input}
-                        checked={shareNeeds}
-                        onChange={(e) => setShareNeeds(e.target.checked)}
-                      />
-                      <span className={st.hero_book_demo__needs_box} aria-hidden />
-                      <p>{t('bookDemo.needs')}</p>
-                    </label>
-                    <button
-                      type="button"
-                      onClick={openCalendar}
-                      className={cn('btn btn-primary', st.hero_book_demo__form_btn)}
-                    >
-                      {t('bookDemo.selectTimeDate')}
-                    </button>
-                  </div>
-                </div>
+                <div ref={calendlyRef} className={st.hero_book_demo__calendar_widget} />
               </div>
             </div>
           </Content>
-
-          {showCalendar ? (
-            <div
-              className={st.hero_book_demo__calendar}
-              style={
-                calendarBox ? { width: calendarBox.width, height: calendarBox.height } : undefined
-              }
-            >
-              <div ref={calendlyRef} className={st.hero_book_demo__calendar_widget} />
-              <button
-                type="button"
-                className={st.hero_book_demo__calendar_close}
-                onClick={() => setShowCalendar(false)}
-                aria-label={t('bookDemo.closeAria')}
-              >
-                <CloseIcon />
-              </button>
-            </div>
-          ) : null}
         </Portal>
       </Root>
       {open ? <Script src={CALENDLY_SCRIPT} strategy="afterInteractive" /> : null}

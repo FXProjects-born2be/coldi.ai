@@ -52,6 +52,7 @@ export const Breadcrumbs = ({ pathname: pathnameProp, currentLabel }: Breadcrumb
   const pathname = pathnameProp ?? clientPathname ?? '';
 
   if (!pathname || pathname === '/') return null;
+  if (pathname !== '/calendar' && !pathname.startsWith('/calendar/')) return null;
   if (pathname.includes('/live-demo')) return null;
 
   const isNewsArticle = pathname.startsWith('/news/') && pathname !== '/news';
@@ -64,10 +65,8 @@ export const Breadcrumbs = ({ pathname: pathnameProp, currentLabel }: Breadcrumb
     href: '/' + segments.slice(0, i + 1).join('/'),
   }));
 
-  const isCalendar = pathname === '/calendar' || pathname.startsWith('/calendar/');
-
   return (
-    <div className={cn(st.breadcrumbs_wrapper, isCalendar && st.calendar)}>
+    <div className={cn(st.breadcrumbs_wrapper, st.calendar)}>
       <div className="container">
         <nav className={st.breadcrumbs} aria-label="Breadcrumb">
           <ol className={st.list}>
