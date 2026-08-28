@@ -23,7 +23,7 @@ export const PricingHero = async () => {
         playsInline
         muted
         loop
-        preload="auto"
+        preload="metadata"
         controls={false}
         aria-hidden
       />

@@ -91,6 +91,12 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      { source: '/agents', destination: '/solutions', permanent: true },
+      { source: '/uk/agents', destination: '/uk/solutions', permanent: true },
+    ];
+  },
 };
 
 // export default withBotId(nextConfig); // temporarily disabled to debug 429 on static chunks

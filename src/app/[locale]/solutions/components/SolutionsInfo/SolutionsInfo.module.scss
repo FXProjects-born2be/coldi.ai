@@ -1,0 +1,190 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+
+.solutions_info {
+    padding-block: 40px;
+
+    &__tabs {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin: 0 auto 32px auto;
+        border-radius: 999px;
+        border: 0.5px solid rgba(0, 0, 0, 0.20);
+        width: max-content;
+    }
+
+    &__tab {
+        padding: 12px 24px;
+        border-radius: 999px;
+        color: #000;
+        font-size: 16px;
+        line-height: 1.4;
+
+        &.active {
+            border: 0.5px solid rgba(0, 0, 0, 0.20);
+            font-size: 20px;
+        }
+    }
+
+    &__row {
+        display: grid;
+        gap: 40px;
+        align-items: flex-start;
+        grid-template-columns: 0.98816fr 1fr;
+        border-radius: 20px;
+        border: 0.5px solid rgba(66, 104, 255, 0.10);
+        box-shadow: 0 113px 32px 0 rgba(66, 104, 255, 0.00), 0 73px 29px 0 rgba(66, 104, 255, 0.01), 0 41px 24px 0 rgba(66, 104, 255, 0.05), 0 18px 18px 0 rgba(66, 104, 255, 0.09), 0 5px 10px 0 rgba(66, 104, 255, 0.10);
+        padding: 32px;
+
+        @include tablet {
+            grid-template-columns: 1fr;
+            padding: 20px;
+        }
+    }
+
+    &__item_tab_title {
+        font-size: 40px;
+        line-height: 1.2;
+        margin-bottom: 40px;
+
+        @include tablet {
+            font-size: 32px;
+            margin-bottom: 32px;
+        }
+    }
+
+    &__item_wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    &__item {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 4px 12px;
+        align-items: center;
+        position: relative;
+        padding-bottom: 17px;
+
+        &.active {
+            .solutions_info__item_description {
+                grid-template-rows: 1fr;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__item_icon {
+        padding: 12px;
+        border-radius: 4px;
+        background: #F6F6F6;
+        aspect-ratio: 1;
+        grid-row: span 2 / span 2;
+    }
+
+    &__item_title {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+    &__item_description {
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        color: rgba(0, 0, 0, 0.80);
+        font-size: 16px;
+        line-height: 1.4;
+        transition: grid-template-rows 0.35s ease, opacity 0.25s ease;
+
+        p {
+            overflow: hidden;
+            min-height: 0;
+        }
+    }
+
+    &__item_progress {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    &__item_progress_fill {
+        display: block;
+        height: 100%;
+        width: 100%;
+        background: #4268ff;
+        transform: scaleX(0);
+        transform-origin: left;
+        animation: solutions-info-item-progress 5s linear forwards;
+    }
+
+    &__visual {
+        transform-origin: center;
+        animation:
+            solutions-info-gradient-opacity 10.66405s linear infinite,
+            solutions-info-gradient-scale 10.66405s linear infinite;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+
+@keyframes solutions-info-item-progress {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes solutions-info-gradient-opacity {
+    0% {
+        animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+    }
+    4.689% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes solutions-info-gradient-scale {
+    0% {
+        animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+        scale: 0.6 0.6;
+    }
+    6.564% {
+        scale: 1 1;
+    }
+    100% {
+        scale: 1 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .solutions_info__visual,
+    .solutions_info__item_progress_fill {
+        animation: none;
+    }
+
+    .solutions_info__item_progress_fill {
+        transform: scaleX(1);
+    }
+
+    .solutions_info__item_description {
+        transition: none;
+    }
+}

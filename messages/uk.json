@@ -349,6 +349,7 @@
   },
   "Header": {
     "home": "Головна",
+    "solutions": "Рішення",
     "news": "Новини",
     "scheduleMeeting": "Запланувати зустріч",
     "menu": "Меню",
@@ -371,11 +372,10 @@
       "voip-phone-service": "VoIP-телефонія"
     },
     "industryItems": {
-      "healthcare": "Охорона здоров’я",
-      "insurance": "Страхові агенти",
-      "real-estate": "Нерухомість",
-      "call-center": "Кол-центр",
-      "debt-collection": "Стягнення боргів"
+      "insurance": "Страхування",
+      "trading": "Торгові платформи та брокери",
+      "debt-collection": "Стягнення боргів",
+      "emis": "EMI та платежі"
     },
     "useCaseItems": {
       "silverbell": "BPO (Silverbell Group)",
@@ -407,9 +407,10 @@
       "legal": "Юридична інформація"
     },
     "explore": {
-      "products": "Продукти",
+      "solutions": "Рішення",
       "pricing": "Ціни",
       "news": "Новини",
+      "useCases": "Кейси",
       "about": "Про нас"
     },
     "products": {
@@ -421,11 +422,10 @@
       "voip-phone-service": "VoIP-телефонія"
     },
     "industries": {
-      "healthcare": "Охорона здоров’я",
       "insurance": "Страхування",
-      "real-estate": "Нерухомість",
-      "call-center": "Кол-центри",
-      "debt-collection": "Стягнення боргів"
+      "trading": "Торгові платформи та брокери",
+      "debt-collection": "Стягнення боргів",
+      "emis": "EMI та платежі"
     },
     "legal": {
       "terms": "Умови використання",

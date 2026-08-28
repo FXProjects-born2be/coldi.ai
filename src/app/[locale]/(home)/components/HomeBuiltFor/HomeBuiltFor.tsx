@@ -69,7 +69,7 @@ const industries: Industry[] = [
   {
     id: 'emis',
     href: '/fintech-Industry',
-    image: '/images/home/home-built-for-one.png',
+    image: '/images/home/home-built-for-four.png',
     messages: [{ role: 'user' }, { role: 'user' }, { role: 'user' }, { role: 'user' }],
     workflows: [
       { id: 'customer-support', icon: '/images/icons/customer-support.svg' },
@@ -229,14 +229,15 @@ export const HomeBuiltFor = () => {
                     fill="#F6F6F6"
                   />
                 </svg>
-                <Image
-                  src={'/images/home/home-built-for-speaking.png'}
-                  alt={industryLabel}
-                  width={60}
-                  height={60}
-                  loading={'lazy'}
-                  className={st.home_built_for__visual_speaking_icon}
-                />
+                <div className={st.home_built_for__visual_speaking_icon}>
+                  <Image
+                    src={'/images/home/home-built-for-speaking.svg'}
+                    alt={industryLabel}
+                    width={54}
+                    height={54}
+                    loading={'lazy'}
+                  />
+                </div>
               </div>
               {industry.messages.map((item, index) => (
                 <p
@@ -278,14 +279,15 @@ export const HomeBuiltFor = () => {
             {/*  </div>*/}
             {/*</div>*/}
 
-            <Image
-              src={'/images/home/home-built-for-logo.png'}
-              alt={industryLabel}
-              width={118}
-              height={118}
-              loading={'lazy'}
-              className={st.home_built_for__visual_logo}
-            />
+            <div className={st.home_built_for__visual_logo}>
+              <Image
+                src={'/images/home/home-built-for-logo.svg'}
+                alt={'Logo'}
+                width={60}
+                height={60}
+                loading={'lazy'}
+              />
+            </div>
           </div>
         </div>
       </div>

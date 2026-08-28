@@ -232,11 +232,17 @@
 
   &__visual_text {
     font-size: 18px;
-    font-weight: 500;
-    line-height: 1.5;
+    line-height: 1.4;
     opacity: 0;
     translate: 0 -40px;
     width: max-content;
+
+    border-radius: 399.6px;
+    border: 0.562px solid rgba(255, 255, 255, 0.40);
+    background: var(--Light-Blue, #F6F6F6);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(10.656827926635742px);
+
 
     @include tablet {
       font-size: 12px;
@@ -273,7 +279,7 @@
     }
 
     &.user {
-      color: #fff;
+      color: #000;
       margin-left: auto;
       border-radius: 399.6px;
       border: 0.562px solid rgba(255, 255, 255, 0.40);
@@ -411,7 +417,27 @@
     z-index: 1;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 55px;
+    bottom: 35px;
+    width: 117px;
+    height: 117px;
+
+    border-radius: 781.947px;
+    border: 1.1px solid rgba(255, 255, 255, 0.40);
+    //background: rgba(128, 128, 128, 0.30);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(20.853544235229492px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include tablet {
+      width: 81px;
+      height: 81px;
+
+      img {
+        max-width: 41px;
+      }
+    }
   }
 
   &__visual_speaking {
@@ -432,6 +458,19 @@
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
+  }
+
+  &__visual_speaking_icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 347.478px;
+    border: 0.489px solid rgba(255, 255, 255, 0.40);
+    background: #F6F6F6;
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(9.266807556152344px);
   }
 }
 

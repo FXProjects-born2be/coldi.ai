@@ -5,6 +5,7 @@ export function getPageHeadingFromPath(pathname: string): string {
   if (pathname === '/news') return 'AI Calling & Industry News';
   if (pathname === '/products') return 'Our Voice Agents and Solutions';
   if (pathname === '/pricing') return 'Pricing';
+  if (pathname === '/solutions') return 'Solutions';
   if (pathname === '/voices') return 'Meet Coldi Voices - Real AI Call Agents in Action';
   if (pathname === '/calendar') return 'Book a demo with us';
   if (pathname === '/demo') return 'Coldi Demo - Try Real AI Call Agents Live';
@@ -60,7 +61,10 @@ export function getPageHeadingFromPath(pathname: string): string {
     return 'AI for Call Centers';
   }
 
-  if (pathname.startsWith('/industries/fx-brokers')) {
+  if (
+    pathname.startsWith('/industries/fx-brokers') ||
+    pathname.startsWith('/industries/trading-platforms-brokers')
+  ) {
     return 'AI Agents for Brokers';
   }
 

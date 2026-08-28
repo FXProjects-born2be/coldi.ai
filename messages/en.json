@@ -349,6 +349,7 @@
   },
   "Header": {
     "home": "Home",
+    "solutions": "Solutions",
     "news": "News",
     "scheduleMeeting": "Schedule a Meeting",
     "menu": "Menu",
@@ -371,11 +372,10 @@
       "voip-phone-service": "VoIP Phone Service"
     },
     "industryItems": {
-      "healthcare": "Healthcare",
-      "insurance": "Insurance Agents",
-      "real-estate": "Real Estate",
-      "call-center": "Call Center",
-      "debt-collection": "Debt Collection"
+      "insurance": "Insurance",
+      "trading": "Trading Platforms & Brokers",
+      "debt-collection": "Debt Collection",
+      "emis": "EMIs & Payments"
     },
     "useCaseItems": {
       "silverbell": "BPO (Silverbell Group)",
@@ -407,9 +407,10 @@
       "legal": "Legal"
     },
     "explore": {
-      "products": "Products",
+      "solutions": "Solutions",
       "pricing": "Pricing",
       "news": "News",
+      "useCases": "Use Cases",
       "about": "About"
     },
     "products": {
@@ -421,11 +422,10 @@
       "voip-phone-service": "VoIP Phone Service"
     },
     "industries": {
-      "healthcare": "Healthcare",
       "insurance": "Insurance",
-      "real-estate": "Real Estate",
-      "call-center": "Call Centers",
-      "debt-collection": "Debt Collection"
+      "trading": "Trading Platforms & Brokers",
+      "debt-collection": "Debt Collection",
+      "emis": "EMIs & Payments"
     },
     "legal": {
       "terms": "Terms of Service",

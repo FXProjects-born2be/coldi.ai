@@ -5,6 +5,7 @@ import NextLink from 'next/link';
 import { getTranslations } from 'next-intl/server';
 
 import { cn, getPageHeadingFromPath, requestRoutes } from '@/shared/lib/helpers';
+import { headerIndustryItems } from '@/shared/ui/components/header/nav';
 import { MessageIcon } from '@/shared/ui/icons/fill/message';
 import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
 import { Facebook } from '@/shared/ui/icons/fill/socials/facebook';
@@ -22,41 +23,36 @@ const menu = [
   {
     id: 'explore',
     links: [
-      { id: 'products', href: '/products' },
+      { id: 'solutions', href: '/solutions' },
       { id: 'pricing', href: '/pricing' },
       { id: 'news', href: '/news' },
+      { id: 'useCases', href: '/helios' },
       { id: 'about', href: '/about' },
     ],
   },
-  {
-    id: 'products',
-    links: [
-      { id: 'outbound-calling', href: '/products/outbound-calling' },
-      { id: 'inbound-calling', href: '/products/inbound-calling' },
-      { id: 'agent-development', href: '/products/agent-development' },
-      { id: 'customer-service-agent', href: '/products/customer-service-agent' },
-      { id: 'ai-for-quality-control', href: '/products/ai-for-quality-control' },
-      { id: 'voip-phone-service', href: '/products/voip-phone-service' },
-    ],
-  },
+  // {
+  //   id: 'products',
+  //   links: [
+  //     { id: 'outbound-calling', href: '/products/outbound-calling' },
+  //     { id: 'inbound-calling', href: '/products/inbound-calling' },
+  //     { id: 'agent-development', href: '/products/agent-development' },
+  //     { id: 'customer-service-agent', href: '/products/customer-service-agent' },
+  //     { id: 'ai-for-quality-control', href: '/products/ai-for-quality-control' },
+  //     { id: 'voip-phone-service', href: '/products/voip-phone-service' },
+  //   ],
+  // },
   {
     id: 'industries',
-    links: [
-      { id: 'healthcare', href: '/industries/healthcare' },
-      { id: 'insurance', href: '/industries/insurance' },
-      { id: 'real-estate', href: '/industries/real-estate' },
-      { id: 'call-center', href: '/industries/call-center' },
-      { id: 'debt-collection', href: '/industries/debt-collection' },
-    ],
+    links: [...headerIndustryItems],
   },
-  {
-    id: 'legal',
-    links: [
-      { id: 'terms', href: '/legal' },
-      { id: 'privacy', href: '/legal' },
-      { id: 'dpa', href: '/legal' },
-    ],
-  },
+  // {
+  //   id: 'legal',
+  //   links: [
+  //     { id: 'terms', href: '/legal' },
+  //     { id: 'privacy', href: '/legal' },
+  //     { id: 'dpa', href: '/legal' },
+  //   ],
+  // },
 ];
 
 export const Footer = async ({ pathname }: { pathname: string }) => {

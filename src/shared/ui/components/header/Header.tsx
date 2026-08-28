@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 
 import { cn, getPageHeadingFromPath } from '@/shared/lib/helpers';
 import { HeaderBurgerMenu } from '@/shared/ui/components/header/HeaderBurgerMenu';
+import { headerIndustryItems } from '@/shared/ui/components/header/nav';
 
 import st from './Header.module.scss';
 
@@ -46,12 +47,7 @@ export const Header = ({ pathname: pathnameProp }: { pathname: string }) => {
             height={32}
           />
         </Link>
-        <Navigation
-          pathname={pathname}
-          homeLabel={t('home')}
-          newsLabel={t('news')}
-          pricingLabel={t('pricing')}
-        />
+        <Navigation pathname={pathname} />
 
         <Link className={cn(st.header__bookMeeting, 'btn-primary')} href="/calendar">
           {t('scheduleMeeting')}
@@ -63,17 +59,9 @@ export const Header = ({ pathname: pathnameProp }: { pathname: string }) => {
   );
 };
 
-const Navigation = ({
-  pathname,
-  homeLabel,
-  newsLabel,
-  pricingLabel,
-}: {
-  pathname: string;
-  homeLabel: string;
-  newsLabel: string;
-  pricingLabel: string;
-}) => {
+const Navigation = ({ pathname }: { pathname: string }) => {
+  const t = useTranslations('Header');
+
   return (
     <ul
       className={st.header__navigation}
@@ -81,18 +69,55 @@ const Navigation = ({
       itemType="http://schema.org/SiteNavigationElement"
     >
       <li className={cn({ [st.active]: pathname === '/' })} itemProp="name">
-        <Link className={st.navLink} href="/" itemProp="url" prefetch={false}>
-          {homeLabel}
+        <Link className={st.navLink} href="/" itemProp="url">
+          {t('home')}
+        </Link>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/solutions' })} itemProp="name">
+        <Link className={st.navLink} href="/solutions" itemProp="url">
+          {t('solutions')}
+        </Link>
+      </li>
+      <li
+        className={cn(st.hasDropdown, {
+          [st.active]: pathname.startsWith('/industries') || pathname === '/fintech-Industry',
+        })}
+        itemProp="name"
+      >
+        <Link className={st.navTrigger} href="/industries" itemProp="url">
+          <span>{t('industries')}</span>
+          <span className={st.dropdownArrow}>
+            <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
+          </span>
+        </Link>
+        <ul className={st.dropdown}>
+          {headerIndustryItems.map((item) => (
+            <li key={item.id} itemProp="name">
+              <Link className={st.dropdownLink} href={item.href} itemProp="url">
+                {t(`industryItems.${item.id}`)}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/pricing' })} itemProp="name">
+        <Link className={st.navLink} href="/pricing" itemProp="url">
+          {t('pricing')}
         </Link>
       </li>
       <li className={cn({ [st.active]: pathname === '/news' })} itemProp="name">
-        <Link className={st.navLink} href="/news" itemProp="url" prefetch={false}>
-          {newsLabel}
+        <Link className={st.navLink} href="/news" itemProp="url">
+          {t('news')}
         </Link>
       </li>
-      <li className={cn({ [st.active]: pathname === '/pricing' })} itemProp="name">
-        <Link className={st.navLink} href="/pricing" itemProp="url" prefetch={false}>
-          {pricingLabel}
+      <li className={cn({ [st.active]: pathname === '/helios' })} itemProp="name">
+        <Link className={st.navLink} href="/helios" itemProp="url">
+          {t('useCases')}
+        </Link>
+      </li>
+      <li className={cn({ [st.active]: pathname === '/about' })} itemProp="name">
+        <Link className={st.navLink} href="/about" itemProp="url">
+          {t('about')}
         </Link>
       </li>
     </ul>
