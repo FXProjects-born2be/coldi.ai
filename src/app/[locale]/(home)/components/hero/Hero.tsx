@@ -2,8 +2,9 @@ import Image from 'next/image';
 
 import { getTranslations } from 'next-intl/server';
 
+import { BookDemo } from '@/shared/ui/components/book-demo';
+
 import st from './Hero.module.scss';
-import { HeroBookDemo } from './HeroBookDemo';
 import { HeroRotatingPhrase } from './HeroRotatingPhrase';
 
 const rings = [
@@ -59,7 +60,7 @@ export const Hero = async () => {
         </h1>
         <p className={st.hero__subtitle}>{t('subtitle')}</p>
 
-        <HeroBookDemo />
+        <BookDemo />
       </div>
     </section>
   );

@@ -210,7 +210,7 @@ export const Footer = async ({ pathname }: { pathname: string }) => {
 
         <div className={st.footer__video} aria-hidden>
           <video
-            src="/videos/footer/footer-video.mp4"
+            src="/videos/footer-video.mp4"
             autoPlay
             playsInline
             muted

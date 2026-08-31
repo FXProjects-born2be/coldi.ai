@@ -1,114 +1,134 @@
 'use client';
 
-import { useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import type { Swiper as SwiperInstance } from 'swiper/types';
+import { useTranslations } from 'next-intl';
 
 import st from './SolutionsDeliver.module.scss';
 
-import 'swiper/css';
-
 const CARDS = [
   {
+    id: 'conversations',
     value: '56.5%',
     image: { src: '/images/solutions/deliver-one.svg', width: 262, height: 191 },
-    title: 'of calls become conversations',
-    description:
-      'Coldi agents turn more than half of answered calls into meaningful conversations with the customer.',
   },
   {
+    id: 'nextStage',
     value: '33.3%',
     image: { src: '/images/solutions/deliver-two.svg', width: 268, height: 178 },
-    title: 'of conversations move to the next stage',
-    description:
-      'One in three conversations results in clear customer interest and a defined next step.',
   },
   {
+    id: 'callback',
     value: '17.6%',
     image: { src: '/images/solutions/deliver-three.png', width: 301, height: 156 },
-    title: 'of conversations result in a scheduled callback',
-    description:
-      'Coldi AI agents convert qualified conversations into scheduled follow-ups with the right specialist.',
   },
-];
-
-const SliderChevron = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-    <path
-      d="M6.68262 14.94L11.5726 10.05C12.1501 9.4725 12.1501 8.5275 11.5726 7.95L6.68262 3.06"
-      stroke="#171717"
-      strokeWidth="1.5"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-const Card = ({ card }: { card: (typeof CARDS)[number] }) => (
-  <article className={st.solutions_deliver__card}>
-    <div className={st.solutions_deliver__media}>
-      <Image src={card.image.src} alt="Image" width={card.image.width} height={card.image.height} />
-    </div>
-    <p className={st.solutions_deliver__value}>{card.value}</p>
-    <h3 className={st.solutions_deliver__card_title}>{card.title}</h3>
-    <p className={st.solutions_deliver__card_text}>{card.description}</p>
-  </article>
-);
+] as const;
 
 export const SolutionsDeliver = () => {
-  const swiperRef = useRef<SwiperInstance | null>(null);
+  const t = useTranslations('SolutionsDeliver');
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const slideRefs = useRef<(HTMLElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const getClosestIndex = useCallback(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return 0;
+
+    const center = viewport.scrollLeft + viewport.clientWidth / 2;
+    let closest = 0;
+    let distance = Infinity;
+
+    slideRefs.current.forEach((slide, index) => {
+      if (!slide) return;
+
+      const mid = slide.offsetLeft + slide.offsetWidth / 2;
+      const nextDistance = Math.abs(mid - center);
+
+      if (nextDistance < distance) {
+        distance = nextDistance;
+        closest = index;
+      }
+    });
+
+    return closest;
+  }, []);
+
+  const scrollToIndex = (index: number) => {
+    const viewport = viewportRef.current;
+    const slide = slideRefs.current[index];
+    if (!viewport || !slide) return;
+
+    viewport.scrollTo({
+      left: slide.offsetLeft - (viewport.clientWidth - slide.offsetWidth) / 2,
+      behavior: 'smooth',
+    });
+    setActiveIndex(index);
+  };
+
+  const goTo = (direction: -1 | 1) => {
+    const next = Math.min(CARDS.length - 1, Math.max(0, getClosestIndex() + direction));
+    scrollToIndex(next);
+  };
 
   return (
     <section className={st.solutions_deliver}>
       <div className="container">
         <div className={st.solutions_deliver__panel}>
-          <h2 className={st.solutions_deliver__title}>What Coldi Agents Deliver</h2>
-          <div className={st.solutions_deliver__grid}>
-            {CARDS.map((card) => (
-              <Card key={card.value} card={card} />
+          <h2 className={st.solutions_deliver__title}>{t('title')}</h2>
+
+          <div
+            ref={viewportRef}
+            className={st.solutions_deliver__viewport}
+            onScroll={() => {
+              const closest = getClosestIndex();
+              setActiveIndex((current) => (current === closest ? current : closest));
+            }}
+          >
+            {CARDS.map((card, index) => (
+              <article
+                key={card.id}
+                className={st.solutions_deliver__card}
+                ref={(node) => {
+                  slideRefs.current[index] = node;
+                }}
+              >
+                <div className={st.solutions_deliver__media}>
+                  <Image
+                    src={card.image.src}
+                    alt=""
+                    width={card.image.width}
+                    height={card.image.height}
+                  />
+                </div>
+                <p className={st.solutions_deliver__value}>{card.value}</p>
+                <h3 className={st.solutions_deliver__card_title}>{t(`cards.${card.id}.title`)}</h3>
+                <p className={st.solutions_deliver__card_text}>
+                  {t(`cards.${card.id}.description`)}
+                </p>
+              </article>
             ))}
           </div>
-          <div className={st.solutions_deliver__slider}>
-            <Swiper
-              observer
-              observeParents
-              centeredSlides
-              slidesPerView={1.22}
-              spaceBetween={16}
-              onSwiper={(instance) => {
-                swiperRef.current = instance;
-              }}
-              className={st.solutions_deliver__swiper}
+
+          <div className={st.solutions_deliver__nav}>
+            <button
+              type="button"
+              className={st.solutions_deliver__nav_prev}
+              aria-label={t('prevSlide')}
+              disabled={activeIndex === 0}
+              onClick={() => goTo(-1)}
             >
-              {CARDS.map((card) => (
-                <SwiperSlide key={card.value}>
-                  <Card card={card} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <div className={st.solutions_deliver__nav}>
-              <button
-                type="button"
-                className={st.solutions_deliver__nav_prev}
-                aria-label="Previous slide"
-                onClick={() => swiperRef.current?.slidePrev()}
-              >
-                <span className="rotate-180">
-                  <SliderChevron />
-                </span>
-              </button>
-              <button
-                type="button"
-                className={st.solutions_deliver__nav_next}
-                aria-label="Next slide"
-                onClick={() => swiperRef.current?.slideNext()}
-              >
-                <SliderChevron />
-              </button>
-            </div>
+              <Image src="/icons/arrow-left.svg" alt="" width={18} height={18} />
+            </button>
+            <button
+              type="button"
+              className={st.solutions_deliver__nav_next}
+              aria-label={t('nextSlide')}
+              disabled={activeIndex === CARDS.length - 1}
+              onClick={() => goTo(1)}
+            >
+              <Image src="/icons/arrow-right.svg" alt="" width={18} height={18} />
+            </button>
           </div>
         </div>
       </div>

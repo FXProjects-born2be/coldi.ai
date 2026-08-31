@@ -1,6 +1,9 @@
 import Image from 'next/image';
 
+import { getTranslations } from 'next-intl/server';
+
 import { cn } from '@/shared/lib/helpers';
+import { BookDemo } from '@/shared/ui/components/book-demo';
 
 import st from './SolutionsHero.module.scss';
 
@@ -16,7 +19,9 @@ const rings = [
   { src: '/images/solutions/hero-nine.svg', width: 1297, height: 537 },
 ];
 
-export const SolutionsHero = () => {
+export const SolutionsHero = async () => {
+  const t = await getTranslations('SolutionsHero');
+
   return (
     <section className={st.agents_hero}>
       <div className={st.agents_hero__bg} aria-hidden>
@@ -37,18 +42,13 @@ export const SolutionsHero = () => {
 
       <div className={cn('container', st.agents_hero__container)}>
         <h1 className={st.agents_hero__title}>
-          Named AI Agents,
+          {t('titleLine1')}
           <br />
-          Built for Fintech Workflows
+          {t('titleLine2')}
         </h1>
-        <p className={st.agents_hero__description}>
-          Not a generic voice AI toolkit. Every bot below is built, deployed, and managed by Coldi
-          for a specific job.
-        </p>
+        <p className={st.agents_hero__description}>{t('description')}</p>
 
-        <button className={cn('btn btn-primary', st.agents_hero__btn)} type="button">
-          Book a Demo
-        </button>
+        <BookDemo className={cn('btn-primary', st.agents_hero__btn)} />
       </div>
     </section>
   );

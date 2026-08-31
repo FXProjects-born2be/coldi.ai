@@ -3,45 +3,25 @@
     "titleLine1": "AI Workforce",
     "titleLine2": "Built for the Next Generation of",
     "subtitle": "Production-ready AI voice agents, fully managed from day one.",
-    "cta": "Book a Demo",
     "phrases": {
       "insuranceBrokers": "Insurance Brokers",
       "tradingPlatforms": "Trading Platforms",
       "debtCollection": "Debt Collection",
       "salesTeams": "Sales Teams"
-    },
-    "bookDemo": {
-      "closeAria": "Close dialog",
-      "title": "Let’s Schedule",
-      "titleHighlight": "Your Call",
-      "subtitle": "Pick a time that works for you.",
-      "subtitleSecond": "We’ll discuss your needs and show you how Coldi can support your business.",
-      "whatToExpect": "What to expect",
-      "infoItems": {
-        "conversation": "A 30-minute conversation with a Coldi specialist",
-        "cases": "Use cases relevant to your business",
-        "match": "A perfect match of a Coldi agent with your current business challenge"
-      },
-      "formTitle": "Ready to Try Coldi?",
-      "name": "Name*",
-      "email": "Work email*",
-      "company": "Company*",
-      "industry": "Industry*",
-      "industryOther": "Please specify your industry",
-      "selectTimeDate": "Select Time and Date",
-      "needs": "Tell us a little about your needs so we can focus on what matters most to you.",
-      "callMe": "Call Me",
-      "sending": "Sending...",
-      "errors": {
-        "submit": "Failed to send. Please try again."
-      },
-      "industries": {
-        "insurance": "Insurance",
-        "trading": "Trading Platforms & Brokers",
-        "debtCollection": "Debt Collection",
-        "emisPayments": "EMIs & Payments",
-        "other": "Other"
-      }
+    }
+  },
+  "BookDemo": {
+    "cta": "Book a Demo",
+    "closeAria": "Close dialog",
+    "title": "Let’s Schedule",
+    "titleHighlight": "Your Call",
+    "subtitle": "Pick a time that works for you.",
+    "subtitleSecond": "We’ll discuss your needs and show you how Coldi can support your business.",
+    "whatToExpect": "What to expect",
+    "infoItems": {
+      "conversation": "A 30-minute conversation with a Coldi specialist",
+      "cases": "Use cases relevant to your business",
+      "match": "A perfect match of a Coldi agent with your current business challenge"
     }
   },
   "HomeBuiltFor": {
@@ -72,10 +52,10 @@
         "label": "Trading Platforms",
         "cta": "Learn more",
         "messages": [
-          "Can I move my payment to next week?",
-          "Sure. What date works?",
-          "The 15th",
-          "Confirmed. New date is the 15th."
+          "I haven't traded in months, what changed?",
+          "New spreads just launched. Want me to walk you through them?",
+          "Yes, show me",
+          "Sent. Check your email for the update."
         ],
         "workflows": {
           "lead-qualification": "Lead Qualification",
@@ -388,9 +368,149 @@
       "meet-the-team": "Meet the Team"
     }
   },
+  "SolutionsInfo": {
+    "prevTab": "Previous tab",
+    "nextTab": "Next tab",
+    "visual": {
+      "managedBy": "Managed by Coldi.ai",
+      "telephony": "Telephony Infrastructure",
+      "api": "API Integrations",
+      "accountVerification": "Account Verification Flow",
+      "optimization": "Optimization Engine",
+      "connected": "Connected",
+      "active": "Active",
+      "operational": "Operational",
+      "autoLearning": "Auto-learning",
+      "sentiment": "Sentiment detection",
+      "risk": "Risk analysis",
+      "routing": "Routing decision",
+      "triage": "AI triage engine",
+      "setup": "Setup",
+      "integrations": "Integrations",
+      "callLogic": "Call Logic",
+      "live": "Live",
+      "completed": "Completed"
+    },
+    "tabs": {
+      "insurance": {
+        "label": "Insurance",
+        "items": {
+          "policyRenewal": {
+            "title": "Policy Renewal Bot",
+            "description": "Calls policyholders ahead of renewal to confirm and lock in rates"
+          },
+          "quoteFollowUp": {
+            "title": "Quote Follow-up Bot",
+            "description": "Follows up on open quotes to convert them into policies"
+          },
+          "kycReminder": {
+            "title": "KYC / Document Reminder Bot",
+            "description": "Chases missing documents and verification to complete onboarding"
+          },
+          "retention": {
+            "title": "Retention / Win-back Bot",
+            "description": "Re-engages lapsing or cancelled policyholders"
+          },
+          "fnol": {
+            "title": "FNOL Intake Bot",
+            "description": "Handles inbound first-notice-of-loss intake and triage"
+          }
+        }
+      },
+      "trading": {
+        "label": "Trading Platforms",
+        "items": {
+          "leadQualification": {
+            "title": "Lead Qualification Bot",
+            "description": "Calls and qualifies new sign-ups while intent is still high"
+          },
+          "eventBasedCalling": {
+            "title": "Event-Based Calling Bot",
+            "description": "Triggers a call on account events like a deposit drop-off or inactivity"
+          },
+          "leadNurturing": {
+            "title": "Lead Nurturing Bot",
+            "description": "Brings cold and aged leads back into activity"
+          },
+          "onboardingKyc": {
+            "title": "Onboarding / KYC Completion Bot",
+            "description": "Pushes new users through verification and onboarding"
+          },
+          "reactivation": {
+            "title": "Reactivation Bot",
+            "description": "Wins back dormant accounts"
+          }
+        }
+      },
+      "debt": {
+        "label": "Debt Collection",
+        "items": {
+          "paymentReminder": {
+            "title": "Payment Reminder Bot",
+            "description": "Pre-due and overdue reminders, compliant and consistent"
+          },
+          "arrangement": {
+            "title": "Arrangement / Negotiation Bot",
+            "description": "Sets up and confirms payment plans"
+          },
+          "brokenPromise": {
+            "title": "Broken-Promise Follow-up Bot",
+            "description": "Follows up on missed payment commitments"
+          },
+          "preLegal": {
+            "title": "Pre-Legal Notice Bot",
+            "description": "Delivers compliant escalation notices before legal steps"
+          }
+        }
+      },
+      "emi": {
+        "label": "EMIs",
+        "items": {
+          "applicationRecovery": {
+            "title": "Application Recovery Bot",
+            "description": "Walks abandoned applicants through the last steps of verification"
+          },
+          "complianceRefresh": {
+            "title": "Compliance Refresh Bot",
+            "description": "Runs document requests and consent refreshes on a schedule"
+          },
+          "accountSupport": {
+            "title": "Account Support Bot",
+            "description": "Answers routine account questions and routes to specialists when needed"
+          }
+        }
+      }
+    }
+  },
+  "SolutionsHero": {
+    "titleLine1": "Named AI Agents,",
+    "titleLine2": "Built for Fintech Workflows",
+    "description": "Not a generic voice AI toolkit. Every bot below is built, deployed, and managed by Coldi for a specific job."
+  },
+  "SolutionsDeliver": {
+    "title": "What Coldi Agents Deliver",
+    "prevSlide": "Previous slide",
+    "nextSlide": "Next slide",
+    "cards": {
+      "conversations": {
+        "title": "of calls become conversations",
+        "description": "Coldi agents turn more than half of answered calls into meaningful conversations with the customer."
+      },
+      "nextStage": {
+        "title": "of conversations move to the next stage",
+        "description": "One in three conversations results in clear customer interest and a defined next step."
+      },
+      "callback": {
+        "title": "of conversations result in a scheduled callback",
+        "description": "Coldi AI agents convert qualified conversations into scheduled follow-ups with the right specialist."
+      }
+    }
+  },
   "SolutionsUseCases": {
     "title": "Our Use Cases",
     "readCase": "Read full case",
+    "prevSlide": "Previous slide",
+    "nextSlide": "Next slide",
     "items": {
       "clickomi": {
         "title": "Outbound Lead Qualification",

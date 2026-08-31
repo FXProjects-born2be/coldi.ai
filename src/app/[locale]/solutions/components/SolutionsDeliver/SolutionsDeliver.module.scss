@@ -1,7 +1,11 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .solutions_deliver {
-  margin-bottom: 40px;
+  padding-block: 40px;
+
+  @include tablet {
+    padding-bottom: 32px;
+  }
 
   &__panel {
     padding: 60px;
@@ -10,7 +14,7 @@
     overflow: hidden;
 
     @include tablet {
-      padding: 24px 20px;
+      padding: 20px;
     }
   }
 
@@ -27,36 +31,44 @@
     }
   }
 
-  &__grid {
+  &__viewport {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    gap: 60px;
 
     @include mobile {
-      display: none;
+      display: flex;
+      gap: 22px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 32px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 
-  &__slider {
-    display: none;
-
+  &__card {
     @include mobile {
-      display: block;
-      margin-inline: -20px;
+      flex: 0 0 200px;
+      scroll-snap-align: center;
     }
-  }
-
-  &__swiper {
-    overflow: hidden;
   }
 
   &__nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 24px;
-    padding-inline: 20px;
+    display: none;
+
+    @include mobile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
   }
 
   &__nav_prev,
@@ -64,30 +76,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
-  }
-
-  &__nav_prev {
-    padding: 11px;
-  }
-
-  &__nav_next {
-    padding: 11px 32px;
+    padding: 12px 24px;
+    max-width: 143px;
+    width: 100%;
     border-radius: 999px;
     border: 0.5px solid rgba(0, 0, 0, 0.20);
     background: #fff;
-  }
 
-  &__card {
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    margin: -16px;
-    border-radius: 16px;
-
-    @include mobile {
-      padding: 0;
-      margin: 0;
+    &:disabled {
+      background: transparent;
+      border-color: transparent;
     }
   }
 
@@ -99,22 +97,18 @@
   &__media {
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-height: 191px;
     margin-bottom: 8px;
 
-    img {
-      max-width: 100%;
-      height: auto;
+    @include mobile-up {
+      min-height: 191px;
     }
 
     @include mobile {
-      min-height: 140px;
+      min-height: 146px;
     }
   }
 
   &__value {
-    width: max-content;
     font-size: 80px;
     line-height: 1.1;
     margin-bottom: 8px;
@@ -133,7 +127,6 @@
 
     @include mobile {
       text-align: center;
-      margin-inline: auto;
     }
   }
 
@@ -149,7 +142,8 @@
     }
 
     @include mobile {
-      max-width: none;
+      max-width: 170px;
+      margin-inline: auto;
       text-align: center;
     }
   }
@@ -159,12 +153,11 @@
     font-size: 14px;
     line-height: 1.4;
 
-    @include tablet {
-      font-size: 12px;
-    }
-
     @include mobile {
       text-align: center;
+      font-size: 12px;
+      max-width: 200px;
+      margin-inline: auto;
     }
   }
 }
