@@ -81,7 +81,7 @@
   &__card_image {
     position: absolute;
     transform-origin: bottom center;
-    transition: transform 0.35s ease, z-index 0.35s ease;
+    transition: transform 0.35s ease;
   }
 
   &__card_images {
@@ -91,7 +91,7 @@
         z-index: -2;
 
        @include mobile {
-         max-width: 80%;
+         max-width: 62%;
        }
      }
 
@@ -101,7 +101,7 @@
         z-index: -1;
 
         @include mobile {
-          max-width: 80%;
+          max-width: 70%;
         }
       }
 
@@ -111,23 +111,22 @@
         z-index: -2;
 
         @include mobile {
-          max-width: 40%;
+          max-width: 32%;
         }
       }
+  }
 
-      &>*:hover {
-        transform: scale(1.14);
-        z-index: 5;
-      }
+  &__card:hover &__card_image {
+    transform: scale(1.08);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .industry_areas__card_image {
     transition: none;
+  }
 
-    &:hover {
-      transform: none;
-    }
+  .industry_areas__card:hover .industry_areas__card_image {
+    transform: none;
   }
 }

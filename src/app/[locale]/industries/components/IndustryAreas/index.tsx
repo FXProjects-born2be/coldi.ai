@@ -24,8 +24,8 @@ const AREAS = [
     icon: '/images/industries/ix_piechart-ai.svg',
     href: '/industries/emis-payments',
     images: [
-      { src: '/images/industries/areas-six.png', width: 403, height: 179 },
-      { src: '/images/industries/areas-five.png', width: 371, height: 230 },
+      { src: '/images/industries/areas-six.svg', width: 403, height: 179 },
+      { src: '/images/industries/areas-five.svg', width: 371, height: 230 },
       { src: '/images/industries/areas-seven.png', width: 194, height: 227 },
     ],
   },

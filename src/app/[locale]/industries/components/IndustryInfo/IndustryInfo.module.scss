@@ -10,10 +10,16 @@
 
   &__tabs {
     display: flex;
-    overflow: auto;
     margin-left: -5px;
     margin-right: -5px;
-    padding-bottom: 8px;
+    margin-bottom: 8px;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     &>* {
       padding-inline: 5px;
@@ -142,7 +148,6 @@
       width: 117px;
       height: 117px;
       border-radius: 781.947px;
-      border: 1.1px solid rgba(255, 255, 255, 0.40);
       background: rgba(128, 128, 128, 0.30);
       backdrop-filter: blur(20.853544235229492px);
     }
@@ -151,7 +156,6 @@
       width: 117px;
       height: 117px;
       border-radius: 781.947px;
-      border: 1.1px solid rgba(255, 255, 255, 0.40);
       background: var(--Windows-Glass, rgba(128, 128, 128, 0.30));
       background-blend-mode: luminosity;
       backdrop-filter: blur(20.853544235229492px);
@@ -161,7 +165,6 @@
       width: 117px;
       height: 117px;
       border-radius: 781.947px;
-      border: 1.1px solid rgba(255, 255, 255, 0.40);
       background: var(--Windows-Glass, rgba(128, 128, 128, 0.30));
       background-blend-mode: luminosity;
       backdrop-filter: blur(20.853544235229492px);
@@ -171,7 +174,6 @@
       width: 117px;
       height: 117px;
       border-radius: 781.947px;
-      border: 1.1px solid rgba(255, 255, 255, 0.40);
       background: var(--Windows-Glass, rgba(128, 128, 128, 0.30));
       background-blend-mode: luminosity;
       backdrop-filter: blur(20.853544235229492px);
