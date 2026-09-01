@@ -1,0 +1,36 @@
+.icon_dots {
+  overflow: visible;
+
+  &__dot {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: icon-dots-pulse 2s ease-in-out infinite;
+
+    &:nth-child(3n) {
+      animation-duration: 2.4s;
+    }
+
+    &:nth-child(3n + 1) {
+      animation-duration: 1.7s;
+    }
+  }
+}
+
+@keyframes icon-dots-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    scale: 0.92;
+  }
+
+  50% {
+    opacity: 1;
+    scale: 1.12;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon_dots__dot {
+    animation: none;
+  }
+}

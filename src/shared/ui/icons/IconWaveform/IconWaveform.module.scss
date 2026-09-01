@@ -1,0 +1,36 @@
+.icon_waveform {
+  overflow: visible;
+
+  &__bar {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: icon-waveform-pulse 1.6s ease-in-out infinite;
+
+    &:nth-child(even) {
+      animation-duration: 1.2s;
+    }
+
+    @for $i from 1 through 27 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{($i - 1) * -0.12}s;
+      }
+    }
+  }
+}
+
+@keyframes icon-waveform-pulse {
+  0%,
+  100% {
+    scale: 1 1;
+  }
+
+  50% {
+    scale: 1 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon_waveform__bar {
+    animation: none;
+  }
+}
