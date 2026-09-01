@@ -68,7 +68,7 @@ const industries: Industry[] = [
   },
   {
     id: 'emis',
-    href: '/fintech-Industry',
+    href: '/industries/emis-payments',
     image: '/images/home/home-built-for-four.png',
     messages: [{ role: 'user' }, { role: 'user' }, { role: 'user' }, { role: 'user' }],
     workflows: [

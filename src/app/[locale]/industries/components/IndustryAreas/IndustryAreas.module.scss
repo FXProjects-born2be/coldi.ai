@@ -1,0 +1,133 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.industry_areas {
+  padding-block: 40px;
+  background: linear-gradient(0deg, #FFF 0%, #F6F6F6 100%);
+
+  @include tablet {
+    padding-block: 24px;
+  }
+
+  &__title {
+    color: #0C1021;
+    font-size: 40px;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    text-align: center;
+
+    @include tablet {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px 40px;
+    min-height: 400px;
+    border-radius: 14px;
+    background: #F6F6F6;
+    border: 1px solid rgba(12, 16, 33, 0.15);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+    @include tablet {
+      padding: 24px;
+    }
+  }
+
+  &__card_icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background: var(--White-solid, #FFF);
+    padding: 2px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__card_title {
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  &__card_text {
+    color: #4d4d4d;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 24px;
+  }
+
+  &__card_cta {
+    padding: 11px 23px;
+  }
+
+  &__card_image {
+    position: absolute;
+    transform-origin: bottom center;
+    transition: transform 0.35s ease, z-index 0.35s ease;
+  }
+
+  &__card_images {
+     &>*:nth-child(1) {
+        right: 167px;
+        bottom: 0;
+        z-index: -2;
+
+       @include mobile {
+         max-width: 80%;
+       }
+     }
+
+      &>*:nth-child(2) {
+        right: 30px;
+        bottom: 0;
+        z-index: -1;
+
+        @include mobile {
+          max-width: 80%;
+        }
+      }
+
+      &>*:nth-child(3) {
+        right: 0;
+        bottom: 0;
+        z-index: -2;
+
+        @include mobile {
+          max-width: 40%;
+        }
+      }
+
+      &>*:hover {
+        transform: scale(1.14);
+        z-index: 5;
+      }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .industry_areas__card_image {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}

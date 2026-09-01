@@ -72,6 +72,10 @@ export function getPageHeadingFromPath(pathname: string): string {
     return 'AI Agents for Debt Collection';
   }
 
+  if (pathname.startsWith('/industries/emis-payments')) {
+    return 'EMIs & Payments';
+  }
+
   if (pathname.startsWith('/industries')) {
     return 'Industries';
   }

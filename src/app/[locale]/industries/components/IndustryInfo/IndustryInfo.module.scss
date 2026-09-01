@@ -1,0 +1,245 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.industry_info {
+  padding-block: 40px;
+  background: #F6F6F6;
+
+  @include tablet {
+    padding-block: 24px;
+  }
+
+  &__tabs {
+    display: flex;
+    overflow: auto;
+    margin-bottom: 8px;
+    margin-left: -5px;
+    margin-right: -5px;
+    padding-bottom: 5px;
+
+    &>* {
+      padding-inline: 5px;
+      flex: 0 0 25%;
+      white-space: nowrap;
+    }
+  }
+
+  &__tab {
+    padding: 16px;
+    border-radius: 16px;
+    text-align: left;
+    width: 100%;
+
+    &_active {
+      background: #FFF;
+    }
+  }
+
+  &__tab_title {
+    font-size: 18px;
+    line-height: 1.4;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  &__tab_subtitle {
+    color: rgba(0, 0, 0, 0.50);
+    font-size: 14px;
+    line-height: 1.4;
+    display: block;
+  }
+
+  &__panel {
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 80px;
+    margin-bottom: 20px;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+
+    @include mobile {
+      margin-bottom: 4px;
+    }
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__title {
+    font-size: 40px;
+    line-height: 1.2;
+    margin-bottom: 14px;
+
+    @include tablet {
+      font-size: 32px;
+    }
+  }
+
+  &__text {
+    color: #4D4D4D;
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 32px;
+
+    @include tablet {
+      font-size: 18px;
+      line-height: 1.4;
+    }
+  }
+
+  &__cta {
+   margin-top: auto;
+  }
+
+  &__visual {
+    position: relative;
+    aspect-ratio: 580 / 356;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+
+  &__visual_bg {
+    object-fit: cover;
+  }
+
+  &__visual_icon {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__visual_logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-blend-mode: luminosity;
+
+    &_insurance {
+      width: 117px;
+      height: 117px;
+      border-radius: 781.947px;
+      border: 1.1px solid rgba(255, 255, 255, 0.40);
+      background: rgba(128, 128, 128, 0.30);
+      backdrop-filter: blur(20.853544235229492px);
+    }
+
+    &_trading {
+      width: 117px;
+      height: 117px;
+      border-radius: 781.947px;
+      border: 1.1px solid rgba(255, 255, 255, 0.40);
+      background: var(--Windows-Glass, rgba(128, 128, 128, 0.30));
+      background-blend-mode: luminosity;
+      backdrop-filter: blur(20.853544235229492px);
+    }
+
+    &_debt {
+      width: 117px;
+      height: 117px;
+      border-radius: 781.947px;
+      border: 1.1px solid rgba(255, 255, 255, 0.40);
+      background: var(--Windows-Glass, rgba(128, 128, 128, 0.30));
+      background-blend-mode: luminosity;
+      backdrop-filter: blur(20.853544235229492px);
+    }
+
+    &_emi {
+      width: 117px;
+      height: 117px;
+      border-radius: 781.947px;
+      border: 1.1px solid rgba(255, 255, 255, 0.40);
+      background: var(--Windows-Glass, rgba(128, 128, 128, 0.30));
+      background-blend-mode: luminosity;
+      backdrop-filter: blur(20.853544235229492px);
+    }
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+
+    @include mobile {
+      gap: 4px;
+    }
+  }
+
+  &__card {
+    padding: 28px 28px 32px 28px;
+    border-radius: 10px;
+    border: 1px solid rgba(12, 16, 33, 0.1);
+
+    @include tablet {
+      padding: 12px;
+    }
+  }
+
+  &__card_icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.00);
+    box-shadow: 0 0 0 0 #FFF inset, 0 0 0 0.5px rgba(0, 0, 0, 0.10) inset;
+    padding: 2px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include tablet {
+      width: 32px;
+      height: 32px;
+
+      img {
+        max-width: 16px;
+        width: auto;
+      }
+    }
+  }
+
+  &__card_title {
+    color: #777169;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+
+    @include mobile {
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+  }
+
+  &__card_text {
+    font-size: 16px;
+    line-height: 1.4;
+
+    @include mobile {
+      display: none;
+    }
+  }
+}

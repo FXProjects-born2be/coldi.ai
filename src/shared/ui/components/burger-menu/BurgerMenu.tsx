@@ -15,7 +15,7 @@ import {
 import { useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
-import { headerIndustryItems } from '@/shared/ui/components/header/nav';
+import { headerAboutItems, headerIndustryItems } from '@/shared/ui/components/header/nav';
 
 import st from './BurgerMenu.module.scss';
 
@@ -25,6 +25,7 @@ export const BurgerMenu = () => {
   const t = useTranslations('Header');
   const [open, setOpen] = useState(false);
   const [openIndustries, setOpenIndustries] = useState(false);
+  const [openAbout, setOpenAbout] = useState(false);
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
 
@@ -32,6 +33,7 @@ export const BurgerMenu = () => {
     setPrevPathname(pathname);
     setOpen(false);
     setOpenIndustries(false);
+    setOpenAbout(false);
   }
 
   return (
@@ -64,8 +66,7 @@ export const BurgerMenu = () => {
                     aria-expanded={openIndustries}
                     name="toggle-industries-group"
                     className={cn(st.groupTrigger, {
-                      [st.active]:
-                        pathname.startsWith('/industries') || pathname === '/fintech-Industry',
+                      [st.active]: pathname.startsWith('/industries'),
                       [st.groupOpen]: openIndustries,
                     })}
                     onClick={() => setOpenIndustries((v) => !v)}
@@ -119,13 +120,45 @@ export const BurgerMenu = () => {
                 >
                   <span itemProp="name">{t('useCases')}</span>
                 </Link>
-                <Link
-                  href="/about"
-                  className={cn({ [st.active]: pathname === '/about' })}
-                  itemProp="url"
-                >
-                  <span itemProp="name">{t('about')}</span>
-                </Link>
+                <div className={st.group}>
+                  <button
+                    aria-label={t('toggleAbout')}
+                    aria-expanded={openAbout}
+                    name="toggle-about-group"
+                    className={cn(st.groupTrigger, {
+                      [st.active]: pathname === '/about' || pathname.startsWith('/meettheteam'),
+                      [st.groupOpen]: openAbout,
+                    })}
+                    onClick={() => setOpenAbout((v) => !v)}
+                  >
+                    <span itemProp="name">{t('about')}</span>
+                    <Image
+                      src="/icons/header/arrow.svg"
+                      alt=""
+                      width={16}
+                      height={8}
+                      className={st.groupArrow}
+                    />
+                  </button>
+                  <div
+                    className={cn(st.groupItems, {
+                      [st.groupItemsOpen]: openAbout,
+                    })}
+                  >
+                    {headerAboutItems.map((item) => (
+                      <Link
+                        key={item.id}
+                        href={item.href}
+                        className={cn(st.subItem, {
+                          [st.active]: pathname === item.href,
+                        })}
+                        itemProp="url"
+                      >
+                        <span itemProp="name">{t(`aboutItems.${item.id}`)}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
                 <Link className={st.bookMeeting} href="/calendar" target="_blank">
                   {t('scheduleMeeting')}
                 </Link>

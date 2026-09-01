@@ -19,6 +19,7 @@ const segmentLabels: Record<string, string> = {
   'call-center': 'Call Center',
   'fx-brokers': 'FX Brokers',
   'debt-collection': 'Debt Collection',
+  'emis-payments': 'EMIs & Payments',
   pricing: 'Pricing',
   about: 'About',
   news: 'News',

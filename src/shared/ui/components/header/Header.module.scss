@@ -97,7 +97,6 @@
       top: calc(100% + 8px);
       left: 0;
       transform: translateX(0) translateY(4px);
-      padding: 6px;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
@@ -139,9 +138,9 @@
           gap: 10px;
           padding: 16px;
           border-radius: 12px;
-          color: #535662;
+          color: #0C1021;
           text-decoration: none;
-          font-size: 20px;
+          font-size: 18px;
           font-weight: 400;
           line-height: 1.2;
         }
@@ -151,16 +150,12 @@
         }
 
         &:hover {
-          .dropdownLink {
-            background: rgba(80, 85, 107, 0.04);
-          }
-
           img {
             opacity: 1;
           }
 
           .dropdownLink {
-            color: #0c1021;
+            color: #4268FF;
           }
         }
       }

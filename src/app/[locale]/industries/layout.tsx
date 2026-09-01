@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 
-import './layout.scss';
-
 export const metadata: Metadata = {
   title: 'AI Voice Solution for more than 10 industries',
   description:

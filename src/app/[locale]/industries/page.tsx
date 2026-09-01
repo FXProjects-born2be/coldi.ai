@@ -1,29 +1,37 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-import { Hero, IndustryCards, OtherIndustries, VoiceAi } from './components';
+import { IndustriesHero, IndustriesOther, IndustryAreas, IndustryInfo } from './components';
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: '/industries',
-  },
-  title: 'AI Voice Solution for more than 10 industries',
-  description:
-    'Explore AI voice solutions for more than 10 industries. Purpose-built agents to scale operations and handle 5,000+ minutes monthly',
-  openGraph: {
-    title: 'AI Voice Solution for more than 10 industries',
-    description:
-      'Explore AI voice solutions for more than 10 industries. Purpose-built agents to scale operations and handle 5,000+ minutes monthly',
-    images: '/images/meta.png',
-  },
+type Props = {
+  params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'IndustriesPage' });
+
+  return {
+    alternates: {
+      canonical: '/industries',
+    },
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      images: '/images/meta.png',
+    },
+  };
+}
 
 export default function IndustriesPage() {
   return (
     <main>
-      <Hero />
-      <IndustryCards />
-      <VoiceAi />
-      <OtherIndustries />
+      <IndustriesHero />
+      <IndustryInfo />
+      <IndustryAreas />
+      <IndustriesOther />
     </main>
   );
 }

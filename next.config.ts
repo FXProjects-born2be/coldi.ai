@@ -95,6 +95,12 @@ const nextConfig: NextConfig = {
     return [
       { source: '/agents', destination: '/solutions', permanent: true },
       { source: '/uk/agents', destination: '/uk/solutions', permanent: true },
+      { source: '/fintech-Industry', destination: '/industries/emis-payments', permanent: true },
+      {
+        source: '/uk/fintech-Industry',
+        destination: '/uk/industries/emis-payments',
+        permanent: true,
+      },
     ];
   },
 };

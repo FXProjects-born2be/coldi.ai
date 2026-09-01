@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 
 import { cn, getPageHeadingFromPath } from '@/shared/lib/helpers';
 import { HeaderBurgerMenu } from '@/shared/ui/components/header/HeaderBurgerMenu';
-import { headerIndustryItems } from '@/shared/ui/components/header/nav';
+import { headerAboutItems, headerIndustryItems } from '@/shared/ui/components/header/nav';
 
 import st from './Header.module.scss';
 
@@ -80,7 +80,7 @@ const Navigation = ({ pathname }: { pathname: string }) => {
       </li>
       <li
         className={cn(st.hasDropdown, {
-          [st.active]: pathname.startsWith('/industries') || pathname === '/fintech-Industry',
+          [st.active]: pathname.startsWith('/industries'),
         })}
         itemProp="name"
       >
@@ -115,10 +115,27 @@ const Navigation = ({ pathname }: { pathname: string }) => {
           {t('useCases')}
         </Link>
       </li>
-      <li className={cn({ [st.active]: pathname === '/about' })} itemProp="name">
-        <Link className={st.navLink} href="/about" itemProp="url">
-          {t('about')}
+      <li
+        className={cn(st.hasDropdown, {
+          [st.active]: pathname === '/about' || pathname.startsWith('/meettheteam'),
+        })}
+        itemProp="name"
+      >
+        <Link className={st.navTrigger} href="/about" itemProp="url">
+          <span>{t('about')}</span>
+          <span className={st.dropdownArrow}>
+            <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
+          </span>
         </Link>
+        <ul className={st.dropdown}>
+          {headerAboutItems.map((item) => (
+            <li key={item.id} itemProp="name">
+              <Link className={st.dropdownLink} href={item.href} itemProp="url">
+                {t(`aboutItems.${item.id}`)}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </li>
     </ul>
   );

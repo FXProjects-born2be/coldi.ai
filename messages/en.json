@@ -134,7 +134,7 @@
     "selectAria": "Select voice example",
     "play": "Play",
     "pause": "Pause",
-    "exploreProducts": "Explore our solutions",
+    "exploreProducts": "Explore Our Solutions",
     "items": {
       "insurance": {
         "title": "Insurance Cases",
@@ -508,7 +508,7 @@
   },
   "SolutionsUseCases": {
     "title": "Our Use Cases",
-    "readCase": "Read full case",
+    "readCase": "Read Full Case",
     "prevSlide": "Previous slide",
     "nextSlide": "Next slide",
     "items": {
@@ -534,6 +534,139 @@
     "title": "Need Something More Specific?",
     "description": "If your workflow isn't listed above, we build custom bots on request. Tell us the call, we'll tell you if it's a fit.",
     "cta": "Book a Demo"
+  },
+  "IndustriesPage": {
+    "metaTitle": "AI Voice Solution for more than 10 industries",
+    "metaDescription": "Explore AI voice solutions for more than 10 industries. Purpose-built agents to scale operations and handle 5,000+ minutes monthly"
+  },
+  "IndustriesHero": {
+    "title": "Voice AI Built",
+    "titleHighlight": "For Fintech",
+    "description": "Coldi runs the phone layer for insurance, trading platforms, and debt collection. Managed end to end, live in weeks."
+  },
+  "IndustryInfo": {
+    "visualAlt": "Image",
+    "tabs": {
+      "insurance": {
+        "label": "Insurance",
+        "subtitle": "Calls. Documents. Renewals. Managed.",
+        "description": "Coldi calls policyholders, chases documents, and handles renewals, fully managed.",
+        "cta": "Explore Insurance Solution",
+        "cards": {
+          "renewals": {
+            "title": "Renewals",
+            "description": "Every policyholder gets called ahead of expiry, not just the accounts someone remembered."
+          },
+          "claimsIntake": {
+            "title": "Claims intake",
+            "description": "First notice of loss handled around the clock, routed to the right desk with clean data."
+          },
+          "crossSell": {
+            "title": "Cross-sell",
+            "description": "Untouched upsell lists get worked without pulling staff off active service."
+          }
+        }
+      },
+      "trading": {
+        "label": "Trading Platforms & Brokers",
+        "subtitle": "New leads qualified, old ones revived.",
+        "description": "Coldi qualifies leads the moment they land and chases dormant accounts before they churn.",
+        "cta": "Explore Trading Platforms Solution",
+        "cards": {
+          "firstContact": {
+            "title": "First contact",
+            "description": "Every new sign-up gets called within minutes, while intent is still high."
+          },
+          "leadEconomics": {
+            "title": "Lead economics",
+            "description": "AI qualifies before a human joins the call, so reps only speak with real prospects."
+          },
+          "onboarding": {
+            "title": "Onboarding",
+            "description": "Verification drop-off is recovered with multilingual follow-up, no local hires required."
+          }
+        }
+      },
+      "debt": {
+        "label": "Debt Collection",
+        "subtitle": "Every account. Compliant. Cheaper.",
+        "description": "Coldi works your full portfolio on a compliant script, at a fraction of the cost of a human floor.",
+        "cta": "Explore Debt Collection Solution",
+        "cards": {
+          "contactRate": {
+            "title": "Contact rate",
+            "description": "Portfolios get worked at the times and in the languages that actually connect."
+          },
+          "smallBalances": {
+            "title": "Small balances",
+            "description": "Accounts too small to justify a human agent become profitable to chase again."
+          },
+          "followThrough": {
+            "title": "Follow-through",
+            "description": "Payment arrangements get reminded and re-confirmed automatically instead of going stale."
+          }
+        }
+      },
+      "emi": {
+        "label": "EMIs & Payments",
+        "subtitle": "Chases every installment, on time.",
+        "description": "Coldi recovers stalled onboarding and handles compliance outreach without a full contact center.",
+        "cta": "Explore EMIs Solution",
+        "cards": {
+          "onboardingRecovery": {
+            "title": "Onboarding recovery",
+            "description": "Applications abandoned mid-verification get a timely, multilingual nudge."
+          },
+          "supportCoverage": {
+            "title": "Support coverage",
+            "description": "Routine account questions get answered around the clock, routed to specialists only when needed."
+          },
+          "leanTeams": {
+            "title": "Lean teams",
+            "description": "You get contact-center coverage without building a contact center."
+          }
+        }
+      }
+    }
+  },
+  "IndustryAreas": {
+    "title": "More Areas Where Coldi Fits",
+    "iconAlt": "Icon",
+    "imageAlt": "Image",
+    "cards": {
+      "otherIndustries": {
+        "title": "Healthcare, Real Estate, Call Centers, and More!",
+        "text": "Not our core focus, but we've run voice AI for these too.",
+        "cta": "See Other Industries"
+      },
+      "fintech": {
+        "title": "Other Fintech Workflows",
+        "text": "Payments, lending and similar.",
+        "cta": "Explore Other Workflows"
+      }
+    }
+  },
+  "IndustriesOther": {
+    "titleLine1": "Other industries",
+    "titleLine2": "we support",
+    "items": {
+      "healthcare": "Healthcare",
+      "realEstate": "Real Estate",
+      "callCenters": "Call Centers",
+      "residential": "Residential",
+      "retail": "Retail",
+      "hvac": "HVAC",
+      "agroIndustry": "Agro-Industry",
+      "technology": "Technology",
+      "manufacturing": "Manufacturing",
+      "consulting": "Consulting",
+      "nonprofit": "Non-profit",
+      "ecommerce": "E-commerce",
+      "entertainment": "Entertainment",
+      "education": "Education",
+      "telecommunications": "Telecommunications",
+      "hospitality": "Hospitality"
+    }
   },
   "Footer": {
     "subtitle": "Making voice AI work for Fintech",

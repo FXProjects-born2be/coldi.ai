@@ -1,0 +1,108 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.industries_hero {
+  padding-top: 76px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  background: #F6F6F6;
+  min-height: 100vh;
+
+  &__container {
+    padding-top: 120px;
+    text-align: center;
+
+    @include tablet {
+      padding-top: 60px;
+    }
+  }
+
+  &__title {
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 16px;
+
+    span {
+      color: #4268FF;
+    }
+
+    @include mobile {
+      font-size: 32px;
+      line-height: 1.2;
+    }
+  }
+
+  &__description {
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.4;
+    max-width: 800px;
+    margin: 0 auto 32px auto;
+
+    @include mobile {
+      font-size: 14px;
+    }
+  }
+
+  &__wave {
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    @include  mobile {
+      bottom: 54px;
+    }
+
+    @include mobile-up {
+      svg {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  &__wave_layer {
+    transform-origin: center;
+    transform-box: fill-box;
+    will-change: transform;
+
+    &:nth-child(1) {
+      animation: industries-hero-wave-a 8s ease-in-out infinite;
+    }
+
+    &:nth-child(2) {
+      animation: industries-hero-wave-b 11s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes industries-hero-wave-a {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-56px);
+  }
+}
+
+@keyframes industries-hero-wave-b {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(72px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .industries_hero__wave_layer {
+    animation: none;
+  }
+}
