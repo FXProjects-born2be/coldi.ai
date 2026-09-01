@@ -7,14 +7,13 @@
   z-index: 1;
   background: #F6F6F6;
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &__container {
-    padding-top: 120px;
+    padding-block: 16px;
     text-align: center;
-
-    @include tablet {
-      padding-top: 60px;
-    }
   }
 
   &__title {
@@ -51,10 +50,6 @@
     bottom: 0;
     left: 0;
     width: 100%;
-
-    @include  mobile {
-      bottom: 54px;
-    }
 
     @include mobile-up {
       svg {

@@ -31,6 +31,33 @@
     }
   }
 
+  &__slider {
+    position: relative;
+
+    @include mobile {
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -24px;
+        width: 57px;
+        height: 324px;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      &::before {
+        left: -20px;
+        background: linear-gradient(90deg, #F6F6F6 0%, rgba(246, 246, 246, 0) 100%);
+      }
+
+      &::after {
+        right: -20px;
+        background: linear-gradient(270deg, #F6F6F6 0%, rgba(246, 246, 246, 0) 100%);
+      }
+    }
+  }
+
   &__viewport {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -95,16 +122,26 @@
   }
 
   &__media {
-    display: flex;
-    align-items: center;
+    position: relative;
     margin-bottom: 8px;
 
     @include mobile-up {
-      min-height: 191px;
+      height: 191px;
     }
 
     @include mobile {
-      min-height: 146px;
+      height: 146px;
+    }
+
+    img {
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    @include mobile {
+      img {
+        object-position: center;
+      }
     }
   }
 

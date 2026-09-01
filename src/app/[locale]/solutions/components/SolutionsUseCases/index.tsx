@@ -10,7 +10,7 @@ import { cn } from '@/shared/lib/helpers';
 import st from './SolutionsUseCases.module.scss';
 
 const CASES = [
-  { id: 'clickomi', image: '/images/solutions/cases-one.png' },
+  { id: 'clickomi', image: '/images/solutions/cases-one.jpg' },
   { id: 'payset', image: '/images/solutions/cases-two.svg' },
   { id: 'clarity', image: '/images/solutions/cases-three.svg' },
   { id: 'stone', image: '/images/solutions/cases-four.svg' },
@@ -83,12 +83,19 @@ export const SolutionsUseCases = () => {
               }}
             >
               <div className={st.solutions_use_cases__card_media}>
-                <Image
-                  src={item.image}
-                  alt={t(`items.${item.id}.title`)}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
+                <div className={st.solutions_use_cases__card_image}>
+                  <Image
+                    src={item.image}
+                    alt={t(`items.${item.id}.title`)}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                  {t.has(`items.${item.id}.caption`) && (
+                    <p className={st.solutions_use_cases__card_caption}>
+                      {t(`items.${item.id}.caption`)}
+                    </p>
+                  )}
+                </div>
               </div>
               <h3 className={st.solutions_use_cases__card_title}>{t(`items.${item.id}.title`)}</h3>
               <p className={st.solutions_use_cases__card_text}>

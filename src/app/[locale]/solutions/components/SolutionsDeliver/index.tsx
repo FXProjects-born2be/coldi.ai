@@ -11,17 +11,17 @@ const CARDS = [
   {
     id: 'conversations',
     value: '56.5%',
-    image: { src: '/images/solutions/deliver-one.svg', width: 262, height: 191 },
+    image: '/images/solutions/deliver-one.svg',
   },
   {
     id: 'nextStage',
     value: '33.3%',
-    image: { src: '/images/solutions/deliver-two.svg', width: 268, height: 178 },
+    image: '/images/solutions/deliver-two.svg',
   },
   {
     id: 'callback',
     value: '17.6%',
-    image: { src: '/images/solutions/deliver-three.png', width: 301, height: 156 },
+    image: '/images/solutions/deliver-three.png',
   },
 ] as const;
 
@@ -77,37 +77,42 @@ export const SolutionsDeliver = () => {
         <div className={st.solutions_deliver__panel}>
           <h2 className={st.solutions_deliver__title}>{t('title')}</h2>
 
-          <div
-            ref={viewportRef}
-            className={st.solutions_deliver__viewport}
-            onScroll={() => {
-              const closest = getClosestIndex();
-              setActiveIndex((current) => (current === closest ? current : closest));
-            }}
-          >
-            {CARDS.map((card, index) => (
-              <article
-                key={card.id}
-                className={st.solutions_deliver__card}
-                ref={(node) => {
-                  slideRefs.current[index] = node;
-                }}
-              >
-                <div className={st.solutions_deliver__media}>
-                  <Image
-                    src={card.image.src}
-                    alt=""
-                    width={card.image.width}
-                    height={card.image.height}
-                  />
-                </div>
-                <p className={st.solutions_deliver__value}>{card.value}</p>
-                <h3 className={st.solutions_deliver__card_title}>{t(`cards.${card.id}.title`)}</h3>
-                <p className={st.solutions_deliver__card_text}>
-                  {t(`cards.${card.id}.description`)}
-                </p>
-              </article>
-            ))}
+          <div className={st.solutions_deliver__slider}>
+            <div
+              ref={viewportRef}
+              className={st.solutions_deliver__viewport}
+              onScroll={() => {
+                const closest = getClosestIndex();
+                setActiveIndex((current) => (current === closest ? current : closest));
+              }}
+            >
+              {CARDS.map((card, index) => (
+                <article
+                  key={card.id}
+                  className={st.solutions_deliver__card}
+                  ref={(node) => {
+                    slideRefs.current[index] = node;
+                  }}
+                >
+                  <div className={st.solutions_deliver__media}>
+                    <Image
+                      src={card.image}
+                      alt="Image"
+                      fill
+                      sizes="(max-width: 767px) 200px, 33vw"
+                      loading={'lazy'}
+                    />
+                  </div>
+                  <p className={st.solutions_deliver__value}>{card.value}</p>
+                  <h3 className={st.solutions_deliver__card_title}>
+                    {t(`cards.${card.id}.title`)}
+                  </h3>
+                  <p className={st.solutions_deliver__card_text}>
+                    {t(`cards.${card.id}.description`)}
+                  </p>
+                </article>
+              ))}
+            </div>
           </div>
 
           <div className={st.solutions_deliver__nav}>

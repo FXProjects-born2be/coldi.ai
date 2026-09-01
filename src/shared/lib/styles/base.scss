@@ -142,7 +142,13 @@ html, body {
 }
 
 .btn-primary {
-  background: var(--Dark-Blue, #2544BD);
+  background: #2544BD;
+
+  &:hover {
+    background: #fff;
+    color: #2544BD;
+    border-color: #2544BD;
+  }
 }
 
 .btn-secondary {

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
+import { IconConnectorLine } from '@/shared/ui/icons/IconConnectorLine';
 
 import st from './SolutionsInfo.module.scss';
 
@@ -44,6 +45,10 @@ const TABS = [
     id: 'emi',
     items: ['applicationRecovery', 'complianceRefresh', 'accountSupport'],
   },
+  {
+    id: 'other',
+    items: [],
+  },
 ] as const;
 
 export const SolutionsInfo = () => {
@@ -61,7 +66,7 @@ export const SolutionsInfo = () => {
   };
 
   const goToTab = (direction: -1 | 1) => {
-    const nextIndex = (tabIndex + direction + TABS.length) % TABS.length;
+    const nextIndex = Math.min(TABS.length - 1, Math.max(0, tabIndex + direction));
     handleTabChange(TABS[nextIndex].id);
   };
 
@@ -83,6 +88,7 @@ export const SolutionsInfo = () => {
             type="button"
             className={st.solutions_info__tabs_btn}
             aria-label={t('prevTab')}
+            disabled={tabIndex === 0}
             onClick={() => goToTab(-1)}
           >
             <Image src="/icons/arrow-left.svg" alt="" width={18} height={18} />
@@ -102,6 +108,7 @@ export const SolutionsInfo = () => {
             type="button"
             className={st.solutions_info__tabs_btn}
             aria-label={t('nextTab')}
+            disabled={tabIndex === TABS.length - 1}
             onClick={() => goToTab(1)}
           >
             <Image src="/icons/arrow-right.svg" alt="" width={18} height={18} />
@@ -118,7 +125,13 @@ export const SolutionsInfo = () => {
                   className={cn(st.solutions_info__item, index === activeIndex && st.active)}
                 >
                   <div className={st.solutions_info__item_icon}>
-                    <Image src={ITEM_ICONS[index]} width={24} height={24} alt="" loading="lazy" />
+                    <Image
+                      src={ITEM_ICONS[index]}
+                      width={24}
+                      height={24}
+                      alt="Icon"
+                      loading="lazy"
+                    />
                   </div>
                   <p className={st.solutions_info__item_title}>
                     {t(`tabs.${activeId}.items.${itemId}.title`)}
@@ -138,7 +151,7 @@ export const SolutionsInfo = () => {
               ))}
             </div>
           </div>
-          <div className={st.solutions_info__visual}>
+          <div key={activeId} className={st.solutions_info__visual}>
             <Image
               className={st.solutions_info__visual_bg}
               src="/images/solutions/solutions-info-bg.png"
@@ -158,37 +171,29 @@ export const SolutionsInfo = () => {
                   <div className={st.solutions_info__visual_item}>
                     <span>{t('visual.managedBy')}</span>
                   </div>
-                  <Image
+                  <IconConnectorLine
+                    variant="thirteen"
                     className={st.solutions_info__visual_item_second_icon}
-                    src="/icons/connector-line-thirteen.svg"
-                    width={155}
-                    height={93}
-                    alt="Icon"
-                    loading="lazy"
+                    delay={0.9}
+                    duration={0.9}
                   />
-                  <Image
+                  <IconConnectorLine
+                    variant="twelve"
                     className={st.solutions_info__visual_item_second_icon}
-                    src="/icons/connector-line-twelve.svg"
-                    width={136}
-                    height={82}
-                    alt="Icon"
-                    loading="lazy"
+                    delay={0.9}
+                    duration={0.8}
                   />
-                  <Image
+                  <IconConnectorLine
+                    variant="eleven"
                     className={st.solutions_info__visual_item_second_icon}
-                    src="/icons/connector-line-eleven.svg"
-                    width={137}
-                    height={344}
-                    alt="Icon"
-                    loading="lazy"
+                    delay={0.9}
+                    duration={1.8}
                   />
-                  <Image
+                  <IconConnectorLine
+                    variant="fourteen"
                     className={st.solutions_info__visual_item_second_icon}
-                    src="/icons/connector-line-fourteen.svg"
-                    width={139}
-                    height={240}
-                    alt="Icon"
-                    loading="lazy"
+                    delay={0.9}
+                    duration={1.45}
                   />
                 </div>
                 <div>
@@ -220,13 +225,11 @@ export const SolutionsInfo = () => {
                   <div className={st.solutions_info__visual_item}>
                     <span>{t('visual.api')}</span>
                   </div>
-                  <Image
+                  <IconConnectorLine
+                    variant="one"
                     className={st.solutions_info__visual_item_second_icon}
-                    src="/icons/connector-line-one.svg"
-                    width={143}
-                    height={26}
-                    alt="Icon"
-                    loading="lazy"
+                    delay={0.9}
+                    duration={0.7}
                   />
                   <div className={st.solutions_info__visual_item}>
                     <Image src={CHECKMARK_ICON} width={27} height={27} alt="" loading="lazy" />
@@ -238,13 +241,11 @@ export const SolutionsInfo = () => {
                   <div className={st.solutions_info__visual_item}>
                     <span>{t('visual.accountVerification')}</span>
                   </div>
-                  <Image
+                  <IconConnectorLine
+                    variant="two"
                     className={st.solutions_info__visual_item_second_icon}
-                    src="/icons/connector-line-two.svg"
-                    width={121}
-                    height={40}
-                    alt=""
-                    loading="lazy"
+                    delay={2.1}
+                    duration={0.7}
                   />
                   <div className={st.solutions_info__visual_item}>
                     <Image src={CHECKMARK_ICON} width={27} height={27} alt="Icon" loading="lazy" />
@@ -256,13 +257,11 @@ export const SolutionsInfo = () => {
                   <div className={st.solutions_info__visual_item}>
                     <span>{t('visual.telephony')}</span>
                   </div>
-                  <Image
+                  <IconConnectorLine
+                    variant="three"
                     className={st.solutions_info__visual_item_second_icon}
-                    src="/icons/connector-line-three.svg"
-                    width={101}
-                    height={49}
-                    alt="Icon"
-                    loading="lazy"
+                    delay={3.3}
+                    duration={0.7}
                   />
 
                   <div className={st.solutions_info__visual_item}>
@@ -275,13 +274,11 @@ export const SolutionsInfo = () => {
                   <div className={st.solutions_info__visual_item}>
                     <span>{t('visual.optimization')}</span>
                   </div>
-                  <Image
+                  <IconConnectorLine
+                    variant="four"
                     className={st.solutions_info__visual_item_second_icon}
-                    src="/icons/connector-line-four.svg"
-                    width={107}
-                    height={49}
-                    alt="Icon"
-                    loading="lazy"
+                    delay={4.5}
+                    duration={0.7}
                   />
                   <div className={st.solutions_info__visual_item}>
                     <Image
@@ -308,13 +305,11 @@ export const SolutionsInfo = () => {
                     <Image src={CHECKMARK_ICON} width={27} height={27} alt="" loading="lazy" />
                     <span>{t('visual.sentiment')}</span>
                   </div>
-                  <Image
+                  <IconConnectorLine
+                    variant="seven"
                     className={st.solutions_info__visual_item_second_icon}
-                    src="/icons/connector-line-seven.svg"
-                    width={8}
-                    height={225}
-                    alt="Icon"
-                    loading="lazy"
+                    delay={0.9}
+                    duration={1.4}
                   />
                 </div>
                 <div>
@@ -323,13 +318,11 @@ export const SolutionsInfo = () => {
                       <Image src={CHECKMARK_ICON} width={27} height={27} alt="" loading="lazy" />
                       <span>{t('visual.risk')}</span>
                     </div>
-                    <Image
+                    <IconConnectorLine
+                      variant="five"
                       className={st.solutions_info__visual_item_second_icon}
-                      src="/icons/connector-line-five.svg"
-                      width={154}
-                      height={139}
-                      alt=""
-                      loading="lazy"
+                      delay={2.3}
+                      duration={0.9}
                     />
                   </div>
                   <div>
@@ -337,13 +330,11 @@ export const SolutionsInfo = () => {
                       <Image src={CHECKMARK_ICON} width={27} height={27} alt="" loading="lazy" />
                       <span>{t('visual.routing')}</span>
                     </div>
-                    <Image
+                    <IconConnectorLine
+                      variant="six"
                       className={st.solutions_info__visual_item_second_icon}
-                      src="/icons/connector-line-six.svg"
-                      width={136}
-                      height={139}
-                      alt=""
-                      loading="lazy"
+                      delay={2.3}
+                      duration={0.9}
                     />
                   </div>
                 </div>
@@ -377,13 +368,11 @@ export const SolutionsInfo = () => {
                       <span>{t('visual.completed')}</span>
                     </div>
                   </div>
-                  <Image
+                  <IconConnectorLine
+                    variant="eight"
                     className={st.solutions_info__visual_item_second_icon}
-                    src="/icons/connector-line-eight.svg"
-                    width={222}
-                    height={38}
-                    alt=""
-                    loading="lazy"
+                    delay={0.9}
+                    duration={0.8}
                   />
                 </div>
                 <div>
@@ -401,13 +390,11 @@ export const SolutionsInfo = () => {
                       <span>{t('visual.completed')}</span>
                     </div>
                   </div>
-                  <Image
+                  <IconConnectorLine
+                    variant="nine"
                     className={st.solutions_info__visual_item_second_icon}
-                    src="/icons/connector-line-nine.svg"
-                    width={217}
-                    height={61}
-                    alt=""
-                    loading="lazy"
+                    delay={1.7}
+                    duration={0.85}
                   />
                 </div>
                 <div>
@@ -425,13 +412,11 @@ export const SolutionsInfo = () => {
                       <span>{t('visual.completed')}</span>
                     </div>
                   </div>
-                  <Image
+                  <IconConnectorLine
+                    variant="ten"
                     className={st.solutions_info__visual_item_second_icon}
-                    src="/icons/connector-line-ten.svg"
-                    width={254}
-                    height={38}
-                    alt=""
-                    loading="lazy"
+                    delay={2.55}
+                    duration={0.8}
                   />
                 </div>
                 <div>

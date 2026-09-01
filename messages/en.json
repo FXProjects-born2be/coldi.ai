@@ -479,6 +479,9 @@
             "description": "Answers routine account questions and routes to specialists when needed"
           }
         }
+      },
+      "other": {
+        "label": "Other"
       }
     }
   },
@@ -513,10 +516,12 @@
     "nextSlide": "Next slide",
     "items": {
       "clickomi": {
+        "caption": "Digital Advertising\nAgency",
         "title": "Outbound Lead Qualification",
         "description": "Coldi AI agent calls hot leads, qualifies interest, checks whether the call center is open, and either transfers the lead to a live specialist or books a suitable time automatically."
       },
       "payset": {
+        "caption": "Multi-Currency Payments Platform",
         "title": "Automated Callback Booking",
         "description": "Coldi AI agent calls new leads, identifies those ready to speak with a specialist, checks real-time availability, and books the callback directly into the calendar."
       },
