@@ -1,0 +1,1 @@
+export { BodyPageClass } from './BodyPageClass';
