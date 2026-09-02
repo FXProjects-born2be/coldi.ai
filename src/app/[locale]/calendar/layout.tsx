@@ -55,7 +55,7 @@ export default function LiveDemoLayout({
           `,
         }}
       />
-      <div className="layout">{children}</div>
+      {children}
     </>
   );
 }

@@ -8,6 +8,8 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import type { ReactNode } from 'react';
 
+import { cn, getBodyPageClass } from '@/shared/lib/helpers';
+import { BodyPageClass } from '@/shared/ui/components/body-page-class';
 import { Breadcrumbs } from '@/shared/ui/components/breadcrumbs';
 import { DeferredMarketingScripts } from '@/shared/ui/components/deferred-marketing-scripts/DeferredMarketingScripts';
 import { Footer } from '@/shared/ui/components/footer';
@@ -78,8 +80,9 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <SpeedInsights />
-      <body className={urbanist.variable}>
+      <body className={cn(urbanist.variable, getBodyPageClass(pathname))}>
         <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
+          <BodyPageClass />
           <Script
             id="organization-jsonld"
             type="application/ld+json"

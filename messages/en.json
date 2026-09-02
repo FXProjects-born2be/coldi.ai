@@ -24,6 +24,12 @@
       "match": "A perfect match of a Coldi agent with your current business challenge"
     }
   },
+  "CalendarHero": {
+    "title": "Let’s schedule",
+    "titleHighlight": "your call",
+    "description": "Pick a time that works for you.",
+    "descriptionSecond": "We’ll discuss your needs and show you how Coldi can support your business."
+  },
   "HomeBuiltFor": {
     "title": "Built for Your Business",
     "description": "Every fintech business has different customer conversations. Select your industry to explore the Voice AI workflows we build, manage and optimize for teams like yours.",
@@ -692,11 +698,11 @@
       "legal": "Legal"
     },
     "explore": {
-      "solutions": "Solutions",
+      "products": "Products",
       "pricing": "Pricing",
       "news": "News",
-      "useCases": "Use Cases",
-      "about": "About"
+      "about": "About",
+      "trustCenter": "Trust Center"
     },
     "products": {
       "outbound-calling": "Outbound AI Calling",
@@ -710,7 +716,8 @@
       "insurance": "Insurance",
       "trading": "Trading Platforms & Brokers",
       "debt-collection": "Debt Collection",
-      "emis": "EMIs & Payments"
+      "emis": "EMIs & Payments",
+      "other": "Other Industries"
     },
     "legal": {
       "terms": "Terms of Service",

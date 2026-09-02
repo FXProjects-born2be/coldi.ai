@@ -62,7 +62,8 @@
     :global(iframe) {
       width: 100% !important;
       min-width: 0 !important;
-      height: 100% !important;
+      margin-top: -66px;
+      height: calc(100% + 66px) !important;
     }
   }
 

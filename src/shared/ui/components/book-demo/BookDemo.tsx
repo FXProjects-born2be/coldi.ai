@@ -14,7 +14,8 @@ import st from './BookDemo.module.scss';
 
 import { Link } from '@/i18n/navigation';
 
-const CALENDLY_URL = 'https://calendly.com/coldi/30min';
+const CALENDLY_URL =
+  'https://calendly.com/coldi/30min?hide_event_type_details=1&hide_gdpr_banner=1';
 const CALENDLY_SCRIPT = 'https://assets.calendly.com/assets/external/widget.js';
 
 type CalendlyWidget = {

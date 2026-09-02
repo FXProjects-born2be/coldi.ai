@@ -41,7 +41,15 @@ export const PricingSpecializedServices = () => {
                 service.id === activeService.id && st.active
               )}
             >
-              <div>
+              <Image
+                className={st.pricing_services__card_bg}
+                src={service.hoverBg}
+                alt=""
+                fill
+                aria-hidden
+                sizes="(max-width: 767px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              />
+              <div className={st.pricing_services__card_body}>
                 <h3 className={st.pricing_services__card_title}>
                   {t(`services.${service.id}.title`)}
                 </h3>
@@ -50,7 +58,7 @@ export const PricingSpecializedServices = () => {
                 </p>
               </div>
 
-              <div>
+              <div className={st.pricing_services__card_body}>
                 <div className={st.pricing_services__price}>
                   <p className={st.pricing_services__price_label}>{t('priceLabel')}</p>
                   <p className={st.pricing_services__price_value}>

@@ -1,71 +1,79 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
-.layout {
-  display: flex;
-  padding: 80px 120px;
-  justify-content: center;
-  align-items: center;
-  align-self: stretch;
-  gap: 64px;
-  flex-wrap: wrap;
-  @include mobile {
-    padding: 80px 16px;
-    flex-direction: column;
-    gap: 32px;
-  }
-}
+.calendar_home {
+  height: 100%;
 
-.title {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 24px;
-  width: 100%;
-  @include mobile {
-    width: 100%;
+  &_container {
+    height: 100%;
   }
-  h1 {
-    color: #0c1021;
-    text-align: center;
-    font-family: Urbanist;
+
+  &__row {
+    display: flex;
+    gap: 60px 100px;
+    grid-template-columns: 336px 1fr;
+    height: 100%;
+
+    @include desktop {
+      &>*:first-child {
+        align-self: center;
+        flex: 0 0 336px
+      }
+    }
+
+    @include tablet {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__title {
+    color: #0C1021;
     font-size: 48px;
-    font-style: normal;
-    font-weight: 400;
     line-height: normal;
-    span {
-      color: #4268ff;
-    }
-    @include mobile {
+    margin-bottom: 24px;
+
+    @include tablet {
       font-size: 32px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    span {
+      color: #4268FF;
     }
   }
-  p {
-    color: #50556b;
+
+  &__description {
+    color: #50556B;
     font-size: 20px;
-    font-style: normal;
     font-weight: 400;
     line-height: normal;
-  }
-}
-.video {
-  border-radius: 12px;
-  overflow: hidden;
-  width: 40%;
 
-  @include mobile {
-    width: 100%;
+    @include tablet {
+      font-size: 16px;
+      text-align: center;
+    }
   }
-}
-.calendar {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  @include mobile {
-    width: 100%;
-  }
-}
 
-.meetingsEmbed {
-  width: 100%;
+  &__embed {
+    overflow: hidden;
+    background: url("/images/calendar/calendar-bg.png") no-repeat center center;
+    background-size: cover;
+    padding: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+    flex-grow: 1;
+
+    @include tablet {
+      padding: 10px;
+      border-radius: 8px;
+    }
+  }
+
+  &__widget {
+    width: 100%;
+    height: 100%;
+  }
 }

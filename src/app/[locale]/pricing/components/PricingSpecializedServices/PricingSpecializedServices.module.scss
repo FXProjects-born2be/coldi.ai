@@ -71,38 +71,6 @@
       grid-template-columns: 1fr;
       margin-bottom: 8px;
     }
-
-    &>*:nth-child(1) {
-      background: url('/images/pricing/services-one-bg.png') no-repeat center top;
-
-      &::before {
-        background-image: url('/images/pricing/services-one-hover-bg.png');
-      }
-    }
-
-    &>*:nth-child(2) {
-      background: url('/images/pricing/services-two-bg.png') no-repeat center top;
-
-      &::before {
-        background-image: url('/images/pricing/services-two-hover-bg.png');
-      }
-    }
-
-    &>*:nth-child(3) {
-      background: url('/images/pricing/services-three-bg.png') no-repeat center top;
-
-      &::before {
-        background-image: url('/images/pricing/services-three-hover-bg.png');
-      }
-    }
-
-    &>*:nth-child(4) {
-      background: url('/images/pricing/services-four-bg.png') no-repeat center top;
-
-      &::before {
-        background-image: url('/images/pricing/services-four-hover-bg.png');
-      }
-    }
   }
 
   &__card {
@@ -118,42 +86,39 @@
     justify-content: space-between;
     min-height: 400px;
 
-    > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;
-      transform: scale(0.28);
-      transform-origin: top center;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 0;
-      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
-    }
-
-    &:hover::before {
-      transform: scale(1);
-      opacity: 1;
-    }
-
     @include mobile {
       display: none;
 
       &.active {
         display: flex;
       }
+    }
+  }
 
-      &.active::before {
-        transform: scale(1);
-        opacity: 1;
-      }
+  &__card_bg {
+    object-fit: cover;
+    object-position: top center;
+    transform: scale(0.36, 0.07);
+    transform-origin: top center;
+    pointer-events: none;
+    z-index: 0;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+  }
+
+  &__card_body {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__card:hover &__card_bg {
+    transform: scale(1);
+  }
+
+  @include mobile {
+    &__card.active &__card_bg {
+      transform: scale(1);
     }
   }
 

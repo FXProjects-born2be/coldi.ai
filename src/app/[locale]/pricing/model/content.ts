@@ -28,6 +28,7 @@ export type Plan =
 
 export type Service = {
   id: 'custom-ai' | 'quality-control' | 'voip' | 'implementation';
+  hoverBg: string;
 };
 
 export type ProcessStep = {
@@ -61,10 +62,10 @@ export const plans: Plan[] = [
 ];
 
 export const services: Service[] = [
-  { id: 'custom-ai' },
-  { id: 'quality-control' },
-  { id: 'voip' },
-  { id: 'implementation' },
+  { id: 'custom-ai', hoverBg: '/images/pricing/services-one-hover-bg.png' },
+  { id: 'quality-control', hoverBg: '/images/pricing/services-two-hover-bg.png' },
+  { id: 'voip', hoverBg: '/images/pricing/services-three-hover-bg.png' },
+  { id: 'implementation', hoverBg: '/images/pricing/services-four-hover-bg.png' },
 ];
 
 export const processSteps: ProcessStep[] = [

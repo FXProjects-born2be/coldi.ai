@@ -5,7 +5,6 @@ import NextLink from 'next/link';
 import { getTranslations } from 'next-intl/server';
 
 import { cn, getPageHeadingFromPath, requestRoutes } from '@/shared/lib/helpers';
-import { headerIndustryItems } from '@/shared/ui/components/header/nav';
 import { MessageIcon } from '@/shared/ui/icons/fill/message';
 import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
 import { Facebook } from '@/shared/ui/icons/fill/socials/facebook';
@@ -23,37 +22,35 @@ const menu = [
   {
     id: 'explore',
     links: [
-      { id: 'solutions', href: '/solutions' },
+      { id: 'products', href: '/products' },
       { id: 'pricing', href: '/pricing' },
       { id: 'news', href: '/news' },
-      { id: 'useCases', href: '/helios' },
       { id: 'about', href: '/about' },
+      {
+        id: 'trustCenter',
+        href: 'https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd',
+        external: true,
+      },
     ],
   },
-  // {
-  //   id: 'products',
-  //   links: [
-  //     { id: 'outbound-calling', href: '/products/outbound-calling' },
-  //     { id: 'inbound-calling', href: '/products/inbound-calling' },
-  //     { id: 'agent-development', href: '/products/agent-development' },
-  //     { id: 'customer-service-agent', href: '/products/customer-service-agent' },
-  //     { id: 'ai-for-quality-control', href: '/products/ai-for-quality-control' },
-  //     { id: 'voip-phone-service', href: '/products/voip-phone-service' },
-  //   ],
-  // },
   {
     id: 'industries',
-    links: [...headerIndustryItems],
+    links: [
+      { id: 'insurance', href: '/industries/insurance' },
+      { id: 'trading', href: '/industries/trading-platforms-brokers' },
+      { id: 'debt-collection', href: '/industries/debt-collection' },
+      { id: 'emis', href: '/industries/emis-payments' },
+      { id: 'other', href: '/industries#other-industries' },
+    ],
   },
-  // {
-  //   id: 'legal',
-  //   links: [
-  //     { id: 'terms', href: '/legal' },
-  //     { id: 'privacy', href: '/legal' },
-  //     { id: 'dpa', href: '/legal' },
-  //   ],
-  // },
-];
+  {
+    id: 'legal',
+    links: [
+      { id: 'terms', href: '/terms-of-service.pdf', external: true },
+      { id: 'privacy', href: '/privacy-policy.pdf', external: true },
+    ],
+  },
+] as const;
 
 export const Footer = async ({ pathname }: { pathname: string }) => {
   const t = await getTranslations('Footer');
@@ -144,13 +141,34 @@ export const Footer = async ({ pathname }: { pathname: string }) => {
                       itemScope
                       itemType="http://schema.org/SiteNavigationElement"
                     >
-                      {column.links.map((link) => (
-                        <li key={link.id} itemProp="name">
-                          <Link href={link.href} itemProp="url" className={st.footer__menu_link}>
-                            {t(`${column.id}.${link.id}`)}
-                          </Link>
-                        </li>
-                      ))}
+                      {column.links.map((link) => {
+                        const label = t(`${column.id}.${link.id}`);
+                        const isExternal = 'external' in link && link.external;
+
+                        return (
+                          <li key={link.id} itemProp="name">
+                            {isExternal ? (
+                              <NextLink
+                                href={link.href}
+                                itemProp="url"
+                                className={st.footer__menu_link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {label}
+                              </NextLink>
+                            ) : (
+                              <Link
+                                href={link.href}
+                                itemProp="url"
+                                className={st.footer__menu_link}
+                              >
+                                {label}
+                              </Link>
+                            )}
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 ))}

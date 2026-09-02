@@ -1,12 +1,5 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
-.breadcrumbs_wrapper {
-  padding-top: 96px;
-
-  &.calendar {
-    padding-top: 20px;
-  }
-}
 
 .breadcrumbs {
   position: relative;
