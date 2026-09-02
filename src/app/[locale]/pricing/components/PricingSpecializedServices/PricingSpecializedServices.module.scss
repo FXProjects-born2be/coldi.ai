@@ -93,12 +93,31 @@
         display: flex;
       }
     }
+
+    &.hovered {
+      .pricing_services__card_bg {
+        transform: scale(1);
+        border-radius: 0;
+      }
+
+      .pricing_services__card_title,
+      .pricing_services__card_description,
+      .pricing_services__price_label,
+      .pricing_services__price_value {
+        color: #F6F6F6;
+      }
+
+      .pricing_services__btn {
+        background: #FFF;
+        color: #4268FF;
+      }
+    }
   }
 
   &__card_bg {
     object-fit: cover;
     object-position: top center;
-    transform: scale(0.36, 0.07);
+    transform: scale(0.56, 0.06);
     transform-origin: top center;
     pointer-events: none;
     z-index: 0;
@@ -110,16 +129,6 @@
   &__card_body {
     position: relative;
     z-index: 1;
-  }
-
-  &__card:hover &__card_bg {
-    transform: scale(1);
-  }
-
-  @include mobile {
-    &__card.active &__card_bg {
-      transform: scale(1);
-    }
   }
 
   &__card_title {
@@ -160,31 +169,5 @@
     transition: color 0.45s ease;
     background: #2544BD;
     color: #FFF;
-  }
-
-  &__card:hover &__card_title,
-  &__card:hover &__card_description,
-  &__card:hover &__price_label,
-  &__card:hover &__price_value {
-    color: #F6F6F6;
-  }
-
-  &__card:hover &__btn {
-    background: #FFF;
-    color: #4268FF;
-  }
-
-  @include mobile {
-    &__card.active &__card_title,
-    &__card.active &__card_description,
-    &__card.active &__price_label,
-    &__card.active &__price_value {
-      color: #F6F6F6;
-    }
-
-    &__card.active &__btn {
-      background: #FFF;
-      color: #4268FF;
-    }
   }
 }

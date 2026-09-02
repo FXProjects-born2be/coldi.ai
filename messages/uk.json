@@ -253,6 +253,7 @@
   "PricingContact": {
     "eyebrow": "Є запитання?",
     "title": "Напишіть Coldi!",
+    "imageAlt": "Написати Coldi",
     "emailPlaceholder": "Ваш email*",
     "send": "Надіслати",
     "sending": "Надсилання...",

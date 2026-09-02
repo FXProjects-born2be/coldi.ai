@@ -46,75 +46,61 @@ export const PricingContact = () => {
 
   return (
     <section className={st.pricing_contact}>
-      <div className="container">
-        <div className={st.pricing_contact__row}>
-          <div className={st.pricing_contact__content}>
-            <p className={st.pricing_contact__eyebrow}>{t('eyebrow')}</p>
-            <h2 className={st.pricing_contact__title}>{t('title')}</h2>
+      <div className={st.pricing_contact__row}>
+        <div className={st.pricing_contact__visual}>
+          <Image src="/images/pricing/contact.svg" alt={t('imageAlt')} fill loading="lazy" />
+        </div>
 
-            {isSuccess ? (
-              <p className={st.pricing_contact__success}>{t('success')}</p>
-            ) : (
-              <form
-                className={st.pricing_contact__form}
-                noValidate
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  handleSubmit().catch(console.error);
-                }}
-              >
-                <Field name="email">
-                  {(field) => (
-                    <div className={st.pricing_contact__field}>
-                      <input
-                        className={cn(
-                          st.pricing_contact__input,
-                          field.state.meta.errors.length && st.pricing_contact__input_error
-                        )}
-                        name={field.name}
-                        type="email"
-                        placeholder={t('emailPlaceholder')}
-                        value={String(field.state.value ?? '')}
-                        onBlur={field.handleBlur}
-                        onChange={(e) => field.handleChange(e.target.value)}
-                      />
-                    </div>
-                  )}
-                </Field>
+        <div className={st.pricing_contact__content}>
+          <p className={st.pricing_contact__eyebrow}>{t('eyebrow')}</p>
+          <h2 className={st.pricing_contact__title}>{t('title')}</h2>
 
-                {submitError ? <ErrorMessage>{submitError}</ErrorMessage> : null}
+          {isSuccess ? (
+            <p className={st.pricing_contact__success}>{t('success')}</p>
+          ) : (
+            <form
+              className={st.pricing_contact__form}
+              noValidate
+              onSubmit={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleSubmit().catch(console.error);
+              }}
+            >
+              <Field name="email">
+                {(field) => (
+                  <div className={st.pricing_contact__field}>
+                    <input
+                      className={cn(
+                        st.pricing_contact__input,
+                        field.state.meta.errors.length && st.pricing_contact__input_error
+                      )}
+                      name={field.name}
+                      type="email"
+                      placeholder={t('emailPlaceholder')}
+                      value={String(field.state.value ?? '')}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    />
+                  </div>
+                )}
+              </Field>
 
-                <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-                  {([canSubmit, isSubmitting]) => (
-                    <button
-                      type="submit"
-                      disabled={!canSubmit || isSubmitting}
-                      className={cn('btn', 'btn-secondary', st.pricing_contact__btn)}
-                    >
-                      {isSubmitting ? t('sending') : t('send')}
-                    </button>
-                  )}
-                </Subscribe>
-              </form>
-            )}
-          </div>
+              {submitError ? <ErrorMessage>{submitError}</ErrorMessage> : null}
 
-          <div className={st.pricing_contact__visual} aria-hidden>
-            <div className={st.pricing_contact__sphere}>
-              <div className={st.pricing_contact__sphere_bg} />
-            </div>
-            <div className={st.pricing_contact__logo}>
-              <span className={st.pricing_contact__logo_dim} />
-              <Image
-                src="/images/pricing/contact-logo.svg"
-                alt="Icon"
-                width={86}
-                height={86}
-                loading={'lazy'}
-              />
-            </div>
-          </div>
+              <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+                {([canSubmit, isSubmitting]) => (
+                  <button
+                    type="submit"
+                    disabled={!canSubmit || isSubmitting}
+                    className={cn('btn', 'btn-secondary', st.pricing_contact__btn)}
+                  >
+                    {isSubmitting ? t('sending') : t('send')}
+                  </button>
+                )}
+              </Subscribe>
+            </form>
+          )}
         </div>
       </div>
     </section>

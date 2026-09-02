@@ -15,6 +15,7 @@ import { Link } from '@/i18n/navigation';
 export const PricingSpecializedServices = () => {
   const t = useTranslations('SpecializedServices');
   const [activeId, setActiveId] = useState(services[0]?.id);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const activeIndex = services.findIndex((item) => item.id === activeId);
   const activeService = services[activeIndex] ?? services[0];
 
@@ -24,7 +25,13 @@ export const PricingSpecializedServices = () => {
     const nextIndex = (activeIndex + direction + services.length) % services.length;
     const next = services[nextIndex];
     if (!next) return;
+    setHoveredId(null);
     setActiveId(next.id);
+  };
+
+  const handleCardPointerEnter = (id: string, pointerType: string) => {
+    if (pointerType !== 'mouse') return;
+    setHoveredId(id);
   };
 
   return (
@@ -38,8 +45,11 @@ export const PricingSpecializedServices = () => {
               key={service.id}
               className={cn(
                 st.pricing_services__card,
-                service.id === activeService.id && st.active
+                service.id === activeService.id && st.active,
+                hoveredId === service.id && st.hovered
               )}
+              onPointerEnter={(event) => handleCardPointerEnter(service.id, event.pointerType)}
+              onPointerLeave={() => setHoveredId(null)}
             >
               <Image
                 className={st.pricing_services__card_bg}

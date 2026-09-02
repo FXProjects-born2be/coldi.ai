@@ -253,6 +253,7 @@
   "PricingContact": {
     "eyebrow": "Have questions?",
     "title": "Contact Coldi!",
+    "imageAlt": "Contact Coldi",
     "emailPlaceholder": "Your email*",
     "send": "Send",
     "sending": "Sending...",
