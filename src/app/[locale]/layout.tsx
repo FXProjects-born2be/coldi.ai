@@ -42,7 +42,7 @@ const organizationStructuredData = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
-    url: 'https://coldi.ai/meettheteam',
+    url: 'https://coldi.ai/meet-the-team',
     availableLanguage: ['en', 'es'],
   },
   sameAs: [

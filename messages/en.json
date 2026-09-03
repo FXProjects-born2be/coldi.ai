@@ -87,6 +87,81 @@
     "title": "Hear Coldi in Action",
     "description": "Book a demo and see how AI calling can fit into your existing workflows."
   },
+  "MeetTeamPage": {
+    "metaTitle": "Meet the team",
+    "metaDescription": "We don’t just build technology; we design the bridge between your business strategy and automated execution."
+  },
+  "MeetTeamHero": {
+    "titleEyebrow": "Meet the Team",
+    "title": "Behind Coldi",
+    "description": "From AI development and telephony to integrations, operations, and quality control, our team makes every calling workflow work."
+  },
+  "MeetTeamInfo": {
+    "sections": {
+      "purpose": {
+        "eyebrow": "Our Purpose",
+        "title": "Make Voice AI Work in the Real World",
+        "body": "Our mission is clear: to transform large-scale business communication into measurable outcomes. We deploy and manage AI voice solutions that eliminate operational friction and guarantee consistent quality in every second of interaction."
+      },
+      "vision": {
+        "eyebrow": "Our Vision",
+        "title": "Make Business Calling Easier to Scale",
+        "body": "We aim to become the global standard for the managed communication layer. We envision a future where the integration between human strategy and artificial intelligence is so seamless that technology isn't just a tool, but an invisible engine of high-efficiency growth."
+      }
+    }
+  },
+  "MeetTeamGrid": {
+    "title": "Meet the Team",
+    "linkedinAria": "{name} LinkedIn",
+    "roles": {
+      "or-gold": "Co - Founder",
+      "ilia-ron": "Co - Founder",
+      "yosi-stern": "CTO",
+      "serhii-zhakhovskyi": "Partnerships & Growth Manager",
+      "jacob-berkun": "BDM",
+      "leeron-ben-zion": "Sales Account Executive",
+      "natalia-kunytsyna": "Customer Success Manager",
+      "vladyslav-kachanov": "AI Tech Specialist",
+      "oleksandr-romashko": "AI Tech Specialist",
+      "ihor-zhabokrytskyi": "Head of IT Department",
+      "iryna-mykolenko": "Operations Teamleader",
+      "alina-denysenko": "Quality Control",
+      "thomas-angelo": "Quality Control"
+    }
+  },
+  "MeetTeamInfoDrive": {
+    "items": {
+      "intro": {
+        "title": "The Values",
+        "titleRest": " That Drive Our Team",
+        "body": "Calls are intelligently routed based on the caller's needs, urgency, or account profile, ensuring faster resolution and eliminating frustrating Interactive Voice Response menus."
+      },
+      "ownership": {
+        "title": "Radical Ownership",
+        "body": "We take responsibility for the implementation, not just the software."
+      },
+      "quality": {
+        "title": "Quality at Scale",
+        "body": "More calls should never mean lower-quality conversations."
+      },
+      "integration": {
+        "title": "Seamless Integration",
+        "body": "We build around your existing systems, processes, and tools."
+      },
+      "optimization": {
+        "title": "Continuous Optimization",
+        "body": "We monitor, tune, and improve agents after they go live."
+      },
+      "reliability": {
+        "title": "Reliability Over Experimentation",
+        "body": "Our systems are built for businesses that depend on every call."
+      }
+    }
+  },
+  "MeetTeamInfoQuote": {
+    "badge": "Connect. Automate. Grow.",
+    "title": "Behind every <muted>AI</muted> solution is a <muted>human</muted> team obsessed with <muted>detail</muted>, <muted>integration</muted>, and, above all, your operational <muted>success</muted>"
+  },
   "HomeBuiltFor": {
     "title": "Built for Your Business",
     "description": "Every fintech business has different customer conversations. Select your industry to explore the Voice AI workflows we build, manage and optimize for teams like yours.",

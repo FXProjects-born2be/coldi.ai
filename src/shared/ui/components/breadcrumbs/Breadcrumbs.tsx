@@ -29,7 +29,7 @@ const segmentLabels: Record<string, string> = {
   'coldi-in-action': 'Coldi in Action',
   'turn-leads-into-meetings': 'Turn Leads into Meetings',
   'agent-development': 'AI Agent Development',
-  meettheteam: 'Meet the Team',
+  'meet-the-team': 'Meet the Team',
   'customer-service-agent': 'AI Customer Service',
   'voip-phone-service': 'VoIP Phone Service',
   'ai-for-quality-control': 'AI for Quality Control',

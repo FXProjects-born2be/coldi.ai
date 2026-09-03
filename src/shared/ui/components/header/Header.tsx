@@ -117,7 +117,7 @@ const Navigation = ({ pathname }: { pathname: string }) => {
       </li>
       <li
         className={cn(st.hasDropdown, {
-          [st.active]: pathname === '/about' || pathname.startsWith('/meettheteam'),
+          [st.active]: pathname === '/about' || pathname.startsWith('/meet-the-team'),
         })}
         itemProp="name"
       >

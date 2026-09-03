@@ -1,0 +1,108 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.meet_team_info {
+  padding-block: 60px;
+
+  @include tablet {
+    padding-block: 32px;
+  }
+
+  &__container {
+    max-width: 1142px;
+
+    &>*:not(:last-child) {
+      margin-bottom: 124px;
+
+      @include tablet {
+        margin-bottom: 52px;
+      }
+    }
+
+    @include desktop {
+      &>*:nth-child(even) {
+        &>*:nth-child(1) {
+          order: 2;
+        }
+      }
+    }
+  }
+
+  &__block {
+    display: grid;
+    grid-template-columns: 0.85461fr 1fr;
+    align-items: center;
+    gap: 0 64px;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__content {
+    padding: 32px;
+
+    @include tablet {
+      padding: 20px;
+      order: 2;
+    }
+  }
+
+  &__eyebrow {
+    width: max-content;
+    padding: 8px 16px;
+    border-radius: 32px;
+    background: rgba(66, 104, 255, 0.10);
+    color: #4268FF;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 16px;
+
+    @include tablet {
+     margin-inline: auto;
+    }
+  }
+
+  &__title {
+    color: #0c1021;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1.1905;
+    margin-bottom: 32px;
+
+    @include tablet {
+      font-size: 24px;
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__desc {
+    color: #535662;
+    font-size: 20px;
+    line-height: normal;
+
+    @include tablet {
+      font-size: 14px;
+      line-height: 1.4;
+      text-align: center;
+    }
+  }
+
+  &__visual {
+    border-radius: 24px;
+    background: #FAFAFA;
+    padding: 44px 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+
+    @include tablet {
+      order: 1;
+      border-radius: 15px;
+      padding: 28px 43px;
+    }
+  }
+}

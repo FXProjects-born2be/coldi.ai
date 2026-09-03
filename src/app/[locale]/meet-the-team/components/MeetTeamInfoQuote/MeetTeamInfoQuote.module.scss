@@ -1,0 +1,49 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.meet_team_info_quote {
+  padding-block: 60px;
+
+  @include tablet {
+    padding-block: 40px;
+  }
+
+  &__content {
+    &>*:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__title {
+    color: #0c1021;
+    font-size: 48px;
+    line-height: 1.2;
+    text-transform: capitalize;
+    max-width: 1018px;
+    margin-inline: auto;
+    text-align: center;
+
+    @include tablet {
+      font-size: 24px;
+    }
+  }
+
+  &__quote_close {
+    margin-left: auto;
+  }
+
+  &__badge {
+    width: max-content;
+    padding: 8px 16px;
+    border-radius: 32px;
+    background: rgba(66, 104, 255, 0.10);
+    color: #4268ff;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    margin-inline: auto;
+  }
+
+  &__muted {
+    color: rgba(12, 16, 33, 0.40);
+  }
+}

@@ -11,7 +11,7 @@ export function getPageHeadingFromPath(pathname: string): string {
   if (pathname === '/demo') return 'Coldi Demo - Try Real AI Call Agents Live';
   if (pathname === '/coldi-in-action') return 'Listen to Recorded Calls';
   if (pathname === '/call-request') return 'Request a Call or Demo';
-  if (pathname === '/meettheteam') return 'Meet the team';
+  if (pathname === '/meet-the-team') return 'Meet the team';
   if (pathname === '/legal') return 'Coldi Live';
   if (pathname === '/agro-industry') return 'Lead Qualification in the Global Agro-Industry';
   if (pathname === '/clarity-global') return 'Clarity Global use case';

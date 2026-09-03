@@ -1,0 +1,107 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.meet_team_grid {
+  padding-block: 40px;
+
+  @include tablet {
+    padding-block: 32px;
+  }
+
+  &__container {
+    max-width: 1142px;
+  }
+
+  &__title {
+    color: #0C1021;
+    text-align: center;
+    font-size: 48px;
+    line-height: 120%;
+    margin-bottom: 96px;
+
+    @include tablet {
+      margin-bottom: 64px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+
+    @include mobile-up {
+      &>*:last-child {
+        grid-column: 1 / -1;
+        max-width: 348px;
+        margin-inline: auto;
+      }
+    }
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__photo {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #fafafa;
+    max-width: 348px;
+    margin: auto;
+  }
+
+  &__badge {
+    position: absolute;
+    left: 50%;
+    bottom: 17px;
+    transform: translateX(-50%);
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__name {
+    color: #0c1021;
+    font-size: 20px;
+    line-height: normal;
+  }
+
+  &__role {
+    color: rgba(80, 85, 107, 0.6);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  &__linkedin {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #e3e9ff;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #d4ddff;
+    }
+  }
+}
