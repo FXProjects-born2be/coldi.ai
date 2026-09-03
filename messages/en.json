@@ -419,7 +419,8 @@
       "insurance": "Insurance",
       "trading": "Trading Platforms & Brokers",
       "debt-collection": "Debt Collection",
-      "emis": "EMIs & Payments"
+      "emis": "EMIs & Payments",
+      "other": "Other Industries"
     },
     "useCaseItems": {
       "silverbell": "BPO (Silverbell Group)",

@@ -419,7 +419,8 @@
       "insurance": "Страхування",
       "trading": "Торгові платформи та брокери",
       "debt-collection": "Стягнення боргів",
-      "emis": "EMI та платежі"
+      "emis": "EMI та платежі",
+      "other": "Інші галузі"
     },
     "useCaseItems": {
       "silverbell": "BPO (Silverbell Group)",
