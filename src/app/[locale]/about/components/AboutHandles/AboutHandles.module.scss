@@ -1,0 +1,80 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.about_handles {
+  padding-bottom: 80px;
+
+  @include tablet {
+    padding-bottom: 40px;
+  }
+
+  &__title {
+    color: #0C1021;
+    text-align: center;
+    font-size: 48px;
+    line-height: 1.2;
+    margin-bottom: 32px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__item {
+    padding: 20px;
+    border-radius: 8px;
+    background: #F6F6F6;
+  }
+
+  &__top {
+    padding: 32px;
+    border-radius: 8px;
+    border: 0.5px solid rgba(0, 0, 0, 0.20);
+    background: #FFF;
+    margin-bottom: 20px;
+
+    &>*:not(:last-child) {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__picture {
+    position: relative;
+    aspect-ratio: 307 / 225;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__item_label {
+    color: #4268FF;
+    text-align: center;
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  &__item_title {
+    color: #0C1021;
+    text-align: center;
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  &__item_desc {
+    color: #50556B;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+}

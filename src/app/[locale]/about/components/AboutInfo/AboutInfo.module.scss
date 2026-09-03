@@ -1,0 +1,139 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.about_info {
+  padding-top: 80px;
+  padding-bottom: 124px;
+
+  &__items {
+    padding: 32px;
+    border-radius: 20px;
+    border: 0.5px solid rgba(66, 104, 255, 0.10);
+    background: #FFF;
+    box-shadow: 0 113px 32px 0 rgba(66, 104, 255, 0.00), 0 73px 29px 0 rgba(66, 104, 255, 0.01), 0 41px 24px 0 rgba(66, 104, 255, 0.05), 0 18px 18px 0 rgba(66, 104, 255, 0.09), 0 5px 10px 0 rgba(66, 104, 255, 0.10);
+
+    @include tablet {
+      padding: 20px;
+    }
+  }
+
+  &__items_top {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    margin-bottom: 40px;
+  }
+
+  &__tab {
+    display: block;
+    width: 100%;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background: #DBDBDE;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  &__tab_bar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background: #4268FF;
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  &__tab_filling &__tab_bar {
+    animation: about-info-tab-fill var(--about-info-tab-duration, 5s) linear forwards;
+  }
+
+  &__tab_active &__tab_bar {
+    transform: scaleX(1);
+  }
+
+  &__row {
+    border-radius: 24px;
+    background: #FAFAFA;
+    display: grid;
+    grid-template-columns: 1.32085fr 1fr;
+    gap: 20px 100px;
+    align-items: center;
+    padding: 29px 96px 29px 28px;
+
+    @include tablet {
+      padding: 0 12px 25px 12px;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__col {
+    padding: 32px;
+
+    @include tablet {
+      padding: 20px;
+    }
+
+    &>*:not(:last-child) {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__title {
+    color: #0c1021;
+    font-size: 40px;
+    line-height: 1.2;
+
+    @include tablet {
+      font-size: 24px;
+      text-align: center;
+    }
+  }
+
+  &__desc {
+    color: #535662;
+    font-size: 20px;
+    line-height: 1.4;
+
+    @include tablet {
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+
+  &__second_desc {
+    color: #4268FF;
+    font-size: 24px;
+    line-height: 120%;
+
+    @include tablet {
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__tab_filling &__tab_bar {
+      animation: none;
+      transform: scaleX(1);
+    }
+  }
+}
+
+@keyframes about-info-tab-fill {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}

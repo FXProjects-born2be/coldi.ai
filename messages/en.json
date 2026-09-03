@@ -30,6 +30,63 @@
     "description": "Pick a time that works for you.",
     "descriptionSecond": "We’ll discuss your needs and show you how Coldi can support your business."
   },
+  "AboutHero": {
+    "titleEyebrow": "About Coldi",
+    "title": "Voice AI Built for Real Business",
+    "description": "Coldi helps businesses automate customer and sales calls with AI agents that speak naturally, follow business rules, and work inside existing systems."
+  },
+  "AboutInfo": {
+    "blocks": {
+      "phone-capacity": {
+        "title": "The Phone Still Runs on Human Capacity",
+        "description": "The average call center handles over 4,000 calls per month, yet many still miss dozens daily due to overload. Traditional call centers can no longer keep up. Delayed responses, dropped calls, and overwhelmed agents lead to missed opportunities and lost revenue. AI is no longer an innovation - it's a necessity."
+      },
+      "work-in-business": {
+        "title": "We Make AI Work in Your Business",
+        "description": "Many companies offer AI call center tools. Few take responsibility for making them actually work. Coldi is not a plug-and-play solution that performs miracles on its own. To bring results, it needs to be trained, configured, and integrated - and that’s exactly what our team does for you.",
+        "secondDescription": "From the first call to ongoing optimization, we handle the operational side of voice AI."
+      },
+      "workflow": {
+        "title": "AI That Fits Your Existing Workflow",
+        "description": "AI should fit into your workflow, not replace it. Coldi is built to work with the tools your team already uses - calendars, CRMs, ticketing systems, or booking tools. No extra platforms, no tech headaches. We prioritize practical deployment, not technical complexity.",
+        "secondDescription": "Your systems stay in place. Coldi adds the voice layer."
+      },
+      "operations": {
+        "title": "Built by People Who Understand Operations",
+        "description": "Coldi isn’t just software - it’s supported by a team that knows how real business works. We make sure AI fits into your workflow and helps you get things done.",
+        "secondDescription": "We don’t just give you an AI agent. We make it work."
+      },
+      "global": {
+        "title": "Voice AI Ready for Global Operations",
+        "description": "Coldi operates managed telephony infrastructure across dozens of countries, with localized calling capabilities and support for 30+ languages. You can connect Coldi to your existing telephony provider or use Coldi’s infrastructure.",
+        "secondDescription": "We manage the technical layer so your team can focus on the conversations and workflows that matter."
+      }
+    }
+  },
+  "AboutHandles": {
+    "title": "What Coldi Handles",
+    "items": {
+      "languages": {
+        "label": "30+ languages",
+        "title": "Your Rules",
+        "description": "Agents follow your scripts, logic, qualification criteria, and escalation rules."
+      },
+      "telephony": {
+        "label": "Global telephony",
+        "title": "Your Systems",
+        "description": "Coldi connects to your CRM, calendar, telephony, APIs, and business tools."
+      },
+      "availability": {
+        "label": "24/7 availability",
+        "title": "Your Calls",
+        "description": "Inbound, outbound, follow-ups, qualification, booking, and reactivation."
+      }
+    }
+  },
+  "AboutAction": {
+    "title": "Hear Coldi in Action",
+    "description": "Book a demo and see how AI calling can fit into your existing workflows."
+  },
   "HomeBuiltFor": {
     "title": "Built for Your Business",
     "description": "Every fintech business has different customer conversations. Select your industry to explore the Voice AI workflows we build, manage and optimize for teams like yours.",

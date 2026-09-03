@@ -1,3 +1,4 @@
-export * from './details/Details';
-export * from './hero/Hero';
-export * from './ready-to-hear/ReadyToHear';
+export * from './AboutAction';
+export * from './AboutHandles';
+export * from './AboutHero';
+export * from './AboutInfo';

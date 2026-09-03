@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Details, Hero, ReadyToHear } from './components';
+import { AboutAction, AboutHandles, AboutHero, AboutInfo } from './components';
 
 export const metadata: Metadata = {
   alternates: {
@@ -20,9 +20,10 @@ export const metadata: Metadata = {
 export default function Products() {
   return (
     <main>
-      <Hero />
-      <Details />
-      <ReadyToHear />
+      <AboutHero />
+      <AboutInfo />
+      <AboutHandles />
+      <AboutAction />
     </main>
   );
 }
