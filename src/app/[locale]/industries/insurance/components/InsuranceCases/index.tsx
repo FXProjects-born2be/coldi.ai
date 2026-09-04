@@ -3,12 +3,41 @@
 import { useRef, useState } from 'react';
 
 import { cn } from '@/shared/lib/helpers';
+import { IconAuraFour } from '@/shared/ui/icons/IconAuraFour';
+import { IconAuraThree } from '@/shared/ui/icons/IconAuraThree';
 import { IconWaveformLeft } from '@/shared/ui/icons/IconWaveformLeft';
 import { IconWaveformRight } from '@/shared/ui/icons/IconWaveformRight';
 
 import st from './InsuranceCases.module.scss';
 
-export const InsuranceCases = () => {
+type InsuranceCasesProps = {
+  title?: string;
+  titleAccent?: string;
+  description?: string;
+  audio?: string;
+  visual?: 'waveform' | 'aura';
+  page?: 'trading-platforms-brokers' | 'debt-collection' | 'emis-payments';
+};
+
+const VISUALS = {
+  waveform: {
+    left: IconWaveformLeft,
+    right: IconWaveformRight,
+  },
+  aura: {
+    left: IconAuraThree,
+    right: IconAuraFour,
+  },
+} as const;
+
+export const InsuranceCases = ({
+  title = 'Insurance Cases',
+  titleAccent = 'Policy Renewal',
+  description = 'A real renewal call, softened for privacy. Same tone your policyholders would hear',
+  audio = '/audio/insurance.wav',
+  visual = 'waveform',
+  page,
+}: InsuranceCasesProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -30,23 +59,24 @@ export const InsuranceCases = () => {
     setIsPlaying(false);
   };
 
+  const LeftVisual = VISUALS[visual].left;
+  const RightVisual = VISUALS[visual].right;
+
   return (
-    <section className={st.insurance_cases}>
+    <section className={cn(st.insurance_cases, page && st[page])}>
       <div className={'container'}>
         <div className={st.insurance_cases__row}>
           <div className={st.insurance_cases__wave_left}>
-            <IconWaveformLeft active={isPlaying} />
+            <LeftVisual active={isPlaying} />
           </div>
 
           <div className={st.insurance_cases__center}>
             <h2 className={st.insurance_cases__title}>
-              Insurance Cases
+              {title}
               <br />
-              <span>Policy Renewal</span>
+              <span>{titleAccent}</span>
             </h2>
-            <p className={st.insurance_cases__desc}>
-              A real renewal call, softened for privacy. Same tone your policyholders would hear
-            </p>
+            <p className={st.insurance_cases__desc}>{description}</p>
 
             <button
               type="button"
@@ -74,7 +104,7 @@ export const InsuranceCases = () => {
           </div>
 
           <div className={st.insurance_cases__wave_right}>
-            <IconWaveformRight active={isPlaying} />
+            <RightVisual active={isPlaying} />
           </div>
 
           <button
@@ -101,7 +131,7 @@ export const InsuranceCases = () => {
             </span>
           </button>
         </div>
-        <audio ref={audioRef} src="/audio/insurance.wav" onEnded={handleEnded} preload="none" />
+        <audio ref={audioRef} src={audio} onEnded={handleEnded} preload="none" />
       </div>
     </section>
   );

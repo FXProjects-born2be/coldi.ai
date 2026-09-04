@@ -4,13 +4,30 @@ import { type CSSProperties, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { cn } from '@/shared/lib/helpers';
+import { IconAuraTwo } from '@/shared/ui/icons/IconAuraTwo';
 import { SoundWave } from '@/shared/ui/icons/SoundWave';
 
 import st from './InsuranceHandles.module.scss';
 
 import { Link } from '@/i18n/navigation';
 
-const items = [
+type InsuranceHandlesItem = {
+  id: string;
+  icon: string;
+  label: string;
+};
+
+type InsuranceHandlesProps = {
+  items?: InsuranceHandlesItem[];
+  firstText?: string;
+  secondText?: string;
+  answer?: string;
+  botsHref?: string;
+  background?: string;
+  visual?: 'soundWave' | 'auraTwo';
+};
+
+const DEFAULT_ITEMS: InsuranceHandlesItem[] = [
   { id: 'policy-renewals', icon: '/icons/ic_outline-policy.svg', label: 'Policy Renewals' },
   {
     id: 'claims-follow-up',
@@ -32,12 +49,13 @@ const items = [
     icon: '/icons/ri_file-ai-2-line.svg',
     label: 'Document / KYC Chasing',
   },
-] as const;
+];
 
-const FIRST_TEXT =
-  'Coldi: "Hi, saw you just registered on [Platform]. Got two minutes to tell me what you\'re looking to trade?"';
-const SECOND_TEXT =
-  'Coldi: "Good, I\'ll connect you with an account manager who specializes in FX. They\'ll call within the hour."';
+const DEFAULT_FIRST_TEXT =
+  '"Hi, saw you just registered on [Platform]. Got two minutes to tell me what you\'re looking to trade?"';
+const DEFAULT_SECOND_TEXT =
+  '"Good, I\'ll connect you with an account manager who specializes in FX. They\'ll call within the hour."';
+const DEFAULT_ANSWER = 'Yeah, go ahead.';
 
 const CHAR_MS = 28;
 const QUESTION_IN_MS = 500;
@@ -46,20 +64,34 @@ const AFTER_ANSWER_MS = 1200;
 const ITEM_MS = 5000;
 const TABLET_MQ = '(max-width: 1024px)';
 
-const BOTS_HREF = '/solutions?tab=trading#solutions-info';
-type Phase = 'idle' | 'question' | 'typing-1' | 'speaking' | 'answer' | 'typing-2' | 'done';
-type ItemId = (typeof items)[number]['id'];
+const DEFAULT_BOTS_HREF = '/solutions?tab=insurance#solutions-info';
+const DEFAULT_BACKGROUND = '/images/general/background.png';
 
-export const InsuranceHandles = () => {
+const VISUALS = {
+  soundWave: SoundWave,
+  auraTwo: IconAuraTwo,
+} as const;
+type Phase = 'idle' | 'question' | 'typing-1' | 'speaking' | 'answer' | 'typing-2' | 'done';
+
+export const InsuranceHandles = ({
+  items = DEFAULT_ITEMS,
+  firstText = DEFAULT_FIRST_TEXT,
+  secondText = DEFAULT_SECOND_TEXT,
+  answer = DEFAULT_ANSWER,
+  botsHref = DEFAULT_BOTS_HREF,
+  background = DEFAULT_BACKGROUND,
+  visual = 'soundWave',
+}: InsuranceHandlesProps) => {
   const rootRef = useRef<HTMLDivElement>(null);
   const [phase, setPhase] = useState<Phase>('idle');
   const [displayed, setDisplayed] = useState('');
   const [isTablet, setIsTablet] = useState(false);
   const [itemsInView, setItemsInView] = useState(false);
-  const [activeItemId, setActiveItemId] = useState<ItemId>(items[0].id);
+  const [activeItemId, setActiveItemId] = useState(items[0].id);
 
   const isTyping = phase === 'typing-1' || phase === 'typing-2';
-  const fullText = phase === 'typing-2' || phase === 'done' ? SECOND_TEXT : FIRST_TEXT;
+  const fullText = phase === 'typing-2' || phase === 'done' ? secondText : firstText;
+  const Visual = VISUALS[visual];
 
   useEffect(() => {
     const root = rootRef.current;
@@ -104,7 +136,7 @@ export const InsuranceHandles = () => {
     }, ITEM_MS);
 
     return () => window.clearTimeout(timeoutId);
-  }, [activeItemId, isTablet, itemsInView]);
+  }, [activeItemId, isTablet, items, itemsInView]);
 
   useEffect(() => {
     if (phase !== 'question') return;
@@ -189,14 +221,17 @@ export const InsuranceHandles = () => {
             </ul>
 
             <Link
-              href={BOTS_HREF}
-              className={cn('btn btn-secondary', st.insurance_handles__btn_desktop)}
+              href={botsHref}
+              className={cn('btn btn-secondary w-max', st.insurance_handles__btn_desktop)}
             >
               Check Available Bots
             </Link>
           </div>
 
-          <div className={st.insurance_handles__right}>
+          <div
+            className={st.insurance_handles__right}
+            style={{ '--insurance-handles-bg': `url("${background}")` } as CSSProperties}
+          >
             <div className={st.insurance_handles__reaction}>
               {showSpeaking && (
                 <div className={st.insurance_handles__right_top}>
@@ -210,7 +245,7 @@ export const InsuranceHandles = () => {
 
               {showAnswer && (
                 <div className={st.insurance_handles__answer_wrapper}>
-                  <p className={st.insurance_handles__answer}>Yeah, go ahead.</p>
+                  <p className={st.insurance_handles__answer}>{answer}</p>
                 </div>
               )}
             </div>
@@ -226,13 +261,18 @@ export const InsuranceHandles = () => {
               </div>
             </div>
 
-            <div className={st.insurance_handles__sound_wave}>
-              <SoundWave active={isTyping} />
+            <div
+              className={cn(
+                st.insurance_handles__sound_wave,
+                visual === 'auraTwo' && st.insurance_handles__sound_wave_aura
+              )}
+            >
+              <Visual active={isTyping} />
             </div>
           </div>
 
           <Link
-            href={BOTS_HREF}
+            href={botsHref}
             className={cn('btn btn-secondary', st.insurance_handles__btn_tablet)}
           >
             Check Available Bots

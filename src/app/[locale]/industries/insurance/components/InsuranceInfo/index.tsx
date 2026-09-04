@@ -15,36 +15,52 @@ import st from './InsuranceInfo.module.scss';
 
 const AUTO_MS = 5000;
 
-const items = [
+const CONNECTORS = [
+  IconConnectorArrowOne,
+  IconConnectorArrowTwo,
+  IconConnectorArrowThree,
+  IconConnectorArrowFour,
+] as const;
+
+type InsuranceInfoItem = {
+  id: string;
+  label: string;
+};
+
+type InsuranceInfoProps = {
+  items?: InsuranceInfoItem[];
+  description?: string;
+};
+
+const DEFAULT_ITEMS: InsuranceInfoItem[] = [
   {
     id: 'claims-follow-up',
     label: 'Leads come in faster than your floor can call them',
-    icon: IconConnectorArrowOne,
   },
   {
     id: 'quote-qualification',
     label: "You're paying for traffic that never gets a real conversation",
-    icon: IconConnectorArrowTwo,
   },
   {
     id: 'payment-reminders',
     label: "You're expanding into new language markets and don't want to hire locally",
-    icon: IconConnectorArrowThree,
   },
   {
     id: 'document-kyc',
     label:
       "One client cut their calling floor from 60 agents to 25 with flat conversion — that's the kind of shift you're after",
-    icon: IconConnectorArrowFour,
   },
-] as const;
+];
 
-type ItemId = (typeof items)[number]['id'];
+const DEFAULT_DESCRIPTION = 'Talk to us about a 30-day pilot on your highest-volume lead source.';
 
-export const InsuranceInfo = () => {
+export const InsuranceInfo = ({
+  items = DEFAULT_ITEMS,
+  description = DEFAULT_DESCRIPTION,
+}: InsuranceInfoProps) => {
   const rowRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
-  const [activeId, setActiveId] = useState<ItemId | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
     const row = rowRef.current;
@@ -65,7 +81,7 @@ export const InsuranceInfo = () => {
     observer.observe(row);
 
     return () => observer.disconnect();
-  }, []);
+  }, [items]);
 
   useEffect(() => {
     if (!inView || !activeId) return;
@@ -81,7 +97,7 @@ export const InsuranceInfo = () => {
     }, AUTO_MS);
 
     return () => window.clearTimeout(timeoutId);
-  }, [inView, activeId]);
+  }, [activeId, inView, items]);
 
   return (
     <section className={st.insurance_info}>
@@ -95,8 +111,8 @@ export const InsuranceInfo = () => {
         >
           <div className={st.insurance_info__left}>
             <ul className={st.insurance_info__list}>
-              {items.map((item) => {
-                const ConnectorIcon = item.icon;
+              {items.map((item, index) => {
+                const ConnectorIcon = CONNECTORS[index];
                 const isActive = inView && item.id === activeId;
 
                 return (
@@ -133,7 +149,7 @@ export const InsuranceInfo = () => {
 
             <div className={st.insurance_info__right_inner}>
               <div className={st.insurance_info__description}>
-                <p>Talk to us about a 30-day pilot on your highest-volume lead source.</p>
+                <p>{description}</p>
               </div>
 
               <div className={st.insurance_info__btn}>

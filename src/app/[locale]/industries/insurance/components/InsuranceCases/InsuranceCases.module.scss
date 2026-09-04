@@ -17,6 +17,7 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+    overflow: hidden;
 
     @include desktop {
       &:before,
@@ -43,20 +44,19 @@
       flex-direction: column;
       padding-block: 40px;
       gap: 0;
+      min-height: 450px;
     }
   }
 
   &__wave_left,
   &__wave_right {
-    max-width: 337px;
-    width: 100%;
-
-    svg {
+    @include desktop {
+      max-width: 337px;
       width: 100%;
     }
 
-    @include tablet {
-      margin-bottom: 30px;
+    svg {
+      width: 100%;
     }
   }
 
@@ -97,7 +97,9 @@
   }
 
   &__play {
-    margin: auto;
+    @include desktop {
+      margin-inline: auto;
+    }
 
     &_desktop {
       @include tablet {
@@ -106,10 +108,8 @@
     }
 
     &_mobile {
-      display: none;
-
-      @include tablet {
-        display: flex;
+      @include desktop {
+        display: none;
       }
     }
   }
@@ -120,5 +120,16 @@
     justify-content: center;
     width: 20px;
     height: 20px;
+  }
+}
+
+.trading-platforms-brokers {
+  .insurance_cases__wave_right {
+    @include tablet {
+      position: absolute;
+      top: 50%;
+      left: -42%;
+      z-index: -1;
+    }
   }
 }
