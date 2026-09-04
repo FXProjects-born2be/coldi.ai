@@ -28,7 +28,7 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: linear-gradient(90deg, #FFF 0%, rgba(255, 255, 255, 0.00) 100%);
+        background: rgba(255, 255, 255, 0);
       }
 
       &:before {
@@ -129,6 +129,17 @@
       position: absolute;
       top: 50%;
       left: -42%;
+      z-index: -1;
+    }
+  }
+}
+
+.debt-collection {
+  .insurance_cases__wave_right {
+    @include tablet {
+      position: absolute;
+      top: 31%;
+      left: -31%;
       z-index: -1;
     }
   }

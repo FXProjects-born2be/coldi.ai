@@ -5,6 +5,8 @@ import { useRef, useState } from 'react';
 import { cn } from '@/shared/lib/helpers';
 import { IconAuraFour } from '@/shared/ui/icons/IconAuraFour';
 import { IconAuraThree } from '@/shared/ui/icons/IconAuraThree';
+import { IconTimerFour } from '@/shared/ui/icons/IconTimerFour';
+import { IconTimerThree } from '@/shared/ui/icons/IconTimerThree';
 import { IconWaveformLeft } from '@/shared/ui/icons/IconWaveformLeft';
 import { IconWaveformRight } from '@/shared/ui/icons/IconWaveformRight';
 
@@ -15,7 +17,7 @@ type InsuranceCasesProps = {
   titleAccent?: string;
   description?: string;
   audio?: string;
-  visual?: 'waveform' | 'aura';
+  visual?: 'waveform' | 'aura' | 'timer';
   page?: 'trading-platforms-brokers' | 'debt-collection' | 'emis-payments';
 };
 
@@ -27,6 +29,10 @@ const VISUALS = {
   aura: {
     left: IconAuraThree,
     right: IconAuraFour,
+  },
+  timer: {
+    left: IconTimerThree,
+    right: IconTimerFour,
   },
 } as const;
 

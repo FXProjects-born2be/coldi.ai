@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import { cn } from '@/shared/lib/helpers';
 import { IconAuraTwo } from '@/shared/ui/icons/IconAuraTwo';
+import { IconTimerTwo } from '@/shared/ui/icons/IconTimerTwo';
 import { SoundWave } from '@/shared/ui/icons/SoundWave';
 
 import st from './InsuranceHandles.module.scss';
@@ -24,7 +25,7 @@ type InsuranceHandlesProps = {
   answer?: string;
   botsHref?: string;
   background?: string;
-  visual?: 'soundWave' | 'auraTwo';
+  visual?: 'soundWave' | 'auraTwo' | 'timerTwo';
 };
 
 const DEFAULT_ITEMS: InsuranceHandlesItem[] = [
@@ -70,6 +71,7 @@ const DEFAULT_BACKGROUND = '/images/general/background.png';
 const VISUALS = {
   soundWave: SoundWave,
   auraTwo: IconAuraTwo,
+  timerTwo: IconTimerTwo,
 } as const;
 type Phase = 'idle' | 'question' | 'typing-1' | 'speaking' | 'answer' | 'typing-2' | 'done';
 
@@ -264,7 +266,7 @@ export const InsuranceHandles = ({
             <div
               className={cn(
                 st.insurance_handles__sound_wave,
-                visual === 'auraTwo' && st.insurance_handles__sound_wave_aura
+                visual !== 'soundWave' && st.insurance_handles__sound_wave_aura
               )}
             >
               <Visual active={isTyping} />

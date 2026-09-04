@@ -1,10 +1,12 @@
+import type { ReactNode } from 'react';
+
 import st from './InsuranceOperations.module.scss';
 
 import { Link } from '@/i18n/navigation';
 
 type InsuranceOperationsProps = {
   title?: string;
-  description?: string;
+  description?: ReactNode;
   video?: string;
 };
 
