@@ -1,0 +1,225 @@
+@property --r-0 {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: true;
+}
+
+@property --r-1 {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: true;
+}
+
+@property --r-2 {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: true;
+}
+
+@property --r-3 {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: true;
+}
+
+.icon_aura_two {
+  overflow: visible;
+
+  &__shape {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: icon-aura-two-pulse 6.86s cubic-bezier(0.33, 0, 0.67, 1) infinite;
+
+    &:nth-child(1) {
+      --op-1: 0.7;
+      --op-2: 0.9;
+      --op-3: 0.75;
+      --r-0: 0deg;
+      --r-1: 5deg;
+      --r-2: 3deg;
+      --r-3: 7deg;
+      --tx-1: 11.196px;
+      --ty-1: -8.397px;
+      --tx-2: 5.598px;
+      --ty-2: 2.799px;
+      --tx-3: -5.598px;
+      --ty-3: 6.998px;
+      --sx-1: 1.12;
+      --sy-1: 0.9;
+      --sx-2: 0.92;
+      --sy-2: 1.1;
+      --sx-3: 1.06;
+      --sy-3: 0.95;
+    }
+
+    &:nth-child(2) {
+      --op-1: 0.75;
+      --op-2: 0.85;
+      --op-3: 0.7;
+      --r-0: 0deg;
+      --r-1: -4deg;
+      --r-2: -7deg;
+      --r-3: -3deg;
+      --tx-1: -9.797px;
+      --ty-1: 6.998px;
+      --tx-2: -4.199px;
+      --ty-2: -5.598px;
+      --tx-3: 6.998px;
+      --ty-3: -8.397px;
+      --sx-1: 0.88;
+      --sy-1: 1.1;
+      --sx-2: 1.12;
+      --sy-2: 0.9;
+      --sx-3: 0.94;
+      --sy-3: 1.05;
+    }
+
+    &:nth-child(3) {
+      --op-1: 0.8;
+      --op-2: 0.7;
+      --op-3: 0.85;
+      --r-0: 0deg;
+      --r-1: 6deg;
+      --r-2: -4deg;
+      --r-3: 5deg;
+      --tx-1: -6.998px;
+      --ty-1: -5.598px;
+      --tx-2: 8.397px;
+      --ty-2: -8.397px;
+      --tx-3: 4.199px;
+      --ty-3: 5.598px;
+      --sx-1: 1.08;
+      --sy-1: 0.92;
+      --sx-2: 0.88;
+      --sy-2: 1.12;
+      --sx-3: 1.1;
+      --sy-3: 0.93;
+    }
+
+    &:nth-child(4) {
+      --op-1: 0.72;
+      --op-2: 0.88;
+      --op-3: 0.78;
+      --r-0: 0deg;
+      --r-1: -5deg;
+      --r-2: 4deg;
+      --r-3: -6deg;
+      --tx-1: 5.598px;
+      --ty-1: 8.397px;
+      --tx-2: -6.998px;
+      --ty-2: 5.598px;
+      --tx-3: -8.397px;
+      --ty-3: -4.199px;
+      --sx-1: 0.9;
+      --sy-1: 1.12;
+      --sx-2: 1.14;
+      --sy-2: 0.88;
+      --sx-3: 0.92;
+      --sy-3: 1.08;
+    }
+
+    &:nth-child(5) {
+      --op-1: 0.78;
+      --op-2: 0.72;
+      --op-3: 0.82;
+      --r-0: 0deg;
+      --r-1: 3deg;
+      --r-2: -5deg;
+      --r-3: 4deg;
+      --tx-1: -5.598px;
+      --ty-1: 4.199px;
+      --tx-2: 6.998px;
+      --ty-2: -6.998px;
+      --tx-3: -4.199px;
+      --ty-3: 8.397px;
+      --sx-1: 1.1;
+      --sy-1: 0.88;
+      --sx-2: 0.9;
+      --sy-2: 1.08;
+      --sx-3: 1.08;
+      --sy-3: 0.92;
+    }
+
+    &:nth-child(6) {
+      --op-1: 0.82;
+      --op-2: 0.75;
+      --op-3: 0.7;
+      --r-0: 0deg;
+      --r-1: -6deg;
+      --r-2: 5deg;
+      --r-3: -4deg;
+      --tx-1: 6.998px;
+      --ty-1: -6.998px;
+      --tx-2: -8.397px;
+      --ty-2: 6.998px;
+      --tx-3: 5.598px;
+      --ty-3: -5.598px;
+      --sx-1: 0.92;
+      --sy-1: 1.08;
+      --sx-2: 1.1;
+      --sy-2: 0.92;
+      --sx-3: 0.88;
+      --sy-3: 1.12;
+    }
+
+    &:nth-child(7) {
+      --op-1: 0.7;
+      --op-2: 0.82;
+      --op-3: 0.76;
+      --r-0: 0deg;
+      --r-1: 4deg;
+      --r-2: -6deg;
+      --r-3: 3deg;
+      --tx-1: 4.199px;
+      --ty-1: 5.598px;
+      --tx-2: -5.598px;
+      --ty-2: 8.397px;
+      --tx-3: 8.397px;
+      --ty-3: -6.998px;
+      --sx-1: 1.06;
+      --sy-1: 0.94;
+      --sx-2: 0.92;
+      --sy-2: 1.06;
+      --sx-3: 1.12;
+      --sy-3: 0.88;
+    }
+  }
+}
+
+@keyframes icon-aura-two-pulse {
+  0%,
+  72.89%,
+  100% {
+    opacity: 1;
+    rotate: var(--r-0);
+    translate: 0 0;
+    scale: 1 1;
+  }
+
+  18.22% {
+    opacity: var(--op-1);
+    rotate: var(--r-1);
+    translate: var(--tx-1) var(--ty-1);
+    scale: var(--sx-1) var(--sy-1);
+  }
+
+  36.44% {
+    opacity: var(--op-2);
+    rotate: var(--r-2);
+    translate: var(--tx-2) var(--ty-2);
+    scale: var(--sx-2) var(--sy-2);
+  }
+
+  54.66% {
+    opacity: var(--op-3);
+    rotate: var(--r-3);
+    translate: var(--tx-3) var(--ty-3);
+    scale: var(--sx-3) var(--sy-3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon_aura_two__shape {
+    animation: none;
+  }
+}
