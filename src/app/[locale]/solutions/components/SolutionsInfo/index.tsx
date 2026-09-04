@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 
 import { useTranslations } from 'next-intl';
 
@@ -51,16 +52,22 @@ const TABS = [
   },
 ] as const;
 
+type TabId = (typeof TABS)[number]['id'];
+
+const isTabId = (value: string | null): value is TabId => TABS.some((tab) => tab.id === value);
+
 export const SolutionsInfo = () => {
   const t = useTranslations('SolutionsInfo');
-  const [activeId, setActiveId] = useState<(typeof TABS)[number]['id']>('insurance');
+  const searchParams = useSearchParams();
+  const tabFromUrl = searchParams.get('tab');
+  const [activeId, setActiveId] = useState<TabId>(isTabId(tabFromUrl) ? tabFromUrl : 'insurance');
   const [activeIndex, setActiveIndex] = useState(0);
   const activeTab = TABS.find((tab) => tab.id === activeId) ?? TABS[0];
   const tabIndex = TABS.findIndex((tab) => tab.id === activeId);
   const items = activeTab.items;
   const activeLabel = t(`tabs.${activeId}.label`);
 
-  const handleTabChange = (id: (typeof TABS)[number]['id']) => {
+  const handleTabChange = (id: TabId) => {
     setActiveId(id);
     setActiveIndex(0);
   };
@@ -81,7 +88,7 @@ export const SolutionsInfo = () => {
   }, [activeId, activeIndex, items.length]);
 
   return (
-    <div className={st.solutions_info}>
+    <div id="solutions-info" className={st.solutions_info}>
       <div className="container">
         <div className={st.solutions_info__tabs}>
           <button

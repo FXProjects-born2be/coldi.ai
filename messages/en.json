@@ -158,6 +158,30 @@
       }
     }
   },
+  "InsuranceWhy": {
+    "items": {
+      "intro": {
+        "title": "Why Insurance Teams",
+        "titleRest": "Bring Coldi In"
+      },
+      "renewals": {
+        "title": "Renewals",
+        "body": "Every policyholder gets called ahead of expiry, not just the accounts someone remembered."
+      },
+      "claimsIntake": {
+        "title": "Claims intake",
+        "body": "First notice of loss handled around the clock, routed to the right desk with clean data."
+      },
+      "crossSell": {
+        "title": "Cross-sell",
+        "body": "Untouched upsell lists get worked without pulling staff off active service."
+      },
+      "verification": {
+        "title": "Verification",
+        "body": "Contact details, beneficiaries, and consent refreshed at portfolio scale."
+      }
+    }
+  },
   "MeetTeamInfoQuote": {
     "badge": "Connect. Automate. Grow.",
     "title": "Behind every <muted>AI</muted> solution is a <muted>human</muted> team obsessed with <muted>detail</muted>, <muted>integration</muted>, and, above all, your operational <muted>success</muted>"

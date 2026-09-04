@@ -1,6 +1,13 @@
 import type { Metadata } from 'next';
 
-import { Cards, Comparison, ContentCards, Faq, Hero, Why } from './components';
+import {
+  InsuranceCases,
+  InsuranceHandles,
+  InsuranceHero,
+  InsuranceInfo,
+  InsuranceOperations,
+  InsuranceWhy,
+} from './components';
 
 export const metadata: Metadata = {
   alternates: {
@@ -20,12 +27,12 @@ export const metadata: Metadata = {
 export default function InsuranceAgentsPage() {
   return (
     <main>
-      <Hero />
-      <Why />
-      <Cards />
-      <Comparison />
-      <ContentCards />
-      <Faq />
+      <InsuranceHero />
+      <InsuranceHandles />
+      <InsuranceCases />
+      <InsuranceWhy />
+      <InsuranceOperations />
+      <InsuranceInfo />
     </main>
   );
 }

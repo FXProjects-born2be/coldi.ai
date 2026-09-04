@@ -156,6 +156,11 @@ html, body {
     background: #fff;
     color: #2544BD;
     border-color: #2544BD;
+
+    svg path,
+    svg rect {
+      fill: #2544BD;
+    }
   }
 }
 
@@ -187,12 +192,21 @@ button {
   width: max-content;
 }
 
+.mx-auto {
+  margin-inline: auto;
+}
+
 .rotate-180 {
   transform: rotate(180deg);
 }
 
 svg {
   display: block;
+
+  path,
+  rect {
+    transition: all .3s ease-in-out;
+  }
 }
 
 .page-calendar {
@@ -212,8 +226,8 @@ svg {
   }
 }
 
-h1 {
-  span {
-    color: #4268FF;
-  }
+h1 span,
+h2 span {
+  color: #4268FF;
 }
+

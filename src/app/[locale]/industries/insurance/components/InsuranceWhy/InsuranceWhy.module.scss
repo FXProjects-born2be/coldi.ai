@@ -1,0 +1,114 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.insurance_why {
+  padding-top: 50px;
+  padding-bottom: 80px;
+
+  @include tablet {
+    padding-block: 40px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &>*:nth-child(1) {
+      grid-column: span 2;
+
+      @include tablet {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @include tablet {
+      &>*:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+  &__card {
+    padding: 28px 28px 32px 28px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 0.5px solid #B2B2B2;
+    position: relative;
+    z-index: 1;
+
+    @include tablet {
+      padding: 30px 20px;
+    }
+  }
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.00);
+    box-shadow: 0 0 0 0 #FFF inset, 0 0 0 0.5px rgba(0, 0, 0, 0.10) inset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+
+    @include tablet {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__card_title {
+    color: #777169;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+
+    @include tablet {
+      font-size: 14px;
+    }
+  }
+
+  &__card_desc {
+    color: #000;
+    font-size: 16px;
+    line-height: 1.4;
+
+    @include tablet {
+      font-size: 14px;
+    }
+  }
+
+  &__title {
+    font-size: 40px;
+    line-height: 120%;
+
+    @include tablet {
+      font-size: 32px;
+    }
+  }
+
+  &__desc {
+    font-size: 16px;
+    line-height: 140%;
+    max-width: 700px;
+
+    @include tablet {
+      font-size: 14px;
+    }
+  }
+
+  &__video {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+}

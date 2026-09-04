@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import {
   SolutionsDeliver,
   SolutionsHero,
@@ -10,7 +12,9 @@ export default function SolutionsPage() {
   return (
     <main>
       <SolutionsHero />
-      <SolutionsInfo />
+      <Suspense fallback={null}>
+        <SolutionsInfo />
+      </Suspense>
       <SolutionsDeliver />
       <SolutionsUseCases />
       <SolutionsSpecific />

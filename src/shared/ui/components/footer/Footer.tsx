@@ -26,11 +26,7 @@ const menu = [
       { id: 'pricing', href: '/pricing' },
       { id: 'news', href: '/news' },
       { id: 'about', href: '/about' },
-      {
-        id: 'trustCenter',
-        href: 'https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd',
-        external: true,
-      },
+      { id: 'trustCenter', href: '/trust-center' },
     ],
   },
   {

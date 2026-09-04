@@ -13,8 +13,6 @@ import st from './HomeManaged.module.scss';
 
 type ManagedTabImage = {
   src: string;
-  width: number;
-  height: number;
 };
 
 type ManagedTab = {
@@ -28,18 +26,12 @@ const tabs: ManagedTab[] = [
     image: [
       {
         src: '/images/home/managed-one-main.png',
-        width: 720,
-        height: 361,
       },
       {
         src: '/images/home/managed-one-sub-one.png',
-        width: 358,
-        height: 181,
       },
       {
         src: '/images/home/managed-one-sub-two.png',
-        width: 257,
-        height: 161,
       },
     ],
   },
@@ -48,8 +40,6 @@ const tabs: ManagedTab[] = [
     image: [
       {
         src: '/images/home/managed-two.png',
-        width: 720,
-        height: 330,
       },
     ],
   },
@@ -58,8 +48,6 @@ const tabs: ManagedTab[] = [
     image: [
       {
         src: '/images/home/managed-three.png',
-        width: 720,
-        height: 393,
       },
     ],
   },
@@ -68,13 +56,9 @@ const tabs: ManagedTab[] = [
     image: [
       {
         src: '/images/home/managed-four.png',
-        width: 660,
-        height: 404,
       },
       {
         src: '/images/home/managed-four-sub-one.png',
-        width: 366,
-        height: 198,
       },
     ],
   },
@@ -82,9 +66,13 @@ const tabs: ManagedTab[] = [
     id: 'campaign-performance',
     image: [
       {
-        src: '/images/home/managed-five.png',
-        width: 720,
-        height: 355,
+        src: '/images/home/managed-five.svg',
+      },
+      {
+        src: '/images/home/managed-fives-sub-one.png',
+      },
+      {
+        src: '/images/home/managed-fives-sub-two.png',
       },
     ],
   },
@@ -358,7 +346,7 @@ export const HomeManaged = () => {
             ))}
           </div>
 
-          <div className={st.home_managed__main}>
+          <div className={cn(st.home_managed__main, st[`home_managed__main_${activeTab.id}`])}>
             <div className={st.home_managed__visual}>
               <ManagedVisualImages
                 key={activeTab.id}
@@ -388,12 +376,7 @@ export const HomeManaged = () => {
                     className={st.home_managed__preview_image}
                     onClick={(event) => event.stopPropagation()}
                   >
-                    <Image
-                      src={preview.src}
-                      alt={activeTitle}
-                      width={preview.width}
-                      height={preview.height}
-                    />
+                    <Image src={preview.src} alt={activeTitle} />
                   </div>
                   <button
                     type="button"
