@@ -56,31 +56,27 @@ const FeaturedControl = ({
 export const Hero = ({ articles }: HeroProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const activeArticle = articles[activeIndex] ?? articles[0];
+  const slideCount = articles.length;
+  const slideIndex = slideCount === 0 ? 0 : Math.min(activeIndex, slideCount - 1);
+  const activeArticle = articles[slideIndex] ?? articles[0];
 
   const goTo = useCallback(
     (index: number) => {
-      if (!articles.length) return;
-      setActiveIndex((index + articles.length) % articles.length);
+      if (!slideCount) return;
+      setActiveIndex((index + slideCount) % slideCount);
     },
-    [articles.length]
+    [slideCount]
   );
 
   useEffect(() => {
-    if (articles.length <= 1 || isPaused) return undefined;
+    if (slideCount <= 1 || isPaused) return undefined;
 
     const timer = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % articles.length);
+      setActiveIndex((current) => (current + 1) % slideCount);
     }, AUTOPLAY_MS);
 
     return () => window.clearInterval(timer);
-  }, [articles.length, isPaused, activeIndex]);
-
-  useEffect(() => {
-    if (activeIndex > articles.length - 1) {
-      setActiveIndex(0);
-    }
-  }, [activeIndex, articles.length]);
+  }, [slideCount, isPaused, slideIndex]);
 
   return (
     <section className={st.hero}>
@@ -119,7 +115,7 @@ export const Hero = ({ articles }: HeroProps) => {
             {articles.length > 0 && (
               <FeaturedControl
                 articles={articles}
-                activeIndex={activeIndex}
+                activeIndex={slideIndex}
                 isPaused={isPaused}
                 className={st.featuredControlDesktop}
                 onSelect={goTo}
@@ -166,7 +162,7 @@ export const Hero = ({ articles }: HeroProps) => {
           {articles.length > 0 && (
             <FeaturedControl
               articles={articles}
-              activeIndex={activeIndex}
+              activeIndex={slideIndex}
               isPaused={isPaused}
               className={st.featuredControlMobile}
               onSelect={goTo}

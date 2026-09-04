@@ -54,10 +54,6 @@ export const AllArticles = ({ articles, categories }: AllArticlesProps) => {
   const compactCards = isFirstPage ? pageItems.slice(LARGE_CARDS_COUNT) : pageItems;
 
   useEffect(() => {
-    setPage(1);
-  }, [category, search]);
-
-  useEffect(() => {
     const onPointerDown = (event: MouseEvent) => {
       if (!filterRef.current?.contains(event.target as Node)) {
         setIsFilterOpen(false);
@@ -78,6 +74,7 @@ export const AllArticles = ({ articles, categories }: AllArticlesProps) => {
 
   const selectCategory = (value: string) => {
     setCategory(value.toLowerCase() === 'all' ? 'all' : value);
+    setPage(1);
     setIsFilterOpen(false);
   };
 
@@ -149,7 +146,10 @@ export const AllArticles = ({ articles, categories }: AllArticlesProps) => {
               placeholder="Search"
               aria-label="Search articles"
               value={search}
-              onChange={(event) => setSearch(event.target.value)}
+              onChange={(event) => {
+                setSearch(event.target.value);
+                setPage(1);
+              }}
             />
             <span className={st.searchIcon}>
               <Image
