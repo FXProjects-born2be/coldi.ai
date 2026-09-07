@@ -319,15 +319,20 @@
   }
 
   a {
+    display: inline !important;
+    width: auto;
     color: #4268ff;
     text-decoration: underline;
   }
 
   strong {
+    display: inline;
     font-weight: 700;
   }
 
   ul {
+    display: block;
+    list-style: disc;
     margin: 0 0 14px;
     padding-left: 1.25em;
 
@@ -337,6 +342,7 @@
   }
 
   li {
+    display: list-item;
     margin-bottom: 5px;
 
     &:last-child {

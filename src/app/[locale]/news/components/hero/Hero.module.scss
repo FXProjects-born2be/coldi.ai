@@ -186,7 +186,8 @@
   box-shadow:
     0 5px 5px rgba(66, 104, 255, 0.1),
     0 18px 9px rgba(66, 104, 255, 0.09),
-    0 41px 12px rgba(66, 104, 255, 0.05);
+    0 41px 12px rgba(66, 104, 255, 0.05),
+    0 73px 14.5px rgba(66, 104, 255, 0.01);
   color: inherit;
   text-decoration: none;
   animation: featured-in 0.7s cubic-bezier(0.22, 1, 0.36, 1);
@@ -226,9 +227,10 @@
 
 .featuredCategory {
   margin: 0;
-  color: #000;
-  font-size: 16px;
-  line-height: 1.4;
+  color: #4268ff;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
   text-transform: uppercase;
 }
 
@@ -244,13 +246,23 @@
   margin: 0;
   color: #000;
   font-size: 20px;
-  line-height: 1.4;
+  line-height: normal;
 }
 
 .featuredDate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 8px 16px;
+  background: #fff;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border-radius: 999px;
   color: #000;
   font-size: 16px;
+  font-weight: 400;
   line-height: 1.4;
+  white-space: nowrap;
 }
 
 .skeleton {
@@ -352,7 +364,7 @@
 
   .featuredCategory {
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 700;
   }
 
   .featuredTitle {
@@ -361,6 +373,7 @@
 
   .featuredExcerpt {
     font-size: 14px;
+    line-height: 1.4;
   }
 
   .featuredDate {
