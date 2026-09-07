@@ -42,8 +42,9 @@ const menu = [
   {
     id: 'legal',
     links: [
-      { id: 'terms', href: '/terms-of-service.pdf', external: true },
-      { id: 'privacy', href: '/privacy-policy.pdf', external: true },
+      { id: 'terms', href: '/legal' },
+      { id: 'privacy', href: '/legal' },
+      { id: 'data-processing-agreement', href: '/legal' },
     ],
   },
 ] as const;

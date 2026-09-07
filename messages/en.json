@@ -837,6 +837,31 @@
       "hospitality": "Hospitality"
     }
   },
+  "LegalPage": {
+    "metaTitle": "Legal",
+    "metaDescription": "Access all official legal documents and policies for our company. Download or view the latest versions of our agreements."
+  },
+  "LegalHero": {
+    "title": "Legal",
+    "description": "Access all official legal documents and policies for our company. Download or view the latest versions of our agreements."
+  },
+  "LegalInfo": {
+    "download": "Download PDF",
+    "files": {
+      "terms": {
+        "title": "Terms of Service",
+        "meta": "Last updated 14 January 2026"
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "meta": "Last updated 14 January 2026"
+      },
+      "dpa": {
+        "title": "Data Processing Agreement",
+        "meta": "Last updated 14 January 2026"
+      }
+    }
+  },
   "Footer": {
     "subtitle": "Making voice AI work for Fintech",
     "copyright": "© {year} Coldi. Voice-Powered. Rights Reserved.",
@@ -880,7 +905,7 @@
     "legal": {
       "terms": "Terms of Service",
       "privacy": "Privacy Policy",
-      "dpa": "Data Processing Agreement"
+      "data-processing-agreement": "Data Processing Agreement"
     }
   }
 }

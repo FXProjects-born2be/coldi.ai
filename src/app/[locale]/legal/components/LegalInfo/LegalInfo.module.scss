@@ -1,0 +1,64 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.legal_info {
+  padding-block: 40px;
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      &>*:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+  &__item {
+    padding: 30px;
+    border-radius: 10px;
+    border: 0.5px solid #B2B2B2;
+    background: rgba(255, 255, 255, 0.00);
+    text-align: center;
+  }
+
+  &__title {
+    color: #0C1021;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  &__meta {
+    color: rgba(80, 85, 107, 0.60);
+    font-size: 16px;
+    line-height: normal;
+    margin-bottom: 32px;
+  }
+
+  &__download {
+    display: flex;
+    padding: 12px 16px 12px 12px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 16px;
+    border: 1px solid rgba(12, 16, 33, 0.1);
+    background: #fafafa;
+    overflow: hidden;
+    color: #0c1021;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+  }
+}

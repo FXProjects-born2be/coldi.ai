@@ -1,0 +1,55 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.legal_hero {
+  padding-top: 76px;
+  background: url("/images/legal/legal-hero.jpg") no-repeat center;
+  background-size: cover;
+  text-align: center;
+
+  &::after {
+    content: "";
+    position: absolute;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  &__container {
+    padding-block: 52px;
+
+    @include tablet {
+      padding-block: 64px;
+    }
+  }
+
+  &__title {
+    color: #0C1021;
+    font-size: 60px;
+    line-height: 1.1;
+    margin-bottom: 12px;
+
+    @include tablet {
+      font-size: 32px;
+      line-height: 1.2;
+    }
+  }
+
+  &__desc {
+    color: #50556B;
+    font-size: 20px;
+    line-height: 1.4;
+    max-width: 650px;
+    margin-inline: auto;
+
+    @include tablet {
+      font-size: 16px;
+    }
+
+    @include mobileSmall {
+      font-size: 16px;
+    }
+  }
+}

@@ -231,3 +231,19 @@ h2 span {
   color: #4268FF;
 }
 
+.hero-shadow {
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 286px;
+    position: absolute;
+    top: -198px;
+    border-radius: 999999px;
+    background: #FFF;
+    filter: blur(100px);
+    left: 0;
+  }
+}

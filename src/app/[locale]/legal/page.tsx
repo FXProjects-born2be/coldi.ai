@@ -1,25 +1,35 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-import { Files, Hero } from './components';
+import { LegalHero, LegalInfo } from './components';
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: '/legal',
-  },
-  title: 'Coldi Live',
-  description: '',
-  openGraph: {
-    title: 'Coldi Live',
-    description: '',
-    images: '/images/meta.png',
-  },
+type Props = {
+  params: Promise<{ locale: string }>;
 };
 
-export default function Products() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'LegalPage' });
+
+  return {
+    alternates: {
+      canonical: '/legal',
+    },
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      images: '/images/meta.png',
+    },
+  };
+}
+
+export default function LegalPage() {
   return (
     <main>
-      <Hero />
-      <Files />
+      <LegalHero />
+      <LegalInfo />
     </main>
   );
 }
