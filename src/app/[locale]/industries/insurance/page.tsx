@@ -29,7 +29,7 @@ export default function InsuranceAgentsPage() {
     <main>
       <InsuranceHero />
       <InsuranceHandles />
-      <InsuranceCases />
+      <InsuranceCases page="insurance" />
       <InsuranceWhy />
       <InsuranceOperations />
       <InsuranceInfo />

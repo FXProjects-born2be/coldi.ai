@@ -61,6 +61,21 @@ export const Header = ({ pathname: pathnameProp }: { pathname: string }) => {
 
 const Navigation = ({ pathname }: { pathname: string }) => {
   const t = useTranslations('Header');
+  const [hideDropdowns, setHideDropdowns] = useState(false);
+  const prevPathname = useRef(pathname);
+
+  useEffect(() => {
+    if (prevPathname.current === pathname) return;
+
+    prevPathname.current = pathname;
+    setHideDropdowns(true);
+
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  }, [pathname]);
+
+  const showDropdowns = () => setHideDropdowns(false);
 
   return (
     <ul
@@ -79,12 +94,13 @@ const Navigation = ({ pathname }: { pathname: string }) => {
         </Link>
       </li>
       <li
-        className={cn(st.hasDropdown, {
+        className={cn(st.hasDropdown, hideDropdowns && st.hideDropdown, {
           [st.active]: pathname.startsWith('/industries'),
         })}
         itemProp="name"
+        onMouseLeave={showDropdowns}
       >
-        <Link className={st.navTrigger} href="/industries" itemProp="url">
+        <Link className={st.navTrigger} href="/industries" itemProp="url" onFocus={showDropdowns}>
           <span>{t('industries')}</span>
           <span className={st.dropdownArrow}>
             <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
@@ -116,12 +132,13 @@ const Navigation = ({ pathname }: { pathname: string }) => {
         </Link>
       </li>
       <li
-        className={cn(st.hasDropdown, {
+        className={cn(st.hasDropdown, hideDropdowns && st.hideDropdown, {
           [st.active]: pathname === '/about' || pathname.startsWith('/meet-the-team'),
         })}
         itemProp="name"
+        onMouseLeave={showDropdowns}
       >
-        <Link className={st.navTrigger} href="/about" itemProp="url">
+        <Link className={st.navTrigger} href="/about" itemProp="url" onFocus={showDropdowns}>
           <span>{t('about')}</span>
           <span className={st.dropdownArrow}>
             <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />

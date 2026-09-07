@@ -19,8 +19,22 @@
     filter: blur(100px);
   }
 
+  &_image {
+    background: var(--insurance-hero-image) lightgray 50% / cover no-repeat;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
+      pointer-events: none;
+    }
+  }
+
   &__container {
     padding-block: 16px;
+    position: relative;
+    z-index: 1;
   }
 
   &__video {

@@ -14,30 +14,13 @@
     display: flex;
     gap: 51px;
     min-height: 389px;
-    justify-content: space-between;
     align-items: center;
     position: relative;
+    z-index: 1;
     overflow: hidden;
 
     @include desktop {
-      &:before,
-      &:after {
-        content: '';
-        width: 128px;
-        height: 95%;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0);
-      }
-
-      &:before {
-        left: 211px;
-      }
-
-      &:after {
-        right: 211px;
-      }
+      justify-content: center;
     }
 
     @include tablet {
@@ -50,25 +33,41 @@
 
   &__wave_left,
   &__wave_right {
+    position: absolute;
+    z-index: -1;
+
     @include desktop {
-      max-width: 337px;
-      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
-    svg {
-      width: 100%;
+    @include tablet {
+      bottom: 0;
     }
   }
 
   &__wave_left {
+    left: 0;
+
     @include tablet {
       display: none;
     }
   }
 
+  &__wave_right {
+    @include desktop {
+      right: 0;
+    }
+
+    @include tablet {
+      left: 50%;
+      transform: translateX(-50%);
+      right: unset;
+    }
+  }
+
   &__center {
     text-align: center;
-    flex-shrink: 0;
 
     @include tablet {
       padding-inline: 20px;
@@ -89,7 +88,11 @@
     font-size: 20px;
     line-height: 1.4;
     max-width: 500px;
-    margin: 0 auto 32px auto;
+    margin-inline: auto;
+
+    @include desktop {
+      margin-bottom: 32px;
+    }
 
     @include tablet {
       font-size: 16px;
@@ -97,20 +100,13 @@
   }
 
   &__play {
-    @include desktop {
-      margin-inline: auto;
-    }
+    margin-inline: auto;
 
-    &_desktop {
-      @include tablet {
-        display: none;
-      }
-    }
-
-    &_mobile {
-      @include desktop {
-        display: none;
-      }
+    @include tablet {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 
@@ -121,26 +117,43 @@
     width: 20px;
     height: 20px;
   }
-}
 
-.trading-platforms-brokers {
-  .insurance_cases__wave_right {
-    @include tablet {
-      position: absolute;
-      top: 50%;
-      left: -42%;
-      z-index: -1;
+  &__wave_mobile {
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    z-index: -1;
+
+    @include desktop {
+      display: none;
     }
   }
 }
 
+.insurance {
+  @include tablet {
+    .insurance_cases__wave_right {
+      position: static;
+      margin-top: 30px;
+    }
+  }
+}
+
+.trading-platforms-brokers,
 .debt-collection {
-  .insurance_cases__wave_right {
-    @include tablet {
-      position: absolute;
-      top: 31%;
-      left: -31%;
-      z-index: -1;
+  @include tablet {
+    .insurance_cases__wave_right {
+      display: none;
+    }
+  }
+}
+
+.emis-payments {
+  @include tablet {
+    .insurance_cases__wave_right {
+      bottom: 78px;
     }
   }
 }

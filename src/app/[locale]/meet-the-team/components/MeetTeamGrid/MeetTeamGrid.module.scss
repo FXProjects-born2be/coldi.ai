@@ -28,13 +28,13 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
 
-    @include mobile-up {
-      &>*:last-child {
-        grid-column: 1 / -1;
-        max-width: 348px;
-        margin-inline: auto;
-      }
-    }
+    //@include mobile-up {
+    //  &>*:last-child {
+    //    grid-column: 1 / -1;
+    //    max-width: 348px;
+    //    margin-inline: auto;
+    //  }
+    //}
 
     @include tablet {
       grid-template-columns: repeat(2, 1fr);

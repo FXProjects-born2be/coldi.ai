@@ -42,18 +42,18 @@ const teamMembers = [
     image: '/images/meet-the-team/jacob-berkun.png',
     linkedinUrl: 'https://www.linkedin.com/in/jacob-berkun-b5671014b/',
   },
-  {
-    id: 'leeron-ben-zion',
-    name: 'Leeron Ben Zion',
-    image: '/images/meet-the-team/leeron-ben-zion.png',
-    linkedinUrl: 'https://www.linkedin.com/in/leeron-ben-zion',
-  },
-  {
-    id: 'natalia-kunytsyna',
-    name: 'Natalia Kunytsyna',
-    image: '/images/meet-the-team/natalia-kunytsyna.png',
-    linkedinUrl: 'https://www.linkedin.com/in/natalia-kunytsyna-15781361',
-  },
+  // {
+  //   id: 'leeron-ben-zion',
+  //   name: 'Leeron Ben Zion',
+  //   image: '/images/meet-the-team/leeron-ben-zion.png',
+  //   linkedinUrl: 'https://www.linkedin.com/in/leeron-ben-zion',
+  // },
+  // {
+  //   id: 'natalia-kunytsyna',
+  //   name: 'Natalia Kunytsyna',
+  //   image: '/images/meet-the-team/natalia-kunytsyna.png',
+  //   linkedinUrl: 'https://www.linkedin.com/in/natalia-kunytsyna-15781361',
+  // },
   {
     id: 'vladyslav-kachanov',
     name: 'Vladyslav Kachanov',

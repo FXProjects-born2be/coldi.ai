@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import { cn } from '@/shared/lib/helpers';
 import { IconAuraTwo } from '@/shared/ui/icons/IconAuraTwo';
+import { IconDotWave } from '@/shared/ui/icons/IconDotWave';
 import { IconTimerTwo } from '@/shared/ui/icons/IconTimerTwo';
 import { SoundWave } from '@/shared/ui/icons/SoundWave';
 
@@ -25,7 +26,7 @@ type InsuranceHandlesProps = {
   answer?: string;
   botsHref?: string;
   background?: string;
-  visual?: 'soundWave' | 'auraTwo' | 'timerTwo';
+  visual?: 'soundWave' | 'auraTwo' | 'timerTwo' | 'dotWave';
 };
 
 const DEFAULT_ITEMS: InsuranceHandlesItem[] = [
@@ -72,6 +73,7 @@ const VISUALS = {
   soundWave: SoundWave,
   auraTwo: IconAuraTwo,
   timerTwo: IconTimerTwo,
+  dotWave: IconDotWave,
 } as const;
 type Phase = 'idle' | 'question' | 'typing-1' | 'speaking' | 'answer' | 'typing-2' | 'done';
 
@@ -266,7 +268,8 @@ export const InsuranceHandles = ({
             <div
               className={cn(
                 st.insurance_handles__sound_wave,
-                visual !== 'soundWave' && st.insurance_handles__sound_wave_aura
+                (visual === 'auraTwo' || visual === 'timerTwo') &&
+                  st.insurance_handles__sound_wave_aura
               )}
             >
               <Visual active={isTyping} />

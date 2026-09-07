@@ -1,3 +1,5 @@
+import { type CSSProperties } from 'react';
+
 import { cn } from '@/shared/lib/helpers';
 import { BookDemo } from '@/shared/ui/components/book-demo';
 
@@ -8,6 +10,7 @@ type InsuranceHeroProps = {
   titleAccent?: string;
   description?: string;
   video?: string;
+  image?: string;
 };
 
 export const InsuranceHero = ({
@@ -15,9 +18,13 @@ export const InsuranceHero = ({
   titleAccent = 'Insurance Operations',
   description = 'Coldi calls policyholders, chases documents, and handles renewals, fully managed from day one.',
   video = '/videos/insurance-hero.mp4',
+  image,
 }: InsuranceHeroProps) => {
   return (
-    <section className={st.insurance_hero}>
+    <section
+      className={cn(st.insurance_hero, image && st.insurance_hero_image)}
+      style={image ? ({ '--insurance-hero-image': `url(${image})` } as CSSProperties) : undefined}
+    >
       <div className={cn('container', st.insurance_hero__container)}>
         <h1 className={st.insurance_hero__title}>
           {title}
@@ -29,17 +36,19 @@ export const InsuranceHero = ({
 
         <BookDemo />
       </div>
-      <video
-        className={st.insurance_hero__video}
-        src={video}
-        autoPlay
-        playsInline
-        muted
-        loop
-        preload="metadata"
-        controls={false}
-        aria-hidden
-      />
+      {!image && (
+        <video
+          className={st.insurance_hero__video}
+          src={video}
+          autoPlay
+          playsInline
+          muted
+          loop
+          preload="metadata"
+          controls={false}
+          aria-hidden
+        />
+      )}
     </section>
   );
 };

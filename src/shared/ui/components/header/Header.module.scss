@@ -87,6 +87,13 @@
         transform: translateY(0);
       }
 
+      &.hideDropdown > .dropdown {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(0) translateY(4px);
+        pointer-events: none;
+      }
+
       .dropdownArrow {
         flex-shrink: 0;
       }
