@@ -148,6 +148,8 @@
   }
 
   &__reaction {
+    position: relative;
+    z-index: 1;
     min-height: 60px;
   }
 
@@ -176,6 +178,8 @@
   }
 
   &__logo {
+    position: relative;
+    z-index: 1;
     width: 117px;
     height: 117px;
     aspect-ratio: 1/1;
@@ -200,6 +204,8 @@
   }
 
   &__question_wrapper {
+    position: relative;
+    z-index: 1;
     padding: 20px 32px;
     border-radius: 399.6px;
     border: 0.562px solid rgba(255, 255, 255, 0.40);
@@ -231,9 +237,10 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: -1;
 
-    svg {
+    svg,
+    img,
+    video {
       width: 100%;
     }
   }
@@ -244,8 +251,17 @@
     justify-content: center;
     pointer-events: none;
 
-    svg {
+    svg,
+    img,
+    video {
       height: auto;
+    }
+  }
+
+  &__sound_wave_video {
+    video {
+      display: block;
+      mix-blend-mode: screen;
     }
   }
 

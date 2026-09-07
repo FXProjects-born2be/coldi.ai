@@ -13,13 +13,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/industries/emis-payments',
   },
-  title: 'AI Voice Agents for Emis Payments',
+  title: 'Coldi AI Voice Agents for EMIs & Payment Providers',
   description:
-    'AI debt collection software that automates borrower communication, payment reminders, and recovery workflows. Scale credit and debit collection services with AI voice agents.',
+    "Recover abandoned onboarding and verification with Coldi's AI voice agents for EMIs and payment providers. Automate KYC follow-up, compliance outreach, and CRM sync. Book a demo!",
   openGraph: {
-    title: 'AI Voice Agents for Debt Collection Software',
+    title: 'Coldi AI Voice Agents for EMIs & Payment Providers',
     description:
-      'AI debt collection software that automates borrower communication, payment reminders, and recovery workflows. Scale credit and debit collection services with AI voice agents.',
+      "Recover abandoned onboarding and verification with Coldi's AI voice agents for EMIs and payment providers. Automate KYC follow-up, compliance outreach, and CRM sync. Book a demo!",
     images: '/images/meta.png',
   },
 };

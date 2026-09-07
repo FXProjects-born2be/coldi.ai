@@ -27,6 +27,7 @@ type InsuranceHandlesProps = {
   botsHref?: string;
   background?: string;
   visual?: 'soundWave' | 'auraTwo' | 'timerTwo' | 'dotWave';
+  video?: string;
 };
 
 const DEFAULT_ITEMS: InsuranceHandlesItem[] = [
@@ -85,8 +86,10 @@ export const InsuranceHandles = ({
   botsHref = DEFAULT_BOTS_HREF,
   background = DEFAULT_BACKGROUND,
   visual = 'soundWave',
+  video,
 }: InsuranceHandlesProps) => {
   const rootRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [phase, setPhase] = useState<Phase>('idle');
   const [displayed, setDisplayed] = useState('');
   const [isTablet, setIsTablet] = useState(false);
@@ -189,6 +192,19 @@ export const InsuranceHandles = ({
     return () => window.clearTimeout(timeoutId);
   }, [phase]);
 
+  useEffect(() => {
+    const el = videoRef.current;
+
+    if (!el || !video) return;
+
+    if (isTyping) {
+      void el.play().catch(() => undefined);
+      return;
+    }
+
+    el.pause();
+  }, [isTyping, video]);
+
   const showQuestion = phase !== 'idle';
   const showSpeaking = phase === 'speaking';
   const showAnswer = phase === 'answer' || phase === 'typing-2' || phase === 'done';
@@ -268,11 +284,25 @@ export const InsuranceHandles = ({
             <div
               className={cn(
                 st.insurance_handles__sound_wave,
-                (visual === 'auraTwo' || visual === 'timerTwo') &&
-                  st.insurance_handles__sound_wave_aura
+                (visual === 'auraTwo' || visual === 'timerTwo' || Boolean(video)) &&
+                  st.insurance_handles__sound_wave_aura,
+                video && st.insurance_handles__sound_wave_video
               )}
             >
-              <Visual active={isTyping} />
+              {video ? (
+                <video
+                  ref={videoRef}
+                  src={video}
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  controls={false}
+                  aria-hidden
+                />
+              ) : (
+                <Visual active={isTyping} />
+              )}
             </div>
           </div>
 

@@ -142,7 +142,8 @@
 }
 
 .trading-platforms-brokers,
-.debt-collection {
+.debt-collection,
+.other-industries {
   @include tablet {
     .insurance_cases__wave_right {
       display: none;
@@ -154,6 +155,32 @@
   @include tablet {
     .insurance_cases__wave_right {
       bottom: 78px;
+    }
+  }
+}
+
+.other-industries {
+  .insurance_cases__wave_right {
+    @include desktop {
+      bottom: 0;
+    }
+    
+    left: 0;
+    top: unset;
+    transform: translateY(0);
+
+    svg {
+      overflow: visible;
+    }
+  }
+
+  .insurance_cases__wave_mobile {
+    width: 100%;
+
+    svg {
+      overflow: visible;
+      width: 100%;
+      height: auto;
     }
   }
 }

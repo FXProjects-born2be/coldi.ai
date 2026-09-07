@@ -8,6 +8,8 @@ import { IconAuraFour } from '@/shared/ui/icons/IconAuraFour';
 import { IconAuraThree } from '@/shared/ui/icons/IconAuraThree';
 import { IconDotWaveOne } from '@/shared/ui/icons/IconDotWaveOne';
 import { IconDotWaveTwo } from '@/shared/ui/icons/IconDotWaveTwo';
+import { IconHorizonWave } from '@/shared/ui/icons/IconHorizonWave';
+import { IconHorizonWaveMobile } from '@/shared/ui/icons/IconHorizonWaveMobile';
 import { IconTimerFive } from '@/shared/ui/icons/IconTimerFive';
 import { IconTimerFour } from '@/shared/ui/icons/IconTimerFour';
 import { IconTimerThree } from '@/shared/ui/icons/IconTimerThree';
@@ -21,8 +23,13 @@ type InsuranceCasesProps = {
   titleAccent?: string;
   description?: string;
   audio?: string;
-  visual?: 'waveform' | 'aura' | 'timer' | 'dotWave';
-  page?: 'trading-platforms-brokers' | 'debt-collection' | 'emis-payments' | 'insurance';
+  visual?: 'waveform' | 'aura' | 'timer' | 'dotWave' | 'horizon';
+  page?:
+    | 'trading-platforms-brokers'
+    | 'debt-collection'
+    | 'emis-payments'
+    | 'insurance'
+    | 'other-industries';
 };
 
 const VISUALS = {
@@ -42,11 +49,14 @@ const VISUALS = {
     left: IconDotWaveOne,
     right: IconDotWaveTwo,
   },
+  horizon: {
+    right: IconHorizonWave,
+  },
 } as const;
 
 export const InsuranceCases = ({
   title = 'Insurance Cases',
-  titleAccent = 'Policy Renewal',
+  titleAccent,
   description = 'A real renewal call, softened for privacy. Same tone your policyholders would hear',
   audio = '/audio/insurance.wav',
   visual = 'waveform',
@@ -73,22 +83,29 @@ export const InsuranceCases = ({
     setIsPlaying(false);
   };
 
-  const LeftVisual = VISUALS[visual].left;
-  const RightVisual = VISUALS[visual].right;
+  const visualPair = VISUALS[visual];
+  const LeftVisual = 'left' in visualPair ? visualPair.left : null;
+  const RightVisual = visualPair.right;
 
   return (
     <section className={cn(st.insurance_cases, page && st[page])}>
       <div className={'container'}>
         <div className={st.insurance_cases__row}>
-          <div className={st.insurance_cases__wave_left}>
-            <LeftVisual active={isPlaying} />
-          </div>
+          {LeftVisual && (
+            <div className={st.insurance_cases__wave_left}>
+              <LeftVisual active={isPlaying} />
+            </div>
+          )}
 
           <div className={st.insurance_cases__center}>
             <h2 className={st.insurance_cases__title}>
               {title}
-              <br />
-              <span>{titleAccent}</span>
+              {titleAccent ? (
+                <>
+                  <br />
+                  <span>{titleAccent}</span>
+                </>
+              ) : null}
             </h2>
             <p className={st.insurance_cases__desc}>{description}</p>
 
@@ -130,6 +147,12 @@ export const InsuranceCases = ({
           {page === 'debt-collection' && (
             <div className={st.insurance_cases__wave_mobile}>
               <IconTimerFive active={isPlaying} />
+            </div>
+          )}
+
+          {page === 'other-industries' && (
+            <div className={st.insurance_cases__wave_mobile}>
+              <IconHorizonWaveMobile active={isPlaying} />
             </div>
           )}
         </div>

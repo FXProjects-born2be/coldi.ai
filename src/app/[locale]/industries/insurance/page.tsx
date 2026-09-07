@@ -13,13 +13,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/industries/insurance',
   },
-  title: 'AI Insurance Agents: Voice & Claims Automation | Coldi',
+  title: 'Coldi AI Voice Agents for Insurance ',
   description:
-    'Automate policyholder calls and claims with AI voice agents. 24/7 multilingual support with CRM integration. Streamline your operations today.',
+    'Optimize claims and policy renewals with Coldi’s insurance AI voice agents. Automate FNOL, quote intake, and CRM updates 24/7. Book a demo!',
   openGraph: {
-    title: 'AI Insurance Agents: Voice & Claims Automation | Coldi',
+    title: 'Coldi AI Voice Agents for Insurance ',
     description:
-      'Automate policyholder calls and claims with AI voice agents. 24/7 multilingual support with CRM integration. Streamline your operations today.',
+      'Optimize claims and policy renewals with Coldi’s insurance AI voice agents. Automate FNOL, quote intake, and CRM updates 24/7. Book a demo!',
     images: '/images/meta.png',
   },
 };
@@ -29,7 +29,7 @@ export default function InsuranceAgentsPage() {
     <main>
       <InsuranceHero />
       <InsuranceHandles />
-      <InsuranceCases page="insurance" />
+      <InsuranceCases page="insurance" titleAccent="Policy Renewal" />
       <InsuranceWhy />
       <InsuranceOperations />
       <InsuranceInfo />
