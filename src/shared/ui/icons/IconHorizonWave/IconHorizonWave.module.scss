@@ -1,0 +1,92 @@
+.icon_horizon_wave {
+  display: block;
+
+  &__fill {
+    transform-box: fill-box;
+    transform-origin: center bottom;
+  }
+
+  &__line {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  &_active &__fill {
+    animation: icon-horizon-wave-breathe 2.4s ease-in-out infinite;
+
+    &:nth-of-type(2) {
+      animation-delay: 0.35s;
+    }
+  }
+
+  &_active &__line {
+    animation: icon-horizon-wave-undulate 1.6s ease-in-out infinite;
+  }
+
+  &_active path:nth-child(4) {
+    animation-delay: 0.18s;
+  }
+
+  &_active path:nth-child(5) {
+    animation-delay: 0.32s;
+  }
+
+  &_active &__line_blue {
+    animation:
+      icon-horizon-wave-undulate 1.6s ease-in-out infinite,
+      icon-horizon-wave-glow 1.6s ease-in-out infinite;
+    animation-delay: 0.32s, 0s;
+  }
+}
+
+@keyframes icon-horizon-wave-breathe {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1 1;
+  }
+
+  50% {
+    translate: 0 -6px;
+    scale: 1 1.05;
+  }
+}
+
+@keyframes icon-horizon-wave-undulate {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  25% {
+    translate: 0 -9px;
+  }
+
+  50% {
+    translate: 0 3px;
+  }
+
+  75% {
+    translate: 0 -5px;
+  }
+}
+
+@keyframes icon-horizon-wave-glow {
+  0%,
+  100% {
+    stroke-opacity: 0.7;
+  }
+
+  50% {
+    stroke-opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon_horizon_wave_active {
+    .icon_horizon_wave__fill,
+    .icon_horizon_wave__line {
+      animation: none;
+    }
+  }
+}
