@@ -1,11 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { type CSSProperties, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
+import { IconAuraTwo } from '@/shared/ui/icons/IconAuraTwo';
+import { IconDotWave } from '@/shared/ui/icons/IconDotWave';
+import { IconTimerTwo } from '@/shared/ui/icons/IconTimerTwo';
+import { SoundWave } from '@/shared/ui/icons/SoundWave';
 
 import st from './HomeBuiltFor.module.scss';
 
@@ -16,67 +20,110 @@ type Workflow = {
   icon: string;
 };
 
-type ChatMessage = {
-  role: 'user' | 'assistant' | 'status';
-  icon?: string;
-};
+type HandlesVisual = 'soundWave' | 'auraTwo' | 'timerTwo' | 'dotWave';
 
 type Industry = {
   id: string;
   href: string;
-  image: string;
-  messages: ChatMessage[];
   workflows: Workflow[];
+  handles: {
+    background: string;
+    firstText: string;
+    secondText: string;
+    answer: string;
+    visual: HandlesVisual;
+  };
 };
+
+const CHAR_MS = 28;
+const QUESTION_IN_MS = 500;
+const SPEAKING_MS = 1600;
+const AFTER_ANSWER_MS = 1200;
+
+type HandlesPhase = 'idle' | 'question' | 'typing-1' | 'speaking' | 'answer' | 'typing-2' | 'done';
+
+const VISUALS = {
+  soundWave: SoundWave,
+  auraTwo: IconAuraTwo,
+  timerTwo: IconTimerTwo,
+  dotWave: IconDotWave,
+} as const;
 
 const industries: Industry[] = [
   {
     id: 'insurance',
     href: '/industries/insurance',
-    image: '/images/home/home-built-for-one.png',
-    messages: [{ role: 'user' }, { role: 'user' }, { role: 'user' }, { role: 'user' }],
     workflows: [
       { id: 'policy-renewals', icon: '/images/icons/policy-renewals.png' },
       { id: 'claims-follow-up', icon: '/images/icons/claims-follow-up.png' },
       { id: 'quote-qualification', icon: '/images/icons/quote-qualification.svg' },
       { id: 'payment-reminders', icon: '/images/icons/payment-reminders.svg' },
     ],
+    handles: {
+      background: '/images/general/background.png',
+      firstText:
+        '"Hi, saw you just registered on [Platform]. Got two minutes to tell me what you\'re looking to trade?"',
+      secondText:
+        '"Good, I\'ll connect you with an account manager who specializes in FX. They\'ll call within the hour."',
+      answer: 'Yeah, go ahead.',
+      visual: 'soundWave',
+    },
   },
   {
     id: 'trading',
-    href: '/industries/brokers-and-trading-platforms',
-    image: '/images/home/home-built-for-two.png',
-    messages: [{ role: 'user' }, { role: 'user' }, { role: 'user' }, { role: 'user' }],
+    href: '/industries/trading-platforms-brokers',
     workflows: [
       { id: 'lead-qualification', icon: '/images/icons/lead-qualification.svg' },
       { id: 'deposit-activation', icon: '/images/icons/deposit-activation.svg' },
       { id: 'kyc-follow-up', icon: '/images/icons/kys-follow-up.svg' },
       { id: 'client-reactivation', icon: '/images/icons/client-reactivation.svg' },
     ],
+    handles: {
+      background: '/images/general/background-two.png',
+      firstText:
+        '"Hi, saw you just registered on [Platform]. Got two minutes to tell me what you\'re looking to trade?"',
+      answer: 'Sure, mostly FX pairs.',
+      secondText:
+        '"Good, I\'ll connect you with an account manager who specializes in FX. They\'ll call within the hour."',
+      visual: 'auraTwo',
+    },
   },
   {
     id: 'debt-collection',
     href: '/industries/debt-collection',
-    image: '/images/home/home-built-for-three.png',
-    messages: [{ role: 'user' }, { role: 'user' }, { role: 'user' }, { role: 'user' }],
     workflows: [
       { id: 'debt-payment-reminders', icon: '/images/icons/payment-reminders.svg' },
       { id: 'promise-to-pay', icon: '/images/icons/promise-to-pay.svg' },
       { id: 'payment-plans', icon: '/images/icons/build-payment-plans.svg' },
       { id: 'recovery-campaigns', icon: '/images/icons/recovery-campaigns.svg' },
     ],
+    handles: {
+      background: '/images/general/background-three.png',
+      firstText:
+        '"Hi, this is Coldi calling about your account ending 4471. You have a payment of $210 due Friday. Would you like to set up a plan?"',
+      answer: 'Can I pay half now and half next month?',
+      secondText:
+        '"Yes, I can set that up right now. You\'ll get a confirmation text with both dates."',
+      visual: 'timerTwo',
+    },
   },
   {
     id: 'emis',
     href: '/industries/emis-payments',
-    image: '/images/home/home-built-for-four.png',
-    messages: [{ role: 'user' }, { role: 'user' }, { role: 'user' }, { role: 'user' }],
     workflows: [
       { id: 'customer-support', icon: '/images/icons/customer-support.svg' },
       { id: 'verification-calls', icon: '/images/icons/verification-calls.svg' },
       { id: 'appointment-booking', icon: '/images/icons/appointment-booking.svg' },
       { id: 'custom-automations', icon: '/images/icons/custom-automations.svg' },
     ],
+    handles: {
+      background: '/images/general/background-four.png',
+      firstText:
+        '"Hi, this is Coldi calling on behalf of [Provider]. You started an account application but didn\'t finish verification — got two minutes?"',
+      answer: 'Yeah, what do you need?',
+      secondText: '"Just a photo ID upload, I\'ll text you the secure link now."',
+      visual: 'dotWave',
+    },
   },
 ];
 
@@ -92,6 +139,141 @@ const SliderChevron = () => (
     />
   </svg>
 );
+
+const HomeBuiltForHandlesVisual = ({
+  speakingLabel,
+  firstText,
+  secondText,
+  answer,
+  visual,
+}: {
+  speakingLabel: string;
+  firstText: string;
+  secondText: string;
+  answer: string;
+  visual: HandlesVisual;
+}) => {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [phase, setPhase] = useState<HandlesPhase>('idle');
+  const [displayed, setDisplayed] = useState('');
+
+  const isTyping = phase === 'typing-1' || phase === 'typing-2';
+  const fullText = phase === 'typing-2' || phase === 'done' ? secondText : firstText;
+  const showQuestion = phase !== 'idle';
+  const showSpeaking = phase === 'speaking';
+  const showAnswer = phase === 'answer' || phase === 'typing-2' || phase === 'done';
+  const Visual = VISUALS[visual];
+  const isAuraVisual = visual === 'auraTwo' || visual === 'timerTwo';
+
+  useEffect(() => {
+    const root = rootRef.current;
+
+    if (!root) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+
+        observer.disconnect();
+        setPhase('question');
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(root);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (phase !== 'question') return;
+
+    const timeoutId = window.setTimeout(() => {
+      setPhase('typing-1');
+    }, QUESTION_IN_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== 'typing-1' && phase !== 'typing-2') return;
+    if (displayed.length >= fullText.length) return;
+
+    const timeoutId = window.setTimeout(() => {
+      const nextText = fullText.slice(0, displayed.length + 1);
+      setDisplayed(nextText);
+
+      if (nextText.length >= fullText.length) {
+        setPhase(phase === 'typing-1' ? 'speaking' : 'done');
+      }
+    }, CHAR_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [displayed, fullText, phase]);
+
+  useEffect(() => {
+    if (phase !== 'speaking') return;
+
+    const timeoutId = window.setTimeout(() => {
+      setPhase('answer');
+    }, SPEAKING_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== 'answer') return;
+
+    const timeoutId = window.setTimeout(() => {
+      setDisplayed('');
+      setPhase('typing-2');
+    }, AFTER_ANSWER_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [phase]);
+
+  return (
+    <>
+      <div ref={rootRef} className={st.home_built_for__visual_reaction}>
+        {showSpeaking && (
+          <div className={st.home_built_for__visual_speaking_handles}>
+            <p className={st.home_built_for__visual_speaking_title}>{speakingLabel}</p>
+            <Image src="/icons/voice.svg" alt="" width={24} height={24} />
+            <div className={st.home_built_for__visual_speaking_icon}>
+              <Image src="/icons/speaking.svg" alt="" width={54} height={54} />
+            </div>
+          </div>
+        )}
+
+        {showAnswer && (
+          <div className={st.home_built_for__visual_answer_wrapper}>
+            <p className={st.home_built_for__visual_answer}>{answer}</p>
+          </div>
+        )}
+      </div>
+
+      <div>
+        {showQuestion && (
+          <div className={st.home_built_for__visual_question_wrapper}>
+            <p className={st.home_built_for__visual_question}>{displayed}</p>
+          </div>
+        )}
+        <div className={st.home_built_for__visual_logo}>
+          <Image alt="" width={60} height={60} src="/icons/logo-white.svg" />
+        </div>
+      </div>
+
+      <div
+        className={cn(
+          st.home_built_for__visual_sound_wave,
+          isAuraVisual && st.home_built_for__visual_sound_wave_aura
+        )}
+      >
+        <Visual active={isTyping} />
+      </div>
+    </>
+  );
+};
 
 export const HomeBuiltFor = () => {
   const t = useTranslations('HomeBuiltFor');
@@ -165,129 +347,29 @@ export const HomeBuiltFor = () => {
             ))}
           </div>
 
-          <Link href={industry.href} className={cn('btn', 'btn-primary', st.home_built_for__cta)}>
+          <Link
+            href={industry.href}
+            className={cn('btn btn-primary w-max', st.home_built_for__cta)}
+          >
             {t(`industries.${industry.id}.cta`)}
           </Link>
 
-          <div className={st.home_built_for__visual}>
-            <Image
-              src={industry.image}
-              alt={industryLabel}
-              width={700}
-              height={580}
-              className={st.home_built_for__visual_bg_image}
+          <div
+            className={cn(st.home_built_for__visual, st.home_built_for__visual_handles)}
+            style={
+              {
+                '--home-built-for-visual-bg': `url("${industry.handles.background}")`,
+              } as CSSProperties
+            }
+          >
+            <HomeBuiltForHandlesVisual
+              key={industry.id}
+              speakingLabel={t('speaking')}
+              firstText={industry.handles.firstText}
+              secondText={industry.handles.secondText}
+              answer={industry.handles.answer}
+              visual={industry.handles.visual}
             />
-
-            <div key={industry.id} className={st.home_built_for__visual_chat}>
-              <div className={st.home_built_for__visual_speaking}>
-                <p className={st.home_built_for__visual_speaking_title}>{t('speaking')}</p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
-                  fill="none"
-                >
-                  <rect
-                    x="6.40186"
-                    y="2.98746"
-                    width="1.70712"
-                    height="15.3641"
-                    rx="0.853561"
-                    fill="#F6F6F6"
-                  />
-                  <rect
-                    x="13.23"
-                    y="2.98746"
-                    width="1.70712"
-                    height="15.3641"
-                    rx="0.853561"
-                    fill="#F6F6F6"
-                  />
-                  <rect
-                    x="9.81592"
-                    y="5.54814"
-                    width="1.70712"
-                    height="10.2427"
-                    rx="0.853561"
-                    fill="#F6F6F6"
-                  />
-                  <rect
-                    x="2.9873"
-                    y="5.54814"
-                    width="1.70712"
-                    height="10.2427"
-                    rx="0.853561"
-                    fill="#F6F6F6"
-                  />
-                  <rect
-                    x="16.6445"
-                    y="5.54814"
-                    width="1.70712"
-                    height="10.2427"
-                    rx="0.853561"
-                    fill="#F6F6F6"
-                  />
-                </svg>
-                <div className={st.home_built_for__visual_speaking_icon}>
-                  <Image
-                    src={'/images/home/home-built-for-speaking.svg'}
-                    alt={industryLabel}
-                    width={54}
-                    height={54}
-                    loading={'lazy'}
-                  />
-                </div>
-              </div>
-              {industry.messages.map((item, index) => (
-                <p
-                  key={`${item.role}-${index}`}
-                  className={cn(st.home_built_for__visual_text, st[item.role])}
-                >
-                  {item.icon ? (
-                    <Image
-                      src={item.icon}
-                      alt=""
-                      width={35}
-                      height={35}
-                      className={st.home_built_for__visual_icon}
-                    />
-                  ) : null}
-                  {item.role === 'status' ? (
-                    <>
-                      {t(`industries.${industry.id}.messages.${index}`).replace(/\.+$/, '')}
-                      <span className={st.home_built_for__visual_dots} aria-hidden>
-                        <span>.</span>
-                        <span>.</span>
-                        <span>.</span>
-                      </span>
-                    </>
-                  ) : (
-                    <span>{t(`industries.${industry.id}.messages.${index}`)}</span>
-                  )}
-                </p>
-              ))}
-            </div>
-
-            {/*<div className={st.home_built_for__visual_second_image}>*/}
-            {/*  <div className={st.home_built_for__visual_second_image_block}>*/}
-            {/*    <span></span>*/}
-            {/*    <span></span>*/}
-            {/*    <span></span>*/}
-            {/*    <span></span>*/}
-            {/*    <span></span>*/}
-            {/*  </div>*/}
-            {/*</div>*/}
-
-            <div className={st.home_built_for__visual_logo}>
-              <Image
-                src={'/images/home/home-built-for-logo.svg'}
-                alt={'Logo'}
-                width={60}
-                height={60}
-                loading={'lazy'}
-              />
-            </div>
           </div>
         </div>
       </div>

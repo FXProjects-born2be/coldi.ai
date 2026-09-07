@@ -1,23 +1,32 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
 import { IconCarbonPauseFilled } from '@/shared/ui/icons/IconCarbonPauseFilled';
 import { IconEntypoControllerPlay } from '@/shared/ui/icons/IconEntypoControllerPlay';
+import { IconHearAura } from '@/shared/ui/icons/IconHearAura';
+import { IconHearDots } from '@/shared/ui/icons/IconHearDots';
+import { IconHearTimer } from '@/shared/ui/icons/IconHearTimer';
+import { IconHearWaveform } from '@/shared/ui/icons/IconHearWaveform';
 
 import st from './HomeHearVoice.module.scss';
 
 import { Link } from '@/i18n/navigation';
 
+const VISUALS = {
+  insurance: IconHearWaveform,
+  trading: IconHearAura,
+  'debt-collection': IconHearTimer,
+  'customer-support': IconHearDots,
+} as const;
+
+type HearVoiceId = keyof typeof VISUALS;
+
 type HearVoiceItem = {
-  id: string;
-  secondImage: string;
-  width: number;
-  height: number;
+  id: HearVoiceId;
   audio?: string;
 };
 
@@ -36,33 +45,33 @@ const SelectChevron = () => (
 const voices: HearVoiceItem[] = [
   {
     id: 'insurance',
-    secondImage: '/images/home/home-built-for-one-second.svg',
-    width: 288,
-    height: 126,
     audio: '/audio/insurance.wav',
   },
   {
     id: 'trading',
-    secondImage: '/images/home/home-built-for-two-second.svg',
-    width: 223,
-    height: 223,
     audio: '/audio/trading-platforms.wav',
   },
   {
     id: 'debt-collection',
-    secondImage: '/images/home/home-built-for-three-second.svg',
-    width: 237,
-    height: 235,
     audio: '/audio/debt-collection.wav',
   },
   {
     id: 'customer-support',
-    secondImage: '/images/home/home-built-for-four-second.svg',
-    width: 287,
-    height: 159,
     audio: '/audio/debt-collection.wav',
   },
 ];
+
+const HearVisual = ({ id, active }: { id: HearVoiceId; active?: boolean }) => {
+  const Visual = VISUALS[id];
+
+  return (
+    <div className={st.home_hear_voice__visual}>
+      <div className={st.home_hear_voice__visual_icon}>
+        <Visual active={active} />
+      </div>
+    </div>
+  );
+};
 
 export const HomeHearVoice = () => {
   const t = useTranslations('HomeHearVoice');
@@ -162,15 +171,7 @@ export const HomeHearVoice = () => {
                 </p>
               </div>
 
-              <div className={st.home_hear_voice__item_second}>
-                <Image
-                  src={item.secondImage}
-                  alt=""
-                  width={item.width}
-                  height={item.height}
-                  loading="lazy"
-                />
-              </div>
+              <HearVisual id={item.id} active={activeIndex === index} />
 
               <button
                 type="button"
@@ -207,7 +208,7 @@ export const HomeHearVoice = () => {
             onClick={() => setIsSelectOpen((open) => !open)}
           >
             <span className={st.home_hear_voice__select_thumb}>
-              <Image src={selectedVoice.secondImage} alt="" fill sizes="40px" />
+              <HearVisual id={selectedVoice.id} active={activeIndex === selectedIndex} />
             </span>
             <span className={st.home_hear_voice__select_label}>
               {t(`items.${selectedVoice.id}.title`)}
@@ -235,7 +236,7 @@ export const HomeHearVoice = () => {
                     onClick={() => selectVoice(index)}
                   >
                     <span className={st.home_hear_voice__select_thumb}>
-                      <Image src={item.secondImage} alt="" fill sizes="40px" />
+                      <HearVisual id={item.id} active={activeIndex === index} />
                     </span>
                     <span className={st.home_hear_voice__select_label}>
                       {t(`items.${item.id}.title`)}
