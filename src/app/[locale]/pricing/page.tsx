@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/pricing',
   },
-  title: 'AI Voice Agent & Call Center Solutions Pricing',
+  title: 'Coldi Pricing: Flexible AI Voice Agent Plans for Fintech',
   description:
-    'See AI voice agent pricing and plans for inbound calls, booking agents, and full-service voice solutions. Discover affordable AI call center software built to scale. Request your AI voice agent now!',
+    "Compare Coldi's AI voice agent pricing for fintech. We offer outbound, inbound and fully managed plans across 10+ industries. Get a quote.",
   openGraph: {
-    title: 'AI Voice Agent & Call Center Solutions Pricing',
+    title: 'Coldi Pricing: Flexible AI Voice Agent Plans for Fintech',
     description:
-      'See AI voice agent pricing and plans for inbound calls, booking agents, and full-service voice solutions. Discover affordable AI call center software built to scale. Request your AI voice agent now!',
+      "Compare Coldi's AI voice agent pricing for fintech. We offer outbound, inbound and fully managed plans across 10+ industries. Get a quote.",
     images: '/images/meta.png',
   },
 };

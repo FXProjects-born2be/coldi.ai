@@ -64,7 +64,7 @@ const items = [
 
 const IMAGE_MS = 800;
 const TAB_START_MS = 3400 + IMAGE_MS;
-const TAB_STEP_MS = 3400;
+const TAB_STEP_MS = 7500;
 const TAB_ANIM_MS = 3200;
 
 const connectors = [

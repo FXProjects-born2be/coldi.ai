@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
 import { createPortal } from 'react-dom';
 
 import { cn } from '@/shared/lib/helpers';
+import { IconTabProgress } from '@/shared/ui/icons/IconTabProgress';
 import { CloseIcon } from '@/shared/ui/icons/outline/close';
 
 import st from './HomeManaged.module.scss';
@@ -79,92 +80,6 @@ const tabs: ManagedTab[] = [
 ];
 
 const TAB_DURATION_MS = 60_000;
-const TAB_RADIUS = 16;
-const PROGRESS_INSET = 1;
-
-const roundedRectPath = (width: number, height: number, radius: number, inset: number) => {
-  const w = width - inset * 2;
-  const h = height - inset * 2;
-  const r = Math.min(radius, w / 2, h / 2);
-  const x = inset;
-  const y = inset;
-  const midX = x + w / 2;
-
-  return [
-    `M ${midX} ${y}`,
-    `H ${x + w - r}`,
-    `A ${r} ${r} 0 0 1 ${x + w} ${y + r}`,
-    `V ${y + h - r}`,
-    `A ${r} ${r} 0 0 1 ${x + w - r} ${y + h}`,
-    `H ${x + r}`,
-    `A ${r} ${r} 0 0 1 ${x} ${y + h - r}`,
-    `V ${y + r}`,
-    `A ${r} ${r} 0 0 1 ${x + r} ${y}`,
-    `H ${midX}`,
-  ].join(' ');
-};
-
-const TabProgress = ({ durationMs }: { durationMs: number }) => {
-  const svgRef = useRef<SVGSVGElement>(null);
-  const [size, setSize] = useState({ width: 0, height: 0 });
-
-  useLayoutEffect(() => {
-    const svg = svgRef.current;
-    const parent = svg?.parentElement;
-    if (!parent) return;
-
-    const update = () => {
-      const width = parent.offsetWidth;
-      const height = parent.offsetHeight;
-      setSize((prev) =>
-        prev.width === width && prev.height === height ? prev : { width, height }
-      );
-    };
-
-    update();
-    const observer = new ResizeObserver(update);
-    observer.observe(parent);
-    return () => observer.disconnect();
-  }, []);
-
-  const path =
-    size.width > 0
-      ? roundedRectPath(size.width, size.height, TAB_RADIUS - PROGRESS_INSET, PROGRESS_INSET)
-      : '';
-
-  return (
-    <svg
-      ref={svgRef}
-      className={st.home_managed__tab_progress}
-      viewBox={size.width > 0 ? `0 0 ${size.width} ${size.height}` : undefined}
-      fill="none"
-      aria-hidden
-    >
-      {path ? (
-        <>
-          <path
-            d={path}
-            pathLength={100}
-            className={cn(
-              st.home_managed__tab_progress_line,
-              st['home_managed__tab_progress_line--cw']
-            )}
-            style={{ animationDuration: `${durationMs}ms` }}
-          />
-          <path
-            d={path}
-            pathLength={100}
-            className={cn(
-              st.home_managed__tab_progress_line,
-              st['home_managed__tab_progress_line--ccw']
-            )}
-            style={{ animationDuration: `${durationMs}ms` }}
-          />
-        </>
-      ) : null}
-    </svg>
-  );
-};
 
 const IMAGE_MOVE_MS = 500;
 
@@ -340,7 +255,7 @@ export const HomeManaged = () => {
                   {t(`tabs.${tab.id}.description`)}
                 </span>
                 {autoPlay && tab.id === activeTab.id ? (
-                  <TabProgress durationMs={TAB_DURATION_MS} />
+                  <IconTabProgress durationMs={TAB_DURATION_MS} />
                 ) : null}
               </button>
             ))}

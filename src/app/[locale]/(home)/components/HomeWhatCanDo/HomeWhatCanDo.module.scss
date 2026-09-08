@@ -274,7 +274,7 @@
     }
 
     &.active {
-      animation: tab-fade-in 0.8s linear 2.4s both;
+      animation: tab-fade-in 0.8s linear forwards;
     }
   }
 

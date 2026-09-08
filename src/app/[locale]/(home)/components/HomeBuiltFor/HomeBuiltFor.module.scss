@@ -299,16 +299,6 @@
     }
   }
 
-  &__visual_sound_wave_aura {
-    inset: auto 0 0;
-    display: flex;
-    justify-content: center;
-
-    svg {
-      height: auto;
-    }
-  }
-
   &__visual_bg_image {
     position: absolute;
     z-index: -1;

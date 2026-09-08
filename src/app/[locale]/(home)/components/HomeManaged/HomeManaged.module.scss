@@ -97,44 +97,6 @@
     }
   }
 
-  &__tab_progress {
-    position: absolute;
-    inset: -1px;
-    width: auto;
-    height: auto;
-    overflow: visible;
-    pointer-events: none;
-    z-index: 1;
-
-    @include tablet {
-      display: none;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      display: none;
-    }
-  }
-
-  &__tab_progress_line {
-    fill: none;
-    stroke: #4268ff;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-dasharray: 0 100;
-
-    &--cw {
-      animation-name: home-managed-progress-cw;
-      animation-timing-function: linear;
-      animation-fill-mode: forwards;
-    }
-
-    &--ccw {
-      animation-name: home-managed-progress-ccw;
-      animation-timing-function: linear;
-      animation-fill-mode: forwards;
-    }
-  }
-
   &__tab_title {
     font-size: 18px;
     line-height: 1.4;
@@ -394,30 +356,6 @@
       right: -10px;
       left: unset;
     }
-  }
-}
-
-@keyframes home-managed-progress-cw {
-  from {
-    stroke-dasharray: 0 100;
-    stroke-dashoffset: 0;
-  }
-
-  to {
-    stroke-dasharray: 50 100;
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes home-managed-progress-ccw {
-  from {
-    stroke-dasharray: 0 100;
-    stroke-dashoffset: 0;
-  }
-
-  to {
-    stroke-dasharray: 50 100;
-    stroke-dashoffset: -50;
   }
 }
 
