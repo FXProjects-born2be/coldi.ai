@@ -1,0 +1,155 @@
+.icon_speaking {
+  display: block;
+  flex-shrink: 0;
+
+  &__bar {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  &.active &__bar:nth-child(1) {
+    animation: icon-speaking-1 2.4s linear infinite;
+  }
+
+  &.active &__bar:nth-child(2) {
+    animation: icon-speaking-2 2.4s linear infinite;
+  }
+
+  &.active &__bar:nth-child(3) {
+    animation: icon-speaking-3 2.4s linear infinite;
+  }
+
+  &.active &__bar:nth-child(4) {
+    animation: icon-speaking-4 2.4s linear infinite;
+  }
+
+  &.active &__bar:nth-child(5) {
+    animation: icon-speaking-5 2.4s linear infinite;
+  }
+}
+
+@keyframes icon-speaking-1 {
+  0%,
+  50%,
+  100% {
+    animation-timing-function: ease-in-out;
+    scale: 1 1;
+  }
+
+  12.5% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.4;
+  }
+
+  25% {
+    animation-timing-function: ease-in-out;
+    scale: 1 1;
+  }
+
+  37.5% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.6;
+  }
+}
+
+@keyframes icon-speaking-2 {
+  0%,
+  50%,
+  100% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.5;
+  }
+
+  10% {
+    animation-timing-function: ease-in-out;
+    scale: 1 1;
+  }
+
+  22.5% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.35;
+  }
+
+  35% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.85;
+  }
+}
+
+@keyframes icon-speaking-3 {
+  0%,
+  50%,
+  100% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.7;
+  }
+
+  11% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.3;
+  }
+
+  24% {
+    animation-timing-function: ease-in-out;
+    scale: 1 1;
+  }
+
+  36% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.4;
+  }
+}
+
+@keyframes icon-speaking-4 {
+  0%,
+  50%,
+  100% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.4;
+  }
+
+  9% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.9;
+  }
+
+  21% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.3;
+  }
+
+  34% {
+    animation-timing-function: ease-in-out;
+    scale: 1 1;
+  }
+}
+
+@keyframes icon-speaking-5 {
+  0%,
+  50%,
+  100% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.6;
+  }
+
+  14% {
+    animation-timing-function: ease-in-out;
+    scale: 1 1;
+  }
+
+  26% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.5;
+  }
+
+  39% {
+    animation-timing-function: ease-in-out;
+    scale: 1 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon_speaking.active .icon_speaking__bar {
+    animation: none;
+  }
+}
