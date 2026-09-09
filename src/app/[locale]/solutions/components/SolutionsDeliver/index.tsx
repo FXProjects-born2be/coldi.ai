@@ -1,139 +1,92 @@
 'use client';
 
-import { useCallback, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
+
+import { Counter } from '@/shared/ui/components/counter';
 
 import st from './SolutionsDeliver.module.scss';
 
 const CARDS = [
   {
-    id: 'conversations',
-    value: '56.5%',
-    image: '/images/solutions/deliver-one.svg',
+    id: 'hoursSaved',
+    value: 12702,
+    image: null,
   },
   {
-    id: 'nextStage',
-    value: '33.3%',
-    image: '/images/solutions/deliver-two.svg',
+    id: 'meetings',
+    value: 577,
+    image: '/icons/streamline-ultimate_work-from-home-laptop-meeting.svg',
   },
   {
-    id: 'callback',
-    value: '17.6%',
-    image: '/images/solutions/deliver-three.png',
+    id: 'transfers',
+    value: 521,
+    image: '/icons/hugeicons_arrow-data-transfer-horizontal.svg',
+  },
+  {
+    id: 'callbacks',
+    value: 685,
+    image: '/icons/fluent_call-inbound-16-regular.svg',
   },
 ] as const;
 
 export const SolutionsDeliver = () => {
   const t = useTranslations('SolutionsDeliver');
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const slideRefs = useRef<(HTMLElement | null)[]>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const [play, setPlay] = useState(false);
 
-  const getClosestIndex = useCallback(() => {
-    const viewport = viewportRef.current;
-    if (!viewport) return 0;
+  useEffect(() => {
+    const node = cardsRef.current;
+    if (!node || play) return;
 
-    const center = viewport.scrollLeft + viewport.clientWidth / 2;
-    let closest = 0;
-    let distance = Infinity;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
 
-    slideRefs.current.forEach((slide, index) => {
-      if (!slide) return;
+        setPlay(true);
+        observer.disconnect();
+      },
+      { threshold: 0.3 }
+    );
 
-      const mid = slide.offsetLeft + slide.offsetWidth / 2;
-      const nextDistance = Math.abs(mid - center);
+    observer.observe(node);
 
-      if (nextDistance < distance) {
-        distance = nextDistance;
-        closest = index;
-      }
-    });
-
-    return closest;
-  }, []);
-
-  const scrollToIndex = (index: number) => {
-    const viewport = viewportRef.current;
-    const slide = slideRefs.current[index];
-    if (!viewport || !slide) return;
-
-    viewport.scrollTo({
-      left: slide.offsetLeft - (viewport.clientWidth - slide.offsetWidth) / 2,
-      behavior: 'smooth',
-    });
-    setActiveIndex(index);
-  };
-
-  const goTo = (direction: -1 | 1) => {
-    const next = Math.min(CARDS.length - 1, Math.max(0, getClosestIndex() + direction));
-    scrollToIndex(next);
-  };
+    return () => observer.disconnect();
+  }, [play]);
 
   return (
     <section className={st.solutions_deliver}>
       <div className="container">
         <div className={st.solutions_deliver__panel}>
           <h2 className={st.solutions_deliver__title}>{t('title')}</h2>
-
-          <div className={st.solutions_deliver__slider}>
-            <div
-              ref={viewportRef}
-              className={st.solutions_deliver__viewport}
-              onScroll={() => {
-                const closest = getClosestIndex();
-                setActiveIndex((current) => (current === closest ? current : closest));
-              }}
-            >
-              {CARDS.map((card, index) => (
-                <article
-                  key={card.id}
-                  className={st.solutions_deliver__card}
-                  ref={(node) => {
-                    slideRefs.current[index] = node;
-                  }}
-                >
+          <p className={st.solutions_deliver__description}>{t('description')}</p>
+          <div ref={cardsRef} className={st.solutions_deliver__cards}>
+            {CARDS.map((card) => (
+              <article key={card.id} className={st.solutions_deliver__card}>
+                {card.image && (
                   <div className={st.solutions_deliver__media}>
-                    <Image
-                      src={card.image}
-                      alt="Image"
-                      fill
-                      sizes="(max-width: 767px) 200px, 33vw"
-                      loading={'lazy'}
-                    />
+                    <Image src={card.image} alt="Icon" width={24} height={24} />
                   </div>
-                  <p className={st.solutions_deliver__value}>{card.value}</p>
+                )}
+                <div>
+                  <p className={st.solutions_deliver__value}>
+                    <Counter
+                      start={0}
+                      end={card.value}
+                      play={play}
+                      separator
+                      duration={7.6}
+                      mobileDuration={3.8}
+                    />
+                  </p>
                   <h3 className={st.solutions_deliver__card_title}>
                     {t(`cards.${card.id}.title`)}
                   </h3>
-                  <p className={st.solutions_deliver__card_text}>
-                    {t(`cards.${card.id}.description`)}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          <div className={st.solutions_deliver__nav}>
-            <button
-              type="button"
-              className={st.solutions_deliver__nav_prev}
-              aria-label={t('prevSlide')}
-              disabled={activeIndex === 0}
-              onClick={() => goTo(-1)}
-            >
-              <Image src="/icons/arrow-left.svg" alt="" width={18} height={18} />
-            </button>
-            <button
-              type="button"
-              className={st.solutions_deliver__nav_next}
-              aria-label={t('nextSlide')}
-              disabled={activeIndex === CARDS.length - 1}
-              onClick={() => goTo(1)}
-            >
-              <Image src="/icons/arrow-right.svg" alt="" width={18} height={18} />
-            </button>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </div>

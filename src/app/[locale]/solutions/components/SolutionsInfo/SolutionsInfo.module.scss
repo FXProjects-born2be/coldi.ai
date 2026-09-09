@@ -115,6 +115,13 @@
         align-items: center;
         position: relative;
         padding-bottom: 17px;
+        width: 100%;
+        border: none;
+        background: none;
+        text-align: left;
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
 
         &.active {
             .solutions_info__item_description {

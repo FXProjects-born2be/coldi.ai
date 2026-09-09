@@ -496,6 +496,7 @@
     "news": "News",
     "scheduleMeeting": "Schedule a Meeting",
     "menu": "Menu",
+    "close": "Close",
     "openMenuAria": "Open burger menu",
     "products": "Products",
     "pricing": "Pricing",
@@ -656,20 +657,19 @@
   },
   "SolutionsDeliver": {
     "title": "What Coldi Agents Deliver",
-    "prevSlide": "Previous slide",
-    "nextSlide": "Next slide",
+    "description": "Less manual work. More qualified outcomes. More time for your team to close.",
     "cards": {
-      "conversations": {
-        "title": "of calls become conversations",
-        "description": "Coldi agents turn more than half of answered calls into meaningful conversations with the customer."
+      "hoursSaved": {
+        "title": "Hours of human work saved in one month"
       },
-      "nextStage": {
-        "title": "of conversations move to the next stage",
-        "description": "One in three conversations results in clear customer interest and a defined next step."
+      "meetings": {
+        "title": "Meetings booked"
       },
-      "callback": {
-        "title": "of conversations result in a scheduled callback",
-        "description": "Coldi AI agents convert qualified conversations into scheduled follow-ups with the right specialist."
+      "transfers": {
+        "title": "Qualified transfers"
+      },
+      "callbacks": {
+        "title": "Callbacks scheduled"
       }
     }
   },

@@ -127,9 +127,11 @@ export const SolutionsInfo = () => {
             <p className={st.solutions_info__item_tab_title}>{activeLabel}</p>
             <div className={st.solutions_info__item_wrapper}>
               {items.map((itemId, index) => (
-                <div
+                <button
                   key={itemId}
+                  type="button"
                   className={cn(st.solutions_info__item, index === activeIndex && st.active)}
+                  onClick={() => setActiveIndex(index)}
                 >
                   <div className={st.solutions_info__item_icon}>
                     <Image
@@ -154,7 +156,7 @@ export const SolutionsInfo = () => {
                       />
                     )}
                   </span>
-                </div>
+                </button>
               ))}
             </div>
           </div>

@@ -54,10 +54,6 @@
       animation-duration: 50s;
     }
   }
-
-  &__images:hover .home_tools__track {
-    animation-play-state: paused;
-  }
 }
 
 @keyframes home-tools-scroll {

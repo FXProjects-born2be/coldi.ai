@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/shared/lib/helpers';
 import { IconAuraTwo } from '@/shared/ui/icons/IconAuraTwo';
 import { IconDotWave } from '@/shared/ui/icons/IconDotWave';
+import { IconSpeaking } from '@/shared/ui/icons/IconSpeaking';
 import { IconTimerTwo } from '@/shared/ui/icons/IconTimerTwo';
 import { SoundWave } from '@/shared/ui/icons/SoundWave';
 
@@ -126,19 +127,6 @@ const industries: Industry[] = [
   },
 ];
 
-const SliderChevron = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-    <path
-      d="M6.68262 14.94L11.5726 10.05C12.1501 9.4725 12.1501 8.5275 11.5726 7.95L6.68262 3.06"
-      stroke="#171717"
-      strokeWidth="1.5"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
 const HomeBuiltForHandlesVisual = ({
   speakingLabel,
   firstText,
@@ -156,7 +144,6 @@ const HomeBuiltForHandlesVisual = ({
   const [phase, setPhase] = useState<HandlesPhase>('idle');
   const [displayed, setDisplayed] = useState('');
 
-  const isTyping = phase === 'typing-1' || phase === 'typing-2';
   const fullText = phase === 'typing-2' || phase === 'done' ? secondText : firstText;
   const showQuestion = phase !== 'idle';
   const showSpeaking = phase === 'speaking';
@@ -237,7 +224,7 @@ const HomeBuiltForHandlesVisual = ({
         {showSpeaking && (
           <div className={st.home_built_for__visual_speaking_handles}>
             <p className={st.home_built_for__visual_speaking_title}>{speakingLabel}</p>
-            <Image src="/icons/voice.svg" alt="" width={24} height={24} />
+            <IconSpeaking />
             <div className={st.home_built_for__visual_speaking_icon}>
               <Image src="/icons/speaking.svg" alt="" width={54} height={54} />
             </div>
@@ -257,6 +244,7 @@ const HomeBuiltForHandlesVisual = ({
             <p className={st.home_built_for__visual_question}>{displayed}</p>
           </div>
         )}
+
         <div className={st.home_built_for__visual_logo}>
           <Image alt="" width={60} height={60} src="/icons/logo-white.svg" />
         </div>
@@ -268,7 +256,7 @@ const HomeBuiltForHandlesVisual = ({
           isAuraVisual && st.home_built_for__visual_sound_wave_aura
         )}
       >
-        <Visual active={isTyping} />
+        <Visual active={showSpeaking} />
       </div>
     </>
   );
@@ -282,8 +270,11 @@ export const HomeBuiltFor = () => {
   const industry = industries[industryIndex] ?? industries[0];
   const industryLabel = t(`industries.${industry.id}.label`);
 
+  const canScrollPrev = industryIndex > 0;
+  const canScrollNext = industryIndex < industries.length - 1;
+
   const goToIndustry = (direction: -1 | 1) => {
-    const nextIndex = (industryIndex + direction + industries.length) % industries.length;
+    const nextIndex = Math.min(industries.length - 1, Math.max(0, industryIndex + direction));
     setIndustryId(industries[nextIndex].id);
   };
 
@@ -313,20 +304,22 @@ export const HomeBuiltFor = () => {
         <div className={st.home_built_for__slider}>
           <button
             type="button"
-            className={cn(st.home_built_for__slider_btn, 'rotate-180')}
+            className={cn(st.home_built_for__slider_btn, canScrollPrev && st.can_scroll)}
             aria-label={t('prevIndustry')}
+            disabled={!canScrollPrev}
             onClick={() => goToIndustry(-1)}
           >
-            <SliderChevron />
+            <Image src="/icons/arrow-left.svg" alt="" width={18} height={18} />
           </button>
           <p className={st.home_built_for__slider_label}>{industryLabel}</p>
           <button
             type="button"
-            className={st.home_built_for__slider_btn}
+            className={cn(st.home_built_for__slider_btn, canScrollNext && st.can_scroll)}
             aria-label={t('nextIndustry')}
+            disabled={!canScrollNext}
             onClick={() => goToIndustry(1)}
           >
-            <SliderChevron />
+            <Image src="/icons/arrow-right.svg" alt="" width={18} height={18} />
           </button>
         </div>
 

@@ -45,7 +45,7 @@ const SelectChevron = () => (
 const voices: HearVoiceItem[] = [
   {
     id: 'insurance',
-    audio: '/audio/insurance.wav',
+    audio: '/audio/insurance.mp3',
   },
   {
     id: 'trading',

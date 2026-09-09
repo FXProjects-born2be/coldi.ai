@@ -83,9 +83,14 @@
     justify-content: center;
     flex-shrink: 0;
     border-radius: 999px;
-    border: 0.5px solid rgba(0, 0, 0, 0.20);
-    background: #fff;
+    border: 0.5px solid transparent;
+    background: transparent;
     padding: 11px 23px;
+
+    &.can_scroll {
+      border-color: rgba(0, 0, 0, 0.20);
+      background: #fff;
+    }
   }
 
   &__tab {
@@ -205,7 +210,7 @@
     justify-content: space-between;
 
     @include tablet {
-      padding: 32px;
+      padding: 30px 30px 22px 30px;
       min-height: 400px;
     }
   }
@@ -244,7 +249,7 @@
     line-height: 1.5;
 
     @include mobile {
-      font-size: 10px;
+      font-size: 15px;
     }
   }
 
@@ -255,12 +260,12 @@
     border-radius: 399.6px;
     border: 0.562px solid rgba(255, 255, 255, 0.40);
     background-blend-mode: luminosity;
-    backdrop-filter: blur(10.656827926635742px);
-    margin-bottom: 7px;
+    backdrop-filter: blur(2px);
+    margin-bottom: 22px;
     animation: home-built-for-handles-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 
     @include mobile {
-      padding: 9px 16px;
+      padding: 7px 10px;
       margin-bottom: 14px;
     }
   }
@@ -273,24 +278,17 @@
     line-height: 1.5;
 
     @include mobile {
-      font-size: 9px;
+      font-size: 13px;
     }
-  }
-
-  &__visual_handles &__visual_logo {
-    position: relative;
-    left: auto;
-    transform: none;
-    bottom: auto;
-    margin: auto;
-    background: rgba(128, 128, 128, 0.30);
   }
 
   &__visual_sound_wave {
     position: absolute;
     bottom: 0;
-    left: 0;
-    z-index: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    z-index: -1;
     pointer-events: none;
 
     svg {
@@ -518,17 +516,11 @@
   }
 
   &__visual_logo {
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 35px;
+    margin-inline: auto;
     width: 117px;
     height: 117px;
-
     border-radius: 781.947px;
     border: 1.1px solid rgba(255, 255, 255, 0.40);
-    //background: rgba(128, 128, 128, 0.30);
     background-blend-mode: luminosity;
     backdrop-filter: blur(20.853544235229492px);
     display: flex;
@@ -563,6 +555,10 @@
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
+
+    @include mobile {
+      font-size: 14px;
+    }
   }
 
   &__visual_speaking_icon {
@@ -576,6 +572,11 @@
     background: #F6F6F6;
     background-blend-mode: luminosity;
     backdrop-filter: blur(9.266807556152344px);
+
+    @include mobile {
+      width: 42px;
+      height: 42px;
+    }
   }
 }
 

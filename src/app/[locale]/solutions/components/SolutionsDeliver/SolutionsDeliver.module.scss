@@ -23,7 +23,7 @@
     text-align: center;
     font-size: 48px;
     line-height: 1.2;
-    margin-bottom: 60px;
+    margin-bottom: 10px;
 
     @include tablet {
       font-size: 32px;
@@ -31,139 +31,140 @@
     }
   }
 
-  &__slider {
-    position: relative;
+  &__description {
+    color: #000;
+    text-align: center;
+    font-size: 20px;
+    line-height: 140%;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
 
-    @include mobile {
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -24px;
-        width: 57px;
-        height: 324px;
-        pointer-events: none;
-        z-index: 1;
-      }
-
-      &::before {
-        left: -20px;
-        background: linear-gradient(90deg, #F6F6F6 0%, rgba(246, 246, 246, 0) 100%);
-      }
-
-      &::after {
-        right: -20px;
-        background: linear-gradient(270deg, #F6F6F6 0%, rgba(246, 246, 246, 0) 100%);
-      }
+    @include tablet {
+      font-size: 16px;
     }
   }
 
-  &__viewport {
+  &__cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 60px;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 8px;
 
-    @include mobile {
-      display: flex;
-      gap: 22px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      overscroll-behavior-x: contain;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      margin-bottom: 32px;
+    @include tablet {
+      grid-template-columns: 1fr 1fr 1fr;
 
-      &::-webkit-scrollbar {
-        display: none;
+      &>*:nth-child(1) {
+        grid-column: 1 / -1;
       }
     }
+
+    &>*:not(:nth-child(1)) {
+      padding: 20px;
+
+      @include tablet {
+        padding: 10px;
+      }
+    }
+
+    &>*:nth-child(1) {
+      padding: 32px;
+    }
+
   }
 
   &__card {
-    @include mobile {
-      flex: 0 0 200px;
-      scroll-snap-align: center;
-    }
-  }
-
-  &__nav {
-    display: none;
-
-    @include mobile {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-    }
-  }
-
-  &__nav_prev,
-  &__nav_next {
+    position: relative;
+    border-radius: 8px;
+    background: #FFF;
+    padding: 20px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 24px;
-    max-width: 143px;
-    width: 100%;
-    border-radius: 999px;
-    border: 0.5px solid rgba(0, 0, 0, 0.20);
-    background: #fff;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: space-between;
+    overflow: hidden;
 
-    &:disabled {
-      background: transparent;
-      border-color: transparent;
+    @include desktop {
+      min-height: 210px;
+    }
+  }
+
+  &__card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__card:first-child {
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 0.7;
+      right: 0;
+
+      @include mobile {
+        right: -86px;
+      }
+    }
+
+    &::before {
+      width: 192px;
+      height: 72px;
+      bottom: 0;
+      background-image: url('/images/solutions/deliver-one.svg');
+    }
+
+    &::after {
+      width: 235px;
+      height: 72px;
+      top: 0;
+      background-image: url('/images/solutions/deliver-two.svg');
+    }
+  }
+
+  &__card:first-child &__value {
+    font-size: 80px;
+
+    @include tablet {
+      font-size: 60px;
     }
   }
 
   &__card:hover &__value {
-    color: transparent;
+    background: url('/images/general/background-six.png') no-repeat center / cover;
+    background-clip: text;
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   &__media {
-    position: relative;
-    margin-bottom: 8px;
-
-    @include mobile-up {
-      height: 191px;
-    }
-
-    @include mobile {
-      height: 146px;
-    }
-
-    img {
-      object-fit: contain;
-      object-position: left center;
-    }
+    display: flex;
+    width: 42px;
+    height: 42px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    background: #E3E9FF;
+    margin-left: auto;
 
     @include mobile {
-      img {
-        object-position: center;
-      }
+      width: 26px;
+      height: 26px;
+      padding: 6px;
     }
   }
 
   &__value {
-    font-size: 80px;
+    font-size: 60px;
     line-height: 1.1;
     margin-bottom: 8px;
     color: #0c1021;
-    background:
-      linear-gradient(0deg, rgba(66, 104, 255, 0.20) 0%, rgba(66, 104, 255, 0.20) 100%),
-      linear-gradient(180deg, #2544bd 0%, #4268ff 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: #0c1021;
-    transition: color 0.25s ease, -webkit-text-fill-color 0.25s ease;
+    font-variant-numeric: tabular-nums;
+    transition: all .3s ease-in-out;
 
     @include tablet {
-      font-size: 52px;
-    }
-
-    @include mobile {
-      text-align: center;
+      font-size: 40px;
     }
   }
 
@@ -171,30 +172,10 @@
     color: #0c1021;
     font-size: 18px;
     line-height: 1.4;
-    margin-bottom: 8px;
-    max-width: 190px;
+    max-width: 230px;
 
     @include tablet {
       font-size: 16px;
-    }
-
-    @include mobile {
-      max-width: 170px;
-      margin-inline: auto;
-      text-align: center;
-    }
-  }
-
-  &__card_text {
-    color: #50556B;
-    font-size: 14px;
-    line-height: 1.4;
-
-    @include mobile {
-      text-align: center;
-      font-size: 12px;
-      max-width: 200px;
-      margin-inline: auto;
     }
   }
 }

@@ -6,7 +6,7 @@ export const getBots = (): BotPreview[] => [
     name: 'Insurance',
     text: 'Needs check & offer <br/>optimization',
     btnVariant: 'primary',
-    audioUrl: '/audio/insurance.wav',
+    audioUrl: '/audio/insurance.mp3',
   },
   {
     videoUrl: '/videos/voices/variant-2.mp4',

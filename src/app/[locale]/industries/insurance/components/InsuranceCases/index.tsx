@@ -58,7 +58,7 @@ export const InsuranceCases = ({
   title = 'Insurance Cases',
   titleAccent,
   description = 'A real renewal call, softened for privacy. Same tone your policyholders would hear',
-  audio = '/audio/insurance.wav',
+  audio = '/audio/insurance.mp3',
   visual = 'waveform',
   page,
 }: InsuranceCasesProps) => {

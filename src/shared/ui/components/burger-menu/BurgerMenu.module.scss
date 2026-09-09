@@ -1,6 +1,6 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
-.burger {
+.burger_menu {
   display: none;
   color: #2544BD;
   font-size: 14px;
@@ -13,143 +13,145 @@
   @include tablet {
     display: block;
   }
-}
 
-.overlay {
-  background: rgba(12, 16, 33, 0.25);
-  backdrop-filter: blur(4px);
-  position: fixed;
-  inset: 0;
-  z-index: 990;
-}
-
-@keyframes slideDown {
-  0% {
-    opacity: 0;
+  &__content {
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    background: #F6F6F6;
+    z-index: 1000;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
   }
-  100% {
-    opacity: 1;
-    top: 64px;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-shrink: 0;
   }
-}
 
-.content {
-  border-top: 1px solid rgba(80, 85, 107, 0.05);
-  position: fixed;
-  top: 64px;
-  left: 0;
-  width: 100%;
-  background: #fff;
-  z-index: 995;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  &.open {
-    animation: slideDown 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+  &__logo {}
+
+  &__close {
+    font-size: 14px;
+    padding: 10px 20px;
+    font-weight: 700;
+    background: transparent;
   }
-}
 
-.nav {
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  padding: 16px 16px 32px 16px;
-  gap: 4px;
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding-right: 10px;
+  }
 
-  a {
+  &__link {
+    color: #000;
     text-align: center;
-    padding: 16px 24px;
-    border-radius: 48px;
-    color: #0c1021;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 120%;
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 10px 40px;
+    border-radius: 99px;
+
+    &.active {
+      background: #FFF;
+      color: #4268FF;
+    }
+  }
+
+  &__book {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: auto;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__group_trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 10px 40px;
+    border-radius: 99px;
 
     &.active {
       background-color: #eaeaeb;
     }
 
-    &.bookMeeting {
-      padding: 16px;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      border-radius: 24px;
-      background: #4268ff;
-      border: 1px solid #4268ff;
-      color: #fff;
-      margin-top: 8px;
+    a {
+      padding: 0;
+      border-radius: 0;
+      text-align: inherit;
+      color: inherit;
+      font: inherit;
     }
   }
-}
 
-.group {
-  display: flex;
-  flex-direction: column;
-}
-
-.groupTrigger {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 16px 24px;
-  border-radius: 48px;
-  color: #0c1021;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 120%;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-
-  &.active {
-    background-color: #eaeaeb;
-  }
-
-  .groupArrow {
+  &__group_arrow {
     transition: transform 0.2s ease;
     flex-shrink: 0;
   }
 
-  &.groupOpen .groupArrow {
+  &__group_trigger.group_open &__group_arrow {
     transform: rotate(180deg);
   }
-}
 
-.groupItems {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.3s ease, opacity 0.2s ease;
-  opacity: 0;
-  padding: 0 6px;
-
-  &.groupItemsOpen {
-    max-height: 400px;
-    opacity: 1;
+  &__group_arrow_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 5px;
   }
-}
 
-.subItem {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 16px;
-  border-radius: 12px;
-  color: #535662;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 1.2;
-  text-align: center;
+  &__group_items {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease, opacity 0.2s ease;
+    opacity: 0;
+    padding: 0 6px;
 
-  &:hover,
-  &.active {
-    background: rgba(80, 85, 107, 0.04);
-    color: #0c1021;
+    &.open {
+      max-height: 400px;
+      opacity: 1;
+    }
+  }
+
+  &__sub_item {
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 10px 40px;
+    border-radius: 99px;
+
+    &.active {
+      background: #FFF;
+      color: #4268FF;
+    }
   }
 }

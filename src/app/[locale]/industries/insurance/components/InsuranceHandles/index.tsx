@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { cn } from '@/shared/lib/helpers';
 import { IconAuraTwo } from '@/shared/ui/icons/IconAuraTwo';
 import { IconDotWave } from '@/shared/ui/icons/IconDotWave';
+import { IconSpeaking } from '@/shared/ui/icons/IconSpeaking';
 import { IconTimerTwo } from '@/shared/ui/icons/IconTimerTwo';
 import { SoundWave } from '@/shared/ui/icons/SoundWave';
 
@@ -256,7 +257,7 @@ export const InsuranceHandles = ({
               {showSpeaking && (
                 <div className={st.insurance_handles__right_top}>
                   <p className={st.insurance_handles__right_top_text}>Speaking...</p>
-                  <Image src={'/icons/voice.svg'} alt={'Icon'} width={24} height={24} />
+                  <IconSpeaking />
                   <div className={st.insurance_handles__right_top_icon_speaking}>
                     <Image src={'/icons/speaking.svg'} alt={'Icon'} width={54} height={54} />
                   </div>
