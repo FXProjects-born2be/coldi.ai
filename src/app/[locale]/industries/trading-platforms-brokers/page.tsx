@@ -72,7 +72,7 @@ export default function BrokersPage() {
         title="Trading Platforms"
         titleAccent="Lead Qualification"
         description="Hear how Coldi separates a real trader from a junk lead before your sales floor ever picks up."
-        audio="/audio/trading-platforms.wav"
+        audio="/audio/trading-platforms.mp3"
         visual="aura"
         page="trading-platforms-brokers"
       />

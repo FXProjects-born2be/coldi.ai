@@ -76,7 +76,7 @@ export default function OtherIndustriesPage() {
       <InsuranceCases
         title="Lead Follow-Up"
         description="A new request, called back to qualify the need and arrange the next step."
-        audio="/audio/debt-collection.wav"
+        audio="/audio/other-industries.mp3"
         visual="horizon"
         page="other-industries"
       />

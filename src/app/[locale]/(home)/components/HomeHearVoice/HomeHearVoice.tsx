@@ -49,7 +49,7 @@ const voices: HearVoiceItem[] = [
   },
   {
     id: 'trading',
-    audio: '/audio/trading-platforms.wav',
+    audio: '/audio/trading-platforms.mp3',
   },
   {
     id: 'debt-collection',
@@ -57,7 +57,7 @@ const voices: HearVoiceItem[] = [
   },
   {
     id: 'customer-support',
-    audio: '/audio/debt-collection.wav',
+    audio: '/audio/emis.mp3',
   },
 ];
 

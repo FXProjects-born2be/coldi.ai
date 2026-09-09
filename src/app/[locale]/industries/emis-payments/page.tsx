@@ -67,7 +67,7 @@ export default function EmisPaymentsPage() {
         title="EMIs"
         titleAccent="Application Recovery"
         description="A stalled sign-up, walked back through the last step of verification."
-        audio="/audio/debt-collection.wav"
+        audio="/audio/emis.mp3"
         visual="dotWave"
         page="emis-payments"
       />
