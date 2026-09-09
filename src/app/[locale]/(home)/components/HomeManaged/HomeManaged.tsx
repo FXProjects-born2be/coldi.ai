@@ -155,19 +155,6 @@ const ManagedVisualImages = ({
   );
 };
 
-const SliderChevron = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-    <path
-      d="M6.68262 14.94L11.5726 10.05C12.1501 9.4725 12.1501 8.5275 11.5726 7.95L6.68262 3.06"
-      stroke="#171717"
-      strokeWidth="1.5"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
 export const HomeManaged = () => {
   const t = useTranslations('HomeManaged');
   const [activeId, setActiveId] = useState(tabs[0].id);
@@ -309,11 +296,11 @@ export const HomeManaged = () => {
           <div className={st.home_managed__slider}>
             <button
               type="button"
-              className={cn(st.home_managed__slider_btn, 'rotate-180')}
+              className={st.home_managed__slider_btn}
               aria-label={t('prevTab')}
               onClick={() => goToTab(-1)}
             >
-              <SliderChevron />
+              <Image src="/icons/arrow-left.svg" alt="" width={18} height={18} />
             </button>
             <p className={st.home_managed__slider_label}>{activeTitle}</p>
             <button
@@ -322,7 +309,7 @@ export const HomeManaged = () => {
               aria-label={t('nextTab')}
               onClick={() => goToTab(1)}
             >
-              <SliderChevron />
+              <Image src="/icons/arrow-right.svg" alt="" width={18} height={18} />
             </button>
           </div>
         </div>

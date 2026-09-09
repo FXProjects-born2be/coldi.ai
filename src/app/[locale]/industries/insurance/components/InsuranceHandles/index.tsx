@@ -55,9 +55,9 @@ const DEFAULT_ITEMS: InsuranceHandlesItem[] = [
 ];
 
 const DEFAULT_FIRST_TEXT =
-  '"Hi, saw you just registered on [Platform]. Got two minutes to tell me what you\'re looking to trade?"';
+  '"Hi, this is Coldi calling on behalf of [Insurer]. Your policy renews August 3rd — want me to lock in your current rate now?"';
 const DEFAULT_SECOND_TEXT =
-  '"Good, I\'ll connect you with an account manager who specializes in FX. They\'ll call within the hour."';
+  '"Done. You\'ll get confirmation by text and email in the next minute."';
 const DEFAULT_ANSWER = 'Yeah, go ahead.';
 
 const CHAR_MS = 28;

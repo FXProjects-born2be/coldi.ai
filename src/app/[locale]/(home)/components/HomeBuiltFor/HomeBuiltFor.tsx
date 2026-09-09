@@ -62,9 +62,8 @@ const industries: Industry[] = [
     handles: {
       background: '/images/general/background.png',
       firstText:
-        '"Hi, saw you just registered on [Platform]. Got two minutes to tell me what you\'re looking to trade?"',
-      secondText:
-        '"Good, I\'ll connect you with an account manager who specializes in FX. They\'ll call within the hour."',
+        '"Hi, this is Coldi calling on behalf of [Insurer]. Your policy renews August 3rd — want me to lock in your current rate now?"',
+      secondText: '"Done. You\'ll get confirmation by text and email in the next minute."',
       answer: 'Yeah, go ahead.',
       visual: 'soundWave',
     },
