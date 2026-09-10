@@ -39,6 +39,7 @@ type Industry = {
 const CHAR_MS = 28;
 const QUESTION_IN_MS = 500;
 const PAUSE_MS = 2000;
+const LOOP_AFTER_MS = 10000;
 
 type HandlesPhase =
   | 'idle'
@@ -150,6 +151,11 @@ const HomeBuiltForHandlesVisual = ({
   const rootRef = useRef<HTMLDivElement>(null);
   const [phase, setPhase] = useState<HandlesPhase>('idle');
   const [displayed, setDisplayed] = useState('');
+  const [showAvatar, setShowAvatar] = useState(false);
+
+  if (phase === 'speaking' && !showAvatar) {
+    setShowAvatar(true);
+  }
 
   const fullText = phase === 'typing-2' || phase === 'done' ? secondText : firstText;
   const showQuestion = phase !== 'idle';
@@ -237,13 +243,28 @@ const HomeBuiltForHandlesVisual = ({
     return () => window.clearTimeout(timeoutId);
   }, [phase]);
 
+  useEffect(() => {
+    if (phase !== 'done') return;
+
+    const timeoutId = window.setTimeout(() => {
+      setDisplayed('');
+      setPhase('question');
+    }, LOOP_AFTER_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [phase]);
+
   return (
     <>
       <div ref={rootRef} className={st.home_built_for__visual_reaction}>
-        {showSpeaking && (
+        {(showSpeaking || showAvatar) && (
           <div className={st.home_built_for__visual_speaking_handles}>
-            <p className={st.home_built_for__visual_speaking_title}>{speakingLabel}</p>
-            <IconSpeaking />
+            {showSpeaking && (
+              <>
+                <p className={st.home_built_for__visual_speaking_title}>{speakingLabel}</p>
+                <IconSpeaking />
+              </>
+            )}
             <div className={st.home_built_for__visual_speaking_icon}>
               <Image src="/icons/speaking.svg" alt="" width={54} height={54} />
             </div>

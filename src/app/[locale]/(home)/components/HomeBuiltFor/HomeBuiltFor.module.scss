@@ -227,6 +227,7 @@
     align-items: center;
     justify-content: flex-end;
     animation: home-built-for-handles-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    margin-bottom: 6px;
   }
 
   &__visual_answer_wrapper {
@@ -259,8 +260,9 @@
     padding: 20px 32px;
     border-radius: 399.6px;
     border: 0.562px solid rgba(255, 255, 255, 0.40);
+    background: rgba(128, 128, 128, 0.1);
     background-blend-mode: luminosity;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(10.656827926635742px);
     margin-bottom: 22px;
     animation: home-built-for-handles-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 
@@ -521,6 +523,7 @@
     height: 117px;
     border-radius: 781.947px;
     border: 1.1px solid rgba(255, 255, 255, 0.40);
+    background: rgba(128, 128, 128, 0.1);
     background-blend-mode: luminosity;
     backdrop-filter: blur(20.853544235229492px);
     display: flex;
