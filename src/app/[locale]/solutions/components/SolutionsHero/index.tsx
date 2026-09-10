@@ -42,9 +42,13 @@ export const SolutionsHero = async () => {
 
       <div className={cn('container', st.agents_hero__container)}>
         <h1 className={st.agents_hero__title}>
-          {t('titleLine1')}
+          {t.rich('titleLine1', {
+            span: (chunks) => <span>{chunks}</span>,
+          })}
           <br />
-          {t('titleLine2')}
+          {t.rich('titleLine2', {
+            span: (chunks) => <span>{chunks}</span>,
+          })}
         </h1>
         <p className={st.agents_hero__description}>{t('description')}</p>
 

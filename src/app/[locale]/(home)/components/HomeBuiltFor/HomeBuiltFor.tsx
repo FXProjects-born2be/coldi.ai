@@ -38,10 +38,17 @@ type Industry = {
 
 const CHAR_MS = 28;
 const QUESTION_IN_MS = 500;
-const SPEAKING_MS = 1600;
-const AFTER_ANSWER_MS = 1200;
+const PAUSE_MS = 2000;
 
-type HandlesPhase = 'idle' | 'question' | 'typing-1' | 'speaking' | 'answer' | 'typing-2' | 'done';
+type HandlesPhase =
+  | 'idle'
+  | 'question'
+  | 'typing-1'
+  | 'hold'
+  | 'speaking'
+  | 'answer'
+  | 'typing-2'
+  | 'done';
 
 const VISUALS = {
   soundWave: SoundWave,
@@ -148,6 +155,8 @@ const HomeBuiltForHandlesVisual = ({
   const showQuestion = phase !== 'idle';
   const showSpeaking = phase === 'speaking';
   const showAnswer = phase === 'answer' || phase === 'typing-2' || phase === 'done';
+  const isWaveActive =
+    phase === 'question' || phase === 'typing-1' || phase === 'speaking' || phase === 'typing-2';
   const Visual = VISUALS[visual];
   const isAuraVisual = visual === 'auraTwo' || visual === 'timerTwo';
 
@@ -190,7 +199,7 @@ const HomeBuiltForHandlesVisual = ({
       setDisplayed(nextText);
 
       if (nextText.length >= fullText.length) {
-        setPhase(phase === 'typing-1' ? 'speaking' : 'done');
+        setPhase(phase === 'typing-1' ? 'hold' : 'done');
       }
     }, CHAR_MS);
 
@@ -198,11 +207,21 @@ const HomeBuiltForHandlesVisual = ({
   }, [displayed, fullText, phase]);
 
   useEffect(() => {
+    if (phase !== 'hold') return;
+
+    const timeoutId = window.setTimeout(() => {
+      setPhase('speaking');
+    }, PAUSE_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [phase]);
+
+  useEffect(() => {
     if (phase !== 'speaking') return;
 
     const timeoutId = window.setTimeout(() => {
       setPhase('answer');
-    }, SPEAKING_MS);
+    }, PAUSE_MS);
 
     return () => window.clearTimeout(timeoutId);
   }, [phase]);
@@ -213,7 +232,7 @@ const HomeBuiltForHandlesVisual = ({
     const timeoutId = window.setTimeout(() => {
       setDisplayed('');
       setPhase('typing-2');
-    }, AFTER_ANSWER_MS);
+    }, PAUSE_MS);
 
     return () => window.clearTimeout(timeoutId);
   }, [phase]);
@@ -256,7 +275,7 @@ const HomeBuiltForHandlesVisual = ({
           isAuraVisual && st.home_built_for__visual_sound_wave_aura
         )}
       >
-        <Visual active={showSpeaking} />
+        <Visual active={isWaveActive} />
       </div>
     </>
   );

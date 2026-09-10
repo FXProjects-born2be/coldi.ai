@@ -651,8 +651,8 @@
     }
   },
   "SolutionsHero": {
-    "titleLine1": "Named AI Agents,",
-    "titleLine2": "Built for Fintech Workflows",
+    "titleLine1": "<span>Named</span> AI Agents,",
+    "titleLine2": "Built for <span>Fintech</span> Workflows",
     "description": "Not a generic voice AI toolkit. Every bot below is built, deployed, and managed by Coldi for a specific job."
   },
   "SolutionsDeliver": {

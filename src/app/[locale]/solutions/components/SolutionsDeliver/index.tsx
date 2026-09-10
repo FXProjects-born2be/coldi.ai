@@ -13,21 +13,25 @@ const CARDS = [
   {
     id: 'hoursSaved',
     value: 12702,
+    step: 100,
     image: null,
   },
   {
     id: 'meetings',
     value: 577,
+    step: 10,
     image: '/icons/streamline-ultimate_work-from-home-laptop-meeting.svg',
   },
   {
     id: 'transfers',
     value: 521,
+    step: 10,
     image: '/icons/hugeicons_arrow-data-transfer-horizontal.svg',
   },
   {
     id: 'callbacks',
     value: 685,
+    step: 10,
     image: '/icons/fluent_call-inbound-16-regular.svg',
   },
 ] as const;
@@ -79,6 +83,7 @@ export const SolutionsDeliver = () => {
                       separator
                       duration={7.6}
                       mobileDuration={3.8}
+                      step={card.step}
                     />
                   </p>
                   <h3 className={st.solutions_deliver__card_title}>

@@ -12,6 +12,7 @@ type CounterProps = {
   className?: string;
   separator?: boolean;
   play?: boolean;
+  step?: number;
 };
 
 const MOBILE_QUERY = '(max-width: 767px)';
@@ -27,6 +28,7 @@ export const Counter = ({
   className,
   separator = false,
   play,
+  step,
 }: CounterProps) => {
   const [count, setCount] = useState(start);
   const [isInView, setIsInView] = useState(false);
@@ -68,7 +70,11 @@ export const Counter = ({
     const animate = () => {
       const progress = Math.min((Date.now() - startTime) / totalMs, 1);
       const easeOut = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(start + totalChange * easeOut));
+      const raw = start + totalChange * easeOut;
+      const next =
+        progress >= 1 || !step ? Math.round(raw) : Math.min(end, Math.floor(raw / step) * step);
+
+      setCount(next);
 
       if (progress < 1) {
         frame = requestAnimationFrame(animate);
@@ -83,7 +89,7 @@ export const Counter = ({
       window.clearTimeout(timer);
       window.cancelAnimationFrame(frame);
     };
-  }, [shouldPlay, start, end, duration, mobileDuration, delay]);
+  }, [shouldPlay, start, end, duration, mobileDuration, delay, step]);
 
   const formatted = separator ? count.toLocaleString('en-US') : count;
 
