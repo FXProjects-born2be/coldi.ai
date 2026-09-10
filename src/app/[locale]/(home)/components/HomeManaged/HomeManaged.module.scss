@@ -95,6 +95,16 @@
         color: #4268FF;
       }
     }
+
+    &--calls {}
+
+    &--analytics {}
+
+    &--agents {}
+
+    &--leads {}
+
+    &--campaign-performance {}
   }
 
   &__tab_title {
@@ -118,27 +128,9 @@
     }
   }
 
-  &__main {
-    min-width: 0;
-    position: relative;
-
-    @include tablet {
-      border-radius: 16px;
-      background: #f6f6f6;
-      padding: 16px;
-    }
-
-    @include mobile {
-      overflow: visible;
-    }
-  }
-
   &__visual {
     position: relative;
     z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: url('/images/home/managed-bg.png') center / cover no-repeat;
     overflow: hidden;
     border-radius: 20px;
@@ -157,12 +149,97 @@
     @include mobile {
       overflow: visible;
     }
+
+    //&--calls {
+    //  .home_managed__visual_image--slot-1 {
+    //    background: red;
+    //  }
+    //}
+
+    &--analytics {}
+
+    &--agents {}
+
+    &--leads {}
+
+    &--campaign-performance {}
   }
 
   &__visual_images {
     position: relative;
     width: 100%;
     aspect-ratio: 718 / 360;
+
+    &--calls {}
+
+    &--analytics {
+      top: 20px;
+      aspect-ratio: 720 / 330;
+
+      .home_managed__visual_image--slot-1 {
+        width: 57.934%;
+        height: 60.771%;
+        left: 2%;
+        top: 51%;
+      }
+
+      .home_managed__visual_image--slot-2 {
+        width: 51.945%;
+        height: 60.771%;
+        left: unset;
+        right: 4%;
+        top: 80%;
+      }
+    }
+
+    &--agents {
+      aspect-ratio: 720 / 393;
+
+      .home_managed__visual_image--slot-1 {
+        width: 66.011%;
+        height: 76.542%;
+        left: unset;
+        right: 2%;
+        top: 50%;
+      }
+    }
+
+    &--leads {
+      aspect-ratio: 660 / 404;
+      max-width: 660px;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 60px;
+
+      .home_managed__visual_image--slot-1 {
+        width: 51.249%;
+        height: 45.048%;
+        left: unset;
+        right: 1%;
+        top: 62%;
+      }
+    }
+
+    &--campaign-performance {
+      aspect-ratio: 720 / 355;
+      top: 50%;
+      transform: translateY(-50%);
+
+      .home_managed__visual_image--slot-1 {
+        width: 65.32%;
+        height: 47.734%;
+        left: 10%;
+        top: 69%;
+      }
+
+      .home_managed__visual_image--slot-2 {
+        width: 56.68%;
+        height: 59.597%;
+        top: -50px;
+        right: 30px;
+        left: unset;
+      }
+    }
   }
 
   &__visual_image {
@@ -181,6 +258,7 @@
       transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
       box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 8px;
+    box-shadow: -64px 152px 46px 0 rgba(0, 0, 0, 0.00), -41px 97px 42px 0 rgba(0, 0, 0, 0.01), -23px 55px 36px 0 rgba(0, 0, 0, 0.05), -10px 24px 26px 0 rgba(0, 0, 0, 0.09), -3px 6px 15px 0 rgba(0, 0, 0, 0.10);
 
     img {
       object-fit: cover;
@@ -205,32 +283,20 @@
     }
 
     &--slot-1 {
-      left: 28px;
-      top: 80%;
+      left: 3%;
+      top: 79%;
       width: 49.856%;
       height: 50.274%;
       z-index: 2;
-      box-shadow: -64px 152px 46px 0 rgba(0, 0, 0, 0.00), -41px 97px 42px 0 rgba(0, 0, 0, 0.01), -23px 55px 36px 0 rgba(0, 0, 0, 0.05), -10px 24px 26px 0 rgba(0, 0, 0, 0.09), -3px 6px 15px 0 rgba(0, 0, 0, 0.10);
-
-      @include tablet {
-        left: 0;
-        top: 115%;
-      }
     }
 
     &--slot-2 {
-      left: 50%;
-      top: 90%;
+      left: 47%;
+      top: 87%;
       width: 35.791%;
       height: 44.72%;
       z-index: 3;
-      box-shadow: -64px 152px 46px 0 rgba(0, 0, 0, 0.00), -41px 97px 42px 0 rgba(0, 0, 0, 0.01), -23px 55px 36px 0 rgba(0, 0, 0, 0.05), -10px 24px 26px 0 rgba(0, 0, 0, 0.09), -3px 6px 15px 0 rgba(0, 0, 0, 0.10);
 
-      @include tablet {
-        left: unset;
-        right: 14px;
-        top: 125%;
-      }
     }
 
     &--lift {

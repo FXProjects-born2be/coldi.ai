@@ -53,9 +53,14 @@
     justify-content: center;
     flex-shrink: 0;
     border-radius: 999px;
-    border: 0.5px solid rgba(0, 0, 0, 0.20);
-    background: #fff;
+    border: 0.5px solid transparent;
+    background: transparent;
     padding: 11px 23px;
+
+    &.can_scroll {
+      border-color: rgba(0, 0, 0, 0.20);
+      background: #fff;
+    }
   }
 
   &__grid {
@@ -91,13 +96,37 @@
 
       &.active {
         display: flex;
+
+        .pricing_services__card_preview {
+          opacity: 0;
+        }
+
+        .pricing_services__card_bg {
+          animation: pricing-services-card-fill 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .pricing_services__card_title,
+        .pricing_services__card_description,
+        .pricing_services__price_label,
+        .pricing_services__price_value {
+          color: #F6F6F6;
+        }
+
+        .pricing_services__btn {
+          background: #FFF;
+          color: #4268FF;
+        }
       }
     }
 
     &.hovered {
+      .pricing_services__card_preview {
+        opacity: 0;
+      }
+
       .pricing_services__card_bg {
         transform: scale(1);
-        border-radius: 0;
+        opacity: 1;
       }
 
       .pricing_services__card_title,
@@ -114,6 +143,18 @@
     }
   }
 
+  &__card_preview {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56%;
+    height: auto;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.45s ease;
+  }
+
   &__card_bg {
     object-fit: cover;
     object-position: top center;
@@ -121,9 +162,8 @@
     transform-origin: top center;
     pointer-events: none;
     z-index: 0;
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    border-bottom-left-radius: 999px;
-    border-bottom-right-radius: 999px;
+    opacity: 0;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
   }
 
   &__card_body {
@@ -169,5 +209,20 @@
     transition: color 0.45s ease;
     background: #2544BD;
     color: #FFF;
+  }
+}
+
+@keyframes pricing-services-card-fill {
+  from {
+    transform: scale(0.56, 0.06);
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1);
+    border-radius: 0;
+    opacity: 1;
   }
 }

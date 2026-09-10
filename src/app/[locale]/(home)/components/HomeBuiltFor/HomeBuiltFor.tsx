@@ -40,6 +40,7 @@ const CHAR_MS = 28;
 const QUESTION_IN_MS = 500;
 const PAUSE_MS = 1000;
 const LOOP_AFTER_MS = 10000;
+const PLAY_ANIMATION = true;
 
 type HandlesPhase =
   | 'idle'
@@ -149,8 +150,8 @@ const HomeBuiltForHandlesVisual = ({
   visual: HandlesVisual;
 }) => {
   const rootRef = useRef<HTMLDivElement>(null);
-  const [phase, setPhase] = useState<HandlesPhase>('idle');
-  const [displayed, setDisplayed] = useState('');
+  const [phase, setPhase] = useState<HandlesPhase>(PLAY_ANIMATION ? 'idle' : 'done');
+  const [displayed, setDisplayed] = useState(PLAY_ANIMATION ? '' : secondText);
 
   const fullText = phase === 'typing-2' || phase === 'done' ? secondText : firstText;
   const showQuestion =
@@ -163,6 +164,8 @@ const HomeBuiltForHandlesVisual = ({
   const isAuraVisual = visual === 'auraTwo' || visual === 'timerTwo';
 
   useEffect(() => {
+    if (!PLAY_ANIMATION) return;
+
     const root = rootRef.current;
 
     if (!root) return;
@@ -183,7 +186,7 @@ const HomeBuiltForHandlesVisual = ({
   }, []);
 
   useEffect(() => {
-    if (phase !== 'question') return;
+    if (!PLAY_ANIMATION || phase !== 'question') return;
 
     const timeoutId = window.setTimeout(() => {
       setPhase('typing-1');
@@ -193,6 +196,7 @@ const HomeBuiltForHandlesVisual = ({
   }, [phase]);
 
   useEffect(() => {
+    if (!PLAY_ANIMATION) return;
     if (phase !== 'typing-1' && phase !== 'typing-2') return;
     if (displayed.length >= fullText.length) return;
 
@@ -209,7 +213,7 @@ const HomeBuiltForHandlesVisual = ({
   }, [displayed, fullText, phase]);
 
   useEffect(() => {
-    if (phase !== 'hold') return;
+    if (!PLAY_ANIMATION || phase !== 'hold') return;
 
     const timeoutId = window.setTimeout(() => {
       setPhase('speaking');
@@ -219,7 +223,7 @@ const HomeBuiltForHandlesVisual = ({
   }, [phase]);
 
   useEffect(() => {
-    if (phase !== 'speaking') return;
+    if (!PLAY_ANIMATION || phase !== 'speaking') return;
 
     const timeoutId = window.setTimeout(() => {
       setPhase('answer');
@@ -229,7 +233,7 @@ const HomeBuiltForHandlesVisual = ({
   }, [phase]);
 
   useEffect(() => {
-    if (phase !== 'answer') return;
+    if (!PLAY_ANIMATION || phase !== 'answer') return;
 
     const timeoutId = window.setTimeout(() => {
       setDisplayed('');
@@ -240,7 +244,7 @@ const HomeBuiltForHandlesVisual = ({
   }, [phase]);
 
   useEffect(() => {
-    if (phase !== 'done') return;
+    if (!PLAY_ANIMATION || phase !== 'done') return;
 
     const timeoutId = window.setTimeout(() => {
       setDisplayed('');

@@ -37,7 +37,7 @@
 
   &__list {
     @include desktop {
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
 
     &>*:not(:last-child) {
@@ -151,6 +151,9 @@
     position: relative;
     z-index: 1;
     min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 
   &__answer_wrapper {
@@ -185,13 +188,13 @@
     aspect-ratio: 1/1;
     border-radius: 781.947px;
     border: 1.1px solid rgba(255, 255, 255, 0.40);
+    background: rgba(128, 128, 128, 0.10);
     background-blend-mode: luminosity;
     backdrop-filter: blur(20.853544235229492px);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
-    background: rgba(128, 128, 128, 0.30);
 
     @include mobile {
       width: 81px;

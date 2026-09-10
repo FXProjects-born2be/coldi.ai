@@ -837,6 +837,16 @@
       "hospitality": "Hospitality"
     }
   },
+  "OtherIndustriesPage": {
+    "InsuranceHandles": {
+      "lead-qualification": "Lead Qualification for Real Estate, Technology & E-commerce",
+      "appointment-booking": "Appointment Booking for Healthcare, Hospitality & Consulting",
+      "customer-support": "Customer Support for Retail, Telecommunications & Education",
+      "service-dispatchg": "Service Dispatch for HVAC, Residential & Agro-Industry",
+      "lead-re-engagement": "Lead Re-engagement for Real Estate, E-commerce & Entertainment",
+      "follow-ups": "Follow-Ups for Manufacturing, Non-profit & Call Centers"
+    }
+  },
   "LegalPage": {
     "metaTitle": "Legal",
     "metaDescription": "Access all official legal documents and policies for our company. Download or view the latest versions of our agreements."

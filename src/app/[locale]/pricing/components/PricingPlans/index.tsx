@@ -25,19 +25,21 @@ export const PricingPlans = () => {
   return (
     <section className={st.pricing_plans}>
       <div className="container">
-        <div className={st.pricing_plans__tabs} role="tablist" aria-label={t('tabsAria')}>
-          {plans.map((plan) => (
-            <button
-              key={plan.id}
-              type="button"
-              role="tab"
-              aria-selected={plan.id === activeId}
-              className={cn(st.pricing_plans__tab, plan.id === activeId && st.active)}
-              onClick={() => setActiveId(plan.id)}
-            >
-              {t(`plans.${plan.id}.tab`)}
-            </button>
-          ))}
+        <div className={st.pricing_plans__tabs_wrapper}>
+          <div className={st.pricing_plans__tabs} role="tablist" aria-label={t('tabsAria')}>
+            {plans.map((plan) => (
+              <button
+                key={plan.id}
+                type="button"
+                role="tab"
+                aria-selected={plan.id === activeId}
+                className={cn(st.pricing_plans__tab, plan.id === activeId && st.active)}
+                onClick={() => setActiveId(plan.id)}
+              >
+                {t(`plans.${plan.id}.tab`)}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className={st.pricing_plans__grid}>

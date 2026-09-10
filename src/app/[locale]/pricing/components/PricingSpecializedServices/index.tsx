@@ -18,11 +18,13 @@ export const PricingSpecializedServices = () => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const activeIndex = services.findIndex((item) => item.id === activeId);
   const activeService = services[activeIndex] ?? services[0];
+  const canScrollPrev = activeIndex > 0;
+  const canScrollNext = activeIndex < services.length - 1;
 
   if (!activeService) return null;
 
   const goToService = (direction: -1 | 1) => {
-    const nextIndex = (activeIndex + direction + services.length) % services.length;
+    const nextIndex = Math.min(services.length - 1, Math.max(0, activeIndex + direction));
     const next = services[nextIndex];
     if (!next) return;
     setHoveredId(null);
@@ -51,6 +53,14 @@ export const PricingSpecializedServices = () => {
               onPointerEnter={(event) => handleCardPointerEnter(service.id, event.pointerType)}
               onPointerLeave={() => setHoveredId(null)}
             >
+              <Image
+                className={st.pricing_services__card_preview}
+                src={service.bg}
+                alt=""
+                width={224}
+                height={30}
+                aria-hidden
+              />
               <Image
                 className={st.pricing_services__card_bg}
                 src={service.hoverBg}
@@ -87,22 +97,24 @@ export const PricingSpecializedServices = () => {
         <div className={st.pricing_services__slider}>
           <button
             type="button"
-            className={st.pricing_services__slider_btn}
+            className={cn(st.pricing_services__slider_btn, canScrollPrev && st.can_scroll)}
             aria-label={t('prevService')}
+            disabled={!canScrollPrev}
             onClick={() => goToService(-1)}
           >
-            <Image src="/icons/arrow-left.svg" alt="" width={18} height={18} />
+            <Image src="/icons/arrow-left.svg" alt="Icon" width={18} height={18} />
           </button>
           <p className={st.pricing_services__slider_label}>
             {t(`services.${activeService.id}.tab`)}
           </p>
           <button
             type="button"
-            className={st.pricing_services__slider_btn}
+            className={cn(st.pricing_services__slider_btn, canScrollNext && st.can_scroll)}
             aria-label={t('nextService')}
+            disabled={!canScrollNext}
             onClick={() => goToService(1)}
           >
-            <Image src="/icons/arrow-right.svg" alt="" width={18} height={18} />
+            <Image src="/icons/arrow-right.svg" alt="Icon" width={18} height={18} />
           </button>
         </div>
       </div>

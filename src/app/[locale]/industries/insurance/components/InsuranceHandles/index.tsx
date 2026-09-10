@@ -63,8 +63,8 @@ const DEFAULT_ANSWER = 'Yeah, go ahead.';
 
 const CHAR_MS = 28;
 const QUESTION_IN_MS = 500;
-const SPEAKING_MS = 1600;
-const AFTER_ANSWER_MS = 1200;
+const PAUSE_MS = 1000;
+const LOOP_AFTER_MS = 10000;
 const ITEM_MS = 5000;
 const TABLET_MQ = '(max-width: 1024px)';
 
@@ -77,7 +77,15 @@ const VISUALS = {
   timerTwo: IconTimerTwo,
   dotWave: IconDotWave,
 } as const;
-type Phase = 'idle' | 'question' | 'typing-1' | 'speaking' | 'answer' | 'typing-2' | 'done';
+type Phase =
+  | 'idle'
+  | 'question'
+  | 'typing-1'
+  | 'hold'
+  | 'speaking'
+  | 'answer'
+  | 'typing-2'
+  | 'done';
 
 export const InsuranceHandles = ({
   items = DEFAULT_ITEMS,
@@ -97,9 +105,14 @@ export const InsuranceHandles = ({
   const [itemsInView, setItemsInView] = useState(false);
   const [activeItemId, setActiveItemId] = useState(items[0].id);
 
-  const isTyping = phase === 'typing-1' || phase === 'typing-2';
+  const isWaveActive = phase === 'typing-1' || phase === 'hold' || phase === 'typing-2';
   const fullText = phase === 'typing-2' || phase === 'done' ? secondText : firstText;
   const Visual = VISUALS[visual];
+  const showQuestion =
+    phase === 'typing-1' || phase === 'hold' || phase === 'typing-2' || phase === 'done';
+  const showSpeaking = phase === 'speaking';
+  const showAnswer = phase === 'answer' || phase === 'typing-2' || phase === 'done';
+  const showAvatar = showSpeaking || showAnswer;
 
   useEffect(() => {
     const root = rootRef.current;
@@ -165,7 +178,7 @@ export const InsuranceHandles = ({
       setDisplayed(nextText);
 
       if (nextText.length >= fullText.length) {
-        setPhase(phase === 'typing-1' ? 'speaking' : 'done');
+        setPhase(phase === 'typing-1' ? 'hold' : 'done');
       }
     }, CHAR_MS);
 
@@ -173,11 +186,21 @@ export const InsuranceHandles = ({
   }, [displayed, fullText, phase]);
 
   useEffect(() => {
+    if (phase !== 'hold') return;
+
+    const timeoutId = window.setTimeout(() => {
+      setPhase('speaking');
+    }, PAUSE_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [phase]);
+
+  useEffect(() => {
     if (phase !== 'speaking') return;
 
     const timeoutId = window.setTimeout(() => {
       setPhase('answer');
-    }, SPEAKING_MS);
+    }, PAUSE_MS);
 
     return () => window.clearTimeout(timeoutId);
   }, [phase]);
@@ -188,7 +211,18 @@ export const InsuranceHandles = ({
     const timeoutId = window.setTimeout(() => {
       setDisplayed('');
       setPhase('typing-2');
-    }, AFTER_ANSWER_MS);
+    }, PAUSE_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== 'done') return;
+
+    const timeoutId = window.setTimeout(() => {
+      setDisplayed('');
+      setPhase('question');
+    }, LOOP_AFTER_MS);
 
     return () => window.clearTimeout(timeoutId);
   }, [phase]);
@@ -198,17 +232,13 @@ export const InsuranceHandles = ({
 
     if (!el || !video) return;
 
-    if (isTyping) {
+    if (isWaveActive) {
       void el.play().catch(() => undefined);
       return;
     }
 
     el.pause();
-  }, [isTyping, video]);
-
-  const showQuestion = phase !== 'idle';
-  const showSpeaking = phase === 'speaking';
-  const showAnswer = phase === 'answer' || phase === 'typing-2' || phase === 'done';
+  }, [isWaveActive, video]);
 
   return (
     <section className={st.insurance_handles}>
@@ -254,10 +284,14 @@ export const InsuranceHandles = ({
             style={{ '--insurance-handles-bg': `url("${background}")` } as CSSProperties}
           >
             <div className={st.insurance_handles__reaction}>
-              {showSpeaking && (
+              {showAvatar && (
                 <div className={st.insurance_handles__right_top}>
-                  <p className={st.insurance_handles__right_top_text}>Speaking...</p>
-                  <IconSpeaking />
+                  {showSpeaking && (
+                    <>
+                      <p className={st.insurance_handles__right_top_text}>Speaking...</p>
+                      <IconSpeaking />
+                    </>
+                  )}
                   <div className={st.insurance_handles__right_top_icon_speaking}>
                     <Image src={'/icons/speaking.svg'} alt={'Icon'} width={54} height={54} />
                   </div>
@@ -302,7 +336,7 @@ export const InsuranceHandles = ({
                   aria-hidden
                 />
               ) : (
-                <Visual active={isTyping} />
+                <Visual active={isWaveActive} />
               )}
             </div>
           </div>

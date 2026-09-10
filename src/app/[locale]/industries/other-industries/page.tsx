@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 import {
   InsuranceCases,
@@ -24,7 +25,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function OtherIndustriesPage() {
+export default async function OtherIndustriesPage() {
+  const t = await getTranslations('OtherIndustriesPage.InsuranceHandles');
+
   return (
     <main>
       <InsuranceHero
@@ -38,32 +41,32 @@ export default function OtherIndustriesPage() {
           {
             id: 'lead-qualification',
             icon: '/icons/hugeicons_diploma.svg',
-            label: 'Lead Qualification for Real Estate, Technology & E-commerce',
+            label: t('lead-qualification'),
           },
           {
             id: 'appointment-booking',
             icon: '/icons/hugeicons_appointment-02.svg',
-            label: 'Appointment Booking for Healthcare, Hospitality & Consulting',
+            label: t('appointment-booking'),
           },
           {
             id: 'customer-support',
             icon: '/icons/griddy-icons_customer-support.svg',
-            label: 'Customer Support for Retail, Telecommunications & Education',
+            label: t('customer-support'),
           },
           {
             id: 'service-dispatchg',
             icon: '/icons/carbon_send.svg',
-            label: 'Service Dispatch for HVAC, Residential & Agro-Industry',
+            label: t('service-dispatchg'),
           },
           {
             id: 'lead-re-engagement',
             icon: '/icons/hugeicons_touch-interaction-01.svg',
-            label: 'Lead Re-engagement for Real Estate, E-commerce & Entertainment',
+            label: t('lead-re-engagement'),
           },
           {
             id: 'follow-ups',
-            icon: '/icons/fluent_person-account-16-regular.svg',
-            label: 'famicons_trending-up-outline',
+            icon: '/icons/famicons_trending-up-outline.svg',
+            label: t('follow-ups'),
           },
         ]}
         firstText={`"Hi, this is Coldi calling on behalf of [Provider]. You left a request on our website. Is it now a good time to talk?" " `}

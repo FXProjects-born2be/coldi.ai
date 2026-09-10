@@ -28,6 +28,7 @@ export type Plan =
 
 export type Service = {
   id: 'custom-ai' | 'quality-control' | 'voip' | 'implementation';
+  bg: string;
   hoverBg: string;
 };
 
@@ -62,10 +63,26 @@ export const plans: Plan[] = [
 ];
 
 export const services: Service[] = [
-  { id: 'custom-ai', hoverBg: '/images/pricing/services-one-hover-bg.png' },
-  { id: 'quality-control', hoverBg: '/images/pricing/services-two-hover-bg.png' },
-  { id: 'voip', hoverBg: '/images/pricing/services-three-hover-bg.png' },
-  { id: 'implementation', hoverBg: '/images/pricing/services-four-hover-bg.png' },
+  {
+    id: 'custom-ai',
+    bg: '/images/pricing/services-one-bg.png',
+    hoverBg: '/images/pricing/services-one-hover-bg.png',
+  },
+  {
+    id: 'quality-control',
+    bg: '/images/pricing/services-two-bg.png',
+    hoverBg: '/images/pricing/services-two-hover-bg.png',
+  },
+  {
+    id: 'voip',
+    bg: '/images/pricing/services-three-bg.png',
+    hoverBg: '/images/pricing/services-three-hover-bg.png',
+  },
+  {
+    id: 'implementation',
+    bg: '/images/pricing/services-four-bg.png',
+    hoverBg: '/images/pricing/services-four-hover-bg.png',
+  },
 ];
 
 export const processSteps: ProcessStep[] = [

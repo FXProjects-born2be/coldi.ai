@@ -4,32 +4,32 @@
   padding-block: 40px;
   background: #fafafa;
 
-  &__tabs {
-    display: none;
+  &__tabs_wrapper {
+    margin-bottom: 20px;
+    text-align: center;
 
-    @include mobile {
-      display: flex;
-      width: 100%;
-      margin-bottom: 16px;
-      padding: 4px;
-      border-radius: 999px;
-      border: 0.5px solid rgba(0, 0, 0, 0.20);
-      background: #fff;
+    @include mobile-up {
+      display: none;
     }
   }
 
+  &__tabs {
+    display: inline-flex;
+    border-radius: 999px;
+    border: 0.5px solid rgba(0, 0, 0, 0.20);
+  }
+
   &__tab {
-    flex: 1;
     border: 0.5px solid transparent;
     border-radius: 999px;
-    padding: 11px 16px;
+    padding: 11px 24px;
     background: transparent;
     color: #000;
     font-size: 16px;
     line-height: 1.4;
 
     &.active {
-      background: #f6f6f6;
+      font-size: 20px;
       border-color: rgba(0, 0, 0, 0.20);
     }
   }

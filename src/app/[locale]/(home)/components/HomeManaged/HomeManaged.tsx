@@ -26,7 +26,7 @@ const tabs: ManagedTab[] = [
     id: 'calls',
     image: [
       {
-        src: '/images/home/managed-one-main.png',
+        src: '/images/home/managed-one-main.svg',
       },
       {
         src: '/images/home/managed-one-sub-one.png',
@@ -40,7 +40,13 @@ const tabs: ManagedTab[] = [
     id: 'analytics',
     image: [
       {
-        src: '/images/home/managed-two.png',
+        src: '/images/home/managed-two.svg',
+      },
+      {
+        src: '/images/home/managed-two-sub-one.png',
+      },
+      {
+        src: '/images/home/managed-two-sub-two.png',
       },
     ],
   },
@@ -50,13 +56,16 @@ const tabs: ManagedTab[] = [
       {
         src: '/images/home/managed-three.png',
       },
+      {
+        src: '/images/home/managed-two-three-one.png',
+      },
     ],
   },
   {
     id: 'leads',
     image: [
       {
-        src: '/images/home/managed-four.png',
+        src: '/images/home/managed-four.svg',
       },
       {
         src: '/images/home/managed-four-sub-one.png',
@@ -90,11 +99,13 @@ const rotateClockwise = (order: number[], slot: number) => {
 };
 
 const ManagedVisualImages = ({
+  tabId,
   images,
   alt,
   viewLabel,
   onPreview,
 }: {
+  tabId: string;
   images: ManagedTabImage[];
   alt: string;
   viewLabel: string;
@@ -125,7 +136,9 @@ const ManagedVisualImages = ({
   };
 
   return (
-    <div className={st.home_managed__visual_images}>
+    <div
+      className={cn(st.home_managed__visual_images, st[`home_managed__visual_images--${tabId}`])}
+    >
       {images.map((image, originalIndex) => {
         const slot = order.indexOf(originalIndex);
 
@@ -232,7 +245,11 @@ export const HomeManaged = () => {
                 type="button"
                 role="tab"
                 aria-selected={tab.id === activeTab.id}
-                className={cn(st.home_managed__tab, tab.id === activeTab.id && st.active)}
+                className={cn(
+                  st.home_managed__tab,
+                  st[`home_managed__tab--${tab.id}`],
+                  tab.id === activeTab.id && st.active
+                )}
                 onClick={() => selectTab(tab.id)}
               >
                 <span className={st.home_managed__tab_title}>{t(`tabs.${tab.id}.title`)}</span>
@@ -248,10 +265,13 @@ export const HomeManaged = () => {
             ))}
           </div>
 
-          <div className={cn(st.home_managed__main, st[`home_managed__main_${activeTab.id}`])}>
-            <div className={st.home_managed__visual}>
+          <>
+            <div
+              className={cn(st.home_managed__visual, st[`home_managed__visual--${activeTab.id}`])}
+            >
               <ManagedVisualImages
                 key={activeTab.id}
+                tabId={activeTab.id}
                 images={activeTab.image}
                 alt={activeTitle}
                 viewLabel={t('viewScreenshot', { title: activeTitle })}
@@ -263,7 +283,7 @@ export const HomeManaged = () => {
               <span className={st.home_managed__tab_title}>{activeTitle}</span>
               <span className={st.home_managed__tab_text}>{activeDescription}</span>
             </div>
-          </div>
+          </>
 
           {preview
             ? createPortal(
