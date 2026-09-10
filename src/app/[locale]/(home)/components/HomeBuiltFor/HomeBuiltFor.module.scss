@@ -219,6 +219,9 @@
     position: relative;
     z-index: 1;
     min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 
   &__visual_speaking_handles {
@@ -227,7 +230,6 @@
     align-items: center;
     justify-content: flex-end;
     animation: home-built-for-handles-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    margin-bottom: 6px;
   }
 
   &__visual_answer_wrapper {
@@ -236,9 +238,9 @@
     border: 0.562px solid rgba(255, 255, 255, 0.40);
     background: var(--Light-Blue, #F6F6F6);
     backdrop-filter: blur(10.656827926635742px);
-    width: max-content;
     margin-left: auto;
     animation: home-built-for-handles-pop 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    display: inline-flex;
 
     @include mobile {
       padding: 6px 14px;

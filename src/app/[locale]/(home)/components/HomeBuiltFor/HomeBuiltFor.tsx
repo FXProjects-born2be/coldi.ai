@@ -38,7 +38,7 @@ type Industry = {
 
 const CHAR_MS = 28;
 const QUESTION_IN_MS = 500;
-const PAUSE_MS = 2000;
+const PAUSE_MS = 1000;
 const LOOP_AFTER_MS = 10000;
 
 type HandlesPhase =
@@ -151,16 +151,12 @@ const HomeBuiltForHandlesVisual = ({
   const rootRef = useRef<HTMLDivElement>(null);
   const [phase, setPhase] = useState<HandlesPhase>('idle');
   const [displayed, setDisplayed] = useState('');
-  const [showAvatar, setShowAvatar] = useState(false);
-
-  if (phase === 'speaking' && !showAvatar) {
-    setShowAvatar(true);
-  }
 
   const fullText = phase === 'typing-2' || phase === 'done' ? secondText : firstText;
   const showQuestion = phase !== 'idle';
   const showSpeaking = phase === 'speaking';
   const showAnswer = phase === 'answer' || phase === 'typing-2' || phase === 'done';
+  const showAvatar = phase === 'speaking' || phase === 'answer';
   const isWaveActive =
     phase === 'question' || phase === 'typing-1' || phase === 'speaking' || phase === 'typing-2';
   const Visual = VISUALS[visual];
@@ -257,7 +253,7 @@ const HomeBuiltForHandlesVisual = ({
   return (
     <>
       <div ref={rootRef} className={st.home_built_for__visual_reaction}>
-        {(showSpeaking || showAvatar) && (
+        {showAvatar && (
           <div className={st.home_built_for__visual_speaking_handles}>
             {showSpeaking && (
               <>
