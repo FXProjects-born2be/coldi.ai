@@ -156,7 +156,7 @@ const HomeBuiltForHandlesVisual = ({
   const showQuestion = phase !== 'idle';
   const showSpeaking = phase === 'speaking';
   const showAnswer = phase === 'answer' || phase === 'typing-2' || phase === 'done';
-  const showAvatar = phase === 'speaking' || phase === 'answer';
+  const showAvatar = showSpeaking || showAnswer;
   const isWaveActive =
     phase === 'question' || phase === 'typing-1' || phase === 'speaking' || phase === 'typing-2';
   const Visual = VISUALS[visual];
@@ -262,7 +262,7 @@ const HomeBuiltForHandlesVisual = ({
               </>
             )}
             <div className={st.home_built_for__visual_speaking_icon}>
-              <Image src="/icons/speaking.svg" alt="" width={54} height={54} />
+              <Image src="/icons/speaking.svg" alt="Icon" width={54} height={54} />
             </div>
           </div>
         )}
