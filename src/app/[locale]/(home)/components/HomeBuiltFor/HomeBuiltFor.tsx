@@ -265,7 +265,7 @@ const HomeBuiltForHandlesVisual = ({
         )}
 
         <div className={st.home_built_for__visual_logo}>
-          <Image alt="" width={60} height={60} src="/icons/logo-white.svg" />
+          <Image alt="Icon" width={60} height={60} src="/icons/logo-white.svg" />
         </div>
       </div>
 
@@ -349,7 +349,7 @@ export const HomeBuiltFor = () => {
             {industry.workflows.map((item) => (
               <div key={item.id} className={st.home_built_for__content_item}>
                 <div className={st.home_built_for__content_item_image}>
-                  <Image src={item.icon} alt="" width={20} height={20} loading={'lazy'} />
+                  <Image src={item.icon} alt="Icon" width={20} height={20} />
                 </div>
                 <p className={st.home_built_for__content_item_title}>
                   {t(`industries.${industry.id}.workflows.${item.id}`)}
