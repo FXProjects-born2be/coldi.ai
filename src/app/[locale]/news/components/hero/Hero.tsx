@@ -137,9 +137,6 @@ export const Hero = ({ articles }: HeroProps) => {
                   alt={activeArticle.title}
                   width={1024}
                   height={576}
-                  quality={100}
-                  unoptimized
-                  priority
                 />
               </div>
               <div className={st.featuredBody}>
