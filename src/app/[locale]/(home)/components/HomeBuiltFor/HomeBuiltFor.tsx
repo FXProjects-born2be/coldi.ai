@@ -153,12 +153,12 @@ const HomeBuiltForHandlesVisual = ({
   const [displayed, setDisplayed] = useState('');
 
   const fullText = phase === 'typing-2' || phase === 'done' ? secondText : firstText;
-  const showQuestion = phase !== 'idle';
+  const showQuestion =
+    phase === 'typing-1' || phase === 'hold' || phase === 'typing-2' || phase === 'done';
   const showSpeaking = phase === 'speaking';
   const showAnswer = phase === 'answer' || phase === 'typing-2' || phase === 'done';
   const showAvatar = showSpeaking || showAnswer;
-  const isWaveActive =
-    phase === 'question' || phase === 'typing-1' || phase === 'speaking' || phase === 'typing-2';
+  const isWaveActive = phase === 'typing-1' || phase === 'hold' || phase === 'typing-2';
   const Visual = VISUALS[visual];
   const isAuraVisual = visual === 'auraTwo' || visual === 'timerTwo';
 
