@@ -140,8 +140,8 @@ export const BurgerMenu = () => {
                   <span itemProp="name">{t('news')}</span>
                 </Link>
                 <Link
-                  href="/helios"
-                  className={cn(st.burger_menu__link, pathname === '/helios' && st.active)}
+                  href="/use-cases"
+                  className={cn(st.burger_menu__link, pathname === '/use-cases' && st.active)}
                   itemProp="url"
                 >
                   <span itemProp="name">{t('useCases')}</span>

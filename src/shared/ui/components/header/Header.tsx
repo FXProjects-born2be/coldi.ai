@@ -126,8 +126,13 @@ const Navigation = ({ pathname }: { pathname: string }) => {
           {t('news')}
         </Link>
       </li>
-      <li className={cn({ [st.active]: pathname === '/helios' })} itemProp="name">
-        <Link className={st.navLink} href="/helios" itemProp="url">
+      <li
+        className={cn({
+          [st.active]: pathname === '/use-cases' || pathname.startsWith('/use-cases'),
+        })}
+        itemProp="name"
+      >
+        <Link className={st.navLink} href="/use-cases" itemProp="url">
           {t('useCases')}
         </Link>
       </li>

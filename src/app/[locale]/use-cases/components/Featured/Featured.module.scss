@@ -1,0 +1,279 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.section {
+  background: #f6f6f6;
+  padding: 40px 0;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+
+  @include tablet {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 0;
+  padding: 16px 24px;
+  background: transparent;
+  border: 0;
+  border-radius: 16px;
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+
+  @include tablet {
+    flex: 0 0 auto;
+    min-width: 180px;
+    font-size: 16px;
+  }
+}
+
+.tabActive {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow:
+    0 0 0.5px rgba(0, 0, 0, 0.4),
+    0 1px 0.5px rgba(0, 0, 0, 0.04),
+    0 2px 2px rgba(0, 0, 0, 0.04);
+}
+
+.tabLine {
+  display: block;
+  width: 112px;
+  max-width: 100%;
+  height: 1px;
+  background: #4268ff;
+  border-radius: 4px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow:
+    0 0 0.5px rgba(0, 0, 0, 0.4),
+    0 1px 0.5px rgba(0, 0, 0, 0.04),
+    0 2px 2px rgba(0, 0, 0, 0.04);
+  animation: fade-in 0.35s ease;
+}
+
+.top {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  padding: 16px;
+
+  @include tablet {
+    flex-direction: column;
+    gap: 24px;
+    padding: 8px;
+  }
+}
+
+.intro {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  color: #000;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.2;
+
+  @include tablet {
+    font-size: 28px;
+  }
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: #fff;
+  border: 1px solid #2544bd;
+  border-radius: 9999px;
+  color: #2544bd;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background: #2544bd;
+    color: #fff;
+  }
+}
+
+.story {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 600px;
+  max-width: 100%;
+
+  @include tablet {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+}
+
+.storyCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 30px 20px;
+  border: 0.5px solid #b2b2b2;
+  border-radius: 10px;
+}
+
+.storyLabel {
+  margin: 0;
+  color: #777169;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.storyText {
+  margin: 0;
+  color: #000;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.results {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px;
+  overflow: hidden;
+  border-radius: 10px;
+  background:
+    linear-gradient(90deg, rgba(66, 104, 255, 0.72), rgba(66, 180, 255, 0.65)),
+    linear-gradient(135deg, #1a2f8f, #4268ff 50%, #6ad1ff);
+
+  @include tablet {
+    padding: 16px;
+  }
+}
+
+.resultsTitle {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #f6f6f6;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.metrics {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+
+  @include tablet {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+  padding: 30px 20px;
+  background: #fff;
+  border: 0.5px solid #b2b2b2;
+  border-radius: 10px;
+
+  @include tablet {
+    min-height: 114px;
+    padding: 16px;
+  }
+}
+
+.metricValue {
+  margin: 0;
+  color: #000;
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 1.2;
+
+  @include tablet {
+    font-size: 32px;
+  }
+}
+
+.metricSuffix {
+  font-size: 40px;
+  line-height: 1.4;
+
+  @include tablet {
+    font-size: 20px;
+  }
+}
+
+.metricLabel {
+  margin: 0;
+  color: #777169;
+  font-size: 16px;
+  line-height: 1.4;
+
+  @include tablet {
+    font-size: 14px;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,497 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.section {
+  background: #f6f6f6;
+  padding: 40px 0;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.heading {
+  margin: 0;
+  color: #000;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+
+  @include tablet {
+    font-size: 28px;
+  }
+}
+
+.panel {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  width: 100%;
+  padding: 40px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow:
+    0 0 0.5px rgba(0, 0, 0, 0.4),
+    0 1px 0.5px rgba(0, 0, 0, 0.04),
+    0 2px 2px rgba(0, 0, 0, 0.04);
+
+  @include tablet {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 240px;
+  flex-shrink: 0;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.sideTab {
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  border: 1px solid #f6f6f6;
+  border-radius: 16px;
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sideTabActive {
+  background: #f6f6f6;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 40px;
+  min-width: 0;
+  animation: fade-in 0.35s ease;
+
+  @include tablet {
+    gap: 20px;
+    width: 100%;
+  }
+}
+
+.contentTop {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+
+  @include tablet {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+.copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.copyText {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.title {
+  margin: 0;
+  color: #000;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.2;
+
+  @include tablet {
+    font-size: 24px;
+  }
+}
+
+.description {
+  margin: 0;
+  color: #4d4d4d;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: #fff;
+  border: 1px solid #2544bd;
+  border-radius: 9999px;
+  color: #2544bd;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background: #2544bd;
+    color: #fff;
+  }
+}
+
+.handles {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  width: 100%;
+}
+
+.handlesTitle {
+  margin: 0;
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.handlesList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include tablet {
+    gap: 10px;
+  }
+}
+
+.handleItem {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #000;
+  font-size: 14px;
+  line-height: 1.4;
+
+  @include tablet {
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+.handleIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: #f6f6f6;
+  border-radius: 4px;
+  flex-shrink: 0;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.handleLabel {
+  min-width: 0;
+
+  @include tablet {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+}
+
+.visuals {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+
+  @include tablet {
+    flex-direction: column;
+  }
+}
+
+.workflow,
+.integration {
+  position: relative;
+  overflow: hidden;
+}
+
+.workflow {
+  flex: 1;
+  min-width: 0;
+  border-radius: 16px;
+  line-height: 0;
+
+  @include tablet {
+    line-height: normal;
+    min-height: 400px;
+  }
+}
+
+.integration {
+  width: 288px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  line-height: 0;
+
+  @include tablet {
+    width: 100%;
+    line-height: normal;
+  }
+}
+
+.cardImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.cardImageDesktop {
+  @include tablet {
+    display: none;
+  }
+}
+
+.cardBg {
+  object-fit: cover;
+  z-index: 0;
+}
+
+.workflowMobile,
+.integrationMobile {
+  display: none;
+
+  @include tablet {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+.workflowMobile {
+  @include tablet {
+    gap: 20px;
+    min-height: 400px;
+    padding: 28px 16px 24px;
+    border-radius: 16px;
+    box-shadow: inset 0 3px 16px rgba(255, 255, 255, 0.5);
+  }
+}
+
+.workflowOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(24, 24, 24, 0.7);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.integrationMobile {
+  @include tablet {
+    gap: 32px;
+    padding: 20px 32px;
+    border-radius: 10px;
+  }
+}
+
+.integrationTint {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(40, 188, 98, 0.3);
+  pointer-events: none;
+}
+
+.visualLabel {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #dfdfdf;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.workflowZigzag {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.zigzagLines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.node {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  padding: 7px 10px;
+  background: #fff;
+  border: 0.8px solid rgba(45, 45, 45, 0.1);
+  border-radius: 50px;
+  color: #0c1021;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+
+  img {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+}
+
+.nodeLeft {
+  align-self: flex-start;
+  margin-left: 4%;
+}
+
+.nodeRight {
+  align-self: flex-end;
+  margin-right: 4%;
+}
+
+.integrationFlow {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: center;
+  width: 100%;
+}
+
+.integrationConnectors {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.sheetsPill {
+  position: relative;
+  z-index: 1;
+  line-height: 0;
+
+  img {
+    width: 179px;
+    height: auto;
+  }
+}
+
+.connectedPill {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 11px;
+  background: #fff;
+  border: 0.9px solid rgba(40, 188, 98, 0.1);
+  border-radius: 58px;
+  color: #28bc62;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+
+  img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.mobileNav {
+  display: none;
+
+  @include tablet {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 6px;
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
+    border-radius: 999px;
+  }
+}
+
+.navBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 12px 24px;
+  background: #fff;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+
+  &:last-child {
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.navTitle {
+  margin: 0;
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
