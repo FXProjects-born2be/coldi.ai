@@ -81,138 +81,33 @@ export const UseCasesImplementations = () => {
                   className={cn(st.cardImage, st.cardImageDesktop)}
                   unoptimized
                 />
-
-                <div className={st.workflowMobile}>
-                  <Image
-                    src="/images/use-cases-hub/workflow-card-bg.jpg"
-                    alt=""
-                    fill
-                    className={st.cardBg}
-                    sizes="100vw"
-                    unoptimized
-                  />
-                  <div className={st.workflowOverlay} aria-hidden />
-                  <p className={st.visualLabel}>The workflow</p>
-                  <div className={st.workflowZigzag}>
-                    <svg className={st.zigzagLines} viewBox="0 0 300 320" fill="none" aria-hidden>
-                      <path
-                        d="M120 28 C160 28, 180 40, 200 55"
-                        stroke="white"
-                        strokeWidth="1.4"
-                        strokeDasharray="4 4"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M160 88 C120 88, 100 100, 90 120"
-                        stroke="white"
-                        strokeWidth="1.4"
-                        strokeDasharray="4 4"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M120 155 C160 155, 180 168, 200 185"
-                        stroke="white"
-                        strokeWidth="1.4"
-                        strokeDasharray="4 4"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M160 218 C120 218, 100 230, 90 250"
-                        stroke="white"
-                        strokeWidth="1.4"
-                        strokeDasharray="4 4"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M140 278 C200 278, 240 290, 250 300 C250 310, 220 310, 180 305"
-                        stroke="white"
-                        strokeWidth="1.4"
-                        strokeDasharray="4 4"
-                        strokeLinecap="round"
-                      />
-                      <polygon points="200,50 206,58 194,58" fill="white" />
-                      <polygon points="90,115 96,123 84,123" fill="white" />
-                      <polygon points="200,180 206,188 194,188" fill="white" />
-                      <polygon points="90,245 96,253 84,253" fill="white" />
-                      <polygon points="180,300 172,294 172,306" fill="white" />
-                    </svg>
-                    {active.workflow.map((step, index) => (
-                      <span
-                        key={step}
-                        className={cn(st.node, index % 2 === 1 ? st.nodeRight : st.nodeLeft)}
-                      >
-                        <Image
-                          src="/images/use-cases-hub/check-blue.svg"
-                          alt=""
-                          width={20}
-                          height={20}
-                          unoptimized
-                        />
-                        {step}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                <Image
+                  src="/images/use-cases-hub/workflow-card-mobile.jpg"
+                  alt="The workflow"
+                  width={636}
+                  height={1291}
+                  className={cn(st.cardImage, st.cardImageMobile)}
+                  unoptimized
+                />
               </div>
 
               <div className={st.integration}>
                 <Image
-                  src="/images/use-cases-hub/integration-card.png"
+                  src="/images/use-cases-hub/integration-card.jpg"
                   alt="Integration: Google Sheets connected"
-                  width={288}
-                  height={300}
+                  width={576}
+                  height={600}
                   className={cn(st.cardImage, st.cardImageDesktop)}
                   unoptimized
                 />
-
-                <div className={st.integrationMobile}>
-                  <Image
-                    src="/images/use-cases-hub/integration-bg.jpg"
-                    alt=""
-                    fill
-                    className={st.cardBg}
-                    sizes="100vw"
-                    unoptimized
-                  />
-                  <div className={st.integrationTint} aria-hidden />
-                  <p className={st.visualLabel}>Integration</p>
-                  <div className={st.integrationFlow}>
-                    <svg
-                      className={st.integrationConnectors}
-                      viewBox="0 0 220 110"
-                      fill="none"
-                      aria-hidden
-                    >
-                      <path
-                        d="M165 28 C205 28, 205 62, 55 62 C25 62, 25 88, 60 88"
-                        stroke="white"
-                        strokeWidth="1.5"
-                        strokeDasharray="4 4"
-                        strokeLinecap="round"
-                      />
-                      <polygon points="60,83 68,88 60,93" fill="white" />
-                    </svg>
-                    <div className={st.sheetsPill}>
-                      <Image
-                        src="/images/use-cases-hub/google-sheets.png"
-                        alt="Google Sheets"
-                        width={179}
-                        height={52}
-                        unoptimized
-                      />
-                    </div>
-                    <div className={st.connectedPill}>
-                      <Image
-                        src="/images/use-cases-hub/check-green.svg"
-                        alt=""
-                        width={22}
-                        height={22}
-                        unoptimized
-                      />
-                      <span>Connected</span>
-                    </div>
-                  </div>
-                </div>
+                <Image
+                  src="/images/use-cases-hub/integration-card-mobile.jpg"
+                  alt="Integration: Google Sheets connected"
+                  width={636}
+                  height={475}
+                  className={cn(st.cardImage, st.cardImageMobile)}
+                  unoptimized
+                />
               </div>
             </div>
           </div>

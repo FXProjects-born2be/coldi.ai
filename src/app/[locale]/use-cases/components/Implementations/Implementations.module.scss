@@ -276,6 +276,15 @@
   }
 }
 
+.cardImageMobile {
+  display: none;
+  border-radius: 16px;
+
+  @include tablet {
+    display: block;
+  }
+}
+
 .cardBg {
   object-fit: cover;
   z-index: 0;

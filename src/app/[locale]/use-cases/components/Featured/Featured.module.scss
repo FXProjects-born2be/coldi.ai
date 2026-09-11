@@ -64,13 +64,40 @@
     0 2px 2px rgba(0, 0, 0, 0.04);
 }
 
-.tabLine {
+.tabsPaused .tabFillActive {
+  animation-play-state: paused;
+}
+
+.tabTrack {
   display: block;
-  width: 112px;
-  max-width: 100%;
+  position: relative;
+  width: 100%;
   height: 1px;
+  overflow: hidden;
+  background: #dbdbde;
+  border-radius: 4px;
+}
+
+.tabFill {
+  display: block;
+  width: 100%;
+  height: 100%;
   background: #4268ff;
   border-radius: 4px;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.tabFillActive {
+  animation: tab-progress 6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.tab:not(.tabActive) .tabTrack {
+  background: transparent;
+}
+
+.tab:not(.tabActive) .tabFill {
+  display: none;
 }
 
 .card {
@@ -186,9 +213,26 @@
   padding: 20px;
   overflow: hidden;
   border-radius: 10px;
-  background:
-    linear-gradient(90deg, rgba(66, 104, 255, 0.72), rgba(66, 180, 255, 0.65)),
-    linear-gradient(135deg, #1a2f8f, #4268ff 50%, #6ad1ff);
+  background: #4268ff;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      url('/images/use-cases-hub/results-bg-grain.jpg') center / cover no-repeat;
+    transform: scale(1.45);
+    transform-origin: center top;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgba(66, 104, 255, 0.6);
+  }
 
   @include tablet {
     padding: 16px;
@@ -239,16 +283,27 @@
   color: #000;
   font-size: 60px;
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.1;
+  transition: color 0.35s ease;
 
   @include tablet {
     font-size: 32px;
   }
 }
 
+.metricValueHighlight {
+  background:
+    linear-gradient(90deg, rgba(66, 104, 255, 0.2), rgba(66, 104, 255, 0.2)),
+    url('/images/use-cases-hub/metric-texture.png') top left / cover no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
 .metricSuffix {
   font-size: 40px;
-  line-height: 1.4;
+  line-height: 1.2;
 
   @include tablet {
     font-size: 20px;
@@ -275,5 +330,15 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes tab-progress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
   }
 }
