@@ -1,34 +1,30 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
-import { blurInUp } from '@/shared/lib/helpers';
-
 import { heroContent } from '../data';
 import st from './Hero.module.scss';
 
-export const Hero = () => {
-  return (
-    <section className={st.layout}>
-      <motion.div
-        className={st.inner}
-        variants={blurInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <span className={st.badge}>{heroContent.label}</span>
-        <h1>
-          Strategic Partnership Case Study:
-          <br />
-          <span>Silverbell Group &amp; Coldi.ai</span>
+export const Hero = () => (
+  <section className={st.section}>
+    <div className={`container ${st.inner}`}>
+      <div className={st.copy}>
+        <h1 className={st.title}>
+          <span className={st.titleAccent}>{heroContent.titleLine1}</span>
+          <span className={st.titleRest}>{heroContent.titleLine2}</span>
         </h1>
-        <div className={st.copy}>
-          {heroContent.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+        <p className={st.subtitle}>{heroContent.subtitle}</p>
+      </div>
+
+      <div className={st.card}>
+        <div className={st.cardInner}>
+          <div className={st.period}>
+            <p className={st.periodLabel}>{heroContent.reportingLabel}</p>
+            <p className={st.periodRange}>{heroContent.reportingRange}</p>
+          </div>
+          <div className={st.paragraphs}>
+            {heroContent.paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+            ))}
+          </div>
         </div>
-      </motion.div>
-    </section>
-  );
-};
+      </div>
+    </div>
+  </section>
+);

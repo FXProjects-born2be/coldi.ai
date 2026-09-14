@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { CaseStudies, Hero } from './components';
+import { CaseStudy, Hero } from './components';
 
 export const metadata: Metadata = {
   alternates: {
@@ -21,7 +21,7 @@ export default function SilverbellGroupPage() {
   return (
     <main>
       <Hero />
-      <CaseStudies />
+      <CaseStudy />
     </main>
   );
 }

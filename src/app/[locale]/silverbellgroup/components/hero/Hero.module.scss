@@ -1,128 +1,138 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
-.layout {
-  position: relative;
-  overflow: hidden;
-  padding: 165px 165px 96px;
-  background-color: #fff;
-  background-image: url("/images/residential-service-automation/hero.png");
-  background-size: cover;
-  background-position: bottom center;
-  background-repeat: no-repeat;
+.section {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #f6f6f6 100%);
+  padding: 80px 0 60px;
 
-  @include fourteenInch {
-    padding-inline: 64px;
-  }
-
-  @include mobile {
-    padding: 112px 16px 32px;
+  @include tablet {
+    padding: 112px 0 32px;
   }
 }
 
 .inner {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    right: -160px;
-    border-radius: 999px;
-    border: 1px solid rgba(66, 104, 255, 0.08);
-    pointer-events: none;
-  }
-
-  &::before {
-    top: -92px;
-    width: 420px;
-    height: 168px;
-    transform: rotate(-16deg);
-  }
-
-  &::after {
-    top: -34px;
-    width: 320px;
-    height: 120px;
-    transform: rotate(-12deg);
-  }
-
-  @include mobile {
-    &::before {
-      right: -110px;
-      top: -54px;
-      width: 240px;
-      height: 92px;
-    }
-
-    &::after {
-      right: -78px;
-      top: -20px;
-      width: 190px;
-      height: 72px;
-    }
-  }
-}
-
-.badge {
-  display: inline-flex;
+  gap: 32px;
   align-items: center;
-  justify-content: center;
-  width: fit-content;
-  padding: 8px 12px;
-  border-radius: 16px;
-  background: rgba(66, 104, 255, 0.15);
-  color: #4268ff;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.2;
-}
 
-.inner h1 {
-  max-width: 1080px;
-  margin: 0;
-  color: #0c1021;
-  font-size: 64px;
-  font-weight: 400;
-  line-height: 1.1;
-
-  span {
-    color: #4268ff;
-  }
-
-  @include mobile {
-    max-width: 100%;
-    font-size: 32px;
-    line-height: 1.2;
+  @include tablet {
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
   }
 }
 
 .copy {
   display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: 1090px;
+}
+
+.titleAccent {
+  color: #4268ff;
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 1.1;
+
+  @include tablet {
+    font-size: 32px;
+  }
+}
+
+.titleRest {
+  color: #000;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.2;
+
+  @include tablet {
+    font-size: 28px;
+  }
+}
+
+.subtitle {
+  margin: 0;
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+
+  @include tablet {
+    font-size: 16px;
+  }
+}
+
+.card {
+  flex: 1;
+  min-width: 0;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+}
+
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 16px;
+
+  @include tablet {
+    gap: 24px;
+    padding: 8px;
+  }
+}
+
+.period {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.periodLabel {
+  margin: 0;
+  color: #000;
+  font-size: 20px;
+  line-height: 1.4;
+
+  @include tablet {
+    font-size: 16px;
+  }
+}
+
+.periodRange {
+  margin: 0;
+  color: #000;
+  font-size: 40px;
+  line-height: 1.2;
+  white-space: pre-wrap;
+
+  @include tablet {
+    font-size: 28px;
+  }
+}
+
+.paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
   p {
     margin: 0;
-    color: #535662;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 1.6;
-  }
+    color: #4d4d4d;
+    font-size: 18px;
+    line-height: 1.4;
 
-  p + p {
-    margin-top: 20px;
-  }
-
-  @include mobile {
-    p {
-      font-size: 18px;
-      line-height: 1.55;
+    @include tablet {
+      font-size: 16px;
     }
   }
 }
