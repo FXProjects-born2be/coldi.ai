@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -6,9 +8,23 @@ import { cn } from '@/shared/lib/helpers';
 import { DEFAULT_NEWS_IMAGE, formatCardDate, type NewsCard } from '../../lib';
 import st from './ArticleCard.module.scss';
 
+export const NEWS_LISTING_RETURN_KEY = 'newsListingReturn';
+
 type ArticleCardProps = {
   article: NewsCard;
   variant?: 'large' | 'compact' | 'related';
+};
+
+const rememberListingReturn = () => {
+  if (typeof window === 'undefined') return;
+  try {
+    const path = `${window.location.pathname}${window.location.search}`;
+    if (path.includes('/news') && !/\/news\/[^/?]+/.test(path)) {
+      sessionStorage.setItem(NEWS_LISTING_RETURN_KEY, path);
+    }
+  } catch {
+    // ignore storage errors
+  }
 };
 
 export const ArticleCard = ({ article, variant = 'compact' }: ArticleCardProps) => {
@@ -16,7 +32,11 @@ export const ArticleCard = ({ article, variant = 'compact' }: ArticleCardProps) 
   const category = article.category || 'News';
 
   return (
-    <Link href={`/news/${article.slug}`} className={cn(st.card, st[variant])}>
+    <Link
+      href={`/news/${article.slug}`}
+      className={cn(st.card, st[variant])}
+      onClick={rememberListingReturn}
+    >
       <div className={st.imageWrap}>
         <Image
           src={article.image || DEFAULT_NEWS_IMAGE}

@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { cn } from '@/shared/lib/helpers';
 
 import { DEFAULT_NEWS_IMAGE, formatFeaturedDate, type NewsCard } from '../../lib';
+import { NEWS_LISTING_RETURN_KEY } from '../article-card/ArticleCard';
 import st from './Hero.module.scss';
 
 const AUTOPLAY_MS = 6000;
@@ -130,6 +131,13 @@ export const Hero = ({ articles }: HeroProps) => {
               className={st.featured}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
+              onClick={() => {
+                try {
+                  sessionStorage.setItem(NEWS_LISTING_RETURN_KEY, '/news');
+                } catch {
+                  // ignore
+                }
+              }}
             >
               <div className={st.featuredImage}>
                 <Image

@@ -4,8 +4,8 @@ import type { Metadata } from 'next';
 
 import { StructuredData } from '@/shared/ui/components/structured-data/StructuredData';
 
-import { getArticleBySlug, getRelatedArticles } from '../articles';
 import { ArticlePage } from '../components/article-page/ArticlePage';
+import { getRelatedCards, resolveArticleBySlug } from '../legacy';
 
 const SITE_URL = 'https://coldi.ai';
 const DEFAULT_NEWS_IMAGE = `${SITE_URL}/images/news/news-item-image.png`;
@@ -24,9 +24,12 @@ const stripHtml = (value: string) =>
 const getArticleDescription = (article?: {
   title?: string;
   excerpt?: string;
+  seoDescription?: string;
   intro?: { type: string; html?: string }[];
+  htmlContent?: string;
 }) => {
   if (!article) return '';
+  if (article.seoDescription?.trim()) return article.seoDescription;
   if (article.excerpt?.trim()) return article.excerpt;
 
   const introText = article.intro
@@ -36,7 +39,13 @@ const getArticleDescription = (article?: {
     .slice(0, 160)
     .trim();
 
-  return introText || article.title || '';
+  if (introText) return introText;
+
+  if (article.htmlContent) {
+    return stripHtml(article.htmlContent).slice(0, 160).trim();
+  }
+
+  return article.title || '';
 };
 
 export async function generateMetadata({
@@ -45,19 +54,19 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  const article = await resolveArticleBySlug(slug);
   const description = getArticleDescription(article);
 
   return {
     alternates: {
       canonical: `/news/${slug}`,
     },
-    title: article?.title || '',
+    title: article?.seoTitle || article?.title || '',
     description,
     authors: [{ name: AUTHOR_NAME, url: AUTHOR_URL }],
     publisher: PUBLISHER_NAME,
     openGraph: {
-      title: article?.title || '',
+      title: article?.seoTitle || article?.title || '',
       description,
       images: [article?.image || DEFAULT_NEWS_IMAGE],
     },
@@ -66,7 +75,7 @@ export async function generateMetadata({
 
 export default async function NewsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  const article = await resolveArticleBySlug(slug);
 
   if (!article) {
     notFound();
@@ -75,7 +84,7 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
   const articleUrl = `${SITE_URL}/news/${slug}`;
   const articleImage = article.image || DEFAULT_NEWS_IMAGE;
   const description = getArticleDescription(article);
-  const related = getRelatedArticles(article);
+  const related = await getRelatedCards(article);
 
   return (
     <>

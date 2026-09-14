@@ -1,12 +1,19 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { Suspense, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { cn } from '@/shared/lib/helpers';
 
-import { ARTICLES_PAGE_SIZE, LARGE_CARDS_COUNT, type NewsCard, padPage } from '../../lib';
-import { ArticleCard } from '../article-card/ArticleCard';
+import {
+  ARTICLES_PAGE_SIZE,
+  FIRST_PAGE_SIZE,
+  LARGE_CARDS_COUNT,
+  type NewsCard,
+  padPage,
+} from '../../lib';
+import { ArticleCard, NEWS_LISTING_RETURN_KEY } from '../article-card/ArticleCard';
 import st from './AllArticles.module.scss';
 
 type AllArticlesProps = {
@@ -14,13 +21,35 @@ type AllArticlesProps = {
   categories: string[];
 };
 
-export const AllArticles = ({ articles, categories }: AllArticlesProps) => {
-  const [search, setSearch] = useState('');
-  const [category, setCategory] = useState('all');
-  const [page, setPage] = useState(1);
+const getTotalPages = (count: number) => {
+  if (count <= FIRST_PAGE_SIZE) return 1;
+  return 1 + Math.ceil((count - FIRST_PAGE_SIZE) / ARTICLES_PAGE_SIZE);
+};
+
+const getPageItems = (articles: NewsCard[], page: number) => {
+  if (page <= 1) return articles.slice(0, FIRST_PAGE_SIZE);
+
+  const start = FIRST_PAGE_SIZE + (page - 2) * ARTICLES_PAGE_SIZE;
+  return articles.slice(start, start + ARTICLES_PAGE_SIZE);
+};
+
+const parsePositiveInt = (value: string | null, fallback = 1) => {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed) || parsed < 1) return fallback;
+  return Math.floor(parsed);
+};
+
+const AllArticlesInner = ({ articles, categories }: AllArticlesProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const filterRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const category = searchParams.get('category') ?? 'all';
+  const search = searchParams.get('q') ?? '';
+  const urlPage = parsePositiveInt(searchParams.get('page'));
 
   const filterOptions = useMemo(
     () => ['All', ...categories.filter((item) => item.toLowerCase() !== 'all')],
@@ -43,38 +72,51 @@ export const AllArticles = ({ articles, categories }: AllArticlesProps) => {
     });
   }, [articles, category, search]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / ARTICLES_PAGE_SIZE));
-  const currentPage = Math.min(page, totalPages);
-  const pageItems = filtered.slice(
-    (currentPage - 1) * ARTICLES_PAGE_SIZE,
-    currentPage * ARTICLES_PAGE_SIZE
-  );
+  const totalPages = getTotalPages(filtered.length);
+  const currentPage = Math.min(urlPage, totalPages);
+  const pageItems = getPageItems(filtered, currentPage);
   const isFirstPage = currentPage === 1;
   const largeCards = isFirstPage ? pageItems.slice(0, LARGE_CARDS_COUNT) : [];
   const compactCards = isFirstPage ? pageItems.slice(LARGE_CARDS_COUNT) : pageItems;
 
-  useEffect(() => {
-    const onPointerDown = (event: MouseEvent) => {
-      if (!filterRef.current?.contains(event.target as Node)) {
-        setIsFilterOpen(false);
-      }
-    };
+  const syncUrl = (
+    nextPage: number,
+    nextCategory: string,
+    nextSearch: string,
+    mode: 'push' | 'replace' = 'replace'
+  ) => {
+    const params = new URLSearchParams();
+    if (nextPage > 1) params.set('page', String(nextPage));
+    if (nextCategory !== 'all') params.set('category', nextCategory);
+    if (nextSearch.trim()) params.set('q', nextSearch.trim());
 
-    document.addEventListener('mousedown', onPointerDown);
-    return () => document.removeEventListener('mousedown', onPointerDown);
-  }, []);
+    const query = params.toString();
+    const href = query ? `${pathname}?${query}` : pathname;
+
+    if (mode === 'push') {
+      router.push(href, { scroll: false });
+    } else {
+      router.replace(href, { scroll: false });
+    }
+
+    try {
+      sessionStorage.setItem(NEWS_LISTING_RETURN_KEY, href);
+    } catch {
+      // ignore storage errors
+    }
+  };
 
   const goToPage = (nextPage: number) => {
     const clamped = Math.min(Math.max(nextPage, 1), totalPages);
     if (clamped === currentPage) return;
 
-    setPage(clamped);
+    syncUrl(clamped, category, search, 'push');
     sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const selectCategory = (value: string) => {
-    setCategory(value.toLowerCase() === 'all' ? 'all' : value);
-    setPage(1);
+    const nextCategory = value.toLowerCase() === 'all' ? 'all' : value;
+    syncUrl(1, nextCategory, search);
     setIsFilterOpen(false);
   };
 
@@ -84,7 +126,15 @@ export const AllArticles = ({ articles, categories }: AllArticlesProps) => {
         <div className={st.toolbar}>
           <div className={st.toolbarTop}>
             <h2 className={st.heading}>All Articles</h2>
-            <div className={st.filterWrap} ref={filterRef}>
+            <div
+              className={st.filterWrap}
+              ref={filterRef}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                  setIsFilterOpen(false);
+                }
+              }}
+            >
               <button
                 type="button"
                 className={cn(st.filter, (isFilterOpen || category !== 'all') && st.filterActive)}
@@ -147,8 +197,7 @@ export const AllArticles = ({ articles, categories }: AllArticlesProps) => {
               aria-label="Search articles"
               value={search}
               onChange={(event) => {
-                setSearch(event.target.value);
-                setPage(1);
+                syncUrl(1, category, event.target.value);
               }}
             />
             <span className={st.searchIcon}>
@@ -184,7 +233,7 @@ export const AllArticles = ({ articles, categories }: AllArticlesProps) => {
           </>
         )}
 
-        {filtered.length > ARTICLES_PAGE_SIZE && (
+        {filtered.length > FIRST_PAGE_SIZE && (
           <div className={st.pagination}>
             <button
               type="button"
@@ -215,3 +264,9 @@ export const AllArticles = ({ articles, categories }: AllArticlesProps) => {
     </section>
   );
 };
+
+export const AllArticles = (props: AllArticlesProps) => (
+  <Suspense fallback={null}>
+    <AllArticlesInner {...props} />
+  </Suspense>
+);

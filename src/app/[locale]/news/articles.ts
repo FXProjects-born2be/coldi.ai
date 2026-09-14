@@ -188,19 +188,63 @@ const ARTICLES: NewsArticle[] = [
       'how-ai-reduces-costs-in-healthcare',
     ],
     intro: [
-      p(
-        `Expanding into a new market usually means supporting a new language, adding phone numbers, or integrating with local systems. Our latest U.S. deployment taught us that it can mean much more than that. One of our customers sells an e-commerce product across all 50 U.S. states. Every purchase is followed by a personalized onboarding call, where an AI agent guides the customer through the next steps and helps them get the most from the product. On paper, it's a simple workflow. A customer buys a product. An AI agent calls to schedule and deliver the onboarding. In practice, running that workflow across the United States uncovered two challenges we hadn't needed to solve at this scale before: Which phone number should the call come from? When is that call actually allowed to happen? Neither problem could be solved with another campaign or another workflow. Both required new infrastructure.`
+      html(
+        `Expanding into a new market usually means supporting a new language, adding phone numbers, or integrating with local systems.`,
+        `Our latest U.S. deployment taught us that it can mean much more than that.`,
+        `One of our customers sells an e-commerce product across all 50 U.S. states. Every purchase is followed by a personalized onboarding call, where an AI agent guides the customer through the next steps and helps them get the most from the product.`,
+        `On paper, it's a simple workflow. A customer buys a product. An AI agent calls to schedule and deliver the onboarding.`,
+        `In practice, running that workflow across the United States uncovered two challenges we hadn't needed to solve at this scale before:`,
+        `<ul><li>Which phone number should the call come from?</li><li>When is that call actually allowed to happen?</li></ul>`,
+        `Neither problem could be solved with another campaign or another workflow. Both required new infrastructure.`
       ),
     ],
     sections: [
-      section(
-        'Challenge #1: Local Numbers Matter',
-        `If you're making outbound calls in the U.S., the number you call from matters almost as much as the conversation itself. According to a Software Advice survey, consumers were nearly four times more likely to answer calls from a local area code than from an out-of-area or toll-free number (27.5% vs. 7%). For businesses making thousands of outbound calls every month, that's a significant difference — and in our own deployment, switching to local caller ID matching moved the answer rate by 53%.  Our customer's buyers could be anywhere — from Texas to California to Florida. Using the same caller ID for every customer wasn't an option. Our first thought was to solve this the way we'd handled similar projects before: build dedicated campaigns for different regions. That approach worked well in Europe, LATAM, and the GCC, where regional routing could be managed with a relatively small number of dialing plans. The U.S. is different. With hundreds of active telephone area codes across 50 states, maintaining separate routing logic manually doesn't scale. So instead of asking customers to manage that complexity, we built it directly into Coldi. Local Caller ID Matching Every outbound call now follows a simple decision process. Step 1: Check the recipient's area code. If a matching local number is available, the call is placed from that number. If not, Coldi automatically looks for another available number in the same state. If no state match exists, the platform selects the closest available number within the same time zone. The entire process happens automatically before the call is placed. No manual routing. No duplicated campaigns. No maintenance. Just the most relevant caller ID available for every outbound call. It's important to note that this is local presence dialing, not caller ID spoofing. Every number used belongs to Coldi's infrastructure. The platform simply selects the most appropriate legitimate number for each call. Running this at U.S. scale is not a small lift: 300+ numbers across 300+ area codes in 50+ states is a lot of moving parts to keep matched and current. We built that complexity directly into the Coldi platform, so it's live automatically for any client running on Coldi — nothing for the client's team to configure. We also built an automated number health system underneath it. It continuously scans every number in the pool for signs of trouble — dropped answer rates, spam flags, carrier issues — and once a problem is found, the system replaces the number automatically. No human touch required.`
-      ),
-      section(
-        "Challenge #2: Compliance Doesn't Scale Manually",
-        `Improving answer rates solved only half the problem. The second challenge was compliance. Outbound campaigns in the United States must respect federal regulations, the recipient's local time zone, and, in many cases, additional state-specific requirements. For organizations calling customers across the country, managing those rules manually becomes increasingly difficult as campaigns grow. We didn't want customers maintaining spreadsheets of calling windows or creating separate retry schedules for every region. So we applied the same philosophy: build the logic once, let the platform handle the rest. TCPA-Aware Calling Logic Before every outbound call, Coldi automatically: Identifies the recipient's local time zone. Verifies the applicable calling window. Schedules retry attempts only during permitted hours. Prevents calls from being placed outside configured calling windows. Instead of relying on manual scheduling, every outbound attempt is evaluated before it's placed. That allows teams to focus on customer engagement instead of monitoring clocks, calendars, and regional rules. Building Features Around Real Customer Problems Neither of these capabilities started as roadmap items. They came directly from solving a real operational challenge for a customer running outbound onboarding across the United States. What began as one implementation became two new platform capabilities: Local Caller ID Matching, helping businesses connect with more customers by presenting the most relevant local caller ID — with an automated number health system that finds and replaces underperforming numbers on its own. TCPA-Aware Calling Logic, helping teams automate outbound campaigns while respecting local calling windows. That's how we build Coldi. We don't create features because they sound impressive. We build them because real deployments uncover real operational problems. As we continue expanding in the U.S., we'll keep investing in infrastructure that helps businesses run smarter, more scalable outbound operations. Because great Voice AI isn't just about what happens during the conversation. It's about everything that happens before the phone even rings.`
-      ),
+      {
+        heading: 'Challenge #1: Local Numbers Matter',
+        blocks: [
+          html(
+            `If you're making outbound calls in the U.S., the number you call from matters almost as much as the conversation itself.`,
+            `According to a Software Advice survey, consumers were nearly four times more likely to answer calls from a local area code than from an out-of-area or toll-free number (27.5% vs. 7%). For businesses making thousands of outbound calls every month, that's a significant difference — and in our own deployment, switching to local caller ID matching moved the answer rate by <strong>53%</strong>.`,
+            `Our customer's buyers could be anywhere — from Texas to California to Florida. Using the same caller ID for every customer wasn't an option.`,
+            `Our first thought was to solve this the way we'd handled similar projects before: build dedicated campaigns for different regions. That approach worked well in Europe, LATAM, and the GCC, where regional routing could be managed with a relatively small number of dialing plans.`,
+            `The U.S. is different. With hundreds of active telephone area codes across 50 states, maintaining separate routing logic manually doesn't scale. So instead of asking customers to manage that complexity, we built it directly into Coldi.`,
+            `<p><strong>Local Caller ID Matching</strong></p>`,
+            `Every outbound call now follows a simple decision process.`,
+            `Step 1: Check the recipient's area code. If a matching local number is available, the call is placed from that number. If not, Coldi automatically looks for another available number in the same state. If no state match exists, the platform selects the closest available number within the same time zone.`,
+            `The entire process happens automatically before the call is placed. No manual routing. No duplicated campaigns. No maintenance. Just the most relevant caller ID available for every outbound call.`,
+            `It's important to note that this is local presence dialing, not caller ID spoofing. Every number used belongs to Coldi's infrastructure. The platform simply selects the most appropriate legitimate number for each call.`,
+            `Running this at U.S. scale is not a small lift: 300+ numbers across 300+ area codes in 50+ states is a lot of moving parts to keep matched and current. We built that complexity directly into the Coldi platform, so it's live automatically for any client running on Coldi — nothing for the client's team to configure.`,
+            `We also built an automated number health system underneath it. It continuously scans every number in the pool for signs of trouble — dropped answer rates, spam flags, carrier issues — and once a problem is found, the system replaces the number automatically. No human touch required.`
+          ),
+        ],
+      },
+      {
+        heading: "Challenge #2: Compliance Doesn't Scale Manually",
+        blocks: [
+          html(
+            `Improving answer rates solved only half the problem.`,
+            `The second challenge was compliance.`,
+            `Outbound campaigns in the United States must respect federal regulations, the recipient's local time zone, and, in many cases, additional state-specific requirements. For organizations calling customers across the country, managing those rules manually becomes increasingly difficult as campaigns grow.`,
+            `We didn't want customers maintaining spreadsheets of calling windows or creating separate retry schedules for every region. So we applied the same philosophy: build the logic once, let the platform handle the rest.`,
+            `<p><strong>TCPA-Aware Calling Logic</strong></p>`,
+            `Before every outbound call, Coldi automatically:`,
+            `<ul><li>Identifies the recipient's local time zone.</li><li>Verifies the applicable calling window.</li><li>Schedules retry attempts only during permitted hours.</li><li>Prevents calls from being placed outside configured calling windows.</li></ul>`,
+            `Instead of relying on manual scheduling, every outbound attempt is evaluated before it's placed. That allows teams to focus on customer engagement instead of monitoring clocks, calendars, and regional rules.`
+          ),
+        ],
+      },
+      {
+        heading: 'Building Features Around Real Customer Problems',
+        blocks: [
+          html(
+            `Neither of these capabilities started as roadmap items. They came directly from solving a real operational challenge for a customer running outbound onboarding across the United States.`,
+            `What began as one implementation became two new platform capabilities:`,
+            `<ul><li><strong>Local Caller ID Matching</strong>, helping businesses connect with more customers by presenting the most relevant local caller ID — with an automated number health system that finds and replaces underperforming numbers on its own.</li><li><strong>TCPA-Aware Calling Logic</strong>, helping teams automate outbound campaigns while respecting local calling windows.</li></ul>`,
+            `That's how we build Coldi. We don't create features because they sound impressive. We build them because real deployments uncover real operational problems.`,
+            `As we continue expanding in the U.S., we'll keep investing in infrastructure that helps businesses run smarter, more scalable outbound operations. Because great Voice AI isn't just about what happens during the conversation. It's about everything that happens before the phone even rings.`
+          ),
+        ],
+      },
     ],
   }),
   withCard('will-ai-replace-real-estate-agents', {

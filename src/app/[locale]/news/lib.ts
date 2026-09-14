@@ -26,6 +26,11 @@ export type NewsArticle = NewsCard & {
   relatedSlugs: string[];
   intro: ArticleBlock[];
   sections: ArticleSection[];
+  /** Legacy Supabase HTML body rendered inside the new article chrome */
+  htmlContent?: string;
+  htmlToc?: { id: string; text: string }[];
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export const slugifyHeading = (value: string) =>
@@ -37,7 +42,10 @@ export const slugifyHeading = (value: string) =>
     .replace(/\s+/g, '-');
 
 export const DEFAULT_NEWS_IMAGE = '/images/news/news-outbound.png';
-export const ARTICLES_PAGE_SIZE = 8;
+/** Compact 3-column pages */
+export const ARTICLES_PAGE_SIZE = 9;
+/** First page: 2 large + 9 compact */
+export const FIRST_PAGE_SIZE = 11;
 export const LARGE_CARDS_COUNT = 2;
 
 export const NEWS_CATEGORIES = [

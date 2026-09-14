@@ -8,6 +8,7 @@ import { ArticleCard } from '../article-card/ArticleCard';
 import st from './ArticlePage.module.scss';
 import { ArticleShare } from './ArticleShare';
 import { ArticleToc } from './ArticleToc';
+import { NewsListingLink } from './NewsListingLink';
 
 const SITE_URL = 'https://coldi.ai';
 
@@ -128,10 +129,13 @@ const renderBlocks = (blocks: NewsArticle['intro'], className: string) => {
 
 export const ArticlePage = ({ article, related }: ArticlePageProps) => {
   const articleUrl = `${SITE_URL}/news/${article.slug}`;
-  const tocItems = article.sections.map((section) => ({
-    id: slugifyHeading(section.heading),
-    text: section.heading,
-  }));
+  const tocItems =
+    article.htmlToc && article.htmlToc.length > 0
+      ? article.htmlToc
+      : article.sections.map((section) => ({
+          id: slugifyHeading(section.heading),
+          text: section.heading,
+        }));
 
   return (
     <main className={st.page}>
@@ -154,9 +158,7 @@ export const ArticlePage = ({ article, related }: ArticlePageProps) => {
                 />
               </li>
               <li>
-                <Link href="/news" className={st.crumbLink}>
-                  News
-                </Link>
+                <NewsListingLink className={st.crumbLink}>News</NewsListingLink>
               </li>
               <li className={st.separator} aria-hidden>
                 <Image
@@ -240,22 +242,31 @@ export const ArticlePage = ({ article, related }: ArticlePageProps) => {
               </div>
             )}
 
-            {article.intro.length > 0 && (
-              <div className={st.section}>{renderBlocks(article.intro, st.intro)}</div>
+            {article.htmlContent ? (
+              <div
+                className={`${st.section} ${st.htmlContent}`}
+                dangerouslySetInnerHTML={{ __html: article.htmlContent }}
+              />
+            ) : (
+              <>
+                {article.intro.length > 0 && (
+                  <div className={st.section}>{renderBlocks(article.intro, st.intro)}</div>
+                )}
+
+                {article.sections.map((section) => {
+                  const id = slugifyHeading(section.heading);
+
+                  return (
+                    <section key={id} className={st.section}>
+                      <h2 id={id} className={st.heading}>
+                        {section.heading}
+                      </h2>
+                      {renderBlocks(section.blocks, st.sectionBody)}
+                    </section>
+                  );
+                })}
+              </>
             )}
-
-            {article.sections.map((section) => {
-              const id = slugifyHeading(section.heading);
-
-              return (
-                <section key={id} className={st.section}>
-                  <h2 id={id} className={st.heading}>
-                    {section.heading}
-                  </h2>
-                  {renderBlocks(section.blocks, st.sectionBody)}
-                </section>
-              );
-            })}
           </div>
         </div>
       </section>
