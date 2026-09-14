@@ -75,25 +75,22 @@
     padding: 20px;
     transition: box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 
-    > * {
+    > *:not(img) {
       position: relative;
       z-index: 1;
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%), url('/images/pricing/plans-bg.jpg') lightgray -199.647px -40.971px / 220.714% 138.137% no-repeat;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 0;
-      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     @include mobile {
       min-height: 254px;
     }
+  }
+
+  &__inner_top_bg {
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   &__title {
@@ -180,7 +177,8 @@
     box-shadow: -183.017px 0 50.958px 0 rgba(66, 104, 255, 0.00), -116.987px 0 46.651px 0 rgba(66, 104, 255, 0.01), -66.03px 0 39.474px 0 rgba(66, 104, 255, 0.03), -29.426px 0 29.426px 0 rgba(66, 104, 255, 0.06), -7.177px 0 15.79px 0 rgba(66, 104, 255, 0.06);
   }
 
-  &__card:hover &__inner_top::before {
+  &__card:hover &__inner_top::after,
+  &__card:hover &__inner_top_bg {
     opacity: 1;
   }
 
@@ -201,7 +199,8 @@
       box-shadow: -183.017px 0 50.958px 0 rgba(66, 104, 255, 0.00), -116.987px 0 46.651px 0 rgba(66, 104, 255, 0.01), -66.03px 0 39.474px 0 rgba(66, 104, 255, 0.03), -29.426px 0 29.426px 0 rgba(66, 104, 255, 0.06), -7.177px 0 15.79px 0 rgba(66, 104, 255, 0.06);
     }
 
-    &__card.active &__inner_top::before {
+    &__card.active &__inner_top::after,
+    &__card.active &__inner_top_bg {
       opacity: 1;
     }
 

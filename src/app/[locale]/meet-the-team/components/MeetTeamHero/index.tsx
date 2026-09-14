@@ -8,7 +8,7 @@ export const MeetTeamHero = async () => {
   const t = await getTranslations('MeetTeamHero');
 
   return (
-    <section className={st.meet_team_hero}>
+    <section className={cn('hero-shadow', st.meet_team_hero)}>
       <div className={cn('container', st.meet_team_hero__container)}>
         <div className={st.meet_team_hero__header}>
           <h1 className={st.meet_team_hero__title}>

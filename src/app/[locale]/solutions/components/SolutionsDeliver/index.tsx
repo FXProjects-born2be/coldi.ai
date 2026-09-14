@@ -81,7 +81,7 @@ export const SolutionsDeliver = () => {
                       end={card.value}
                       play={play}
                       separator
-                      duration={7.6}
+                      duration={5.6}
                       mobileDuration={3.8}
                       step={card.step}
                     />

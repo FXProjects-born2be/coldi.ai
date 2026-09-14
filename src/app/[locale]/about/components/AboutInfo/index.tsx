@@ -14,43 +14,23 @@ const AUTO_MS = 5000;
 const blocks = [
   {
     id: 'phone-capacity',
-    image: {
-      src: '/images/about/about1.png',
-      width: 427,
-      height: 506,
-    },
+    image: '/images/about/about1.png',
   },
   {
     id: 'work-in-business',
-    image: {
-      src: '/images/about/about2.png',
-      width: 516,
-      height: 515,
-    },
+    image: '/images/about/about2.png',
   },
   {
     id: 'workflow',
-    image: {
-      src: '/images/about/about3.png',
-      width: 564,
-      height: 564,
-    },
+    image: '/images/about/about3.png',
   },
   {
     id: 'operations',
-    image: {
-      src: '/images/about/about4.png',
-      width: 427,
-      height: 309,
-    },
+    image: '/images/about/about4.png',
   },
   {
     id: 'global',
-    image: {
-      src: '/images/about/about5.png',
-      width: 564,
-      height: 564,
-    },
+    image: '/images/about/about5.png',
   },
 ] as const;
 
@@ -175,11 +155,10 @@ export const AboutInfo = () => {
                 </div>
                 <div className={st.about_info__img}>
                   <Image
-                    src={block.image.src}
+                    src={block.image}
                     alt={title}
-                    width={block.image.width}
-                    height={block.image.height}
-                    loading="lazy"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
                   />
                 </div>
               </div>

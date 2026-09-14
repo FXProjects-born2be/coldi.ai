@@ -11,23 +11,32 @@
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.10);
     box-shadow: 0 0 0 0 #FFF inset, 0 0 0 0.5px rgba(0, 0, 0, 0.30) inset;
-    display: flex;
-    gap: 51px;
     min-height: 389px;
-    align-items: center;
     position: relative;
     z-index: 1;
     overflow: hidden;
+    display: grid;
 
     @include desktop {
-      justify-content: center;
+      grid-template-columns: 1fr 1.475fr 1fr;
+      gap: 51px;
     }
 
     @include tablet {
-      flex-direction: column;
-      padding-block: 40px;
-      gap: 0;
       min-height: 450px;
+      padding-top: 40px;
+    }
+  }
+
+  @include desktop {
+    &__wave_wrapper {
+      position: relative;
+    }
+  }
+
+  @include tablet {
+    &__wave_wrapper--left {
+      display: none;
     }
   }
 
@@ -44,14 +53,16 @@
     @include tablet {
       bottom: 0;
     }
+
+    @include desktop {
+      svg {
+        max-width: 100%;
+      }
+    }
   }
 
   &__wave_left {
     left: 0;
-
-    @include tablet {
-      display: none;
-    }
   }
 
   &__wave_right {
@@ -68,6 +79,10 @@
 
   &__center {
     text-align: center;
+
+    @include desktop {
+      align-self: center;
+    }
 
     @include tablet {
       padding-inline: 20px;
@@ -135,9 +150,7 @@
 .insurance {
   @include tablet {
     .insurance_cases__wave_right {
-      position: static;
-      margin-top: 30px;
-      transform: translateX(0);
+      bottom: 124px;
     }
   }
 }
@@ -169,6 +182,7 @@
     left: 0;
     top: unset;
     transform: translateY(0);
+    width: auto;
 
     svg {
       overflow: visible;

@@ -23,11 +23,11 @@ export const SolutionsHero = async () => {
   const t = await getTranslations('SolutionsHero');
 
   return (
-    <section className={st.agents_hero}>
-      <div className={st.agents_hero__bg} aria-hidden>
-        <div className={st.agents_hero__rings}>
+    <section className={cn('hero-shadow ', st.solutions_hero)}>
+      <div className={st.solutions_hero__bg} aria-hidden>
+        <div className={st.solutions_hero__rings}>
           {rings.map((ring) => (
-            <div key={ring.src} className={st.agents_hero__ring}>
+            <div key={ring.src} className={st.solutions_hero__ring}>
               <Image
                 src={ring.src}
                 alt=""
@@ -40,8 +40,8 @@ export const SolutionsHero = async () => {
         </div>
       </div>
 
-      <div className={cn('container', st.agents_hero__container)}>
-        <h1 className={st.agents_hero__title}>
+      <div className={cn('container', st.solutions_hero__container)}>
+        <h1 className={st.solutions_hero__title}>
           {t.rich('titleLine1', {
             span: (chunks) => <span>{chunks}</span>,
           })}
@@ -50,9 +50,9 @@ export const SolutionsHero = async () => {
             span: (chunks) => <span>{chunks}</span>,
           })}
         </h1>
-        <p className={st.agents_hero__description}>{t('description')}</p>
+        <p className={st.solutions_hero__description}>{t('description')}</p>
 
-        <BookDemo className={cn('btn-primary', st.agents_hero__btn)} />
+        <BookDemo className={'btn-primary mx-auto'} />
       </div>
     </section>
   );

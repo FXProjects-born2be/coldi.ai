@@ -1,20 +1,42 @@
 'use client';
 
-import { useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
 import { useForm, v } from '@/shared/lib/forms';
 import { cn } from '@/shared/lib/helpers';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
+import { IconContactWave } from '@/shared/ui/icons/IconContactWave';
 
 import st from './PricingContact.module.scss';
 
 export const PricingContact = () => {
   const t = useTranslations('PricingContact');
+  const visualRef = useRef<HTMLDivElement>(null);
+  const [isWaveActive, setIsWaveActive] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
+
+  useEffect(() => {
+    const root = visualRef.current;
+
+    if (!root) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+
+        observer.disconnect();
+        setIsWaveActive(true);
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(root);
+
+    return () => observer.disconnect();
+  }, []);
 
   const contactSchema = v.object({
     email: v.pipe(v.string(), v.minLength(1), v.email()),
@@ -47,8 +69,8 @@ export const PricingContact = () => {
   return (
     <section className={st.pricing_contact}>
       <div className={st.pricing_contact__row}>
-        <div className={st.pricing_contact__visual}>
-          <Image src="/images/pricing/contact.svg" alt={t('imageAlt')} fill loading="lazy" />
+        <div ref={visualRef} className={st.pricing_contact__visual}>
+          <IconContactWave active={isWaveActive} />
         </div>
 
         <div className={st.pricing_contact__content}>

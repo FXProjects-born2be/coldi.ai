@@ -60,18 +60,30 @@
     grid-template-columns: 1.32085fr 1fr;
     gap: 20px 100px;
     align-items: center;
+    min-height: 564px;
     padding: 29px 96px 29px 28px;
 
     @include tablet {
+      grid-template-columns: 1fr;
+      min-height: 0;
       padding: 0 12px 25px 12px;
     }
 
     &[hidden] {
       display: none;
     }
+  }
+
+  &__img {
+    position: relative;
+    height: 100%;
 
     @include tablet {
-      grid-template-columns: 1fr;
+      min-height: 283px;
+    }
+
+    img {
+      object-fit: contain;
     }
   }
 

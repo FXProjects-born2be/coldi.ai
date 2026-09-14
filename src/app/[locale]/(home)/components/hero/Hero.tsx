@@ -39,7 +39,7 @@ export const Hero = async () => {
   const t = await getTranslations('Hero');
 
   return (
-    <section className={st.hero}>
+    <section className={`hero-shadow ${st.hero}`}>
       <div className={st.hero__bg} aria-hidden>
         <div className={st.hero__rings}>
           <Rings />

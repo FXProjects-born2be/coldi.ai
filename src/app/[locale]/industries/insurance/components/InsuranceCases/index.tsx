@@ -92,8 +92,15 @@ export const InsuranceCases = ({
       <div className={'container'}>
         <div className={st.insurance_cases__row}>
           {LeftVisual && (
-            <div className={st.insurance_cases__wave_left}>
-              <LeftVisual active={isPlaying} />
+            <div
+              className={cn(
+                st.insurance_cases__wave_wrapper,
+                st['insurance_cases__wave_wrapper--left']
+              )}
+            >
+              <div className={st.insurance_cases__wave_left}>
+                <LeftVisual active={isPlaying} />
+              </div>
             </div>
           )}
 
@@ -134,8 +141,10 @@ export const InsuranceCases = ({
             </button>
           </div>
 
-          <div className={st.insurance_cases__wave_right}>
-            <RightVisual active={isPlaying} />
+          <div className={st.insurance_cases__wave_wrapper}>
+            <div className={st.insurance_cases__wave_right}>
+              <RightVisual active={isPlaying} />
+            </div>
           </div>
 
           {page === 'trading-platforms-brokers' && (

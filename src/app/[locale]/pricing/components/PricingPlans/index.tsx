@@ -50,6 +50,14 @@ export const PricingPlans = () => {
             >
               <div className={st.pricing_plans__inner}>
                 <div className={st.pricing_plans__inner_top}>
+                  <Image
+                    className={st.pricing_plans__inner_top_bg}
+                    src="/images/pricing/plans-bg.jpg"
+                    alt="Image"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 476px"
+                    aria-hidden
+                  />
                   <h2 className={st.pricing_plans__title}>{t(`plans.${plan.id}.title`)}</h2>
                   <div className={st.pricing_plans__price}>
                     <p className={st.pricing_plans__price_label}>{t(`plans.${plan.id}.eyebrow`)}</p>

@@ -10,10 +10,10 @@ import { cn } from '@/shared/lib/helpers';
 import st from './SolutionsUseCases.module.scss';
 
 const CASES = [
-  { id: 'clickomi', image: '/images/solutions/cases-one.jpg' },
-  { id: 'payset', image: '/images/solutions/cases-two.svg' },
-  { id: 'clarity', image: '/images/solutions/cases-three.svg' },
-  { id: 'stone', image: '/images/solutions/cases-four.svg' },
+  { id: 'clickomi', image: '/images/solutions/cases-one.svg', width: 287, height: 79 },
+  { id: 'payset', image: null, width: 150, height: 63 },
+  { id: 'clarity', image: '/images/solutions/cases-three.svg', width: 114, height: 20 },
+  { id: 'stone', image: '/images/solutions/cases-four.svg', width: 73, height: 62 },
 ] as const;
 
 export const SolutionsUseCases = () => {
@@ -85,18 +85,34 @@ export const SolutionsUseCases = () => {
               <div className={st.solutions_use_cases__card_media}>
                 <div className={st.solutions_use_cases__card_image}>
                   <Image
-                    src={item.image}
-                    alt={t(`items.${item.id}.title`)}
+                    src={'/images/solutions/cases-bg.jpg'}
+                    alt={'Image'}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
+                    className={'-z-1'}
                   />
                   {t.has(`items.${item.id}.caption`) && (
                     <p className={st.solutions_use_cases__card_caption}>
                       {t(`items.${item.id}.caption`)}
                     </p>
                   )}
+                  {item.image && (
+                    <div className={st.solutions_use_cases__card_logos}>
+                      {Array.from({ length: index === 0 ? 3 : 1 }, (_, logoIndex) => (
+                        <Image
+                          key={`${item.id}-${logoIndex}`}
+                          src={item.image}
+                          alt={t(`items.${item.id}.title`)}
+                          width={item.width}
+                          height={item.height}
+                          className={st.solutions_use_cases__card_logo}
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
+
               <h3 className={st.solutions_use_cases__card_title}>{t(`items.${item.id}.title`)}</h3>
               <p className={st.solutions_use_cases__card_text}>
                 {t(`items.${item.id}.description`)}
