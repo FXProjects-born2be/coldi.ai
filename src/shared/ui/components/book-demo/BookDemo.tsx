@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-import Script from 'next/script';
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
 import { useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
+import { CalendlyInline } from '@/shared/ui/components/calendly-inline';
 import { CloseIcon } from '@/shared/ui/icons/outline/close';
 
 import st from './BookDemo.module.scss';
@@ -16,13 +16,6 @@ import { Link } from '@/i18n/navigation';
 
 const CALENDLY_URL =
   'https://calendly.com/coldi/30min?hide_event_type_details=1&hide_gdpr_banner=1';
-const CALENDLY_SCRIPT = 'https://assets.calendly.com/assets/external/widget.js';
-
-type CalendlyWidget = {
-  initInlineWidget: (options: { url: string; parentElement: HTMLElement }) => void;
-};
-
-const getCalendly = () => (window as Window & { Calendly?: CalendlyWidget }).Calendly;
 
 const INFO_ITEMS = [
   {
@@ -42,33 +35,6 @@ const INFO_ITEMS = [
 export const BookDemo = ({ className }: { className?: string }) => {
   const t = useTranslations('BookDemo');
   const [open, setOpen] = useState(false);
-  const calendlyRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-
-    const initCalendly = () => {
-      const parent = calendlyRef.current;
-      const Calendly = getCalendly();
-      if (!parent || !Calendly) return false;
-
-      parent.innerHTML = '';
-      Calendly.initInlineWidget({
-        url: CALENDLY_URL,
-        parentElement: parent,
-      });
-
-      return true;
-    };
-
-    if (initCalendly()) return;
-
-    const id = window.setInterval(() => {
-      if (initCalendly()) window.clearInterval(id);
-    }, 80);
-
-    return () => window.clearInterval(id);
-  }, [open]);
 
   return (
     <>
@@ -133,13 +99,16 @@ export const BookDemo = ({ className }: { className?: string }) => {
               </div>
 
               <div className={st.book_demo__form_wrapper}>
-                <div ref={calendlyRef} className={st.book_demo__calendar_widget} />
+                <CalendlyInline
+                  url={CALENDLY_URL}
+                  className={st.book_demo__calendar_widget}
+                  active={open}
+                />
               </div>
             </div>
           </Content>
         </Portal>
       </Root>
-      {open ? <Script src={CALENDLY_SCRIPT} strategy="afterInteractive" /> : null}
     </>
   );
 };

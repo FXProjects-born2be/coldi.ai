@@ -1,14 +1,12 @@
-import Script from 'next/script';
-
 import { getTranslations } from 'next-intl/server';
 
 import { cn } from '@/shared/lib/helpers';
+import { CalendlyInline } from '@/shared/ui/components/calendly-inline';
 
 import st from './Hero.module.scss';
 
 const CALENDLY_URL =
   'https://calendly.com/coldi/30min?hide_event_type_details=1&hide_gdpr_banner=1';
-const CALENDLY_SCRIPT = 'https://assets.calendly.com/assets/external/widget.js';
 
 export const Hero = async () => {
   const t = await getTranslations('CalendarHero');
@@ -30,11 +28,7 @@ export const Hero = async () => {
           </div>
 
           <div className={st.calendar_home__embed}>
-            <div
-              className={`calendly-inline-widget ${st.calendar_home__widget}`}
-              data-url={CALENDLY_URL}
-            />
-            <Script src={CALENDLY_SCRIPT} strategy="afterInteractive" />
+            <CalendlyInline url={CALENDLY_URL} className={st.calendar_home__widget} />
           </div>
         </div>
       </div>
