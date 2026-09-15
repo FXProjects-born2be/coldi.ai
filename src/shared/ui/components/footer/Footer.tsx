@@ -9,6 +9,7 @@ import { MessageIcon } from '@/shared/ui/icons/fill/message';
 import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
 import { Facebook } from '@/shared/ui/icons/fill/socials/facebook';
 import { Linkedin } from '@/shared/ui/icons/fill/socials/linkedin';
+import { Telegram } from '@/shared/ui/icons/fill/socials/telegram';
 import { WhatsappFixed } from '@/shared/ui/icons/fill/socials/whatsapp-fixed';
 import { X } from '@/shared/ui/icons/fill/socials/x';
 import { Youtube } from '@/shared/ui/icons/fill/socials/youtube';
@@ -80,7 +81,12 @@ export const Footer = async ({ pathname }: { pathname: string }) => {
 
                   <ul className={st.footer__socials}>
                     <li>
-                      <NextLink href="https://x.com/Coldiai" className={st.footer__socials_link}>
+                      <NextLink
+                        href="https://x.com/Coldiai"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={st.footer__socials_link}
+                      >
                         <X />
                       </NextLink>
                     </li>
@@ -88,6 +94,8 @@ export const Footer = async ({ pathname }: { pathname: string }) => {
                       <NextLink
                         href="https://www.facebook.com/coldiai/"
                         className={st.footer__socials_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
                         <Facebook />
                       </NextLink>
@@ -96,6 +104,7 @@ export const Footer = async ({ pathname }: { pathname: string }) => {
                       <NextLink
                         href="https://www.linkedin.com/company/coldiai/"
                         target="_blank"
+                        rel="noopener noreferrer"
                         className={st.footer__socials_link}
                       >
                         <Linkedin />
@@ -106,9 +115,21 @@ export const Footer = async ({ pathname }: { pathname: string }) => {
                       <NextLink
                         href="https://www.youtube.com/@coldi_ai"
                         target="_blank"
+                        rel="noopener noreferrer"
                         className={st.footer__socials_link}
                       >
                         <Youtube />
+                      </NextLink>
+                    </li>
+
+                    <li>
+                      <NextLink
+                        href="https://t.me/ColdiAI"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={st.footer__socials_link}
+                      >
+                        <Telegram />
                       </NextLink>
                     </li>
                   </ul>
@@ -136,7 +157,7 @@ export const Footer = async ({ pathname }: { pathname: string }) => {
                     <ul
                       className={st.footer__menu_list}
                       itemScope
-                      itemType="http://schema.org/SiteNavigationElement"
+                      itemType="https://schema.org/SiteNavigationElement"
                     >
                       {column.links.map((link) => {
                         const label = t(`${column.id}.${link.id}`);

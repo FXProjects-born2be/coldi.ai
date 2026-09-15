@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
-import { CaseStudies, Closing, Hero } from './components';
+import { CaseStudy, Hero } from '../silverbellgroup/components';
+import { caseStudyContent, heroContent } from './components/data';
 
 export const metadata: Metadata = {
   alternates: {
@@ -20,9 +21,8 @@ export const metadata: Metadata = {
 export default function ClarityGlobalPage() {
   return (
     <main>
-      <Hero />
-      <CaseStudies />
-      <Closing />
+      <Hero content={heroContent} />
+      <CaseStudy content={caseStudyContent} />
     </main>
   );
 }

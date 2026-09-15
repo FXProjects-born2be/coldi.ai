@@ -6,21 +6,27 @@ import Link from 'next/link';
 
 import { cn } from '@/shared/lib/helpers';
 
-import {
-  ctaContent,
-  implementationPhases,
-  integratedItems,
-  issueColumns,
-  monitoringItems,
-  operationalFlowImage,
-  resultsMetrics,
-  scriptAdjustments,
-  snapshotCards,
-  tocItems,
-} from '../data';
+import type { CaseStudyContent } from '../data';
+import { caseStudyContent as defaultContent } from '../data';
 import st from './CaseStudy.module.scss';
 
-export const CaseStudy = () => {
+export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyContent }) => {
+  const {
+    tocItems,
+    snapshotCards,
+    snapshotIcon,
+    implementationPhases,
+    integratedItems,
+    integratedIcon,
+    operationalFlowImage,
+    scriptAdjustmentsLabel,
+    scriptAdjustments,
+    issueColumns,
+    monitoringItems,
+    resultsBg,
+    resultsMetrics,
+    cta,
+  } = content;
   const [activeId, setActiveId] = useState<string>(tocItems[0].id);
 
   useEffect(() => {
@@ -45,7 +51,7 @@ export const CaseStudy = () => {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, []);
+  }, [tocItems]);
 
   return (
     <>
@@ -65,31 +71,25 @@ export const CaseStudy = () => {
           </aside>
 
           <div className={st.content}>
-            <article id="engagement-snapshot" className={st.card}>
-              <h2 className={st.cardTitle}>Engagement Snapshot</h2>
+            <article id={tocItems[0].id} className={st.card}>
+              <h2 className={st.cardTitle}>{tocItems[0].title}</h2>
               <div className={st.snapshotGrid}>
                 {snapshotCards.map((card, index) => (
-                  <div key={`snapshot-${index}`} className={st.snapshotCard}>
+                  <div key={`${card.label}-${index}`} className={st.snapshotCard}>
                     <div className={st.snapshotText}>
                       <p className={st.snapshotValue}>{card.value}</p>
                       <p className={st.snapshotLabel}>{card.label}</p>
                     </div>
                     <span className={st.snapshotIcon}>
-                      <Image
-                        src="/images/silverbellgroup/icon-data-transfer.svg"
-                        alt=""
-                        width={24}
-                        height={24}
-                        unoptimized
-                      />
+                      <Image src={snapshotIcon} alt="" width={24} height={24} unoptimized />
                     </span>
                   </div>
                 ))}
               </div>
             </article>
 
-            <article id="implementation" className={st.card}>
-              <h2 className={st.cardTitle}>How The Implementation Went</h2>
+            <article id={tocItems[1].id} className={st.card}>
+              <h2 className={st.cardTitle}>{tocItems[1].title}</h2>
               <div className={st.phaseGrid}>
                 {implementationPhases.map((phase) => (
                   <div key={phase.title} className={st.phaseCard}>
@@ -104,19 +104,13 @@ export const CaseStudy = () => {
               </div>
             </article>
 
-            <article id="integrated" className={st.card}>
-              <h2 className={st.cardTitle}>What Coldi Integrated</h2>
+            <article id={tocItems[2].id} className={st.card}>
+              <h2 className={st.cardTitle}>{tocItems[2].title}</h2>
               <div className={st.integratedGrid}>
                 {integratedItems.map((item) => (
                   <div key={item} className={st.integratedItem}>
                     <span className={st.integratedIcon}>
-                      <Image
-                        src="/images/silverbellgroup/icon-ai-magic.svg"
-                        alt=""
-                        width={24}
-                        height={24}
-                        unoptimized
-                      />
+                      <Image src={integratedIcon} alt="" width={24} height={24} unoptimized />
                     </span>
                     <p>{item}</p>
                   </div>
@@ -145,7 +139,7 @@ export const CaseStudy = () => {
               </div>
 
               <div className={st.adjustments}>
-                <p className={st.adjustmentsLabel}>Script Adjustments:</p>
+                <p className={st.adjustmentsLabel}>{scriptAdjustmentsLabel}</p>
                 <div className={st.adjustmentsGrid}>
                   {scriptAdjustments.map((item, index) => (
                     <div key={`adj-${index}`} className={st.adjustmentCard}>
@@ -157,8 +151,8 @@ export const CaseStudy = () => {
               </div>
             </article>
 
-            <article id="issues" className={st.card}>
-              <h2 className={st.cardTitle}>Issues Found and Fixed</h2>
+            <article id={tocItems[3].id} className={st.card}>
+              <h2 className={st.cardTitle}>{tocItems[3].title}</h2>
               <div className={st.issuesGrid}>
                 {issueColumns.map((column) => (
                   <div key={column.title} className={st.issueCard}>
@@ -185,8 +179,8 @@ export const CaseStudy = () => {
               </div>
             </article>
 
-            <article id="monitoring" className={st.card}>
-              <h2 className={st.cardTitle}>Proactive Monitoring & Compliance Engineering</h2>
+            <article id={tocItems[4].id} className={st.card}>
+              <h2 className={st.cardTitle}>{tocItems[4].title}</h2>
               <div className={st.monitoringGrid}>
                 {monitoringItems.map((item, index) => (
                   <div key={`mon-${index}`} className={st.monitoringCard}>
@@ -197,9 +191,9 @@ export const CaseStudy = () => {
               </div>
             </article>
 
-            <article id="results" className={st.results}>
+            <article id={tocItems[5].id} className={st.results}>
               <Image
-                src="/images/silverbellgroup/results-bg.jpg"
+                src={resultsBg}
                 alt=""
                 fill
                 className={st.resultsBg}
@@ -207,7 +201,7 @@ export const CaseStudy = () => {
                 unoptimized
               />
               <div className={st.resultsOverlay} aria-hidden />
-              <h2 className={st.resultsTitle}>Results to Date</h2>
+              <h2 className={st.resultsTitle}>{tocItems[5].title}</h2>
               <div className={st.resultsGrid}>
                 {resultsMetrics.map((metric) => (
                   <div key={metric.label} className={st.resultCard}>
@@ -225,10 +219,10 @@ export const CaseStudy = () => {
 
       <section className={st.cta}>
         <div className={cn('container', st.ctaInner)}>
-          <h2 className={st.ctaTitle}>{ctaContent.title}</h2>
-          <p className={st.ctaText}>{ctaContent.text}</p>
-          <Link href={ctaContent.href} className={st.ctaButton}>
-            {ctaContent.button}
+          <h2 className={st.ctaTitle}>{cta.title}</h2>
+          <p className={st.ctaText}>{cta.text}</p>
+          <Link href={cta.href} className={st.ctaButton}>
+            {cta.button}
           </Link>
         </div>
       </section>

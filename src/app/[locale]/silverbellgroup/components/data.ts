@@ -1,4 +1,77 @@
-export const heroContent = {
+export type HeroContent = {
+  titleLine1: string;
+  titleLine2: string;
+  subtitle: string;
+  reportingLabel: string;
+  reportingRange: string;
+  paragraphs: string[];
+};
+
+export type TocItem = {
+  id: string;
+  title: string;
+  description: string;
+};
+
+export type SnapshotCard = {
+  value: string;
+  label: string;
+};
+
+export type ImplementationPhase = {
+  title: string;
+  subtitle: string;
+  text: string;
+};
+
+export type FlowImage = {
+  desktop: string;
+  mobile: string;
+  alt: string;
+};
+
+export type LabelValue = {
+  label: string;
+  value: string;
+};
+
+export type IssueColumn = {
+  title: string;
+  desktop: string;
+  mobile: string;
+};
+
+export type ResultMetric = {
+  value: string;
+  label: string;
+  highlight: boolean;
+};
+
+export type CtaContent = {
+  title: string;
+  text: string;
+  button: string;
+  href: string;
+};
+
+export type CaseStudyContent = {
+  tocItems: readonly TocItem[];
+  snapshotCards: readonly SnapshotCard[];
+  snapshotIcon: string;
+  implementationPhases: readonly ImplementationPhase[];
+  integratedItems: readonly string[];
+  integratedIcon: string;
+  operationalFlowImage: FlowImage;
+  scriptAdjustmentsLabel: string;
+  scriptAdjustments: readonly LabelValue[];
+  issueColumns: readonly IssueColumn[];
+  monitoringItems: readonly LabelValue[];
+  resultsBg: string;
+  resultsMetrics: readonly ResultMetric[];
+  cta: CtaContent;
+};
+
+export const heroContent: HeroContent = {
   titleLine1: 'Group & Coldi.ai:',
   titleLine2: 'Strategic Partnership Case Study',
   subtitle:
@@ -44,6 +117,8 @@ export const tocItems = [
   },
 ] as const;
 
+export const snapshotIcon = '/images/silverbellgroup/icon-data-transfer.svg';
+
 export const snapshotCards = Array.from({ length: 8 }, () => ({
   value: 'Data',
   label: 'Data missing',
@@ -62,6 +137,8 @@ export const implementationPhases = [
   },
 ];
 
+export const integratedIcon = '/images/silverbellgroup/icon-ai-magic.svg';
+
 export const integratedItems = [
   'Integrated the AI Agent directly into the "Chat with an Online Representative" portal on the Silverbell website.',
   '24/7 digital extension offering round-the-clock coverage during nights, weekends, and holidays.',
@@ -74,6 +151,8 @@ export const operationalFlowImage = {
   mobile: '/images/silverbellgroup/flow-mobile.png',
   alt: 'Operational Flow',
 };
+
+export const scriptAdjustmentsLabel = 'Script Adjustments:';
 
 export const scriptAdjustments = [
   {
@@ -123,6 +202,8 @@ export const monitoringItems = [
   },
 ];
 
+export const resultsBg = '/images/silverbellgroup/results-bg.jpg';
+
 export const resultsMetrics = [
   { value: '100', label: 'calls daily', highlight: true },
   { value: '75', label: 'hours saved weekly', highlight: false },
@@ -130,9 +211,26 @@ export const resultsMetrics = [
   { value: '100500', label: 'clients happy', highlight: false },
 ];
 
-export const ctaContent = {
+export const ctaContent: CtaContent = {
   title: 'Ready to automate your workflows?',
   text: 'See what we can build for your team.',
   button: 'Book a Demo',
   href: '/calendar',
+};
+
+export const caseStudyContent: CaseStudyContent = {
+  tocItems,
+  snapshotCards,
+  snapshotIcon,
+  implementationPhases,
+  integratedItems,
+  integratedIcon,
+  operationalFlowImage,
+  scriptAdjustmentsLabel,
+  scriptAdjustments,
+  issueColumns,
+  monitoringItems,
+  resultsBg,
+  resultsMetrics,
+  cta: ctaContent,
 };
