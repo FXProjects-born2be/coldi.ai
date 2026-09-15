@@ -4,12 +4,11 @@ export const heroContent: HeroContent = {
   titleLine1: 'Clarity Global:',
   titleLine2: 'Automating compliance',
   subtitle:
-    'How Clarity Global is eliminating manual follow-up work across hundreds of client reviews and cutting response lag to zero.',
+    'How Clarity Global Eliminates Manual Follow-Up Work Across Hundreds of Client Reviews and Cuts Response Lag to Zero ',
   reportingLabel: 'Reporting Period:',
-  reportingRange: 'Ongoing',
+  reportingRange: '[month] 2026  - [month] 2026',
   paragraphs: [
-    'Clarity Global is a Canadian fintech that provides advanced payment infrastructure to global businesses. Their core offering includes multi-currency IBANs, global payments, foreign exchange, and on/off-ramp.',
-    "With hundreds of B2B clients and strict regulatory obligations on every side, compliance isn't a checkbox for them. It's a core part of how the business runs.",
+    "Clarity Global is a Canadian fintech that provides advanced payment infrastructure to global businesses. With hundreds of B2B clients and strict regulatory obligations on every side, compliance isn't a checkbox for them. It's a core part of how the business runs. By deploying an outbound AI review workflow alongside a 24/7 inbound AI Live Support Agent, Clarity Global eliminated manual outreach delays, automated response classification, and removed operational bottlenecks for their compliance and support teams.",
   ],
 };
 
@@ -50,54 +49,56 @@ export const caseStudyContent: CaseStudyContent = {
   tocItems,
   snapshotIcon: '/images/silverbellgroup/icon-data-transfer.svg',
   snapshotCards: [
-    { value: '6 mo', label: 'Compliance review cycle' },
-    { value: '24/7', label: 'Inbound coverage' },
-    { value: '0', label: 'Wait times' },
-    { value: '7 days', label: 'Reminder interval' },
-    { value: '3', label: 'Response categories' },
-    { value: '100s', label: 'Clients per cycle' },
-    { value: 'AI', label: 'Live support agent' },
-    { value: 'Full', label: 'Audit trail' },
+    { value: 'Data', label: 'Data missing' },
+    { value: 'Data', label: 'Data missing' },
+    { value: 'Data', label: 'Data missing' },
+    { value: 'Data', label: 'Data missing' },
+    { value: 'Data', label: 'Data missing' },
+    { value: 'Data', label: 'Data missing' },
+    { value: 'Data', label: 'Data missing' },
+    { value: 'Data', label: 'Data missing' },
   ],
   implementationPhases: [
     {
-      title: 'Phase 1',
-      subtitle: '(Compliance reviews)',
-      text: 'We deployed an AI outbound calling agent that handles every step of the six-month periodic compliance review cycle, from first contact to final report, without any manual input from the Clarity Global team.',
+      title: 'July 2026',
+      subtitle: '(Phase 1 Rollout)  ',
+      text: 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsum',
     },
     {
-      title: 'Phase 2',
-      subtitle: '(Live support)',
-      text: "Any user visiting Clarity Global's website can now reach a live AI support agent by calling +1 236 309 2666. The agent handles inbound queries around the clock — no wait times, no staff availability required.",
+      title: 'August 2026',
+      subtitle: '(Phase 2 Optimization)',
+      text: 'Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsum',
     },
   ],
   integratedIcon: '/images/silverbellgroup/icon-ai-magic.svg',
   integratedItems: [
-    'Automatic CRM-based classification into corporate and individual, with separate approved message scripts per type.',
-    'Reminders fire at precise 7-day intervals with per-client tracking of send dates and response status.',
-    'Incoming emails are analysed and sorted into three defined categories automatically, with results saved for reporting.',
-    'Change-declaration emails are sent to the compliance department the moment a client response is classified.',
-    'Structured reports are auto-generated each cycle, covering all three client outcome categories with full per-client data.',
-    'Every outbound message, client reply, AI classification, and compliance notification is stored with timestamps.',
+    '<strong>Client Segmentation & Routing:</strong> CRM-based automatic classification into corporate and individual accounts with distinct approved message scripts per category.',
+    '<strong>3-Stage Reminder Automation:</strong> System schedules and fires follow-up reminders at exact 7-day intervals with real-time send date and status tracking per client.',
+    '<strong>AI Response Classification:</strong> Autonomous analysis and categorization of incoming client emails into three defined categories, updating reports automatically.',
+    '<strong>Instant Compliance Escalation:</strong> Real-time trigger system that instantly notifies the compliance department upon detecting a high-priority "changes reported" response.',
+    '<strong>Automated Monthly Reporting:</strong> System auto-generates audit-ready reports covering all outcome categories and individual client details.',
+    '<strong>Centralized Audit Trail Log:</strong> Timestamped storage of every outbound message, client reply, AI classification, and internal compliance alert.',
+    '<strong>24/7 AI Live Support Agent (+1 236 309 2666):</strong> Inbound phone automation providing immediate coverage, client qualification, and smart query routing to appropriate support channels.',
   ],
-  operationalFlowImage: {
-    desktop: '/images/clarity-global/aboutVisual-desktop.svg',
-    mobile: '/images/clarity-global/aboutVisual-mobile.svg',
-    alt: 'Clarity Global operational flow',
-  },
-  scriptAdjustmentsLabel: 'Qualification flow:',
+  operationalFlowImage: null,
+  scriptAdjustmentsLabel: 'Script Adjustments:',
   scriptAdjustments: [
     {
-      label: 'Account',
-      value: 'Existing account or new registration?',
+      label: 'Audience-Specific Messaging',
+      value:
+        'Configured separate, approved prompt templates and message scripts for Corporate Clients vs. Individual Clients during outreach.',
     },
     {
-      label: 'Payment details',
-      value: 'Business or personal payment solutions?',
-    },
-    {
-      label: 'Country & industry',
-      value: 'Country of operation, industry, and estimated transaction volume.',
+      label: 'Inbound Lead Qualification Flow',
+      value:
+        'Programmed interactive script logic to collect five critical data points from new visitors:',
+      list: [
+        'Existing account vs. new registration status',
+        'Business vs. personal payment solutions',
+        'Country of operation',
+        'Industry sector',
+        'Estimated transaction volume',
+      ],
     },
   ],
   issueColumns: [
@@ -119,32 +120,63 @@ export const caseStudyContent: CaseStudyContent = {
   ],
   monitoringItems: [
     {
-      label: '24/7 inbound coverage',
+      label: 'Complete Audit Trail:',
       value:
-        'Around-the-clock phone coverage for any global inquiry without extra staff or night shifts.',
+        'Every single outbound communication, incoming client response, AI classification decision, and internal notification is stored with immutable timestamps for regulatory compliance.',
     },
     {
-      label: 'Reduced human load',
+      label: 'Strict Escalation SLA:',
       value:
-        'First-tier queries are resolved automatically so only critical escalations reach human agents.',
-    },
-    {
-      label: 'Smart routing',
-      value:
-        "Automatically identifies existing clients' queries and routes the call to the right support channel.",
+        'Automatic instant routing of change-declaration flags directly to compliance officers, eliminating human delay on high-risk accounts.',
     },
   ],
   resultsBg: '/images/silverbellgroup/results-bg.jpg',
   resultsMetrics: [
-    { value: '24/7', label: 'inbound coverage', highlight: true },
-    { value: '0', label: 'wait times', highlight: false },
-    { value: '6 mo', label: 'review cycle automated', highlight: false },
-    { value: '100%', label: 'audit trail coverage', highlight: false },
+    {
+      value: '24/7',
+      subtitle: 'Front-Line Dispatching Established',
+      label: 'Across all residential electrical and emergency response inquiries.',
+      highlight: true,
+    },
+    {
+      value: '100%',
+      subtitle: 'Inbound Booking Lifecycle Automated',
+      label: 'From initial ring and intent triage to confirmed calendar appointment.',
+      highlight: false,
+    },
+    {
+      value: '0 Min',
+      subtitle: 'Manual Scheduling Delays',
+      label: 'By syncing live quotes and time slots directly into Housecall Pro.',
+      highlight: false,
+    },
+    {
+      value: '100%',
+      subtitle: 'Automated Lead & Scope Capture',
+      label: 'Lifting human overhead for routine project estimate intake.',
+      highlight: false,
+    },
+    {
+      value: '0 Sec',
+      subtitle: 'Automated Lead Qualification',
+      label: 'Intent screening, ZIP code validation, and detailed job scoping per call.',
+      highlight: false,
+    },
+    {
+      value: '100%',
+      subtitle: 'Instant Post-Call Notifications',
+      label: 'Instant Post-Call Notifications ',
+      highlight: false,
+    },
+    {
+      value: '3 Steps',
+      subtitle: 'Automated Lead Qualification',
+      label: 'Intent screening, ZIP code validation, and detailed job scoping per call. ',
+      highlight: false,
+    },
   ],
   cta: {
-    title: 'Ready to automate your compliance workflows?',
+    title: 'Ready to automate your workflows?',
     text: 'See what we can build for your team.',
-    button: 'Book a Demo',
-    href: '/calendar',
   },
 };

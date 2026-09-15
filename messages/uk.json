@@ -440,19 +440,10 @@
       "sector": "Оберіть галузь"
     },
     "sectors": {
-      "Technology": "Технології",
-      "Healthcare": "Охорона здоров’я",
-      "Finance": "Фінанси",
-      "E-commerce": "E-commerce",
-      "Real Estate": "Нерухомість",
-      "Education": "Освіта",
-      "Retail": "Рітейл",
-      "Telecommunications": "Телекомунікації",
-      "Manufacturing": "Виробництво",
-      "Hospitality": "Готельний бізнес",
-      "Consulting": "Консалтинг",
-      "Entertainment": "Розваги",
-      "Non-profit": "Некомерційна організація",
+      "insurance": "Страхування",
+      "trading": "Торгові платформи та брокери",
+      "debt-collection": "Стягнення боргів",
+      "emis": "EMI та платежі",
       "Other": "Інше"
     }
   },

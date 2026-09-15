@@ -8,7 +8,6 @@ import { useTranslations } from 'next-intl';
 import PhoneInput from 'react-phone-input-2';
 
 import type { BookDemoSchema } from '@/features/request-leads-demo/model/schemas';
-import { SECTOR_OPTIONS } from '@/features/request-leads-demo/model/schemas';
 import { SectorSelect } from '@/features/request-leads-demo/ui/sector-select';
 
 import { useForm, v } from '@/shared/lib/forms';
@@ -18,6 +17,7 @@ import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { CloseIcon } from '@/shared/ui/icons/outline/close';
 import { TextField } from '@/shared/ui/kit/text-field';
 
+import { PRICING_SECTOR_OPTIONS } from '../../model/schemas';
 import { useRequestPricingStore } from '../../store/store';
 import st from './RequestDialog.module.scss';
 
@@ -70,7 +70,11 @@ export const RequestDialog = ({
   );
 
   const sectorItems = useMemo(
-    () => SECTOR_OPTIONS.map((item) => ({ ...item, label: t(`sectors.${item.value}`) })),
+    () =>
+      PRICING_SECTOR_OPTIONS.map((item) => ({
+        value: item.value,
+        label: t(`sectors.${item.key}`),
+      })),
     [t]
   );
 
@@ -113,6 +117,8 @@ export const RequestDialog = ({
     if (data.name?.trim()) params.set('firstName', data.name.trim());
     if (data.surname?.trim()) params.set('lastName', data.surname.trim());
     if (data.email?.trim()) params.set('email', data.email.trim());
+    if (data.phone?.trim()) params.set('phone', data.phone.trim());
+    if (data.sector?.trim()) params.set('industry', data.sector.trim());
     const query = params.toString();
     const redirectUrl = query ? `${SUCCESS_REDIRECT_PATH}?${query}` : SUCCESS_REDIRECT_PATH;
     setTimeout(() => router.push(redirectUrl), REDIRECT_DELAY_MS);

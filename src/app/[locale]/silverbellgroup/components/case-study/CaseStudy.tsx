@@ -2,13 +2,22 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { cn } from '@/shared/lib/helpers';
+import { BookDemo } from '@/shared/ui/components/book-demo';
 
 import type { CaseStudyContent } from '../data';
 import { caseStudyContent as defaultContent } from '../data';
 import st from './CaseStudy.module.scss';
+
+const renderWithStrong = (text: string) =>
+  text.split(/(<strong>[\s\S]*?<\/strong>)/g).map((part, index) => {
+    const match = /^<strong>([\s\S]*?)<\/strong>$/.exec(part);
+    if (match) {
+      return <strong key={index}>{match[1]}</strong>;
+    }
+    return part;
+  });
 
 export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyContent }) => {
   const {
@@ -107,36 +116,38 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
             <article id={tocItems[2].id} className={st.card}>
               <h2 className={st.cardTitle}>{tocItems[2].title}</h2>
               <div className={st.integratedGrid}>
-                {integratedItems.map((item) => (
-                  <div key={item} className={st.integratedItem}>
+                {integratedItems.map((item, index) => (
+                  <div key={`integrated-${index}`} className={st.integratedItem}>
                     <span className={st.integratedIcon}>
                       <Image src={integratedIcon} alt="" width={24} height={24} unoptimized />
                     </span>
-                    <p>{item}</p>
+                    <p>{renderWithStrong(item)}</p>
                   </div>
                 ))}
               </div>
 
-              <div className={st.flow}>
-                <Image
-                  className={st.flowDesktop}
-                  src={operationalFlowImage.desktop}
-                  alt={operationalFlowImage.alt}
-                  width={820}
-                  height={388}
-                  sizes="(max-width: 768px) 0px, 820px"
-                  unoptimized
-                />
-                <Image
-                  className={st.flowMobile}
-                  src={operationalFlowImage.mobile}
-                  alt={operationalFlowImage.alt}
-                  width={318}
-                  height={388}
-                  sizes="(max-width: 768px) 100vw, 0px"
-                  unoptimized
-                />
-              </div>
+              {operationalFlowImage && (
+                <div className={st.flow}>
+                  <Image
+                    className={st.flowDesktop}
+                    src={operationalFlowImage.desktop}
+                    alt={operationalFlowImage.alt}
+                    width={820}
+                    height={388}
+                    sizes="(max-width: 768px) 0px, 820px"
+                    unoptimized
+                  />
+                  <Image
+                    className={st.flowMobile}
+                    src={operationalFlowImage.mobile}
+                    alt={operationalFlowImage.alt}
+                    width={318}
+                    height={388}
+                    sizes="(max-width: 768px) 100vw, 0px"
+                    unoptimized
+                  />
+                </div>
+              )}
 
               <div className={st.adjustments}>
                 <p className={st.adjustmentsLabel}>{scriptAdjustmentsLabel}</p>
@@ -145,6 +156,13 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                     <div key={`adj-${index}`} className={st.adjustmentCard}>
                       <p className={st.adjustmentMuted}>{item.label}</p>
                       <p className={st.adjustmentValue}>{item.value}</p>
+                      {item.list?.length ? (
+                        <ul className={st.adjustmentList}>
+                          {item.list.map((entry) => (
+                            <li key={entry}>{entry}</li>
+                          ))}
+                        </ul>
+                      ) : null}
                     </div>
                   ))}
                 </div>
@@ -203,11 +221,14 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
               <div className={st.resultsOverlay} aria-hidden />
               <h2 className={st.resultsTitle}>{tocItems[5].title}</h2>
               <div className={st.resultsGrid}>
-                {resultsMetrics.map((metric) => (
-                  <div key={metric.label} className={st.resultCard}>
+                {resultsMetrics.map((metric, index) => (
+                  <div key={`result-${index}`} className={st.resultCard}>
                     <p className={cn(st.resultValue, metric.highlight && st.resultValueHighlight)}>
                       {metric.value}
                     </p>
+                    {metric.subtitle ? (
+                      <p className={st.resultDescription}>{metric.subtitle}</p>
+                    ) : null}
                     <p className={st.resultLabel}>{metric.label}</p>
                   </div>
                 ))}
@@ -221,10 +242,19 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
         <div className={cn('container', st.ctaInner)}>
           <h2 className={st.ctaTitle}>{cta.title}</h2>
           <p className={st.ctaText}>{cta.text}</p>
-          <Link href={cta.href} className={st.ctaButton}>
-            {cta.button}
-          </Link>
+          <BookDemo className={'btn-secondary'}></BookDemo>
         </div>
+        <video
+          className={st.ctaVideo}
+          src="/videos/solutions-specific.mp4"
+          autoPlay
+          playsInline
+          muted
+          loop
+          preload="metadata"
+          controls={false}
+          aria-hidden
+        />
       </section>
     </>
   );

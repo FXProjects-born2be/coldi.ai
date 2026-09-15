@@ -18,4 +18,12 @@ export const requestPricingSchema = v.object({
   smsCode: v.optional(v.string()), // SMS verification code for free email domains
 });
 
+export const PRICING_SECTOR_OPTIONS = [
+  { key: 'insurance', value: 'Insurance' },
+  { key: 'trading', value: 'Trading Platforms & Brokers' },
+  { key: 'debt-collection', value: 'Debt Collection' },
+  { key: 'emis', value: 'EMIs & Payments' },
+  { key: 'Other', value: 'Other' },
+] as const;
+
 export type RequestPricingSchema = v.InferOutput<typeof requestPricingSchema>;

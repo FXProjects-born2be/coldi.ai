@@ -33,6 +33,7 @@ export type FlowImage = {
 export type LabelValue = {
   label: string;
   value: string;
+  list?: readonly string[];
 };
 
 export type IssueColumn = {
@@ -45,13 +46,12 @@ export type ResultMetric = {
   value: string;
   label: string;
   highlight: boolean;
+  subtitle?: string;
 };
 
 export type CtaContent = {
   title: string;
   text: string;
-  button: string;
-  href: string;
 };
 
 export type CaseStudyContent = {
@@ -61,7 +61,7 @@ export type CaseStudyContent = {
   implementationPhases: readonly ImplementationPhase[];
   integratedItems: readonly string[];
   integratedIcon: string;
-  operationalFlowImage: FlowImage;
+  operationalFlowImage: FlowImage | null;
   scriptAdjustmentsLabel: string;
   scriptAdjustments: readonly LabelValue[];
   issueColumns: readonly IssueColumn[];
@@ -214,8 +214,6 @@ export const resultsMetrics = [
 export const ctaContent: CtaContent = {
   title: 'Ready to automate your workflows?',
   text: 'See what we can build for your team.',
-  button: 'Book a Demo',
-  href: '/calendar',
 };
 
 export const caseStudyContent: CaseStudyContent = {

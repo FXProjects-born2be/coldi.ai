@@ -2,31 +2,28 @@
 
 .section {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #f6f6f6 100%);
-  padding: 80px 0 60px;
-
-  @include tablet {
-    padding: 112px 0 32px;
-  }
+  padding-top: 76px;
 }
 
 .inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 32px;
   align-items: center;
+  padding-top: 80px;
+  padding-bottom: 60px;
 
   @include tablet {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 24px;
-    align-items: stretch;
+    padding-top: 60px;
   }
 }
 
 .copy {
   display: flex;
-  flex: 1;
   flex-direction: column;
   gap: 16px;
-  min-width: 0;
 }
 
 .title {
@@ -43,7 +40,8 @@
   line-height: 1.1;
 
   @include tablet {
-    font-size: 32px;
+    font-size: 40px;
+    line-height: 1.2;
   }
 }
 
@@ -54,7 +52,7 @@
   line-height: 1.2;
 
   @include tablet {
-    font-size: 28px;
+    font-size: 32px;
   }
 }
 
@@ -64,30 +62,27 @@
   font-size: 20px;
   font-weight: 400;
   line-height: 1.4;
-
-  @include tablet {
-    font-size: 16px;
-  }
 }
 
 .card {
-  flex: 1;
-  min-width: 0;
-  padding: 20px;
+  padding: 36px;
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.40), 0 1px 1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px 0 rgba(0, 0, 0, 0.04);
   border-radius: 20px;
+
+  @include tablet {
+    padding: 16px;
+    border-radius: 8px
+  }
 }
 
 .cardInner {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  padding: 16px;
 
   @include tablet {
     gap: 24px;
-    padding: 8px;
   }
 }
 
@@ -104,7 +99,7 @@
   line-height: 1.4;
 
   @include tablet {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
@@ -116,7 +111,7 @@
   white-space: pre-wrap;
 
   @include tablet {
-    font-size: 28px;
+    font-size: 24px;
   }
 }
 
@@ -132,7 +127,7 @@
     line-height: 1.4;
 
     @include tablet {
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 }

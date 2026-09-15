@@ -440,19 +440,10 @@
       "sector": "Please select a sector"
     },
     "sectors": {
-      "Technology": "Technology",
-      "Healthcare": "Healthcare",
-      "Finance": "Finance",
-      "E-commerce": "E-commerce",
-      "Real Estate": "Real Estate",
-      "Education": "Education",
-      "Retail": "Retail",
-      "Telecommunications": "Telecommunications",
-      "Manufacturing": "Manufacturing",
-      "Hospitality": "Hospitality",
-      "Consulting": "Consulting",
-      "Entertainment": "Entertainment",
-      "Non-profit": "Non-profit",
+      "insurance": "Insurance",
+      "trading": "Trading Platforms & Brokers",
+      "debt-collection": "Debt Collection",
+      "emis": "EMIs & Payments",
       "Other": "Other"
     }
   },
