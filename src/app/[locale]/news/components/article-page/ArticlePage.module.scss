@@ -127,6 +127,60 @@
   }
 }
 
+.heroTextPreview {
+  container-type: size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 56px;
+  background:
+    linear-gradient(180deg, rgba(12, 16, 33, 0.12) 0%, rgba(12, 16, 33, 0.35) 100%),
+    url('/images/news/legacy-preview-bg.jpg') center / cover no-repeat;
+}
+
+.heroBadge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 6px 12px 6px 8px;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  img {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+}
+
+.heroPreviewTitle {
+  position: relative;
+  z-index: 1;
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: #fff;
+  font-size: clamp(28px, 6cqi, 56px);
+  font-weight: 500;
+  line-height: 1.15;
+  text-align: center;
+  word-break: break-word;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
 .bodyInner {
   display: flex;
   flex-direction: row;
@@ -620,6 +674,20 @@
 
   .heroImage {
     aspect-ratio: 358 / 400;
+  }
+
+  .heroTextPreview {
+    padding: 56px 24px 32px;
+  }
+
+  .heroBadge {
+    top: 12px;
+    left: 12px;
+  }
+
+  .heroPreviewTitle {
+    font-size: clamp(22px, 9cqi, 36px);
+    -webkit-line-clamp: 5;
   }
 
   .bodyInner {

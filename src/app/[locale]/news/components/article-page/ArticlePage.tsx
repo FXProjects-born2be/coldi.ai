@@ -3,6 +3,8 @@ import Link from 'next/link';
 
 import type { ReactNode } from 'react';
 
+import { cn } from '@/shared/lib/helpers';
+
 import { DEFAULT_NEWS_IMAGE, type NewsArticle, type NewsCard, slugifyHeading } from '../../lib';
 import { ArticleCard } from '../article-card/ArticleCard';
 import st from './ArticlePage.module.scss';
@@ -191,16 +193,26 @@ export const ArticlePage = ({ article, related }: ArticlePageProps) => {
             </div>
           </div>
 
-          <div className={st.heroImage}>
-            <Image
-              src={article.heroImage || article.image || DEFAULT_NEWS_IMAGE}
-              alt={article.title}
-              fill
-              sizes="(max-width: 1024px) 100vw, 1280px"
-              quality={100}
-              unoptimized
-              priority
-            />
+          <div className={cn(st.heroImage, article.isLegacy && st.heroTextPreview)}>
+            {article.isLegacy ? (
+              <>
+                <span className={st.heroBadge}>
+                  <Image src="/icons/logo-white.svg" alt="" width={18} height={18} unoptimized />
+                  Coldi
+                </span>
+                <p className={st.heroPreviewTitle}>{article.title}</p>
+              </>
+            ) : (
+              <Image
+                src={article.heroImage || article.image || DEFAULT_NEWS_IMAGE}
+                alt={article.title}
+                fill
+                sizes="(max-width: 1024px) 100vw, 1280px"
+                quality={100}
+                unoptimized
+                priority
+              />
+            )}
           </div>
         </div>
       </section>

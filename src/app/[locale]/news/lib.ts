@@ -6,6 +6,8 @@ export type NewsCard = {
   image: string;
   category: string;
   created_at: string;
+  /** Supabase legacy posts use adaptive text preview instead of cover image */
+  isLegacy?: boolean;
 };
 
 export type ArticleBlock =

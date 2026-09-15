@@ -30,6 +30,7 @@ const rememberListingReturn = () => {
 export const ArticleCard = ({ article, variant = 'compact' }: ArticleCardProps) => {
   const dateLabel = formatCardDate(article.created_at);
   const category = article.category || 'News';
+  const isLegacyPreview = Boolean(article.isLegacy);
 
   return (
     <Link
@@ -37,15 +38,25 @@ export const ArticleCard = ({ article, variant = 'compact' }: ArticleCardProps) 
       className={cn(st.card, st[variant])}
       onClick={rememberListingReturn}
     >
-      <div className={st.imageWrap}>
-        <Image
-          src={article.image || DEFAULT_NEWS_IMAGE}
-          alt={article.title}
-          width={1024}
-          height={576}
-          quality={100}
-          unoptimized
-        />
+      <div className={cn(st.imageWrap, isLegacyPreview && st.textPreview)}>
+        {isLegacyPreview ? (
+          <>
+            <span className={st.badge}>
+              <Image src="/icons/logo-white.svg" alt="" width={18} height={18} unoptimized />
+              Coldi
+            </span>
+            <p className={st.previewTitle}>{article.title}</p>
+          </>
+        ) : (
+          <Image
+            src={article.image || DEFAULT_NEWS_IMAGE}
+            alt={article.title}
+            width={1024}
+            height={576}
+            quality={100}
+            unoptimized
+          />
+        )}
       </div>
       <span className={st.arrow} aria-hidden>
         <Image

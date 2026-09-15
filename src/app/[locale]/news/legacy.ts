@@ -87,6 +87,7 @@ export const mapLegacyPostToCard = (post: LegacyNewsArticle): NewsCard => ({
   image: post.image || DEFAULT_NEWS_IMAGE,
   category: normalizeCategory(post.category),
   created_at: post.created_at,
+  isLegacy: true,
 });
 
 export const mapLegacyPostToArticle = (post: LegacyNewsArticle): NewsArticle => {

@@ -29,6 +29,65 @@
   }
 }
 
+.textPreview {
+  container-type: size;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  padding: 44px 16px 16px;
+  background:
+    linear-gradient(180deg, rgba(12, 16, 33, 0.15) 0%, rgba(12, 16, 33, 0.45) 100%),
+    url('/images/news/legacy-preview-bg.jpg') center / cover no-repeat;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  max-width: calc(100% - 24px);
+  padding: 6px 12px 6px 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  img {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+}
+
+.previewTitle {
+  position: relative;
+  z-index: 1;
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: #fff;
+  font-size: clamp(14px, 9cqi, 28px);
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+  word-break: break-word;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+
 .arrow {
   position: absolute;
   top: 24px;
@@ -107,6 +166,11 @@
   @include desktop {
     min-height: 434px;
   }
+
+  .previewTitle {
+    font-size: clamp(18px, 7cqi, 32px);
+    -webkit-line-clamp: 4;
+  }
 }
 
 .compact,
@@ -117,6 +181,11 @@
 
   .excerpt {
     display: none;
+  }
+
+  .previewTitle {
+    font-size: clamp(16px, 8cqi, 26px);
+    -webkit-line-clamp: 5;
   }
 }
 
@@ -151,14 +220,45 @@
       align-self: stretch;
     }
 
+    .textPreview {
+      gap: 4px;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 8px 8px;
+    }
+
+    .badge {
+      top: 6px;
+      left: 6px;
+      gap: 4px;
+      max-width: calc(100% - 12px);
+      padding: 3px 7px 3px 4px;
+      font-size: 9px;
+
+      img {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    .previewTitle {
+      display: -webkit-box;
+      font-size: clamp(9px, 12cqi, 11px);
+      line-height: 1.15;
+      text-align: center;
+      -webkit-line-clamp: 4;
+    }
+
     .arrow {
       display: none;
     }
 
     .body {
       flex: 1;
+      gap: 8px;
       min-width: 0;
-      padding: 16px;
+      padding: 8px 16px;
+      justify-content: center;
     }
 
     .meta {
