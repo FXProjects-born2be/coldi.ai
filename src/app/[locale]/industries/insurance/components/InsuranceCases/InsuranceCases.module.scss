@@ -174,15 +174,16 @@
 }
 
 .other-industries {
+  .insurance_cases__row {
+    grid-template-columns: 1fr;
+  }
+
   .insurance_cases__wave_right {
-    @include desktop {
-      bottom: 0;
-    }
-    
     left: 0;
     top: unset;
     transform: translateY(0);
     width: auto;
+    bottom: 0;
 
     svg {
       overflow: visible;
@@ -193,9 +194,7 @@
     width: 100%;
 
     svg {
-      overflow: visible;
-      width: 100%;
-      height: auto;
+      margin: auto;
     }
   }
 }
