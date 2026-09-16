@@ -27,7 +27,7 @@ export const AboutHero = async () => {
         playsInline
         muted
         loop
-        preload="metadata"
+        preload="auto"
         controls={false}
         aria-hidden
       />

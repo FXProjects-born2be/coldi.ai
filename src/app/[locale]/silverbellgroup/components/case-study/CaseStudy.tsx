@@ -1,10 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { cn } from '@/shared/lib/helpers';
-import { BookDemo } from '@/shared/ui/components/book-demo';
 
 import type { CaseStudyContent } from '../data';
 import { caseStudyContent as defaultContent } from '../data';
@@ -22,21 +21,52 @@ const renderWithStrong = (text: string) =>
 export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyContent }) => {
   const {
     tocItems,
+    problem,
     snapshotCards,
-    snapshotIcon,
     implementationPhases,
     integratedItems,
-    integratedIcon,
-    operationalFlowImage,
-    scriptAdjustmentsLabel,
-    scriptAdjustments,
-    issueColumns,
+    askedCards,
     monitoringItems,
+    wentWrongItems,
     resultsBg,
+    resultsShow,
     resultsMetrics,
-    cta,
   } = content;
   const [activeId, setActiveId] = useState<string>(tocItems[0].id);
+  const [phaseIndex, setPhaseIndex] = useState(0);
+  const phaseTrackRef = useRef<HTMLDivElement>(null);
+  const sectionTitle = (id: string) => tocItems.find((item) => item.id === id)?.title ?? '';
+  const lastPhaseIndex = implementationPhases.length - 1;
+  const canScrollPrev = phaseIndex > 0;
+  const canScrollNext = phaseIndex < lastPhaseIndex;
+
+  const goToPhase = (index: number) => {
+    const next = Math.max(0, Math.min(lastPhaseIndex, index));
+    const track = phaseTrackRef.current;
+    const slide = track?.children[next] as HTMLElement | undefined;
+    slide?.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    setPhaseIndex(next);
+  };
+
+  const onPhaseScroll = () => {
+    const track = phaseTrackRef.current;
+    if (!track) return;
+
+    const slides = Array.from(track.children) as HTMLElement[];
+    const left = track.scrollLeft;
+    let closest = 0;
+    let dist = Number.POSITIVE_INFINITY;
+
+    slides.forEach((slide, index) => {
+      const delta = Math.abs(slide.offsetLeft - left);
+      if (delta < dist) {
+        dist = delta;
+        closest = index;
+      }
+    });
+
+    setPhaseIndex(closest);
+  };
 
   useEffect(() => {
     const sections = tocItems
@@ -80,125 +110,208 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
           </aside>
 
           <div className={st.content}>
-            <article id={tocItems[0].id} className={st.card}>
-              <h2 className={st.cardTitle}>{tocItems[0].title}</h2>
+            {problem && (
+              <div id="problem" className={st.problemWrap}>
+                <article className={st.card}>
+                  <h2 className={st.cardTitle}>{problem.title}</h2>
+                  <div className={st.problemGrid}>
+                    {problem.items.map((item) => (
+                      <div key={item.title} className={st.problemCard}>
+                        <h3 className={st.problemCardTitle}>{item.title}</h3>
+                        <p className={st.problemCardText}>{item.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+
+                <div className={st.problemContext}>
+                  <div className={st.problemTried}>
+                    <h3 className={st.problemTriedTitle}>{problem.tried.title}</h3>
+                    <div className={st.problemTriedList}>
+                      {problem.tried.items.map((item) => (
+                        <div key={item.title} className={st.problemTriedItem}>
+                          <p className={st.problemTriedItemTitle}>{item.title}</p>
+                          <p className={st.problemTriedItemText}>{item.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className={st.problemHighlights}>
+                    {[problem.asked, problem.conclusion].map((panel) => (
+                      <div key={panel.title} className={st.problemHighlight}>
+                        {panel.bgImage ? (
+                          <Image
+                            src={panel.bgImage}
+                            alt=""
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 400px"
+                            className={st.problemHighlightBg}
+                          />
+                        ) : null}
+
+                        <h3 className={st.problemHighlightTitle}>{panel.title}</h3>
+                        <p className={st.problemHighlightText}>{panel.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <article id="engagement-snapshot" className={st.card}>
+              <h2 className={st.cardTitle}>{sectionTitle('engagement-snapshot')}</h2>
               <div className={st.snapshotGrid}>
                 {snapshotCards.map((card, index) => (
                   <div key={`${card.label}-${index}`} className={st.snapshotCard}>
-                    <div className={st.snapshotText}>
-                      <p className={st.snapshotValue}>{card.value}</p>
+                    <div>
+                      <p
+                        className={st.snapshotValue}
+                        dangerouslySetInnerHTML={{ __html: card.value }}
+                      />
                       <p className={st.snapshotLabel}>{card.label}</p>
                     </div>
-                    <span className={st.snapshotIcon}>
-                      <Image src={snapshotIcon} alt="" width={24} height={24} unoptimized />
-                    </span>
+                    <div className={st.snapshotIcon}>
+                      {card.src ? (
+                        <Image src={card.src} alt="" width={24} height={24} unoptimized />
+                      ) : null}
+                    </div>
                   </div>
                 ))}
               </div>
             </article>
 
-            <article id={tocItems[1].id} className={st.card}>
-              <h2 className={st.cardTitle}>{tocItems[1].title}</h2>
-              <div className={st.phaseGrid}>
-                {implementationPhases.map((phase) => (
-                  <div key={phase.title} className={st.phaseCard}>
-                    <h3 className={st.phaseTitle}>
-                      {phase.title}
-                      <br />
-                      {phase.subtitle}
-                    </h3>
-                    <p className={st.phaseText}>{phase.text}</p>
-                  </div>
-                ))}
-              </div>
-            </article>
-
-            <article id={tocItems[2].id} className={st.card}>
-              <h2 className={st.cardTitle}>{tocItems[2].title}</h2>
+            <article id="integrated" className={st.card}>
+              <h2 className={st.cardTitle}>{sectionTitle('integrated')}</h2>
               <div className={st.integratedGrid}>
                 {integratedItems.map((item, index) => (
                   <div key={`integrated-${index}`} className={st.integratedItem}>
                     <span className={st.integratedIcon}>
-                      <Image src={integratedIcon} alt="" width={24} height={24} unoptimized />
+                      {item.src ? (
+                        <Image src={item.src} alt="Icon" width={24} height={24} unoptimized />
+                      ) : null}
                     </span>
-                    <p>{renderWithStrong(item)}</p>
+                    {item.title ? <p className={st.integratedTitle}>{item.title}</p> : null}
+                    <p className={st.integratedText}>{renderWithStrong(item.text)}</p>
                   </div>
                 ))}
               </div>
+            </article>
 
-              {operationalFlowImage && (
-                <div className={st.flow}>
-                  <Image
-                    className={st.flowDesktop}
-                    src={operationalFlowImage.desktop}
-                    alt={operationalFlowImage.alt}
-                    width={820}
-                    height={388}
-                    sizes="(max-width: 768px) 0px, 820px"
-                    unoptimized
-                  />
-                  <Image
-                    className={st.flowMobile}
-                    src={operationalFlowImage.mobile}
-                    alt={operationalFlowImage.alt}
-                    width={318}
-                    height={388}
-                    sizes="(max-width: 768px) 100vw, 0px"
-                    unoptimized
-                  />
-                </div>
-              )}
-
-              <div className={st.adjustments}>
-                <p className={st.adjustmentsLabel}>{scriptAdjustmentsLabel}</p>
-                <div className={st.adjustmentsGrid}>
-                  {scriptAdjustments.map((item, index) => (
-                    <div key={`adj-${index}`} className={st.adjustmentCard}>
-                      <p className={st.adjustmentMuted}>{item.label}</p>
-                      <p className={st.adjustmentValue}>{item.value}</p>
-                      {item.list?.length ? (
-                        <ul className={st.adjustmentList}>
-                          {item.list.map((entry) => (
-                            <li key={entry}>{entry}</li>
-                          ))}
-                        </ul>
+            <article id="implementation" className={cn(st.card, st.implementation)}>
+              <h2 className={st.cardTitle}>{sectionTitle('implementation')}</h2>
+              <div className={st.phaseRow}>
+                <div className={st.phaseTimeline}>
+                  {implementationPhases.map((_, index) => (
+                    <div key={`week-${index}`} className={st.phaseWeek}>
+                      <p className={st.phaseWeekLabel}>Week {index + 1}</p>
+                      {index < implementationPhases.length - 1 ? (
+                        <Image
+                          className={st.phaseWeekLine}
+                          src="/images/silverbellgroup/connector-line.svg"
+                          alt=""
+                          width={8}
+                          height={117}
+                          unoptimized
+                        />
                       ) : null}
                     </div>
                   ))}
                 </div>
+                <div className={st.phaseItems}>
+                  {implementationPhases.map((phase) => (
+                    <div key={phase.title} className={st.phaseCard}>
+                      <h3 className={st.phaseTitle}>{phase.title}</h3>
+                      {phase.subtitle ? <p className={st.phaseSubtitle}>{phase.subtitle}</p> : null}
+                      <p className={st.phaseText}>{phase.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className={st.phaseSlider}>
+                <div className={st.phaseTrack} ref={phaseTrackRef} onScroll={onPhaseScroll}>
+                  {implementationPhases.map((phase, index) => (
+                    <div key={phase.title} className={st.phaseSlide}>
+                      <div className={st.phaseWeek}>
+                        <p className={st.phaseWeekLabel}>Week {index + 1}</p>
+                        {index < implementationPhases.length - 1 ? (
+                          <Image
+                            className={st.phaseWeekLineMobile}
+                            src="/images/silverbellgroup/connector-line-mobile.svg"
+                            alt=""
+                            width={174}
+                            height={8}
+                            unoptimized
+                          />
+                        ) : null}
+                      </div>
+                      <div className={st.phaseCard}>
+                        <h3 className={st.phaseTitle}>{phase.title}</h3>
+                        <p className={st.phaseText}>{phase.text}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className={st.phaseNav}>
+                  <button
+                    type="button"
+                    className={cn(st.phaseNavPrev, canScrollPrev && st.can_scroll)}
+                    aria-label="Previous week"
+                    disabled={!canScrollPrev}
+                    onClick={() => goToPhase(phaseIndex - 1)}
+                  >
+                    <Image
+                      src={'/icons/arrow-left.svg'}
+                      alt={'Icon'}
+                      width={'18'}
+                      height={'18'}
+                      unoptimized
+                    />
+                  </button>
+                  <button
+                    type="button"
+                    className={cn(st.phaseNavNext, canScrollNext && st.can_scroll)}
+                    aria-label="Next week"
+                    disabled={!canScrollNext}
+                    onClick={() => goToPhase(phaseIndex + 1)}
+                  >
+                    <Image
+                      src={'/icons/arrow-right.svg'}
+                      alt={'Icon'}
+                      width={'18'}
+                      height={'18'}
+                      unoptimized
+                    />
+                  </button>
+                </div>
               </div>
             </article>
 
-            <article id={tocItems[3].id} className={st.card}>
-              <h2 className={st.cardTitle}>{tocItems[3].title}</h2>
-              <div className={st.issuesGrid}>
-                {issueColumns.map((column) => (
-                  <div key={column.title} className={st.issueCard}>
-                    <Image
-                      className={st.issueDesktop}
-                      src={column.desktop}
-                      alt={column.title}
-                      width={318}
-                      height={300}
-                      sizes="(max-width: 768px) 0px, 33vw"
-                      unoptimized
-                    />
-                    <Image
-                      className={st.issueMobile}
-                      src={column.mobile}
-                      alt={column.title}
-                      width={267}
-                      height={300}
-                      sizes="(max-width: 768px) 100vw, 0px"
-                      unoptimized
-                    />
+            <article id="issues" className={st.card}>
+              <h2 className={st.cardTitle}>{sectionTitle('issues')}</h2>
+              <div className={st.snapshotGrid}>
+                {askedCards.map((card, index) => (
+                  <div key={`${card.label}-${index}`} className={st.snapshotCard}>
+                    <div>
+                      <p
+                        className={st.snapshotValue}
+                        dangerouslySetInnerHTML={{ __html: card.value }}
+                      />
+                      <p className={st.snapshotLabel}>{card.label}</p>
+                    </div>
+                    <div className={st.snapshotIcon}>
+                      {card.src ? (
+                        <Image src={card.src} alt="" width={24} height={24} unoptimized />
+                      ) : null}
+                    </div>
                   </div>
                 ))}
               </div>
             </article>
 
-            <article id={tocItems[4].id} className={st.card}>
-              <h2 className={st.cardTitle}>{tocItems[4].title}</h2>
+            <article id="monitoring" className={st.card}>
+              <h2 className={st.cardTitle}>{sectionTitle('monitoring')}</h2>
               <div className={st.monitoringGrid}>
                 {monitoringItems.map((item, index) => (
                   <div key={`mon-${index}`} className={st.monitoringCard}>
@@ -209,52 +322,64 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
               </div>
             </article>
 
-            <article id={tocItems[5].id} className={st.results}>
-              <Image
-                src={resultsBg}
-                alt=""
-                fill
-                className={st.resultsBg}
-                sizes="(max-width: 1024px) 100vw, 900px"
-                unoptimized
-              />
-              <div className={st.resultsOverlay} aria-hidden />
-              <h2 className={st.resultsTitle}>{tocItems[5].title}</h2>
-              <div className={st.resultsGrid}>
-                {resultsMetrics.map((metric, index) => (
-                  <div key={`result-${index}`} className={st.resultCard}>
-                    <p className={cn(st.resultValue, metric.highlight && st.resultValueHighlight)}>
-                      {metric.value}
-                    </p>
-                    {metric.subtitle ? (
-                      <p className={st.resultDescription}>{metric.subtitle}</p>
-                    ) : null}
-                    <p className={st.resultLabel}>{metric.label}</p>
+            <article id="went-wrong" className={st.card}>
+              <h2 className={st.cardTitle}>{sectionTitle('went-wrong')}</h2>
+              <div className={st.wentWrongGrid}>
+                {wentWrongItems.map((item, index) => (
+                  <div key={`wrong-${index}`} className={st.wentWrongCard}>
+                    <p className={st.wentWrongTitle}>{item.title}</p>
                   </div>
                 ))}
               </div>
             </article>
+
+            <article id="results" className={st.results}>
+              <div className={st.resultsRow}>
+                <div className={st.resultsLeft}>
+                  <Image
+                    src={resultsBg}
+                    alt="Image"
+                    fill
+                    className={st.resultsBg}
+                    sizes="(max-width: 1024px) 100vw, 900px"
+                  />
+                  <h2 className={st.resultsTitle}>{sectionTitle('results')}</h2>
+                  <div className={st.resultsGrid}>
+                    {resultsMetrics.map((metric, index) => (
+                      <div key={`result-${index}`} className={st.resultCard}>
+                        <p
+                          className={cn(
+                            st.resultValue,
+                            metric.highlight && st.resultValueHighlight
+                          )}
+                        >
+                          {metric.value}
+                        </p>
+                        {metric.subtitle ? (
+                          <p className={st.resultDescription}>{metric.subtitle}</p>
+                        ) : null}
+                        <p className={st.resultLabel}>{metric.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className={st.resultsRight}>
+                  {resultsShow.src ? (
+                    <Image
+                      src={resultsShow.src}
+                      alt=""
+                      fill
+                      className={st.resultsBg}
+                      sizes="(max-width: 1024px) 100vw, 400px"
+                    />
+                  ) : null}
+                  <h2 className={st.resultsShowTitle}>{resultsShow.title}</h2>
+                  <p className={st.resultsShowText}>{resultsShow.text}</p>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
-      </section>
-
-      <section className={st.cta}>
-        <div className={cn('container', st.ctaInner)}>
-          <h2 className={st.ctaTitle}>{cta.title}</h2>
-          <p className={st.ctaText}>{cta.text}</p>
-          <BookDemo className={'btn-secondary'}></BookDemo>
-        </div>
-        <video
-          className={st.ctaVideo}
-          src="/videos/solutions-specific.mp4"
-          autoPlay
-          playsInline
-          muted
-          loop
-          preload="metadata"
-          controls={false}
-          aria-hidden
-        />
       </section>
     </>
   );

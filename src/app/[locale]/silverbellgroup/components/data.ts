@@ -1,8 +1,21 @@
+export type HeroImage = {
+  src: string;
+  width: number;
+  height: number;
+};
+
+export type HeroBgImage = { src: string };
+
+export type HeroImages = {
+  bgImage?: HeroBgImage;
+  image: HeroImage;
+};
+
 export type HeroContent = {
   titleLine1: string;
   titleLine2: string;
   subtitle: string;
-  reportingLabel: string;
+  images: HeroImages;
   reportingRange: string;
   paragraphs: string[];
 };
@@ -16,30 +29,25 @@ export type TocItem = {
 export type SnapshotCard = {
   value: string;
   label: string;
+  src: string;
+};
+
+export type IntegratedItem = {
+  title: string;
+  text: string;
+  src: string;
 };
 
 export type ImplementationPhase = {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   text: string;
-};
-
-export type FlowImage = {
-  desktop: string;
-  mobile: string;
-  alt: string;
 };
 
 export type LabelValue = {
   label: string;
   value: string;
   list?: readonly string[];
-};
-
-export type IssueColumn = {
-  title: string;
-  desktop: string;
-  mobile: string;
 };
 
 export type ResultMetric = {
@@ -49,186 +57,312 @@ export type ResultMetric = {
   subtitle?: string;
 };
 
-export type CtaContent = {
+export type ProblemItem = {
   title: string;
   text: string;
 };
 
+export type ProblemPanel = {
+  title: string;
+  text: string;
+  bgImage?: string;
+};
+
+export type ProblemContent = {
+  title: string;
+  items: readonly ProblemItem[];
+  tried: {
+    title: string;
+    items: readonly ProblemItem[];
+  };
+  asked: ProblemPanel;
+  conclusion: ProblemPanel;
+};
+
 export type CaseStudyContent = {
   tocItems: readonly TocItem[];
+  problem?: ProblemContent;
   snapshotCards: readonly SnapshotCard[];
-  snapshotIcon: string;
   implementationPhases: readonly ImplementationPhase[];
-  integratedItems: readonly string[];
-  integratedIcon: string;
-  operationalFlowImage: FlowImage | null;
-  scriptAdjustmentsLabel: string;
-  scriptAdjustments: readonly LabelValue[];
-  issueColumns: readonly IssueColumn[];
+  integratedItems: readonly IntegratedItem[];
+  askedCards: readonly SnapshotCard[];
   monitoringItems: readonly LabelValue[];
+  wentWrongItems: readonly { title: string }[];
   resultsBg: string;
+  resultsShow: {
+    title: string;
+    text: string;
+    src: string;
+  };
   resultsMetrics: readonly ResultMetric[];
-  cta: CtaContent;
 };
 
 export const heroContent: HeroContent = {
-  titleLine1: 'Group & Coldi.ai:',
-  titleLine2: 'Strategic Partnership Case Study',
+  titleLine1: 'Global Scale,<br />Zero Downtime:',
+  titleLine2: 'How Silverbell Group Expanded 24/7 Service Without Adding Headcount',
   subtitle:
-    'AI-Driven 24/7 Autonomous Customer Experience & Appointment Setting for Global Professional Services',
-  reportingLabel: 'Reporting Period:',
-  reportingRange: '[month] 2026  - [month] 2026',
+    'How a global professional services leader integrated autonomous AI agents into their client intake funnel to capture after-hours leads and streamline global operations.',
+  images: {
+    image: {
+      src: '/images/silverbellgroup/sbg.png',
+      width: 190,
+      height: 100,
+    },
+  },
+  reportingRange: 'THE CLIENT',
   paragraphs: [
-    'In the world of high-tier global operations, the bridge between elite service and digital innovation is where true scale happens. Silverbell Group, a leader known for its professional excellence and international reach, has joined forces with Coldi.ai in a strategic partnership designed to showcase the future of AI-driven business support.',
-    'To launch this synergy, Coldi.ai provided Silverbell Group with a full-scale integration of our flagship AI solution as a collaborative gesture, aiming to streamline their customer experience and explore new operational frontiers.',
+    'Silverbell Group is an international leader in professional services and enterprise outsourcing. Operating across multiple time zones, their global clientele requires immediate, high-touch support and rapid sales intake.',
   ],
 };
 
 export const tocItems = [
   {
+    id: 'problem',
+    title: 'Problem',
+    description: 'Calls slipping through after hours',
+  },
+  {
     id: 'engagement-snapshot',
     title: 'Engagement Snapshot',
-    description: 'The client, the challenge, and what we set out to fix',
+    description: 'The client, scope, and setup',
+  },
+  {
+    id: 'integrated',
+    title: 'What Coldi Built',
+    description: 'The agent, integrations, and workflows',
   },
   {
     id: 'implementation',
     title: 'How The Implementation Went',
-    description: 'Our phased rollout, from kickoff to the first live call',
-  },
-  {
-    id: 'integrated',
-    title: 'What Coldi Integrated',
-    description: 'The systems, channels, and workflows we connected',
+    description: 'A phased rollout to go-live',
   },
   {
     id: 'issues',
-    title: 'Issues Found and Fixed',
-    description: 'Edge cases we caught and resolved before they reached callers',
+    title: 'What The Client Asked For Along The Way',
+    description: 'Requests that reshaped the build',
   },
   {
     id: 'monitoring',
-    title: 'Proactive Monitoring & Compliance Engineering',
-    description: 'Keeping the agent reliable, secure, and audit-ready',
+    title: 'How Coldi Runs The Account',
+    description: 'Monitored, tuned, and audit-ready',
+  },
+  {
+    id: 'went-wrong',
+    title: 'What Went Wrong, and How Fast It Was Fixed',
+    description: 'Edge cases, caught and closed',
   },
   {
     id: 'results',
-    title: 'Results to Date',
-    description: 'Measurable impact since Coldi went live',
+    title: 'Results & What The Numbers Mean',
+    description: 'The impact since launch',
   },
 ] as const;
 
-export const snapshotIcon = '/images/silverbellgroup/icon-data-transfer.svg';
+export const problemContent: ProblemContent = {
+  title: 'The Problem',
+  items: [
+    {
+      title: 'Time Zone Coverage Gaps',
+      text: 'Inbound inquiries arriving outside standard regional office hours were delayed in response, leading to lost conversion opportunities.',
+    },
+    {
+      title: 'Capacity Limits',
+      text: 'High-tier human specialists spent excessive time on initial data capture and basic routine inquiries rather than high-value consultation.',
+    },
+    {
+      title: 'Lead Leakage',
+      text: 'Web portal traffic during nights, weekends, and holidays went unengaged without a live, proactive representative available.',
+    },
+  ],
+  tried: {
+    title: 'What They Tried Before Coldi',
+    items: [
+      {
+        title: 'Standard Off-the-Shelf Chatbots',
+        text: 'Generic conversational bots failed to handle industry-specific nuance and could not reliably drive conversion or intent-based routing.',
+      },
+      {
+        title: 'Expanding Manual Shifts',
+        text: 'Staffing global hours manually created steep operational overhead and inconsistent service quality across regional shifts.',
+      },
+      {
+        title: 'Static Web Forms',
+        text: 'Unattended contact forms suffered from low completion rates and slow follow-up speeds.',
+      },
+    ],
+  },
+  asked: {
+    title: 'What They Asked For',
+    text: "Deploy a 24/7 autonomous AI agent directly into the website representative portal to answer complex inquiries, capture prospect contact details, and book qualified meetings directly into human specialists' calendars.",
+    bgImage: '/images/silverbellgroup/problem-one.png',
+  },
+  conclusion: {
+    title: 'The conclusion they reached',
+    text: 'Generic tools and static forms do not drive business growth. The critical challenge is deploying an active, brand-tuned agent that manages technical routing, instant scheduling, and data intake seamlessly around the clock. That is the point at which they came to Coldi.',
+    bgImage: '/images/silverbellgroup/problem-two.png',
+  },
+};
 
-export const snapshotCards = Array.from({ length: 8 }, () => ({
-  value: 'Data',
-  label: 'Data missing',
-}));
+export const snapshotCards = [
+  {
+    value: '6 <span>Weeks</span>',
+    label: 'Full Deployment Timeline',
+    src: 'icons/simple-one.svg',
+  },
+  {
+    value: '24/7',
+    label: 'Active Coverage Across All Time Zones',
+    src: 'icons/simple-two.svg',
+  },
+  {
+    value: '100<span>%</span>',
+    label: 'Inbound Web Portal Integration',
+    src: 'icons/simple-three.svg',
+  },
+  {
+    value: '100+<span> Daily</span>',
+    label: 'Inquiries Managed System-Wide',
+    src: 'icons/simple-four.svg',
+  },
+];
 
 export const implementationPhases = [
   {
-    title: 'July 2026',
-    subtitle: '(Phase 1 Rollout)',
-    text: 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsum',
+    title: 'Discovery & Wiring',
+    text: 'Mapped intent logic, pre-loaded Silverbell domain knowledge, and wired API connections to internal scheduling tools.',
   },
   {
-    title: 'August 2026',
-    subtitle: '(Phase 2 Optimization)',
-    text: 'Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsum',
+    title: 'Iterative Prompt & Logic Tuning',
+    text: 'Tested response handling against historical customer inquiries; refined conversational tone and booking prompts.',
+  },
+  {
+    title: 'Portal Integration & Pilot Launch',
+    text: 'Deployed agent to live web environment; began real-time transcript monitoring for edge cases.',
+  },
+  {
+    title: 'Escalation Protocol Optimization',
+    text: 'Hardened the live-transfer and callback logic for inquiries requiring human specialist intervention.',
+  },
+  {
+    title: 'Full Automation & 24/7 Rollout',
+    text: 'Expanded system to handle complete weekend, holiday, and night-shift coverage without manual supervision.',
+  },
+  {
+    title: 'Hardening & Performance Audit',
+    text: 'Conducted full transcript review, optimized response latencies, and finalized operational handoff reporting.',
   },
 ];
-
-export const integratedIcon = '/images/silverbellgroup/icon-ai-magic.svg';
 
 export const integratedItems = [
-  'Integrated the AI Agent directly into the "Chat with an Online Representative" portal on the Silverbell website.',
-  '24/7 digital extension offering round-the-clock coverage during nights, weekends, and holidays.',
-  'Proactive appointment setting: programmed to request company name and direct contact information (phone/email) in every interaction.',
-  "Instant expert knowledge base: pre-loaded with Silverbell's specific industry expertise to handle global clientele queries.",
-];
-
-export const operationalFlowImage = {
-  desktop: '/images/silverbellgroup/flow-desktop.png',
-  mobile: '/images/silverbellgroup/flow-mobile.png',
-  alt: 'Operational Flow',
-};
-
-export const scriptAdjustmentsLabel = 'Script Adjustments:';
-
-export const scriptAdjustments = [
   {
-    label: 'Lorem ipsum Lorem ipsum Lorem ipsum',
-    value: 'Lorem ipsum Lorem ipsum Lorem ipsum',
+    title: 'Autonomous Web Agent Integration',
+    text: 'Embedded directly into Silverbell’s "Chat with an Online Representative" portal to act as a digital extension of their elite service team.',
+    src: 'icons/autonomous.svg',
   },
   {
-    label: 'Lorem ipsum Lorem ipsum Lorem ipsum',
-    value: 'Lorem ipsum Lorem ipsum Lorem ipsum',
+    title: 'Domain-Specific Knowledge Base',
+    text: 'Pre-loaded with Silverbell’s proprietary operational data to deliver immediate, accurate technical and service responses.',
+    src: 'icons/domain.svg',
   },
   {
-    label: 'Lorem ipsum Lorem ipsum Lorem ipsum',
-    value: 'Lorem ipsum Lorem ipsum Lorem ipsum',
+    title: 'Proactive Lead Capture & Appointment Engine',
+    text: 'Programmed with strict logic to collect verified contact data (company name, phone, email) and lock in appointments in real time.',
+    src: 'icons/proactive.svg',
+  },
+  {
+    title: 'Human-in-the-Loop Routing Architecture',
+    text: 'Built-in logic flow to seamlessly escalate complex edge cases directly to live human teams with full transcript context.',
+    src: 'icons/human.svg',
   },
 ];
 
-export const issueColumns = [
+export const askedCards = [
   {
-    title: 'Software',
-    desktop: '/images/silverbellgroup/issue-software-desktop.png',
-    mobile: '/images/silverbellgroup/issue-software-mobile.png',
+    value: '20+',
+    label: 'Specific Prompt Adjustments for Tone and Brand Tuning',
+    src: 'icons/specific.svg',
   },
   {
-    title: 'Infrastructure',
-    desktop: '/images/silverbellgroup/issue-infrastructure-desktop.png',
-    mobile: '/images/silverbellgroup/issue-infrastructure-mobile.png',
+    value: '5+',
+    label: 'Calendar Integration Tweaks for Dynamic Slot Allocation',
+    src: 'icons/calendar.svg',
   },
   {
-    title: 'Compliance',
-    desktop: '/images/silverbellgroup/issue-compliance-desktop.png',
-    mobile: '/images/silverbellgroup/issue-compliance-mobile.png',
+    value: '100%',
+    label: 'Coverage Verified Across After-Hours and Holiday Schedules',
+    src: 'icons/coverage.svg',
   },
 ];
 
 export const monitoringItems = [
   {
-    label: 'Lorem ipsum Lorem ipsum Lorem ipsum',
-    value: 'Lorem ipsum Lorem ipsum Lorem ipsum',
+    label: 'Turnkey Managed Solution',
+    value:
+      'Coldi handles all ongoing prompt engineering, system maintenance, and API health monitoring.',
   },
   {
-    label: 'Lorem ipsum Lorem ipsum Lorem ipsum',
-    value: 'Lorem ipsum Lorem ipsum Lorem ipsum',
+    label: 'Full Data Transparency',
+    value:
+      'Complete transcript access and outcome reporting supplied automatically to management teams.',
   },
   {
-    label: 'Lorem ipsum Lorem ipsum Lorem ipsum',
-    value: 'Lorem ipsum Lorem ipsum Lorem ipsum',
+    label: 'Proactive Logic Updates',
+    value: "Knowledge bases are continuously updated as Silverbell's service catalog evolves.",
   },
 ];
 
-export const resultsBg = '/images/silverbellgroup/results-bg.jpg';
+export const wentWrongItems = [
+  { title: 'Area' },
+  { title: 'What Happened' },
+  { title: 'How Coldi Resolved It' },
+  { title: 'Data Collection' },
+  { title: 'Initial leads occasionally omitted company size during open conversation.' },
+  {
+    title:
+      'Re-prompted agent logic to enforce mandatory contact data capture before slot confirmation.',
+  },
+  { title: 'Schedule Syncing' },
+  { title: 'Slot availability conflicted across multi-regional specialist calendars.' },
+  {
+    title:
+      'Reconfigured scheduling integration to auto-detect client time zones and dynamically display localized availability.',
+  },
+  {
+    title: 'Hand-Off Context',
+  },
+  {
+    title: 'Human specialists lacked immediate context when reviewing AI-booked leads.',
+  },
+  {
+    title: 'Configured automated post-chat summary webhooks sent straight to internal CRM/inbox.',
+  },
+];
+
+export const resultsBg = '/images/silverbellgroup/results-bg.png';
+
+export const resultsShow = {
+  title: 'What This Engagement Shows',
+  text: 'Success in AI deployment depends on deep implementation—embedding domain expertise, enforcing clean data capture, and creating flawless hand-offs to human teams. Coldi delivers the complete operational engine alongside the voice and chat technology.',
+  src: '/images/silverbellgroup/result-two-bg.jpg',
+};
 
 export const resultsMetrics = [
-  { value: '100', label: 'calls daily', highlight: true },
-  { value: '75', label: 'hours saved weekly', highlight: false },
-  { value: '45%', label: 'conversion boost', highlight: false },
-  { value: '100500', label: 'clients happy', highlight: false },
+  { value: '100+', label: 'Daily Automated Inquiries Managed', highlight: true },
+  { value: '75 Hours', label: 'Saved Weekly in Initial Qualification', highlight: false },
+  { value: '45%', label: 'Increase in Qualified Lead Conversions', highlight: false },
+  { value: '24/7', label: 'Continuous Global Coverage Achieved', highlight: false },
 ];
-
-export const ctaContent: CtaContent = {
-  title: 'Ready to automate your workflows?',
-  text: 'See what we can build for your team.',
-};
 
 export const caseStudyContent: CaseStudyContent = {
   tocItems,
+  problem: problemContent,
   snapshotCards,
-  snapshotIcon,
   implementationPhases,
   integratedItems,
-  integratedIcon,
-  operationalFlowImage,
-  scriptAdjustmentsLabel,
-  scriptAdjustments,
-  issueColumns,
+  askedCards,
   monitoringItems,
+  wentWrongItems,
   resultsBg,
+  resultsShow,
   resultsMetrics,
-  cta: ctaContent,
 };

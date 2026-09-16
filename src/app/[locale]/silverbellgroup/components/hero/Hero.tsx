@@ -1,31 +1,59 @@
+import Image from 'next/image';
+
 import type { HeroContent } from '../data';
 import { heroContent as defaultHeroContent } from '../data';
 import st from './Hero.module.scss';
 
 export const Hero = ({ content = defaultHeroContent }: { content?: HeroContent }) => (
-  <section className={st.section}>
+  <section className={`hero-shadow-two ${st.section}`}>
     <div className={`container ${st.inner}`}>
       <div className={st.copy}>
         <h1 className={st.title}>
-          <span className={st.titleAccent}>{content.titleLine1}</span>
-          <span className={st.titleRest}>{content.titleLine2}</span>
+          <span
+            className={st.titleAccent}
+            dangerouslySetInnerHTML={{ __html: content.titleLine1 }}
+          />
+          <span className={st.titleRest} dangerouslySetInnerHTML={{ __html: content.titleLine2 }} />
         </h1>
-        <p className={st.subtitle}>{content.subtitle}</p>
+        <p className={st.subtitle} dangerouslySetInnerHTML={{ __html: content.subtitle }} />
       </div>
 
       <div className={st.card}>
-        <div className={st.cardInner}>
-          <div className={st.period}>
-            <p className={st.periodLabel}>{content.reportingLabel}</p>
-            <p className={st.periodRange}>{content.reportingRange}</p>
-          </div>
-          <div className={st.paragraphs}>
-            {content.paragraphs.map((paragraph) => (
-              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-            ))}
-          </div>
+        <div className={st.images}>
+          {content.images.bgImage && (
+            <div className={st.bgImage}>
+              <Image src={content.images.bgImage.src} alt="Image" fill sizes="200px" />
+            </div>
+          )}
+          <Image
+            className={st.image}
+            src={content.images.image.src}
+            alt="Image"
+            width={content.images.image.width}
+            height={content.images.image.height}
+          />
+        </div>
+
+        <p className={st.periodRange}>{content.reportingRange}</p>
+
+        <div className={st.paragraphs}>
+          {content.paragraphs.map((paragraph) => (
+            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+          ))}
         </div>
       </div>
     </div>
+
+    <video
+      className={st.video}
+      src="/videos/about-hero.mp4"
+      autoPlay
+      playsInline
+      muted
+      loop
+      preload="auto"
+      controls={false}
+      aria-hidden
+    />
   </section>
 );
