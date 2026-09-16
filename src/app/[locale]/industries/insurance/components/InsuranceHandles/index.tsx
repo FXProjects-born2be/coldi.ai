@@ -12,8 +12,6 @@ import { SoundWave } from '@/shared/ui/icons/SoundWave';
 
 import st from './InsuranceHandles.module.scss';
 
-import { Link } from '@/i18n/navigation';
-
 type InsuranceHandlesItem = {
   id: string;
   icon: string;
@@ -25,7 +23,6 @@ type InsuranceHandlesProps = {
   firstText?: string;
   secondText?: string;
   answer?: string;
-  botsHref?: string;
   background?: string;
   visual?: 'soundWave' | 'auraTwo' | 'timerTwo' | 'dotWave';
   video?: string;
@@ -68,7 +65,6 @@ const LOOP_AFTER_MS = 10000;
 const ITEM_MS = 5000;
 const TABLET_MQ = '(max-width: 1024px)';
 
-const DEFAULT_BOTS_HREF = '/solutions?tab=insurance#solutions-info';
 const DEFAULT_BACKGROUND = '/images/general/background.png';
 
 const VISUALS = {
@@ -92,7 +88,6 @@ export const InsuranceHandles = ({
   firstText = DEFAULT_FIRST_TEXT,
   secondText = DEFAULT_SECOND_TEXT,
   answer = DEFAULT_ANSWER,
-  botsHref = DEFAULT_BOTS_HREF,
   background = DEFAULT_BACKGROUND,
   visual = 'soundWave',
   video,
@@ -270,19 +265,13 @@ export const InsuranceHandles = ({
                 </li>
               ))}
             </ul>
-
-            <Link
-              href={botsHref}
-              className={cn('btn btn-secondary w-max', st.insurance_handles__btn_desktop)}
-            >
-              Check Available Bots
-            </Link>
           </div>
 
-          <div
-            className={st.insurance_handles__right}
-            style={{ '--insurance-handles-bg': `url("${background}")` } as CSSProperties}
-          >
+          <div className={st.insurance_handles__right}>
+            <div className={st.insurance_handles__bg}>
+              <Image src={background} alt="Image" fill sizes="(max-width: 1024px) 100vw, 50vw" />
+            </div>
+
             <div className={st.insurance_handles__reaction}>
               {showAvatar && (
                 <div className={st.insurance_handles__right_top}>
@@ -340,13 +329,6 @@ export const InsuranceHandles = ({
               )}
             </div>
           </div>
-
-          <Link
-            href={botsHref}
-            className={cn('btn btn-secondary', st.insurance_handles__btn_tablet)}
-          >
-            Check Available Bots
-          </Link>
         </div>
       </div>
     </section>

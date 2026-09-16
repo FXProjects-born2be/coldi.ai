@@ -36,10 +36,6 @@
   }
 
   &__list {
-    @include desktop {
-      margin-bottom: 20px;
-    }
-
     &>*:not(:last-child) {
       margin-bottom: 16px;
     }
@@ -100,8 +96,6 @@
 
   &__right {
     border-radius: 10px;
-    background: var(--insurance-handles-bg, url("/images/general/background.png")) no-repeat center;
-    background-size: cover;
     padding: 52px 86px 55px 86px;
     display: flex;
     flex-direction: column;
@@ -113,6 +107,17 @@
     @include tablet {
         padding: 32px;
         min-height: 350px;
+    }
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    img {
+      object-fit: cover;
     }
   }
 
@@ -265,18 +270,6 @@
     video {
       display: block;
       mix-blend-mode: screen;
-    }
-  }
-
-  @include desktop {
-    &__btn_tablet {
-      display: none;
-    }
-  }
-
-  @include tablet {
-    .insurance_handles__btn_desktop {
-      display: none;
     }
   }
 }

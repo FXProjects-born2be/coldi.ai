@@ -72,7 +72,6 @@ export default async function OtherIndustriesPage() {
         firstText={`"Hi, this is Coldi calling on behalf of [Provider]. You left a request on our website. Is it now a good time to talk?" " `}
         answer="Yes, I did. Thanks for the fast callback"
         secondText={`"Of course. Could you tell me a little more about your request so I can coordinate the right next step? "`}
-        botsHref="/solutions?tab=other#solutions-info"
         background="/images/general/background-five.png"
         video="/videos/other-industries-handles.mp4"
       />
@@ -122,8 +121,9 @@ export default async function OtherIndustriesPage() {
         title="Built for Secured Operations"
         description={
           <>
-            Every call is logged with a full audit trail. ISO 27001 and GDPR certification in
-            progress.
+            Every qualification call follows your approved scripts and targeting criteria, with
+            complete recordings, transcripts, and audit logs. Built to support high-converting,
+            GDPR-compliant sales pipelines.
           </>
         }
       />

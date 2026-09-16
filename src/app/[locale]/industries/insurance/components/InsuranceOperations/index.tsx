@@ -12,7 +12,7 @@ type InsuranceOperationsProps = {
 
 export const InsuranceOperations = ({
   title = 'Built for Insurance Operations',
-  description = 'Every call recorded, scripted to your approved language, and logged for audit. ISO 27001 and GDPR certification in progress.',
+  description = 'Every call follows your approved scripts and messaging, with complete recordings, transcripts, and audit logs. Built to support GDPR-compliant insurance operations.',
   video = '/videos/insurance-operations.mp4',
 }: InsuranceOperationsProps) => {
   return (

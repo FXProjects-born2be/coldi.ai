@@ -59,7 +59,6 @@ export default function EmisPaymentsPage() {
         firstText={`"Hi, this is Coldi calling on behalf of [Provider]. You started an account application but didn't finish verification — got two minutes?"`}
         answer="Yeah, what do you need?"
         secondText={`"Just a photo ID upload, I'll text you the secure link now."`}
-        botsHref="/solutions?tab=emi#solutions-info"
         background="/images/general/background-four.png"
         visual="dotWave"
       />
@@ -110,8 +109,9 @@ export default function EmisPaymentsPage() {
         title="Built for EMI Operations"
         description={
           <>
-            Every verification call is logged with a full audit trail. ISO 27001 and GDPR
-            certification in progress.
+            Every verification call follows your approved scripts and regulatory messaging, with
+            complete recordings, transcripts, and audit logs. Built to support GDPR-compliant EMI
+            operations.
           </>
         }
       />

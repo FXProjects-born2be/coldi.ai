@@ -59,7 +59,6 @@ export default function DebtCollectionPage() {
         firstText={`"Hi, this is Coldi calling about your account ending 4471. You have a payment of $210 due Friday. Would you like to set up a plan?"`}
         answer="Can I pay half now and half next month?"
         secondText={`"Yes, I can set that up right now. You'll get a confirmation text with both dates."`}
-        botsHref="/solutions?tab=debt#solutions-info"
         background="/images/general/background-three.png"
         visual="timerTwo"
       />

@@ -64,7 +64,6 @@ export default function BrokersPage() {
         firstText={`"Hi, saw you just registered on [Platform]. Got two minutes to tell me what you're looking to trade?"`}
         answer="Sure, mostly FX pairs."
         secondText={`"Good, I'll connect you with an account manager who specializes in FX. They'll call within the hour."`}
-        botsHref="/solutions?tab=trading#solutions-info"
         background="/images/general/background-two.png"
         visual="auraTwo"
       />
