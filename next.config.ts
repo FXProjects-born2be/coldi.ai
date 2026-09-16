@@ -10,7 +10,11 @@ const withNextIntl = createNextIntlPlugin();
 // script-src/style-src/etc. and test against the third-party scripts in use
 // (Google Analytics, Meta Pixel, reCAPTCHA, hCaptcha, Cloudflare Turnstile,
 // Retell AI, Supabase, YouTube embeds).
+const isSearchIndexable =
+  process.env.VERCEL_ENV === 'production' && process.env.VERCEL_GIT_COMMIT_REF !== 'dev';
+
 const securityHeaders = [
+  ...(!isSearchIndexable ? [{ key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' }] : []),
   {
     key: 'Referrer-Policy',
     value: 'strict-origin-when-cross-origin',

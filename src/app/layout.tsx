@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
+import { isSearchIndexable } from '@/shared/lib/seo/indexing';
+
 import '@/shared/lib/styles/null.scss';
 import '@/shared/lib/styles/base.scss';
 
@@ -16,14 +18,23 @@ const getMetadataBase = () => {
   return new URL('http://localhost:3000');
 };
 
+const searchIndexable = isSearchIndexable();
+
 export const metadata: Metadata = {
   metadataBase: getMetadataBase(),
-  verification: {
-    google: 'xwxPBu6sQqKwZ2sx5fphyZV8rM-oyAvHww_SZNUXevQ',
-  },
-  other: {
-    'facebook-domain-verification': 'mzne85ac0n2d0wka3heosu8pd81iwc',
-  },
+  robots: searchIndexable
+    ? { index: true, follow: true }
+    : { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
+  ...(searchIndexable
+    ? {
+        verification: {
+          google: 'xwxPBu6sQqKwZ2sx5fphyZV8rM-oyAvHww_SZNUXevQ',
+        },
+        other: {
+          'facebook-domain-verification': 'mzne85ac0n2d0wka3heosu8pd81iwc',
+        },
+      }
+    : {}),
   title: {
     template: '%s | Coldi',
     default: 'Fully Managed AI Voice Agents for Fintech | Coldi AI',
