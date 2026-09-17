@@ -37,6 +37,36 @@ export type WorkflowCard = {
 
 export const FEATURED_CASES: FeaturedCase[] = [
   {
+    id: 'multi-asset-broker',
+    tab: 'Multi-Asset Broker',
+    title: 'Multi-Asset Broker',
+    href: '/evest',
+    pain: 'Re-engaging a cold database of 11,840 leads across global markets caused low contact rates, manual dialer fatigue, and wasted time on automated voicemails.',
+    solution:
+      'Coldi deployed an outbound AI voice engine with 2.48 multi-dial cadences, precision answering machine filtering, and dynamic callback scheduling directly into account manager queues.',
+    results: [
+      { value: '29,377', label: 'calls placed' },
+      { value: '88+ talk', label: 'hours logged' },
+      { value: '96.4%', label: 'live human pickup efficiency' },
+      { value: '672', label: 'qualified leads captured' },
+    ],
+  },
+  {
+    id: 'payment-solutions',
+    tab: 'Payment Solutions Provider',
+    title: 'Payment Solutions Provider',
+    href: '/clarity-global',
+    pain: 'Manual 6-month compliance reviews across hundreds of clients created spreadsheet overload and slow status-change escalations.',
+    solution:
+      'Coldi automated the entire review cycle with an outbound compliance agent and a 24/7 inbound AI phone line.',
+    results: [
+      { value: '100%', label: 'Review Cycle Automation' },
+      { value: '0', suffix: 'Sec', label: 'Escalation Lag' },
+      { value: '10+', suffix: 'Hours', label: 'Saved Monthly' },
+      { value: '24/7', label: 'Inbound Coverage' },
+    ],
+  },
+  {
     id: 'silverbell',
     tab: 'Business Process Outsourcing',
     title: 'Silverbell Group',
@@ -45,25 +75,10 @@ export const FEATURED_CASES: FeaturedCase[] = [
     solution:
       'Coldi integrated a 24/7 AI voice representative into Silverbell’s digital touchpoints to deliver expert responses, capture contact data, and schedule appointments around the clock.',
     results: [
-      { value: '100', label: 'calls daily' },
-      { value: '75', label: 'hours saved weekly' },
-      { value: '45%', label: 'conversion boost' },
-      { value: '100500', label: 'clients happy' },
-    ],
-  },
-  {
-    id: 'payment-solutions',
-    tab: 'Payment Solutions Provider',
-    title: 'Payment Solutions Provider',
-    href: '/clarity-global',
-    pain: 'Manual 6-month compliance reviews across hundreds of clients created spreadsheet overload and slow status-change escalations. ',
-    solution:
-      'Coldi automated the entire review cycle with an outbound compliance agent and a 24/7 inbound AI phone line.',
-    results: [
-      { value: '100%', label: 'Review Cycle Automation' },
-      { value: '0', suffix: 'Sec', label: 'Escalation Lag' },
-      { value: '10+', suffix: 'Hours', label: 'Saved Monthly' },
-      { value: '24/7', label: 'Inbound Coverage' },
+      { value: '100+', label: 'Daily Automated Inquiries Managed' },
+      { value: '75', suffix: 'Hours', label: 'hours saved weekly' },
+      { value: '45%', label: 'Increase in Qualified Lead Conversions' },
+      { value: '24/7', label: 'Continuous Global Coverage Achieved' },
     ],
   },
   {
@@ -114,33 +129,6 @@ export const FEATURED_CASES: FeaturedCase[] = [
 ];
 
 export const IMPLEMENTATIONS: ImplementationCase[] = [
-  {
-    id: 'multi-asset-broker',
-    tab: 'Multi-Asset Broker',
-    title: 'Automated Lead Outreach & Callback Qualification',
-    description:
-      'The client needed a simple way to turn an existing lead database into live conversations without requiring its team to manually call every lead.',
-    href: '/helios',
-    handles: [
-      { icon: '/images/use-cases-hub/handle-outbound.png', label: 'Outbound lead calling' },
-      { icon: '/images/use-cases-hub/handle-interest.png', label: 'Interest qualification' },
-      { icon: '/images/use-cases-hub/handle-callback.png', label: 'Callback agreement' },
-      { icon: '/images/use-cases-hub/handle-summaries.png', label: 'Call summaries' },
-      { icon: '/images/use-cases-hub/handle-handoff.png', label: 'Lead handoff' },
-    ],
-    workflow: [
-      'Lead database',
-      'AI outbound call',
-      'Interest detection',
-      'Callback agreement',
-      'Lead summary',
-      'Human sales team',
-    ],
-    integration: {
-      name: 'Google Sheets',
-      icon: '/images/use-cases-hub/google-sheets.png',
-    },
-  },
   {
     id: 'multi-currency',
     tab: 'Multi-Currency Payment Platform',

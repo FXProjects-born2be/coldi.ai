@@ -58,14 +58,14 @@ export const UseCasesFeatured = () => {
   );
 
   useEffect(() => {
-    if (metricCount <= 1 || isPaused) return undefined;
+    if (metricCount <= 1) return undefined;
 
     const timer = window.setInterval(() => {
       setHighlightIndex((current) => (current + 1) % metricCount);
     }, METRIC_HIGHLIGHT_MS);
 
     return () => window.clearInterval(timer);
-  }, [metricCount, isPaused, activeIndex]);
+  }, [metricCount, activeIndex]);
 
   return (
     <section className={st.section}>
