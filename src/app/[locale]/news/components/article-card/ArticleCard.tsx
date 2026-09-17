@@ -53,8 +53,6 @@ export const ArticleCard = ({ article, variant = 'compact' }: ArticleCardProps) 
             alt={article.title}
             width={1024}
             height={576}
-            quality={100}
-            unoptimized
           />
         )}
       </div>

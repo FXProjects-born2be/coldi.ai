@@ -24,7 +24,6 @@ export type ArticleSection = {
 export type NewsArticle = NewsCard & {
   dateLabel: string;
   heroImage?: string;
-  showSummarize?: boolean;
   relatedSlugs: string[];
   intro: ArticleBlock[];
   sections: ArticleSection[];

@@ -9,43 +9,11 @@ import { DEFAULT_NEWS_IMAGE, type NewsArticle, type NewsCard, slugifyHeading } f
 import { ArticleCard } from '../article-card/ArticleCard';
 import st from './ArticlePage.module.scss';
 import { ArticleShare } from './ArticleShare';
+import { ArticleSummarizeWithAi } from './ArticleSummarizeWithAi';
 import { ArticleToc } from './ArticleToc';
 import { NewsListingLink } from './NewsListingLink';
 
 const SITE_URL = 'https://coldi.ai';
-
-const SUMMARIZE_TOOLS = [
-  {
-    name: 'ChatGPT',
-    icon: '/images/news/icons/ai-chatgpt.svg',
-    href: (url: string) =>
-      `https://chatgpt.com/?q=${encodeURIComponent(`Summarize this article: ${url}`)}`,
-  },
-  {
-    name: 'Perplexity',
-    icon: '/images/news/icons/ai-perplexity.svg',
-    href: (url: string) =>
-      `https://www.perplexity.ai/search?q=${encodeURIComponent(`Summarize ${url}`)}`,
-  },
-  {
-    name: 'Grok',
-    icon: '/images/news/icons/ai-grok.svg',
-    href: (url: string) =>
-      `https://x.com/i/grok?text=${encodeURIComponent(`Summarize this article: ${url}`)}`,
-  },
-  {
-    name: 'Gemini',
-    icon: '/images/news/icons/ai-gemini.svg',
-    href: (url: string) =>
-      `https://gemini.google.com/app?q=${encodeURIComponent(`Summarize this article: ${url}`)}`,
-  },
-  {
-    name: 'Claude',
-    icon: '/images/news/icons/ai-claude.svg',
-    href: (url: string) =>
-      `https://claude.ai/new?q=${encodeURIComponent(`Summarize this article: ${url}`)}`,
-  },
-] as const;
 
 type ArticlePageProps = {
   article: NewsArticle;
@@ -208,9 +176,6 @@ export const ArticlePage = ({ article, related }: ArticlePageProps) => {
                 alt={article.title}
                 fill
                 sizes="(max-width: 1024px) 100vw, 1280px"
-                quality={100}
-                unoptimized
-                priority
               />
             )}
           </div>
@@ -225,34 +190,7 @@ export const ArticlePage = ({ article, related }: ArticlePageProps) => {
           </aside>
 
           <div className={st.content}>
-            {article.showSummarize && (
-              <div className={st.summarize}>
-                <p className={st.summarizeLabel}>
-                  <Image
-                    src="/images/news/icons/sparks.svg"
-                    alt=""
-                    width={16}
-                    height={16}
-                    unoptimized
-                  />
-                  Summarize with ai
-                </p>
-                <div className={st.summarizeButtons}>
-                  {SUMMARIZE_TOOLS.map((tool) => (
-                    <a
-                      key={tool.name}
-                      className={st.summarizeButton}
-                      href={tool.href(articleUrl)}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <Image src={tool.icon} alt="" width={24} height={24} unoptimized />
-                      {tool.name}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
+            <ArticleSummarizeWithAi url={articleUrl} />
 
             {article.htmlContent ? (
               <div

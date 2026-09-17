@@ -38,7 +38,7 @@ const HERO_IMAGES: Record<string, string> = {
 const withCard = (
   slug: string,
   fields: Pick<NewsArticle, 'dateLabel' | 'relatedSlugs' | 'intro' | 'sections'> &
-    Partial<Pick<NewsArticle, 'showSummarize' | 'title' | 'category'>>
+    Partial<Pick<NewsArticle, 'title' | 'category'>>
 ): NewsArticle => {
   const base = card(slug) ?? FEATURED_ARTICLES.find((article) => article.slug === slug);
 
@@ -59,7 +59,6 @@ const withCard = (
 const ARTICLES: NewsArticle[] = [
   withCard('is-ai-safe', {
     dateLabel: 'September 6, 2026',
-    showSummarize: true,
     relatedSlugs: [
       'will-ai-replace-real-estate-agents',
       'voice-ai-for-outbound-sales',
