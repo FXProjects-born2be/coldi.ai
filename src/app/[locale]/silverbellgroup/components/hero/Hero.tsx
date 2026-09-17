@@ -21,9 +21,13 @@ export const Hero = ({ content = defaultHeroContent }: { content?: HeroContent }
       <div className={st.card}>
         <div className={st.images}>
           {content.images.bgImage && (
-            <div className={st.bgImage}>
-              <Image src={content.images.bgImage.src} alt="Image" fill sizes="200px" />
-            </div>
+            <Image
+              src={content.images.bgImage.src}
+              alt="Image"
+              fill
+              sizes="200px"
+              className={st.bgImage}
+            />
           )}
           <Image
             className={st.image}

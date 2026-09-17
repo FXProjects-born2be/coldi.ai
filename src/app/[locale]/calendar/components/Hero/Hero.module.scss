@@ -56,9 +56,9 @@
   }
 
   &__embed {
+    position: relative;
+    z-index: 1;
     overflow: hidden;
-    background: url("/images/calendar/calendar-bg.png") no-repeat center center;
-    background-size: cover;
     padding: 60px;
     display: flex;
     align-items: center;
@@ -70,6 +70,12 @@
       padding: 10px;
       border-radius: 8px;
     }
+  }
+
+  &__bg {
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
   }
 
   &__widget {

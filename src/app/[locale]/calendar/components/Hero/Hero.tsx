@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { getTranslations } from 'next-intl/server';
 
 import { cn } from '@/shared/lib/helpers';
@@ -77,6 +79,13 @@ export const Hero = async ({ firstName, lastName, email, phone, industry }: Hero
           </div>
 
           <div className={st.calendar_home__embed}>
+            <Image
+              className={st.calendar_home__bg}
+              src="/images/calendar/calendar-bg.png"
+              alt=""
+              fill
+              sizes="(max-width: 1024px) 100vw, 60vw"
+            />
             <CalendlyInline url={url} prefill={prefill} className={st.calendar_home__widget} />
           </div>
         </div>

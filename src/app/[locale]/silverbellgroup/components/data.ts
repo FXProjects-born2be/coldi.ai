@@ -7,7 +7,7 @@ export type HeroImage = {
 export type HeroBgImage = { src: string };
 
 export type HeroImages = {
-  bgImage?: HeroBgImage;
+  bgImage: HeroBgImage | null;
   image: HeroImage;
 };
 
@@ -95,6 +95,8 @@ export type CaseStudyContent = {
     src: string;
   };
   resultsMetrics: readonly ResultMetric[];
+  column?: 'one' | 'two';
+  layout?: 'two' | 'four';
 };
 
 export const heroContent: HeroContent = {
@@ -103,6 +105,7 @@ export const heroContent: HeroContent = {
   subtitle:
     'How a global professional services leader integrated autonomous AI agents into their client intake funnel to capture after-hours leads and streamline global operations.',
   images: {
+    bgImage: null,
     image: {
       src: '/images/silverbellgroup/sbg.png',
       width: 190,
@@ -343,7 +346,7 @@ export const resultsBg = '/images/silverbellgroup/results-bg.png';
 export const resultsShow = {
   title: 'What This Engagement Shows',
   text: 'Success in AI deployment depends on deep implementation—embedding domain expertise, enforcing clean data capture, and creating flawless hand-offs to human teams. Coldi delivers the complete operational engine alongside the voice and chat technology.',
-  src: '/images/silverbellgroup/result-two-bg.jpg',
+  src: '/images/silverbellgroup/result-two-bg.png',
 };
 
 export const resultsMetrics = [
@@ -365,4 +368,6 @@ export const caseStudyContent: CaseStudyContent = {
   resultsBg,
   resultsShow,
   resultsMetrics,
+  column: 'two',
+  layout: 'two',
 };

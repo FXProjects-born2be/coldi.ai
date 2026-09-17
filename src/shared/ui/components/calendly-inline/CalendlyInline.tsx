@@ -4,10 +4,12 @@ import { useEffect, useRef } from 'react';
 
 import { cn } from '@/shared/lib/helpers';
 
+import { useRouter } from '@/i18n/navigation';
+
 const CALENDLY_SCRIPT = 'https://assets.calendly.com/assets/external/widget.js';
 const CALENDLY_ORIGIN = 'https://calendly.com';
 const SCRIPT_ID = 'calendly-widget-js';
-const RESET_AFTER_MS = 3000;
+const REDIRECT_AFTER_MS = 15000;
 const SCRIPT_RETRY_MS = 1200;
 
 type CalendlyPrefill = {
@@ -66,6 +68,7 @@ type CalendlyInlineProps = {
 
 export const CalendlyInline = ({ url, className, active = true, prefill }: CalendlyInlineProps) => {
   const parentRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (!active) return;
@@ -127,8 +130,8 @@ export const CalendlyInline = ({ url, className, active = true, prefill }: Calen
 
       window.clearTimeout(resetId);
       resetId = window.setTimeout(() => {
-        if (!cancelled) initWidget();
-      }, RESET_AFTER_MS);
+        if (!cancelled) router.push('/');
+      }, REDIRECT_AFTER_MS);
     };
 
     window.addEventListener('message', onMessage);
@@ -139,7 +142,7 @@ export const CalendlyInline = ({ url, className, active = true, prefill }: Calen
       window.clearTimeout(resetId);
       window.removeEventListener('message', onMessage);
     };
-  }, [active, url, prefill]);
+  }, [active, url, prefill, router]);
 
   return <div ref={parentRef} className={cn('calendly-inline-widget', className)} />;
 };

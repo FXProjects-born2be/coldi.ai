@@ -31,6 +31,8 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
     resultsBg,
     resultsShow,
     resultsMetrics,
+    column = 'one',
+    layout = 'two',
   } = content;
   const [activeId, setActiveId] = useState<string>(tocItems[0].id);
   const [phaseIndex, setPhaseIndex] = useState(0);
@@ -290,7 +292,7 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
 
             <article id="issues" className={st.card}>
               <h2 className={st.cardTitle}>{sectionTitle('issues')}</h2>
-              <div className={st.snapshotGrid}>
+              <div className={st.issuesGrid}>
                 {askedCards.map((card, index) => (
                   <div key={`${card.label}-${index}`} className={st.snapshotCard}>
                     <div>
@@ -334,7 +336,7 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
             </article>
 
             <article id="results" className={st.results}>
-              <div className={st.resultsRow}>
+              <div className={cn(st.resultsRow, column === 'two' && st.resultsRowTwo)}>
                 <div className={st.resultsLeft}>
                   <Image
                     src={resultsBg}
@@ -344,7 +346,7 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                     sizes="(max-width: 1024px) 100vw, 900px"
                   />
                   <h2 className={st.resultsTitle}>{sectionTitle('results')}</h2>
-                  <div className={st.resultsGrid}>
+                  <div className={cn(st.resultsGrid, layout === 'four' && st.resultsGridFour)}>
                     {resultsMetrics.map((metric, index) => (
                       <div key={`result-${index}`} className={st.resultCard}>
                         <p
@@ -352,9 +354,8 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                             st.resultValue,
                             metric.highlight && st.resultValueHighlight
                           )}
-                        >
-                          {metric.value}
-                        </p>
+                          dangerouslySetInnerHTML={{ __html: metric.value }}
+                        />
                         {metric.subtitle ? (
                           <p className={st.resultDescription}>{metric.subtitle}</p>
                         ) : null}
