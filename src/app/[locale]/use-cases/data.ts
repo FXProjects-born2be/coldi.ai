@@ -85,7 +85,7 @@ export const FEATURED_CASES: FeaturedCase[] = [
     id: 'agro-industry',
     tab: 'Global Agro Industry',
     title: 'Global Agro Industry',
-    href: '/industries',
+    href: '/agro-industry',
     pain: 'Senior sales managers wasted hours manually filtering unqualified inbound inquiries for complex multi-million dollar infrastructure projects.',
     solution:
       'Coldi deployed an autonomous AI voice concierge to manage technical discovery, extract structured project data, and schedule qualified prospects.',

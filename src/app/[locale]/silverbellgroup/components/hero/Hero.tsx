@@ -13,7 +13,12 @@ export const Hero = ({ content = defaultHeroContent }: { content?: HeroContent }
             className={st.titleAccent}
             dangerouslySetInnerHTML={{ __html: content.titleLine1 }}
           />
-          <span className={st.titleRest} dangerouslySetInnerHTML={{ __html: content.titleLine2 }} />
+          {content.titleLine2 ? (
+            <span
+              className={st.titleRest}
+              dangerouslySetInnerHTML={{ __html: content.titleLine2 }}
+            />
+          ) : null}
         </h1>
         <p className={st.subtitle} dangerouslySetInnerHTML={{ __html: content.subtitle }} />
       </div>
