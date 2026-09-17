@@ -48,7 +48,13 @@ const TABS = [
   },
   {
     id: 'other',
-    items: [],
+    items: [
+      'healthcareAppointment',
+      'realEstateLead',
+      'retailEcommerce',
+      'hospitalityTravel',
+      'educationEnrollment',
+    ],
   },
 ] as const;
 

@@ -125,17 +125,6 @@
         line-height: 1.4;
     }
 
-    &__bottom {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 64px 20px;
-
-        @include mobile {
-            flex-direction: column;
-        }
-    }
-
     &__copyright {
         color: rgba(0, 0, 0, 0.50);
         font-size: 14px;
@@ -144,17 +133,6 @@
 
         @include mobile {
             order: 2;
-        }
-    }
-
-    &__badges {
-        display: flex;
-        align-items: center;
-        gap: 40px;
-
-        @include mobile {
-            order: 1;
-            gap: 30px;
         }
     }
 

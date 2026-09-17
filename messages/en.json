@@ -637,7 +637,29 @@
         }
       },
       "other": {
-        "label": "Other"
+        "label": "Other",
+        "items": {
+          "healthcareAppointment": {
+            "title": "Healthcare Appointment Bot",
+            "description": "Schedules appointments, sends reminders, and follows up with patients automatically."
+          },
+          "realEstateLead": {
+            "title": "Real Estate Lead Qualification Bot",
+            "description": "Calls new property leads, identifies their requirements, and books viewings with qualified prospects."
+          },
+          "retailEcommerce": {
+            "title": "Retail & E-commerce Support Bot",
+            "description": "Handles order questions, delivery updates, product enquiries, and customer follow-ups."
+          },
+          "hospitalityTravel": {
+            "title": "Hospitality & Travel Booking Bot",
+            "description": "Manages booking enquiries, confirmations, changes, and pre-arrival communication."
+          },
+          "educationEnrollment": {
+            "title": "Education Enrollment Bot",
+            "description": "Contacts prospective students, answers initial questions, and guides them through the enrollment process."
+          }
+        }
       }
     }
   },
@@ -839,11 +861,11 @@
     }
   },
   "LegalPage": {
-    "metaTitle": "Legal",
+    "metaTitle": "Trust Center",
     "metaDescription": "Access all official legal documents and policies for our company. Download or view the latest versions of our agreements."
   },
   "LegalHero": {
-    "title": "Legal",
+    "title": "Trust Center",
     "description": "Access all official legal documents and policies for our company. Download or view the latest versions of our agreements."
   },
   "LegalInfo": {
@@ -863,6 +885,16 @@
       }
     }
   },
+  "LegalCompliance": {
+    "subtitle": "Our Security and Compliance",
+    "title": "Need More Information?",
+    "description": "For details about our GDPR practices, ISO 27001 program, or specific security and compliance requirements, contact our team.",
+    "contactTitle": "Contact Us!",
+    "mailIconAlt": "Email",
+    "starAiAria": "View Coldi on STAR AI",
+    "starLevelAria": "View Coldi on STAR Level",
+    "saasHubAria": "View Coldi on SaaSHub"
+  },
   "Footer": {
     "subtitle": "Making voice AI work for Fintech",
     "copyright": "© {year} Coldi. Voice-Powered. Rights Reserved.",
@@ -878,8 +910,7 @@
     "columns": {
       "explore": "Explore",
       "products": "Products",
-      "industries": "Industries",
-      "legal": "Legal"
+      "industries": "Industries"
     },
     "explore": {
       "products": "Products",
@@ -902,11 +933,6 @@
       "debt-collection": "Debt Collection",
       "emis": "EMIs & Payments",
       "other": "Other Industries"
-    },
-    "legal": {
-      "terms": "Terms of Service",
-      "privacy": "Privacy Policy",
-      "data-processing-agreement": "Data Processing Agreement"
     }
   }
 }

@@ -13,7 +13,7 @@ export type HeroImages = {
 
 export type HeroContent = {
   titleLine1: string;
-  titleLine2: string;
+  titleLine2: string | null;
   subtitle: string;
   images: HeroImages;
   reportingRange: string;

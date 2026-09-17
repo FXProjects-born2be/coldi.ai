@@ -7,8 +7,6 @@
 *,
 *:before,
 *:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -96,27 +94,6 @@ video {
   .flag-dropdown {
     background: transparent !important;
     border: none !important;
-  }
-}
-
-@keyframes fadeIn3D {
-  from {
-    opacity: 0.2;
-    transform: matrix3d(1.1, 0, 0, 0, 0, 1, 2, -0.0003, 0, 0, 3, 0, 0, 0, 0, 1);
-  }
-  to {
-    opacity: 1;
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 2, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-  }
-}
-
-.fadeIn3D {
-  animation: fadeIn3D linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 40%;
-  transition: all 0.5s ease-in-out;
-  @media (max-width: 992px) {
-    animation-range: entry 0% cover 20%;
   }
 }
 

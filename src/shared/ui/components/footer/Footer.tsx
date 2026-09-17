@@ -40,14 +40,6 @@ const menu = [
       { id: 'other', href: '/industries/other-industries' },
     ],
   },
-  {
-    id: 'legal',
-    links: [
-      { id: 'terms', href: '/legal' },
-      { id: 'privacy', href: '/legal' },
-      { id: 'data-processing-agreement', href: '/legal' },
-    ],
-  },
 ] as const;
 
 export const Footer = async ({ pathname }: { pathname: string }) => {
@@ -197,49 +189,6 @@ export const Footer = async ({ pathname }: { pathname: string }) => {
               <p className={st.footer__copyright}>
                 {t('copyright', { year: new Date().getFullYear() })}
               </p>
-              <div className={st.footer__badges}>
-                <a
-                  href="https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={t('starAria')}
-                >
-                  <Image
-                    src="/images/footer/star-ai.png"
-                    alt={pageHeading}
-                    width={140}
-                    height={140}
-                    loading={'lazy'}
-                  />
-                </a>
-                <a
-                  href="https://cloudsecurityalliance.org/star/registry/coldi-labs-ltd/services/coldi-ai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={t('starAria')}
-                >
-                  <Image
-                    src="/images/footer/star-level.png"
-                    alt={pageHeading}
-                    width={140}
-                    height={140}
-                    loading={'lazy'}
-                  />
-                </a>
-                <a
-                  href="https://www.saashub.com/coldi?utm_source=badge&utm_campaign=badge&utm_content=coldi&badge_variant=color&badge_kind=approved"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={t('saasHubAria')}
-                >
-                  <Image
-                    src="/images/footer/saas-hub.png"
-                    alt={t('saasHubAria')}
-                    width={126}
-                    height={42}
-                  />
-                </a>
-              </div>
             </div>
           </div>
         </div>

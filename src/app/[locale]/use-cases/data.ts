@@ -70,7 +70,7 @@ export const FEATURED_CASES: FeaturedCase[] = [
     id: 'stone-electric',
     tab: 'Home & Residential Services',
     title: 'Stone Electric Company',
-    href: '/residential-service-automation',
+    href: '/stone-electric',
     pain: 'Missed calls during high-volume hours and after-hours emergencies resulted in lost high-value jobs and delayed technician dispatch',
     solution:
       'Coldi deployed an AI voice agent to handle 24/7 intake—instantly transferring emergency calls to live electricians and booking routine jobs directly into technician calendars.',

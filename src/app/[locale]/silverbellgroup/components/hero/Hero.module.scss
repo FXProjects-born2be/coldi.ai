@@ -137,3 +137,13 @@
   object-fit: cover;
   z-index: -2;
 }
+
+:global(.page-stone-electric) {
+  .titleAccent {
+    font-size: 40px;
+
+    @include tablet {
+      font-size: 32px;
+    }
+  }
+}

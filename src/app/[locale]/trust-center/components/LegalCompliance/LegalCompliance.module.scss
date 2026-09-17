@@ -1,0 +1,118 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.legal_compliance {
+  padding-block: 80px;
+
+  @include tablet {
+    padding-block: 40px;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 80px;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__left {
+    background: #FAFAFA;
+    padding: 38px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 53px;
+
+    @include tablet {
+      gap: 23px;
+    }
+  }
+
+  &__subtitle {
+    color: #0C1021;
+    text-align: center;
+    font-size: 42px;
+    line-height: 1.19;
+
+    @include tablet {
+      font-size: 32px;
+    }
+  }
+
+  &__badges {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 45px 52px;
+
+    @include tablet {
+      gap: 33px 37px;
+    }
+
+    &>*:last-child {
+      grid-column: 1 / -1;
+        img {
+          margin: auto;
+        }
+    }
+  }
+
+  &__title {
+    color: #0C1021;
+    font-size: 48px;
+    line-height: 120%;
+    margin-bottom: 8px;
+
+    @include tablet {
+      font-size: 40px;
+      text-align: center;
+    }
+  }
+
+  &__description {
+    color: #0C1021;
+    font-size: 24px;
+    line-height: 120%;
+    margin-bottom: 40px;
+
+    @include tablet {
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+
+  &__contact {
+    border-radius: 16px;
+    background: rgba(66, 104, 255, 0.15);
+    padding: 20px;
+  }
+
+  &__contact_title {
+    color: #0C1021;
+    font-size: 16px;
+    line-height: 140%;
+    margin-bottom: 6px;
+
+    @include tablet {
+      text-align: center;
+    }
+  }
+
+  &__contact_link {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: #4268FF;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 120%;
+
+    @include tablet {
+      justify-content: center;
+    }
+  }
+}

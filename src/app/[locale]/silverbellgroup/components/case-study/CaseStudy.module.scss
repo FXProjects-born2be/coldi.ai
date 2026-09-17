@@ -834,3 +834,39 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
+:global(.page-stone-electric) {
+  .snapshotValue {
+    @include desktop {
+      font-size: 24px;
+    }
+  }
+
+  @include desktop {
+    .issuesGrid {
+      grid-template-columns: repeat(6, 1fr);
+
+      > * {
+        grid-column: span 2;
+      }
+
+      > :nth-last-child(-n + 2) {
+        grid-column: span 3;
+      }
+    }
+  }
+
+  @include desktop {
+    .resultsGrid {
+      grid-template-columns: repeat(6, 1fr);
+
+      > * {
+        grid-column: span 2;
+      }
+
+      > :nth-last-child(-n + 2) {
+        grid-column: span 3;
+      }
+    }
+  }
+}
