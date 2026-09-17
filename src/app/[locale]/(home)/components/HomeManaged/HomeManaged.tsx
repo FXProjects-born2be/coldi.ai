@@ -62,17 +62,6 @@ const tabs: ManagedTab[] = [
     ],
   },
   {
-    id: 'leads',
-    image: [
-      {
-        src: '/images/home/managed-four.svg',
-      },
-      {
-        src: '/images/home/managed-four-sub-one.png',
-      },
-    ],
-  },
-  {
     id: 'campaign-performance',
     image: [
       {
@@ -83,6 +72,17 @@ const tabs: ManagedTab[] = [
       },
       {
         src: '/images/home/managed-fives-sub-two.png',
+      },
+    ],
+  },
+  {
+    id: 'leads',
+    image: [
+      {
+        src: '/images/home/managed-four.svg',
+      },
+      {
+        src: '/images/home/managed-four-sub-one.png',
       },
     ],
   },
