@@ -79,6 +79,13 @@ export type ProblemContent = {
   conclusion: ProblemPanel;
 };
 
+export type AskedAudio = {
+  title: string;
+  text: string;
+  image: string;
+  audio: string;
+};
+
 export type CaseStudyContent = {
   tocItems: readonly TocItem[];
   problem?: ProblemContent;
@@ -86,6 +93,7 @@ export type CaseStudyContent = {
   implementationPhases: readonly ImplementationPhase[];
   integratedItems: readonly IntegratedItem[];
   askedCards: readonly SnapshotCard[];
+  askedAudios?: readonly AskedAudio[] | null;
   monitoringItems: readonly LabelValue[];
   wentWrongItems: readonly { title: string }[];
   resultsBg: string;
@@ -96,7 +104,6 @@ export type CaseStudyContent = {
   };
   resultsMetrics: readonly ResultMetric[];
   column?: 'one' | 'two';
-  layout?: 'two' | 'four';
 };
 
 export const heroContent: HeroContent = {
@@ -369,5 +376,4 @@ export const caseStudyContent: CaseStudyContent = {
   resultsShow,
   resultsMetrics,
   column: 'two',
-  layout: 'two',
 };

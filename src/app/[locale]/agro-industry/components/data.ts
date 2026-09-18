@@ -297,5 +297,4 @@ export const caseStudyContent: CaseStudyContent = {
   resultsShow,
   resultsMetrics,
   column: 'one',
-  layout: 'four',
 };

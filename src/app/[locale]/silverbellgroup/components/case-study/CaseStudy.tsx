@@ -7,6 +7,7 @@ import { cn } from '@/shared/lib/helpers';
 
 import type { CaseStudyContent } from '../data';
 import { caseStudyContent as defaultContent } from '../data';
+import { AskedAudioGrid } from './AskedAudioGrid';
 import st from './CaseStudy.module.scss';
 
 const renderWithStrong = (text: string) =>
@@ -26,13 +27,13 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
     implementationPhases,
     integratedItems,
     askedCards,
+    askedAudios = null,
     monitoringItems,
     wentWrongItems,
     resultsBg,
     resultsShow,
     resultsMetrics,
     column = 'one',
-    layout = 'two',
   } = content;
   const [activeId, setActiveId] = useState<string>(tocItems[0].id);
   const [phaseIndex, setPhaseIndex] = useState(0);
@@ -310,6 +311,9 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                   </div>
                 ))}
               </div>
+              {askedAudios && askedAudios.length > 0 ? (
+                <AskedAudioGrid items={askedAudios} />
+              ) : null}
             </article>
 
             <article id="monitoring" className={st.card}>
@@ -346,7 +350,7 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                     sizes="(max-width: 1024px) 100vw, 900px"
                   />
                   <h2 className={st.resultsTitle}>{sectionTitle('results')}</h2>
-                  <div className={cn(st.resultsGrid, layout === 'four' && st.resultsGridFour)}>
+                  <div className={st.resultsGrid}>
                     {resultsMetrics.map((metric, index) => (
                       <div key={`result-${index}`} className={st.resultCard}>
                         <p

@@ -182,6 +182,21 @@ export const integratedItems = [
   },
 ];
 
+export const askedAudios = [
+  {
+    title: 'Complex Project Scoping',
+    text: 'In this call, the AI manages a detailed request for a deck renovation, collecting specific requirements for outlets and lighting while validating the service area.',
+    image: '/images/silverbellgroup/asked-bg-one.png',
+    audio: '/audio/electric-1.mp3',
+  },
+  {
+    title: 'Standard Quote & Appointment Booking',
+    text: 'Watch how the agent handles a common inquiry for an outdoor outlet, explains the installation process, and syncs directly with the calendar for an onsite estimate.',
+    image: '/images/silverbellgroup/asked-bg-two.png',
+    audio: '/audio/electric-2.mp3',
+  },
+];
+
 export const askedCards = [
   {
     value: 'Emergency Scripting',
@@ -294,11 +309,11 @@ export const caseStudyContent: CaseStudyContent = {
   implementationPhases,
   integratedItems,
   askedCards,
+  askedAudios,
   monitoringItems,
   wentWrongItems,
   resultsBg,
   resultsShow,
   resultsMetrics,
   column: 'one',
-  layout: 'four',
 };

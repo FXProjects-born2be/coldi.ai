@@ -86,7 +86,7 @@
   justify-content: center;
 
   @include mobile-up {
-    max-width: 190px;
+    max-width: 200px;
   }
 }
 
@@ -139,7 +139,8 @@
 }
 
 :global(.page-stone-electric),
-:global(.page-agro-industry) {
+:global(.page-agro-industry),
+:global(.page-evest){
   .titleAccent {
     font-size: 40px;
 

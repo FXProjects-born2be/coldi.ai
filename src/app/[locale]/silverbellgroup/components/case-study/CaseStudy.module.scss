@@ -637,7 +637,6 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  justify-content: center;
   min-height: 120px;
   padding: 30px 20px;
   background: #f6f6f6;
@@ -763,14 +762,6 @@
   gap: 8px;
 }
 
-.resultsGridFour {
-  grid-template-columns: repeat(4, 1fr);
-
-  @media screen and (max-width: 1200px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 .resultCard {
   padding: 20px;
   border-radius: 10px;
@@ -786,6 +777,7 @@
 
   span {
     font-size: 24px;
+    line-height: 120%;
     display: block;
   }
 
@@ -835,6 +827,97 @@
   }
 }
 
+.askedAudioGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+
+  @include tablet {
+    grid-template-columns: 1fr;
+  }
+}
+
+.askedAudioCard {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 52px 20px 20px 20px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 0.5px solid rgba(0, 0, 0, 0.20);
+  min-height: 399px;
+}
+
+.askedAudioCardPlaying {
+  border-color: #4268ff;
+
+  .askedAudioBgWrap {
+    animation: asked-audio-rotate 12s linear infinite;
+  }
+}
+
+@property --rotate-transform {
+  syntax: '<angle>';
+  initial-value: 0rad;
+  inherits: false;
+}
+
+.askedAudioBgWrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  z-index: -2;
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(var(--rotate-transform, 0rad));
+}
+
+.askedAudioBg {
+  object-fit: cover;
+}
+
+@keyframes asked-audio-rotate {
+  0% {
+    animation-timing-function: ease-out;
+    --rotate-transform: -6.283rad;
+  }
+
+  100% {
+    --rotate-transform: 0rad;
+  }
+}
+
+.askedAudioTitle {
+  margin: 0 0 6px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+
+  @include tablet {
+    font-size: 20px;
+  }
+}
+
+.askedAudioText {
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.4;
+
+  @include mobile {
+    font-size: 14px;
+  }
+}
+
+.askedAudioPlay {
+  margin-top: 24px;
+}
+
 :global(.page-stone-electric) {
   .snapshotValue {
     @include desktop {
@@ -855,7 +938,11 @@
       }
     }
   }
-
+}
+:global(.page-stone-electric),
+:global(.page-evest),
+:global(.page-clarity-global),
+:global(.page-agro-industry) {
   @include desktop {
     .resultsGrid {
       grid-template-columns: repeat(6, 1fr);
@@ -867,6 +954,20 @@
       > :nth-last-child(-n + 2) {
         grid-column: span 3;
       }
+    }
+  }
+}
+
+:global(.page-evest) {
+  .snapshotValue {
+    @include desktop {
+      font-size: 24px;
+    }
+  }
+
+  @include desktop {
+    .issuesGrid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }
