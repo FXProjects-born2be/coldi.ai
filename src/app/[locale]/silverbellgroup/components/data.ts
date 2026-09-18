@@ -81,7 +81,7 @@ export type ProblemContent = {
 
 export type AskedAudio = {
   title: string;
-  text: string;
+  text: string | null;
   image: string;
   audio: string;
 };
@@ -94,6 +94,7 @@ export type CaseStudyContent = {
   integratedItems: readonly IntegratedItem[];
   askedCards: readonly SnapshotCard[];
   askedAudios?: readonly AskedAudio[] | null;
+  askedAudioColumn?: 'one' | 'two';
   monitoringItems: readonly LabelValue[];
   wentWrongItems: readonly { title: string }[];
   resultsBg: string;

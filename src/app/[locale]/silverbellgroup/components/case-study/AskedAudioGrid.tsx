@@ -8,7 +8,13 @@ import { cn } from '@/shared/lib/helpers';
 import type { AskedAudio } from '../data';
 import st from './CaseStudy.module.scss';
 
-export const AskedAudioGrid = ({ items }: { items: readonly AskedAudio[] }) => {
+export const AskedAudioGrid = ({
+  items,
+  column = 'two',
+}: {
+  items: readonly AskedAudio[];
+  column?: 'one' | 'two';
+}) => {
   const [playingId, setPlayingId] = useState<string | null>(null);
   const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({});
 
@@ -34,7 +40,7 @@ export const AskedAudioGrid = ({ items }: { items: readonly AskedAudio[] }) => {
   };
 
   return (
-    <div className={st.askedAudioGrid}>
+    <div className={cn(st.askedAudioGrid, column === 'two' && st.askedAudioGridTwo)}>
       {items.map((item) => {
         const isPlaying = playingId === item.audio;
 
@@ -54,7 +60,7 @@ export const AskedAudioGrid = ({ items }: { items: readonly AskedAudio[] }) => {
             </div>
             <div>
               <p className={st.askedAudioTitle}>{item.title}</p>
-              <p className={st.askedAudioText}>{item.text}</p>
+              {item.text ? <p className={st.askedAudioText}>{item.text}</p> : null}
             </div>
             <audio
               ref={(node) => {

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 
-import { Hear, Hero, Process } from './components';
+import { CaseStudy, Hero } from '../silverbellgroup/components';
+import { caseStudyContent, heroContent } from './components/data';
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: '/hvac-leads',
+    canonical: '/hvac-saas',
   },
   title: 'High-Volume Lead Re-engagement for SaaS and HVAC',
   description:
@@ -17,12 +18,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HvacLeadsPage() {
+export default function hvacSaasPage() {
   return (
     <main>
-      <Hero />
-      <Process />
-      <Hear />
+      <Hero content={heroContent} />
+      <CaseStudy content={caseStudyContent} />
     </main>
   );
 }

@@ -28,6 +28,7 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
     integratedItems,
     askedCards,
     askedAudios = null,
+    askedAudioColumn = 'two',
     monitoringItems,
     wentWrongItems,
     resultsBg,
@@ -312,7 +313,7 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                 ))}
               </div>
               {askedAudios && askedAudios.length > 0 ? (
-                <AskedAudioGrid items={askedAudios} />
+                <AskedAudioGrid items={askedAudios} column={askedAudioColumn} />
               ) : null}
             </article>
 

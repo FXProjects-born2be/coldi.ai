@@ -829,12 +829,27 @@
 
 .askedAudioGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 10px;
   width: 100%;
 
+  .askedAudioTitle {
+    text-align: center;
+  }
+}
+
+.askedAudioGridTwo {
+  grid-template-columns: 1fr 1fr;
+
   @include tablet {
     grid-template-columns: 1fr;
+  }
+
+  .askedAudioCard {
+    min-height: 399px;
+  }
+
+  .askedAudioTitle {
+    text-align: left;
   }
 }
 
@@ -848,21 +863,10 @@
   overflow: hidden;
   border-radius: 8px;
   border: 0.5px solid rgba(0, 0, 0, 0.20);
-  min-height: 399px;
 }
 
 .askedAudioCardPlaying {
   border-color: #4268ff;
-
-  .askedAudioBgWrap {
-    animation: asked-audio-rotate 12s linear infinite;
-  }
-}
-
-@property --rotate-transform {
-  syntax: '<angle>';
-  initial-value: 0rad;
-  inherits: false;
 }
 
 .askedAudioBgWrap {
@@ -873,22 +877,11 @@
   height: 150%;
   z-index: -2;
   pointer-events: none;
-  transform: translate(-50%, -50%) rotate(var(--rotate-transform, 0rad));
+  transform: translate(-50%, -50%);
 }
 
 .askedAudioBg {
   object-fit: cover;
-}
-
-@keyframes asked-audio-rotate {
-  0% {
-    animation-timing-function: ease-out;
-    --rotate-transform: -6.283rad;
-  }
-
-  100% {
-    --rotate-transform: 0rad;
-  }
 }
 
 .askedAudioTitle {
@@ -942,7 +935,8 @@
 :global(.page-stone-electric),
 :global(.page-evest),
 :global(.page-clarity-global),
-:global(.page-agro-industry) {
+:global(.page-agro-industry),
+:global(.page-hvac-saas) {
   @include desktop {
     .resultsGrid {
       grid-template-columns: repeat(6, 1fr);
@@ -968,6 +962,14 @@
   @include desktop {
     .issuesGrid {
       grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+:global(.page-hvac-saas) {
+  .snapshotValue {
+    @include desktop {
+      font-size: 24px;
     }
   }
 }
