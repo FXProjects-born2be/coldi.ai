@@ -79,7 +79,6 @@ export const UseCasesImplementations = () => {
                   width={624}
                   height={300}
                   className={cn(st.cardImage, st.cardImageDesktop)}
-                  unoptimized
                 />
                 <Image
                   src="/images/use-cases-hub/workflow-card-mobile.jpg"
@@ -87,7 +86,6 @@ export const UseCasesImplementations = () => {
                   width={636}
                   height={1291}
                   className={cn(st.cardImage, st.cardImageMobile)}
-                  unoptimized
                 />
               </div>
 

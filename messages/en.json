@@ -545,7 +545,11 @@
       "integrations": "Integrations",
       "callLogic": "Call Logic",
       "live": "Live",
-      "completed": "Completed"
+      "completed": "Completed",
+      "customerData": "Customer Data & Intent",
+      "rightMessage": "Right Message, Language & Voice",
+      "tailoredFlow": "Tailored Conversation Flow",
+      "continuousOptimization": "Continuous Optimization"
     },
     "tabs": {
       "insurance": {

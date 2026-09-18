@@ -545,7 +545,11 @@
       "integrations": "Інтеграції",
       "callLogic": "Логіка дзвінків",
       "live": "Запущено",
-      "completed": "Завершено"
+      "completed": "Завершено",
+      "customerData": "Дані клієнта та намір",
+      "rightMessage": "Точне повідомлення, мова та голос",
+      "tailoredFlow": "Індивідуальний сценарій розмови",
+      "continuousOptimization": "Постійна оптимізація"
     },
     "tabs": {
       "insurance": {

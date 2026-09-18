@@ -5,6 +5,7 @@ import NextLink from 'next/link';
 import { getTranslations } from 'next-intl/server';
 
 import { cn, getPageHeadingFromPath, requestRoutes } from '@/shared/lib/helpers';
+import { LazyVideo } from '@/shared/ui/components/lazy-video';
 import { MessageIcon } from '@/shared/ui/icons/fill/message';
 import { PhoneIcon } from '@/shared/ui/icons/fill/phone';
 import { Facebook } from '@/shared/ui/icons/fill/socials/facebook';
@@ -194,15 +195,7 @@ export const Footer = async ({ pathname }: { pathname: string }) => {
         </div>
 
         <div className={st.footer__video} aria-hidden>
-          <video
-            src="/videos/footer-video.mp4"
-            autoPlay
-            playsInline
-            muted
-            loop
-            preload="metadata"
-            controls={false}
-          />
+          <LazyVideo src="/videos/footer-video.mp4" />
         </div>
 
         <a

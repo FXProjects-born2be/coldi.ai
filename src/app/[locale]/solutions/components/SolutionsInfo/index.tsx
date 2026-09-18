@@ -452,6 +452,59 @@ export const SolutionsInfo = () => {
                 </div>
               </div>
             )}
+            {activeId === 'other' && (
+              <div
+                className={cn(
+                  st.solutions_info__visual_content,
+                  st['solutions_info__visual_content--4']
+                )}
+              >
+                <div>
+                  <div className={st.solutions_info__visual_item}>
+                    <Image src={CHECKMARK_ICON} width={27} height={27} alt="" loading="lazy" />
+                    <span>{t('visual.managedBy')}</span>
+                  </div>
+                  <IconConnectorLine
+                    variant="sixteen"
+                    className={st.solutions_info__visual_item_second_icon}
+                    delay={0.9}
+                    duration={1.1}
+                  />
+                  <IconConnectorLine
+                    variant="fifteen"
+                    className={st.solutions_info__visual_item_second_icon}
+                    delay={0.9}
+                    duration={1.1}
+                  />
+                  <IconConnectorLine
+                    variant="seventeen"
+                    className={st.solutions_info__visual_item_second_icon}
+                    delay={0.9}
+                    duration={1.7}
+                  />
+                  <IconConnectorLine
+                    variant="eighteen"
+                    className={st.solutions_info__visual_item_second_icon}
+                    delay={0.9}
+                    duration={1.9}
+                  />
+                </div>
+                <div>
+                  <div className={st.solutions_info__visual_item}>
+                    <span>{t('visual.customerData')}</span>
+                  </div>
+                  <div className={st.solutions_info__visual_item}>
+                    <span>{t('visual.rightMessage')}</span>
+                  </div>
+                </div>
+                <div className={st.solutions_info__visual_item}>
+                  <span>{t('visual.tailoredFlow')}</span>
+                </div>
+                <div className={st.solutions_info__visual_item}>
+                  <span>{t('visual.continuousOptimization')}</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

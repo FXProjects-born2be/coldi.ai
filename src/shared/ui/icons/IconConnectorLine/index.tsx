@@ -4,7 +4,7 @@ import { cn } from '@/shared/lib/helpers';
 
 import st from './IconConnectorLine.module.scss';
 
-type ArrowDir = 'down' | 'right';
+type ArrowDir = 'down' | 'right' | 'left';
 
 const VARIANTS = {
   one: {
@@ -105,12 +105,41 @@ const VARIANTS = {
     start: { x: 2.67, y: 2.67 },
     arrow: { x: 135.17, y: 239.02, dir: 'down' as ArrowDir },
   },
+  fifteen: {
+    width: 163,
+    height: 138,
+    d: 'M159.5 2.67 V47.37 C159.5 71.37 3.68 71.37 3.68 95.37 V134',
+    start: { x: 159.5, y: 2.67 },
+    arrow: { x: 3.68, y: 137.43, dir: 'down' as ArrowDir },
+  },
+  sixteen: {
+    width: 146,
+    height: 138,
+    d: 'M2.67 2.67 V47.37 C2.67 71.37 142.85 71.37 142.85 95.37 V133',
+    start: { x: 2.67, y: 2.67 },
+    arrow: { x: 142.85, y: 136.5, dir: 'down' as ArrowDir },
+  },
+  seventeen: {
+    width: 43,
+    height: 315,
+    d: 'M39.81 2.67 V287.6 C39.81 311.6 15.81 311.6 5 311.6',
+    start: { x: 39.81, y: 2.67 },
+    arrow: { x: 0.58, y: 311.6, dir: 'left' as ArrowDir },
+  },
+  eighteen: {
+    width: 71,
+    height: 351,
+    d: 'M2.67 2.67 V323.6 C2.67 347.6 26.67 347.6 65.85 347.6',
+    start: { x: 2.67, y: 2.67 },
+    arrow: { x: 70.28, y: 347.6, dir: 'right' as ArrowDir },
+  },
 } as const;
 
-const arrowPath = (x: number, y: number, dir: ArrowDir) =>
-  dir === 'right'
-    ? `M${x - 3.89} ${y - 2.83} L${x} ${y} L${x - 3.89} ${y + 2.83}`
-    : `M${x - 2.83} ${y - 3.89} L${x} ${y} L${x + 2.83} ${y - 3.89}`;
+const arrowPath = (x: number, y: number, dir: ArrowDir) => {
+  if (dir === 'right') return `M${x - 3.89} ${y - 2.83} L${x} ${y} L${x - 3.89} ${y + 2.83}`;
+  if (dir === 'left') return `M${x + 3.89} ${y - 2.83} L${x} ${y} L${x + 3.89} ${y + 2.83}`;
+  return `M${x - 2.83} ${y - 3.89} L${x} ${y} L${x + 2.83} ${y - 3.89}`;
+};
 
 type IconConnectorLineProps = {
   variant: keyof typeof VARIANTS;
