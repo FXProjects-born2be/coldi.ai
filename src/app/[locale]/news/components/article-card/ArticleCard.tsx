@@ -15,6 +15,12 @@ type ArticleCardProps = {
   variant?: 'large' | 'compact' | 'related';
 };
 
+const IMAGE_SIZES = {
+  large: '(max-width: 767px) 100vw, 50vw',
+  compact: '(max-width: 767px) 100px, (max-width: 1024px) 50vw, 33vw',
+  related: '(max-width: 1024px) 100vw, 33vw',
+} as const;
+
 const rememberListingReturn = () => {
   if (typeof window === 'undefined') return;
   try {
@@ -53,6 +59,7 @@ export const ArticleCard = ({ article, variant = 'compact' }: ArticleCardProps) 
             alt={article.title}
             width={1024}
             height={576}
+            sizes={IMAGE_SIZES[variant]}
           />
         )}
       </div>

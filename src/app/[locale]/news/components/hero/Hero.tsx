@@ -145,6 +145,7 @@ export const Hero = ({ articles }: HeroProps) => {
                   alt={activeArticle.title}
                   width={1024}
                   height={576}
+                  sizes="(max-width: 1024px) 100vw, 600px"
                 />
               </div>
               <div className={st.featuredBody}>

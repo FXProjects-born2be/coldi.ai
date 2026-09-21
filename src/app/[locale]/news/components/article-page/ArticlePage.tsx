@@ -60,9 +60,7 @@ const renderBlocks = (blocks: NewsArticle['intro'], className: string) => {
             src={block.src}
             alt={block.alt || ''}
             fill
-            sizes="900px"
-            quality={100}
-            unoptimized
+            sizes="(max-width: 1024px) 100vw, 900px"
           />
         </div>
       );
@@ -240,8 +238,7 @@ export const ArticlePage = ({ article, related }: ArticlePageProps) => {
           alt=""
           fill
           className={st.ctaBg}
-          quality={100}
-          unoptimized
+          sizes="100vw"
         />
         <div className={st.ctaInner}>
           <h2 className={st.ctaTitle}>Turn more calls into real conversations</h2>

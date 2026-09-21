@@ -22,13 +22,13 @@ const section = (heading: string, ...htmls: string[]) => ({
 const card = (slug: string) => LISTING_ARTICLES.find((article) => article.slug === slug);
 
 const HERO_IMAGES: Record<string, string> = {
-  'is-ai-safe': '/images/news/heroes/is-ai-safe.png',
+  'is-ai-safe': '/images/news/heroes/is-ai-safe.jpg',
   'what-building-for-the-us-taught-us': '/images/news/heroes/featured-us-calling.png',
-  'will-ai-replace-real-estate-agents': '/images/news/heroes/real-estate-city.png',
-  'voice-ai-for-outbound-sales': '/images/news/heroes/outbound-sales.png',
-  'what-is-an-inbound-call-center': '/images/news/heroes/inbound-center.png',
-  'how-ai-reduces-costs-in-healthcare': '/images/news/heroes/healthcare.png',
-  'free-llm-ecosystems-and-frameworks': '/images/news/heroes/llm-ecosystems.png',
+  'will-ai-replace-real-estate-agents': '/images/news/heroes/real-estate-city.jpg',
+  'voice-ai-for-outbound-sales': '/images/news/heroes/outbound-sales.jpg',
+  'what-is-an-inbound-call-center': '/images/news/heroes/inbound-center.jpg',
+  'how-ai-reduces-costs-in-healthcare': '/images/news/heroes/healthcare.jpg',
+  'free-llm-ecosystems-and-frameworks': '/images/news/heroes/llm-ecosystems.jpg',
   'ai-car-in-insurance': '/images/news/heroes/car-insurance.png',
   'will-ai-replace-real-estate-agents-2026': '/images/news/heroes/real-estate-2026.png',
   'impact-of-ai-on-life-insurance': '/images/news/heroes/life-insurance.png',

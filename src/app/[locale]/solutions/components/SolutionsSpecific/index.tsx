@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { cn } from '@/shared/lib/helpers';
 import { BookDemo } from '@/shared/ui/components/book-demo';
+import { LazyVideo } from '@/shared/ui/components/lazy-video';
 
 import st from './SolutionsSpecific.module.scss';
 
@@ -15,17 +16,7 @@ export const SolutionsSpecific = async () => {
         <p className={st.solutions_specific__text}>{t('description')}</p>
         <BookDemo className={'btn-secondary w-max'} />
       </div>
-      <video
-        className={st.solutions_specific__video}
-        src="/videos/solutions-specific.mp4"
-        autoPlay
-        playsInline
-        muted
-        loop
-        preload="metadata"
-        controls={false}
-        aria-hidden
-      />
+      <LazyVideo className={st.solutions_specific__video} src="/videos/solutions-specific.mp4" />
     </section>
   );
 };

@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 
 import { cn } from '@/shared/lib/helpers';
+import { LazyVideo } from '@/shared/ui/components/lazy-video';
 
 import st from './PricingHero.module.scss';
 
@@ -16,17 +17,7 @@ export const PricingHero = async () => {
           <p className={st.pricing_hero__desc}>{t('description')}</p>
         </div>
       </div>
-      <video
-        className={st.pricing_hero__video}
-        src="/videos/pricing-hero.mp4"
-        autoPlay
-        playsInline
-        muted
-        loop
-        preload="metadata"
-        controls={false}
-        aria-hidden
-      />
+      <LazyVideo className={st.pricing_hero__video} src="/videos/pricing-hero.mp4" />
     </section>
   );
 };
