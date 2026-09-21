@@ -1,6 +1,6 @@
 'use client';
 
-import { type CSSProperties, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { cn } from '@/shared/lib/helpers';
@@ -62,8 +62,6 @@ const CHAR_MS = 28;
 const QUESTION_IN_MS = 500;
 const PAUSE_MS = 1000;
 const LOOP_AFTER_MS = 10000;
-const ITEM_MS = 5000;
-const TABLET_MQ = '(max-width: 1024px)';
 
 const DEFAULT_BACKGROUND = '/images/general/background.png';
 
@@ -96,9 +94,8 @@ export const InsuranceHandles = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [phase, setPhase] = useState<Phase>('idle');
   const [displayed, setDisplayed] = useState('');
-  const [isTablet, setIsTablet] = useState(false);
-  const [itemsInView, setItemsInView] = useState(false);
-  const [activeItemId, setActiveItemId] = useState(items[0].id);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeItemId = items[activeIndex]?.id ?? items[0].id;
 
   const isWaveActive = phase === 'typing-1' || phase === 'hold' || phase === 'typing-2';
   const fullText = phase === 'typing-2' || phase === 'done' ? secondText : firstText;
@@ -120,7 +117,6 @@ export const InsuranceHandles = ({
 
         observer.disconnect();
         setPhase('question');
-        setItemsInView(true);
       },
       { threshold: 0.35 }
     );
@@ -129,30 +125,6 @@ export const InsuranceHandles = ({
 
     return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    const media = window.matchMedia(TABLET_MQ);
-    const update = () => setIsTablet(media.matches);
-
-    update();
-    media.addEventListener('change', update);
-
-    return () => media.removeEventListener('change', update);
-  }, []);
-
-  useEffect(() => {
-    if (!isTablet || !itemsInView) return;
-
-    const timeoutId = window.setTimeout(() => {
-      setActiveItemId((current) => {
-        const index = items.findIndex((item) => item.id === current);
-
-        return items[(index + 1) % items.length].id;
-      });
-    }, ITEM_MS);
-
-    return () => window.clearTimeout(timeoutId);
-  }, [activeItemId, isTablet, items, itemsInView]);
 
   useEffect(() => {
     if (phase !== 'question') return;
@@ -242,29 +214,42 @@ export const InsuranceHandles = ({
           <div className={st.insurance_handles__left}>
             <h2 className={st.insurance_handles__title}>What Coldi Handles</h2>
 
-            <ul
-              className={st.insurance_handles__list}
-              style={{ '--insurance-handles-item-duration': `${ITEM_MS}ms` } as CSSProperties}
-            >
-              {items.map((item) => (
-                <li
-                  key={item.id}
-                  className={cn(
-                    st.insurance_handles__item,
-                    item.id === activeItemId && st.insurance_handles__item_active,
-                    isTablet &&
-                      itemsInView &&
-                      item.id === activeItemId &&
-                      st.insurance_handles__item_filling
-                  )}
-                >
-                  <span className={st.insurance_handles__item_icon}>
-                    <Image src={item.icon} alt={item.label} width={24} height={24} />
-                  </span>
-                  <span className={st.insurance_handles__item_label}>{item.label}</span>
-                </li>
-              ))}
-            </ul>
+            <div className={st.insurance_handles__slider}>
+              <button
+                type="button"
+                className={st.insurance_handles__nav}
+                aria-label="Previous item"
+                disabled={activeIndex === 0}
+                onClick={() => setActiveIndex((index) => Math.max(0, index - 1))}
+              >
+                <Image src="/icons/arrow-left.svg" alt="" width={18} height={18} />
+              </button>
+              <ul className={st.insurance_handles__list}>
+                {items.map((item) => (
+                  <li
+                    key={item.id}
+                    className={cn(
+                      st.insurance_handles__item,
+                      item.id === activeItemId && st.insurance_handles__item_active
+                    )}
+                  >
+                    <span className={st.insurance_handles__item_icon}>
+                      <Image src={item.icon} alt={item.label} width={24} height={24} />
+                    </span>
+                    <span className={st.insurance_handles__item_label}>{item.label}</span>
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                className={st.insurance_handles__nav}
+                aria-label="Next item"
+                disabled={activeIndex === items.length - 1}
+                onClick={() => setActiveIndex((index) => Math.min(items.length - 1, index + 1))}
+              >
+                <Image src="/icons/arrow-right.svg" alt="" width={18} height={18} />
+              </button>
+            </div>
           </div>
 
           <div className={st.insurance_handles__right}>
