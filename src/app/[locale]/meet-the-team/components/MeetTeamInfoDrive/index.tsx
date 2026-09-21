@@ -2,6 +2,8 @@ import Image from 'next/image';
 
 import { getTranslations } from 'next-intl/server';
 
+import { LazyVideo } from '@/shared/ui/components/lazy-video';
+
 import st from './MeetTeamInfoDrive.module.scss';
 
 const items = [
@@ -51,7 +53,7 @@ export const MeetTeamInfoDrive = async () => {
               <article key={item.id} className={st.meet_team_info_drive__card}>
                 {item.icon && (
                   <div className={st.meet_team_info_drive__icon}>
-                    <Image src={item.icon} alt="" width={24} height={24} aria-hidden="true" />
+                    <Image src={item.icon} alt="Icon" width={24} height={24} aria-hidden="true" />
                   </div>
                 )}
 
@@ -74,17 +76,7 @@ export const MeetTeamInfoDrive = async () => {
                 </p>
 
                 {item.video && (
-                  <video
-                    className={st.meet_team_info_drive__video}
-                    src={item.video}
-                    autoPlay
-                    playsInline
-                    muted
-                    loop
-                    preload="metadata"
-                    controls={false}
-                    aria-hidden
-                  />
+                  <LazyVideo className={st.meet_team_info_drive__video} src={item.video} />
                 )}
               </article>
             );

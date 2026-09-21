@@ -66,7 +66,7 @@ export default function DebtCollectionPage() {
         title="Debt Collection"
         titleAccent="Payment Reminder"
         description="Scripted word for word, recorded end to end, opt-out honored instantly."
-        audio="/audio/debt-collection.wav"
+        audio="/audio/debt-collection.mp3"
         visual="timer"
         page="debt-collection"
       />

@@ -2,6 +2,8 @@ import Image from 'next/image';
 
 import { getTranslations } from 'next-intl/server';
 
+import { LazyVideo } from '@/shared/ui/components/lazy-video';
+
 import st from './InsuranceWhy.module.scss';
 
 type InsuranceWhyItem = {
@@ -83,19 +85,7 @@ export const InsuranceWhy = async ({ items }: InsuranceWhyProps) => {
                   </p>
                 )}
 
-                {item.video && (
-                  <video
-                    className={st.insurance_why__video}
-                    src={item.video}
-                    autoPlay
-                    playsInline
-                    muted
-                    loop
-                    preload="metadata"
-                    controls={false}
-                    aria-hidden
-                  />
-                )}
+                {item.video && <LazyVideo className={st.insurance_why__video} src={item.video} />}
               </article>
             );
           })}

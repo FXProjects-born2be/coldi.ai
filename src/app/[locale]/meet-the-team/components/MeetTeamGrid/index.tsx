@@ -115,7 +115,6 @@ export const MeetTeamGrid = async () => {
                   width={348}
                   height={348}
                   className={st.meet_team_grid__img}
-                  unoptimized
                 />
                 <Image
                   src="/images/meet-the-team/team-badge.svg"

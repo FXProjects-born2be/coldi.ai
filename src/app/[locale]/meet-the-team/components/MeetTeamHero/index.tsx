@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 
 import { cn } from '@/shared/lib/helpers';
+import { LazyVideo } from '@/shared/ui/components/lazy-video';
 
 import st from './MeetTeamHero.module.scss';
 
@@ -20,17 +21,7 @@ export const MeetTeamHero = async () => {
           <p className={st.meet_team_hero__desc}>{t('description')}</p>
         </div>
       </div>
-      <video
-        className={st.meet_team_hero__video}
-        src="/videos/meet-the-team-hero.mp4"
-        autoPlay
-        playsInline
-        muted
-        loop
-        preload="metadata"
-        controls={false}
-        aria-hidden
-      />
+      <LazyVideo className={st.meet_team_hero__video} src="/videos/meet-the-team-hero.mp4" />
     </section>
   );
 };

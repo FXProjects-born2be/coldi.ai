@@ -53,7 +53,7 @@ const voices: HearVoiceItem[] = [
   },
   {
     id: 'debt-collection',
-    audio: '/audio/debt-collection.wav',
+    audio: '/audio/debt-collection.mp3',
   },
   {
     id: 'customer-support',

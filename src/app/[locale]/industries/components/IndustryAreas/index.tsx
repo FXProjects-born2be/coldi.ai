@@ -14,9 +14,9 @@ const AREAS = [
     icon: '/images/industries/hugeicons_ai-magic.svg',
     href: '#other-industries',
     images: [
-      { src: '/images/industries/areas-one.svg', width: 404, height: 172 },
-      { src: '/images/industries/areas-two.svg', width: 373, height: 226 },
-      { src: '/images/industries/areas-three.svg', width: 179, height: 225 },
+      { src: '/images/industries/areas-one.png', width: 404, height: 172 },
+      { src: '/images/industries/areas-two.png', width: 373, height: 226 },
+      { src: '/images/industries/areas-three.png', width: 179, height: 225 },
     ],
   },
   {
@@ -24,9 +24,9 @@ const AREAS = [
     icon: '/images/industries/ix_piechart-ai.svg',
     href: '/industries/emis-payments',
     images: [
-      { src: '/images/industries/areas-six.svg', width: 403, height: 179 },
-      { src: '/images/industries/areas-five.svg', width: 371, height: 230 },
-      { src: '/images/industries/areas-seven.svg', width: 194, height: 227 },
+      { src: '/images/industries/areas-six.png', width: 403, height: 179 },
+      { src: '/images/industries/areas-five.png', width: 371, height: 230 },
+      { src: '/images/industries/areas-seven.png', width: 194, height: 227 },
     ],
   },
 ] as const;
@@ -63,7 +63,6 @@ export const IndustryAreas = async () => {
                       alt={t('imageAlt')}
                       width={image.width}
                       height={image.height}
-                      unoptimized
                     />
                   ))}
                 </div>

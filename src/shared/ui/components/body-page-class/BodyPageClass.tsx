@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { getBodyPageClass } from '@/shared/lib/helpers';
+import { getBodyPageClass, rememberCalendarReturn } from '@/shared/lib/helpers';
 
 import { usePathname } from '@/i18n/navigation';
 
@@ -19,6 +19,7 @@ export const BodyPageClass = () => {
     });
 
     document.body.classList.add(pageClass);
+    rememberCalendarReturn(pathname, window.location.search);
   }, [pathname]);
 
   return null;

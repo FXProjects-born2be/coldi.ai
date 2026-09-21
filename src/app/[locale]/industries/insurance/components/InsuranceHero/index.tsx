@@ -1,7 +1,8 @@
-import { type CSSProperties } from 'react';
+import Image from 'next/image';
 
 import { cn } from '@/shared/lib/helpers';
 import { BookDemo } from '@/shared/ui/components/book-demo';
+import { LazyVideo } from '@/shared/ui/components/lazy-video';
 
 import st from './InsuranceHero.module.scss';
 
@@ -21,10 +22,7 @@ export const InsuranceHero = ({
   image,
 }: InsuranceHeroProps) => {
   return (
-    <section
-      className={cn(st.insurance_hero, image && st.insurance_hero_image)}
-      style={image ? ({ '--insurance-hero-image': `url(${image})` } as CSSProperties) : undefined}
-    >
+    <section className={st.insurance_hero}>
       <div className={cn('container', st.insurance_hero__container)}>
         <h1 className={st.insurance_hero__title}>
           {title}
@@ -36,18 +34,17 @@ export const InsuranceHero = ({
 
         <BookDemo />
       </div>
-      {!image && (
-        <video
-          className={st.insurance_hero__video}
-          src={video}
-          autoPlay
-          playsInline
-          muted
-          loop
-          preload="metadata"
-          controls={false}
+      {image ? (
+        <Image
+          className={st.insurance_hero__image}
+          src={image}
+          alt=""
+          fill
+          sizes="100vw"
           aria-hidden
         />
+      ) : (
+        <LazyVideo className={st.insurance_hero__video} src={video} />
       )}
     </section>
   );

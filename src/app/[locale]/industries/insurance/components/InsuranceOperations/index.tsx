@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import { LazyVideo } from '@/shared/ui/components/lazy-video';
+
 import st from './InsuranceOperations.module.scss';
 
 import { Link } from '@/i18n/navigation';
@@ -26,17 +28,7 @@ export const InsuranceOperations = ({
           Our Security and Compliance
         </Link>
       </div>
-      <video
-        className={st.insurance_operations__video}
-        src={video}
-        autoPlay
-        playsInline
-        muted
-        loop
-        preload="metadata"
-        controls={false}
-        aria-hidden
-      />
+      <LazyVideo className={st.insurance_operations__video} src={video} />
     </section>
   );
 };
