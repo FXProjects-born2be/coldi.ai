@@ -13,6 +13,13 @@ export const LegalCompliance = async () => {
       <div className="container">
         <div className={st.legal_compliance__row}>
           <div className={st.legal_compliance__left}>
+            <Image
+              src="/images/trust-center/compliance-bg.png"
+              alt={t('starAiAria')}
+              fill
+              sizes="600px"
+            />
+
             <p className={st.legal_compliance__subtitle}>{t('subtitle')}</p>
 
             <div className={st.legal_compliance__badges}>
@@ -25,8 +32,8 @@ export const LegalCompliance = async () => {
                 <Image
                   src="/images/footer/star-ai.png"
                   alt={t('starAiAria')}
-                  width={185}
-                  height={185}
+                  width={150}
+                  height={150}
                 />
               </NextLink>
               <NextLink
@@ -38,8 +45,8 @@ export const LegalCompliance = async () => {
                 <Image
                   src="/images/footer/star-level.png"
                   alt={t('starLevelAria')}
-                  width={185}
-                  height={185}
+                  width={150}
+                  height={150}
                 />
               </NextLink>
               <NextLink

@@ -222,15 +222,15 @@
     width: 117px;
     height: 117px;
     aspect-ratio: 1/1;
-    border-radius: 781.947px;
-    border: 1.1px solid rgba(255, 255, 255, 0.40);
-    background: rgba(128, 128, 128, 0.10);
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(20.853544235229492px);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
+    border-radius: 781.947px;
+    border: 1.1px solid rgba(255, 255, 255, 0.40);
+    background: var(--Windows-Glass, rgba(128, 128, 128, 0.30));
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(20.853544235229492px);
 
     @include mobile {
       width: 81px;
@@ -246,12 +246,13 @@
     position: relative;
     z-index: 1;
     padding: 20px 32px;
-    border-radius: 399.6px;
-    border: 0.562px solid rgba(255, 255, 255, 0.40);
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(10.656827926635742px);
     margin-bottom: 7px;
     animation: insurance-handles-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    border-radius: 399.6px;
+    border: 0.562px solid rgba(255, 255, 255, 0.40);
+    background: var(--Windows-Glass, rgba(128, 128, 128, 0.30));
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(10.656827926635742px);
 
     @include mobile {
       padding: 9px 16px;
