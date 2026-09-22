@@ -20,7 +20,7 @@ export const UseCasesImplementations = () => {
   };
 
   return (
-    <section className={st.section}>
+    <section id="implementations" className={st.section}>
       <div className={cn('container', st.inner)}>
         <h2 className={st.heading}>More Coldi Implementations</h2>
 

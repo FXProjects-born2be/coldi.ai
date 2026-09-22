@@ -249,7 +249,7 @@ export const HomeHearVoice = () => {
         </div>
 
         <div className={st.home_hear_voice__btn}>
-          <Link href={'/products'} className="btn btn-primary d-inline-block">
+          <Link href={'/solutions'} className="btn btn-primary d-inline-block">
             {t('exploreProducts')}
           </Link>
         </div>

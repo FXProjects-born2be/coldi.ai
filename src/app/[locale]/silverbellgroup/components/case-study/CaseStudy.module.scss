@@ -936,7 +936,8 @@
 :global(.page-evest),
 :global(.page-clarity-global),
 :global(.page-agro-industry),
-:global(.page-hvac-saas) {
+:global(.page-hvac-saas),
+:global(.page-clickomi) {
   @include desktop {
     .resultsGrid {
       grid-template-columns: repeat(6, 1fr);
@@ -953,12 +954,6 @@
 }
 
 :global(.page-evest) {
-  .snapshotValue {
-    @include desktop {
-      font-size: 24px;
-    }
-  }
-
   @include desktop {
     .issuesGrid {
       grid-template-columns: repeat(2, 1fr);
@@ -966,7 +961,10 @@
   }
 }
 
-:global(.page-hvac-saas) {
+:global(.page-hvac-saas),
+:global(.page-evest),
+:global(.page-clickomi),
+:global(.page-agro-industry) {
   .snapshotValue {
     @include desktop {
       font-size: 24px;

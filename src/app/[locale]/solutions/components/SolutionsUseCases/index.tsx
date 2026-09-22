@@ -9,11 +9,31 @@ import { cn } from '@/shared/lib/helpers';
 
 import st from './SolutionsUseCases.module.scss';
 
+import { Link } from '@/i18n/navigation';
+
 const CASES = [
-  { id: 'clickomi', image: '/images/solutions/cases-one.svg', width: 287, height: 79 },
-  { id: 'payset', image: null, width: 150, height: 63 },
-  { id: 'clarity', image: '/images/solutions/cases-three.svg', width: 114, height: 20 },
-  { id: 'stone', image: '/images/solutions/cases-four.svg', width: 73, height: 62 },
+  {
+    id: 'clickomi',
+    href: '/clickomi',
+    image: '/images/solutions/cases-one.svg',
+    width: 287,
+    height: 79,
+  },
+  { id: 'payset', href: '/use-cases#implementations', image: null, width: 150, height: 63 },
+  {
+    id: 'clarity',
+    href: '/clarity-global',
+    image: '/images/solutions/cases-three.svg',
+    width: 114,
+    height: 20,
+  },
+  {
+    id: 'stone',
+    href: '/stone-electric',
+    image: '/images/solutions/cases-four.svg',
+    width: 73,
+    height: 62,
+  },
 ] as const;
 
 export const SolutionsUseCases = () => {
@@ -117,9 +137,12 @@ export const SolutionsUseCases = () => {
               <p className={st.solutions_use_cases__card_text}>
                 {t(`items.${item.id}.description`)}
               </p>
-              <a href="#" className={cn('btn btn-secondary w-max', st.solutions_use_cases__cta)}>
+              <Link
+                href={item.href}
+                className={cn('btn btn-secondary w-max', st.solutions_use_cases__cta)}
+              >
                 {t('readCase')}
-              </a>
+              </Link>
             </article>
           ))}
         </div>
