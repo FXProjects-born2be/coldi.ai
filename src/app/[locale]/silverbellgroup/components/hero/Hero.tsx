@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import { LazyVideo } from '@/shared/ui/components/lazy-video';
+
 import type { HeroContent } from '../data';
 import { heroContent as defaultHeroContent } from '../data';
 import st from './Hero.module.scss';
@@ -53,16 +55,6 @@ export const Hero = ({ content = defaultHeroContent }: { content?: HeroContent }
       </div>
     </div>
 
-    <video
-      className={st.video}
-      src="/videos/about-hero.mp4"
-      autoPlay
-      playsInline
-      muted
-      loop
-      preload="auto"
-      controls={false}
-      aria-hidden
-    />
+    <LazyVideo className={st.video} src="/videos/about-hero.mp4" />
   </section>
 );

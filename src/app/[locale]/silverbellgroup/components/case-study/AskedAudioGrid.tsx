@@ -35,6 +35,10 @@ export const AskedAudioGrid = ({
       return;
     }
 
+    if (audio.getAttribute('src') !== id) {
+      audio.src = id;
+    }
+
     void audio.play();
     setPlayingId(id);
   };
@@ -66,7 +70,7 @@ export const AskedAudioGrid = ({
               ref={(node) => {
                 audioRefs.current[item.audio] = node;
               }}
-              src={item.audio}
+              preload="none"
               onEnded={() => setPlayingId((current) => (current === item.audio ? null : current))}
               hidden
             />
