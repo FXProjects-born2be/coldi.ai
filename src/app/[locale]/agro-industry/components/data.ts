@@ -8,10 +8,10 @@ export const heroContent: HeroContent = {
   titleLine1: 'Automated Technical Screening & Senior Sales Scheduling',
   titleLine2: '',
   subtitle:
-    'How a global agricultural infrastructure provider deployed an autonomous AI voice assistant ("Sara") to handle technical discovery, qualify complex project leads, and populate CRM data.',
+    'How a global agricultural infrastructure provider deployed an autonomous AI voice assistant to handle technical discovery, qualify complex project leads, and populate CRM data.',
   reportingRange: 'THE CLIENT',
   paragraphs: [
-    'Global Agro Industry delivers turnkey agricultural infrastructure, livestock facilities, and complex engineering solutions to international markets.',
+    'Agricultural infrastructure provider delivers turnkey agricultural infrastructure, livestock facilities, and complex engineering solutions to international markets.',
   ],
 };
 
@@ -89,7 +89,7 @@ export const problemContent: ProblemContent = {
   },
   asked: {
     title: 'What They Asked For',
-    text: 'Deploy an autonomous digital concierge named Sara to handle initial technical inquiries, extract critical business intelligence into the CRM, screen project intent, and schedule pre-qualified prospects directly with senior sales teams',
+    text: 'Deploy an autonomous AI voice assistant to handle initial technical inquiries, extract critical business intelligence into the CRM, screen project intent, and schedule pre-qualified prospects directly with senior sales teams',
     bgImage: '/images/silverbellgroup/problem-one.png',
   },
   conclusion: {
@@ -152,7 +152,7 @@ export const implementationPhases = [
 export const integratedItems = [
   {
     title: 'Inbound Discovery & Screening Architecture',
-    text: 'Deployed AI agent Sara, trained on complete agricultural product catalogs to answer technical questions and guide initial discovery.',
+    text: 'Deployed AI voice assistant, trained on complete agricultural product catalogs to answer technical questions and guide initial discovery.',
     src: 'icons/clarity-built-one.svg',
   },
   {

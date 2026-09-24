@@ -6,12 +6,12 @@ import type {
 
 export const heroContent: HeroContent = {
   titleLine1: 'Zero Response Lag, 100% Audit Readiness:',
-  titleLine2: 'How Clarity Global Automated B2B Compliance & Inbound Support',
+  titleLine2: 'How The Payment Solutions Provider Automated B2B Compliance & Inbound Support',
   subtitle:
     'How a Canadian fintech deployed autonomous outbound review workflows and a 24/7 inbound voice agent to eliminate manual follow-ups across hundreds of B2B client reviews.',
   reportingRange: 'THE CLIENT',
   paragraphs: [
-    'Clarity Global is a Canadian fintech providing advanced payment infrastructure to global B2B clients. Operating under strict regulatory obligations, mandatory periodic compliance reviews are a core operational requirement.',
+    'The client is a Canadian fintech providing advanced payment infrastructure to global B2B clients. Operating under strict regulatory obligations, mandatory periodic compliance reviews are a core operational requirement.',
   ],
 };
 

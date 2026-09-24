@@ -11,7 +11,7 @@ export const heroContent: HeroContent = {
     'How an international trading platform leveraged an outbound AI voice engine across 29,377 dial attempts to qualify trader intent and lock in 671 structured callbacks.',
   reportingRange: 'THE CLIENT',
   paragraphs: [
-    'Evest is an international multi-asset trading and investment platform handling high-volume global lead re-engagement and trader qualification operations.',
+    'The client is an international multi-asset trading and investment platform handling high-volume global lead re-engagement and trader qualification operations.',
   ],
 };
 

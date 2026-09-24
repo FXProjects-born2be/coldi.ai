@@ -11,7 +11,7 @@ export const heroContent: HeroContent = {
     'How a residential electrical contractor deployed an autonomous AI voice agent ("George") to triage emergency calls, validate service areas, and book jobs directly into technician calendars. ',
   reportingRange: 'THE CLIENT',
   paragraphs: [
-    'Stone Electric Company is a residential service business providing electrical contracting, emergency response, lighting, and renovation project work.',
+    'The client is a residential service business providing electrical contracting, emergency response, lighting, and renovation project work.',
   ],
 };
 

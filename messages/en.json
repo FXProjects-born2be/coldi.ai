@@ -60,6 +60,16 @@
         "title": "Voice AI Ready for Global Operations",
         "description": "Coldi operates managed telephony infrastructure across dozens of countries, with localized calling capabilities and support for 30+ languages. You can connect Coldi to your existing telephony provider or use Coldi’s infrastructure.",
         "secondDescription": "We manage the technical layer so your team can focus on the conversations and workflows that matter."
+      },
+      "purpose": {
+        "label": "Our Purpose",
+        "title": "Make Voice AI Work in the Real World",
+        "description": "Our mission is clear: to transform large-scale business communication into measurable outcomes. We deploy and manage AI voice solutions that eliminate operational friction and guarantee consistent quality in every second of interaction."
+      },
+      "vision": {
+        "label": "Our Vision",
+        "title": "Make Business Calling Easier to Scale",
+        "description": "We aim to become the global standard for the managed communication layer. We envision a future where the integration between human strategy and artificial intelligence is so seamless that technology isn't just a tool, but an invisible engine of high-efficiency growth."
       }
     }
   },

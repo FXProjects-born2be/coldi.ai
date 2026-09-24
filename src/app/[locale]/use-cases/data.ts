@@ -97,9 +97,9 @@ export const FEATURED_CASES: FeaturedCase[] = [
     ],
   },
   {
-    id: 'agro-industry',
-    tab: 'Global Agro Industry',
-    title: 'Global Agro Industry',
+    id: 'agricultural-infrastructure-provider',
+    tab: 'Agricultural Infrastructure Provider',
+    title: 'Agricultural Infrastructure Provider',
     href: '/agro-industry',
     pain: 'Senior sales managers wasted hours manually filtering unqualified inbound inquiries for complex multi-million dollar infrastructure projects.',
     solution:
@@ -165,7 +165,7 @@ export const IMPLEMENTATIONS: ImplementationCase[] = [
     tab: 'AI-powered fintech platform',
     title: 'Lead Re-engagement with Automated Follow-Up',
     description:
-      'PortfolioIQ needed to turn outbound calls into a complete follow-up process, giving interested leads both a direct path to a specialist and additional information by SMS.',
+      'The client needed to turn outbound calls into a complete follow-up process, giving interested leads both a direct path to a specialist and additional information by SMS.',
     href: '/clarity-global',
     handles: [
       { icon: '/images/use-cases-hub/handle-outbound.png', label: 'Outbound lead calling' },

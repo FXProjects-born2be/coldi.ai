@@ -32,6 +32,14 @@ const blocks = [
     id: 'global',
     image: '/images/about/about5.png',
   },
+  {
+    id: 'purpose',
+    image: '/images/about/about6.png',
+  },
+  {
+    id: 'vision',
+    image: '/images/about/about7.png',
+  },
 ] as const;
 
 type BlockId = (typeof blocks)[number]['id'];
@@ -98,7 +106,12 @@ export const AboutInfo = () => {
           <div
             className={st.about_info__items_top}
             role="tablist"
-            style={{ '--about-info-tab-duration': `${AUTO_MS}ms` } as CSSProperties}
+            style={
+              {
+                '--about-info-tab-duration': `${AUTO_MS}ms`,
+                '--about-info-tab-count': blocks.length,
+              } as CSSProperties
+            }
           >
             {blocks.map((block, index) => {
               const title = t(`blocks.${block.id}.title`);
@@ -133,11 +146,15 @@ export const AboutInfo = () => {
           {blocks.map((block) => {
             const isActive = block.id === activeId;
             const title = t(`blocks.${block.id}.title`);
+            const hasLabel = t.has(`blocks.${block.id}.label`);
             const hasSecondDescription = t.has(`blocks.${block.id}.secondDescription`);
 
             return (
               <div key={block.id} role="tabpanel" hidden={!isActive} className={st.about_info__row}>
                 <div className={st.about_info__col}>
+                  {hasLabel && (
+                    <p className={st.about_info__label}>{t(`blocks.${block.id}.label`)}</p>
+                  )}
                   <h3 className={st.about_info__title}>
                     {title.split('\n').map((line, lineIndex) => (
                       <Fragment key={line}>

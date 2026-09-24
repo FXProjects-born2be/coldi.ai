@@ -95,12 +95,12 @@ export type CaseStudyContent = {
 
 export const heroContent: HeroContent = {
   titleLine1: 'Global Scale, Zero Downtime:',
-  titleLine2: 'How Silverbell Group Expanded 24/7 Service Without Adding Headcount',
+  titleLine2: 'How a Professional Services Provider Expanded 24/7 Service Without Adding Headcount',
   subtitle:
     'How a global professional services leader integrated autonomous AI agents into their client intake funnel to capture after-hours leads and streamline global operations.',
   reportingRange: 'THE CLIENT',
   paragraphs: [
-    'Silverbell Group is an international leader in professional services and enterprise outsourcing. Operating across multiple time zones, their global clientele requires immediate, high-touch support and rapid sales intake.',
+    'The client is an international leader in professional services and enterprise outsourcing (global professional services provider). Operating across multiple time zones, their global clientele requires immediate, high-touch support and rapid sales intake.',
   ],
 };
 
@@ -218,7 +218,7 @@ export const snapshotCards = [
 export const implementationPhases = [
   {
     title: 'Discovery & Wiring',
-    text: 'Mapped intent logic, pre-loaded Silverbell domain knowledge, and wired API connections to internal scheduling tools.',
+    text: 'Mapped intent logic, pre-loaded client’s domain knowledge, and wired API connections to internal scheduling tools.',
   },
   {
     title: 'Iterative Prompt & Logic Tuning',
@@ -245,12 +245,12 @@ export const implementationPhases = [
 export const integratedItems = [
   {
     title: 'Autonomous Web Agent Integration',
-    text: 'Embedded directly into Silverbell’s "Chat with an Online Representative" portal to act as a digital extension of their elite service team.',
+    text: 'Embedded directly into the client’s "Chat with an Online Representative" portal to act as a digital extension of their elite service team.',
     src: 'icons/autonomous.svg',
   },
   {
     title: 'Domain-Specific Knowledge Base',
-    text: 'Pre-loaded with Silverbell’s proprietary operational data to deliver immediate, accurate technical and service responses.',
+    text: 'Pre-loaded with the client’s proprietary operational data to deliver immediate, accurate technical and service responses.',
     src: 'icons/domain.svg',
   },
   {
@@ -296,7 +296,7 @@ export const monitoringItems = [
   },
   {
     label: 'Proactive Logic Updates',
-    value: "Knowledge bases are continuously updated as Silverbell's service catalog evolves.",
+    value: 'Knowledge bases are continuously updated as the client’s service catalog evolves.',
   },
 ];
 
