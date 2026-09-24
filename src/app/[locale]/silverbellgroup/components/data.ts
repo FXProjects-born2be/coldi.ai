@@ -1,21 +1,7 @@
-export type HeroImage = {
-  src: string;
-  width: number;
-  height: number;
-};
-
-export type HeroBgImage = { src: string };
-
-export type HeroImages = {
-  bgImage: HeroBgImage | null;
-  image: HeroImage;
-};
-
 export type HeroContent = {
   titleLine1: string;
   titleLine2: string | null;
   subtitle: string;
-  images: HeroImages;
   reportingRange: string;
   paragraphs: string[];
 };
@@ -108,18 +94,10 @@ export type CaseStudyContent = {
 };
 
 export const heroContent: HeroContent = {
-  titleLine1: 'Global Scale,<br />Zero Downtime:',
+  titleLine1: 'Global Scale, Zero Downtime:',
   titleLine2: 'How Silverbell Group Expanded 24/7 Service Without Adding Headcount',
   subtitle:
     'How a global professional services leader integrated autonomous AI agents into their client intake funnel to capture after-hours leads and streamline global operations.',
-  images: {
-    bgImage: null,
-    image: {
-      src: '/images/silverbellgroup/sbg.png',
-      width: 190,
-      height: 100,
-    },
-  },
   reportingRange: 'THE CLIENT',
   paragraphs: [
     'Silverbell Group is an international leader in professional services and enterprise outsourcing. Operating across multiple time zones, their global clientele requires immediate, high-touch support and rapid sales intake.',

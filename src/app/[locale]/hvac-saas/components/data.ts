@@ -9,16 +9,6 @@ export const heroContent: HeroContent = {
   titleLine2: null,
   subtitle:
     'How a SaaS and HVAC service operator deployed an ultra-low latency voice AI engine to reactivate cold lead databases, analyze existing software stacks, and book 15-minute product demos.',
-  images: {
-    bgImage: {
-      src: '/images/silverbellgroup/stone-electric-bg.png',
-    },
-    image: {
-      src: '/images/silverbellgroup/stone-electric.svg',
-      width: 126,
-      height: 122,
-    },
-  },
   reportingRange: 'THE CLIENT',
   paragraphs: [
     'The client provides high-volume SaaS solutions to HVAC contractor networks and field service businesses managing cold prospect databases from previous events and outreach.',

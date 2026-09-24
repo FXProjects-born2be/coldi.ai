@@ -36,23 +36,11 @@ const teamMembers = [
     image: '/images/meet-the-team/serhii-zhakhovskyi.png',
     linkedinUrl: 'https://www.linkedin.com/in/serhiizhaks/',
   },
-  {
-    id: 'jacob-berkun',
-    name: 'Jacob Berkun',
-    image: '/images/meet-the-team/jacob-berkun.png',
-    linkedinUrl: 'https://www.linkedin.com/in/jacob-berkun-b5671014b/',
-  },
   // {
-  //   id: 'leeron-ben-zion',
-  //   name: 'Leeron Ben Zion',
-  //   image: '/images/meet-the-team/leeron-ben-zion.png',
-  //   linkedinUrl: 'https://www.linkedin.com/in/leeron-ben-zion',
-  // },
-  // {
-  //   id: 'natalia-kunytsyna',
-  //   name: 'Natalia Kunytsyna',
-  //   image: '/images/meet-the-team/natalia-kunytsyna.png',
-  //   linkedinUrl: 'https://www.linkedin.com/in/natalia-kunytsyna-15781361',
+  //   id: 'jacob-berkun',
+  //   name: 'Jacob Berkun',
+  //   image: '/images/meet-the-team/jacob-berkun.png',
+  //   linkedinUrl: 'https://www.linkedin.com/in/jacob-berkun-b5671014b/',
   // },
   {
     id: 'vladyslav-kachanov',
@@ -85,11 +73,24 @@ const teamMembers = [
     image: '/images/meet-the-team/alina-denysenko.png',
     linkedinUrl: 'https://www.linkedin.com/in/alina-d-20ab1a401/',
   },
+  // {
+  //   id: 'thomas-angelo',
+  //   name: 'Thomas Angelo',
+  //   image: '/images/meet-the-team/thomas-angelo.png',
+  //   linkedinUrl: '',
+  // },
   {
-    id: 'thomas-angelo',
-    name: 'Thomas Angelo',
+    id: 'nikita-kurdybailo',
+    name: 'Nikita Kurdybailo',
+    image: '/images/meet-the-team/leeron-ben-zion.png',
+    linkedinUrl: 'https://www.linkedin.com/in/nikita-kurdybailo',
+  },
+  {
+    id: 'paul-samosuyk',
+    name: 'Paul Samosuyk',
     image: '/images/meet-the-team/thomas-angelo.png',
-    linkedinUrl: '',
+    linkedinUrl:
+      'https://www.linkedin.com/in/paul-samosuyk-9597b8433?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
   },
 ] as const;
 

@@ -106,7 +106,7 @@ export const Footer = async ({ pathname }: { pathname: string }) => {
 
                     <li>
                       <NextLink
-                        href="https://www.youtube.com/@coldi_ai"
+                        href="https://www.youtube.com/@ColdiAI"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={st.footer__socials_link}

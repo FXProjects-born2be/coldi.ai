@@ -1,13 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import {
-  MeetTeamGrid,
-  MeetTeamHero,
-  MeetTeamInfo,
-  MeetTeamInfoDrive,
-  MeetTeamInfoQuote,
-} from './components';
+import { MeetTeamGrid, MeetTeamHero, MeetTeamInfoDrive, MeetTeamInfoQuote } from './components';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -35,7 +29,6 @@ export default function MeetTheTeamPage() {
   return (
     <main>
       <MeetTeamHero />
-      <MeetTeamInfo />
       <MeetTeamGrid />
       <MeetTeamInfoDrive />
       <MeetTeamInfoQuote />

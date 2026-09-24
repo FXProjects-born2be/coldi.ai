@@ -9,16 +9,6 @@ export const heroContent: HeroContent = {
   titleLine2: 'How Clarity Global Automated B2B Compliance & Inbound Support',
   subtitle:
     'How a Canadian fintech deployed autonomous outbound review workflows and a 24/7 inbound voice agent to eliminate manual follow-ups across hundreds of B2B client reviews.',
-  images: {
-    bgImage: {
-      src: '/images/silverbellgroup/clarity-global-bg.png',
-    },
-    image: {
-      src: '/images/silverbellgroup/clarity-global.svg',
-      width: 126,
-      height: 122,
-    },
-  },
   reportingRange: 'THE CLIENT',
   paragraphs: [
     'Clarity Global is a Canadian fintech providing advanced payment infrastructure to global B2B clients. Operating under strict regulatory obligations, mandatory periodic compliance reviews are a core operational requirement.',

@@ -9,16 +9,6 @@ export const heroContent: HeroContent = {
   titleLine2: '',
   subtitle:
     'How a performance marketing agency deployed an autonomous outbound voice campaign to process 8,255 unique leads, book 419 onboarding sessions, and execute 386 live Success Manager transfers.',
-  images: {
-    bgImage: {
-      src: '/images/silverbellgroup/stone-electric-bg.png',
-    },
-    image: {
-      src: '/images/silverbellgroup/clickomi-logo.svg',
-      width: 156,
-      height: 32,
-    },
-  },
   reportingRange: 'THE CLIENT',
   paragraphs: [
     'Clickomi is a performance marketing agency managing high-volume client onboarding and customer success operations.',

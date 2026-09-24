@@ -9,14 +9,6 @@ export const heroContent: HeroContent = {
   titleLine2: '',
   subtitle:
     'How a global agricultural infrastructure provider deployed an autonomous AI voice assistant ("Sara") to handle technical discovery, qualify complex project leads, and populate CRM data.',
-  images: {
-    bgImage: null,
-    image: {
-      src: '/images/silverbellgroup/global-agro-logo.png',
-      width: 191,
-      height: 100,
-    },
-  },
   reportingRange: 'THE CLIENT',
   paragraphs: [
     'Global Agro Industry delivers turnkey agricultural infrastructure, livestock facilities, and complex engineering solutions to international markets.',

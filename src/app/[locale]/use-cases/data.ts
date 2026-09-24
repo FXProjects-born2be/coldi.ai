@@ -115,7 +115,7 @@ export const FEATURED_CASES: FeaturedCase[] = [
     id: 'hvac-saas',
     tab: 'HVAC & SaaS',
     title: 'HVAC & SaaS',
-    href: '/hvac-leads',
+    href: '/hvac-saas',
     pain: 'Dormant lead databases lose value rapidly, leaving past event lists and cold CRM contacts uncontacted due to manual dialing limits.',
     solution:
       'Coldi deployed an outbound AI engine to call cold lists, handle objections, qualify software stacks, and send instant SMS demo booking links.',
@@ -130,32 +130,33 @@ export const FEATURED_CASES: FeaturedCase[] = [
 
 export const IMPLEMENTATIONS: ImplementationCase[] = [
   {
-    id: 'multi-currency',
-    tab: 'Multi-Currency Payment Platform',
-    title: 'AI Outbound Calling & Callback Scheduling',
+    id: 'digital-ads',
+    tab: 'Digital Advertising Agency',
+    title: 'AI Calling with Real-Time Human Handoff',
     description:
-      'The client wanted to automate outbound lead calling while making it possible for interested prospects to book a callback with a specialist.',
-    href: '/clarity-global',
+      'The client needed a seamless calling workflow that could determine when a live team was available and automatically handle the next step when they were not.',
+    href: '/clickomi',
     handles: [
       { icon: '/images/use-cases-hub/handle-outbound.png', label: 'Outbound lead calling' },
-      { icon: '/images/use-cases-hub/handle-interest.png', label: 'Lead qualification' },
-      { icon: '/images/use-cases-hub/handle-callback.png', label: 'Callback conversion' },
       {
-        icon: '/icons/fluent_calendar-phone-16-regular.svg',
-        label: 'Real-time availability checks',
+        icon: '/icons/griddy-icons_customer-support.svg',
+        label: 'Call-center availability checks',
       },
-      { icon: '/icons/hugeicons_appointment-02.svg', label: 'Appointment booking' },
+      { icon: '/images/use-cases-hub/handle-handoff.png', label: 'Live agent transfers' },
+      { icon: '/icons/hugeicons_appointment-02.svg', label: 'Callback scheduling' },
+      { icon: '/images/use-cases-hub/handle-interest.png', label: 'Inbound lead identification' },
+      { icon: '/icons/bx_data.svg', label: 'Lead data retrieval' },
     ],
     workflow: [
-      'API lead delivery',
+      'Hot lead',
       'AI call',
-      'Interest qualification',
-      'Specialist availability',
-      'Calendar booking',
-      'Human callback',
+      'Call-center status check',
+      'Live transfer or scheduling',
+      'Lead identification',
+      'Booking',
     ],
     integration: {
-      name: 'API · Calendly · VoIP · CRM',
+      name: 'Calendly · Custom API',
       icon: '/icons/carbon_integration.svg',
     },
   },
@@ -184,37 +185,6 @@ export const IMPLEMENTATIONS: ImplementationCase[] = [
     integration: {
       name: 'Google Sheets · SMS · Local Brazilian number',
       icon: '/images/use-cases-hub/google-sheets.png',
-    },
-  },
-  {
-    id: 'digital-ads',
-    tab: 'Digital Advertising Agency',
-    title: 'AI Calling with Real-Time Human Handoff',
-    description:
-      'The client needed a seamless calling workflow that could determine when a live team was available and automatically handle the next step when they were not.',
-    href: '/hvac-leads',
-    handles: [
-      { icon: '/images/use-cases-hub/handle-outbound.png', label: 'Outbound lead calling' },
-      {
-        icon: '/icons/griddy-icons_customer-support.svg',
-        label: 'Call-center availability checks',
-      },
-      { icon: '/images/use-cases-hub/handle-handoff.png', label: 'Live agent transfers' },
-      { icon: '/icons/hugeicons_appointment-02.svg', label: 'Callback scheduling' },
-      { icon: '/images/use-cases-hub/handle-interest.png', label: 'Inbound lead identification' },
-      { icon: '/icons/bx_data.svg', label: 'Lead data retrieval' },
-    ],
-    workflow: [
-      'Hot lead',
-      'AI call',
-      'Call-center status check',
-      'Live transfer or scheduling',
-      'Lead identification',
-      'Booking',
-    ],
-    integration: {
-      name: 'Calendly · Custom API',
-      icon: '/icons/carbon_integration.svg',
     },
   },
 ];
