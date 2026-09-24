@@ -21,7 +21,7 @@ const segmentLabels: Record<string, string> = {
   'debt-collection': 'Debt Collection',
   'emis-payments': 'EMIs & Payments',
   pricing: 'Pricing',
-  about: 'About',
+  'coldi-vision': 'Coldi Vision',
   news: 'News',
   voices: 'Voices',
   demo: 'Demo',

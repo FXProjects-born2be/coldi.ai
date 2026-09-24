@@ -4,7 +4,7 @@ import { AboutAction, AboutHandles, AboutHero, AboutInfo } from './components';
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: '/about',
+    canonical: '/coldi-vision',
   },
   title: 'Expert AI Calling Solutions Provider',
   description:

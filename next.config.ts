@@ -99,6 +99,8 @@ const nextConfig: NextConfig = {
     return [
       { source: '/agents', destination: '/solutions', permanent: true },
       { source: '/uk/agents', destination: '/uk/solutions', permanent: true },
+      { source: '/about', destination: '/coldi-vision', permanent: true },
+      { source: '/uk/about', destination: '/uk/coldi-vision', permanent: true },
       { source: '/meettheteam', destination: '/meet-the-team', permanent: true },
       { source: '/uk/meettheteam', destination: '/uk/meet-the-team', permanent: true },
       { source: '/fintech-Industry', destination: '/industries/emis-payments', permanent: true },

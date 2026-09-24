@@ -6,4 +6,7 @@ export const headerIndustryItems = [
   { id: 'other', href: '/industries/other-industries' },
 ] as const;
 
-export const headerAboutItems = [{ id: 'meet-the-team', href: '/meet-the-team' }] as const;
+export const headerAboutItems = [
+  { id: 'coldi-vision', href: '/coldi-vision' },
+  { id: 'meet-the-team', href: '/meet-the-team' },
+] as const;

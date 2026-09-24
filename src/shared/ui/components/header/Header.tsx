@@ -62,6 +62,8 @@ export const Header = ({ pathname: pathnameProp }: { pathname: string }) => {
 const Navigation = ({ pathname }: { pathname: string }) => {
   const t = useTranslations('Header');
   const [hideDropdowns, setHideDropdowns] = useState(false);
+  const [openAbout, setOpenAbout] = useState(false);
+  const aboutRef = useRef<HTMLLIElement>(null);
   const prevPathname = useRef(pathname);
 
   useEffect(() => {
@@ -69,11 +71,33 @@ const Navigation = ({ pathname }: { pathname: string }) => {
 
     prevPathname.current = pathname;
     setHideDropdowns(true);
+    setOpenAbout(false);
 
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
     }
   }, [pathname]);
+
+  useEffect(() => {
+    if (!openAbout) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (aboutRef.current?.contains(event.target as Node)) return;
+      setOpenAbout(false);
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpenAbout(false);
+    };
+
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [openAbout]);
 
   const showDropdowns = () => setHideDropdowns(false);
 
@@ -137,18 +161,34 @@ const Navigation = ({ pathname }: { pathname: string }) => {
         </Link>
       </li>
       <li
-        className={cn(st.hasDropdown, hideDropdowns && st.hideDropdown, {
-          [st.active]: pathname === '/about' || pathname.startsWith('/meet-the-team'),
-        })}
+        ref={aboutRef}
+        className={cn(
+          st.hasDropdown,
+          st.clickDropdown,
+          hideDropdowns && st.hideDropdown,
+          openAbout && st.dropdownOpen,
+          {
+            [st.active]: pathname === '/coldi-vision' || pathname.startsWith('/meet-the-team'),
+          }
+        )}
         itemProp="name"
         onMouseLeave={showDropdowns}
       >
-        <Link className={st.navTrigger} href="/about" itemProp="url" onFocus={showDropdowns}>
+        <button
+          type="button"
+          className={st.navTrigger}
+          aria-expanded={openAbout}
+          aria-haspopup="menu"
+          onClick={() => {
+            showDropdowns();
+            setOpenAbout((open) => !open);
+          }}
+        >
           <span>{t('about')}</span>
           <span className={st.dropdownArrow}>
             <Image src="/icons/header/arrow.svg" alt="" width={16} height={8} />
           </span>
-        </Link>
+        </button>
         <ul className={st.dropdown}>
           {headerAboutItems.map((item) => (
             <li key={item.id} itemProp="name">

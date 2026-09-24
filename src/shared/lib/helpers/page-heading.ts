@@ -1,7 +1,7 @@
 export function getPageHeadingFromPath(pathname: string): string {
   if (!pathname || pathname === '/') return 'Coldi Brand-Tuned AI Talkers';
 
-  if (pathname === '/about') return 'Expert AI Calling Solutions Provider';
+  if (pathname === '/coldi-vision') return 'Expert AI Calling Solutions Provider';
   if (pathname === '/news') return 'AI Calling & Industry News';
   if (pathname === '/products') return 'Our Voice Agents and Solutions';
   if (pathname === '/pricing') return 'Pricing';

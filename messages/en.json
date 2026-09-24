@@ -31,7 +31,7 @@
     "descriptionSecond": "We’ll discuss your needs and show you how Coldi can support your business."
   },
   "AboutHero": {
-    "titleEyebrow": "About Coldi",
+    "titleEyebrow": "Coldi Vision",
     "title": "Voice AI Built for Real Business",
     "description": "Coldi helps businesses automate customer and sales calls with AI agents that speak naturally, follow business rules, and work inside existing systems."
   },
@@ -533,6 +533,7 @@
       "hvac-leads": "HVAC Leads"
     },
     "aboutItems": {
+      "coldi-vision": "Coldi Vision",
       "meet-the-team": "Meet the Team"
     }
   },
@@ -892,8 +893,8 @@
         "meta": "Last updated 14 January 2026"
       },
       "privacy": {
-        "title": "Privacy Policy",
-        "meta": "Last updated 14 January 2026"
+        "title": "GDPR - Privacy Policy",
+        "meta": "Last updated 26 August 2026"
       },
       "dpa": {
         "title": "Data Processing Agreement",
@@ -932,7 +933,7 @@
       "products": "Products",
       "pricing": "Pricing",
       "news": "News",
-      "about": "About",
+      "about": "Coldi Vision",
       "trustCenter": "Trust Center"
     },
     "products": {

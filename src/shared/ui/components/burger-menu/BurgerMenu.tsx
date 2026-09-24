@@ -147,32 +147,27 @@ export const BurgerMenu = () => {
                   <span itemProp="name">{t('useCases')}</span>
                 </Link>
                 <div className={st.burger_menu__group}>
-                  <div
+                  <button
+                    type="button"
                     className={cn(st.burger_menu__group_trigger, {
-                      [st.active]: pathname === '/about' || pathname.startsWith('/meet-the-team'),
+                      [st.active]:
+                        pathname === '/coldi-vision' || pathname.startsWith('/meet-the-team'),
                       [st.group_open]: openAbout,
                     })}
+                    aria-label={t('toggleAbout')}
+                    aria-expanded={openAbout}
+                    name="toggle-about-group"
+                    onClick={() => setOpenAbout((open) => !open)}
                   >
-                    <Link href="/about" itemProp="url">
-                      <span itemProp="name">{t('about')}</span>
-                    </Link>
-                    <button
-                      type="button"
-                      aria-label={t('toggleAbout')}
-                      aria-expanded={openAbout}
-                      name="toggle-about-group"
-                      className={st.burger_menu__group_arrow_btn}
-                      onClick={() => setOpenAbout((v) => !v)}
-                    >
-                      <Image
-                        src="/icons/header/arrow.svg"
-                        alt=""
-                        width={16}
-                        height={8}
-                        className={st.burger_menu__group_arrow}
-                      />
-                    </button>
-                  </div>
+                    <span itemProp="name">{t('about')}</span>
+                    <Image
+                      src="/icons/header/arrow.svg"
+                      alt=""
+                      width={16}
+                      height={8}
+                      className={st.burger_menu__group_arrow}
+                    />
+                  </button>
                   <div className={cn(st.burger_menu__group_items, openAbout && st.open)}>
                     {headerAboutItems.map((item) => (
                       <Link
