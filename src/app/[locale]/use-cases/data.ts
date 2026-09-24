@@ -69,11 +69,11 @@ export const FEATURED_CASES: FeaturedCase[] = [
   {
     id: 'silverbell',
     tab: 'Business Process Outsourcing',
-    title: 'Silverbell Group',
+    title: 'Global Professional Services Provider',
     href: '/silverbellgroup',
     pain: 'High inquiry volume across global time zones caused delayed responses, missed appointment opportunities, and staff fatigue outside standard operating hours.',
     solution:
-      'Coldi integrated a 24/7 AI voice representative into Silverbell’s digital touchpoints to deliver expert responses, capture contact data, and schedule appointments around the clock.',
+      'Coldi integrated a 24/7 AI voice representative into the client’s digital touchpoints to deliver expert responses, capture contact data, and schedule appointments around the clock.',
     results: [
       { value: '100+', label: 'Daily Automated Inquiries Managed' },
       { value: '75', suffix: 'Hours', label: 'hours saved weekly' },
@@ -84,7 +84,7 @@ export const FEATURED_CASES: FeaturedCase[] = [
   {
     id: 'stone-electric',
     tab: 'Home & Residential Services',
-    title: 'Stone Electric Company',
+    title: 'Residential Electrical Contractor',
     href: '/stone-electric',
     pain: 'Missed calls during high-volume hours and after-hours emergencies resulted in lost high-value jobs and delayed technician dispatch',
     solution:

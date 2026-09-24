@@ -711,20 +711,22 @@
     "items": {
       "clickomi": {
         "caption": "Digital Advertising\nAgency",
-        "title": "Outbound Lead Qualification",
+        "title": "Digital Advertising Agency",
         "description": "Coldi AI agent calls hot leads, qualifies interest, checks whether the call center is open, and either transfers the lead to a live specialist or books a suitable time automatically."
       },
       "payset": {
-        "caption": "Multi-Currency Payments Platform",
-        "title": "Automated Callback Booking",
+        "caption": "Multi-Currency Payments\nPlatform",
+        "title": "Multi-Currency Payments Platform",
         "description": "Coldi AI agent calls new leads, identifies those ready to speak with a specialist, checks real-time availability, and books the callback directly into the calendar."
       },
       "clarity": {
-        "title": "Automated Compliance Follow-Up",
+        "caption": "Payment Solutions\nProvider",
+        "title": "Payment Solutions Provider",
         "description": "AI manages recurring client reviews from first outreach to reminders, response classification, internal escalation, reporting, and a complete activity trail."
       },
       "stone": {
-        "title": "Inbound Triage & Dispatch",
+        "caption": "Residential Electrical\nContractor",
+        "title": "Residential Electrical Contractor",
         "description": "AI answers inbound calls, identifies emergencies, validates the service area, captures job details, and either transfers urgent cases or books an available appointment."
       }
     }

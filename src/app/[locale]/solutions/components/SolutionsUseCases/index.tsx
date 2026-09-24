@@ -12,28 +12,10 @@ import st from './SolutionsUseCases.module.scss';
 import { Link } from '@/i18n/navigation';
 
 const CASES = [
-  {
-    id: 'clickomi',
-    href: '/clickomi',
-    image: '/images/solutions/cases-one.svg',
-    width: 287,
-    height: 79,
-  },
-  { id: 'payset', href: '/use-cases#implementations', image: null, width: 150, height: 63 },
-  {
-    id: 'clarity',
-    href: '/clarity-global',
-    image: '/images/solutions/cases-three.svg',
-    width: 114,
-    height: 20,
-  },
-  {
-    id: 'stone',
-    href: '/stone-electric',
-    image: '/images/solutions/cases-four.svg',
-    width: 73,
-    height: 62,
-  },
+  { id: 'clickomi', href: '/clickomi' },
+  { id: 'payset', href: '/use-cases#implementations' },
+  { id: 'clarity', href: '/clarity-global' },
+  { id: 'stone', href: '/stone-electric' },
 ] as const;
 
 export const SolutionsUseCases = () => {
@@ -111,25 +93,9 @@ export const SolutionsUseCases = () => {
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className={'-z-1'}
                   />
-                  {t.has(`items.${item.id}.caption`) && (
-                    <p className={st.solutions_use_cases__card_caption}>
-                      {t(`items.${item.id}.caption`)}
-                    </p>
-                  )}
-                  {item.image && (
-                    <div className={st.solutions_use_cases__card_logos}>
-                      {Array.from({ length: index === 0 ? 3 : 1 }, (_, logoIndex) => (
-                        <Image
-                          key={`${item.id}-${logoIndex}`}
-                          src={item.image}
-                          alt={t(`items.${item.id}.title`)}
-                          width={item.width}
-                          height={item.height}
-                          className={st.solutions_use_cases__card_logo}
-                        />
-                      ))}
-                    </div>
-                  )}
+                  <p className={st.solutions_use_cases__card_caption}>
+                    {t(`items.${item.id}.caption`)}
+                  </p>
                 </div>
               </div>
 
