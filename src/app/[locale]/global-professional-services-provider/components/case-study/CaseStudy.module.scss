@@ -911,7 +911,7 @@
   margin-top: 24px;
 }
 
-:global(.page-stone-electric) {
+:global(.page-residential-electrical-contractor) {
   .snapshotValue {
     @include desktop {
       font-size: 24px;
@@ -932,12 +932,12 @@
     }
   }
 }
-:global(.page-stone-electric),
-:global(.page-evest),
-:global(.page-clarity-global),
-:global(.page-agro-industry),
-:global(.page-hvac-saas),
-:global(.page-clickomi) {
+:global(.page-residential-electrical-contractor),
+:global(.page-multi-asset-trading-and-investment-platform),
+:global(.page-canadian-fintech),
+:global(.page-global-agricultural-infrastructure-provider),
+:global(.page-saas-and-hvac-service-operator),
+:global(.page-performance-marketing-agency) {
   @include desktop {
     .resultsGrid {
       grid-template-columns: repeat(6, 1fr);
@@ -953,7 +953,7 @@
   }
 }
 
-:global(.page-evest) {
+:global(.page-multi-asset-trading-and-investment-platform) {
   @include desktop {
     .issuesGrid {
       grid-template-columns: repeat(2, 1fr);
@@ -961,10 +961,10 @@
   }
 }
 
-:global(.page-hvac-saas),
-:global(.page-evest),
-:global(.page-clickomi),
-:global(.page-agro-industry) {
+:global(.page-saas-and-hvac-service-operator),
+:global(.page-multi-asset-trading-and-investment-platform),
+:global(.page-performance-marketing-agency),
+:global(.page-global-agricultural-infrastructure-provider) {
   .snapshotValue {
     @include desktop {
       font-size: 24px;

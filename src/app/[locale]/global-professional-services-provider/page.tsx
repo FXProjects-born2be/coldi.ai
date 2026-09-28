@@ -4,7 +4,7 @@ import { CaseStudy, Hero } from './components';
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: '/silverbellgroup',
+    canonical: '/global-professional-services-provider',
   },
   title: 'AI Operational Excellence: Silverbell Group Case Study',
   description:

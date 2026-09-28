@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 
-import { CaseStudy, Hero } from '../silverbellgroup/components';
+import { CaseStudy, Hero } from '../global-professional-services-provider/components';
 import { caseStudyContent, heroContent } from './components/data';
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: '/agro-industry',
+    canonical: '/global-agricultural-infrastructure-provider',
   },
   title: 'Lead Qualification in the Global Agro-Industry',
   description:

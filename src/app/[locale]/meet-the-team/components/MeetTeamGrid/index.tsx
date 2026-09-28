@@ -92,6 +92,18 @@ const teamMembers = [
     linkedinUrl:
       'https://www.linkedin.com/in/paul-samosuyk-9597b8433?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
   },
+  {
+    id: 'olha-koreva',
+    name: 'Olha Koreva',
+    image: '/images/meet-the-team/alina-denysenko.png',
+    linkedinUrl: '',
+  },
+  {
+    id: 'larysa-byshenko',
+    name: 'Larysa Byshenko',
+    image: '/images/meet-the-team/alina-denysenko.png',
+    linkedinUrl: '',
+  },
 ] as const;
 
 function resolveLinkedinHref(value: string) {
@@ -110,13 +122,15 @@ export const MeetTeamGrid = async () => {
           {teamMembers.map((member) => (
             <article key={member.id} className={st.meet_team_grid__card}>
               <div className={st.meet_team_grid__photo}>
-                <Image
-                  src={member.image}
-                  alt={imageAlt('meettheteam')}
-                  width={348}
-                  height={348}
-                  className={st.meet_team_grid__img}
-                />
+                {member.image ? (
+                  <Image
+                    src={member.image}
+                    alt={imageAlt('meettheteam')}
+                    width={348}
+                    height={348}
+                    className={st.meet_team_grid__img}
+                  />
+                ) : null}
                 <Image
                   src="/images/meet-the-team/team-badge.svg"
                   alt={imageAlt('meettheteam')}
@@ -133,22 +147,24 @@ export const MeetTeamGrid = async () => {
                   <p className={st.meet_team_grid__role}>{t(`roles.${member.id}`)}</p>
                 </div>
 
-                <Link
-                  href={resolveLinkedinHref(member.linkedinUrl)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={member.linkedinUrl}
-                  aria-label={t('linkedinAria', { name: member.name })}
-                  className={st.meet_team_grid__linkedin}
-                >
-                  <Image
-                    src="/images/meet-the-team/linkedin.svg"
-                    alt={imageAlt('meettheteam')}
-                    width={16}
-                    height={16}
-                    unoptimized
-                  />
-                </Link>
+                {member.linkedinUrl ? (
+                  <Link
+                    href={resolveLinkedinHref(member.linkedinUrl)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={member.linkedinUrl}
+                    aria-label={t('linkedinAria', { name: member.name })}
+                    className={st.meet_team_grid__linkedin}
+                  >
+                    <Image
+                      src="/images/meet-the-team/linkedin.svg"
+                      alt={imageAlt('meettheteam')}
+                      width={16}
+                      height={16}
+                      unoptimized
+                    />
+                  </Link>
+                ) : null}
               </div>
             </article>
           ))}

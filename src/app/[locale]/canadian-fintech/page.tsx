@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 
-import { CaseStudy, Hero } from '../silverbellgroup/components';
+import { CaseStudy, Hero } from '../global-professional-services-provider/components';
 import { caseStudyContent, heroContent } from './components/data';
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: '/clarity-global',
+    canonical: '/canadian-fintech',
   },
   title: 'Clarity Global use case',
   description:
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function StoneElectricPage() {
+export default function ClarityGlobalPage() {
   return (
     <main>
       <Hero content={heroContent} />

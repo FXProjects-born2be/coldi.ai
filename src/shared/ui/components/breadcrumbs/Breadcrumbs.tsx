@@ -36,11 +36,18 @@ const segmentLabels: Record<string, string> = {
   'use-cases': 'Use Cases',
   legal: 'Legal',
   silverbellgroup: 'Silverbell Group',
+  'global-professional-services-provider': 'Silverbell Group',
   'clarity-global': 'Clarity Global',
+  'canadian-fintech': 'Clarity Global',
+  'performance-marketing-agency': 'Clickomi',
+  'residential-electrical-contractor': 'Stone Electric',
+  'multi-asset-trading-and-investment-platform': 'Evest',
   helios: 'Helios',
   'residential-service-automation': 'Residential Service Automation',
   'agro-industry': 'Agro-Industry',
+  'global-agricultural-infrastructure-provider': 'Agro-Industry',
   'hvac-leads': 'HVAC Leads',
+  'saas-and-hvac-service-operator': 'HVAC Leads',
 };
 
 type BreadcrumbsProps = {

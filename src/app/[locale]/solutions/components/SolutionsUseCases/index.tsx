@@ -12,10 +12,10 @@ import st from './SolutionsUseCases.module.scss';
 import { Link } from '@/i18n/navigation';
 
 const CASES = [
-  { id: 'clickomi', href: '/clickomi' },
+  { id: 'clickomi', href: '/performance-marketing-agency' },
   { id: 'payset', href: '/use-cases#implementations' },
-  { id: 'clarity', href: '/clarity-global' },
-  { id: 'stone', href: '/stone-electric' },
+  { id: 'clarity', href: '/canadian-fintech' },
+  { id: 'stone', href: '/residential-electrical-contractor' },
 ] as const;
 
 export const SolutionsUseCases = () => {

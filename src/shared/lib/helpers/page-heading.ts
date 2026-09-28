@@ -13,8 +13,17 @@ export function getPageHeadingFromPath(pathname: string): string {
   if (pathname === '/call-request') return 'Request a Call or Demo';
   if (pathname === '/meet-the-team') return 'Meet the team';
   if (pathname === '/legal') return 'Coldi Live';
-  if (pathname === '/agro-industry') return 'Lead Qualification in the Global Agro-Industry';
-  if (pathname === '/clarity-global') return 'Clarity Global use case';
+  if (pathname === '/global-agricultural-infrastructure-provider')
+    return 'Lead Qualification in the Global Agro-Industry';
+  if (pathname === '/canadian-fintech') return 'Clarity Global use case';
+  if (pathname === '/performance-marketing-agency')
+    return 'Lead Qualification in the Global Agro-Industry';
+  if (pathname === '/residential-electrical-contractor') return 'Clarity Global use case';
+  if (pathname === '/multi-asset-trading-and-investment-platform') return 'Evest use case';
+  if (pathname === '/global-professional-services-provider')
+    return 'AI Operational Excellence: Silverbell Group Case Study';
+  if (pathname === '/saas-and-hvac-service-operator')
+    return 'High-Volume Lead Re-engagement for SaaS and HVAC';
   if (pathname === '/hvac-leads') return 'High-Volume Lead Re-engagement for SaaS and HVAC';
   if (pathname === '/helios') return 'How Helios Cut Costs by 30% & Scaled with AI';
   if (pathname === '/turn-leads-into-meetings' || pathname === '/turn-leads-into-meetings-2') {

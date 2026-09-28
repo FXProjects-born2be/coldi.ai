@@ -2,7 +2,7 @@ import type {
   CaseStudyContent,
   HeroContent,
   ProblemContent,
-} from '@/app/[locale]/silverbellgroup/components/data';
+} from '@/app/[locale]/global-professional-services-provider/components/data';
 
 export const heroContent: HeroContent = {
   titleLine1: 'High-Volume Multi-Asset Trader Qualification & Callback Scheduling',

@@ -40,7 +40,7 @@ export const FEATURED_CASES: FeaturedCase[] = [
     id: 'multi-asset-broker',
     tab: 'Multi-Asset Broker',
     title: 'Multi-Asset Broker',
-    href: '/evest',
+    href: '/multi-asset-trading-and-investment-platform',
     pain: 'Re-engaging a cold database of 11,840 leads across global markets caused low contact rates, manual dialer fatigue, and wasted time on automated voicemails.',
     solution:
       'Coldi deployed an outbound AI voice engine with 2.48 multi-dial cadences, precision answering machine filtering, and dynamic callback scheduling directly into account manager queues.',
@@ -55,7 +55,7 @@ export const FEATURED_CASES: FeaturedCase[] = [
     id: 'payment-solutions',
     tab: 'Payment Solutions Provider',
     title: 'Payment Solutions Provider',
-    href: '/clarity-global',
+    href: '/canadian-fintech',
     pain: 'Manual 6-month compliance reviews across hundreds of clients created spreadsheet overload and slow status-change escalations.',
     solution:
       'Coldi automated the entire review cycle with an outbound compliance agent and a 24/7 inbound AI phone line.',
@@ -70,7 +70,7 @@ export const FEATURED_CASES: FeaturedCase[] = [
     id: 'silverbell',
     tab: 'Business Process Outsourcing',
     title: 'Global Professional Services Provider',
-    href: '/silverbellgroup',
+    href: '/global-professional-services-provider',
     pain: 'High inquiry volume across global time zones caused delayed responses, missed appointment opportunities, and staff fatigue outside standard operating hours.',
     solution:
       'Coldi integrated a 24/7 AI voice representative into the client’s digital touchpoints to deliver expert responses, capture contact data, and schedule appointments around the clock.',
@@ -85,7 +85,7 @@ export const FEATURED_CASES: FeaturedCase[] = [
     id: 'stone-electric',
     tab: 'Home & Residential Services',
     title: 'Residential Electrical Contractor',
-    href: '/stone-electric',
+    href: '/residential-electrical-contractor',
     pain: 'Missed calls during high-volume hours and after-hours emergencies resulted in lost high-value jobs and delayed technician dispatch',
     solution:
       'Coldi deployed an AI voice agent to handle 24/7 intake—instantly transferring emergency calls to live electricians and booking routine jobs directly into technician calendars.',
@@ -100,7 +100,7 @@ export const FEATURED_CASES: FeaturedCase[] = [
     id: 'agricultural-infrastructure-provider',
     tab: 'Agricultural Infrastructure Provider',
     title: 'Agricultural Infrastructure Provider',
-    href: '/agro-industry',
+    href: '/global-agricultural-infrastructure-provider',
     pain: 'Senior sales managers wasted hours manually filtering unqualified inbound inquiries for complex multi-million dollar infrastructure projects.',
     solution:
       'Coldi deployed an autonomous AI voice concierge to manage technical discovery, extract structured project data, and schedule qualified prospects.',
@@ -115,7 +115,7 @@ export const FEATURED_CASES: FeaturedCase[] = [
     id: 'hvac-saas',
     tab: 'HVAC & SaaS',
     title: 'HVAC & SaaS',
-    href: '/hvac-saas',
+    href: '/saas-and-hvac-service-operator',
     pain: 'Dormant lead databases lose value rapidly, leaving past event lists and cold CRM contacts uncontacted due to manual dialing limits.',
     solution:
       'Coldi deployed an outbound AI engine to call cold lists, handle objections, qualify software stacks, and send instant SMS demo booking links.',
@@ -135,7 +135,7 @@ export const IMPLEMENTATIONS: ImplementationCase[] = [
     title: 'AI Calling with Real-Time Human Handoff',
     description:
       'The client needed a seamless calling workflow that could determine when a live team was available and automatically handle the next step when they were not.',
-    href: '/clickomi',
+    href: '/performance-marketing-agency',
     handles: [
       { icon: '/images/use-cases-hub/handle-outbound.png', label: 'Outbound lead calling' },
       {
@@ -166,7 +166,7 @@ export const IMPLEMENTATIONS: ImplementationCase[] = [
     title: 'Lead Re-engagement with Automated Follow-Up',
     description:
       'The client needed to turn outbound calls into a complete follow-up process, giving interested leads both a direct path to a specialist and additional information by SMS.',
-    href: '/clarity-global',
+    href: '/canadian-fintech',
     handles: [
       { icon: '/images/use-cases-hub/handle-outbound.png', label: 'Outbound lead calling' },
       { icon: '/images/use-cases-hub/handle-interest.png', label: 'Interest qualification' },
