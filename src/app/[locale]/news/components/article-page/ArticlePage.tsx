@@ -7,6 +7,7 @@ import { cn } from '@/shared/lib/helpers';
 
 import { DEFAULT_NEWS_IMAGE, type NewsArticle, type NewsCard, slugifyHeading } from '../../lib';
 import { ArticleCard } from '../article-card/ArticleCard';
+import { ArticleFaq } from './ArticleFaq';
 import st from './ArticlePage.module.scss';
 import { ArticleShare } from './ArticleShare';
 import { ArticleSummarizeWithAi } from './ArticleSummarizeWithAi';
@@ -100,10 +101,13 @@ export const ArticlePage = ({ article, related }: ArticlePageProps) => {
   const tocItems =
     article.htmlToc && article.htmlToc.length > 0
       ? article.htmlToc
-      : article.sections.map((section) => ({
-          id: slugifyHeading(section.heading),
-          text: section.heading,
-        }));
+      : [
+          ...article.sections.map((section) => ({
+            id: slugifyHeading(section.heading),
+            text: section.heading,
+          })),
+          ...(article.faq?.length ? [{ id: 'faq', text: 'FAQ' }] : []),
+        ];
 
   return (
     <main className={st.page}>
@@ -213,6 +217,8 @@ export const ArticlePage = ({ article, related }: ArticlePageProps) => {
                     </section>
                   );
                 })}
+
+                {article.faq?.length ? <ArticleFaq items={article.faq} /> : null}
               </>
             )}
           </div>

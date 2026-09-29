@@ -35,6 +35,24 @@ export const FEATURED_ARTICLES: NewsCard[] = [
 
 const GRID_TEMPLATES: NewsCard[] = [
   {
+    id: 'article-10',
+    title: 'Coldi AI vs. Vapi: Done-for-You Deployment vs. Developer Infrastructure',
+    slug: 'coldi-ai-vs-vapi-done-for-you-deployment-vs-developer-infrastructure',
+    excerpt: '',
+    image: '/images/news/heroes/сoldi-ai-vs-vapi.jpg',
+    category: 'Industry Trends',
+    created_at: '2026-09-06',
+  },
+  {
+    id: 'article-9',
+    title: 'Coldi AI vs. ElevenLabs: Managed Voice Agents vs. Build-Your-Own',
+    slug: 'coldi-ai-vs-elevenlabs-managed-voice-agents-vs-build-your-own',
+    excerpt: '',
+    image: '/images/news/heroes/сoldi-ai-vs-eleven-labs.jpg',
+    category: 'Industry Trends',
+    created_at: '2026-09-06',
+  },
+  {
     id: 'article-1',
     title: 'Is AI Safe?',
     slug: 'is-ai-safe',

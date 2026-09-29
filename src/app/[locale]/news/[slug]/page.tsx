@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 
 import type { Metadata } from 'next';
 
+import { FaqStructuredData } from '@/shared/ui/components/structured-data/FaqStructuredData';
 import { StructuredData } from '@/shared/ui/components/structured-data/StructuredData';
 
 import { ArticlePage } from '../components/article-page/ArticlePage';
@@ -118,6 +119,9 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
           },
         }}
       />
+      {article.faq?.length ? (
+        <FaqStructuredData id={`news-faq-${article.slug}`} faqs={article.faq} />
+      ) : null}
       <ArticlePage article={article} related={related} />
     </>
   );

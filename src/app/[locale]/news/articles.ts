@@ -23,6 +23,10 @@ const card = (slug: string) => LISTING_ARTICLES.find((article) => article.slug =
 
 const HERO_IMAGES: Record<string, string> = {
   'is-ai-safe': '/images/news/heroes/is-ai-safe.jpg',
+  'coldi-ai-vs-elevenlabs-managed-voice-agents-vs-build-your-own':
+    '/images/news/heroes/сoldi-ai-vs-eleven-labs.jpg',
+  'coldi-ai-vs-vapi-done-for-you-deployment-vs-developer-infrastructure':
+    '/images/news/heroes/сoldi-ai-vs-eleven-labs.jpg',
   'what-building-for-the-us-taught-us': '/images/news/heroes/featured-us-calling.png',
   'will-ai-replace-real-estate-agents': '/images/news/heroes/real-estate-city.jpg',
   'voice-ai-for-outbound-sales': '/images/news/heroes/outbound-sales.jpg',
@@ -38,7 +42,7 @@ const HERO_IMAGES: Record<string, string> = {
 const withCard = (
   slug: string,
   fields: Pick<NewsArticle, 'dateLabel' | 'relatedSlugs' | 'intro' | 'sections'> &
-    Partial<Pick<NewsArticle, 'title' | 'category'>>
+    Partial<Pick<NewsArticle, 'title' | 'category' | 'faq'>>
 ): NewsArticle => {
   const base = card(slug) ?? FEATURED_ARTICLES.find((article) => article.slug === slug);
 
@@ -176,6 +180,184 @@ const ARTICLES: NewsArticle[] = [
             `Is AI safe? The consensus across all these different platforms—from Perplexity to Character AI—is that <strong>AI is safe when approached with skepticism, boundaries, and proper digital hygiene</strong>. The software itself is rarely malicious`
           ),
         ],
+      },
+    ],
+  }),
+  withCard('coldi-ai-vs-vapi-done-for-you-deployment-vs-developer-infrastructure', {
+    dateLabel: 'September 6, 2026',
+    relatedSlugs: [
+      'coldi-ai-vs-elevenlabs-managed-voice-agents-vs-build-your-own',
+      'voice-ai-for-outbound-sales',
+      'is-ai-safe',
+    ],
+    intro: [
+      p(
+        `Vapi is infrastructure. It gives engineering teams the primitives to build voice agents: orchestration, telephony hooks, and model routing, all exposed through an API. That's the point of it, and for teams that want to build their own voice product, it's a solid foundation. Coldi AI starts from a different premise: fintech operations teams don't want to build a voice product, they want a working call operation. Coldi is a managed team behind the API, not a set of primitives handed to your engineers.`
+      ),
+    ],
+    sections: [
+      section(
+        'The core difference',
+        `The real question isn't which platform has better latency or model options. It's who owns the operation once it's live: script iteration, QA, compliance updates, CRM sync, and the ongoing tuning that keeps a voice agent performing. With Vapi, that ownership sits with your team. With Coldi, it sits with Coldi.`
+      ),
+      {
+        heading: 'Side-by-side comparison',
+        blocks: [
+          {
+            type: 'table',
+            headers: ['', 'Coldi AI', 'Vapi'],
+            rows: [
+              [
+                'What it is',
+                'Managed, done-for-you voice AI operation',
+                'Developer infrastructure and API for building voice agents',
+              ],
+              [
+                'Ongoing maintenance',
+                "Handled by Coldi's team",
+                "Owned by the customer's engineering team",
+              ],
+              ['Telephony and CRM integration', 'Included', 'Built and maintained by the customer'],
+              ['Compliance', 'Included (ISO 27001, GDPR)', 'Self-managed'],
+              [
+                'Time to first live call',
+                'Days, operational onboarding',
+                'Depends on internal engineering capacity',
+              ],
+              [
+                'Team required to operate',
+                'None beyond existing ops staff',
+                'Ongoing engineering and DevOps involvement',
+              ],
+              [
+                'Vertical specialization',
+                'Fintech: Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams',
+                'General purpose, industry-agnostic',
+              ],
+            ],
+          },
+        ],
+      },
+      section(
+        'Who should use which',
+        `Vapi fits a company that wants to build and own a voice product as part of its core engineering roadmap, with the internal capacity to maintain it. Coldi fits a fintech operations or growth team that needs voice calling as a working channel, not a build project, and would rather have a managed partner absorb the maintenance burden.`
+      ),
+    ],
+    faq: [
+      {
+        question: 'Is Vapi a finished product or a developer tool?',
+        answer:
+          'Vapi is a developer tool. It provides the infrastructure to build a voice agent, but the surrounding operation, from telephony to compliance to ongoing QA, is left to the team implementing it.',
+      },
+      {
+        question: 'Do I need an engineering team to run Vapi in production?',
+        answer:
+          'Yes. Vapi is designed for teams that want to build and maintain their own voice agent infrastructure, which requires ongoing engineering involvement rather than a one-time setup.',
+      },
+      {
+        question: 'What does "done-for-you" mean in Coldi\'s positioning?',
+        answer:
+          'It means Coldi handles the parts of running a voice AI operation that typically require a dedicated engineering team elsewhere: telephony, CRM sync, compliance, and ongoing script and performance tuning.',
+      },
+      {
+        question: 'Can Coldi handle the same call volume as a Vapi-built system?',
+        answer:
+          'Coldi is built to run production-scale outbound and inbound operations for fintech use cases, with the infrastructure and compliance layer already accounted for as part of the service.',
+      },
+      {
+        question: 'Is Coldi more expensive than building on Vapi?',
+        answer:
+          'Direct cost comparisons depend on internal engineering headcount and timeline, which vary by company. The relevant comparison is total cost of ownership, including the engineering time Vapi requires that Coldi absorbs as part of the managed service.',
+      },
+    ],
+  }),
+  withCard('coldi-ai-vs-elevenlabs-managed-voice-agents-vs-build-your-own', {
+    dateLabel: 'September 6, 2026',
+    relatedSlugs: ['is-ai-safe', 'voice-ai-for-outbound-sales', 'what-is-an-inbound-call-center'],
+    intro: [
+      p(
+        `ElevenLabs Conversational AI is a developer toolkit for building voice agents: strong models, flexible configuration, and a wide set of building blocks. What it doesn't include is the operation around those blocks. You still need to connect telephony, wire your CRM, handle compliance, and staff the engineering time to keep it running. Coldi AI is built for fintech teams that want the outbound or inbound operation itself, not another platform to integrate. Telephony, CRM data sync, compliance, and ongoing tuning are handled as part of the service, so a working call operation is live in days rather than a multi-sprint build.`
+      ),
+    ],
+    sections: [
+      section(
+        'The core difference',
+        `ElevenLabs sells the model layer. Coldi sells the outcome. If your team has engineers who want to own the stack, ElevenLabs is a legitimate starting point. If your team wants a fintech-specific voice operation without hiring for it, that's the gap Coldi fills.`
+      ),
+      {
+        heading: 'Side-by-side comparison',
+        blocks: [
+          {
+            type: 'table',
+            headers: ['', 'Coldi AI', 'ElevenLabs Conversational AI'],
+            rows: [
+              [
+                'Model',
+                'Coldi-managed, tuned for fintech use cases',
+                "Bring your own LLM or use ElevenLabs' models",
+              ],
+              ['Telephony', 'Included', 'Self-managed integration required'],
+              [
+                'CRM / data-card sync',
+                'Included, built for fintech workflows',
+                'Custom build required',
+              ],
+              ['Compliance (ISO 27001, GDPR)', 'Included as part of the service', 'Self-managed'],
+              [
+                'Engineering hours to launch',
+                'Minimal; operational, not developer, onboarding',
+                'Meaningful engineering investment to reach production',
+              ],
+              [
+                'Best fit',
+                'Fintech teams that want a live operation, not a dev project',
+                'Teams with in-house engineering who want full control of the stack',
+              ],
+              [
+                'Verticals served by Coldi',
+                'Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams',
+                'General purpose across industries',
+              ],
+            ],
+          },
+        ],
+      },
+      section(
+        'Who should use which',
+        `ElevenLabs makes sense for a team with dedicated engineering capacity that wants to own every layer of the voice stack and is comfortable maintaining it long term. Coldi makes sense for a fintech team that needs the call operation running now, with compliance and CRM sync already accounted for, and without adding headcount to maintain it.`
+      ),
+    ],
+    faq: [
+      {
+        question: 'Is ElevenLabs a call center platform?',
+        answer:
+          'No. ElevenLabs Conversational AI is a developer toolkit for building voice agents. It provides the model and configuration layer, not the surrounding operation: telephony, CRM integration, and compliance are left to the team implementing it.',
+      },
+      {
+        question: 'Do I need developers to run ElevenLabs Conversational AI?',
+        answer:
+          'Yes, in most production deployments. Getting from the toolkit to a live, compliant, CRM-connected call operation typically requires engineering time to wire the surrounding infrastructure.',
+      },
+      {
+        question: 'Does Coldi AI use ElevenLabs or a similar model layer?',
+        answer:
+          'Coldi is built on a managed voice AI stack tuned specifically for fintech conversations, with the surrounding operation, compliance, and CRM sync included rather than left to the customer to build.',
+      },
+      {
+        question: 'Can I switch from ElevenLabs to Coldi without rebuilding my call flows?',
+        answer:
+          "Coldi's onboarding is designed to map existing call flows and scripts into a working operation, so most of what a team has already defined in ElevenLabs can carry over conceptually even though the underlying implementation changes.",
+      },
+      {
+        question: 'Is Coldi AI only for outbound calling?',
+        answer:
+          'No. Coldi supports both outbound and inbound voice operations across its fintech verticals: Insurance Brokers, Trading Platforms, Debt Collection, and Sales Teams.',
+      },
+      {
+        question:
+          "What compliance standards does Coldi meet that ElevenLabs doesn't handle by default?",
+        answer:
+          "Coldi includes ISO 27001 and GDPR alignment as part of the managed service. With ElevenLabs' toolkit, compliance posture depends entirely on how the implementing team builds and manages the surrounding infrastructure.",
       },
     ],
   }),

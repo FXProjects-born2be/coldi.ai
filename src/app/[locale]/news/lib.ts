@@ -21,12 +21,18 @@ export type ArticleSection = {
   blocks: ArticleBlock[];
 };
 
+export type ArticleFaqItem = {
+  question: string;
+  answer: string;
+};
+
 export type NewsArticle = NewsCard & {
   dateLabel: string;
   heroImage?: string;
   relatedSlugs: string[];
   intro: ArticleBlock[];
   sections: ArticleSection[];
+  faq?: ArticleFaqItem[];
   /** Legacy Supabase HTML body rendered inside the new article chrome */
   htmlContent?: string;
   htmlToc?: { id: string; text: string }[];
