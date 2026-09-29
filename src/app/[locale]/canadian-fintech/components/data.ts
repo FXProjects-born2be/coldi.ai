@@ -136,26 +136,26 @@ export const snapshotCards = [
     label: 'Structured Follow-Up Interval Cadence',
     src: 'icons/clarity-engagement-icon-four.svg',
   },
-  {
-    value: 'XXX',
-    label: 'Calls Independently Audited',
-    src: 'icons/clarity-engagement-icon-five.svg',
-  },
-  {
-    value: 'XXX',
-    label: 'Local Numbers Provisioned',
-    src: 'icons/clarity-engagement-icon-six.svg',
-  },
-  {
-    value: 'XXX',
-    label: 'Total Dial Attempts',
-    src: 'icons/clarity-engagement-icon-seven.svg',
-  },
-  {
-    value: 'XXX',
-    label: 'Hours of Manual Work Saved',
-    src: 'icons/clarity-engagement-icon-eight.svg',
-  },
+  // {
+  //   value: 'XXX',
+  //   label: 'Calls Independently Audited',
+  //   src: 'icons/clarity-engagement-icon-five.svg',
+  // },
+  // {
+  //   value: 'XXX',
+  //   label: 'Local Numbers Provisioned',
+  //   src: 'icons/clarity-engagement-icon-six.svg',
+  // },
+  // {
+  //   value: 'XXX',
+  //   label: 'Total Dial Attempts',
+  //   src: 'icons/clarity-engagement-icon-seven.svg',
+  // },
+  // {
+  //   value: 'XXX',
+  //   label: 'Hours of Manual Work Saved',
+  //   src: 'icons/clarity-engagement-icon-eight.svg',
+  // },
 ];
 
 export const implementationPhases = [
@@ -254,24 +254,24 @@ export const wentWrongItems = [
   { title: 'Area' },
   { title: 'What Happened' },
   { title: 'How Coldi Resolved It' },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
   {
-    title: 'Data Missing',
+    title: 'Coming Soon',
   },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
   {
-    title: 'Data Missing',
-  },
-  {
-    title: 'Data Missing',
+    title: 'Coming Soon',
   },
   {
-    title: 'Data Missing',
+    title: 'Coming Soon',
   },
   {
-    title: 'Data Missing',
+    title: 'Coming Soon',
+  },
+  {
+    title: 'Coming Soon',
   },
 ];
 

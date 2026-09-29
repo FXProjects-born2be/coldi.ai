@@ -115,11 +115,11 @@ export const snapshotCards = [
     label: 'Inbound Booking Lifecycle Automated',
     src: 'icons/stone-engagement-icon-one.svg',
   },
-  {
-    value: 'XXX',
-    label: 'Housecall Pro & Twilio Telephony Integration',
-    src: 'icons/simple-four.svg',
-  },
+  // {
+  //   value: 'XXX',
+  //   label: 'Housecall Pro & Twilio Telephony Integration',
+  //   src: 'icons/simple-four.svg',
+  // },
 ];
 
 export const implementationPhases = [
@@ -239,24 +239,24 @@ export const wentWrongItems = [
   { title: 'Area' },
   { title: 'What Happened' },
   { title: 'How Coldi Resolved It' },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
   {
-    title: 'Data Missing',
+    title: 'Coming Soon',
   },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
   {
-    title: 'Data Missing',
-  },
-  {
-    title: 'Data Missing',
+    title: 'Coming Soon',
   },
   {
-    title: 'Data Missing',
+    title: 'Coming Soon',
   },
   {
-    title: 'Data Missing',
+    title: 'Coming Soon',
+  },
+  {
+    title: 'Coming Soon',
   },
 ];
 

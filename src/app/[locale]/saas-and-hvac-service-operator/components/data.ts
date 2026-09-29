@@ -124,28 +124,28 @@ export const snapshotCards = [
 
 export const implementationPhases = [
   {
-    title: 'Data missing',
-    text: 'Data missing',
+    title: 'Coming Soon',
+    text: 'Coming Soon',
   },
   {
-    title: 'Data missing 2',
-    text: 'Data missing',
+    title: 'Coming Soon 2',
+    text: 'Coming Soon',
   },
   {
-    title: 'Data missing 3',
-    text: 'Data missing',
+    title: 'Coming Soon 3',
+    text: 'Coming Soon',
   },
   {
-    title: 'Data missing 4',
-    text: 'Data missing',
+    title: 'Coming Soon 4',
+    text: 'Coming Soon',
   },
   {
-    title: 'Data missing 5',
-    text: 'Data missing',
+    title: 'Coming Soon 5',
+    text: 'Coming Soon',
   },
   {
-    title: 'Data missing 6',
-    text: 'Data missing',
+    title: 'Coming Soon 6',
+    text: 'Coming Soon',
   },
 ];
 
@@ -222,24 +222,24 @@ export const wentWrongItems = [
   { title: 'Area' },
   { title: 'What Happened' },
   { title: 'How Coldi Resolved It' },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
   {
-    title: 'Data Missing',
+    title: 'Coming Soon',
   },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
   {
-    title: 'Data Missing',
-  },
-  {
-    title: 'Data Missing',
+    title: 'Coming Soon',
   },
   {
-    title: 'Data Missing',
+    title: 'Coming Soon',
   },
   {
-    title: 'Data Missing',
+    title: 'Coming Soon',
+  },
+  {
+    title: 'Coming Soon',
   },
 ];
 

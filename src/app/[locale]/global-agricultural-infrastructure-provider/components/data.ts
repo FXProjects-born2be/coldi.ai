@@ -212,15 +212,15 @@ export const wentWrongItems = [
   { title: 'Area' },
   { title: 'What Happened' },
   { title: 'How Coldi Resolved It' },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
 ];
 
 export const resultsBg = '/images/silverbellgroup/results-bg.png';
@@ -253,13 +253,13 @@ export const resultsMetrics = [
     highlight: false,
   },
   {
-    value: 'XXX',
-    label: 'Data Missing',
+    value: 'Coming Soon',
+    label: 'Coming Soon',
     highlight: false,
   },
   {
-    value: 'XXX',
-    label: 'Data Missing',
+    value: 'Coming Soon',
+    label: 'Coming Soon',
     highlight: false,
   },
   {

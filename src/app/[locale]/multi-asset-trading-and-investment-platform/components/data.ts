@@ -212,24 +212,24 @@ export const wentWrongItems = [
   { title: 'Area' },
   { title: 'What Happened' },
   { title: 'How Coldi Resolved It' },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
   {
-    title: 'Data Missing',
+    title: 'Coming Soon',
   },
-  { title: 'Data Missing' },
-  { title: 'Data Missing' },
+  { title: 'Coming Soon' },
+  { title: 'Coming Soon' },
   {
-    title: 'Data Missing',
-  },
-  {
-    title: 'Data Missing',
+    title: 'Coming Soon',
   },
   {
-    title: 'Data Missing',
+    title: 'Coming Soon',
   },
   {
-    title: 'Data Missing',
+    title: 'Coming Soon',
+  },
+  {
+    title: 'Coming Soon',
   },
 ];
 
