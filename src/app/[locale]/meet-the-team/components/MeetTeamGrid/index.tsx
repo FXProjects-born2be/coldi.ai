@@ -82,13 +82,13 @@ const teamMembers = [
   {
     id: 'nikita-kurdybailo',
     name: 'Nikita Kurdybailo',
-    image: '/images/meet-the-team/leeron-ben-zion.png',
+    image: '/images/meet-the-team/nikita-kurdybailo.png',
     linkedinUrl: 'https://www.linkedin.com/in/nikita-kurdybailo',
   },
   {
     id: 'paul-samosuyk',
     name: 'Paul Samosuyk',
-    image: '/images/meet-the-team/thomas-angelo.png',
+    image: '/images/meet-the-team/paul-samosuyk.png',
     linkedinUrl:
       'https://www.linkedin.com/in/paul-samosuyk-9597b8433?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
   },
