@@ -11,6 +11,7 @@ const CALENDLY_ORIGIN = 'https://calendly.com';
 const SCRIPT_ID = 'calendly-widget-js';
 const REDIRECT_AFTER_MS = 15000;
 const SCRIPT_RETRY_MS = 1200;
+const PRECONNECT_ORIGINS = ['https://assets.calendly.com', 'https://calendly.com'];
 
 type CalendlyPrefill = {
   name?: string;
@@ -29,6 +30,38 @@ type CalendlyApi = {
 };
 
 const getCalendly = () => (window as Window & { Calendly?: CalendlyApi }).Calendly;
+
+const ensurePreconnect = () => {
+  PRECONNECT_ORIGINS.forEach((href) => {
+    if (document.querySelector(`link[rel="preconnect"][href="${href}"]`)) return;
+
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = href;
+    link.crossOrigin = 'anonymous';
+    document.head.appendChild(link);
+  });
+};
+
+const insertScript = (onLoad: () => void, cacheBust = false) => {
+  const script = document.createElement('script');
+  script.id = SCRIPT_ID;
+  script.src = cacheBust ? `${CALENDLY_SCRIPT}?v=${Date.now()}` : CALENDLY_SCRIPT;
+  script.async = true;
+  script.onload = onLoad;
+  document.body.appendChild(script);
+  return script;
+};
+
+export const preloadCalendly = () => {
+  if (typeof window === 'undefined') return;
+
+  ensurePreconnect();
+
+  if (getCalendly() || document.getElementById(SCRIPT_ID)) return;
+
+  insertScript(() => undefined);
+};
 
 const isEventScheduled = (data: unknown) => {
   let payload = data;
@@ -49,16 +82,6 @@ const isEventScheduled = (data: unknown) => {
   );
 };
 
-const insertScript = (onLoad: () => void, cacheBust = false) => {
-  const script = document.createElement('script');
-  script.id = SCRIPT_ID;
-  script.src = cacheBust ? `${CALENDLY_SCRIPT}?v=${Date.now()}` : CALENDLY_SCRIPT;
-  script.async = true;
-  script.onload = onLoad;
-  document.body.appendChild(script);
-  return script;
-};
-
 type CalendlyInlineProps = {
   url: string;
   className?: string;
@@ -72,6 +95,7 @@ export const CalendlyInline = ({ url, className, active = true, prefill }: Calen
   const pathname = usePathname() ?? '';
 
   useEffect(() => {
+    preloadCalendly();
     if (!active) return;
 
     let cancelled = false;
@@ -80,13 +104,16 @@ export const CalendlyInline = ({ url, className, active = true, prefill }: Calen
     let retried = false;
     const startedAt = Date.now();
 
+    let widgetStarted = false;
+
     const initWidget = () => {
       const parent = parentRef.current;
       const Calendly = getCalendly();
 
       if (!parent || !Calendly) return false;
+      if (widgetStarted || parent.querySelector('iframe')) return true;
 
-      parent.innerHTML = '';
+      widgetStarted = true;
       Calendly.initInlineWidget({
         url,
         parentElement: parent,

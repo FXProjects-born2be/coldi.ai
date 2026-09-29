@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
 import { useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
-import { CalendlyInline } from '@/shared/ui/components/calendly-inline';
+import { CalendlyInline, preloadCalendly } from '@/shared/ui/components/calendly-inline';
 import { CloseIcon } from '@/shared/ui/icons/outline/close';
 
 import st from './BookDemo.module.scss';
@@ -16,6 +16,10 @@ import { Link } from '@/i18n/navigation';
 
 const CALENDLY_URL =
   'https://calendly.com/coldi/30min?hide_event_type_details=1&hide_gdpr_banner=1';
+
+if (typeof window !== 'undefined') {
+  preloadCalendly();
+}
 
 const INFO_ITEMS = [
   {
@@ -32,9 +36,14 @@ const INFO_ITEMS = [
   },
 ] as const;
 
+const subscribeNoop = () => () => undefined;
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 export const BookDemo = ({ className }: { className?: string }) => {
   const t = useTranslations('BookDemo');
   const [open, setOpen] = useState(false);
+  const keepCalendar = useSyncExternalStore(subscribeNoop, getClientSnapshot, getServerSnapshot);
 
   return (
     <>
@@ -48,11 +57,14 @@ export const BookDemo = ({ className }: { className?: string }) => {
         </button>
       </div>
 
-      <Root open={open} onOpenChange={setOpen}>
-        <Portal>
-          <Overlay className={st.book_demo__overlay} />
+      <Root open={open} onOpenChange={setOpen} modal={open}>
+        <Portal forceMount={keepCalendar || undefined}>
+          {open ? <Overlay className={st.book_demo__overlay} /> : null}
           <Content
+            forceMount={keepCalendar || undefined}
             className={st.book_demo__content}
+            inert={!open}
+            aria-hidden={!open}
             onPointerDownOutside={(event) => event.preventDefault()}
             onFocusOutside={(event) => event.preventDefault()}
           >
@@ -99,11 +111,7 @@ export const BookDemo = ({ className }: { className?: string }) => {
               </div>
 
               <div className={st.book_demo__form_wrapper}>
-                <CalendlyInline
-                  url={CALENDLY_URL}
-                  className={st.book_demo__calendar_widget}
-                  active={open}
-                />
+                <CalendlyInline url={CALENDLY_URL} className={st.book_demo__calendar_widget} />
               </div>
             </div>
           </Content>
