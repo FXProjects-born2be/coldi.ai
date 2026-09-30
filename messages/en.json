@@ -1,1 +1,1419 @@
-{}
+{
+  "Hero": {
+    "titleLine1": "AI Workforce",
+    "titleLine2": "Built for the Next Generation of",
+    "subtitle": "Production-ready AI voice agents, fully managed from day one.",
+    "phrases": {
+      "insuranceBrokers": "Insurance Brokers",
+      "tradingPlatforms": "Trading Platforms",
+      "debtCollection": "Debt Collection",
+      "salesTeams": "Sales Teams"
+    }
+  },
+  "BookDemo": {
+    "cta": "Book a Demo",
+    "closeAria": "Close dialog",
+    "title": "Let’s Schedule",
+    "titleHighlight": "Your Call",
+    "subtitle": "Pick a time that works for you.",
+    "subtitleSecond": "We’ll discuss your needs and show you how Coldi can support your business.",
+    "whatToExpect": "What to expect",
+    "infoItems": {
+      "conversation": "A 30-minute conversation with a Coldi specialist",
+      "cases": "Use cases relevant to your business",
+      "match": "A perfect match of a Coldi agent with your current business challenge"
+    }
+  },
+  "CalendarHero": {
+    "title": "Let’s schedule",
+    "titleHighlight": "your call",
+    "description": "Pick a time that works for you.",
+    "descriptionSecond": "We’ll discuss your needs and show you how Coldi can support your business."
+  },
+  "AboutHero": {
+    "titleEyebrow": "Coldi Vision",
+    "title": "Voice AI Built for Real Business",
+    "description": "Coldi helps businesses automate customer and sales calls with AI agents that speak naturally, follow business rules, and work inside existing systems."
+  },
+  "AboutInfo": {
+    "blocks": {
+      "phone-capacity": {
+        "title": "The Phone Still Runs on Human Capacity",
+        "description": "The average call center handles over 4,000 calls per month, yet many still miss dozens daily due to overload. Traditional call centers can no longer keep up. Delayed responses, dropped calls, and overwhelmed agents lead to missed opportunities and lost revenue. AI is no longer an innovation - it's a necessity."
+      },
+      "work-in-business": {
+        "title": "We Make AI Work in Your Business",
+        "description": "Many companies offer AI call center tools. Few take responsibility for making them actually work. Coldi is not a plug-and-play solution that performs miracles on its own. To bring results, it needs to be trained, configured, and integrated - and that’s exactly what our team does for you.",
+        "secondDescription": "From the first call to ongoing optimization, we handle the operational side of voice AI."
+      },
+      "workflow": {
+        "title": "AI That Fits Your Existing Workflow",
+        "description": "AI should fit into your workflow, not replace it. Coldi is built to work with the tools your team already uses - calendars, CRMs, ticketing systems, or booking tools. No extra platforms, no tech headaches. We prioritize practical deployment, not technical complexity.",
+        "secondDescription": "Your systems stay in place. Coldi adds the voice layer."
+      },
+      "operations": {
+        "title": "Built by People Who Understand Operations",
+        "description": "Coldi isn’t just software - it’s supported by a team that knows how real business works. We make sure AI fits into your workflow and helps you get things done.",
+        "secondDescription": "We don’t just give you an AI agent. We make it work."
+      },
+      "global": {
+        "title": "Voice AI Ready for Global Operations",
+        "description": "Coldi operates managed telephony infrastructure across dozens of countries, with localized calling capabilities and support for 30+ languages. You can connect Coldi to your existing telephony provider or use Coldi’s infrastructure.",
+        "secondDescription": "We manage the technical layer so your team can focus on the conversations and workflows that matter."
+      },
+      "purpose": {
+        "label": "Our Purpose",
+        "title": "Make Voice AI Work in the Real World",
+        "description": "Our mission is clear: to transform large-scale business communication into measurable outcomes. We deploy and manage AI voice solutions that eliminate operational friction and guarantee consistent quality in every second of interaction."
+      },
+      "vision": {
+        "label": "Our Vision",
+        "title": "Make Business Calling Easier to Scale",
+        "description": "We aim to become the global standard for the managed communication layer. We envision a future where the integration between human strategy and artificial intelligence is so seamless that technology isn't just a tool, but an invisible engine of high-efficiency growth."
+      }
+    }
+  },
+  "AboutHandles": {
+    "title": "What Coldi Handles",
+    "items": {
+      "languages": {
+        "label": "30+ languages",
+        "title": "Your Rules",
+        "description": "Agents follow your scripts, logic, qualification criteria, and escalation rules."
+      },
+      "telephony": {
+        "label": "Global telephony",
+        "title": "Your Systems",
+        "description": "Coldi connects to your CRM, calendar, telephony, APIs, and business tools."
+      },
+      "availability": {
+        "label": "24/7 availability",
+        "title": "Your Calls",
+        "description": "Inbound, outbound, follow-ups, qualification, booking, and reactivation."
+      }
+    }
+  },
+  "AboutAction": {
+    "title": "Hear Coldi in Action",
+    "description": "Book a demo and see how AI calling can fit into your existing workflows."
+  },
+  "MeetTeamPage": {
+    "metaTitle": "Meet the team",
+    "metaDescription": "We don’t just build technology; we design the bridge between your business strategy and automated execution."
+  },
+  "MeetTeamHero": {
+    "titleEyebrow": "Meet the Team",
+    "title": "Behind Coldi",
+    "description": "From AI development and telephony to integrations, operations, and quality control, our team makes every calling workflow work."
+  },
+  "MeetTeamInfo": {
+    "sections": {
+      "purpose": {
+        "eyebrow": "Our Purpose",
+        "title": "Make Voice AI Work in the Real World",
+        "body": "Our mission is clear: to transform large-scale business communication into measurable outcomes. We deploy and manage AI voice solutions that eliminate operational friction and guarantee consistent quality in every second of interaction."
+      },
+      "vision": {
+        "eyebrow": "Our Vision",
+        "title": "Make Business Calling Easier to Scale",
+        "body": "We aim to become the global standard for the managed communication layer. We envision a future where the integration between human strategy and artificial intelligence is so seamless that technology isn't just a tool, but an invisible engine of high-efficiency growth."
+      }
+    }
+  },
+  "MeetTeamGrid": {
+    "title": "Meet the Team",
+    "linkedinAria": "{name} LinkedIn",
+    "roles": {
+      "or-gold": "Co - Founder",
+      "ilia-ron": "Co - Founder",
+      "yosi-stern": "CTO",
+      "serhii-zhakhovskyi": "Partnerships & Growth Manager",
+      "jacob-berkun": "BDM",
+      "leeron-ben-zion": "Sales Account Executive",
+      "natalia-kunytsyna": "Customer Success Manager",
+      "vladyslav-kachanov": "AI Tech Specialist",
+      "oleksandr-romashko": "AI Tech Specialist",
+      "ihor-zhabokrytskyi": "Head of IT Department",
+      "iryna-mykolenko": "Operations Teamleader",
+      "alina-denysenko": "Quality Control",
+      "thomas-angelo": "Quality Control",
+      "nikita-kurdybailo": "Operations Specialist",
+      "paul-samosuyk": "Analyst",
+      "olha-koreva": "Customer Success Manager",
+      "larysa-byshenko": "Finance Manager"
+    }
+  },
+  "MeetTeamInfoDrive": {
+    "items": {
+      "intro": {
+        "title": "The Values",
+        "titleRest": " That Drive Our Team",
+        "body": "Calls are intelligently routed based on the caller's needs, urgency, or account profile, ensuring faster resolution and eliminating frustrating Interactive Voice Response menus."
+      },
+      "ownership": {
+        "title": "Radical Ownership",
+        "body": "We take responsibility for the implementation, not just the software."
+      },
+      "quality": {
+        "title": "Quality at Scale",
+        "body": "More calls should never mean lower-quality conversations."
+      },
+      "integration": {
+        "title": "Seamless Integration",
+        "body": "We build around your existing systems, processes, and tools."
+      },
+      "optimization": {
+        "title": "Continuous Optimization",
+        "body": "We monitor, tune, and improve agents after they go live."
+      },
+      "reliability": {
+        "title": "Reliability Over Experimentation",
+        "body": "Our systems are built for businesses that depend on every call."
+      }
+    }
+  },
+  "InsuranceWhy": {
+    "items": {
+      "intro": {
+        "title": "Why Insurance Teams",
+        "titleRest": "Bring Coldi In"
+      },
+      "renewals": {
+        "title": "Renewals",
+        "body": "Every policyholder gets called ahead of expiry, not just the accounts someone remembered."
+      },
+      "claimsIntake": {
+        "title": "Claims intake",
+        "body": "First notice of loss handled around the clock, routed to the right desk with clean data."
+      },
+      "crossSell": {
+        "title": "Cross-sell",
+        "body": "Untouched upsell lists get worked without pulling staff off active service."
+      },
+      "verification": {
+        "title": "Verification",
+        "body": "Contact details, beneficiaries, and consent refreshed at portfolio scale."
+      }
+    }
+  },
+  "InsuranceHero": {
+    "title": "AI Voice Agents Built for",
+    "titleAccent": "Insurance Operations",
+    "description": "Coldi calls policyholders, chases documents, and handles renewals, fully managed from day one."
+  },
+  "InsuranceHandles": {
+    "title": "What Coldi Handles",
+    "prevItem": "Previous item",
+    "nextItem": "Next item",
+    "items": {
+      "document-kyc": "Document / KYC Chasing"
+    }
+  },
+  "InsuranceCases": {
+    "title": "Insurance Cases",
+    "titleAccent": "Policy Renewal",
+    "description": "A real renewal call, softened for privacy. Same tone your policyholders would hear",
+    "play": "Play",
+    "pause": "Pause"
+  },
+  "InsuranceOperations": {
+    "title": "Built for Insurance Operations",
+    "description": "Every call follows your approved scripts and messaging, with complete recordings, transcripts, and audit logs. Built to support GDPR-compliant insurance operations.",
+    "cta": "Our Security and Compliance"
+  },
+  "InsuranceInfo": {
+    "title": "Is This You?",
+    "description": "Talk to us about a 30-day pilot on your highest-volume lead source.",
+    "items": {
+      "claims-follow-up": "Leads come in faster than your floor can call them",
+      "quote-qualification": "You're paying for traffic that never gets a real conversation",
+      "payment-reminders": "You're expanding into new language markets and don't want to hire locally",
+      "document-kyc": "One client cut their calling floor from 60 agents to 25 with flat conversion — that's the kind of shift you're after"
+    }
+  },
+  "InsurancePage": {
+    "metaTitle": "Coldi AI Voice Agents for Insurance ",
+    "metaDescription": "Optimize claims and policy renewals with Coldi’s insurance AI voice agents. Automate FNOL, quote intake, and CRM updates 24/7. Book a demo!"
+  },
+  "DebtCollectionPage": {
+    "metaTitle": "AI Voice Agents for Debt Collection Software",
+    "metaDescription": "AI debt collection software that automates borrower communication, payment reminders, and recovery workflows. Scale credit and debit collection services with AI voice agents.",
+    "hero": {
+      "title": "AI Voice Agents Built for",
+      "titleAccent": "Debt Collection",
+      "description": "Coldi works your full portfolio on a compliant script, at a fraction of the cost of a human floor."
+    },
+    "handles": {
+      "items": {
+        "payment-reminders": "Payment Reminders",
+        "arrangement-negotiation": "Arrangement / Negotiation",
+        "broken-promise-follow-up": "Broken-Promise Follow-up",
+        "pre-legal-notice": "Pre-Legal Notice"
+      }
+    },
+    "cases": {
+      "title": "Debt Collection",
+      "titleAccent": "Payment Reminder",
+      "description": "Scripted word for word, recorded end to end, opt-out honored instantly."
+    },
+    "why": {
+      "intro": {
+        "title": "Why Collections Teams",
+        "titleAccent": "Bring Coldi In"
+      },
+      "contact-rate": {
+        "title": "Contact rate",
+        "body": "Portfolios get worked at the times and in the languages that actually connect."
+      },
+      "compliance": {
+        "title": "Compliance",
+        "body": "The approved script runs every time, every call recorded and transcribed."
+      },
+      "small-balances": {
+        "title": "Small balances",
+        "body": "Accounts too small to justify a human agent become profitable to chase again."
+      },
+      "follow-through": {
+        "title": "Follow-through",
+        "body": "Payment arrangements get reminded and re-confirmed automatically instead of going stale."
+      }
+    },
+    "operations": {
+      "title": "Built for Collections Operations",
+      "description1": "Mandatory disclosures built into every script.",
+      "description2": "Full audit trail, immediate stop on any opt-out."
+    },
+    "info": {
+      "description": "Talk to us about a 30-day pilot on one portfolio segment.",
+      "items": {
+        "portfolio-headcount": "Your portfolio is growing faster than headcount",
+        "audit-compliance": "You've had a recent audit, compliance incident, or regulatory pressure",
+        "small-balances": "You're writing off small balances that were never worth a human agent's time",
+        "agent-turnover": "Agent turnover on your hardest seat is a recurring cost"
+      }
+    }
+  },
+  "EmisPaymentsPage": {
+    "metaTitle": "Coldi AI Voice Agents for EMIs & Payment Providers",
+    "metaDescription": "Recover abandoned onboarding and verification with Coldi's AI voice agents for EMIs and payment providers. Automate KYC follow-up, compliance outreach, and CRM sync. Book a demo!",
+    "hero": {
+      "title": "AI Voice Agents Built for ",
+      "titleAccent": "EMIs and Payment Providers",
+      "description": "Coldi recovers stalled onboarding and handles compliance outreach without a full contact center."
+    },
+    "handles": {
+      "items": {
+        "application-recovery": "Application Recovery",
+        "verification-document-requests": "Verification / Document Requests",
+        "compliance-data-refresh": "Compliance Data Refresh",
+        "account-support-routing": "Account Support Routing"
+      }
+    },
+    "cases": {
+      "title": "EMIs",
+      "titleAccent": "Application Recovery",
+      "description": "A stalled sign-up, walked back through the last step of verification."
+    },
+    "why": {
+      "intro": {
+        "title": "Why EMI Teams",
+        "titleAccent": "Bring Coldi In"
+      },
+      "onboarding-recovery": {
+        "title": "Onboarding recovery",
+        "body": "Applications abandoned mid-verification get a timely, multilingual nudge."
+      },
+      "compliance-outreach": {
+        "title": "Compliance outreach",
+        "body": "Document requests and consent refreshes run automatically, fully logged."
+      },
+      "support-coverage": {
+        "title": "Support coverage",
+        "body": "Routine account questions get answered around the clock, routed to specialists only when needed."
+      },
+      "lean-teams": {
+        "title": "Lean teams",
+        "body": "You get contact-center coverage without building a contact center."
+      }
+    },
+    "operations": {
+      "title": "Built for EMI Operations",
+      "description": "Every verification call follows your approved scripts and regulatory messaging, with complete recordings, transcripts, and audit logs. Built to support GDPR-compliant EMI operations."
+    },
+    "info": {
+      "description": "Talk to us about a 30-day pilot on your onboarding funnel.",
+      "items": {
+        "drop-off": "Drop-off between registration and first use is your biggest growth leak",
+        "stalls-without-touchpoint": "Verification stalls without a human touchpoint",
+        "team-is-too-lean": "Your team is too lean to justify a full contact center, but the call volume is there"
+      }
+    }
+  },
+  "TradingPlatformsPage": {
+    "metaTitle": "AI Agents for FX Brokers More FTDs & Retention",
+    "metaDescription": "Convert more leads and retain more traders with AI voice agents built for FX brokers. Instant calls, reactivation, and 30+ languages. Book a demo.",
+    "hero": {
+      "title": "AI Voice Agents Built for",
+      "titleAccent": "Trading Platforms and Brokers",
+      "description": "Coldi qualifies leads the moment they land and chases dormant accounts before they churn, fully managed."
+    },
+    "handles": {
+      "items": {
+        "lead-qualification": "Lead Qualification",
+        "event-based-calling": "Event-Based Calling",
+        "lead-nurturing": "Lead Nurturing",
+        "onboarding-kyc": "Onboarding / KYC Completion",
+        "reactivation": "Reactivation"
+      }
+    },
+    "cases": {
+      "title": "Trading Platforms",
+      "titleAccent": "Lead Qualification",
+      "description": "Hear how Coldi separates a real trader from a junk lead before your sales floor ever picks up."
+    },
+    "why": {
+      "intro": {
+        "title": "Why Trading Teams",
+        "titleAccent": "Bring Coldi In"
+      },
+      "first-contact": {
+        "title": "First contact",
+        "body": "Every new sign-up gets called within minutes, while intent is still high."
+      },
+      "lead-economics": {
+        "title": "Lead economics",
+        "body": "AI qualifies before a human joins the call, so reps only speak with real prospects."
+      },
+      "retention": {
+        "title": "Retention",
+        "body": "Withdrawals, inactivity, and dormant accounts trigger automatic outreach, not a manual review."
+      },
+      "onboarding": {
+        "title": "Onboarding",
+        "body": "Verification drop-off is recovered with multilingual follow-up, no local hires required."
+      }
+    },
+    "operations": {
+      "title": "Built for Trading Operations",
+      "description": "Multi-entity, multi-jurisdiction ready. Scripts adapt by license and region, every call logged for compliance."
+    },
+    "info": {
+      "description": "Talk to us about a 30-day pilot on your highest-volume lead source.",
+      "items": {
+        "leads-faster": "Leads come in faster than your floor can call them",
+        "paid-traffic": "You're paying for traffic that never gets a real conversation",
+        "new-languages": "You're expanding into new language markets and don't want to hire locally",
+        "floor-reduction": "One client cut their calling floor from 60 agents to 25 with flat conversion — that's the kind of shift you're after"
+      }
+    }
+  },
+  "MeetTeamInfoQuote": {
+    "badge": "Connect. Automate. Grow.",
+    "title": "Behind every <muted>AI</muted> solution is a <muted>human</muted> team obsessed with <muted>detail</muted>, <muted>integration</muted>, and, above all, your operational <muted>success</muted>"
+  },
+  "HomeBuiltFor": {
+    "title": "Built for Your Business",
+    "description": "Every fintech business has different customer conversations. Select your industry to explore the Voice AI workflows we build, manage and optimize for teams like yours.",
+    "tabsAria": "Industries",
+    "prevIndustry": "Previous industry",
+    "nextIndustry": "Next industry",
+    "speaking": "Speaking...",
+    "industries": {
+      "insurance": {
+        "label": "Insurance",
+        "cta": "Learn more",
+        "messages": [
+          "When does my policy expire?",
+          "Let me check. Can you confirm your policy number?",
+          "INS-88213",
+          "Renews August 3rd. Want me to lock in your rate?"
+        ],
+        "workflows": {
+          "policy-renewals": "Policy Renewals",
+          "claims-follow-up": "Claims Follow-up",
+          "quote-qualification": "Quote Qualification",
+          "payment-reminders": "Payment Reminders"
+        },
+        "handles": {
+          "firstText": "\"Hi, this is Coldi calling on behalf of [Insurer]. Your policy renews August 3rd — want me to lock in your current rate now?\"",
+          "secondText": "\"Done. You'll get confirmation by text and email in the next minute.\"",
+          "answer": "Yeah, go ahead."
+        }
+      },
+      "trading": {
+        "label": "Trading Platforms",
+        "cta": "Learn more",
+        "messages": [
+          "I haven't traded in months, what changed?",
+          "New spreads just launched. Want me to walk you through them?",
+          "Yes, show me",
+          "Sent. Check your email for the update."
+        ],
+        "workflows": {
+          "lead-qualification": "Lead Qualification",
+          "deposit-activation": "Deposit Activation",
+          "kyc-follow-up": "KYC Follow-up",
+          "client-reactivation": "Client Reactivation"
+        },
+        "handles": {
+          "firstText": "\"Hi, saw you just registered on [Platform]. Got two minutes to tell me what you're looking to trade?\"",
+          "secondText": "\"Good, I'll connect you with an account manager who specializes in FX. They'll call within the hour.\"",
+          "answer": "Sure, mostly FX pairs."
+        }
+      },
+      "debt-collection": {
+        "label": "Debt Collection",
+        "cta": "Explore Debt Collection",
+        "messages": [
+          "Why am I getting this call?",
+          "Your payment of $240 is 5 days overdue.",
+          "Oh, I forgot",
+          "No problem. Want to pay now or set a reminder?"
+        ],
+        "workflows": {
+          "debt-payment-reminders": "Payment Reminders",
+          "promise-to-pay": "Promise to Pay",
+          "payment-plans": "Payment Plans",
+          "recovery-campaigns": "Recovery Campaigns"
+        },
+        "handles": {
+          "firstText": "\"Hi, this is Coldi calling about your account ending 4471. You have a payment of $210 due Friday. Would you like to set up a plan?\"",
+          "secondText": "\"Yes, I can set that up right now. You'll get a confirmation text with both dates.\"",
+          "answer": "Can I pay half now and half next month?"
+        }
+      },
+      "emis": {
+        "label": "EMIs",
+        "cta": "Learn more",
+        "messages": [
+          "My deposit isn't showing up",
+          "Let's check. Amount and method?",
+          "$500, bank transfer",
+          "Found it. Processing, live in 10 minutes."
+        ],
+        "workflows": {
+          "customer-support": "Customer Support",
+          "verification-calls": "Verification Calls",
+          "appointment-booking": "Appointment Booking",
+          "custom-automations": "Custom Automations"
+        },
+        "handles": {
+          "firstText": "\"Hi, this is Coldi calling on behalf of [Provider]. You started an account application but didn't finish verification — got two minutes?\"",
+          "secondText": "\"Just a photo ID upload, I'll text you the secure link now.\"",
+          "answer": "Yeah, what do you need?"
+        }
+      },
+      "other": {
+        "handles": {
+          "firstText": "\"Hi, this is Coldi calling on behalf of [Provider]. You left a request on our website. Is it now a good time to talk?\"",
+          "answer": "Yes, I did. Thanks for the fast callback",
+          "secondText": "\"Of course. Could you tell me a little more about your request so I can coordinate the right next step?\""
+        }
+      }
+    }
+  },
+  "HomeTools": {
+    "title": "Works With the Tools You Already Use"
+  },
+  "HomeWhatCanDo": {
+    "title": "What Coldi Can Do for Your Business",
+    "columns": {
+      "sales-growth": "Sales & growth",
+      "customer-support": "Customer support",
+      "compliance-scheduling": "Compliance & scheduling",
+      "payments-platform": "Payments & platform"
+    },
+    "items": {
+      "qualify-leads": "Qualify leads at scale, automatically",
+      "re-engage-leads": "Re-engage abandoned leads",
+      "outbound-campaigns": "Run outbound campaigns at any volume",
+      "win-back-accounts": "Win back dormant accounts",
+      "collect-feedback": "Collect feedback after every call",
+      "inbound-calls": "Handle inbound calls, 24/7",
+      "multilingual-support": "Deliver multilingual customer support",
+      "route-calls": "Route calls to the right desk instantly",
+      "schedule-appointments": "Schedule appointments and send reminders",
+      "verify-identity": "Verify identity documents instantly",
+      "policy-renewals": "Confirm policy renewals before they lapse",
+      "review-calls": "Review 100% of calls for compliance",
+      "kyc-documents": "Chase missing KYC documents",
+      "custom-agents": "Deploy custom AI agents for any workflow",
+      "payment-plans": "Set up payment plans automatically",
+      "payment-promises": "Follow up on broken payment promises"
+    }
+  },
+  "HomeHearVoice": {
+    "title": "Hear Voice AI in Action",
+    "description": "Listen to real conversations across insurance, trading platforms, and debt collection, and hear how Coldi handles customer interactions naturally and professionally.",
+    "selectAria": "Select voice example",
+    "play": "Play",
+    "pause": "Pause",
+    "exploreProducts": "Explore Our Solutions",
+    "items": {
+      "insurance": {
+        "title": "Insurance Cases",
+        "subtitle": "Policy Renewal"
+      },
+      "trading": {
+        "title": "Trading Platforms",
+        "subtitle": "Lead Qualification"
+      },
+      "debt-collection": {
+        "title": "Debt Collection",
+        "subtitle": "Payment Reminder"
+      },
+      "customer-support": {
+        "title": "EMIs",
+        "subtitle": "Verification Call"
+      }
+    }
+  },
+  "PricingHero": {
+    "title": "Simple Pricing. Scalable Power.",
+    "description": "Choose the plan that fits your stage - whether you're just testing or scaling full operations."
+  },
+  "PricingPlans": {
+    "tabsAria": "Pricing plans",
+    "requestNow": "Request Now",
+    "plans": {
+      "outbound": {
+        "tab": "Outbound",
+        "label": "Outbound Solutions",
+        "title": "Outbound Calling Service",
+        "description": "Transform your outreach with proactive AI agents that execute campaigns on autopilot.",
+        "eyebrow": "Starting from",
+        "priceSuffix": "/per minute",
+        "features": {
+          "strategy-setup": "Strategy & Setup: High-conversion conversational flows",
+          "dynamic-scripting": "Dynamic Scripting: Real-time adaptive responses",
+          "campaign-hours": "Campaign Hours: Flexible timezone scheduling",
+          "infrastructure": "Infrastructure: Your VoIP or Global Infrastructure",
+          "performance-tracking": "Performance Tracking & analytics"
+        }
+      },
+      "inbound": {
+        "tab": "Inbound",
+        "label": "Inbound & Customer Service",
+        "title": "Inbound Calling Service",
+        "description": "Voice agents that understand intent and execute real business actions in real time.",
+        "eyebrow": "Starting from",
+        "priceSuffix": "/per agent",
+        "features": {
+          "action-oriented": "Action-oriented AI: bookings, tickets, queries",
+          "crm-integration": "CRM integration: Zendesk, Salesforce, and more",
+          "resolution-24-7": "24/7 resolution with zero wait time",
+          "omnichannel": "Omnichannel support: voice, chat, messaging",
+          "intelligent-escalation": "Intelligent escalation to human agents"
+        }
+      }
+    }
+  },
+  "SpecializedServices": {
+    "title": "Specialized Services",
+    "priceLabel": "Pricing",
+    "cta": "Get Pricing Quote",
+    "prevService": "Previous service",
+    "nextService": "Next service",
+    "services": {
+      "custom-ai": {
+        "title": "Custom AI Development",
+        "tab": "AI Development",
+        "description": "Full architecture design of a custom AI agent tailored to your specific business logic and brand voice.",
+        "price": "Custom Quote"
+      },
+      "quality-control": {
+        "title": "Quality Control (QC) AI",
+        "tab": "Quality Control",
+        "description": "Automated auditing of 100% of interactions to ensure script compliance, brand safety, and data accuracy.",
+        "price": "Custom Quote"
+      },
+      "voip": {
+        "title": "Global VoIP Infrastructure",
+        "tab": "Global VoIP",
+        "description": "High-quality local numbering and telephony access in dozens of countries to ensure maximum deliverability.",
+        "price": "Based on Region/Volume"
+      },
+      "implementation": {
+        "title": "Managed Implementation",
+        "tab": "Managed Implementation",
+        "description": "Full deployment, testing, and continuous optimization. We handle the technical heavy lifting so you don't have to.",
+        "price": "Included in Managed Plans"
+      }
+    }
+  },
+  "PricingProcess": {
+    "title": "The Coldi Process: How It Works",
+    "steps": {
+      "infrastructure": {
+        "title": "Infrastructure Integration",
+        "description": "Connect our AI with your existing VoIP provider or leverage our optimized high-deliverability network. We sync with your CRM to ensure the AI has the full context."
+      },
+      "script": {
+        "title": "Script & Workflow Design",
+        "description": "Our experts build your dynamic scripts and business logic. We define exactly how the agent handles every scenario to ensure professional and accurate interactions."
+      },
+      "launch": {
+        "title": "Launch & Continuous Optimization",
+        "description": "Go live with 100% transparency. We monitor every interaction, providing you with detailed analytics and constant performance tuning to improve resolution rates."
+      }
+    }
+  },
+  "PricingContact": {
+    "eyebrow": "Have questions?",
+    "title": "Contact Coldi!",
+    "imageAlt": "Contact Coldi",
+    "emailPlaceholder": "Your email*",
+    "send": "Send",
+    "sending": "Sending...",
+    "success": "Thanks, we'll be in touch.",
+    "errors": {
+      "submit": "Failed to send. Please try again."
+    }
+  },
+  "PricingRequest": {
+    "closeAria": "Close dialog",
+    "title": "Start with Coldi",
+    "subtitle": "Fill out your data",
+    "name": "Name",
+    "surname": "Surname",
+    "phone": "Phone Number",
+    "email": "Work email",
+    "industry": "Industry",
+    "searchCountry": "Search country...",
+    "send": "Book a Demo",
+    "sending": "Sending...",
+    "errors": {
+      "name": "Name is required",
+      "surname": "Surname is required",
+      "phone": "Please provide a valid phone number",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "emailWork": "Please use your work email address",
+      "sector": "Please select a sector"
+    },
+    "sectors": {
+      "insurance": "Insurance",
+      "trading": "Trading Platforms & Brokers",
+      "debt-collection": "Debt Collection",
+      "emis": "EMIs & Payments",
+      "Other": "Other"
+    }
+  },
+  "HomeFeaturedOn": {
+    "title": "Featured on"
+  },
+  "HomeManaged": {
+    "title": "Managed Beyond Launch",
+    "description": "Coldi continuously monitors conversations, analyzes performance, and optimizes every workflow to maximize business outcomes.",
+    "tabsAria": "Managed features",
+    "prevTab": "Previous tab",
+    "nextTab": "Next tab",
+    "close": "Close",
+    "viewScreenshot": "View {title} screenshot",
+    "tabs": {
+      "calls": {
+        "title": "Calls",
+        "description": "View call activity, duration, outcomes, and call details."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Track call results, response rates, and key performance metrics."
+      },
+      "agents": {
+        "title": "Agents",
+        "description": "Configure agents, calling settings, scripts, and workflows."
+      },
+      "leads": {
+        "title": "Leads",
+        "description": "Track leads generated and captured from your calling campaigns."
+      },
+      "campaign-performance": {
+        "title": "Campaign Performance",
+        "description": "Monitor overall campaign results, efficiency, and outcomes."
+      }
+    }
+  },
+  "Header": {
+    "home": "Home",
+    "solutions": "Solutions",
+    "news": "News",
+    "scheduleMeeting": "Schedule a Meeting",
+    "menu": "Menu",
+    "close": "Close",
+    "openMenuAria": "Open burger menu",
+    "products": "Products",
+    "pricing": "Pricing",
+    "about": "About",
+    "industries": "Industries",
+    "useCases": "Use Cases",
+    "toggleProducts": "Toggle products group",
+    "toggleAbout": "Toggle about group",
+    "toggleIndustries": "Toggle industries group",
+    "toggleUseCases": "Toggle use cases group",
+    "productItems": {
+      "outbound-calling": "Outbound Calling",
+      "inbound-calling": "Inbound Calling",
+      "agent-development": "AI Agent Development",
+      "customer-service-agent": "AI Customer Service",
+      "ai-for-quality-control": "AI for Quality Control",
+      "voip-phone-service": "VoIP Phone Service"
+    },
+    "industryItems": {
+      "insurance": "Insurance",
+      "trading": "Trading Platforms & Brokers",
+      "debt-collection": "Debt Collection",
+      "emis": "EMIs & Payments",
+      "other": "Other Industries"
+    },
+    "useCaseItems": {
+      "silverbell": "BPO (Silverbell Group)",
+      "clarity-global": "Clarity Global",
+      "residential-service": "Residential Service (Stone Electric)",
+      "agro-industry": "Agro-Industry",
+      "hvac-leads": "HVAC Leads"
+    },
+    "aboutItems": {
+      "coldi-vision": "Coldi Vision",
+      "meet-the-team": "Meet the Team"
+    }
+  },
+  "SolutionsInfo": {
+    "prevTab": "Previous tab",
+    "nextTab": "Next tab",
+    "visual": {
+      "managedBy": "Managed by Coldi.ai",
+      "telephony": "Telephony Infrastructure",
+      "api": "API Integrations",
+      "accountVerification": "Account Verification Flow",
+      "optimization": "Optimization Engine",
+      "connected": "Connected",
+      "active": "Active",
+      "operational": "Operational",
+      "autoLearning": "Auto-learning",
+      "sentiment": "Sentiment detection",
+      "risk": "Risk analysis",
+      "routing": "Routing decision",
+      "triage": "AI triage engine",
+      "setup": "Setup",
+      "integrations": "Integrations",
+      "callLogic": "Call Logic",
+      "live": "Live",
+      "completed": "Completed",
+      "customerData": "Customer Data & Intent",
+      "rightMessage": "Right Message, Language & Voice",
+      "tailoredFlow": "Tailored Conversation Flow",
+      "continuousOptimization": "Continuous Optimization"
+    },
+    "tabs": {
+      "insurance": {
+        "label": "Insurance",
+        "items": {
+          "policyRenewal": {
+            "title": "Policy Renewal Bot",
+            "description": "Calls policyholders ahead of renewal to confirm and lock in rates"
+          },
+          "quoteFollowUp": {
+            "title": "Quote Follow-up Bot",
+            "description": "Follows up on open quotes to convert them into policies"
+          },
+          "kycReminder": {
+            "title": "KYC / Document Reminder Bot",
+            "description": "Chases missing documents and verification to complete onboarding"
+          },
+          "retention": {
+            "title": "Retention / Win-back Bot",
+            "description": "Re-engages lapsing or cancelled policyholders"
+          },
+          "fnol": {
+            "title": "FNOL Intake Bot",
+            "description": "Handles inbound first-notice-of-loss intake and triage"
+          }
+        }
+      },
+      "trading": {
+        "label": "Trading Platforms",
+        "items": {
+          "leadQualification": {
+            "title": "Lead Qualification Bot",
+            "description": "Calls and qualifies new sign-ups while intent is still high"
+          },
+          "eventBasedCalling": {
+            "title": "Event-Based Calling Bot",
+            "description": "Triggers a call on account events like a deposit drop-off or inactivity"
+          },
+          "leadNurturing": {
+            "title": "Lead Nurturing Bot",
+            "description": "Brings cold and aged leads back into activity"
+          },
+          "onboardingKyc": {
+            "title": "Onboarding / KYC Completion Bot",
+            "description": "Pushes new users through verification and onboarding"
+          },
+          "reactivation": {
+            "title": "Reactivation Bot",
+            "description": "Wins back dormant accounts"
+          }
+        }
+      },
+      "debt": {
+        "label": "Debt Collection",
+        "items": {
+          "paymentReminder": {
+            "title": "Payment Reminder Bot",
+            "description": "Pre-due and overdue reminders, compliant and consistent"
+          },
+          "arrangement": {
+            "title": "Arrangement / Negotiation Bot",
+            "description": "Sets up and confirms payment plans"
+          },
+          "brokenPromise": {
+            "title": "Broken-Promise Follow-up Bot",
+            "description": "Follows up on missed payment commitments"
+          },
+          "preLegal": {
+            "title": "Pre-Legal Notice Bot",
+            "description": "Delivers compliant escalation notices before legal steps"
+          }
+        }
+      },
+      "emi": {
+        "label": "EMIs",
+        "items": {
+          "applicationRecovery": {
+            "title": "Application Recovery Bot",
+            "description": "Walks abandoned applicants through the last steps of verification"
+          },
+          "complianceRefresh": {
+            "title": "Compliance Refresh Bot",
+            "description": "Runs document requests and consent refreshes on a schedule"
+          },
+          "accountSupport": {
+            "title": "Account Support Bot",
+            "description": "Answers routine account questions and routes to specialists when needed"
+          }
+        }
+      },
+      "other": {
+        "label": "Other",
+        "items": {
+          "healthcareAppointment": {
+            "title": "Healthcare Appointment Bot",
+            "description": "Schedules appointments, sends reminders, and follows up with patients automatically."
+          },
+          "realEstateLead": {
+            "title": "Real Estate Lead Qualification Bot",
+            "description": "Calls new property leads, identifies their requirements, and books viewings with qualified prospects."
+          },
+          "retailEcommerce": {
+            "title": "Retail & E-commerce Support Bot",
+            "description": "Handles order questions, delivery updates, product enquiries, and customer follow-ups."
+          },
+          "hospitalityTravel": {
+            "title": "Hospitality & Travel Booking Bot",
+            "description": "Manages booking enquiries, confirmations, changes, and pre-arrival communication."
+          },
+          "educationEnrollment": {
+            "title": "Education Enrollment Bot",
+            "description": "Contacts prospective students, answers initial questions, and guides them through the enrollment process."
+          }
+        }
+      }
+    }
+  },
+  "SolutionsHero": {
+    "titleLine1": "<span>Named</span> AI Agents,",
+    "titleLine2": "Built for <span>Fintech</span> Workflows",
+    "description": "Not a generic voice AI toolkit. Every bot below is built, deployed, and managed by Coldi for a specific job."
+  },
+  "SolutionsDeliver": {
+    "title": "What a month with Coldi can look like",
+    "description": "Less manual work. More meetings and qualified sales conversations.",
+    "cards": {
+      "hoursSaved": {
+        "title": "Hours of human work saved in one month"
+      },
+      "meetings": {
+        "title": "Meetings booked"
+      },
+      "transfers": {
+        "title": "Qualified transfers"
+      },
+      "callbacks": {
+        "title": "Callbacks scheduled"
+      }
+    }
+  },
+  "SolutionsUseCases": {
+    "title": "Our Use Cases",
+    "readCase": "Read Full Case",
+    "prevSlide": "Previous slide",
+    "nextSlide": "Next slide",
+    "items": {
+      "clickomi": {
+        "caption": "Digital Advertising\nAgency",
+        "title": "Digital Advertising Agency",
+        "description": "Coldi AI agent calls hot leads, qualifies interest, checks whether the call center is open, and either transfers the lead to a live specialist or books a suitable time automatically."
+      },
+      "payset": {
+        "caption": "Multi-Currency Payments\nPlatform",
+        "title": "Multi-Currency Payments Platform",
+        "description": "Coldi AI agent calls new leads, identifies those ready to speak with a specialist, checks real-time availability, and books the callback directly into the calendar."
+      },
+      "clarity": {
+        "caption": "Payment Solutions\nProvider",
+        "title": "Payment Solutions Provider",
+        "description": "AI manages recurring client reviews from first outreach to reminders, response classification, internal escalation, reporting, and a complete activity trail."
+      },
+      "stone": {
+        "caption": "Residential Electrical\nContractor",
+        "title": "Residential Electrical Contractor",
+        "description": "AI answers inbound calls, identifies emergencies, validates the service area, captures job details, and either transfers urgent cases or books an available appointment."
+      }
+    }
+  },
+  "SolutionsSpecific": {
+    "title": "Need Something More Specific?",
+    "description": "If your workflow isn't listed above, we build custom bots on request. Tell us the call, we'll tell you if it's a fit.",
+    "cta": "Book a Demo"
+  },
+  "IndustriesPage": {
+    "metaTitle": "AI Voice Solution for more than 10 industries",
+    "metaDescription": "Explore AI voice solutions for more than 10 industries. Purpose-built agents to scale operations and handle 5,000+ minutes monthly"
+  },
+  "IndustriesHero": {
+    "title": "Voice AI Built",
+    "titleHighlight": "For Fintech",
+    "description": "Coldi runs the phone layer for insurance, trading platforms, and debt collection. Managed end to end, live in weeks."
+  },
+  "IndustryInfo": {
+    "visualAlt": "Image",
+    "tabs": {
+      "insurance": {
+        "label": "Insurance",
+        "subtitle": "Calls. Documents. Renewals. Managed.",
+        "description": "Coldi calls policyholders, chases documents, and handles renewals, fully managed.",
+        "cta": "Explore Insurance Solution",
+        "cards": {
+          "renewals": {
+            "title": "Renewals",
+            "description": "Every policyholder gets called ahead of expiry, not just the accounts someone remembered."
+          },
+          "claimsIntake": {
+            "title": "Claims intake",
+            "description": "First notice of loss handled around the clock, routed to the right desk with clean data."
+          },
+          "crossSell": {
+            "title": "Cross-sell",
+            "description": "Untouched upsell lists get worked without pulling staff off active service."
+          }
+        }
+      },
+      "trading": {
+        "label": "Trading Platforms & Brokers",
+        "subtitle": "New leads qualified, old ones revived.",
+        "description": "Coldi qualifies leads the moment they land and chases dormant accounts before they churn.",
+        "cta": "Explore Trading Platforms Solution",
+        "cards": {
+          "firstContact": {
+            "title": "First contact",
+            "description": "Every new sign-up gets called within minutes, while intent is still high."
+          },
+          "leadEconomics": {
+            "title": "Lead economics",
+            "description": "AI qualifies before a human joins the call, so reps only speak with real prospects."
+          },
+          "onboarding": {
+            "title": "Onboarding",
+            "description": "Verification drop-off is recovered with multilingual follow-up, no local hires required."
+          }
+        }
+      },
+      "debt": {
+        "label": "Debt Collection",
+        "subtitle": "Every account. Compliant. Cheaper.",
+        "description": "Coldi works your full portfolio on a compliant script, at a fraction of the cost of a human floor.",
+        "cta": "Explore Debt Collection Solution",
+        "cards": {
+          "contactRate": {
+            "title": "Contact rate",
+            "description": "Portfolios get worked at the times and in the languages that actually connect."
+          },
+          "smallBalances": {
+            "title": "Small balances",
+            "description": "Accounts too small to justify a human agent become profitable to chase again."
+          },
+          "followThrough": {
+            "title": "Follow-through",
+            "description": "Payment arrangements get reminded and re-confirmed automatically instead of going stale."
+          }
+        }
+      },
+      "emi": {
+        "label": "EMIs & Payments",
+        "subtitle": "Chases every installment, on time.",
+        "description": "Coldi recovers stalled onboarding and handles compliance outreach without a full contact center.",
+        "cta": "Explore EMIs Solution",
+        "cards": {
+          "onboardingRecovery": {
+            "title": "Onboarding recovery",
+            "description": "Applications abandoned mid-verification get a timely, multilingual nudge."
+          },
+          "supportCoverage": {
+            "title": "Support coverage",
+            "description": "Routine account questions get answered around the clock, routed to specialists only when needed."
+          },
+          "leanTeams": {
+            "title": "Lean teams",
+            "description": "You get contact-center coverage without building a contact center."
+          }
+        }
+      }
+    }
+  },
+  "IndustryAreas": {
+    "title": "More Areas Where Coldi Fits",
+    "iconAlt": "Icon",
+    "imageAlt": "Image",
+    "cards": {
+      "otherIndustries": {
+        "title": "Healthcare, Real Estate, Call Centers, and More!",
+        "text": "Not our core focus, but we've run voice AI for these too.",
+        "cta": "See Other Industries"
+      },
+      "fintech": {
+        "title": "Other Fintech Workflows",
+        "text": "Payments, lending and similar.",
+        "cta": "Explore Other Workflows"
+      }
+    }
+  },
+  "IndustriesOther": {
+    "titleLine1": "Other industries",
+    "titleLine2": "we support",
+    "items": {
+      "healthcare": "Healthcare",
+      "realEstate": "Real Estate",
+      "callCenters": "Call Centers",
+      "residential": "Residential",
+      "retail": "Retail",
+      "hvac": "HVAC",
+      "agroIndustry": "Agro-Industry",
+      "technology": "Technology",
+      "manufacturing": "Manufacturing",
+      "consulting": "Consulting",
+      "nonprofit": "Non-profit",
+      "ecommerce": "E-commerce",
+      "entertainment": "Entertainment",
+      "education": "Education",
+      "telecommunications": "Telecommunications",
+      "hospitality": "Hospitality"
+    }
+  },
+  "OtherIndustriesPage": {
+    "metaTitle": "Coldi AI Voice Agents for Other Regulated Industries",
+    "metaDescription": "See how Coldi's AI voice agents apply to healthcare, real estate, and call center operations beyond our core fintech focus. Book a demo to explore your use case.",
+    "hero": {
+      "title": "AI Voice Agents Built for ",
+      "titleAccent": "More Industries",
+      "description": "Coldi helps businesses automate calls and keep every customer conversation moving."
+    },
+    "InsuranceHandles": {
+      "lead-qualification": "Lead Qualification for Real Estate, Technology & E-commerce",
+      "appointment-booking": "Appointment Booking for Healthcare, Hospitality & Consulting",
+      "customer-support": "Customer Support for Retail, Telecommunications & Education",
+      "service-dispatchg": "Service Dispatch for HVAC, Residential & Agro-Industry",
+      "lead-re-engagement": "Lead Re-engagement for Real Estate, E-commerce & Entertainment",
+      "follow-ups": "Follow-Ups for Manufacturing, Non-profit & Call Centers"
+    },
+    "cases": {
+      "title": "Lead Follow-Up",
+      "description": "A new request, called back to qualify the need and arrange the next step."
+    },
+    "why": {
+      "intro": {
+        "title": "Why Teams",
+        "titleAccent": "Bring Coldi In"
+      },
+      "handle-more-calls": {
+        "title": "Handle more calls",
+        "body": "AI voice calling gives healthcare, retail, and e-commerce teams the capacity to handle high call volumes without adding headcount."
+      },
+      "follow-up-faster": {
+        "title": "Follow up faster",
+        "body": "New requests and missed calls get an immediate response, so potential customers do not wait for an agent to become available."
+      },
+      "automate-routine-tasks": {
+        "title": "Automate routine tasks",
+        "body": "From qualification and information collection to appointment scheduling, Coldi takes repetitive calls off your team's workload."
+      },
+      "scale-without-a-call-center": {
+        "title": "Scale without a call center",
+        "body": "Technology companies, call centers, and service teams can expand their calling capacity without building a larger contact center."
+      }
+    },
+    "operations": {
+      "title": "Built for Secured Operations",
+      "description": "Every qualification call follows your approved scripts and targeting criteria, with complete recordings, transcripts, and audit logs. Built to support high-converting, GDPR-compliant sales pipelines."
+    },
+    "info": {
+      "description": "Start with a 30-day pilot for one department, product category or service. ",
+      "items": {
+        "cannot-respond-fast-enough": "Your team handles hundreds or thousands of calls and requests, but cannot respond to all of them fast enough",
+        "leads-go-cold": "Valuable leads and customer requests go cold while your team is busy handling existing conversations",
+        "repetitive-calls": "Your agents spend too much time on repetitive calls, follow-ups, qualification, and appointment scheduling",
+        "volume-peaks": "Call volume fluctuates, but hiring enough people to cover every peak does not make operational sense",
+        "routine-conversations": "Your call center is overloaded with routine conversations that do not require a human agent",
+        "calling-capacity": "You need more calling capacity without building a larger contact center",
+        "no-24-7-coverage": "Customers expect immediate responses, but your team cannot provide 24/7 coverage"
+      }
+    }
+  },
+  "LegalPage": {
+    "metaTitle": "Trust Center",
+    "metaDescription": "Access all official legal documents and policies for our company. Download or view the latest versions of our agreements."
+  },
+  "LegalHero": {
+    "title": "Trust Center",
+    "description": "Access all official legal documents and policies for our company. Download or view the latest versions of our agreements."
+  },
+  "LegalInfo": {
+    "download": "Download PDF",
+    "files": {
+      "terms": {
+        "title": "Terms of Service",
+        "meta": "Last updated 14 January 2026"
+      },
+      "privacy": {
+        "title": "GDPR - Privacy Policy",
+        "meta": "Last updated 26 August 2026"
+      },
+      "dpa": {
+        "title": "Data Processing Agreement",
+        "meta": "Last updated 14 January 2026"
+      }
+    }
+  },
+  "LegalCompliance": {
+    "subtitle": "Our Security and Compliance",
+    "title": "Need More Information?",
+    "description": "For details about our GDPR practices, ISO 27001 program, or specific security and compliance requirements, contact our team.",
+    "contactTitle": "Contact Us!",
+    "mailIconAlt": "Email",
+    "starAiAria": "View Coldi on STAR AI",
+    "starLevelAria": "View Coldi on STAR Level",
+    "saasHubAria": "View Coldi on SaaSHub"
+  },
+  "Footer": {
+    "subtitle": "Making voice AI work for Fintech",
+    "copyright": "© {year} Coldi. Voice-Powered. Rights Reserved.",
+    "starAria": "View Coldi on Star AI",
+    "saasHubAria": "View Coldi on SaaSHub",
+    "whatsappAria": "Open WhatsApp chat with Coldi",
+    "selectLanguage": "Select language",
+    "languageIconAlt": "Language",
+    "locales": {
+      "en": "English",
+      "uk": "Ukrainian"
+    },
+    "columns": {
+      "explore": "Explore",
+      "products": "Products",
+      "industries": "Industries"
+    },
+    "explore": {
+      "products": "Products",
+      "pricing": "Pricing",
+      "news": "News",
+      "about": "Coldi Vision",
+      "trustCenter": "Trust Center"
+    },
+    "products": {
+      "outbound-calling": "Outbound AI Calling",
+      "inbound-calling": "Inbound AI Calling",
+      "agent-development": "AI Agent Development",
+      "customer-service-agent": "AI Customer Service",
+      "ai-for-quality-control": "AI for Quality Control",
+      "voip-phone-service": "VoIP Phone Service"
+    },
+    "industries": {
+      "insurance": "Insurance",
+      "trading": "Trading Platforms & Brokers",
+      "debt-collection": "Debt Collection",
+      "emis": "EMIs & Payments",
+      "other": "Other Industries"
+    }
+  },
+  "UseCasesPage": {
+    "metaTitle": "Coldi Use Cases: AI Voice Agents for Real Business Workflows",
+    "metaDescription": "See how Coldi automates qualification, follow-ups, support, scheduling, and compliance with real AI voice agent implementations.",
+    "hero": {
+      "title": "See How Coldi Automates Business Calls",
+      "subtitle": "Real AI voice agents handling real business workflows:",
+      "subtitleRest": "from qualification and follow-ups to support, scheduling, and compliance."
+    },
+    "featured": {
+      "tabsAria": "Featured use cases",
+      "exploreCta": "Explore Full Case",
+      "painLabel": "The Pain Point",
+      "solutionLabel": "The Solution",
+      "resultsTitle": "Results",
+      "suffixes": {
+        "sec": " Sec",
+        "hours": " Hours",
+        "talk": " talk",
+        "s": "s",
+        "m": "m",
+        "min": " Min",
+        "metrics": " Metrics",
+        "steps": " Steps",
+        "click": " Click"
+      },
+      "cases": {
+        "multi-asset-broker": {
+          "tab": "Multi-Asset Broker",
+          "title": "Multi-Asset Broker",
+          "pain": "Re-engaging a cold database of 11,840 leads across global markets caused low contact rates, manual dialer fatigue, and wasted time on automated voicemails.",
+          "solution": "Coldi deployed an outbound AI voice engine with 2.48 multi-dial cadences, precision answering machine filtering, and dynamic callback scheduling directly into account manager queues.",
+          "results": {
+            "callsPlaced": "calls placed",
+            "talkHours": "hours logged",
+            "pickupEfficiency": "live human pickup efficiency",
+            "qualifiedLeads": "qualified leads captured"
+          }
+        },
+        "payment-solutions": {
+          "tab": "Payment Solutions Provider",
+          "title": "Payment Solutions Provider",
+          "pain": "Manual 6-month compliance reviews across hundreds of clients created spreadsheet overload and slow status-change escalations.",
+          "solution": "Coldi automated the entire review cycle with an outbound compliance agent and a 24/7 inbound AI phone line.",
+          "results": {
+            "reviewAutomation": "Review Cycle Automation",
+            "escalationLag": "Escalation Lag",
+            "savedMonthly": "Saved Monthly",
+            "inboundCoverage": "Inbound Coverage"
+          }
+        },
+        "silverbell": {
+          "tab": "Business Process Outsourcing",
+          "title": "Global Professional Services Provider",
+          "pain": "High inquiry volume across global time zones caused delayed responses, missed appointment opportunities, and staff fatigue outside standard operating hours.",
+          "solution": "Coldi integrated a 24/7 AI voice representative into the client’s digital touchpoints to deliver expert responses, capture contact data, and schedule appointments around the clock.",
+          "results": {
+            "dailyInquiries": "Daily Automated Inquiries Managed",
+            "hoursSavedWeekly": "hours saved weekly",
+            "leadConversions": "Increase in Qualified Lead Conversions",
+            "globalCoverage": "Continuous Global Coverage Achieved"
+          }
+        },
+        "stone-electric": {
+          "tab": "Home & Residential Services",
+          "title": "Residential Electrical Contractor",
+          "pain": "Missed calls during high-volume hours and after-hours emergencies resulted in lost high-value jobs and delayed technician dispatch",
+          "solution": "Coldi deployed an AI voice agent to handle 24/7 intake—instantly transferring emergency calls to live electricians and booking routine jobs directly into technician calendars.",
+          "results": {
+            "dispatch": "Dispatch",
+            "emergencyDelay": "Emergency Delay",
+            "bookingAutomated": "Booking Automated",
+            "schedulingOverhead": "Scheduling Overhead"
+          }
+        },
+        "agricultural-infrastructure-provider": {
+          "tab": "Agricultural Infrastructure Provider",
+          "title": "Agricultural Infrastructure Provider",
+          "pain": "Senior sales managers wasted hours manually filtering unqualified inbound inquiries for complex multi-million dollar infrastructure projects.",
+          "solution": "Coldi deployed an autonomous AI voice concierge to manage technical discovery, extract structured project data, and schedule qualified prospects.",
+          "results": {
+            "salesFocus": "High-Probability Sales Focus",
+            "screeningOverhead": "Manual Screening Overhead",
+            "crmExtraction": "Surgical CRM Data Extraction",
+            "multiTimezone": "Multi-Time Zone Pipeline"
+          }
+        },
+        "hvac-saas": {
+          "tab": "HVAC & SaaS",
+          "title": "HVAC & SaaS",
+          "pain": "Dormant lead databases lose value rapidly, leaving past event lists and cold CRM contacts uncontacted due to manual dialing limits.",
+          "solution": "Coldi deployed an outbound AI engine to call cold lists, handle objections, qualify software stacks, and send instant SMS demo booking links.",
+          "results": {
+            "leadsCaptured": "Total Leads Captured",
+            "objectionHandling": "Structured Objection Handling",
+            "techStackCapture": "Automated Tech Stack Capture",
+            "smsDemo": "Instant SMS Demo Delivery"
+          }
+        }
+      }
+    },
+    "implementations": {
+      "heading": "More Coldi Implementations",
+      "tabsAria": "Implementations",
+      "exploreCta": "Explore Full Case",
+      "handlesTitle": "Coldi handles",
+      "workflowAlt": "The workflow",
+      "integrationAlt": "Integration: Google Sheets connected",
+      "prevItem": "Previous implementation",
+      "nextItem": "Next implementation",
+      "cases": {
+        "digital-ads": {
+          "tab": "Digital Advertising Agency",
+          "title": "AI Calling with Real-Time Human Handoff",
+          "description": "The client needed a seamless calling workflow that could determine when a live team was available and automatically handle the next step when they were not.",
+          "handles": {
+            "outbound": "Outbound lead calling",
+            "availability": "Call-center availability checks",
+            "liveTransfer": "Live agent transfers",
+            "callback": "Callback scheduling",
+            "inboundId": "Inbound lead identification",
+            "dataRetrieval": "Lead data retrieval"
+          }
+        },
+        "portfolioiq": {
+          "tab": "AI-powered fintech platform",
+          "title": "Lead Re-engagement with Automated Follow-Up",
+          "description": "The client needed to turn outbound calls into a complete follow-up process, giving interested leads both a direct path to a specialist and additional information by SMS.",
+          "handles": {
+            "outbound": "Outbound lead calling",
+            "interest": "Interest qualification",
+            "callbackConversion": "Callback conversion",
+            "sms": "SMS follow-up",
+            "dataCapture": "Lead data capture"
+          }
+        }
+      }
+    },
+    "workflows": {
+      "leadAccent": "One AI Voice Platform.",
+      "leadRest": "Multiple Business Workflows.",
+      "items": {
+        "qualify": {
+          "title": "Qualify",
+          "description": "Identify serious opportunities before they reach your sales team."
+        },
+        "follow-up": {
+          "title": "Follow Up",
+          "description": "Reconnect with leads and customers without relying on manual outreach."
+        },
+        "support": {
+          "title": "Support",
+          "description": "Handle routine questions and provide 24/7 first-line assistance."
+        },
+        "schedule": {
+          "title": "Schedule",
+          "description": "Turn conversations into booked appointments without back-and-forth."
+        },
+        "dispatch": {
+          "title": "Dispatch",
+          "description": "Identify urgent requests and route them to the right specialist."
+        },
+        "comply": {
+          "title": "Comply",
+          "description": "Run recurring compliance outreach, classify responses, and escalate exceptions automatically."
+        }
+      }
+    },
+    "cta": {
+      "title": "Inspired by the Results?",
+      "text": "Tell us what your team is spending time on.",
+      "textRest": "We'll show you where Coldi can automate the workflow."
+    }
+  }
+}

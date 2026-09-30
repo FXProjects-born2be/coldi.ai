@@ -1,0 +1,235 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.home_hear_voice {
+  padding-block: 50px;
+
+  @include tablet {
+    padding-block: 40px;
+  }
+
+  &__top {
+    margin-bottom: 40px;
+
+    @include tablet {
+      margin-bottom: 32px;
+    }
+  }
+
+  &__title {
+    font-size: 40px;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 18px;
+
+    @include tablet {
+      font-size: 32px;
+    }
+  }
+
+  &__description {
+    color: #000;
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.4;
+    max-width: 800px;
+    margin-inline: auto;
+
+    @include tablet {
+      font-size: 14px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+
+    @include tablet {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 14px;
+      padding: 24px;
+      background: #F6F6F6;
+      border-radius: 16px;
+    }
+  }
+
+  &__item {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 0.5px solid rgba(66, 104, 255, 0.10);
+    background: var(--White-solid, #FFF);
+    text-align: center;
+    padding-block: 32px;
+    min-height: 389px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    @include tablet {
+      display: none;
+      border-radius: 20px;
+
+      &.selected {
+        display: flex;
+      }
+    }
+
+    &.playing {
+      box-shadow: 0 113px 32px 0 rgba(66, 104, 255, 0.00), 0 73px 29px 0 rgba(66, 104, 255, 0.01), 0 41px 24px 0 rgba(66, 104, 255, 0.05), 0 18px 18px 0 rgba(66, 104, 255, 0.09), 0 5px 10px 0 rgba(66, 104, 255, 0.10);
+    }
+  }
+
+  &__visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 302 / 223;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+
+  &__visual_icon {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+
+    svg {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+    }
+  }
+
+  &__item_title,
+  &__item_subtitle,
+  &__item_btn {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__item_title {
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  &__item_subtitle {
+    color: rgba(0, 0, 0, 0.50);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  //&__item_btn {
+  //  position: absolute;
+  //  z-index: 1;
+  //  bottom: 30px;
+  //  left: 50%;
+  //  transform: translateX(-50%);
+  //}
+
+  &__select {
+    display: none;
+
+    @include tablet {
+      display: block;
+      position: relative;
+      margin-top: 16px;
+      z-index: 2;
+    }
+  }
+
+  &__select_trigger,
+  &__select_option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    font: inherit;
+    color: inherit;
+    background: #fff;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  &__select_trigger {
+    padding: 6px 16px 6px 6px;
+    border-radius: 999px;
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
+  }
+
+  &__select_thumb {
+    position: relative;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 999px;
+  }
+
+  &__select_thumb &__visual {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    margin: 0;
+    border-radius: 999px;
+  }
+
+  &__select_label {
+    flex: 1;
+    min-width: 0;
+    font-size: 18px;
+    line-height: 1.4;
+    color: #000;
+  }
+
+  &__select_chevron {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__select_list {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    border-radius: 24px;
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  &__select_option {
+    padding: 6px 12px 6px 6px;
+    border: 0;
+    border-radius: 999px;
+
+    &.active,
+    &:hover {
+      background: #f6f6f6;
+    }
+  }
+
+  &__btn {
+    text-align: center;
+    margin-top: 40px;
+  }
+}
+

@@ -1,0 +1,104 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.section {
+  padding-top: 76px;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 80px;
+  align-items: center;
+  padding-top: 80px;
+  padding-bottom: 60px;
+
+  @include tablet {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-top: 60px;
+  }
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.titleAccent {
+  color: #4268ff;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.titleRest {
+  color: #000;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.subtitle {
+  margin: 0;
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+
+  @include tablet {
+    font-size: 16px;
+  }
+}
+
+.card {
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #FFF;
+}
+
+.periodRange {
+  color: #000;
+  font-size: 20px;
+  line-height: 1.4;
+  margin-bottom: 16px;
+
+  @include tablet {
+    font-size: 16px;
+  }
+}
+
+.paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  p {
+    margin: 0;
+    color: #4d4d4d;
+    font-size: 18px;
+    line-height: 1.4;
+
+    @include tablet {
+      font-size: 14px;
+    }
+  }
+}
+
+.video {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}

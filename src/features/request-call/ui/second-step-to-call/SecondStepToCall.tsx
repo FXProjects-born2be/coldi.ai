@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactNode, useEffect, useMemo, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Turnstile } from '@marsidev/react-turnstile';
 
@@ -67,6 +67,12 @@ const companySizes = [
   '5,000+',
 ];
 
+const getNow = () => Date.now();
+
+const redirectToCalendar = () => {
+  window.location.assign('/calendar');
+};
+
 export const SecondStepToCall = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   botName,
@@ -82,7 +88,7 @@ export const SecondStepToCall = ({
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaKey, setCaptchaKey] = useState(0);
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
-  const formMountedAt = useMemo(() => Date.now(), []);
+  const formMountedAtRef = useRef(0);
   const { formToken } = useFormToken('call-request');
 
   const resetCaptcha = () => {
@@ -95,6 +101,10 @@ export const SecondStepToCall = ({
     onSubmit(data);
     resetCaptcha();
   };
+
+  useEffect(() => {
+    formMountedAtRef.current = getNow();
+  }, []);
 
   useEffect(() => {
     if (
@@ -165,7 +175,7 @@ export const SecondStepToCall = ({
         return;
       }
 
-      const elapsed = Date.now() - formMountedAt;
+      const elapsed = getNow() - formMountedAtRef.current;
 
       if (elapsed < MIN_FILL_TIME_MS) {
         console.warn('[ANTI-BOT] Form submitted too fast — blocked:', {
@@ -369,7 +379,7 @@ export const SecondStepToCall = ({
 
       onSubmit(data.value);
       resetCaptcha();
-      window.location.href = '/calendar';
+      redirectToCalendar();
     },
   });
 
@@ -405,7 +415,14 @@ export const SecondStepToCall = ({
       ? requiresSmsVerification(formValues.email)
       : false;
 
-  useEffect(() => {
+  const [prevNeedsSmsVerification, setPrevNeedsSmsVerification] = useState(needsSmsVerification);
+  const [prevEmail, setPrevEmail] = useState(formValues.email);
+  const [prevCaptchaToken, setPrevCaptchaToken] = useState(captchaToken);
+
+  if (needsSmsVerification !== prevNeedsSmsVerification || formValues.email !== prevEmail) {
+    setPrevNeedsSmsVerification(needsSmsVerification);
+    setPrevEmail(formValues.email);
+
     if (!needsSmsVerification) {
       setSmsCodeSent(false);
       setSmsVerified(false);
@@ -413,7 +430,17 @@ export const SecondStepToCall = ({
     } else {
       setSmsVerified(false);
     }
-  }, [needsSmsVerification, formValues.email]);
+  }
+
+  if (captchaToken !== prevCaptchaToken) {
+    setPrevCaptchaToken(captchaToken);
+
+    if (!captchaToken) {
+      setSmsCodeSent(false);
+      setSmsVerified(false);
+      setSmsError(null);
+    }
+  }
 
   useEffect(() => {
     const fetchCsrfToken = async () => {
@@ -429,14 +456,6 @@ export const SecondStepToCall = ({
     };
     fetchCsrfToken();
   }, []);
-
-  useEffect(() => {
-    if (!captchaToken) {
-      setSmsCodeSent(false);
-      setSmsVerified(false);
-      setSmsError(null);
-    }
-  }, [captchaToken]);
 
   const handleSendSmsCode = async () => {
     if (!firstStepData.phone) {

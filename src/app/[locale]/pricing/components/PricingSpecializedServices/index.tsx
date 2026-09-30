@@ -1,0 +1,123 @@
+'use client';
+
+import { useState } from 'react';
+import Image from 'next/image';
+
+import { useTranslations } from 'next-intl';
+
+import { cn } from '@/shared/lib/helpers';
+
+import st from './PricingSpecializedServices.module.scss';
+
+import { services } from '@/app/[locale]/pricing/model/content';
+import { Link } from '@/i18n/navigation';
+
+export const PricingSpecializedServices = () => {
+  const t = useTranslations('SpecializedServices');
+  const [activeId, setActiveId] = useState(services[0]?.id);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const activeIndex = services.findIndex((item) => item.id === activeId);
+  const activeService = services[activeIndex] ?? services[0];
+  const canScrollPrev = activeIndex > 0;
+  const canScrollNext = activeIndex < services.length - 1;
+
+  if (!activeService) return null;
+
+  const goToService = (direction: -1 | 1) => {
+    const nextIndex = Math.min(services.length - 1, Math.max(0, activeIndex + direction));
+    const next = services[nextIndex];
+    if (!next) return;
+    setHoveredId(null);
+    setActiveId(next.id);
+  };
+
+  const handleCardPointerEnter = (id: string, pointerType: string) => {
+    if (pointerType !== 'mouse') return;
+    setHoveredId(id);
+  };
+
+  return (
+    <section className={st.pricing_services}>
+      <div className="container">
+        <h2 className={st.pricing_services__title}>{t('title')}</h2>
+
+        <div className={st.pricing_services__grid}>
+          {services.map((service) => (
+            <article
+              key={service.id}
+              className={cn(
+                st.pricing_services__card,
+                service.id === activeService.id && st.active,
+                hoveredId === service.id && st.hovered
+              )}
+              onPointerEnter={(event) => handleCardPointerEnter(service.id, event.pointerType)}
+              onPointerLeave={() => setHoveredId(null)}
+            >
+              <Image
+                className={st.pricing_services__card_preview}
+                src={service.bg}
+                alt=""
+                width={224}
+                height={30}
+                aria-hidden
+              />
+              <Image
+                className={st.pricing_services__card_bg}
+                src={service.hoverBg}
+                alt=""
+                fill
+                aria-hidden
+                sizes="(max-width: 767px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              />
+              <div className={st.pricing_services__card_body}>
+                <h3 className={st.pricing_services__card_title}>
+                  {t(`services.${service.id}.title`)}
+                </h3>
+                <p className={st.pricing_services__card_description}>
+                  {t(`services.${service.id}.description`)}
+                </p>
+              </div>
+
+              <div className={st.pricing_services__card_body}>
+                <div className={st.pricing_services__price}>
+                  <p className={st.pricing_services__price_label}>{t('priceLabel')}</p>
+                  <p className={st.pricing_services__price_value}>
+                    {t(`services.${service.id}.price`)}
+                  </p>
+                </div>
+
+                <Link href="/calendar" className={cn('btn', st.pricing_services__btn)}>
+                  {t('cta')}
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className={st.pricing_services__slider}>
+          <button
+            type="button"
+            className={cn(st.pricing_services__slider_btn, canScrollPrev && st.can_scroll)}
+            aria-label={t('prevService')}
+            disabled={!canScrollPrev}
+            onClick={() => goToService(-1)}
+          >
+            <Image src="/icons/arrow-left.svg" alt="Icon" width={18} height={18} />
+          </button>
+          <p className={st.pricing_services__slider_label}>
+            {t(`services.${activeService.id}.tab`)}
+          </p>
+          <button
+            type="button"
+            className={cn(st.pricing_services__slider_btn, canScrollNext && st.can_scroll)}
+            aria-label={t('nextService')}
+            disabled={!canScrollNext}
+            onClick={() => goToService(1)}
+          >
+            <Image src="/icons/arrow-right.svg" alt="Icon" width={18} height={18} />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};

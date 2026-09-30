@@ -1,19 +1,29 @@
 export function getPageHeadingFromPath(pathname: string): string {
   if (!pathname || pathname === '/') return 'Coldi Brand-Tuned AI Talkers';
 
-  if (pathname === '/about') return 'Expert AI Calling Solutions Provider';
+  if (pathname === '/coldi-vision') return 'Expert AI Calling Solutions Provider';
   if (pathname === '/news') return 'AI Calling & Industry News';
   if (pathname === '/products') return 'Our Voice Agents and Solutions';
   if (pathname === '/pricing') return 'Pricing';
+  if (pathname === '/solutions') return 'Solutions';
   if (pathname === '/voices') return 'Meet Coldi Voices - Real AI Call Agents in Action';
   if (pathname === '/calendar') return 'Book a demo with us';
   if (pathname === '/demo') return 'Coldi Demo - Try Real AI Call Agents Live';
   if (pathname === '/coldi-in-action') return 'Listen to Recorded Calls';
   if (pathname === '/call-request') return 'Request a Call or Demo';
-  if (pathname === '/meettheteam') return 'Meet the team';
+  if (pathname === '/meet-the-team') return 'Meet the team';
   if (pathname === '/legal') return 'Coldi Live';
-  if (pathname === '/agro-industry') return 'Lead Qualification in the Global Agro-Industry';
-  if (pathname === '/clarity-global') return 'Clarity Global use case';
+  if (pathname === '/global-agricultural-infrastructure-provider')
+    return 'Lead Qualification in the Global Agro-Industry';
+  if (pathname === '/canadian-fintech') return 'Clarity Global use case';
+  if (pathname === '/performance-marketing-agency')
+    return 'Lead Qualification in the Global Agro-Industry';
+  if (pathname === '/residential-electrical-contractor') return 'Clarity Global use case';
+  if (pathname === '/multi-asset-trading-and-investment-platform') return 'Evest use case';
+  if (pathname === '/global-professional-services-provider')
+    return 'AI Operational Excellence: Silverbell Group Case Study';
+  if (pathname === '/saas-and-hvac-service-operator')
+    return 'High-Volume Lead Re-engagement for SaaS and HVAC';
   if (pathname === '/hvac-leads') return 'High-Volume Lead Re-engagement for SaaS and HVAC';
   if (pathname === '/helios') return 'How Helios Cut Costs by 30% & Scaled with AI';
   if (pathname === '/turn-leads-into-meetings' || pathname === '/turn-leads-into-meetings-2') {
@@ -60,12 +70,19 @@ export function getPageHeadingFromPath(pathname: string): string {
     return 'AI for Call Centers';
   }
 
-  if (pathname.startsWith('/industries/fx-brokers')) {
+  if (
+    pathname.startsWith('/industries/fx-brokers') ||
+    pathname.startsWith('/industries/trading-platforms-brokers')
+  ) {
     return 'AI Agents for Brokers';
   }
 
   if (pathname.startsWith('/industries/debt-collection')) {
     return 'AI Agents for Debt Collection';
+  }
+
+  if (pathname.startsWith('/industries/emis-payments')) {
+    return 'EMIs & Payments';
   }
 
   if (pathname.startsWith('/industries')) {

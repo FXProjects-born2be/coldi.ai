@@ -2,16 +2,11 @@
 
 * {
   box-sizing: border-box;
-  padding: 0px;
-  margin: 0px;
-  border: 0px;
 }
 
 *,
 *:before,
 *:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -20,18 +15,9 @@ body {
   height: 100%;
   scroll-behavior: smooth;
   font-family: var(--font-urbanist), sans-serif;
-}
+  scrollbar-width: thin;
+  scrollbar-color: #4268ff #fff;
 
-body {
-  line-height: 1.2;
-  -ms-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  top: 0 !important;
-  background: #fff;
-  margin: 0;
-  height: auto;
-  min-height: 100vh;
   &::-webkit-scrollbar {
     background: transparent;
     width: 10px;
@@ -45,15 +31,20 @@ body {
     background-color: #4268ff;
     border-radius: 100px;
   }
+}
 
-  @include fourteenInch {
-    font-size: 14px;
-    zoom: 0.9;
-  }
-
-  a,
-  button {
-  }
+body {
+  line-height: 1.2;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  top: 0 !important;
+  background: #fff;
+  margin: 0;
+  height: auto;
+  min-height: 100vh;
+  color: #000;
+  font-weight: 400;
 }
 
 font {
@@ -65,8 +56,22 @@ input::-ms-clear {
 }
 
 img {
-  vertical-align: top;
+  display: block;
   max-width: 100%;
+  height: auto;
+}
+
+img[src*="tracker.metricool.com"] {
+  display: none !important;
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+video {
+  display: block;
+  pointer-events: none;
 }
 
 * {
@@ -74,50 +79,22 @@ img {
   -webkit-tap-highlight-color: transparent;
 }
 
-._container {
-  padding: 0 124px;
+.container {
   width: 100%;
-  @include largeDesktop {
-    padding: 0 124px;
-  }
-  @include tablet {
-    padding: 0 16px;
-  }
+  max-width: 1312px;
+  margin-inline: auto;
+  padding-inline: 16px;
 }
 .react-tel-input {
   .selected-flag {
     background: transparent !important;
     border: none !important;
+    padding-left: 24px !important;
   }
   .flag-dropdown {
     background: transparent !important;
     border: none !important;
   }
-}
-
-@keyframes fadeIn3D {
-  from {
-    opacity: 0.2;
-    transform: matrix3d(1.1, 0, 0, 0, 0, 1, 2, -0.0003, 0, 0, 3, 0, 0, 0, 0, 1);
-  }
-  to {
-    opacity: 1;
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 2, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-  }
-}
-
-.fadeIn3D {
-  animation: fadeIn3D linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 40%;
-  transition: all 0.5s ease-in-out;
-  @media (max-width: 992px) {
-    animation-range: entry 0% cover 20%;
-  }
-}
-
-video {
-  pointer-events: none;
 }
 
 * {
@@ -132,4 +109,139 @@ html, body {
 // Legacy reCAPTCHA badge hiding - no longer needed with Turnstile
 .grecaptcha-badge{
   opacity: 0;
+}
+
+.btn {
+  padding: 13px 31px;
+  border-radius: 9999px;
+  font-size: 16px;
+  color: #FFF;
+  font-weight: 600;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  border: 1px solid transparent;
+  transition: all .3s ease-in-out;
+}
+
+.btn-primary {
+  background: #2544BD;
+
+  &:hover {
+    background: #fff;
+    color: #2544BD;
+    border-color: #2544BD;
+
+    svg path,
+    svg rect {
+      fill: #2544BD;
+    }
+  }
+}
+
+.btn-secondary {
+  border-color: #2544BD;
+  color: #2544BD;
+  background: #fff;
+
+  &:hover {
+    background: #2544BD;
+    color: #fff;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+button {
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.w-max {
+  width: max-content;
+}
+
+.mx-auto {
+  margin-inline: auto;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+svg {
+  display: block;
+
+  path,
+  rect {
+    transition: all .3s ease-in-out;
+  }
+}
+
+.page-calendar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  main {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+h1 span,
+h2 span {
+  color: #4268FF;
+}
+
+.hero-shadow {
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 286px;
+    position: absolute;
+    top: -198px;
+    border-radius: 999999px;
+    background: #FFF;
+    filter: blur(100px);
+    left: 0;
+    z-index: 200;
+  }
+}
+
+.hero-shadow-two {
+  position: relative;
+  z-index: 1;
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
+    z-index: -1;
+  }
+}
+
+.-z-1 {
+  z-index: -1;
 }

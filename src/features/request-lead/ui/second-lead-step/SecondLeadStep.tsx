@@ -289,7 +289,14 @@ export const SecondLeadStep = ({
       ? requiresSmsVerification(firstStepData.email)
       : false;
 
-  useEffect(() => {
+  const [prevNeedsSmsVerification, setPrevNeedsSmsVerification] = useState(needsSmsVerification);
+  const [prevEmail, setPrevEmail] = useState(firstStepData.email);
+  const [prevCaptchaToken, setPrevCaptchaToken] = useState(captchaToken);
+
+  if (needsSmsVerification !== prevNeedsSmsVerification || firstStepData.email !== prevEmail) {
+    setPrevNeedsSmsVerification(needsSmsVerification);
+    setPrevEmail(firstStepData.email);
+
     if (!needsSmsVerification) {
       setSmsCodeSent(false);
       setSmsVerified(false);
@@ -297,7 +304,17 @@ export const SecondLeadStep = ({
     } else {
       setSmsVerified(false);
     }
-  }, [needsSmsVerification, firstStepData.email]);
+  }
+
+  if (captchaToken !== prevCaptchaToken) {
+    setPrevCaptchaToken(captchaToken);
+
+    if (!captchaToken) {
+      setSmsCodeSent(false);
+      setSmsVerified(false);
+      setSmsError(null);
+    }
+  }
 
   useEffect(() => {
     const fetchCsrfToken = async () => {
@@ -313,14 +330,6 @@ export const SecondLeadStep = ({
     };
     fetchCsrfToken();
   }, []);
-
-  useEffect(() => {
-    if (!captchaToken) {
-      setSmsCodeSent(false);
-      setSmsVerified(false);
-      setSmsError(null);
-    }
-  }, [captchaToken]);
 
   const handleSendSmsCode = async () => {
     if (!firstStepData.phone) {

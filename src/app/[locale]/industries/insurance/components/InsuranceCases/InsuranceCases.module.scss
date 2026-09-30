@@ -1,0 +1,200 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.insurance_cases {
+  padding-block: 50px;
+
+  @include tablet {
+    padding-block: 32px;
+  }
+
+  &__row {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.10);
+    box-shadow: 0 0 0 0 #FFF inset, 0 0 0 0.5px rgba(0, 0, 0, 0.30) inset;
+    min-height: 389px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: grid;
+
+    @include desktop {
+      grid-template-columns: 1fr 1.475fr 1fr;
+      gap: 51px;
+    }
+
+    @include tablet {
+      min-height: 450px;
+      padding-top: 40px;
+    }
+  }
+
+  @include desktop {
+    &__wave_wrapper {
+      position: relative;
+    }
+  }
+
+  @include tablet {
+    &__wave_wrapper--left {
+      display: none;
+    }
+  }
+
+  &__wave_left,
+  &__wave_right {
+    position: absolute;
+    z-index: -1;
+
+    @include desktop {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    @include tablet {
+      bottom: 0;
+    }
+
+    @include desktop {
+      svg {
+        max-width: 100%;
+      }
+    }
+  }
+
+  &__wave_left {
+    left: 0;
+  }
+
+  &__wave_right {
+    @include desktop {
+      right: 0;
+    }
+
+    @include tablet {
+      left: 50%;
+      transform: translateX(-50%);
+      right: unset;
+    }
+  }
+
+  &__center {
+    text-align: center;
+
+    @include desktop {
+      align-self: center;
+    }
+
+    @include tablet {
+      padding-inline: 20px;
+    }
+  }
+
+  &__title {
+    font-size: 40px;
+    line-height: 120%;
+    margin-bottom: 18px;
+
+    @include tablet {
+      font-size: 32px;
+    }
+  }
+
+  &__desc {
+    font-size: 20px;
+    line-height: 1.4;
+    max-width: 500px;
+    margin-inline: auto;
+
+    @include desktop {
+      margin-bottom: 32px;
+    }
+
+    @include tablet {
+      font-size: 16px;
+    }
+  }
+
+  &__play {
+    margin-inline: auto;
+
+    @include tablet {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__play_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+  }
+
+  &__wave_mobile {
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    z-index: -1;
+
+    @include desktop {
+      display: none;
+    }
+  }
+}
+
+.insurance {
+  @include tablet {
+    .insurance_cases__wave_right {
+      bottom: 124px;
+    }
+  }
+}
+
+.trading-platforms-brokers,
+.debt-collection,
+.other-industries {
+  @include tablet {
+    .insurance_cases__wave_right {
+      display: none;
+    }
+  }
+}
+
+.emis-payments {
+  @include tablet {
+    .insurance_cases__wave_right {
+      bottom: 78px;
+    }
+  }
+}
+
+.other-industries {
+  .insurance_cases__row {
+    grid-template-columns: 1fr;
+  }
+
+  .insurance_cases__wave_right {
+    left: 0;
+    top: unset;
+    transform: translateY(0);
+    width: auto;
+    bottom: 0;
+
+    svg {
+      overflow: visible;
+    }
+  }
+
+  .insurance_cases__wave_mobile {
+    width: 100%;
+
+    svg {
+      margin: auto;
+    }
+  }
+}

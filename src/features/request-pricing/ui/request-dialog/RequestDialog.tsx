@@ -4,18 +4,20 @@ import { useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Content, Description, Overlay, Portal, Root, Title } from '@radix-ui/react-dialog';
+import { useTranslations } from 'next-intl';
 import PhoneInput from 'react-phone-input-2';
 
 import type { BookDemoSchema } from '@/features/request-leads-demo/model/schemas';
-import { bookDemoSchema, SECTOR_OPTIONS } from '@/features/request-leads-demo/model/schemas';
 import { SectorSelect } from '@/features/request-leads-demo/ui/sector-select';
 
-import { useForm } from '@/shared/lib/forms';
+import { useForm, v } from '@/shared/lib/forms';
+import { cn } from '@/shared/lib/helpers';
+import { isFreeEmailDomain } from '@/shared/lib/validation';
 import { ErrorMessage } from '@/shared/ui/components/error-message';
 import { CloseIcon } from '@/shared/ui/icons/outline/close';
-import { Button } from '@/shared/ui/kit/button';
 import { TextField } from '@/shared/ui/kit/text-field';
 
+import { PRICING_SECTOR_OPTIONS } from '../../model/schemas';
 import { useRequestPricingStore } from '../../store/store';
 import st from './RequestDialog.module.scss';
 
@@ -43,11 +45,38 @@ export const RequestDialog = ({
   setOpen: (open: boolean) => void;
 }) => {
   const plan = useRequestPricingStore((state) => state.plan);
+  const t = useTranslations('PricingRequest');
   const router = useRouter();
   const searchParams = useSearchParams();
   const utmParams = useMemo(() => getUtmFromSearchParams(searchParams), [searchParams]);
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [isSectorOpen, setIsSectorOpen] = useState(false);
+
+  const bookDemoSchema = useMemo(
+    () =>
+      v.object({
+        name: v.pipe(v.string(), v.minLength(1, t('errors.name'))),
+        surname: v.pipe(v.string(), v.minLength(1, t('errors.surname'))),
+        phone: v.pipe(v.string(), v.minLength(5, t('errors.phone'))),
+        email: v.pipe(
+          v.string(),
+          v.minLength(1, t('errors.emailRequired')),
+          v.email(t('errors.emailInvalid')),
+          v.check((email) => !isFreeEmailDomain(email), t('errors.emailWork'))
+        ),
+        sector: v.pipe(v.string(), v.minLength(1, t('errors.sector'))),
+      }),
+    [t]
+  );
+
+  const sectorItems = useMemo(
+    () =>
+      PRICING_SECTOR_OPTIONS.map((item) => ({
+        value: item.value,
+        label: t(`sectors.${item.key}`),
+      })),
+    [t]
+  );
 
   const { Field, Subscribe, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -88,6 +117,8 @@ export const RequestDialog = ({
     if (data.name?.trim()) params.set('firstName', data.name.trim());
     if (data.surname?.trim()) params.set('lastName', data.surname.trim());
     if (data.email?.trim()) params.set('email', data.email.trim());
+    if (data.phone?.trim()) params.set('phone', data.phone.trim());
+    if (data.sector?.trim()) params.set('industry', data.sector.trim());
     const query = params.toString();
     const redirectUrl = query ? `${SUCCESS_REDIRECT_PATH}?${query}` : SUCCESS_REDIRECT_PATH;
     setTimeout(() => router.push(redirectUrl), REDIRECT_DELAY_MS);
@@ -96,44 +127,44 @@ export const RequestDialog = ({
   return (
     <Root open={open} onOpenChange={setOpen}>
       <Portal>
-        <Overlay className={st.overlay} />
-        <Content className={st.content}>
+        <Overlay className={st.request_dialog__overlay} />
+        <Content className={st.request_dialog__content}>
           <Title />
           <Description asChild>
             <section>
               <button
                 name="close-dialog"
-                className={st.closeButton}
+                className={st.request_dialog__close}
                 onClick={() => setOpen(false)}
                 type="button"
-                aria-label="Close dialog"
+                aria-label={t('closeAria')}
               >
                 <CloseIcon />
               </button>
 
-              <h3>
-                Start with Coldi <span>{plan.title}</span>
+              <h3 className={st.request_dialog__title}>
+                {t('title')} <span className={st.request_dialog__title_plan}>{plan.title}</span>
               </h3>
 
-              <h4>Fill out your data</h4>
+              <h4 className={st.request_dialog__subtitle}>{t('subtitle')}</h4>
 
               <form
-                className={st.layout}
+                className={st.request_dialog__form}
                 onSubmit={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   handleSubmit().catch(console.error);
                 }}
               >
-                <section className={st.fields}>
-                  <div className={st.formRow}>
-                    <div className={st.inputWrapper}>
+                <section className={st.request_dialog__fields}>
+                  <div className={st.request_dialog__row}>
+                    <div className={st.request_dialog__field}>
                       <Field name="name">
                         {(field) => (
                           <>
                             <TextField
                               name={field.name}
-                              placeholder="Name"
+                              placeholder={t('name')}
                               value={String(field.state.value ?? '')}
                               onBlur={field.handleBlur}
                               onChange={(e) => field.handleChange(e.target.value)}
@@ -146,13 +177,13 @@ export const RequestDialog = ({
                         )}
                       </Field>
                     </div>
-                    <div className={st.inputWrapper}>
+                    <div className={st.request_dialog__field}>
                       <Field name="surname">
                         {(field) => (
                           <>
                             <TextField
                               name={field.name}
-                              placeholder="Surname"
+                              placeholder={t('surname')}
                               value={String(field.state.value ?? '')}
                               onBlur={field.handleBlur}
                               onChange={(e) => field.handleChange(e.target.value)}
@@ -166,22 +197,22 @@ export const RequestDialog = ({
                       </Field>
                     </div>
                   </div>
-                  <div className={`${st.inputWrapper} ${st.full}`}>
+                  <div className={cn(st.request_dialog__field, st.request_dialog__field_full)}>
                     <Field name="phone">
                       {(field) => (
                         <>
-                          <div className={st.phoneInputContainer}>
+                          <div className={st.request_dialog__phone}>
                             <PhoneInput
                               country="gb"
                               value={String(field.state.value)}
                               onChange={(phone) => field.handleChange(phone)}
                               onBlur={field.handleBlur}
-                              placeholder="Phone Number"
-                              inputClass={st.phoneInput}
-                              buttonClass={st.phoneInputButton}
-                              dropdownClass={st.phoneInputDropdown}
+                              placeholder={t('phone')}
+                              inputClass={st.request_dialog__phone_input}
+                              buttonClass={st.request_dialog__phone_button}
+                              dropdownClass={st.request_dialog__phone_dropdown}
                               enableSearch
-                              searchPlaceholder="Search country..."
+                              searchPlaceholder={t('searchCountry')}
                               autoFormat
                             />
                           </div>
@@ -192,14 +223,14 @@ export const RequestDialog = ({
                       )}
                     </Field>
                   </div>
-                  <div className={`${st.inputWrapper} ${st.full}`}>
+                  <div className={cn(st.request_dialog__field, st.request_dialog__field_full)}>
                     <Field name="email">
                       {(field) => (
                         <>
                           <TextField
                             name={field.name}
                             type="email"
-                            placeholder="Work email"
+                            placeholder={t('email')}
                             value={String(field.state.value ?? '')}
                             onBlur={field.handleBlur}
                             onChange={(e) => field.handleChange(e.target.value)}
@@ -213,16 +244,21 @@ export const RequestDialog = ({
                     </Field>
                   </div>
                   <div
-                    className={`${st.inputWrapper} ${st.sector} ${st.full} ${isSectorOpen ? st.sectorOpen : ''}`}
+                    className={cn(
+                      st.request_dialog__field,
+                      st.request_dialog__field_full,
+                      st.request_dialog__sector,
+                      isSectorOpen && st.request_dialog__field_open
+                    )}
                   >
                     <Field name="sector">
                       {(field) => (
                         <>
                           <SectorSelect
-                            items={SECTOR_OPTIONS}
+                            items={sectorItems}
                             value={field.state.value}
                             onChange={field.handleChange}
-                            placeholder="Industry"
+                            placeholder={t('industry')}
                             onOpenChange={setIsSectorOpen}
                           />
                           {field.state.meta.errors?.map((err, i) => (
@@ -233,14 +269,18 @@ export const RequestDialog = ({
                     </Field>
                   </div>
                 </section>
-                <div className={st.footer}>
+                <div className={st.request_dialog__footer}>
                   <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
                     {([canSubmit, isSubmitting]) => {
                       const pending = isSubmitting || isRedirecting;
                       return (
-                        <Button disabled={!canSubmit || pending} type="submit" fullWidth>
-                          {pending ? 'Sending...' : 'Book a Demo'}
-                        </Button>
+                        <button
+                          disabled={!canSubmit || pending}
+                          type="submit"
+                          className="btn btn-primary"
+                        >
+                          {pending ? t('sending') : t('send')}
+                        </button>
                       );
                     }}
                   </Subscribe>

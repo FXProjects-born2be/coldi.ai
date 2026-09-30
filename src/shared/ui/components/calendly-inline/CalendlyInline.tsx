@@ -1,0 +1,180 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
+
+import { cn, getCalendarReturnPath } from '@/shared/lib/helpers';
+
+import { usePathname, useRouter } from '@/i18n/navigation';
+
+const CALENDLY_SCRIPT = 'https://assets.calendly.com/assets/external/widget.js';
+const CALENDLY_ORIGIN = 'https://calendly.com';
+const SCRIPT_ID = 'calendly-widget-js';
+const REDIRECT_AFTER_MS = 15000;
+const SCRIPT_RETRY_MS = 1200;
+const PRECONNECT_ORIGINS = ['https://assets.calendly.com', 'https://calendly.com'];
+
+type CalendlyPrefill = {
+  name?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  customAnswers?: Record<string, string>;
+};
+
+type CalendlyApi = {
+  initInlineWidget: (options: {
+    url: string;
+    parentElement: HTMLElement;
+    prefill?: CalendlyPrefill;
+  }) => void;
+};
+
+const getCalendly = () => (window as Window & { Calendly?: CalendlyApi }).Calendly;
+
+const ensurePreconnect = () => {
+  PRECONNECT_ORIGINS.forEach((href) => {
+    if (document.querySelector(`link[rel="preconnect"][href="${href}"]`)) return;
+
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = href;
+    link.crossOrigin = 'anonymous';
+    document.head.appendChild(link);
+  });
+};
+
+const insertScript = (onLoad: () => void, cacheBust = false) => {
+  const script = document.createElement('script');
+  script.id = SCRIPT_ID;
+  script.src = cacheBust ? `${CALENDLY_SCRIPT}?v=${Date.now()}` : CALENDLY_SCRIPT;
+  script.async = true;
+  script.onload = onLoad;
+  document.body.appendChild(script);
+  return script;
+};
+
+export const preloadCalendly = () => {
+  if (typeof window === 'undefined') return;
+
+  ensurePreconnect();
+
+  if (getCalendly() || document.getElementById(SCRIPT_ID)) return;
+
+  insertScript(() => undefined);
+};
+
+const isEventScheduled = (data: unknown) => {
+  let payload = data;
+
+  if (typeof payload === 'string') {
+    try {
+      payload = JSON.parse(payload);
+    } catch {
+      return false;
+    }
+  }
+
+  return (
+    typeof payload === 'object' &&
+    payload !== null &&
+    'event' in payload &&
+    payload.event === 'calendly.event_scheduled'
+  );
+};
+
+type CalendlyInlineProps = {
+  url: string;
+  className?: string;
+  active?: boolean;
+  prefill?: CalendlyPrefill;
+};
+
+export const CalendlyInline = ({ url, className, active = true, prefill }: CalendlyInlineProps) => {
+  const parentRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const pathname = usePathname() ?? '';
+
+  useEffect(() => {
+    preloadCalendly();
+    if (!active) return;
+
+    let cancelled = false;
+    let pollId: number | undefined;
+    let resetId: number | undefined;
+    let retried = false;
+    const startedAt = Date.now();
+
+    let widgetStarted = false;
+
+    const initWidget = () => {
+      const parent = parentRef.current;
+      const Calendly = getCalendly();
+
+      if (!parent || !Calendly) return false;
+      if (widgetStarted || parent.querySelector('iframe')) return true;
+
+      widgetStarted = true;
+      Calendly.initInlineWidget({
+        url,
+        parentElement: parent,
+        ...(prefill ? { prefill } : {}),
+      });
+
+      return true;
+    };
+
+    const tryInit = () => {
+      if (cancelled) return;
+      if (initWidget() && pollId) {
+        window.clearInterval(pollId);
+        pollId = undefined;
+      }
+    };
+
+    const existing = document.getElementById(SCRIPT_ID);
+
+    if (getCalendly()) {
+      tryInit();
+    } else if (existing) {
+      existing.addEventListener('load', tryInit);
+    } else {
+      insertScript(tryInit);
+    }
+
+    pollId = window.setInterval(() => {
+      tryInit();
+
+      if (cancelled || getCalendly() || retried) return;
+      if (Date.now() - startedAt < SCRIPT_RETRY_MS) return;
+
+      retried = true;
+      document.getElementById(SCRIPT_ID)?.remove();
+      insertScript(tryInit, true);
+    }, 80);
+
+    const onMessage = (event: MessageEvent) => {
+      if (event.origin !== CALENDLY_ORIGIN) return;
+      if (!isEventScheduled(event.data)) return;
+
+      window.clearTimeout(resetId);
+      resetId = window.setTimeout(() => {
+        if (!cancelled) {
+          const returnPath = getCalendarReturnPath();
+          const currentPath = `${pathname}${window.location.search}`;
+          if (returnPath !== currentPath) router.push(returnPath);
+        }
+      }, REDIRECT_AFTER_MS);
+    };
+
+    window.addEventListener('message', onMessage);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(pollId);
+      window.clearTimeout(resetId);
+      window.removeEventListener('message', onMessage);
+    };
+  }, [active, url, prefill, router, pathname]);
+
+  return <div ref={parentRef} className={cn('calendly-inline-widget', className)} />;
+};

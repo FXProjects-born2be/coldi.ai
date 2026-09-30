@@ -1,0 +1,59 @@
+.icon_tab_progress {
+  position: absolute;
+  inset: -1px;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+
+  &__line {
+    fill: none;
+    stroke: #4268ff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 0 100;
+
+    &_cw {
+      animation-name: icon-tab-progress-cw;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+    }
+
+    &_ccw {
+      animation-name: icon-tab-progress-ccw;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+@keyframes icon-tab-progress-cw {
+  from {
+    stroke-dasharray: 0 100;
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dasharray: 50 100;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes icon-tab-progress-ccw {
+  from {
+    stroke-dasharray: 0 100;
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dasharray: 50 100;
+    stroke-dashoffset: -50;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon_tab_progress {
+    display: none;
+  }
+}

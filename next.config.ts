@@ -1,5 +1,8 @@
-// import { withBotId } from 'botid/next/config'; // temporarily disabled to debug 429 on static chunks
 import type { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
+import path from 'node:path';
+
+const withNextIntl = createNextIntlPlugin();
 
 // Security headers applied to every response.
 // CSP starts with a safe baseline (`upgrade-insecure-requests`) that does NOT
@@ -7,7 +10,11 @@ import type { NextConfig } from 'next';
 // script-src/style-src/etc. and test against the third-party scripts in use
 // (Google Analytics, Meta Pixel, reCAPTCHA, hCaptcha, Cloudflare Turnstile,
 // Retell AI, Supabase, YouTube embeds).
+const isSearchIndexable =
+  process.env.VERCEL_ENV === 'production' && process.env.VERCEL_GIT_COMMIT_REF !== 'dev';
+
 const securityHeaders = [
+  ...(!isSearchIndexable ? [{ key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' }] : []),
   {
     key: 'Referrer-Policy',
     value: 'strict-origin-when-cross-origin',
@@ -28,15 +35,57 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [
-      'localhost',
-      'localhost:3000',
-      'grqtgrzdalvrywluyqxe.supabase.co',
-      'www.facebook.com',
-      'dashboard.retellai.com',
-      'cdn-b.saashub.com',
-      'i.ytimg.com',
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'grqtgrzdalvrywluyqxe.supabase.co',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.facebook.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dashboard.retellai.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn-b.saashub.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+        pathname: '/**',
+      },
     ],
+  },
+  turbopack: {
+    resolveAlias: {
+      'next-intl/config': './src/i18n/request.ts',
+    },
+  },
+  webpack(config) {
+    config.resolve = config.resolve ?? {};
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'next-intl/config': path.resolve(process.cwd(), 'src/i18n/request.ts'),
+    };
+    return config;
   },
   async headers() {
     return [
@@ -46,7 +95,73 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      { source: '/agents', destination: '/solutions', permanent: true },
+      { source: '/uk/agents', destination: '/uk/solutions', permanent: true },
+      { source: '/about', destination: '/coldi-vision', permanent: true },
+      { source: '/uk/about', destination: '/uk/coldi-vision', permanent: true },
+      { source: '/clickomi', destination: '/performance-marketing-agency', permanent: true },
+      { source: '/uk/clickomi', destination: '/uk/performance-marketing-agency', permanent: true },
+      { source: '/clarity-global', destination: '/canadian-fintech', permanent: true },
+      { source: '/uk/clarity-global', destination: '/uk/canadian-fintech', permanent: true },
+      {
+        source: '/stone-electric',
+        destination: '/residential-electrical-contractor',
+        permanent: true,
+      },
+      {
+        source: '/uk/stone-electric',
+        destination: '/uk/residential-electrical-contractor',
+        permanent: true,
+      },
+      {
+        source: '/evest',
+        destination: '/multi-asset-trading-and-investment-platform',
+        permanent: true,
+      },
+      {
+        source: '/uk/evest',
+        destination: '/uk/multi-asset-trading-and-investment-platform',
+        permanent: true,
+      },
+      {
+        source: '/silverbellgroup',
+        destination: '/global-professional-services-provider',
+        permanent: true,
+      },
+      {
+        source: '/uk/silverbellgroup',
+        destination: '/uk/global-professional-services-provider',
+        permanent: true,
+      },
+      {
+        source: '/agro-industry',
+        destination: '/global-agricultural-infrastructure-provider',
+        permanent: true,
+      },
+      {
+        source: '/uk/agro-industry',
+        destination: '/uk/global-agricultural-infrastructure-provider',
+        permanent: true,
+      },
+      { source: '/hvac-saas', destination: '/saas-and-hvac-service-operator', permanent: true },
+      {
+        source: '/uk/hvac-saas',
+        destination: '/uk/saas-and-hvac-service-operator',
+        permanent: true,
+      },
+      { source: '/meettheteam', destination: '/meet-the-team', permanent: true },
+      { source: '/uk/meettheteam', destination: '/uk/meet-the-team', permanent: true },
+      { source: '/fintech-Industry', destination: '/industries/emis-payments', permanent: true },
+      {
+        source: '/uk/fintech-Industry',
+        destination: '/uk/industries/emis-payments',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 // export default withBotId(nextConfig); // temporarily disabled to debug 429 on static chunks
-export default nextConfig;
+export default withNextIntl(nextConfig);

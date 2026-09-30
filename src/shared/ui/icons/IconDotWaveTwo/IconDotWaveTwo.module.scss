@@ -1,0 +1,35 @@
+.icon_dot_wave {
+  path {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  &_active path {
+    animation: icon-dot-wave-pulse 1.8s ease-in-out infinite;
+  }
+
+  @for $i from 1 through 12 {
+    &_active path:nth-child(12n + #{$i}) {
+      animation-delay: #{($i - 1) * 0.1}s;
+    }
+  }
+}
+
+@keyframes icon-dot-wave-pulse {
+  0%,
+  100% {
+    fill-opacity: 0.5;
+    scale: 1;
+  }
+
+  45% {
+    fill-opacity: 1;
+    scale: 1.2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon_dot_wave_active path {
+    animation: none;
+  }
+}

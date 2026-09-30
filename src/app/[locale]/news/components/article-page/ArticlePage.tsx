@@ -1,0 +1,259 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
+import type { ReactNode } from 'react';
+
+import { cn } from '@/shared/lib/helpers';
+
+import { DEFAULT_NEWS_IMAGE, type NewsArticle, type NewsCard, slugifyHeading } from '../../lib';
+import { ArticleCard } from '../article-card/ArticleCard';
+import { ArticleFaq } from './ArticleFaq';
+import st from './ArticlePage.module.scss';
+import { ArticleShare } from './ArticleShare';
+import { ArticleSummarizeWithAi } from './ArticleSummarizeWithAi';
+import { ArticleToc } from './ArticleToc';
+import { NewsListingLink } from './NewsListingLink';
+
+const SITE_URL = 'https://coldi.ai';
+
+type ArticlePageProps = {
+  article: NewsArticle;
+  related: NewsCard[];
+};
+
+const renderBlocks = (blocks: NewsArticle['intro'], className: string) => {
+  const nodes: ReactNode[] = [];
+  let paragraphHtml = '';
+
+  const flushParagraphs = () => {
+    if (!paragraphHtml) return;
+    nodes.push(
+      <div
+        key={`p-${nodes.length}`}
+        className={className}
+        dangerouslySetInnerHTML={{ __html: paragraphHtml }}
+      />
+    );
+    paragraphHtml = '';
+  };
+
+  blocks.forEach((block, index) => {
+    if (block.type === 'p') {
+      paragraphHtml += block.html.trim().startsWith('<p') ? block.html : `<p>${block.html}</p>`;
+      return;
+    }
+
+    flushParagraphs();
+
+    if (block.type === 'note') {
+      nodes.push(
+        <p key={`note-${index}`} className={st.note}>
+          {block.text}
+        </p>
+      );
+      return;
+    }
+
+    if (block.type === 'image') {
+      nodes.push(
+        <div key={`img-${index}`} className={st.inlineImage}>
+          <Image
+            src={block.src}
+            alt={block.alt || ''}
+            fill
+            sizes="(max-width: 1024px) 100vw, 900px"
+          />
+        </div>
+      );
+      return;
+    }
+
+    nodes.push(
+      <table
+        key={`table-${index}`}
+        className={cn(st.table, block.headers.length === 2 && st.table2)}
+      >
+        <thead>
+          <tr>
+            {block.headers.map((header, headerIndex) => (
+              <th key={`${header}-${headerIndex}`}>{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {block.rows.map((row, rowIndex) => (
+            <tr key={`${row.join('-')}-${rowIndex}`}>
+              {row.map((cell, cellIndex) => (
+                <td key={`${cell}-${cellIndex}`}>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  });
+
+  flushParagraphs();
+  return nodes;
+};
+
+export const ArticlePage = ({ article, related }: ArticlePageProps) => {
+  const articleUrl = `${SITE_URL}/news/${article.slug}`;
+  const tocItems =
+    article.htmlToc && article.htmlToc.length > 0
+      ? article.htmlToc
+      : [
+          ...article.sections.map((section) => ({
+            id: slugifyHeading(section.heading),
+            text: section.heading,
+          })),
+          ...(article.faq?.length ? [{ id: 'faq', text: 'FAQ' }] : []),
+        ];
+
+  return (
+    <main className={st.page}>
+      <section className={st.hero}>
+        <div className={`container ${st.heroInner}`}>
+          <nav className={st.breadcrumbs} aria-label="Breadcrumb">
+            <ol className={st.crumbs}>
+              <li>
+                <Link href="/" className={st.crumbLink}>
+                  Home
+                </Link>
+              </li>
+              <li className={st.separator} aria-hidden>
+                <Image
+                  src="/images/news/icons/breadcrumbs-arrow.svg"
+                  alt=""
+                  width={8}
+                  height={16}
+                  unoptimized
+                />
+              </li>
+              <li>
+                <NewsListingLink className={st.crumbLink}>News</NewsListingLink>
+              </li>
+              <li className={st.separator} aria-hidden>
+                <Image
+                  src="/images/news/icons/breadcrumbs-arrow.svg"
+                  alt=""
+                  width={8}
+                  height={16}
+                  unoptimized
+                />
+              </li>
+              <li>
+                <span className={st.crumbCurrent}>{article.title}</span>
+              </li>
+            </ol>
+          </nav>
+
+          <div className={st.heroCopy}>
+            <h1 className={st.title}>{article.title}</h1>
+            <div className={st.meta}>
+              <div className={st.metaItem}>
+                <span className={st.metaLabel}>Date</span>
+                <time className={st.metaValue} dateTime={article.created_at}>
+                  {article.dateLabel}
+                </time>
+              </div>
+              <div className={st.metaItem}>
+                <span className={st.metaLabel}>category</span>
+                <span className={st.metaValue}>{article.category}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className={cn(st.heroImage, article.isLegacy && st.heroTextPreview)}>
+            {article.isLegacy ? (
+              <>
+                <span className={st.heroBadge}>
+                  <Image src="/icons/logo-white.svg" alt="" width={18} height={18} unoptimized />
+                  Coldi
+                </span>
+                <p className={st.heroPreviewTitle}>{article.title}</p>
+              </>
+            ) : (
+              <Image
+                src={article.heroImage || article.image || DEFAULT_NEWS_IMAGE}
+                alt={article.title}
+                fill
+                sizes="(max-width: 1024px) 100vw, 1280px"
+              />
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section className={st.body}>
+        <div className={`container ${st.bodyInner}`}>
+          <aside className={st.sidebar}>
+            <ArticleToc items={tocItems} />
+            <ArticleShare title={article.title} url={articleUrl} />
+          </aside>
+
+          <div className={st.content}>
+            <ArticleSummarizeWithAi url={articleUrl} />
+
+            {article.htmlContent ? (
+              <div
+                className={`${st.section} ${st.htmlContent}`}
+                dangerouslySetInnerHTML={{ __html: article.htmlContent }}
+              />
+            ) : (
+              <>
+                {article.intro.length > 0 && (
+                  <div className={st.section}>{renderBlocks(article.intro, st.intro)}</div>
+                )}
+
+                {article.sections.map((section) => {
+                  const id = slugifyHeading(section.heading);
+
+                  return (
+                    <section key={id} className={st.section}>
+                      <h2 id={id} className={st.heading}>
+                        {section.heading}
+                      </h2>
+                      {renderBlocks(section.blocks, st.sectionBody)}
+                    </section>
+                  );
+                })}
+
+                {article.faq?.length ? <ArticleFaq items={article.faq} /> : null}
+              </>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {related.length > 0 && (
+        <section className={st.keepReading}>
+          <div className={`container ${st.keepInner}`}>
+            <h2 className={st.keepTitle}>Keep reading:</h2>
+            <div className={st.keepGrid}>
+              {related.map((item) => (
+                <ArticleCard key={item.id} article={item} variant="related" />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section className={st.cta}>
+        <Image
+          src="/images/news/article-cta-bg.png"
+          alt=""
+          fill
+          className={st.ctaBg}
+          sizes="100vw"
+        />
+        <div className={st.ctaInner}>
+          <h2 className={st.ctaTitle}>Turn more calls into real conversations</h2>
+          <Link href="/calendar" className={st.ctaButton}>
+            Talk to Sales
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+};

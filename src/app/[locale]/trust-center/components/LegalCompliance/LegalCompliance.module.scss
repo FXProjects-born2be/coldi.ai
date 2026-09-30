@@ -1,0 +1,152 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.legal_compliance {
+  padding-block: 80px;
+
+  @include tablet {
+    padding-block: 40px;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 80px;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__left {
+    padding: 38px;
+    gap: 53px;
+    position: relative;
+    z-index: 1;
+    border-radius: 14px;
+
+    @include tablet {
+      gap: 23px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: rgba(24, 24, 24, 0.70);
+      mix-blend-mode: overlay;
+      z-index: -1;
+    }
+
+    img {
+      z-index: -2;
+      object-fit: cover;
+      border-radius: inherit;
+    }
+  }
+
+  &__subtitle {
+    color: #FFF;
+    font-size: 40px;
+    line-height: 1.2;
+    font-weight: 400;
+    max-width: 306px;
+    margin-bottom: 42px;
+
+    @include tablet {
+      font-size: 32px;
+      text-align: center;
+      max-width: none;
+      margin-bottom: 23px;
+    }
+  }
+
+  &__badges {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    column-gap: 24px;
+    row-gap: 33px;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 38px;
+      justify-content: center;
+
+      img {
+        margin: auto;
+      }
+
+      &>:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @include mobile {
+      &>:last-child {
+        max-width: 198px;
+        margin: auto;
+      }
+    }
+  }
+
+  &__title {
+    color: #0C1021;
+    font-size: 48px;
+    line-height: 120%;
+    margin-bottom: 8px;
+
+    @include tablet {
+      font-size: 40px;
+      text-align: center;
+    }
+  }
+
+  &__description {
+    color: #0C1021;
+    font-size: 24px;
+    line-height: 120%;
+    margin-bottom: 40px;
+
+    @include tablet {
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+
+  &__contact {
+    border-radius: 16px;
+    background: rgba(66, 104, 255, 0.15);
+    padding: 20px;
+  }
+
+  &__contact_title {
+    color: #0C1021;
+    font-size: 16px;
+    line-height: 140%;
+    margin-bottom: 6px;
+
+    @include tablet {
+      text-align: center;
+    }
+  }
+
+  &__contact_link {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: #4268FF;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 120%;
+
+    @include tablet {
+      justify-content: center;
+    }
+  }
+}

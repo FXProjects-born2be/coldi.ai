@@ -1,0 +1,137 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.solutions_hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  padding-top: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 76px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FAFAFA 100%);
+    pointer-events: none;
+  }
+
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    translate: -50% 0;
+    height: calc(100% + 56px);
+    width: auto;
+    aspect-ratio: 1440 / 537;
+    min-width: 100%;
+    pointer-events: none;
+    z-index: -2;
+  }
+
+  &__rings {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__ring {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    transform-origin: center;
+
+    @include tablet {
+      transform-origin: 50% 100%;
+    }
+
+    img {
+      height: auto;
+      max-width: none;
+    }
+
+    @for $i from 1 through 9 {
+      &:nth-child(#{$i}) {
+        animation: solutions-hero-ring-#{$i} 10.66s linear infinite;
+      }
+    }
+  }
+
+  &__container {
+    padding-block: 16px;
+  }
+
+  &__title {
+    color: #0c1021;
+    text-align: center;
+    font-size: 60px;
+    line-height: 1.1;
+    margin-bottom: 12px;
+
+    @include tablet {
+      font-size: 40px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__description {
+    color: #50556b;
+    text-align: center;
+    font-size: 28px;
+    line-height: 1.4;
+    max-width: 800px;
+    margin: 0 auto 48px auto;
+
+    @include tablet {
+      font-size: 16px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@for $i from 1 through 9 {
+  $min-opacity: 0.94 - $i * 0.02;
+  $max-scale: 1.194 + $i * 0.007;
+
+  @keyframes solutions-hero-ring-#{$i} {
+    0% {
+      opacity: 1;
+      scale: 1;
+    }
+
+    9% {
+      opacity: $min-opacity;
+    }
+
+    19% {
+      opacity: 1;
+    }
+
+    47% {
+      opacity: $min-opacity;
+    }
+
+    56% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+      scale: $max-scale;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solutions_hero__ring {
+    animation: none;
+  }
+}

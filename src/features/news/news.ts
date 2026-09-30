@@ -20,6 +20,10 @@ export type NewsArticle = {
 
 export const getNewsByCategory = async (category?: string): Promise<NewsArticle[]> => {
   try {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      return [];
+    }
+
     let query = supabase.from('posts').select('*').order('created_at', { ascending: false });
 
     // If category is provided, filter by it (case-insensitive)
@@ -31,13 +35,13 @@ export const getNewsByCategory = async (category?: string): Promise<NewsArticle[
 
     if (error) {
       console.error('Error fetching news:', error);
-      throw error;
+      return [];
     }
 
     return data || [];
   } catch (error) {
     console.error('Error in getNewsByCategory:', error);
-    throw error;
+    return [];
   }
 };
 
@@ -91,16 +95,16 @@ export const getNewsById = async (id: string | number): Promise<NewsArticle | nu
 
 export const getNewsBySlug = async (slug: string): Promise<NewsArticle | null> => {
   try {
-    const { data, error } = await supabase.from('posts').select('*').eq('slug', slug).single();
+    const { data, error } = await supabase.from('posts').select('*').eq('slug', slug).maybeSingle();
 
     if (error) {
       console.error('Error fetching news by slug:', error);
-      throw error;
+      return null;
     }
 
     return data;
   } catch (error) {
     console.error('Error in getNewsBySlug:', error);
-    throw error;
+    return null;
   }
 };

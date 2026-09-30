@@ -1,47 +1,23 @@
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
-export function middleware(req: NextRequest) {
-  const requestHeaders = new Headers(req.headers);
-  requestHeaders.set('x-pathname', req.nextUrl.pathname);
+import createMiddleware from 'next-intl/middleware';
 
-  // ✅ bypass Vercel internal/proxy traffic (BotID дуже часто йде так)
-  if (
-    req.headers.get('x-vercel-proxy-signature') ||
-    req.headers.get('x-vercel-id') ||
-    req.headers.get('x-vercel-sc-host')
-  ) {
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-  }
+import { stripLocalePrefix } from '@/i18n/pathname';
+import { routing } from '@/i18n/routing';
 
-  // ✅ стандартні байпаси
-  const { pathname } = req.nextUrl;
-  if (
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/api') ||
-    pathname === '/favicon.ico' ||
-    pathname === '/robots.txt' ||
-    pathname === '/sitemap.xml'
-  ) {
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-  }
+const handleI18n = createMiddleware(routing);
 
-  // ...твоя існуюча логіка
-  return NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
+export default function middleware(request: NextRequest) {
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-pathname', stripLocalePrefix(request.nextUrl.pathname));
+
+  const requestWithPathname = new NextRequest(request, {
+    headers: requestHeaders,
   });
+
+  return handleI18n(requestWithPathname);
 }
 
 export const config = {
-  matcher: ['/((?!_next|api|favicon.ico|robots.txt|sitemap.xml).*)'],
+  matcher: '/((?!api|trpc|_next|_vercel|.*\\..*).*)',
 };

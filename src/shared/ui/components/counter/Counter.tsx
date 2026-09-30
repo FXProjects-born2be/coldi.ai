@@ -5,26 +5,40 @@ type CounterProps = {
   start: number;
   end: number;
   duration?: number;
+  mobileDuration?: number;
   delay?: number;
   prefix?: string;
   suffix?: string;
   className?: string;
+  separator?: boolean;
+  play?: boolean;
+  step?: number;
 };
+
+const MOBILE_QUERY = '(max-width: 767px)';
 
 export const Counter = ({
   start,
   end,
   duration = 2,
+  mobileDuration,
   delay = 0,
   prefix = '',
   suffix = '',
   className,
+  separator = false,
+  play,
+  step,
 }: CounterProps) => {
   const [count, setCount] = useState(start);
   const [isInView, setIsInView] = useState(false);
   const ref = useRef<HTMLSpanElement | null>(null);
+  const isControlled = play !== undefined;
+  const shouldPlay = isControlled ? play : isInView;
 
   useEffect(() => {
+    if (isControlled) return;
+
     const element = ref.current;
 
     if (!element || isInView) return;
@@ -42,40 +56,47 @@ export const Counter = ({
     observer.observe(element);
 
     return () => observer.disconnect();
-  }, [isInView]);
+  }, [isControlled, isInView]);
 
   useEffect(() => {
-    if (isInView) {
-      const startTime = Date.now();
-      const totalChange = end - start;
+    if (!shouldPlay) return;
 
-      const animate = () => {
-        const elapsed = Date.now() - startTime;
-        const progress = Math.min(elapsed / (duration * 1000), 1);
+    const isMobile = window.matchMedia(MOBILE_QUERY).matches;
+    const totalMs = (isMobile && mobileDuration ? mobileDuration : duration) * 1000;
+    const startTime = Date.now();
+    const totalChange = end - start;
+    let frame = 0;
 
-        // Easing function for smooth animation
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-        const currentCount = Math.round(start + totalChange * easeOut);
+    const animate = () => {
+      const progress = Math.min((Date.now() - startTime) / totalMs, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const raw = start + totalChange * easeOut;
+      const next =
+        progress >= 1 || !step ? Math.round(raw) : Math.min(end, Math.floor(raw / step) * step);
 
-        setCount(currentCount);
+      setCount(next);
 
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        }
-      };
+      if (progress < 1) {
+        frame = requestAnimationFrame(animate);
+      }
+    };
 
-      const timer = setTimeout(() => {
-        requestAnimationFrame(animate);
-      }, delay * 1000);
+    const timer = window.setTimeout(() => {
+      frame = requestAnimationFrame(animate);
+    }, delay * 1000);
 
-      return () => clearTimeout(timer);
-    }
-  }, [isInView, start, end, duration, delay]);
+    return () => {
+      window.clearTimeout(timer);
+      window.cancelAnimationFrame(frame);
+    };
+  }, [shouldPlay, start, end, duration, mobileDuration, delay, step]);
+
+  const formatted = separator ? count.toLocaleString('en-US') : count;
 
   return (
     <span ref={ref} className={className}>
       <span>{prefix}</span>
-      {count}
+      {formatted}
       <span>{suffix}</span>
     </span>
   );

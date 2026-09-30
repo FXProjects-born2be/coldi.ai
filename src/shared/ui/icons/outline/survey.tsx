@@ -1,0 +1,55 @@
+import type { SVGProps } from 'react';
+
+export const SurveyIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    {...props}
+  >
+    <mask
+      id="mask_survey_icon"
+      style={{ maskType: 'luminance' }}
+      maskUnits="userSpaceOnUse"
+      x="0"
+      y="0"
+      width="20"
+      height="20"
+    >
+      <path d="M0 0H20V20H0V0Z" fill="white" />
+    </mask>
+    <g mask="url(#mask_survey_icon)">
+      <path
+        d="M13.125 19.2188H2.1875V17.6562C2.1875 15.9304 3.5866 14.5312 5.3125 14.5312H10C11.7259 14.5312 13.125 15.9304 13.125 17.6562V19.2188Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+      />
+      <path
+        d="M10 10.625C10 11.9194 8.95066 12.9688 7.65625 12.9688C6.36184 12.9688 5.3125 11.9194 5.3125 10.625C5.3125 9.33059 6.36184 8.28125 7.65625 8.28125C8.95066 8.28125 10 9.33059 10 10.625Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+      />
+      <path
+        d="M14.6875 7.03125C12.964 7.03125 11.5625 5.62973 11.5625 3.90625C11.5625 2.18277 12.964 0.78125 14.6875 0.78125C16.411 0.78125 17.8125 2.18277 17.8125 3.90625C17.8125 5.62973 16.411 7.03125 14.6875 7.03125Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="square"
+      />
+      <path
+        d="M16.25 6.61203V11.7188L14.6875 10.1563L13.125 11.7188V6.61203"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+      />
+      <path
+        d="M15.4688 3.90625C15.4688 4.33773 15.119 4.6875 14.6875 4.6875C14.256 4.6875 13.9062 4.33773 13.9062 3.90625C13.9062 3.47477 14.256 3.125 14.6875 3.125C15.119 3.125 15.4688 3.47477 15.4688 3.90625Z"
+        fill="currentColor"
+      />
+    </g>
+  </svg>
+);

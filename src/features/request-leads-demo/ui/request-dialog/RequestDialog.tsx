@@ -76,6 +76,7 @@ export const RequestDialog = () => {
     if (data.name?.trim()) params.set('firstName', data.name.trim());
     if (data.surname?.trim()) params.set('lastName', data.surname.trim());
     if (data.email?.trim()) params.set('email', data.email.trim());
+    if (data.phone?.trim()) params.set('phone', data.phone.trim());
     const query = params.toString();
     const redirectUrl = query ? `${SUCCESS_REDIRECT_PATH}?${query}` : SUCCESS_REDIRECT_PATH;
     setTimeout(() => router.push(redirectUrl), REDIRECT_DELAY_MS);

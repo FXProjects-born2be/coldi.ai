@@ -1,0 +1,44 @@
+# Coldi
+> Fully managed AI voice agents for fintech: outbound and inbound calling, CRM sync, compliance, and ongoing QA — without building the stack yourself.
+
+Coldi Labs LTD. builds and operates production voice AI for Insurance Brokers, Trading Platforms, Debt Collection, and Sales Teams.
+
+## Core pages
+- [Home](https://coldi.ai/): Product overview and managed AI voice agent positioning
+- [Solutions](https://coldi.ai/solutions): How Coldi deploys voice AI for business workflows
+- [Pricing](https://coldi.ai/pricing): Plans and packaging
+- [Use Cases](https://coldi.ai/use-cases): Customer implementations and industry scenarios
+- [Coldi Vision](https://coldi.ai/coldi-vision): Company vision and purpose
+- [Meet the Team](https://coldi.ai/meet-the-team): Founders and team
+- [Trust Center](https://coldi.ai/trust-center): Security and compliance
+- [News](https://coldi.ai/news): Guides, comparisons, and industry insights
+- [Book a demo](https://coldi.ai/calendar): Schedule a call with Coldi
+
+## Industries
+- [Insurance](https://coldi.ai/industries/insurance)
+- [Trading Platforms & Brokers](https://coldi.ai/industries/trading-platforms-brokers)
+- [Debt Collection](https://coldi.ai/industries/debt-collection)
+- [EMIs & Payments](https://coldi.ai/industries/emis-payments)
+- [Other Industries](https://coldi.ai/industries/other-industries)
+
+## Platform comparisons
+- [Best Voice AI Platforms for Fintech 2026](https://coldi.ai/news/best-voice-ai-platforms-for-fintech-debt-collection-and-insurance-in-2026-where-coldi-fits): Where Coldi fits among developer platforms, CCaaS, IVR, and managed providers
+- [Coldi AI vs. ElevenLabs](https://coldi.ai/news/coldi-ai-vs-elevenlabs-managed-voice-agents-vs-build-your-own): Managed voice agents vs build-your-own
+- [Coldi AI vs. Vapi](https://coldi.ai/news/coldi-ai-vs-vapi-done-for-you-deployment-vs-developer-infrastructure): Done-for-you deployment vs developer infrastructure
+- [Coldi AI vs. Retell AI](https://coldi.ai/news/coldi-ai-vs-retell-ai-full-service-operations-vs-api-first-voice-platform): Full-service operations vs API-first voice platform
+- [Coldi AI vs. Bland AI](https://coldi.ai/news/coldi-ai-vs-bland-ai-which-platform-needs-less-engineering): Which platform needs less engineering
+- [Coldi AI vs. Traditional BPO](https://coldi.ai/news/coldi-ai-vs-traditional-bpo-call-centers-ai-voice-agents-vs-human-agent-teams): AI voice agents vs human agent teams
+- [Coldi AI vs. Talkdesk, Aircall, Nextiva](https://coldi.ai/news/coldi-ai-vs-talkdesk-aircall-and-nextiva-autonomous-ai-agents-vs-ai-copilot-for-human-reps): Autonomous agents vs AI copilots for human reps
+- [Coldi AI vs. Legacy IVR](https://coldi.ai/news/coldi-ai-vs-legacy-ivr-why-conversational-voice-ai-is-replacing-phone-trees): Why conversational voice AI is replacing phone trees
+- [Coldi AI vs. In-House Build](https://coldi.ai/news/coldi-ai-vs-in-house-build-real-cost-and-time-to-launch-of-diy-voice-ai): Real cost and time-to-launch of DIY voice AI
+- [Coldi AI vs. Topcalls](https://coldi.ai/news/coldi-ai-vs-topcalls-two-managed-voice-ai-providers-compared-for-fintech-and-collections): Two managed voice AI providers compared for fintech
+
+## Selected guides
+- [Is AI Safe?](https://coldi.ai/news/is-ai-safe)
+- [What Building for the U.S. Taught Us About Outbound Calling](https://coldi.ai/news/what-building-for-the-us-taught-us)
+- [What Voice AI Works Best for Outbound Sales Calls](https://coldi.ai/news/voice-ai-for-outbound-sales)
+- [What is an Inbound Call Center](https://coldi.ai/news/what-is-an-inbound-call-center)
+
+## Optional
+- [Sitemap](https://coldi.ai/sitemap.xml)
+- [Robots](https://coldi.ai/robots.txt)

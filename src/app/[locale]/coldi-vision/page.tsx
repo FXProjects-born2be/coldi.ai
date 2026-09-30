@@ -1,0 +1,29 @@
+import type { Metadata } from 'next';
+
+import { AboutAction, AboutHandles, AboutHero, AboutInfo } from './components';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/coldi-vision',
+  },
+  title: 'Expert AI Calling Solutions Provider',
+  description:
+    'Discover Coldi – an expert AI calling solutions provider delivering AI voice agents that answer calls, schedule, and support your business 24/7.',
+  openGraph: {
+    title: 'Expert AI Calling Solutions Provider',
+    description:
+      'Discover Coldi – an expert AI calling solutions provider delivering AI voice agents that answer calls, schedule, and support your business 24/7.',
+    images: '/images/meta.png',
+  },
+};
+
+export default function Products() {
+  return (
+    <main>
+      <AboutHero />
+      <AboutInfo />
+      <AboutHandles />
+      <AboutAction />
+    </main>
+  );
+}
