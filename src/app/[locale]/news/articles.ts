@@ -26,7 +26,23 @@ const HERO_IMAGES: Record<string, string> = {
   'coldi-ai-vs-elevenlabs-managed-voice-agents-vs-build-your-own':
     '/images/news/heroes/сoldi-ai-vs-eleven-labs.jpg',
   'coldi-ai-vs-vapi-done-for-you-deployment-vs-developer-infrastructure':
-    '/images/news/heroes/сoldi-ai-vs-eleven-labs.jpg',
+    '/images/news/heroes/сoldi-ai-vs-vapi.jpg',
+  'coldi-ai-vs-retell-ai-full-service-operations-vs-api-first-voice-platform':
+    '/images/news/heroes/coldi-ai-vs-retell.jpg',
+  'coldi-ai-vs-bland-ai-which-platform-needs-less-engineering':
+    '/images/news/heroes/coldi-ai-vs-bland-ai.jpg',
+  'coldi-ai-vs-traditional-bpo-call-centers-ai-voice-agents-vs-human-agent-teams':
+    '/images/news/heroes/coldi-ai-vs-traditional-bpo.jpg',
+  'coldi-ai-vs-talkdesk-aircall-and-nextiva-autonomous-ai-agents-vs-ai-copilot-for-human-reps':
+    '/images/news/heroes/coldi-ai-vs-talkdesk.jpg',
+  'coldi-ai-vs-legacy-ivr-why-conversational-voice-ai-is-replacing-phone-trees':
+    '/images/news/heroes/coldi-ai-vs-legacy-ivr.jpg',
+  'coldi-ai-vs-in-house-build-real-cost-and-time-to-launch-of-diy-voice-ai':
+    '/images/news/heroes/coldi-ai-vs-in-house-build.jpg',
+  'coldi-ai-vs-topcalls-two-managed-voice-ai-providers-compared-for-fintech-and-collections':
+    '/images/news/heroes/coldi-ai-vs-topcalls.jpg',
+  'best-voice-ai-platforms-for-fintech-debt-collection-and-insurance-in-2026-where-coldi-fits':
+    '/images/news/heroes/best-voice-ai-platforms.jpg',
   'what-building-for-the-us-taught-us': '/images/news/heroes/featured-us-calling.png',
   'will-ai-replace-real-estate-agents': '/images/news/heroes/real-estate-city.jpg',
   'voice-ai-for-outbound-sales': '/images/news/heroes/outbound-sales.jpg',
@@ -180,6 +196,710 @@ const ARTICLES: NewsArticle[] = [
             `Is AI safe? The consensus across all these different platforms—from Perplexity to Character AI—is that <strong>AI is safe when approached with skepticism, boundaries, and proper digital hygiene</strong>. The software itself is rarely malicious`
           ),
         ],
+      },
+    ],
+  }),
+  withCard(
+    'best-voice-ai-platforms-for-fintech-debt-collection-and-insurance-in-2026-where-coldi-fits',
+    {
+      dateLabel: 'September 6, 2026',
+      relatedSlugs: [
+        'coldi-ai-vs-topcalls-two-managed-voice-ai-providers-compared-for-fintech-and-collections',
+        'coldi-ai-vs-in-house-build-real-cost-and-time-to-launch-of-diy-voice-ai',
+        'coldi-ai-vs-elevenlabs-managed-voice-agents-vs-build-your-own',
+      ],
+      intro: [
+        p(
+          `There's no single "best" voice AI platform for fintech. There's a best fit depending on whether a team wants to build or wants an operation already running. Developer-first platforms like ElevenLabs, Vapi, and Retell AI give engineering teams the tools to build a custom voice agent. Managed providers like Topcalls and Coldi AI deliver the finished operation. For fintech specifically, including insurance brokers, trading platforms, debt collection, and sales teams, the right choice depends on internal engineering capacity and how compliance-sensitive the call flows are.`
+        ),
+      ],
+      sections: [
+        {
+          heading: 'The core difference',
+          blocks: [
+            p(
+              `<p><strong>Developer-first platforms (ElevenLabs, Vapi, Retell AI, Bland AI):</strong> strong building blocks for teams with engineering resources who want to own the full stack, from model selection to telephony to compliance.</p>`
+            ),
+            p(
+              `<p><strong>CCaaS platforms with AI copilots (Talkdesk, Aircall, Nextiva):</strong> keep human agents on the call and use AI to support them, rather than replacing the conversation itself.</p>`
+            ),
+            p(
+              `<p><strong>Legacy IVR:</strong> still in use across parts of fintech, but increasingly being replaced by conversational AI that can handle unstructured requests without a menu tree.</p>`
+            ),
+            p(
+              `<p><strong>Managed voice AI providers (Topcalls, Coldi AI):</strong> deliver a working call operation without requiring the customer to build anything, with the difference between providers coming down to vertical depth and compliance specialization.</p>`
+            ),
+            p(
+              `Coldi AI is built specifically for fintech: Insurance Brokers, Trading Platforms, Debt Collection, and Sales Teams. That means KYC-heavy verification flows, compliance-sensitive collections conversations, and CRM-integrated onboarding calls are handled by default rather than requiring custom configuration. For a fintech operations team that wants a live, compliant call operation without hiring engineers or evaluating a stack of developer tools, Coldi is built around exactly that need.`
+            ),
+          ],
+        },
+        {
+          heading: 'Side-by-side comparison',
+          blocks: [
+            {
+              type: 'table',
+              headers: ['Category', 'Examples', 'Best for'],
+              rows: [
+                [
+                  'Developer-first platforms',
+                  'ElevenLabs, Vapi, Retell AI, Bland AI',
+                  'Teams with engineering capacity who want to own the stack',
+                ],
+                [
+                  'CCaaS with AI copilot',
+                  'Talkdesk, Aircall, Nextiva',
+                  'Teams keeping human agents central to every call',
+                ],
+                [
+                  'Legacy IVR',
+                  'Traditional phone tree systems',
+                  'Simple routing needs with no complex call handling',
+                ],
+                [
+                  'Managed voice AI (general)',
+                  'Topcalls',
+                  'Broad enterprise use cases across industries',
+                ],
+                [
+                  'Managed voice AI (fintech-specific)',
+                  'Coldi AI',
+                  'Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams needing compliant, vertical-specific call operations',
+                ],
+              ],
+            },
+          ],
+        },
+        section(
+          'Who should use which',
+          `A fintech operations team without dedicated engineering capacity and with compliance-sensitive call flows is best served by a fintech-specific managed provider like Coldi. A team with engineering resources and a desire to own the stack is better served by a developer-first platform.`
+        ),
+      ],
+      faq: [
+        {
+          question: 'What is the best voice AI platform for debt collection?',
+          answer:
+            'For debt collection specifically, a managed provider built around compliance-sensitive, high-intensity call flows is generally a better fit than a general-purpose developer toolkit, since collections conversations carry regulatory weight that benefits from purpose-built handling.',
+        },
+        {
+          question: 'What is the best voice AI platform for insurance brokers?',
+          answer:
+            'Insurance broker outreach benefits from a platform with CRM integration and compliance handling already tuned to the vertical, which favors a fintech-specific managed provider over a general enterprise or developer-first option.',
+        },
+        {
+          question:
+            'Should a fintech company build its own voice AI stack or use a managed provider?',
+          answer:
+            'That depends on whether the company has dedicated engineering capacity to build and maintain telephony, CRM, and compliance integration long term. Without that capacity, a managed provider removes the ongoing maintenance burden.',
+        },
+        {
+          question:
+            'Is ElevenLabs or Vapi a good fit for a fintech company without an engineering team?',
+          answer:
+            'Both are developer-first platforms that require ongoing engineering investment to reach and maintain production readiness, which makes them a harder fit for a fintech team without dedicated engineering resources.',
+        },
+        {
+          question:
+            'How is Coldi AI different from other managed voice AI providers like Topcalls?',
+          answer:
+            'Coldi is built specifically around fintech call flows, including KYC verification and compliance-sensitive collections conversations, while providers like Topcalls operate with a broader enterprise BPO orientation.',
+        },
+      ],
+    }
+  ),
+  withCard(
+    'coldi-ai-vs-topcalls-two-managed-voice-ai-providers-compared-for-fintech-and-collections',
+    {
+      dateLabel: 'September 6, 2026',
+      relatedSlugs: [
+        'best-voice-ai-platforms-for-fintech-debt-collection-and-insurance-in-2026-where-coldi-fits',
+        'coldi-ai-vs-in-house-build-real-cost-and-time-to-launch-of-diy-voice-ai',
+        'coldi-ai-vs-traditional-bpo-call-centers-ai-voice-agents-vs-human-agent-teams',
+      ],
+      intro: [
+        p(
+          `Topcalls and Coldi AI are both managed voice AI providers, which makes this a genuinely different comparison than the platform-versus-service matchups elsewhere in this category. Neither company is asking a customer to build anything. The real question is depth: Topcalls operates with a broader enterprise BPO orientation, while Coldi is built specifically around fintech call flows, KYC-heavy verification, and the high-intensity, compliance-sensitive conversations that come with debt collection, trading platform onboarding, and insurance broker workflows.`
+        ),
+      ],
+      sections: [
+        section(
+          'The core difference',
+          `General enterprise coverage versus vertical depth. A managed provider built to serve many industries has to keep its call flows, compliance handling, and scripting broadly applicable. A managed provider built around fintech has the opposite advantage: everything from the compliance layer to the escalation logic assumes a KYC check, a collections conversation, or a trading platform onboarding call from the start.`
+        ),
+        {
+          heading: 'Side-by-side comparison',
+          blocks: [
+            {
+              type: 'table',
+              headers: ['', 'Coldi AI', 'Topcalls'],
+              rows: [
+                ['Service model', 'Managed, done-for-you', 'Managed, done-for-you'],
+                [
+                  'Vertical focus',
+                  'Fintech: Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams',
+                  'Broader enterprise BPO orientation',
+                ],
+                [
+                  'Compliance-sensitive call handling',
+                  'Built around KYC-heavy, regulated fintech flows',
+                  'Handled at a general enterprise level',
+                ],
+                ['Compliance certifications', 'ISO 27001, GDPR', 'Varies by deployment'],
+                [
+                  'CRM and data-card sync',
+                  'Built for fintech workflows',
+                  'General CRM integration',
+                ],
+                [
+                  'Best fit',
+                  'Fintech teams needing regulated, high-intensity call flows',
+                  'Enterprises needing broad-purpose managed calling',
+                ],
+              ],
+            },
+          ],
+        },
+        section(
+          'Who should use which',
+          `For a general enterprise use case without heavy compliance or KYC requirements, Topcalls' broader positioning may fit well. For fintech operations specifically, where collections conversations, KYC verification, and trading platform onboarding require call flows built around those exact scenarios, Coldi's vertical depth is the more direct fit.`
+        ),
+      ],
+      faq: [
+        {
+          question: 'Is Topcalls a managed voice AI provider or a developer platform?',
+          answer:
+            'Topcalls operates as a managed voice AI provider with an enterprise BPO orientation, similar in service model to Coldi but broader in industry focus.',
+        },
+        {
+          question: 'What makes Coldi AI different from Topcalls if both are managed services?',
+          answer:
+            'The difference is vertical depth. Coldi is built specifically around fintech call flows, including KYC-heavy verification and high-intensity collections conversations, rather than general enterprise use cases.',
+        },
+        {
+          question: 'Is Coldi AI better suited to debt collection than Topcalls?',
+          answer:
+            "Coldi's call flows, compliance handling, and escalation logic are built around fintech-specific scenarios like debt collection, which gives it more built-in depth for that use case compared to a broader enterprise-focused provider.",
+        },
+        {
+          question: 'Does Topcalls handle KYC and compliance-heavy calls?',
+          answer:
+            'Compliance handling for KYC-heavy calls depends on how a broader enterprise provider configures each deployment, rather than being purpose-built into the core service as it is with Coldi.',
+        },
+        {
+          question: 'Which managed voice AI provider is better for insurance broker outreach?',
+          answer:
+            'For insurance brokers specifically, a provider built around fintech verticals, like Coldi, has call flows and compliance handling already tuned to that use case rather than requiring custom configuration on a general-purpose platform.',
+        },
+      ],
+    }
+  ),
+  withCard('coldi-ai-vs-in-house-build-real-cost-and-time-to-launch-of-diy-voice-ai', {
+    dateLabel: 'September 6, 2026',
+    relatedSlugs: [
+      'best-voice-ai-platforms-for-fintech-debt-collection-and-insurance-in-2026-where-coldi-fits',
+      'coldi-ai-vs-topcalls-two-managed-voice-ai-providers-compared-for-fintech-and-collections',
+      'coldi-ai-vs-vapi-done-for-you-deployment-vs-developer-infrastructure',
+    ],
+    intro: [
+      p(
+        `The DIY path looks simple from the outside: pick a model provider, wire up telephony, connect the CRM, add compliance, and start calling. The Coldi team knows this path firsthand, because it's the one the founders walked before building Coldi. [Placeholder: reference the founders' own build-it-yourself timeline and cost here once confirmed with Or.] What looks like a few weeks of integration work on a roadmap tends to expand once telephony edge cases, compliance requirements, and CRM sync details surface in production. Coldi exists because that build, done properly for a fintech use case, takes longer and costs more than most teams plan for.`
+      ),
+    ],
+    sections: [
+      section(
+        'The core difference',
+        `Building in-house means owning every layer: model selection, telephony, CRM integration, compliance, QA, and the ongoing maintenance once it's live. None of that disappears after launch. It becomes a permanent line item in engineering time. Coldi replaces that ongoing ownership with a managed service built specifically for fintech call operations.`
+      ),
+      {
+        heading: 'Side-by-side comparison',
+        blocks: [
+          {
+            type: 'table',
+            headers: ['', 'Coldi AI', 'In-House Build'],
+            rows: [
+              ['Time to first live call', 'Days', '[Confirm actual founder timeline with Or]'],
+              [
+                'Engineering investment',
+                'None required from the customer',
+                'Ongoing, not one-time',
+              ],
+              ['Compliance', 'Included (ISO 27001, GDPR)', 'Built and maintained internally'],
+              ['CRM and telephony integration', 'Included', 'Built and maintained internally'],
+              ['Ongoing maintenance', 'Handled by Coldi', 'Permanent engineering commitment'],
+              [
+                'Vertical-specific tuning',
+                'Built in for fintech use cases',
+                'Requires internal expertise to get right',
+              ],
+            ],
+          },
+        ],
+      },
+      section(
+        'Who should use which',
+        `An in-house build makes sense for a company whose core product is the voice AI stack itself, where owning every layer is the point. For a fintech operations or growth team where voice calling is a channel, not the product, building in-house usually means diverting engineering resources away from the actual business to maintain infrastructure that Coldi already runs.`
+      ),
+    ],
+    faq: [
+      {
+        question:
+          'How long does it actually take to build a production-ready voice AI operation in-house?',
+        answer:
+          "It depends heavily on team size and prior experience with telephony and compliance integration, but it's rarely a short project once fintech-specific requirements like KYC and compliance logging are factored in.",
+      },
+      {
+        question: 'What are the hidden costs of building voice AI in-house?',
+        answer:
+          'Beyond initial development, the ongoing costs include compliance maintenance, CRM integration upkeep, QA processes, and the engineering time needed to keep the system performing as call volume and requirements change.',
+      },
+      {
+        question:
+          "Did Coldi's founders build a voice AI system in-house before starting the company?",
+        answer:
+          "Yes. [Placeholder: confirm exact details of the founders' build experience with Or before publishing.]",
+      },
+      {
+        question: 'Is it cheaper to build in-house than to use a managed platform like Coldi?',
+        answer:
+          'The sticker price of open-source or API-based tools can look cheaper upfront, but the full cost includes the engineering time required to build and maintain the surrounding operation, which is often underestimated.',
+      },
+      {
+        question:
+          "What's the biggest risk of building a voice AI operation in-house for a fintech company?",
+        answer:
+          'Compliance is usually the biggest risk. Getting telephony and CRM integration wrong causes operational headaches, but getting compliance wrong in a regulated fintech context carries real regulatory exposure.',
+      },
+    ],
+  }),
+  withCard('coldi-ai-vs-legacy-ivr-why-conversational-voice-ai-is-replacing-phone-trees', {
+    dateLabel: 'September 6, 2026',
+    relatedSlugs: [
+      'coldi-ai-vs-talkdesk-aircall-and-nextiva-autonomous-ai-agents-vs-ai-copilot-for-human-reps',
+      'coldi-ai-vs-traditional-bpo-call-centers-ai-voice-agents-vs-human-agent-teams',
+      'coldi-ai-vs-bland-ai-which-platform-needs-less-engineering',
+    ],
+    intro: [
+      p(
+        `Legacy IVR systems route callers through a fixed menu tree: press 1 for this, press 2 for that, repeat your account number three times. It's rigid by design, built for a world where "understanding the caller" meant matching a keypress to a branch. Coldi AI replaces the phone tree with an agent that actually holds a conversation, understands context, and can handle the exceptions that break every IVR menu eventually. For fintech operations teams still running IVR for account servicing, collections, or lead intake, this is usually the most direct upgrade path available.`
+      ),
+    ],
+    sections: [
+      section(
+        'The core difference',
+        `IVR is a decision tree. Conversational voice AI is a conversation. The practical difference shows up immediately: an IVR caller who doesn't fit the menu gets stuck or drops off. A Coldi AI caller can explain their situation in their own words and get routed correctly, or handled directly, without hunting through a menu.`
+      ),
+      {
+        heading: 'Side-by-side comparison',
+        blocks: [
+          {
+            type: 'table',
+            headers: ['', 'Coldi AI', 'Legacy IVR'],
+            rows: [
+              [
+                'Interaction model',
+                'Natural conversation',
+                'Fixed menu tree, keypress or basic voice commands',
+              ],
+              [
+                'Handles unexpected input',
+                'Yes, understands context and intent',
+                'No, routes to a dead end or agent queue',
+              ],
+              [
+                'Caller experience',
+                'Conversational, low friction',
+                'Often frustrating, especially for complex requests',
+              ],
+              [
+                'Setup and changes',
+                'Managed by Coldi as call flows evolve',
+                'Requires manual reconfiguration of menu logic',
+              ],
+              ['Compliance', 'Included (ISO 27001, GDPR)', 'Varies by legacy vendor'],
+              [
+                'Vertical focus',
+                'Fintech: Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams',
+                'General purpose, often decades-old deployments',
+              ],
+            ],
+          },
+        ],
+      },
+      section(
+        'Who should use which',
+        `There's no real case for keeping legacy IVR once a genuine alternative exists, unless the use case is so simple that a menu tree is genuinely sufficient. For fintech operations handling anything beyond the most basic routing, especially KYC checks, collections conversations, or lead qualification, Coldi replaces the friction of a phone tree with something that actually resolves the call.`
+      ),
+    ],
+    faq: [
+      {
+        question: 'What is an IVR alternative that uses AI instead of a menu tree?',
+        answer:
+          'Coldi AI is built specifically to replace IVR systems for fintech use cases, using natural conversation instead of keypress-based menu routing.',
+      },
+      {
+        question: 'Why are companies moving away from IVR toward conversational AI?',
+        answer:
+          "IVR menus are rigid and frustrate callers who don't fit the predefined options. Conversational AI understands intent and context, so it resolves calls that an IVR would otherwise drop or misroute.",
+      },
+      {
+        question: 'Can Coldi AI handle the same call volume as an IVR system?',
+        answer:
+          'Yes. Coldi is built to handle production-scale call volume for outbound and inbound fintech operations, with the added benefit of actually resolving calls rather than routing them into a menu.',
+      },
+      {
+        question: 'Does replacing IVR with Coldi AI require rebuilding call flows from scratch?',
+        answer:
+          "Coldi's onboarding maps existing IVR logic and call flows into the new conversational setup, so most of the underlying routing logic carries over even though the caller experience changes completely.",
+      },
+      {
+        question: 'Is conversational AI more expensive to run than a legacy IVR system?',
+        answer:
+          "Legacy IVR systems often carry hidden costs in abandoned calls, agent escalations, and maintenance of aging infrastructure. Coldi's pricing should be evaluated against the full cost of running an IVR, not just the base platform fee.",
+      },
+    ],
+  }),
+  withCard(
+    'coldi-ai-vs-talkdesk-aircall-and-nextiva-autonomous-ai-agents-vs-ai-copilot-for-human-reps',
+    {
+      dateLabel: 'September 6, 2026',
+      relatedSlugs: [
+        'coldi-ai-vs-legacy-ivr-why-conversational-voice-ai-is-replacing-phone-trees',
+        'coldi-ai-vs-traditional-bpo-call-centers-ai-voice-agents-vs-human-agent-teams',
+        'coldi-ai-vs-retell-ai-full-service-operations-vs-api-first-voice-platform',
+      ],
+      intro: [
+        p(
+          `Talkdesk, Aircall, and Nextiva are CCaaS platforms built around human agents, with AI layered on top to assist them: transcription, sentiment cues, suggested responses, after-call summaries. That AI makes a human rep faster and more consistent. It doesn't hold the call itself. Coldi AI takes the opposite approach: the AI agent conducts the conversation from start to finish. For fintech teams evaluating both categories, the distinction is whether you're buying a tool for your agents or a replacement for the call itself.`
+        ),
+      ],
+      sections: [
+        section(
+          'The core difference',
+          `CCaaS platforms assume a human is always on the line and AI supports that person. Coldi assumes the AI agent is on the line, with human involvement reserved for the calls that genuinely need it. That's a different starting point for how a team plans headcount, coverage, and scaling.`
+        ),
+        {
+          heading: 'Side-by-side comparison',
+          blocks: [
+            {
+              type: 'table',
+              headers: ['', 'Coldi AI', 'Talkdesk / Aircall / Nextiva'],
+              rows: [
+                [
+                  'Who conducts the call',
+                  'Autonomous AI voice agent',
+                  'Human agent, assisted by AI copilot tools',
+                ],
+                [
+                  'Role of AI',
+                  'Holds the entire conversation',
+                  'Supports the human rep: transcription, suggestions, summaries',
+                ],
+                [
+                  'Scaling model',
+                  'Add capacity without adding headcount',
+                  'Still requires hiring and staffing human agents',
+                ],
+                ['Coverage', '24/7 by default', 'Limited by agent shift availability'],
+                ['Compliance', 'Included (ISO 27001, GDPR)', 'Varies by deployment and add-ons'],
+                [
+                  'Vertical focus',
+                  'Fintech: Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams',
+                  'General purpose contact center software',
+                ],
+              ],
+            },
+          ],
+        },
+        section(
+          'Who should use which',
+          `A CCaaS platform is the right fit for a team that wants to keep human agents at the center of every conversation and use AI to make them faster. Coldi is the right fit for a fintech team that wants to remove the human agent from the call entirely for structured, high-volume conversations, while still routing to a person when a call requires it.`
+        ),
+      ],
+      faq: [
+        {
+          question: 'Does Talkdesk have an AI agent that can hold a full conversation on its own?',
+          answer:
+            "Talkdesk's AI features are primarily built to support human agents during calls, such as real-time transcription and suggested responses, rather than to autonomously conduct the conversation.",
+        },
+        {
+          question: "What's the difference between an AI copilot and an autonomous AI voice agent?",
+          answer:
+            "An AI copilot assists a human who is still on the call. An autonomous AI voice agent, like Coldi's, conducts the entire conversation without a human on the line unless the call is routed for handoff.",
+        },
+        {
+          question: 'Can Coldi AI integrate with a CCaaS platform a company already uses?',
+          answer:
+            'Coldi is built to operate as the calling layer itself rather than as an add-on to existing CCaaS software, though CRM and data-card sync are part of the standard integration.',
+        },
+        {
+          question:
+            'Do CCaaS platforms like Aircall or Nextiva reduce the number of human agents a company needs?',
+          answer:
+            "They can improve agent efficiency, but they don't remove the need for human staffing since a person is still required for every call.",
+        },
+        {
+          question: 'Is Coldi AI a replacement for a CCaaS platform or an addition to one?',
+          answer:
+            "For the calls it's suited to, Coldi is designed to replace the need for a human agent on the line entirely, which is a different function than a CCaaS platform's AI-assisted human calling.",
+        },
+      ],
+    }
+  ),
+  withCard('coldi-ai-vs-traditional-bpo-call-centers-ai-voice-agents-vs-human-agent-teams', {
+    dateLabel: 'September 6, 2026',
+    relatedSlugs: [
+      'coldi-ai-vs-talkdesk-aircall-and-nextiva-autonomous-ai-agents-vs-ai-copilot-for-human-reps',
+      'coldi-ai-vs-legacy-ivr-why-conversational-voice-ai-is-replacing-phone-trees',
+      'coldi-ai-vs-retell-ai-full-service-operations-vs-api-first-voice-platform',
+    ],
+    intro: [
+      p(
+        `Traditional BPO call centers scale by adding headcount: more agents, more shifts, more management layers to keep quality consistent across a growing team. Coldi AI scales by adding capacity to a system that doesn't get tired, doesn't need shift coverage, and holds the same quality on call one thousand as it did on call one. For fintech operations with fluctuating call volume, that difference in how scale actually works changes the calculation on both cost and speed of ramp.`
+      ),
+    ],
+    sections: [
+      section(
+        'The core difference',
+        `A BPO's constraint is people: hiring, training, retention, and coverage. Coldi's constraint is closer to infrastructure: campaigns can ramp up or down without a hiring cycle, and coverage runs 24/7 without shift planning. The trade-off is that a BPO can lean on human judgment for genuinely unusual conversations in a way a voice AI agent handles differently, which is why human handoff routing matters for edge cases.`
+      ),
+      {
+        heading: 'Side-by-side comparison',
+        blocks: [
+          {
+            type: 'table',
+            headers: ['', 'Coldi AI', 'Traditional BPO Call Center'],
+            rows: [
+              [
+                'Scaling model',
+                'Add capacity to existing system',
+                'Hire, train, and onboard new agents',
+              ],
+              ['Coverage', '24/7 by default', 'Dependent on shift scheduling'],
+              ['Ramp time for a new campaign', 'Days', 'Weeks to months, depending on hiring'],
+              [
+                'Consistency across calls',
+                'Same quality regardless of volume',
+                'Varies with agent experience and fatigue',
+              ],
+              [
+                'Cost-per-conversation',
+                '[Confirm with Or before publishing]',
+                '[Confirm with Or before publishing]',
+              ],
+              ['Compliance', 'Included (ISO 27001, GDPR)', 'Varies by vendor'],
+              [
+                'Best fit',
+                'Fintech ops needing consistent, compliant, scalable calling',
+                'Operations needing nuanced human judgment on complex cases',
+              ],
+            ],
+          },
+        ],
+      },
+      section(
+        'Who should use which',
+        `A traditional BPO still has a role where conversations require significant human judgment or relationship-building that a script can't anticipate. Coldi fits fintech operations, particularly Insurance Brokers, Trading Platforms, Debt Collection, and Sales Teams, that need consistent, compliant coverage at a volume and speed that hiring cycles can't match.`
+      ),
+    ],
+    faq: [
+      {
+        question: 'Can AI voice agents fully replace a BPO call center?',
+        answer:
+          'For structured, high-volume fintech conversations like KYC checks, collections outreach, or lead qualification, AI voice agents can replace much of what a BPO handles. Complex, judgment-heavy conversations still often benefit from human handling, which is why handoff routing matters.',
+      },
+      {
+        question: 'How fast can Coldi ramp up a new outbound campaign compared to a BPO?',
+        answer:
+          "Coldi can typically launch a new campaign within days since it doesn't require hiring or training a new team. A BPO's ramp time depends on its hiring pipeline and training cycle, which is usually measured in weeks or months.",
+      },
+      {
+        question: 'Is Coldi AI cheaper than a BPO call center?',
+        answer:
+          'Cost comparisons depend on call volume, complexity, and vendor pricing, and should be evaluated case by case rather than assumed.',
+      },
+      {
+        question:
+          'Does Coldi AI provide 24/7 coverage the way a BPO would need multiple shifts to match?',
+        answer:
+          'Yes. Coldi operates continuously without the shift coverage planning a BPO needs to offer the same availability.',
+      },
+      {
+        question: "What happens when a call needs human judgment that the AI agent can't handle?",
+        answer:
+          'Coldi includes human handoff routing so calls that need escalation, such as compliance-sensitive conversations, are routed to a human rather than forced through the AI agent.',
+      },
+    ],
+  }),
+  withCard('coldi-ai-vs-bland-ai-which-platform-needs-less-engineering', {
+    dateLabel: 'September 6, 2026',
+    relatedSlugs: [
+      'coldi-ai-vs-retell-ai-full-service-operations-vs-api-first-voice-platform',
+      'coldi-ai-vs-vapi-done-for-you-deployment-vs-developer-infrastructure',
+      'coldi-ai-vs-elevenlabs-managed-voice-agents-vs-build-your-own',
+    ],
+    intro: [
+      p(
+        `Bland AI positions itself as a developer-friendly platform for building phone agents, with strong tooling for teams that want to configure and deploy their own voice flows. It's still a build project, even with good tooling. Coldi AI removes the build entirely: a fintech operations team gets a live, QA'd, compliant calling operation without configuring a platform or maintaining code. If the question is which one needs less engineering, the answer is straightforward. Bland needs some. Coldi needs none.`
+      ),
+    ],
+    sections: [
+      section(
+        'The core difference',
+        `Bland lowers the barrier to building a voice agent. Coldi removes the barrier altogether by delivering the finished operation. For a team without dedicated engineering resources, or one that doesn't want to spend them on a call operation, that distinction determines how fast something actually goes live.`
+      ),
+      {
+        heading: 'Side-by-side comparison',
+        blocks: [
+          {
+            type: 'table',
+            headers: ['', 'Coldi AI', 'Bland AI'],
+            rows: [
+              [
+                'Setup approach',
+                'Managed onboarding, no-code for the customer',
+                'Developer-friendly, but still requires configuration and integration',
+              ],
+              ['Time-to-first-call', 'Days', "Depends on internal team's build and testing cycle"],
+              [
+                'QA and case-ID tooling',
+                'Included as part of ongoing operation',
+                'Available as platform features, managed by the customer',
+              ],
+              [
+                'Human handoff routing',
+                'Built into the managed operation for fintech workflows',
+                'Configurable, requires setup by the implementing team',
+              ],
+              ['Compliance', 'Included (ISO 27001, GDPR)', 'Self-managed'],
+              [
+                'Vertical focus',
+                'Fintech: Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams',
+                'General purpose',
+              ],
+              ['Ongoing ownership', "Coldi's team", "Customer's team"],
+            ],
+          },
+        ],
+      },
+      section(
+        'Who should use which',
+        `Bland AI suits a team that wants a flexible, code-friendly platform and has the internal capacity to configure, test, and maintain it. Coldi suits a fintech team looking for a no-code alternative to Bland AI, where the operation is already built, tested, and compliant on day one.`
+      ),
+    ],
+    faq: [
+      {
+        question: 'Is Bland AI a no-code platform?',
+        answer:
+          'Bland AI offers developer-friendly tooling, but production deployment typically still involves configuration, integration, and testing work rather than being fully no-code.',
+      },
+      {
+        question: 'What is a good Bland AI alternative for teams without engineering resources?',
+        answer:
+          'Coldi AI is built for exactly that case: a fintech operations team that needs a working voice AI operation without configuring a platform or maintaining integration code.',
+      },
+      {
+        question: 'How does human handoff work with Coldi versus Bland?',
+        answer:
+          'Coldi includes handoff routing as part of the managed operation, tuned for fintech workflows like KYC checks or compliance escalations. With Bland, handoff logic is configured by the implementing team.',
+      },
+      {
+        question: 'Does Coldi include the same QA and case tracking Bland offers?',
+        answer:
+          'Coldi includes QA and case-ID tooling as part of the ongoing managed service, so tracking and quality monitoring happen without the customer building or maintaining that layer themselves.',
+      },
+      {
+        question: 'Can a team migrate from a Bland AI build to Coldi?',
+        answer:
+          "Yes. Coldi's onboarding maps existing call flows and logic into the managed operation, so prior work defining scripts and flows on Bland typically translates into the new setup.",
+      },
+    ],
+  }),
+  withCard('coldi-ai-vs-retell-ai-full-service-operations-vs-api-first-voice-platform', {
+    dateLabel: 'September 6, 2026',
+    relatedSlugs: [
+      'coldi-ai-vs-bland-ai-which-platform-needs-less-engineering',
+      'coldi-ai-vs-vapi-done-for-you-deployment-vs-developer-infrastructure',
+      'coldi-ai-vs-elevenlabs-managed-voice-agents-vs-build-your-own',
+    ],
+    intro: [
+      p(
+        `Retell AI is a capable API-first platform for building voice agents, and it's a genuinely solid building block: part of Coldi's own infrastructure runs on components in the same category. The difference isn't the quality of the underlying voice technology. It's what sits around it. Retell gives a team the API to build a voice agent. Coldi gives a fintech company the full operation built on top of that layer: telephony, CRM sync, compliance, QA, and the ongoing work of keeping a voice agent performing in production.`
+      ),
+    ],
+    sections: [
+      section(
+        'The core difference',
+        `Think of Retell as the engine. Coldi is the engine plus the rest of the vehicle: the chassis, the dashboard, the maintenance schedule. A team evaluating Retell directly is really asking "can we build this ourselves." A team evaluating Coldi is asking "who runs this for us."`
+      ),
+      {
+        heading: 'Side-by-side comparison',
+        blocks: [
+          {
+            type: 'table',
+            headers: ['', 'Coldi AI', 'Retell AI'],
+            rows: [
+              [
+                'What it is',
+                'Full-service managed voice AI operation',
+                'API-first platform for building voice agents',
+              ],
+              [
+                'Underlying voice infrastructure',
+                'Built on production-grade components, including Retell-class technology',
+                'The API layer itself',
+              ],
+              ['Telephony and CRM integration', 'Included', 'Built and maintained by the customer'],
+              ['Compliance', 'Included (ISO 27001, GDPR)', 'Self-managed'],
+              [
+                'QA, script iteration, tuning',
+                'Ongoing, handled by Coldi',
+                "Owned by the customer's team",
+              ],
+              [
+                'Vertical focus',
+                'Fintech: Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams',
+                'General purpose, industry-agnostic',
+              ],
+              [
+                'Ideal user',
+                'Ops or growth team that wants a live operation',
+                'Engineering team building a custom voice product',
+              ],
+            ],
+          },
+        ],
+      },
+      section(
+        'Who should use which',
+        `Retell is the right call for a team with the engineering resources and appetite to build a custom voice agent from the API up, and the patience to iterate on it in-house. Coldi is the right call for a fintech team that wants the same category of underlying technology already assembled into a working, compliant, CRM-connected operation.`
+      ),
+    ],
+    faq: [
+      {
+        question: 'Is Retell AI a finished voice agent product?',
+        answer:
+          'No. Retell AI is an API-first platform. It provides the building blocks for a voice agent, but telephony integration, CRM sync, compliance, and ongoing tuning are left to the team implementing it.',
+      },
+      {
+        question: 'Does Coldi AI use the same underlying technology as Retell?',
+        answer:
+          "Coldi's infrastructure includes production-grade components from the same category of voice AI technology as Retell. The differentiator is everything Coldi builds and manages around that layer.",
+      },
+      {
+        question:
+          "Why would a company choose a managed layer over building directly on Retell's API?",
+        answer:
+          'Building directly on an API requires ongoing engineering investment: integration work, maintenance, and iteration. A managed layer like Coldi removes that burden for teams that want the outcome, not the build project.',
+      },
+      {
+        question: 'Can Coldi match the customization Retell allows for developers?',
+        answer:
+          'Coldi is built specifically for fintech call flows, which covers the customization most operations teams in Insurance Brokers, Trading Platforms, Debt Collection, and Sales actually need, without requiring a custom build.',
+      },
+      {
+        question: 'Is switching from a Retell-based build to Coldi disruptive?',
+        answer:
+          "Coldi's onboarding maps existing call flows and scripts into the managed operation, so the conceptual work already done on a Retell-based build typically carries over even though the implementation changes.",
       },
     ],
   }),
