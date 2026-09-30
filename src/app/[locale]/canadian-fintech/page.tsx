@@ -1,28 +1,41 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 import { CaseStudy, Hero } from '../global-professional-services-provider/components';
-import { caseStudyContent, heroContent } from './components/data';
+import { buildCanadianFintechCaseStudy, buildCanadianFintechHero } from './components/data';
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: '/canadian-fintech',
-  },
-  title: 'Clarity Global use case',
-  description:
-    'How Clarity Global is eliminating manual follow-up work across hundreds of client reviews and cutting response lag to zero.',
-  openGraph: {
-    title: 'Clarity Global use case',
-    description:
-      'How Clarity Global is eliminating manual follow-up work across hundreds of client reviews and cutting response lag to zero.',
-    images: '/images/meta.png',
-  },
+type Props = {
+  params: Promise<{ locale: string }>;
 };
 
-export default function ClarityGlobalPage() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'CanadianFintechPage' });
+
+  return {
+    alternates: {
+      canonical: '/canadian-fintech',
+    },
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      images: '/images/meta.png',
+    },
+  };
+}
+
+export default async function ClarityGlobalPage() {
+  const t = await getTranslations('CanadianFintechPage');
+  const translator = Object.assign((key: string) => t(key), {
+    raw: (key: string) => t.raw(key) as string,
+  });
+
   return (
     <main>
-      <Hero content={heroContent} />
-      <CaseStudy content={caseStudyContent} />
+      <Hero content={buildCanadianFintechHero(translator)} />
+      <CaseStudy content={buildCanadianFintechCaseStudy(translator)} />
     </main>
   );
 }

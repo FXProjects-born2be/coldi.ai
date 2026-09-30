@@ -1,10 +1,9 @@
 import { LazyVideo } from '@/shared/ui/components/lazy-video';
 
 import type { HeroContent } from '../data';
-import { heroContent as defaultHeroContent } from '../data';
 import st from './Hero.module.scss';
 
-export const Hero = ({ content = defaultHeroContent }: { content?: HeroContent }) => (
+export const Hero = ({ content }: { content: HeroContent }) => (
   <section className={`hero-shadow-two ${st.section}`}>
     <div className={`container ${st.inner}`}>
       <div className={st.copy}>

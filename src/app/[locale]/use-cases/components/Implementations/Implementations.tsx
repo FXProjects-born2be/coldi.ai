@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { useTranslations } from 'next-intl';
 
@@ -10,6 +9,8 @@ import { cn } from '@/shared/lib/helpers';
 
 import { IMPLEMENTATIONS } from '../../data';
 import st from './Implementations.module.scss';
+
+import { Link } from '@/i18n/navigation';
 
 export const UseCasesImplementations = () => {
   const t = useTranslations('UseCasesPage.implementations');

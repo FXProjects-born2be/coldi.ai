@@ -1,28 +1,41 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 import { CaseStudy, Hero } from '../global-professional-services-provider/components';
-import { caseStudyContent, heroContent } from './components/data';
+import { buildSaasHvacCaseStudy, buildSaasHvacHero } from './components/data';
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: '/saas-and-hvac-service-operator',
-  },
-  title: 'High-Volume Lead Re-engagement for SaaS and HVAC',
-  description:
-    'Re-engage cold SaaS & HVAC leads with ultra-low latency AI. Handle objections automatically and send Calendly links via SMS to book more software demos.',
-  openGraph: {
-    title: 'High-Volume Lead Re-engagement for SaaS and HVAC',
-    description:
-      'Re-engage cold SaaS & HVAC leads with ultra-low latency AI. Handle objections automatically and send Calendly links via SMS to book more software demos.',
-    images: '/images/meta.png',
-  },
+type Props = {
+  params: Promise<{ locale: string }>;
 };
 
-export default function hvacSaasPage() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'SaasHvacPage' });
+
+  return {
+    alternates: {
+      canonical: '/saas-and-hvac-service-operator',
+    },
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      images: '/images/meta.png',
+    },
+  };
+}
+
+export default async function hvacSaasPage() {
+  const t = await getTranslations('SaasHvacPage');
+  const translator = Object.assign((key: string) => t(key), {
+    raw: (key: string) => t.raw(key) as string,
+  });
+
   return (
     <main>
-      <Hero content={heroContent} />
-      <CaseStudy content={caseStudyContent} />
+      <Hero content={buildSaasHvacHero(translator)} />
+      <CaseStudy content={buildSaasHvacCaseStudy(translator)} />
     </main>
   );
 }

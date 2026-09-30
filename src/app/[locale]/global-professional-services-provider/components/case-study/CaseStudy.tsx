@@ -3,12 +3,15 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
+import { useTranslations } from 'next-intl';
+
 import { cn } from '@/shared/lib/helpers';
 
 import type { CaseStudyContent } from '../data';
-import { caseStudyContent as defaultContent } from '../data';
 import { AskedAudioGrid } from './AskedAudioGrid';
 import st from './CaseStudy.module.scss';
+
+const assetSrc = (src: string) => (src.startsWith('/') ? src : `/${src}`);
 
 const renderWithStrong = (text: string) =>
   text.split(/(<strong>[\s\S]*?<\/strong>)/g).map((part, index) => {
@@ -19,7 +22,8 @@ const renderWithStrong = (text: string) =>
     return part;
   });
 
-export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyContent }) => {
+export const CaseStudy = ({ content }: { content: CaseStudyContent }) => {
+  const t = useTranslations('CaseStudyChrome');
   const {
     tocItems,
     problem,
@@ -177,7 +181,7 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                     </div>
                     <div className={st.snapshotIcon}>
                       {card.src ? (
-                        <Image src={card.src} alt="" width={24} height={24} unoptimized />
+                        <Image src={assetSrc(card.src)} alt="" width={24} height={24} unoptimized />
                       ) : null}
                     </div>
                   </div>
@@ -192,7 +196,13 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                   <div key={`integrated-${index}`} className={st.integratedItem}>
                     <span className={st.integratedIcon}>
                       {item.src ? (
-                        <Image src={item.src} alt="Icon" width={24} height={24} unoptimized />
+                        <Image
+                          src={assetSrc(item.src)}
+                          alt="Icon"
+                          width={24}
+                          height={24}
+                          unoptimized
+                        />
                       ) : null}
                     </span>
                     {item.title ? <p className={st.integratedTitle}>{item.title}</p> : null}
@@ -208,7 +218,7 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                 <div className={st.phaseTimeline}>
                   {implementationPhases.map((_, index) => (
                     <div key={`week-${index}`} className={st.phaseWeek}>
-                      <p className={st.phaseWeekLabel}>Week {index + 1}</p>
+                      <p className={st.phaseWeekLabel}>{t('week', { week: index + 1 })}</p>
                       {index < implementationPhases.length - 1 ? (
                         <Image
                           className={st.phaseWeekLine}
@@ -238,7 +248,7 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                   {implementationPhases.map((phase, index) => (
                     <div key={phase.title} className={st.phaseSlide}>
                       <div className={st.phaseWeek}>
-                        <p className={st.phaseWeekLabel}>Week {index + 1}</p>
+                        <p className={st.phaseWeekLabel}>{t('week', { week: index + 1 })}</p>
                         {index < implementationPhases.length - 1 ? (
                           <Image
                             className={st.phaseWeekLineMobile}
@@ -261,7 +271,7 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                   <button
                     type="button"
                     className={cn(st.phaseNavPrev, canScrollPrev && st.can_scroll)}
-                    aria-label="Previous week"
+                    aria-label={t('prevWeek')}
                     disabled={!canScrollPrev}
                     onClick={() => goToPhase(phaseIndex - 1)}
                   >
@@ -276,7 +286,7 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                   <button
                     type="button"
                     className={cn(st.phaseNavNext, canScrollNext && st.can_scroll)}
-                    aria-label="Next week"
+                    aria-label={t('nextWeek')}
                     disabled={!canScrollNext}
                     onClick={() => goToPhase(phaseIndex + 1)}
                   >
@@ -306,7 +316,7 @@ export const CaseStudy = ({ content = defaultContent }: { content?: CaseStudyCon
                     </div>
                     <div className={st.snapshotIcon}>
                       {card.src ? (
-                        <Image src={card.src} alt="" width={24} height={24} unoptimized />
+                        <Image src={assetSrc(card.src)} alt="" width={24} height={24} unoptimized />
                       ) : null}
                     </div>
                   </div>

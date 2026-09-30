@@ -4,320 +4,179 @@ import type {
   ProblemContent,
 } from '@/app/[locale]/global-professional-services-provider/components/data';
 
-export const heroContent: HeroContent = {
-  titleLine1: 'Zero Response Lag, 100% Audit Readiness:',
-  titleLine2: 'How The Payment Solutions Provider Automated B2B Compliance & Inbound Support',
-  subtitle:
-    'How a Canadian fintech deployed autonomous outbound review workflows and a 24/7 inbound voice agent to eliminate manual follow-ups across hundreds of B2B client reviews.',
-  reportingRange: 'THE CLIENT',
-  paragraphs: [
-    'The client is a Canadian fintech providing advanced payment infrastructure to global B2B clients. Operating under strict regulatory obligations, mandatory periodic compliance reviews are a core operational requirement.',
-  ],
-};
-
-export const tocItems = [
-  {
-    id: 'problem',
-    title: 'Problem',
-    description: 'Calls slipping through after hours',
-  },
-  {
-    id: 'engagement-snapshot',
-    title: 'Engagement Snapshot',
-    description: 'The client, scope, and setup',
-  },
-  {
-    id: 'integrated',
-    title: 'What Coldi Built',
-    description: 'The agent, integrations, and workflows',
-  },
-  {
-    id: 'implementation',
-    title: 'How The Implementation Went',
-    description: 'A phased rollout to go-live',
-  },
-  {
-    id: 'issues',
-    title: 'What The Client Asked For Along The Way',
-    description: 'Requests that reshaped the build',
-  },
-  {
-    id: 'monitoring',
-    title: 'How Coldi Runs The Account',
-    description: 'Monitored, tuned, and audit-ready',
-  },
-  {
-    id: 'went-wrong',
-    title: 'What Went Wrong, and How Fast It Was Fixed',
-    description: 'Edge cases, caught and closed',
-  },
-  {
-    id: 'results',
-    title: 'Results & What The Numbers Mean',
-    description: 'The impact since launch',
-  },
-];
-
-export const problemContent: ProblemContent = {
-  title: 'The Problem',
-  items: [
+export const canadianFintechStructure = {
+  tocIds: [
+    'problem',
+    'engagement-snapshot',
+    'integrated',
+    'implementation',
+    'issues',
+    'monitoring',
+    'went-wrong',
+    'results',
+  ] as const,
+  problemItemIds: [
+    'manualOutreach',
+    'followUps',
+    'slowClassification',
+    'escalationRisks',
+    'reporting',
+    'auditTrail',
+  ] as const,
+  problemTriedIds: ['spreadsheet', 'manualEscalation', 'traditionalStaffing'] as const,
+  problemAskedBg: '/images/silverbellgroup/problem-one.png',
+  problemConclusionBg: '/images/silverbellgroup/problem-two.png',
+  snapshotCards: [
     {
-      title: 'Manual & Unsegmented Outreach',
-      text: 'Reaching out to hundreds of clients every six months was conducted manually with zero segmentation between corporate and individual accounts.',
+      valueKey: 'timeline',
+      src: 'icons/clarity-engagement-icon-one.svg',
+      labelKey: 'timeline',
+    },
+    { value: '24/7', src: 'icons/clarity-engagement-icon-two.svg', labelKey: 'inbound' },
+    {
+      valueKey: 'lifecycle',
+      src: 'icons/clarity-engagement-icon-three.svg',
+      labelKey: 'lifecycle',
     },
     {
-      title: 'Unstructured Follow-Ups & Scaling Bottlenecks',
-      text: 'No automated reminder cadence existed; follow-ups relied on spreadsheets and team memory, causing missed reminders as client volume grew.',
-    },
-    {
-      title: 'Slow Response Classification',
-      text: 'Client responses were categorized by hand, introducing operational lag.',
-    },
-    {
-      title: 'Compliance Escalation Risks',
-      text: 'Notifications to the compliance team were triggered manually, risking severe delays on high-priority "changes reported" cases.',
-    },
-    {
-      title: 'Time-Consuming Reporting',
-      text: 'Monthly reporting was built manually from scratch each cycle, consuming hours of staff time.',
-    },
-    {
-      title: 'Lack of Audit Trail',
-      text: 'No centralized, timestamped record existed for outbound messages, client replies, and internal alerts.',
+      valueKey: 'cadence',
+      src: 'icons/clarity-engagement-icon-four.svg',
+      labelKey: 'cadence',
     },
   ],
-  tried: {
-    title: 'What They Tried Before Coldi',
-    items: [
-      {
-        title: 'Spreadsheet Tracking',
-        text: 'Manual logs created inconsistent response tracking and high exposure to human error.',
-      },
-      {
-        title: 'Manual Staff Escalation',
-        text: 'Relying on human agents to manually flag high-risk declarations created compliance bottlenecks.',
-      },
-      {
-        title: 'Traditional Support Staffing',
-        text: 'Human-only support led to high operational costs and staff burnout from handling repetitive Tier-1 queries around the clock.',
-      },
-    ],
-  },
-  asked: {
-    title: 'What They Asked For',
-    text: 'Deploy an autonomous outbound compliance workflow to handle the complete six-month review cycle alongside a 24/7 inbound AI Live Support Agent to qualify visitors, answer queries, and route existing clients automatically.',
-    bgImage: '/images/silverbellgroup/problem-one.png',
-  },
-  conclusion: {
-    title: 'The conclusion they reached',
-    text: 'static spreadsheets and manual follow-ups introduce regulatory risk and cannot scale with growth. The critical requirement is a fully automated communication lifecycle—handling outreach, reminder cadences, response classification, instant high-risk escalation, and audit reporting with zero manual input. That is the point at which they came to Coldi.',
-    bgImage: '/images/silverbellgroup/problem-two.png',
-  },
+  implementationPhaseIds: [
+    'discovery',
+    'iterative',
+    'classification',
+    'audit',
+    'rollout',
+    'hardening',
+  ] as const,
+  integratedIds: ['segmentation', 'reminder', 'classification', 'reporting', 'inbound'] as const,
+  integratedSrc: [
+    'icons/clarity-built-one.svg',
+    'icons/clarity-built-two.svg',
+    'icons/clarity-built-three.svg',
+    'icons/clarity-built-four.svg',
+    'icons/clarity-built-five.svg',
+  ],
+  askedIds: ['qualification', 'sla', 'reports'] as const,
+  askedSrc: [
+    'icons/clarity-asked-one.svg',
+    'icons/clarity-asked-two.svg',
+    'icons/clarity-asked-three.svg',
+  ],
+  askedValueKeys: ['qualification', null, null] as const,
+  monitoringIds: ['auditing', 'escalation', 'health'] as const,
+  wentWrongCount: 12,
+  resultsBg: '/images/silverbellgroup/results-bg.png',
+  resultsShowSrc: '/images/silverbellgroup/clarity-result-two-bg.png',
+  resultsMetrics: [
+    { value: '24/7', labelKey: 'inboundSupport', highlight: false },
+    { value: '100%', labelKey: 'lifecycleAutomated', highlight: true },
+    { valueKey: 'zeroMin', labelKey: 'manualDelays', highlight: false },
+    { value: '100%', labelKey: 'leadCapture', highlight: false },
+    { valueKey: 'zeroSec', labelKey: 'qualificationDelay', highlight: false },
+    { value: '100%', labelKey: 'escalationReporting', highlight: true },
+    { valueKey: 'threeSteps', labelKey: 'qualificationLogic', highlight: false },
+    { valueKey: 'zeroLag', labelKey: 'zeroLagLabel', highlight: false },
+  ],
+} as const;
+
+type Translator = {
+  (key: string): string;
+  raw: (key: string) => string;
 };
 
-export const snapshotCards = [
-  {
-    value: '6 <span>Weeks</span>',
-    label: 'Implementation Timeline',
-    src: 'icons/clarity-engagement-icon-one.svg',
-  },
-  {
-    value: '24/7',
-    label: 'Inbound Voice Support Availability',
-    src: 'icons/clarity-engagement-icon-two.svg',
-  },
-  {
-    value: '100<span>%</span>',
-    label: 'Automated Compliance Lifecycle Execution',
-    src: 'icons/clarity-engagement-icon-three.svg',
-  },
-  {
-    value: '7<span> Day</span>',
-    label: 'Structured Follow-Up Interval Cadence',
-    src: 'icons/clarity-engagement-icon-four.svg',
-  },
-  // {
-  //   value: 'XXX',
-  //   label: 'Calls Independently Audited',
-  //   src: 'icons/clarity-engagement-icon-five.svg',
-  // },
-  // {
-  //   value: 'XXX',
-  //   label: 'Local Numbers Provisioned',
-  //   src: 'icons/clarity-engagement-icon-six.svg',
-  // },
-  // {
-  //   value: 'XXX',
-  //   label: 'Total Dial Attempts',
-  //   src: 'icons/clarity-engagement-icon-seven.svg',
-  // },
-  // {
-  //   value: 'XXX',
-  //   label: 'Hours of Manual Work Saved',
-  //   src: 'icons/clarity-engagement-icon-eight.svg',
-  // },
-];
+export const buildCanadianFintechHero = (t: Translator): HeroContent => ({
+  titleLine1: t('hero.titleLine1'),
+  titleLine2: t('hero.titleLine2'),
+  subtitle: t('hero.subtitle'),
+  reportingRange: t('hero.reportingRange'),
+  paragraphs: [t('hero.paragraph')],
+});
 
-export const implementationPhases = [
-  {
-    title: 'Discovery & Wiring',
-    text: 'CRM integration setup, client segmentation rules established, and inbound telephony stood up.',
-  },
-  {
-    title: 'Iterative Prompt & Flow Build',
-    text: 'Configured 3-stage reminder cadences, corporate/individual prompt templates, and the 5-point inbound qualification flow.',
-  },
-  {
-    title: 'Classification & Escalation Engine',
-    text: 'Built AI response sorting (3 categories) and instant compliance alert triggers.',
-  },
-  {
-    title: 'Audit & Reporting Automation',
-    text: 'Integrated centralized timestamped logging and automated monthly compliance report generation.',
-  },
-  {
-    title: 'Full System Rollout',
-    text: 'Launched live outbound compliance reviews and 24/7 inbound support agent (+1 236 309 2666).',
-  },
-  {
-    title: 'Hardening & Audit Review',
-    text: 'Evaluated classification accuracy, latency, and automated hand-off compliance.',
-  },
-];
+export const buildCanadianFintechCaseStudy = (t: Translator): CaseStudyContent => {
+  const s = canadianFintechStructure;
 
-export const integratedItems = [
-  {
-    title: 'Client Segmentation & Dynamic Scripting',
-    text: 'Automatic CRM-based classification into corporate vs. individual accounts, triggering approved, segment-specific outreach scripts.',
-    src: 'icons/clarity-built-one.svg',
-  },
-  {
-    title: '3-Stage Automated Reminder Engine',
-    text: 'Schedules and executes follow-up reminders at exact 7-day intervals with per-client tracking of send dates and response status.',
-    src: 'icons/clarity-built-two.svg',
-  },
-  {
-    title: 'AI Response Classification & Real-Time Escalation',
-    text: 'Analyzes incoming client replies, categorizes them into three defined groups, and instantly alerts the compliance department upon detecting "changes reported".',
-    src: 'icons/clarity-built-three.svg',
-  },
-  {
-    title: 'Automated Audit Trail & Monthly Reporting',
-    text: 'Auto-generates audit-ready monthly reports covering all outcome categories while maintaining a timestamped log of all outreach, replies, and notifications.',
-    src: 'icons/clarity-built-four.svg',
-  },
-  {
-    title: '24/7 Inbound AI Live Support Agent',
-    text: 'Dedicated voice coverage (+1 236 309 2666) providing instant response, smart routing for existing clients, and a 5-point lead qualification flow for new visitors.',
-    src: 'icons/clarity-built-five.svg',
-  },
-];
+  const problem: ProblemContent = {
+    title: t('problem.title'),
+    items: s.problemItemIds.map((id) => ({
+      title: t(`problem.items.${id}.title`),
+      text: t(`problem.items.${id}.text`),
+    })),
+    tried: {
+      title: t('problem.tried.title'),
+      items: s.problemTriedIds.map((id) => ({
+        title: t(`problem.tried.items.${id}.title`),
+        text: t(`problem.tried.items.${id}.text`),
+      })),
+    },
+    asked: {
+      title: t('problem.asked.title'),
+      text: t('problem.asked.text'),
+      bgImage: s.problemAskedBg,
+    },
+    conclusion: {
+      title: t('problem.conclusion.title'),
+      text: t('problem.conclusion.text'),
+      bgImage: s.problemConclusionBg,
+    },
+  };
 
-export const askedCards = [
-  {
-    value: '5<span>-Point</span>',
-    label:
-      'Inbound Qualification Logic Built (Account Status, Payment Solution, Country, Industry, Volume)',
-    src: 'icons/clarity-asked-one.svg',
-  },
-  {
-    value: 'Strict SLA',
-    label: 'Configured for Instant Compliance Escalation Triggers',
-    src: 'icons/clarity-asked-two.svg',
-  },
-  {
-    value: '100%',
-    label: 'Audit-Ready Automated Report Templates Custom-Built',
-    src: 'icons/clarity-asked-three.svg',
-  },
-];
-
-export const monitoringItems = [
-  {
-    label: 'Immutable Compliance Auditing',
-    value:
-      'Complete timestamped records of every call, message, AI classification decision, and internal alert stored automatically.',
-  },
-  {
-    label: 'Zero-Lag Escalation SLA',
-    value:
-      'Direct automated routing of change declarations directly to compliance officers, eliminating human delay.',
-  },
-  {
-    label: 'Managed System Health',
-    value:
-      'Ongoing monitoring of phone line deliverability, prompt accuracy, and CRM sync stability.',
-  },
-];
-
-export const wentWrongItems = [
-  { title: 'Area' },
-  { title: 'What Happened' },
-  { title: 'How Coldi Resolved It' },
-  { title: 'Coming Soon' },
-  { title: 'Coming Soon' },
-  {
-    title: 'Coming Soon',
-  },
-  { title: 'Coming Soon' },
-  { title: 'Coming Soon' },
-  {
-    title: 'Coming Soon',
-  },
-  {
-    title: 'Coming Soon',
-  },
-  {
-    title: 'Coming Soon',
-  },
-  {
-    title: 'Coming Soon',
-  },
-];
-
-export const resultsBg = '/images/silverbellgroup/results-bg.png';
-
-export const resultsShow = {
-  title: 'What This Engagement Shows',
-  text: 'In highly regulated fintech environments, AI deployment must provide total operational precision. Coldi delivers strict logic, real-time escalation triggers, and immutable audit trails directly alongside autonomous voice and text capabilities.',
-  src: '/images/silverbellgroup/clarity-result-two-bg.png',
-};
-
-export const resultsMetrics = [
-  {
-    value: '24/7',
-    label: 'Front-Line Inbound Support Established (+1 236 309 2666)',
-    highlight: false,
-  },
-  {
-    value: '100%',
-    label: 'Inbound & Outbound Compliance Review Lifecycle Automated',
-    highlight: true,
-  },
-  { value: '0 Min', label: 'Manual Scheduling & Follow-Up Delays', highlight: false },
-  { value: '100%', label: 'Automated Lead & Scope Capture', highlight: false },
-  { value: '0 Sec', label: 'Automated Lead Qualification Delay', highlight: false },
-  { value: '100%', label: 'Instant Post-Call Compliance Escalation & Reporting', highlight: true },
-  { value: '3 Steps', label: 'Automated Lead Qualification Logic Implemented', highlight: false },
-  {
-    value: 'Zero <span>Response Lag:</span>',
-    label:
-      'Automated classification and real-time triggers removed manual delays on high-risk accounts.',
-    highlight: false,
-  },
-];
-
-export const caseStudyContent: CaseStudyContent = {
-  tocItems,
-  problem: problemContent,
-  snapshotCards,
-  implementationPhases,
-  integratedItems,
-  askedCards,
-  monitoringItems,
-  wentWrongItems,
-  resultsBg,
-  resultsShow,
-  resultsMetrics,
-  column: 'one',
+  return {
+    tocItems: s.tocIds.map((id) => ({
+      id,
+      title: t(`toc.${id}.title`),
+      description: t(`toc.${id}.description`),
+    })),
+    problem,
+    snapshotCards: s.snapshotCards.map((card) => ({
+      value:
+        'valueKey' in card
+          ? t.raw(`snapshot.values.${card.valueKey}`)
+          : (card as { value: string }).value,
+      label: t(`snapshot.labels.${card.labelKey}`),
+      src: card.src,
+    })),
+    implementationPhases: s.implementationPhaseIds.map((id) => ({
+      title: t(`implementation.${id}.title`),
+      text: t(`implementation.${id}.text`),
+    })),
+    integratedItems: s.integratedIds.map((id, index) => ({
+      title: t(`integrated.${id}.title`),
+      text: t(`integrated.${id}.text`),
+      src: s.integratedSrc[index],
+    })),
+    askedCards: s.askedIds.map((id, index) => {
+      const valueKey = s.askedValueKeys[index];
+      return {
+        value: valueKey ? t.raw(`asked.values.${valueKey}`) : t(`asked.${id}.value`),
+        label: t(`asked.${id}.label`),
+        src: s.askedSrc[index],
+      };
+    }),
+    monitoringItems: s.monitoringIds.map((id) => ({
+      label: t(`monitoring.${id}.label`),
+      value: t(`monitoring.${id}.value`),
+    })),
+    wentWrongItems: Array.from({ length: s.wentWrongCount }, (_, index) => ({
+      title: t(`wentWrong.${index}`),
+    })),
+    resultsBg: s.resultsBg,
+    resultsShow: {
+      title: t('resultsShow.title'),
+      text: t('resultsShow.text'),
+      src: s.resultsShowSrc,
+    },
+    resultsMetrics: s.resultsMetrics.map((metric) => ({
+      value:
+        'valueKey' in metric
+          ? t.raw(`resultsMetrics.values.${metric.valueKey}`)
+          : (metric as { value: string }).value,
+      label: t(`resultsMetrics.labels.${metric.labelKey}`),
+      highlight: metric.highlight,
+    })),
+    column: 'one',
+  };
 };

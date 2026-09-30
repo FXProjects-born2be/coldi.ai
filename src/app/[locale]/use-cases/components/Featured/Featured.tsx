@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
 
 import { useTranslations } from 'next-intl';
 
@@ -9,6 +8,8 @@ import { cn } from '@/shared/lib/helpers';
 
 import { FEATURED_CASES } from '../../data';
 import st from './Featured.module.scss';
+
+import { Link } from '@/i18n/navigation';
 
 const METRIC_HIGHLIGHT_MS = 5000;
 

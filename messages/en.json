@@ -1415,5 +1415,1252 @@
       "text": "Tell us what your team is spending time on.",
       "textRest": "We'll show you where Coldi can automate the workflow."
     }
+  },
+  "MultiAssetPage": {
+    "metaTitle": "Evest use case",
+    "metaDescription": "How Evest is eliminating manual follow-up work across hundreds of client reviews and cutting response lag to zero.",
+    "hero": {
+      "titleLine1": "High-Volume Multi-Asset Trader Qualification & Callback Scheduling",
+      "subtitle": "How an international trading platform leveraged an outbound AI voice engine across 29,377 dial attempts to qualify trader intent and lock in 671 structured callbacks.",
+      "reportingRange": "THE CLIENT",
+      "paragraph": "The client is an international multi-asset trading and investment platform handling high-volume global lead re-engagement and trader qualification operations."
+    },
+    "toc": {
+      "problem": {
+        "title": "Problem",
+        "description": "Calls slipping through after hours"
+      },
+      "engagement-snapshot": {
+        "title": "Engagement Snapshot",
+        "description": "The client, scope, and setup"
+      },
+      "integrated": {
+        "title": "What Coldi Built",
+        "description": "The agent, integrations, and workflows"
+      },
+      "implementation": {
+        "title": "How The Implementation Went",
+        "description": "A phased rollout to go-live"
+      },
+      "issues": {
+        "title": "What The Client Asked For Along The Way",
+        "description": "Requests that reshaped the build"
+      },
+      "monitoring": {
+        "title": "How Coldi Runs The Account",
+        "description": "Monitored, tuned, and audit-ready"
+      },
+      "went-wrong": {
+        "title": "What Went Wrong, and How Fast It Was Fixed",
+        "description": "Edge cases, caught and closed"
+      },
+      "results": {
+        "title": "Results & What The Numbers Mean",
+        "description": "The impact since launch"
+      }
+    },
+    "problem": {
+      "title": "The Problem",
+      "items": {
+        "highDial": {
+          "title": "High Dial Volume Demands",
+          "text": "Managing re-engagement across 11,840 unique lead records required constant manual dialing overhead."
+        },
+        "lowContact": {
+          "title": "Low Contact Efficiency",
+          "text": "Human account managers wasted time navigating voicemails and unanswered calls instead of speaking with active traders."
+        },
+        "scheduling": {
+          "title": "Scheduling Friction",
+          "text": "Unstructured follow-up attempts led to missed connections and poor callback completion rates."
+        }
+      },
+      "tried": {
+        "title": "What They Tried Before Coldi",
+        "items": {
+          "manual": {
+            "title": "Manual Lead Outreach",
+            "text": "Account managers manually called leads, resulting in low dial-frequency per lead and inefficient contact rates."
+          },
+          "basicDialers": {
+            "title": "Basic Automated Outbound Dialers",
+            "text": "Legacy tools lacked real-time answering machine filtering and interactive calendar callback scheduling."
+          }
+        }
+      },
+      "asked": {
+        "title": "What They Asked For",
+        "text": "Deploy an automated outbound voice engine across 11,840 unique leads over 17 calling days to qualify active trader buy signals, capture platform interest, and schedule exact callback time slots for account teams."
+      },
+      "conclusion": {
+        "title": "The conclusion they reached",
+        "text": "scaling trader re-engagement requires systematic multi-dial cadences, precision voicemail filtering, and automated time-specific callback scheduling. That is the point at which they came to Coldi."
+      }
+    },
+    "snapshot": {
+      "values": {
+        "talkTime": "88+ <span>Hours</span>",
+        "avgLength": "66.1 Sec"
+      },
+      "labels": {
+        "callsPlaced": "Total Outbound Calls Placed",
+        "callsAnswered": "Total Calls Answered",
+        "liveReached": "Live Persons Reached",
+        "conversations": "Engaged Conversations Held",
+        "talkTimeLabel": "Total Live Talk Time",
+        "avgLength": "Average Conversation Length",
+        "qualifiedLeads": "Qualified Leads Captured",
+        "momRate": "Month-over-Month Pickups-to-Talk Rate"
+      }
+    },
+    "implementation": {
+      "rollout": {
+        "title": "Rollout (July 2026)",
+        "text": "Placed 14,765 calls resulting in 1,682 live conversations (50.3% of live pickups) and secured 309 arranged callbacks."
+      },
+      "optimization": {
+        "title": "Optimization (August 2026)",
+        "text": "Placed 14,612 calls resulting in 1,837 live conversations (55.8% of live pickups) and secured 362 arranged callbacks up through August 19."
+      }
+    },
+    "integrated": {
+      "multiDial": {
+        "title": "High-Volume Multi-Dial Engine",
+        "text": "Automated outbound system managing an average of 2.48 dial attempts per unique lead to maximize contact coverage."
+      },
+      "amd": {
+        "title": "Precision Answering Machine Detection (AMD)",
+        "text": "Real-time signal processing filtering out automated voicemails to ensure 96.4% of answered calls connected to live humans."
+      },
+      "callback": {
+        "title": "Scheduled Callback Engine",
+        "text": "Interactive scheduling protocol locking specific follow-up time slots directly into internal account manager queues."
+      },
+      "intent": {
+        "title": "Qualified Intent Tagging System",
+        "text": "Real-time conversational classification engine categorizing active trader buy signals and platform interest."
+      }
+    },
+    "asked": {
+      "callbackProtocol": {
+        "value": "Time-Specific Callback Protocol",
+        "label": "Programmed prompt logic securing exact follow-up dates and times, locking in specific schedules for 92.8% of arranged callbacks (623 out of 671)."
+      },
+      "midCampaign": {
+        "value": "Mid-Campaign Conversation Optimization",
+        "label": "Refined dialogue trees between July and August to boost live pickup-to-conversation conversion by 10.9% relative (50.3% to 55.8%)."
+      }
+    },
+    "monitoring": {
+      "cadence": {
+        "label": "Lead Cadence Guardrails",
+        "value": "Automated pacing rules balancing 29,377 calls across 11,840 unique records to prevent list exhaustion and carrier spam flagging."
+      },
+      "overlap": {
+        "label": "Overlap-Aware Outcome Tracking",
+        "value": "Multi-variable analytics engine isolating qualified interest flags and callback bookings without double-counting call volume."
+      },
+      "dialogue": {
+        "label": "Managed Dialogue Refinement",
+        "value": "Continuous conversational prompt tuning based on live human pickup responses."
+      }
+    },
+    "wentWrong": {
+      "0": "Area",
+      "1": "What Happened",
+      "2": "How Coldi Resolved It",
+      "3": "Coming Soon",
+      "4": "Coming Soon",
+      "5": "Coming Soon",
+      "6": "Coming Soon",
+      "7": "Coming Soon",
+      "8": "Coming Soon",
+      "9": "Coming Soon",
+      "10": "Coming Soon",
+      "11": "Coming Soon"
+    },
+    "resultsShow": {
+      "title": "What This Engagement Shows",
+      "text": "High-volume trading lead qualification requires structured cadence management, real-time voicemail filtering, and explicit callback scheduling. Coldi provides the full outbound architecture to turn large-scale database calling into qualified account pipeline opportunities."
+    },
+    "resultsMetrics": {
+      "values": {
+        "precisionLockIn": "<span>Precision Appointment Lock-In</span>",
+        "voicemailFilter": "<span>Voicemail Filtering Efficiency</span>"
+      },
+      "labels": {
+        "qualifiedInterest": "Leads Showing Qualified Interest (19.1% of live conversations)",
+        "callbacksArranged": "Total Callbacks Arranged (19.1% of live conversations)",
+        "callbackAccuracy": "Time-Specific Callback Accuracy (623 out of 671 callbacks locked with explicit appointment times)",
+        "liveConversations": "Total Live Conversations Held across 88+ talk hours",
+        "pickupEfficiency": "Live Human Pick-Up Efficiency (6,638 human connections out of 6,886 answered calls)",
+        "peakConversion": "Peak Conversation Conversion Rate achieved in August",
+        "precisionLockInLabel": "Securing exact dates and times for 92.8% of callbacks prevents lost leads and eliminates phone tag for account managers.",
+        "voicemailFilterLabel": "Eliminating 96.4% of automated voicemails ensures conversation time is spent exclusively with active, live prospects."
+      }
+    }
+  },
+  "CanadianFintechPage": {
+    "metaTitle": "Clarity Global use case",
+    "metaDescription": "How Clarity Global is eliminating manual follow-up work across hundreds of client reviews and cutting response lag to zero.",
+    "hero": {
+      "titleLine1": "Zero Response Lag, 100% Audit Readiness:",
+      "titleLine2": "How The Payment Solutions Provider Automated B2B Compliance & Inbound Support",
+      "subtitle": "How a Canadian fintech deployed autonomous outbound review workflows and a 24/7 inbound voice agent to eliminate manual follow-ups across hundreds of B2B client reviews.",
+      "reportingRange": "THE CLIENT",
+      "paragraph": "The client is a Canadian fintech providing advanced payment infrastructure to global B2B clients. Operating under strict regulatory obligations, mandatory periodic compliance reviews are a core operational requirement."
+    },
+    "toc": {
+      "problem": {
+        "title": "Problem",
+        "description": "Calls slipping through after hours"
+      },
+      "engagement-snapshot": {
+        "title": "Engagement Snapshot",
+        "description": "The client, scope, and setup"
+      },
+      "integrated": {
+        "title": "What Coldi Built",
+        "description": "The agent, integrations, and workflows"
+      },
+      "implementation": {
+        "title": "How The Implementation Went",
+        "description": "A phased rollout to go-live"
+      },
+      "issues": {
+        "title": "What The Client Asked For Along The Way",
+        "description": "Requests that reshaped the build"
+      },
+      "monitoring": {
+        "title": "How Coldi Runs The Account",
+        "description": "Monitored, tuned, and audit-ready"
+      },
+      "went-wrong": {
+        "title": "What Went Wrong, and How Fast It Was Fixed",
+        "description": "Edge cases, caught and closed"
+      },
+      "results": {
+        "title": "Results & What The Numbers Mean",
+        "description": "The impact since launch"
+      }
+    },
+    "problem": {
+      "title": "The Problem",
+      "items": {
+        "manualOutreach": {
+          "title": "Manual & Unsegmented Outreach",
+          "text": "Reaching out to hundreds of clients every six months was conducted manually with zero segmentation between corporate and individual accounts."
+        },
+        "followUps": {
+          "title": "Unstructured Follow-Ups & Scaling Bottlenecks",
+          "text": "No automated reminder cadence existed; follow-ups relied on spreadsheets and team memory, causing missed reminders as client volume grew."
+        },
+        "slowClassification": {
+          "title": "Slow Response Classification",
+          "text": "Client responses were categorized by hand, introducing operational lag."
+        },
+        "escalationRisks": {
+          "title": "Compliance Escalation Risks",
+          "text": "Notifications to the compliance team were triggered manually, risking severe delays on high-priority \"changes reported\" cases."
+        },
+        "reporting": {
+          "title": "Time-Consuming Reporting",
+          "text": "Monthly reporting was built manually from scratch each cycle, consuming hours of staff time."
+        },
+        "auditTrail": {
+          "title": "Lack of Audit Trail",
+          "text": "No centralized, timestamped record existed for outbound messages, client replies, and internal alerts."
+        }
+      },
+      "tried": {
+        "title": "What They Tried Before Coldi",
+        "items": {
+          "spreadsheet": {
+            "title": "Spreadsheet Tracking",
+            "text": "Manual logs created inconsistent response tracking and high exposure to human error."
+          },
+          "manualEscalation": {
+            "title": "Manual Staff Escalation",
+            "text": "Relying on human agents to manually flag high-risk declarations created compliance bottlenecks."
+          },
+          "traditionalStaffing": {
+            "title": "Traditional Support Staffing",
+            "text": "Human-only support led to high operational costs and staff burnout from handling repetitive Tier-1 queries around the clock."
+          }
+        }
+      },
+      "asked": {
+        "title": "What They Asked For",
+        "text": "Deploy an autonomous outbound compliance workflow to handle the complete six-month review cycle alongside a 24/7 inbound AI Live Support Agent to qualify visitors, answer queries, and route existing clients automatically."
+      },
+      "conclusion": {
+        "title": "The conclusion they reached",
+        "text": "static spreadsheets and manual follow-ups introduce regulatory risk and cannot scale with growth. The critical requirement is a fully automated communication lifecycle—handling outreach, reminder cadences, response classification, instant high-risk escalation, and audit reporting with zero manual input. That is the point at which they came to Coldi."
+      }
+    },
+    "snapshot": {
+      "values": {
+        "timeline": "6 <span>Weeks</span>",
+        "lifecycle": "100<span>%</span>",
+        "cadence": "7<span> Day</span>"
+      },
+      "labels": {
+        "timeline": "Implementation Timeline",
+        "inbound": "Inbound Voice Support Availability",
+        "lifecycle": "Automated Compliance Lifecycle Execution",
+        "cadence": "Structured Follow-Up Interval Cadence"
+      }
+    },
+    "implementation": {
+      "discovery": {
+        "title": "Discovery & Wiring",
+        "text": "CRM integration setup, client segmentation rules established, and inbound telephony stood up."
+      },
+      "iterative": {
+        "title": "Iterative Prompt & Flow Build",
+        "text": "Configured 3-stage reminder cadences, corporate/individual prompt templates, and the 5-point inbound qualification flow."
+      },
+      "classification": {
+        "title": "Classification & Escalation Engine",
+        "text": "Built AI response sorting (3 categories) and instant compliance alert triggers."
+      },
+      "audit": {
+        "title": "Audit & Reporting Automation",
+        "text": "Integrated centralized timestamped logging and automated monthly compliance report generation."
+      },
+      "rollout": {
+        "title": "Full System Rollout",
+        "text": "Launched live outbound compliance reviews and 24/7 inbound support agent (+1 236 309 2666)."
+      },
+      "hardening": {
+        "title": "Hardening & Audit Review",
+        "text": "Evaluated classification accuracy, latency, and automated hand-off compliance."
+      }
+    },
+    "integrated": {
+      "segmentation": {
+        "title": "Client Segmentation & Dynamic Scripting",
+        "text": "Automatic CRM-based classification into corporate vs. individual accounts, triggering approved, segment-specific outreach scripts."
+      },
+      "reminder": {
+        "title": "3-Stage Automated Reminder Engine",
+        "text": "Schedules and executes follow-up reminders at exact 7-day intervals with per-client tracking of send dates and response status."
+      },
+      "classification": {
+        "title": "AI Response Classification & Real-Time Escalation",
+        "text": "Analyzes incoming client replies, categorizes them into three defined groups, and instantly alerts the compliance department upon detecting \"changes reported\"."
+      },
+      "reporting": {
+        "title": "Automated Audit Trail & Monthly Reporting",
+        "text": "Auto-generates audit-ready monthly reports covering all outcome categories while maintaining a timestamped log of all outreach, replies, and notifications."
+      },
+      "inbound": {
+        "title": "24/7 Inbound AI Live Support Agent",
+        "text": "Dedicated voice coverage (+1 236 309 2666) providing instant response, smart routing for existing clients, and a 5-point lead qualification flow for new visitors."
+      }
+    },
+    "asked": {
+      "values": {
+        "qualification": "5<span>-Point</span>"
+      },
+      "qualification": {
+        "label": "Inbound Qualification Logic Built (Account Status, Payment Solution, Country, Industry, Volume)"
+      },
+      "sla": {
+        "value": "Strict SLA",
+        "label": "Configured for Instant Compliance Escalation Triggers"
+      },
+      "reports": {
+        "value": "100%",
+        "label": "Audit-Ready Automated Report Templates Custom-Built"
+      }
+    },
+    "monitoring": {
+      "auditing": {
+        "label": "Immutable Compliance Auditing",
+        "value": "Complete timestamped records of every call, message, AI classification decision, and internal alert stored automatically."
+      },
+      "escalation": {
+        "label": "Zero-Lag Escalation SLA",
+        "value": "Direct automated routing of change declarations directly to compliance officers, eliminating human delay."
+      },
+      "health": {
+        "label": "Managed System Health",
+        "value": "Ongoing monitoring of phone line deliverability, prompt accuracy, and CRM sync stability."
+      }
+    },
+    "wentWrong": {
+      "0": "Area",
+      "1": "What Happened",
+      "2": "How Coldi Resolved It",
+      "3": "Coming Soon",
+      "4": "Coming Soon",
+      "5": "Coming Soon",
+      "6": "Coming Soon",
+      "7": "Coming Soon",
+      "8": "Coming Soon",
+      "9": "Coming Soon",
+      "10": "Coming Soon",
+      "11": "Coming Soon"
+    },
+    "resultsShow": {
+      "title": "What This Engagement Shows",
+      "text": "In highly regulated fintech environments, AI deployment must provide total operational precision. Coldi delivers strict logic, real-time escalation triggers, and immutable audit trails directly alongside autonomous voice and text capabilities."
+    },
+    "resultsMetrics": {
+      "values": {
+        "zeroMin": "0 Min",
+        "zeroSec": "0 Sec",
+        "threeSteps": "3 Steps",
+        "zeroLag": "Zero <span>Response Lag:</span>"
+      },
+      "labels": {
+        "inboundSupport": "Front-Line Inbound Support Established (+1 236 309 2666)",
+        "lifecycleAutomated": "Inbound & Outbound Compliance Review Lifecycle Automated",
+        "manualDelays": "Manual Scheduling & Follow-Up Delays",
+        "leadCapture": "Automated Lead & Scope Capture",
+        "qualificationDelay": "Automated Lead Qualification Delay",
+        "escalationReporting": "Instant Post-Call Compliance Escalation & Reporting",
+        "qualificationLogic": "Automated Lead Qualification Logic Implemented",
+        "zeroLagLabel": "Automated classification and real-time triggers removed manual delays on high-risk accounts."
+      }
+    }
+  },
+  "ProfessionalServicesPage": {
+    "metaTitle": "AI Operational Excellence: Silverbell Group Case Study",
+    "metaDescription": "Discover how Coldi and Silverbell Group built a strategic partnership through AI integration. Our Autonomous AI Agent provides 24/7 expert support and proactive appointment setting to enhance global service standards.",
+    "hero": {
+      "titleLine1": "Global Scale, Zero Downtime:",
+      "titleLine2": "How a Professional Services Provider Expanded 24/7 Service Without Adding Headcount",
+      "subtitle": "How a global professional services leader integrated autonomous AI agents into their client intake funnel to capture after-hours leads and streamline global operations.",
+      "reportingRange": "THE CLIENT",
+      "paragraph": "The client is an international leader in professional services and enterprise outsourcing (global professional services provider). Operating across multiple time zones, their global clientele requires immediate, high-touch support and rapid sales intake."
+    },
+    "toc": {
+      "problem": {
+        "title": "Problem",
+        "description": "Calls slipping through after hours"
+      },
+      "engagement-snapshot": {
+        "title": "Engagement Snapshot",
+        "description": "The client, scope, and setup"
+      },
+      "integrated": {
+        "title": "What Coldi Built",
+        "description": "The agent, integrations, and workflows"
+      },
+      "implementation": {
+        "title": "How The Implementation Went",
+        "description": "A phased rollout to go-live"
+      },
+      "issues": {
+        "title": "What The Client Asked For Along The Way",
+        "description": "Requests that reshaped the build"
+      },
+      "monitoring": {
+        "title": "How Coldi Runs The Account",
+        "description": "Monitored, tuned, and audit-ready"
+      },
+      "went-wrong": {
+        "title": "What Went Wrong, and How Fast It Was Fixed",
+        "description": "Edge cases, caught and closed"
+      },
+      "results": {
+        "title": "Results & What The Numbers Mean",
+        "description": "The impact since launch"
+      }
+    },
+    "problem": {
+      "title": "The Problem",
+      "items": {
+        "timeZones": {
+          "title": "Time Zone Coverage Gaps",
+          "text": "Inbound inquiries arriving outside standard regional office hours were delayed in response, leading to lost conversion opportunities."
+        },
+        "capacity": {
+          "title": "Capacity Limits",
+          "text": "High-tier human specialists spent excessive time on initial data capture and basic routine inquiries rather than high-value consultation."
+        },
+        "leadLeakage": {
+          "title": "Lead Leakage",
+          "text": "Web portal traffic during nights, weekends, and holidays went unengaged without a live, proactive representative available."
+        }
+      },
+      "tried": {
+        "title": "What They Tried Before Coldi",
+        "items": {
+          "chatbots": {
+            "title": "Standard Off-the-Shelf Chatbots",
+            "text": "Generic conversational bots failed to handle industry-specific nuance and could not reliably drive conversion or intent-based routing."
+          },
+          "manualShifts": {
+            "title": "Expanding Manual Shifts",
+            "text": "Staffing global hours manually created steep operational overhead and inconsistent service quality across regional shifts."
+          },
+          "webForms": {
+            "title": "Static Web Forms",
+            "text": "Unattended contact forms suffered from low completion rates and slow follow-up speeds."
+          }
+        }
+      },
+      "asked": {
+        "title": "What They Asked For",
+        "text": "Deploy a 24/7 autonomous AI agent directly into the website representative portal to answer complex inquiries, capture prospect contact details, and book qualified meetings directly into human specialists' calendars."
+      },
+      "conclusion": {
+        "title": "The conclusion they reached",
+        "text": "Generic tools and static forms do not drive business growth. The critical challenge is deploying an active, brand-tuned agent that manages technical routing, instant scheduling, and data intake seamlessly around the clock. That is the point at which they came to Coldi."
+      }
+    },
+    "snapshot": {
+      "values": {
+        "timeline": "6 <span>Weeks</span>",
+        "integration": "100<span>%</span>",
+        "inquiries": "100+<span> Daily</span>"
+      },
+      "labels": {
+        "timeline": "Full Deployment Timeline",
+        "coverage": "Active Coverage Across All Time Zones",
+        "integration": "Inbound Web Portal Integration",
+        "inquiries": "Inquiries Managed System-Wide"
+      }
+    },
+    "implementation": {
+      "discovery": {
+        "title": "Discovery & Wiring",
+        "text": "Mapped intent logic, pre-loaded client’s domain knowledge, and wired API connections to internal scheduling tools."
+      },
+      "iterative": {
+        "title": "Iterative Prompt & Logic Tuning",
+        "text": "Tested response handling against historical customer inquiries; refined conversational tone and booking prompts."
+      },
+      "portal": {
+        "title": "Portal Integration & Pilot Launch",
+        "text": "Deployed agent to live web environment; began real-time transcript monitoring for edge cases."
+      },
+      "escalation": {
+        "title": "Escalation Protocol Optimization",
+        "text": "Hardened the live-transfer and callback logic for inquiries requiring human specialist intervention."
+      },
+      "rollout": {
+        "title": "Full Automation & 24/7 Rollout",
+        "text": "Expanded system to handle complete weekend, holiday, and night-shift coverage without manual supervision."
+      },
+      "hardening": {
+        "title": "Hardening & Performance Audit",
+        "text": "Conducted full transcript review, optimized response latencies, and finalized operational handoff reporting."
+      }
+    },
+    "integrated": {
+      "webAgent": {
+        "title": "Autonomous Web Agent Integration",
+        "text": "Embedded directly into the client’s \"Chat with an Online Representative\" portal to act as a digital extension of their elite service team."
+      },
+      "knowledge": {
+        "title": "Domain-Specific Knowledge Base",
+        "text": "Pre-loaded with the client’s proprietary operational data to deliver immediate, accurate technical and service responses."
+      },
+      "leadCapture": {
+        "title": "Proactive Lead Capture & Appointment Engine",
+        "text": "Programmed with strict logic to collect verified contact data (company name, phone, email) and lock in appointments in real time."
+      },
+      "routing": {
+        "title": "Human-in-the-Loop Routing Architecture",
+        "text": "Built-in logic flow to seamlessly escalate complex edge cases directly to live human teams with full transcript context."
+      }
+    },
+    "asked": {
+      "prompts": {
+        "value": "20+",
+        "label": "Specific Prompt Adjustments for Tone and Brand Tuning"
+      },
+      "calendar": {
+        "value": "5+",
+        "label": "Calendar Integration Tweaks for Dynamic Slot Allocation"
+      },
+      "coverage": {
+        "value": "100%",
+        "label": "Coverage Verified Across After-Hours and Holiday Schedules"
+      }
+    },
+    "monitoring": {
+      "turnkey": {
+        "label": "Turnkey Managed Solution",
+        "value": "Coldi handles all ongoing prompt engineering, system maintenance, and API health monitoring."
+      },
+      "transparency": {
+        "label": "Full Data Transparency",
+        "value": "Complete transcript access and outcome reporting supplied automatically to management teams."
+      },
+      "updates": {
+        "label": "Proactive Logic Updates",
+        "value": "Knowledge bases are continuously updated as the client’s service catalog evolves."
+      }
+    },
+    "wentWrong": {
+      "headerArea": "Area",
+      "headerHappened": "What Happened",
+      "headerResolved": "How Coldi Resolved It",
+      "dataArea": "Data Collection",
+      "dataHappened": "Initial leads occasionally omitted company size during open conversation.",
+      "dataResolved": "Re-prompted agent logic to enforce mandatory contact data capture before slot confirmation.",
+      "scheduleArea": "Schedule Syncing",
+      "scheduleHappened": "Slot availability conflicted across multi-regional specialist calendars.",
+      "scheduleResolved": "Reconfigured scheduling integration to auto-detect client time zones and dynamically display localized availability.",
+      "handoffArea": "Hand-Off Context",
+      "handoffHappened": "Human specialists lacked immediate context when reviewing AI-booked leads.",
+      "handoffResolved": "Configured automated post-chat summary webhooks sent straight to internal CRM/inbox."
+    },
+    "resultsShow": {
+      "title": "What This Engagement Shows",
+      "text": "Success in AI deployment depends on deep implementation—embedding domain expertise, enforcing clean data capture, and creating flawless hand-offs to human teams. Coldi delivers the complete operational engine alongside the voice and chat technology."
+    },
+    "resultsMetrics": {
+      "values": {
+        "hoursSaved": "75 Hours"
+      },
+      "labels": {
+        "dailyInquiries": "Daily Automated Inquiries Managed",
+        "hoursSavedLabel": "Saved Weekly in Initial Qualification",
+        "conversions": "Increase in Qualified Lead Conversions",
+        "globalCoverage": "Continuous Global Coverage Achieved"
+      }
+    }
+  },
+  "ResidentialElectricalPage": {
+    "metaTitle": "Automated Residential Service Intake & 24/7 Smart Dispatching",
+    "metaDescription": "How a residential electrical contractor deployed an autonomous AI voice agent (\"George\") to triage emergency calls, validate service areas, and book jobs directly into technician calendars.",
+    "hero": {
+      "titleLine1": "Automated Residential Service Intake & 24/7 Smart Dispatching",
+      "subtitle": "How a residential electrical contractor deployed an autonomous AI voice agent (\"George\") to triage emergency calls, validate service areas, and book jobs directly into technician calendars.",
+      "reportingRange": "THE CLIENT",
+      "paragraph": "The client is a residential service business providing electrical contracting, emergency response, lighting, and renovation project work."
+    },
+    "toc": {
+      "problem": {
+        "title": "Problem",
+        "description": "Calls slipping through after hours"
+      },
+      "engagement-snapshot": {
+        "title": "Engagement Snapshot",
+        "description": "The client, scope, and setup"
+      },
+      "integrated": {
+        "title": "What Coldi Built",
+        "description": "The agent, integrations, and workflows"
+      },
+      "implementation": {
+        "title": "How The Implementation Went",
+        "description": "A phased rollout to go-live"
+      },
+      "issues": {
+        "title": "What The Client Asked For Along The Way",
+        "description": "Requests that reshaped the build"
+      },
+      "monitoring": {
+        "title": "How Coldi Runs The Account",
+        "description": "Monitored, tuned, and audit-ready"
+      },
+      "went-wrong": {
+        "title": "What Went Wrong, and How Fast It Was Fixed",
+        "description": "Edge cases, caught and closed"
+      },
+      "results": {
+        "title": "Results & What The Numbers Mean",
+        "description": "The impact since launch"
+      }
+    },
+    "problem": {
+      "title": "The Problem",
+      "items": {
+        "afterHours": {
+          "title": "After-Hours Coverage",
+          "text": "Inbound calls required 24/7 front-line dispatching to capture emergency and residential service leads."
+        },
+        "manualScreening": {
+          "title": "Manual Screening & Scoping",
+          "text": "Staff had to manually verify operational territory via ZIP codes, capture job details, and handle caller requests."
+        },
+        "scheduling": {
+          "title": "Scheduling Friction",
+          "text": "Finding and locking in available appointment slots manually delayed conversions."
+        }
+      },
+      "tried": {
+        "title": "What They Tried Before Coldi",
+        "items": {
+          "manualDispatch": {
+            "title": "Manual Dispatching",
+            "text": "Inbound calls required 24/7 front-line dispatching to capture emergency and residential service leads."
+          },
+          "offShelf": {
+            "title": "Off-the-Shelf Tools",
+            "text": "Systems that lacked real-time calendar syncing and custom intent detection workflows."
+          }
+        }
+      },
+      "asked": {
+        "title": "What They Asked For",
+        "text": "Deploy an AI voice agent named George to triage inbound calls, screen emergencies, validate service areas, collect caller details, and book jobs directly into technician calendars."
+      },
+      "conclusion": {
+        "title": "The conclusion they reached",
+        "text": "generic call handling lacks the real-time calendar syncing, emergency transfer logic, and service-area validation needed for efficient trade dispatching. That is the point at which they came to Coldi."
+      }
+    },
+    "snapshot": {
+      "values": {
+        "timeline": "6 <span>Weeks</span>",
+        "lifecycle": "100<span>%</span>"
+      },
+      "labels": {
+        "timeline": "Full Deployment Timeline",
+        "coverage": "Front-Line Inbound Dispatch Coverage",
+        "lifecycle": "Inbound Booking Lifecycle Automated"
+      }
+    },
+    "implementation": {
+      "discovery": {
+        "title": "Discovery & Architecture",
+        "text": "Configured Twilio voice routing, defined emergency triage parameters, and wired the Housecall Pro integration."
+      },
+      "conversation": {
+        "title": "Conversation & Screening Build",
+        "text": "Programmed ZIP code validation guardrails, soft-transfer retention scripts, and project scoping trees."
+      },
+      "testing": {
+        "title": "Live Testing & Audio Benchmarking",
+        "text": "Tested agent response accuracy against real-world call scenarios, including complex project scoping and standard estimate requests."
+      },
+      "emergency": {
+        "title": "Emergency Transfer Hardening",
+        "text": "Validated live transfer fail-safes and ZIP code checks for urgent electrical service calls."
+      },
+      "rollout": {
+        "title": "Full Automation Rollout",
+        "text": "Transitioned 24/7 front-line dispatching live across all inbound residential calls."
+      },
+      "hardening": {
+        "title": "Hardening & Post-Call Automation",
+        "text": "Finalized automated post-call SMS confirmations and office manager lead summary webhooks."
+      }
+    },
+    "integrated": {
+      "inbound": {
+        "title": "Inbound Call Architecture & Intent Screening",
+        "text": "Implemented AI agent George to run immediate intent detection, triage emergencies, validate operational territory via ZIP code, and capture user details."
+      },
+      "emergency": {
+        "title": "Intelligent Emergency Dispatching",
+        "text": "Configured automated intent recognition that triggers immediate live transfers to technicians for urgent issues after a ZIP check."
+      },
+      "calendar": {
+        "title": "Housecall Pro Direct Calendar Sync",
+        "text": "Deep calendar integration checking real-time technician availability to negotiate and lock booked appointments directly into field schedules."
+      },
+      "twilio": {
+        "title": "Twilio Telephony & Post-Call Automation",
+        "text": "Integrated Twilio for high-fidelity voice routing, post-call SMS confirmations to customers, and instant lead summary briefs sent to office managers."
+      }
+    },
+    "asked": {
+      "emergency": {
+        "value": "Emergency Scripting",
+        "label": "Immediate ZIP check and live transfer logic built for urgent calls."
+      },
+      "disclosure": {
+        "value": "AI Disclosure & Retention Handling",
+        "label": "Soft transfer and trust-preservation scripts added for callers asking about AI identity or human operators"
+      },
+      "slot": {
+        "value": "Dynamic Slot Negotiation",
+        "label": "Configured multi-option slot offering logic to maximize booking conversion."
+      },
+      "scope": {
+        "value": "Technical Scope Gathering",
+        "label": "Customized conversation trees for complex scoping (deck renovations, outdoor outlets, lighting)."
+      },
+      "audio": {
+        "value": "Audio Call Examples",
+        "label": "Configured for Complex Project Scoping and Standard Quote & Appointment Booking."
+      }
+    },
+    "askedAudios": {
+      "projectScoping": {
+        "title": "Complex Project Scoping",
+        "text": "In this call, the AI manages a detailed request for a deck renovation, collecting specific requirements for outlets and lighting while validating the service area."
+      },
+      "quoteBooking": {
+        "title": "Standard Quote & Appointment Booking",
+        "text": "Watch how the agent handles a common inquiry for an outdoor outlet, explains the installation process, and syncs directly with the calendar for an onsite estimate."
+      }
+    },
+    "monitoring": {
+      "territory": {
+        "label": "Operational Territory Guardrails",
+        "value": "Automated ZIP code verification ensuring only leads within service boundaries proceed to booking."
+      },
+      "summarization": {
+        "label": "Full Data Summarization",
+        "value": "End-of-call confirmation step summarizing contact details and job requirements back to the caller."
+      },
+      "integrations": {
+        "label": "Managed Integrations",
+        "value": "Continuous automated syncing between Twilio routing, Housecall Pro scheduling, and SMS dispatching."
+      }
+    },
+    "wentWrong": {
+      "0": "Area",
+      "1": "What Happened",
+      "2": "How Coldi Resolved It",
+      "3": "Coming Soon",
+      "4": "Coming Soon",
+      "5": "Coming Soon",
+      "6": "Coming Soon",
+      "7": "Coming Soon",
+      "8": "Coming Soon",
+      "9": "Coming Soon",
+      "10": "Coming Soon",
+      "11": "Coming Soon"
+    },
+    "resultsShow": {
+      "title": "What This Engagement Shows",
+      "text": "Automating home service operations requires instant intent triage, territory validation, and direct calendar syncing. Coldi provides the full technical build and integration layer to turn inbound calls into structured, scheduled field work."
+    },
+    "resultsMetrics": {
+      "values": {
+        "instant": "Instant",
+        "immediate": "Immediate",
+        "threeSteps": "3 Steps",
+        "escalation": "<span>Immediate Emergency Escalation</span>"
+      },
+      "labels": {
+        "dispatching": "Front-Line Dispatching Established",
+        "lifecycle": "Inbound Booking Lifecycle Automated",
+        "calendarSync": "Calendar Syncing via Housecall Pro Integration",
+        "leadCapture": "Automated Lead & Scope Capture",
+        "intentZip": "Intent Recognition & ZIP Validation",
+        "notifications": "Instant Post-Call Customer & Office Notifications",
+        "lifecycleSteps": "Automated Lifecycle Completed",
+        "escalationLabel": "Urgent calls bypass intake queues and connect directly to live electricians within seconds of location validation."
+      }
+    }
+  },
+  "AgriculturalInfrastructurePage": {
+    "metaTitle": "Lead Qualification in the Global Agro-Industry",
+    "metaDescription": "How Global Agro Industry deployed Coldi's AI voice concierge Sara for technical discovery, CRM data extraction, and senior sales scheduling.",
+    "hero": {
+      "titleLine1": "Automated Technical Screening & Senior Sales Scheduling",
+      "subtitle": "How a global agricultural infrastructure provider deployed an autonomous AI voice assistant to handle technical discovery, qualify complex project leads, and populate CRM data.",
+      "reportingRange": "THE CLIENT",
+      "paragraph": "Agricultural infrastructure provider delivers turnkey agricultural infrastructure, livestock facilities, and complex engineering solutions to international markets."
+    },
+    "toc": {
+      "problem": {
+        "title": "Problem",
+        "description": "Calls slipping through after hours"
+      },
+      "engagement-snapshot": {
+        "title": "Engagement Snapshot",
+        "description": "The client, scope, and setup"
+      },
+      "integrated": {
+        "title": "What Coldi Built",
+        "description": "The agent, integrations, and workflows"
+      },
+      "implementation": {
+        "title": "How The Implementation Went",
+        "description": "A phased rollout to go-live"
+      },
+      "issues": {
+        "title": "What The Client Asked For Along The Way",
+        "description": "Requests that reshaped the build"
+      },
+      "monitoring": {
+        "title": "How Coldi Runs The Account",
+        "description": "Monitored, tuned, and audit-ready"
+      },
+      "went-wrong": {
+        "title": "What Went Wrong, and How Fast It Was Fixed",
+        "description": "Edge cases, caught and closed"
+      },
+      "results": {
+        "title": "Results & What The Numbers Mean",
+        "description": "The impact since launch"
+      }
+    },
+    "problem": {
+      "title": "The Problem",
+      "items": {
+        "manualScreening": {
+          "title": "High Cost of Manual Screening",
+          "text": "Senior sales managers spent hours filtering unqualified inbound inquiries for multi-million dollar projects."
+        },
+        "resourceStrain": {
+          "title": "Resource Strain",
+          "text": "High-value assets were buried under prospects lacking budget, authority, or immediate project intent."
+        },
+        "timeZones": {
+          "title": "Global Time Zone Friction",
+          "text": "Inbound inquiries arriving across international regions lacked immediate technical response and qualification."
+        }
+      },
+      "tried": {
+        "title": "What They Tried Before Coldi",
+        "items": {
+          "manualFiltering": {
+            "title": "Manual Lead Filtering",
+            "text": "Reliance on senior reps to manually evaluate company sizes, geographical constraints, and scope details."
+          },
+          "webForms": {
+            "title": "Standard Web Forms",
+            "text": "Static contact forms failed to deliver deep technical discovery or capture complex project nuances."
+          }
+        }
+      },
+      "asked": {
+        "title": "What They Asked For",
+        "text": "Deploy an autonomous AI voice assistant to handle initial technical inquiries, extract critical business intelligence into the CRM, screen project intent, and schedule pre-qualified prospects directly with senior sales teams"
+      },
+      "conclusion": {
+        "title": "The conclusion they reached",
+        "text": "generic intake tools cannot evaluate complex industrial catalogs or conduct deep technical discovery across global markets. High-value sales teams require a specialized system that extracts structured business intelligence and pre-qualifies prospects before scheduling. That is the point at which they came to Coldi."
+      }
+    },
+    "snapshot": {
+      "values": {
+        "timeline": "6 <span>Weeks</span>",
+        "intake": "100<span>%</span>",
+        "attributes": "4<span> Core Attributes</span>"
+      },
+      "labels": {
+        "timeline": "Full Deployment Timeline",
+        "coverage": "Global Multi-Time Zone Coverage",
+        "intake": "Inbound Technical Intake Automated",
+        "attributes": "Structured CRM Data Extraction"
+      }
+    },
+    "implementation": {
+      "discovery": {
+        "title": "Discovery & Architecture",
+        "text": "Mapped agricultural product catalog data, defined qualification thresholds, and wired internal CRM extraction endpoints."
+      },
+      "conversation": {
+        "title": "Conversation & Knowledge Build",
+        "text": "Programmed sector-specific rules for regional variations (e.g., poultry housing in Brazil vs. pig farming facilities in Vietnam)."
+      },
+      "screening": {
+        "title": "Screening & Scoring Setup",
+        "text": "Configured intent-analysis logic to distinguish serious investors from casual researchers and set automated lead scoring thresholds."
+      },
+      "transition": {
+        "title": "Transition Protocol Hardening",
+        "text": "Built structured scheduling handoff flows to eliminate cold transfers and capture prospect availability."
+      },
+      "deployment": {
+        "title": "Global Deployment",
+        "text": "Launched 24/7 autonomous intake across international time zones."
+      },
+      "optimization": {
+        "title": "Optimization & Audit",
+        "text": "Evaluated CRM extraction accuracy, prompt precision, and senior manager calendar sync reliability."
+      }
+    },
+    "integrated": {
+      "discovery": {
+        "title": "Inbound Discovery & Screening Architecture",
+        "text": "Deployed AI voice assistant, trained on complete agricultural product catalogs to answer technical questions and guide initial discovery."
+      },
+      "crm": {
+        "title": "Automated CRM Extraction Engine",
+        "text": "Autonomous data capture extracting company profile, project scale, geography, and buy signals directly into internal CRM records."
+      },
+      "scoring": {
+        "title": "Intent-Analysis & Lead Scoring Pipeline",
+        "text": "Scoring logic designed to recognize specific buy signals and evaluate prospects against customized company qualification thresholds."
+      },
+      "handoff": {
+        "title": "Structured Handoff & Scheduling Protocol",
+        "text": "Appointment collection system gathering prospect availability and preferred channels to book fully briefed meetings with senior sales managers."
+      }
+    },
+    "asked": {
+      "sectorRules": {
+        "value": "Sector-Specific Product Rules",
+        "label": "Differentiated context logic tailored to regional project specifications."
+      },
+      "warmHandoff": {
+        "value": "Warm Handoff Protocols",
+        "label": "Replaced cold phone transfers with structured appointment collection and lead briefs"
+      },
+      "dataCapture": {
+        "value": "Strategic Data Capture Prompts",
+        "label": "Engineered dialogue logic to systematically extract Company Profile, Project Scope, Geography, and Intent Signals."
+      }
+    },
+    "monitoring": {
+      "globalOps": {
+        "label": "Continuous Global Operations",
+        "value": "24/7 availability maintained across international time zones for uninterrupted inquiry intake."
+      },
+      "thresholds": {
+        "label": "Qualification Threshold Guardrails",
+        "value": "Automated scoring logic prevents unqualified leads from populating senior sales calendars."
+      },
+      "maintenance": {
+        "label": "Turnkey Infrastructure Maintenance",
+        "value": "Coldi manages prompt updates, catalog expansions, and CRM pipeline health"
+      }
+    },
+    "wentWrong": {
+      "0": "Area",
+      "1": "What Happened",
+      "2": "How Coldi Resolved It",
+      "3": "Coming Soon",
+      "4": "Coming Soon",
+      "5": "Coming Soon",
+      "6": "Coming Soon",
+      "7": "Coming Soon",
+      "8": "Coming Soon",
+      "9": "Coming Soon",
+      "10": "Coming Soon",
+      "11": "Coming Soon"
+    },
+    "resultsShow": {
+      "title": "What This Engagement Shows",
+      "text": "Industrial sales automation requires deep domain knowledge, precise intent scoring, and structured data extraction. Coldi provides the full technical framework to convert complex global inquiries into qualified, scheduled opportunities."
+    },
+    "resultsMetrics": {
+      "values": {
+        "automated": "Automated",
+        "fourMetrics": "4 Metrics",
+        "comingSoon1": "Coming Soon",
+        "comingSoon2": "Coming Soon",
+        "targeted": "Targeted Sales Allocation",
+        "handoffs": "Complete Context Handoffs"
+      },
+      "labels": {
+        "salesFocus": "High-Probability Sales Focus for Senior Managers",
+        "discovery": "Technical Discovery & Scope Intake",
+        "crmExtraction": "Extracted Automatically into CRM",
+        "qualification": "Continuous Multi-Time Zone Qualification",
+        "comingSoon1": "Coming Soon",
+        "comingSoon2": "Coming Soon",
+        "targetedLabel": "Senior managers engage exclusively with pre-screened prospects holding verified budget and intent.",
+        "handoffsLabel": "Structured briefs eliminate administrative discovery work during initial sales meetings."
+      }
+    }
+  },
+  "SaasHvacPage": {
+    "metaTitle": "High-Volume Lead Re-engagement for SaaS and HVAC",
+    "metaDescription": "Re-engage cold SaaS & HVAC leads with ultra-low latency AI. Handle objections automatically and send Calendly links via SMS to book more software demos.",
+    "hero": {
+      "titleLine1": "High-Speed Outbound Reactivation & Tech Stack Scoping",
+      "subtitle": "How a SaaS and HVAC service operator deployed an ultra-low latency voice AI engine to reactivate cold lead databases, analyze existing software stacks, and book 15-minute product demos.",
+      "reportingRange": "THE CLIENT",
+      "paragraph": "The client provides high-volume SaaS solutions to HVAC contractor networks and field service businesses managing cold prospect databases from previous events and outreach."
+    },
+    "toc": {
+      "problem": {
+        "title": "Problem",
+        "description": "Calls slipping through after hours"
+      },
+      "engagement-snapshot": {
+        "title": "Engagement Snapshot",
+        "description": "The client, scope, and setup"
+      },
+      "integrated": {
+        "title": "What Coldi Built",
+        "description": "The agent, integrations, and workflows"
+      },
+      "implementation": {
+        "title": "How The Implementation Went",
+        "description": "A phased rollout to go-live"
+      },
+      "issues": {
+        "title": "What The Client Asked For Along The Way",
+        "description": "Requests that reshaped the build"
+      },
+      "monitoring": {
+        "title": "How Coldi Runs The Account",
+        "description": "Monitored, tuned, and audit-ready"
+      },
+      "went-wrong": {
+        "title": "What Went Wrong, and How Fast It Was Fixed",
+        "description": "Edge cases, caught and closed"
+      },
+      "results": {
+        "title": "Results & What The Numbers Mean",
+        "description": "The impact since launch"
+      }
+    },
+    "problem": {
+      "title": "The Problem",
+      "items": {
+        "databaseDecay": {
+          "title": "Database Decay",
+          "text": "Uncontacted leads sat idle, causing ROI degradation and lost pipeline value over time."
+        },
+        "manualCalling": {
+          "title": "High Manual Cold-Calling Overhead",
+          "text": "Human reps faced rapid fatigue attempting high-volume outreach across cold lists."
+        },
+        "latency": {
+          "title": "Conversation Latency Pauses",
+          "text": "Standard automated dialers introduced awkward silences, triggering immediate hang-ups from busy business owners."
+        }
+      },
+      "tried": {
+        "title": "What They Tried Before Coldi",
+        "items": {
+          "manualSdr": {
+            "title": "Manual SDR Dialing",
+            "text": "Human capacity limits prevented thorough coverage of large, cold lead databases."
+          },
+          "dialers": {
+            "title": "Off-the-Shelf Dialers",
+            "text": "Systems lacked rapid response infrastructure and real-time CRM tech-stack logging capabilities."
+          }
+        }
+      },
+      "asked": {
+        "title": "What They Asked For",
+        "text": "Deploy an outbound voice AI engine to call cold lists, handle natural objection flow, identify the prospect's current software stack, and dispatch SMS booking links during live calls."
+      },
+      "conclusion": {
+        "title": "The conclusion they reached",
+        "text": "cold list reactivation requires sub-second voice latency, intelligent objection handling, and real-time calendar link dispatch to convert idle data before interest cools. That is the point at which they came to Coldi."
+      }
+    },
+    "snapshot": {
+      "values": {
+        "duration": "104.09<span>Min</span>"
+      },
+      "labels": {
+        "calls": "Total Outbound Calls Placed",
+        "duration": "Total Live Call Duration",
+        "leads": "Total Leads Captured",
+        "latency": "Sub-Second Response Latency SLA"
+      }
+    },
+    "implementation": {
+      "phase1": {
+        "title": "Coming Soon",
+        "text": "Coming Soon"
+      },
+      "phase2": {
+        "title": "Coming Soon 2",
+        "text": "Coming Soon"
+      },
+      "phase3": {
+        "title": "Coming Soon 3",
+        "text": "Coming Soon"
+      },
+      "phase4": {
+        "title": "Coming Soon 4",
+        "text": "Coming Soon"
+      },
+      "phase5": {
+        "title": "Coming Soon 5",
+        "text": "Coming Soon"
+      },
+      "phase6": {
+        "title": "Coming Soon 6",
+        "text": "Coming Soon"
+      }
+    },
+    "integrated": {
+      "voice": {
+        "title": "Ultra-Low Latency Voice Engine",
+        "text": "Sub-500ms response architecture engineered to eliminate pauses, manage interruptions, and maintain natural conversation pacing."
+      },
+      "calendly": {
+        "title": "Calendly & SMS Automation Engine",
+        "text": "Automated SMS dispatch system sending direct Calendly booking links during live calls upon verbal prospect confirmation."
+      },
+      "crm": {
+        "title": "CRM Intelligence Feedback Loop",
+        "text": "Real-time CRM integration logging current software stack details, conversation outcomes, and account performance summaries."
+      },
+      "dashboard": {
+        "title": "Real-Time Performance Dashboard",
+        "text": "Centralized tracking environment displaying real-time call counts, live talk minutes, and qualified lead capture metrics."
+      }
+    },
+    "asked": {
+      "objection": {
+        "value": "Two-Step Objection Rule",
+        "label": "Programmed logic where the agent acknowledges initial pushback, pivots with a value proposition, and concedes only after a second firm refusal."
+      },
+      "techStack": {
+        "value": "Tech Stack Discovery Scripting",
+        "label": "Mid-call discovery prompts configured to extract and log the prospect’s existing software environment."
+      },
+      "conversion": {
+        "value": "Instant Conversion Pivot",
+        "label": "Real-time trigger executing SMS booking link dispatch upon verbal interest."
+      }
+    },
+    "askedAudios": {
+      "hvacVoice": {
+        "title": "SEE HVAC VOICE IN ACTION"
+      }
+    },
+    "monitoring": {
+      "latency": {
+        "label": "Latency Management SLA",
+        "value": "Continuous enforcement of sub-500ms voice response speed to prevent robotic speech pauses."
+      },
+      "outreach": {
+        "label": "Outreach Threshold Guardrails",
+        "value": "Automated stopping criteria enforcing objection handling caps to prevent prospect fatigue."
+      },
+      "crm": {
+        "label": "Managed CRM Logging",
+        "value": "Automated synchronization of tech stack metadata and call summary logs."
+      }
+    },
+    "wentWrong": {
+      "0": "Area",
+      "1": "What Happened",
+      "2": "How Coldi Resolved It",
+      "3": "Coming Soon",
+      "4": "Coming Soon",
+      "5": "Coming Soon",
+      "6": "Coming Soon",
+      "7": "Coming Soon",
+      "8": "Coming Soon",
+      "9": "Coming Soon",
+      "10": "Coming Soon",
+      "11": "Coming Soon"
+    },
+    "resultsShow": {
+      "title": "What This Engagement Shows",
+      "text": "Reactivating cold data requires sub-second voice responsiveness, persistent objection handling, and immediate digital link handoffs. Coldi provides the full technical voice pipeline to extract value from idle databases."
+    },
+    "resultsMetrics": {
+      "values": {
+        "twoSteps": "2 Steps",
+        "oneClick": "1 Click",
+        "callMinutes": "104.09 Min",
+        "linkDispatch": "<span>Immediate Link Dispatch</span>",
+        "marketResearch": "<span>Automated Market Research</span>"
+      },
+      "labels": {
+        "qualifiedLeads": "Total Qualified Leads Captured",
+        "objectionHandling": "Structured Objection Handling Enforcement",
+        "techStackLogged": "Automated Tech Stack Scoping Logged to CR",
+        "smsDelivery": "Instant SMS Calendly Demo Delivery",
+        "outboundCalls": "Outbound Calls Placed",
+        "callMinutesLabel": "Total Call Minutes Executed",
+        "linkDispatchLabel": "Sending booking links during active calls converts verbal interest into calendar meetings before the caller hangs up",
+        "marketResearchLabel": "Capturing current software stack data enriches CRM records for future targeting even when demos are not booked immediately."
+      }
+    }
+  },
+  "CaseStudyChrome": {
+    "week": "Week {week}",
+    "prevWeek": "Previous week",
+    "nextWeek": "Next week"
   }
 }

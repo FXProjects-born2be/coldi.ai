@@ -93,266 +93,160 @@ export type CaseStudyContent = {
   column?: 'one' | 'two';
 };
 
-export const heroContent: HeroContent = {
-  titleLine1: 'Global Scale, Zero Downtime:',
-  titleLine2: 'How a Professional Services Provider Expanded 24/7 Service Without Adding Headcount',
-  subtitle:
-    'How a global professional services leader integrated autonomous AI agents into their client intake funnel to capture after-hours leads and streamline global operations.',
-  reportingRange: 'THE CLIENT',
-  paragraphs: [
-    'The client is an international leader in professional services and enterprise outsourcing (global professional services provider). Operating across multiple time zones, their global clientele requires immediate, high-touch support and rapid sales intake.',
+export const professionalServicesStructure = {
+  tocIds: [
+    'problem',
+    'engagement-snapshot',
+    'integrated',
+    'implementation',
+    'issues',
+    'monitoring',
+    'went-wrong',
+    'results',
+  ] as const,
+  problemItemIds: ['timeZones', 'capacity', 'leadLeakage'] as const,
+  problemTriedIds: ['chatbots', 'manualShifts', 'webForms'] as const,
+  problemAskedBg: '/images/silverbellgroup/problem-one.png',
+  problemConclusionBg: '/images/silverbellgroup/problem-two.png',
+  snapshotCards: [
+    { valueKey: 'timeline', src: 'icons/simple-one.svg', labelKey: 'timeline' },
+    { value: '24/7', src: 'icons/simple-two.svg', labelKey: 'coverage' },
+    { valueKey: 'integration', src: 'icons/simple-three.svg', labelKey: 'integration' },
+    { valueKey: 'inquiries', src: 'icons/simple-four.svg', labelKey: 'inquiries' },
   ],
-};
-
-export const tocItems = [
-  {
-    id: 'problem',
-    title: 'Problem',
-    description: 'Calls slipping through after hours',
-  },
-  {
-    id: 'engagement-snapshot',
-    title: 'Engagement Snapshot',
-    description: 'The client, scope, and setup',
-  },
-  {
-    id: 'integrated',
-    title: 'What Coldi Built',
-    description: 'The agent, integrations, and workflows',
-  },
-  {
-    id: 'implementation',
-    title: 'How The Implementation Went',
-    description: 'A phased rollout to go-live',
-  },
-  {
-    id: 'issues',
-    title: 'What The Client Asked For Along The Way',
-    description: 'Requests that reshaped the build',
-  },
-  {
-    id: 'monitoring',
-    title: 'How Coldi Runs The Account',
-    description: 'Monitored, tuned, and audit-ready',
-  },
-  {
-    id: 'went-wrong',
-    title: 'What Went Wrong, and How Fast It Was Fixed',
-    description: 'Edge cases, caught and closed',
-  },
-  {
-    id: 'results',
-    title: 'Results & What The Numbers Mean',
-    description: 'The impact since launch',
-  },
-] as const;
-
-export const problemContent: ProblemContent = {
-  title: 'The Problem',
-  items: [
-    {
-      title: 'Time Zone Coverage Gaps',
-      text: 'Inbound inquiries arriving outside standard regional office hours were delayed in response, leading to lost conversion opportunities.',
-    },
-    {
-      title: 'Capacity Limits',
-      text: 'High-tier human specialists spent excessive time on initial data capture and basic routine inquiries rather than high-value consultation.',
-    },
-    {
-      title: 'Lead Leakage',
-      text: 'Web portal traffic during nights, weekends, and holidays went unengaged without a live, proactive representative available.',
-    },
+  implementationPhaseIds: [
+    'discovery',
+    'iterative',
+    'portal',
+    'escalation',
+    'rollout',
+    'hardening',
+  ] as const,
+  integratedIds: ['webAgent', 'knowledge', 'leadCapture', 'routing'] as const,
+  integratedSrc: [
+    'icons/autonomous.svg',
+    'icons/domain.svg',
+    'icons/proactive.svg',
+    'icons/human.svg',
   ],
-  tried: {
-    title: 'What They Tried Before Coldi',
-    items: [
-      {
-        title: 'Standard Off-the-Shelf Chatbots',
-        text: 'Generic conversational bots failed to handle industry-specific nuance and could not reliably drive conversion or intent-based routing.',
-      },
-      {
-        title: 'Expanding Manual Shifts',
-        text: 'Staffing global hours manually created steep operational overhead and inconsistent service quality across regional shifts.',
-      },
-      {
-        title: 'Static Web Forms',
-        text: 'Unattended contact forms suffered from low completion rates and slow follow-up speeds.',
-      },
-    ],
-  },
-  asked: {
-    title: 'What They Asked For',
-    text: "Deploy a 24/7 autonomous AI agent directly into the website representative portal to answer complex inquiries, capture prospect contact details, and book qualified meetings directly into human specialists' calendars.",
-    bgImage: '/images/silverbellgroup/problem-one.png',
-  },
-  conclusion: {
-    title: 'The conclusion they reached',
-    text: 'Generic tools and static forms do not drive business growth. The critical challenge is deploying an active, brand-tuned agent that manages technical routing, instant scheduling, and data intake seamlessly around the clock. That is the point at which they came to Coldi.',
-    bgImage: '/images/silverbellgroup/problem-two.png',
-  },
+  askedIds: ['prompts', 'calendar', 'coverage'] as const,
+  askedSrc: ['icons/specific.svg', 'icons/calendar.svg', 'icons/coverage.svg'],
+  monitoringIds: ['turnkey', 'transparency', 'updates'] as const,
+  wentWrongIds: [
+    'headerArea',
+    'headerHappened',
+    'headerResolved',
+    'dataArea',
+    'dataHappened',
+    'dataResolved',
+    'scheduleArea',
+    'scheduleHappened',
+    'scheduleResolved',
+    'handoffArea',
+    'handoffHappened',
+    'handoffResolved',
+  ] as const,
+  resultsBg: '/images/silverbellgroup/results-bg.png',
+  resultsShowSrc: '/images/silverbellgroup/result-two-bg.png',
+  resultsMetrics: [
+    { value: '100+', labelKey: 'dailyInquiries', highlight: true },
+    { valueKey: 'hoursSaved', labelKey: 'hoursSavedLabel', highlight: false },
+    { value: '45%', labelKey: 'conversions', highlight: false },
+    { value: '24/7', labelKey: 'globalCoverage', highlight: false },
+  ],
+} as const;
+
+type Translator = {
+  (key: string): string;
+  raw: (key: string) => string;
 };
 
-export const snapshotCards = [
-  {
-    value: '6 <span>Weeks</span>',
-    label: 'Full Deployment Timeline',
-    src: 'icons/simple-one.svg',
-  },
-  {
-    value: '24/7',
-    label: 'Active Coverage Across All Time Zones',
-    src: 'icons/simple-two.svg',
-  },
-  {
-    value: '100<span>%</span>',
-    label: 'Inbound Web Portal Integration',
-    src: 'icons/simple-three.svg',
-  },
-  {
-    value: '100+<span> Daily</span>',
-    label: 'Inquiries Managed System-Wide',
-    src: 'icons/simple-four.svg',
-  },
-];
+export const buildProfessionalServicesHero = (t: Translator): HeroContent => ({
+  titleLine1: t('hero.titleLine1'),
+  titleLine2: t('hero.titleLine2'),
+  subtitle: t('hero.subtitle'),
+  reportingRange: t('hero.reportingRange'),
+  paragraphs: [t('hero.paragraph')],
+});
 
-export const implementationPhases = [
-  {
-    title: 'Discovery & Wiring',
-    text: 'Mapped intent logic, pre-loaded client’s domain knowledge, and wired API connections to internal scheduling tools.',
-  },
-  {
-    title: 'Iterative Prompt & Logic Tuning',
-    text: 'Tested response handling against historical customer inquiries; refined conversational tone and booking prompts.',
-  },
-  {
-    title: 'Portal Integration & Pilot Launch',
-    text: 'Deployed agent to live web environment; began real-time transcript monitoring for edge cases.',
-  },
-  {
-    title: 'Escalation Protocol Optimization',
-    text: 'Hardened the live-transfer and callback logic for inquiries requiring human specialist intervention.',
-  },
-  {
-    title: 'Full Automation & 24/7 Rollout',
-    text: 'Expanded system to handle complete weekend, holiday, and night-shift coverage without manual supervision.',
-  },
-  {
-    title: 'Hardening & Performance Audit',
-    text: 'Conducted full transcript review, optimized response latencies, and finalized operational handoff reporting.',
-  },
-];
+export const buildProfessionalServicesCaseStudy = (t: Translator): CaseStudyContent => {
+  const s = professionalServicesStructure;
 
-export const integratedItems = [
-  {
-    title: 'Autonomous Web Agent Integration',
-    text: 'Embedded directly into the client’s "Chat with an Online Representative" portal to act as a digital extension of their elite service team.',
-    src: 'icons/autonomous.svg',
-  },
-  {
-    title: 'Domain-Specific Knowledge Base',
-    text: 'Pre-loaded with the client’s proprietary operational data to deliver immediate, accurate technical and service responses.',
-    src: 'icons/domain.svg',
-  },
-  {
-    title: 'Proactive Lead Capture & Appointment Engine',
-    text: 'Programmed with strict logic to collect verified contact data (company name, phone, email) and lock in appointments in real time.',
-    src: 'icons/proactive.svg',
-  },
-  {
-    title: 'Human-in-the-Loop Routing Architecture',
-    text: 'Built-in logic flow to seamlessly escalate complex edge cases directly to live human teams with full transcript context.',
-    src: 'icons/human.svg',
-  },
-];
+  const problem: ProblemContent = {
+    title: t('problem.title'),
+    items: s.problemItemIds.map((id) => ({
+      title: t(`problem.items.${id}.title`),
+      text: t(`problem.items.${id}.text`),
+    })),
+    tried: {
+      title: t('problem.tried.title'),
+      items: s.problemTriedIds.map((id) => ({
+        title: t(`problem.tried.items.${id}.title`),
+        text: t(`problem.tried.items.${id}.text`),
+      })),
+    },
+    asked: {
+      title: t('problem.asked.title'),
+      text: t('problem.asked.text'),
+      bgImage: s.problemAskedBg,
+    },
+    conclusion: {
+      title: t('problem.conclusion.title'),
+      text: t('problem.conclusion.text'),
+      bgImage: s.problemConclusionBg,
+    },
+  };
 
-export const askedCards = [
-  {
-    value: '20+',
-    label: 'Specific Prompt Adjustments for Tone and Brand Tuning',
-    src: 'icons/specific.svg',
-  },
-  {
-    value: '5+',
-    label: 'Calendar Integration Tweaks for Dynamic Slot Allocation',
-    src: 'icons/calendar.svg',
-  },
-  {
-    value: '100%',
-    label: 'Coverage Verified Across After-Hours and Holiday Schedules',
-    src: 'icons/coverage.svg',
-  },
-];
-
-export const monitoringItems = [
-  {
-    label: 'Turnkey Managed Solution',
-    value:
-      'Coldi handles all ongoing prompt engineering, system maintenance, and API health monitoring.',
-  },
-  {
-    label: 'Full Data Transparency',
-    value:
-      'Complete transcript access and outcome reporting supplied automatically to management teams.',
-  },
-  {
-    label: 'Proactive Logic Updates',
-    value: 'Knowledge bases are continuously updated as the client’s service catalog evolves.',
-  },
-];
-
-export const wentWrongItems = [
-  { title: 'Area' },
-  { title: 'What Happened' },
-  { title: 'How Coldi Resolved It' },
-  { title: 'Data Collection' },
-  { title: 'Initial leads occasionally omitted company size during open conversation.' },
-  {
-    title:
-      'Re-prompted agent logic to enforce mandatory contact data capture before slot confirmation.',
-  },
-  { title: 'Schedule Syncing' },
-  { title: 'Slot availability conflicted across multi-regional specialist calendars.' },
-  {
-    title:
-      'Reconfigured scheduling integration to auto-detect client time zones and dynamically display localized availability.',
-  },
-  {
-    title: 'Hand-Off Context',
-  },
-  {
-    title: 'Human specialists lacked immediate context when reviewing AI-booked leads.',
-  },
-  {
-    title: 'Configured automated post-chat summary webhooks sent straight to internal CRM/inbox.',
-  },
-];
-
-export const resultsBg = '/images/silverbellgroup/results-bg.png';
-
-export const resultsShow = {
-  title: 'What This Engagement Shows',
-  text: 'Success in AI deployment depends on deep implementation—embedding domain expertise, enforcing clean data capture, and creating flawless hand-offs to human teams. Coldi delivers the complete operational engine alongside the voice and chat technology.',
-  src: '/images/silverbellgroup/result-two-bg.png',
-};
-
-export const resultsMetrics = [
-  { value: '100+', label: 'Daily Automated Inquiries Managed', highlight: true },
-  { value: '75 Hours', label: 'Saved Weekly in Initial Qualification', highlight: false },
-  { value: '45%', label: 'Increase in Qualified Lead Conversions', highlight: false },
-  { value: '24/7', label: 'Continuous Global Coverage Achieved', highlight: false },
-];
-
-export const caseStudyContent: CaseStudyContent = {
-  tocItems,
-  problem: problemContent,
-  snapshotCards,
-  implementationPhases,
-  integratedItems,
-  askedCards,
-  monitoringItems,
-  wentWrongItems,
-  resultsBg,
-  resultsShow,
-  resultsMetrics,
-  column: 'two',
+  return {
+    tocItems: s.tocIds.map((id) => ({
+      id,
+      title: t(`toc.${id}.title`),
+      description: t(`toc.${id}.description`),
+    })),
+    problem,
+    snapshotCards: s.snapshotCards.map((card) => ({
+      value:
+        'valueKey' in card
+          ? t.raw(`snapshot.values.${card.valueKey}`)
+          : (card as { value: string }).value,
+      label: t(`snapshot.labels.${card.labelKey}`),
+      src: card.src,
+    })),
+    implementationPhases: s.implementationPhaseIds.map((id) => ({
+      title: t(`implementation.${id}.title`),
+      text: t(`implementation.${id}.text`),
+    })),
+    integratedItems: s.integratedIds.map((id, index) => ({
+      title: t(`integrated.${id}.title`),
+      text: t(`integrated.${id}.text`),
+      src: s.integratedSrc[index],
+    })),
+    askedCards: s.askedIds.map((id, index) => ({
+      value: t(`asked.${id}.value`),
+      label: t(`asked.${id}.label`),
+      src: s.askedSrc[index],
+    })),
+    monitoringItems: s.monitoringIds.map((id) => ({
+      label: t(`monitoring.${id}.label`),
+      value: t(`monitoring.${id}.value`),
+    })),
+    wentWrongItems: s.wentWrongIds.map((id) => ({
+      title: t(`wentWrong.${id}`),
+    })),
+    resultsBg: s.resultsBg,
+    resultsShow: {
+      title: t('resultsShow.title'),
+      text: t('resultsShow.text'),
+      src: s.resultsShowSrc,
+    },
+    resultsMetrics: s.resultsMetrics.map((metric) => ({
+      value:
+        'valueKey' in metric
+          ? t.raw(`resultsMetrics.values.${metric.valueKey}`)
+          : (metric as { value: string }).value,
+      label: t(`resultsMetrics.labels.${metric.labelKey}`),
+      highlight: metric.highlight,
+    })),
+    column: 'two',
+  };
 };
