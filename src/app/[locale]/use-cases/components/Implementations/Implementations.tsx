@@ -4,12 +4,15 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { useTranslations } from 'next-intl';
+
 import { cn } from '@/shared/lib/helpers';
 
 import { IMPLEMENTATIONS } from '../../data';
 import st from './Implementations.module.scss';
 
 export const UseCasesImplementations = () => {
+  const t = useTranslations('UseCasesPage.implementations');
   const [activeId, setActiveId] = useState(IMPLEMENTATIONS[0].id);
   const activeIndex = IMPLEMENTATIONS.findIndex((item) => item.id === activeId);
   const active = IMPLEMENTATIONS[activeIndex] ?? IMPLEMENTATIONS[0];
@@ -22,10 +25,10 @@ export const UseCasesImplementations = () => {
   return (
     <section id="implementations" className={st.section}>
       <div className={cn('container', st.inner)}>
-        <h2 className={st.heading}>More Coldi Implementations</h2>
+        <h2 className={st.heading}>{t('heading')}</h2>
 
         <div className={st.panel}>
-          <div className={st.sidebar} role="tablist" aria-label="Implementations">
+          <div className={st.sidebar} role="tablist" aria-label={t('tabsAria')}>
             {IMPLEMENTATIONS.map((item) => {
               const isActive = item.id === active.id;
 
@@ -38,7 +41,7 @@ export const UseCasesImplementations = () => {
                   className={cn(st.sideTab, isActive && st.sideTabActive)}
                   onClick={() => setActiveId(item.id)}
                 >
-                  {item.tab}
+                  {t(`cases.${item.id}.tab`)}
                 </button>
               );
             })}
@@ -48,23 +51,25 @@ export const UseCasesImplementations = () => {
             <div className={st.contentTop}>
               <div className={st.copy}>
                 <div className={st.copyText}>
-                  <h3 className={st.title}>{active.title}</h3>
-                  <p className={st.description}>{active.description}</p>
+                  <h3 className={st.title}>{t(`cases.${active.id}.title`)}</h3>
+                  <p className={st.description}>{t(`cases.${active.id}.description`)}</p>
                 </div>
                 <Link href={active.href} className={st.cta}>
-                  Explore Full Case
+                  {t('exploreCta')}
                 </Link>
               </div>
 
               <div className={st.handles}>
-                <p className={st.handlesTitle}>Coldi handles</p>
+                <p className={st.handlesTitle}>{t('handlesTitle')}</p>
                 <ul className={st.handlesList}>
                   {active.handles.map((handle) => (
-                    <li key={handle.label} className={st.handleItem}>
+                    <li key={handle.labelKey} className={st.handleItem}>
                       <span className={st.handleIcon}>
                         <Image src={handle.icon} alt="" width={24} height={24} unoptimized />
                       </span>
-                      <span className={st.handleLabel}>{handle.label}</span>
+                      <span className={st.handleLabel}>
+                        {t(`cases.${active.id}.handles.${handle.labelKey}`)}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -75,14 +80,14 @@ export const UseCasesImplementations = () => {
               <div className={st.workflow}>
                 <Image
                   src="/images/use-cases-hub/workflow-card.png"
-                  alt="The workflow"
+                  alt={t('workflowAlt')}
                   width={624}
                   height={300}
                   className={cn(st.cardImage, st.cardImageDesktop)}
                 />
                 <Image
                   src="/images/use-cases-hub/workflow-card-mobile.jpg"
-                  alt="The workflow"
+                  alt={t('workflowAlt')}
                   width={636}
                   height={1291}
                   className={cn(st.cardImage, st.cardImageMobile)}
@@ -92,7 +97,7 @@ export const UseCasesImplementations = () => {
               <div className={st.integration}>
                 <Image
                   src="/images/use-cases-hub/integration-card.jpg"
-                  alt="Integration: Google Sheets connected"
+                  alt={t('integrationAlt')}
                   width={576}
                   height={600}
                   className={cn(st.cardImage, st.cardImageDesktop)}
@@ -100,7 +105,7 @@ export const UseCasesImplementations = () => {
                 />
                 <Image
                   src="/images/use-cases-hub/integration-card-mobile.jpg"
-                  alt="Integration: Google Sheets connected"
+                  alt={t('integrationAlt')}
                   width={636}
                   height={475}
                   className={cn(st.cardImage, st.cardImageMobile)}
@@ -114,16 +119,16 @@ export const UseCasesImplementations = () => {
             <button
               type="button"
               className={st.navBtn}
-              aria-label="Previous implementation"
+              aria-label={t('prevItem')}
               onClick={() => goTo(-1)}
             >
               <Image src="/icons/arrow-left.svg" alt="" width={18} height={18} unoptimized />
             </button>
-            <p className={st.navTitle}>{active.tab}</p>
+            <p className={st.navTitle}>{t(`cases.${active.id}.tab`)}</p>
             <button
               type="button"
               className={st.navBtn}
-              aria-label="Next implementation"
+              aria-label={t('nextItem')}
               onClick={() => goTo(1)}
             >
               <Image src="/icons/arrow-right.svg" alt="" width={18} height={18} unoptimized />

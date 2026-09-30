@@ -1,230 +1,118 @@
-export type ResultMetric = {
-  value: string;
-  suffix?: string;
-  label: string;
-};
-
-export type FeaturedCase = {
+export type FeaturedCaseMeta = {
   id: string;
-  tab: string;
-  title: string;
   href: string;
-  pain: string;
-  solution: string;
-  results: ResultMetric[];
+  results: {
+    value: string;
+    suffixKey?: 'sec' | 'hours' | 'talk' | 's' | 'm' | 'min' | 'metrics' | 'steps' | 'click';
+    labelKey: string;
+  }[];
 };
 
-export type ImplementationCase = {
+export type ImplementationMeta = {
   id: string;
-  tab: string;
-  title: string;
-  description: string;
   href: string;
-  handles: { icon: string; label: string }[];
-  workflow: string[];
-  integration: {
-    name: string;
-    icon: string;
-  };
+  handles: { icon: string; labelKey: string }[];
 };
 
-export type WorkflowCard = {
+export type WorkflowMeta = {
   id: string;
-  title: string;
-  description: string;
   icon: string;
 };
 
-export const FEATURED_CASES: FeaturedCase[] = [
+export const FEATURED_CASES: FeaturedCaseMeta[] = [
   {
     id: 'multi-asset-broker',
-    tab: 'Multi-Asset Broker',
-    title: 'Multi-Asset Broker',
     href: '/multi-asset-trading-and-investment-platform',
-    pain: 'Re-engaging a cold database of 11,840 leads across global markets caused low contact rates, manual dialer fatigue, and wasted time on automated voicemails.',
-    solution:
-      'Coldi deployed an outbound AI voice engine with 2.48 multi-dial cadences, precision answering machine filtering, and dynamic callback scheduling directly into account manager queues.',
     results: [
-      { value: '29,377', label: 'calls placed' },
-      { value: '88+ talk', label: 'hours logged' },
-      { value: '96.4%', label: 'live human pickup efficiency' },
-      { value: '672', label: 'qualified leads captured' },
+      { value: '29,377', labelKey: 'callsPlaced' },
+      { value: '88+', suffixKey: 'talk', labelKey: 'talkHours' },
+      { value: '96.4%', labelKey: 'pickupEfficiency' },
+      { value: '672', labelKey: 'qualifiedLeads' },
     ],
   },
   {
     id: 'payment-solutions',
-    tab: 'Payment Solutions Provider',
-    title: 'Payment Solutions Provider',
     href: '/canadian-fintech',
-    pain: 'Manual 6-month compliance reviews across hundreds of clients created spreadsheet overload and slow status-change escalations.',
-    solution:
-      'Coldi automated the entire review cycle with an outbound compliance agent and a 24/7 inbound AI phone line.',
     results: [
-      { value: '100%', label: 'Review Cycle Automation' },
-      { value: '0', suffix: 'Sec', label: 'Escalation Lag' },
-      { value: '10+', suffix: 'Hours', label: 'Saved Monthly' },
-      { value: '24/7', label: 'Inbound Coverage' },
+      { value: '100%', labelKey: 'reviewAutomation' },
+      { value: '0', suffixKey: 'sec', labelKey: 'escalationLag' },
+      { value: '10+', suffixKey: 'hours', labelKey: 'savedMonthly' },
+      { value: '24/7', labelKey: 'inboundCoverage' },
     ],
   },
   {
     id: 'silverbell',
-    tab: 'Business Process Outsourcing',
-    title: 'Global Professional Services Provider',
     href: '/global-professional-services-provider',
-    pain: 'High inquiry volume across global time zones caused delayed responses, missed appointment opportunities, and staff fatigue outside standard operating hours.',
-    solution:
-      'Coldi integrated a 24/7 AI voice representative into the client’s digital touchpoints to deliver expert responses, capture contact data, and schedule appointments around the clock.',
     results: [
-      { value: '100+', label: 'Daily Automated Inquiries Managed' },
-      { value: '75', suffix: 'Hours', label: 'hours saved weekly' },
-      { value: '45%', label: 'Increase in Qualified Lead Conversions' },
-      { value: '24/7', label: 'Continuous Global Coverage Achieved' },
+      { value: '100+', labelKey: 'dailyInquiries' },
+      { value: '75', suffixKey: 'hours', labelKey: 'hoursSavedWeekly' },
+      { value: '45%', labelKey: 'leadConversions' },
+      { value: '24/7', labelKey: 'globalCoverage' },
     ],
   },
   {
     id: 'stone-electric',
-    tab: 'Home & Residential Services',
-    title: 'Residential Electrical Contractor',
     href: '/residential-electrical-contractor',
-    pain: 'Missed calls during high-volume hours and after-hours emergencies resulted in lost high-value jobs and delayed technician dispatch',
-    solution:
-      'Coldi deployed an AI voice agent to handle 24/7 intake—instantly transferring emergency calls to live electricians and booking routine jobs directly into technician calendars.',
     results: [
-      { value: '24/7', label: 'Dispatch' },
-      { value: '0s', label: 'Emergency Delay' },
-      { value: '100%', label: 'Booking Automated' },
-      { value: '0m', label: 'Scheduling Overhead' },
+      { value: '24/7', labelKey: 'dispatch' },
+      { value: '0', suffixKey: 's', labelKey: 'emergencyDelay' },
+      { value: '100%', labelKey: 'bookingAutomated' },
+      { value: '0', suffixKey: 'm', labelKey: 'schedulingOverhead' },
     ],
   },
   {
     id: 'agricultural-infrastructure-provider',
-    tab: 'Agricultural Infrastructure Provider',
-    title: 'Agricultural Infrastructure Provider',
     href: '/global-agricultural-infrastructure-provider',
-    pain: 'Senior sales managers wasted hours manually filtering unqualified inbound inquiries for complex multi-million dollar infrastructure projects.',
-    solution:
-      'Coldi deployed an autonomous AI voice concierge to manage technical discovery, extract structured project data, and schedule qualified prospects.',
     results: [
-      { value: '100%', label: 'High-Probability Sales Focus' },
-      { value: '0 Min', label: 'Manual Screening Overhead' },
-      { value: '4 Metrics', label: 'Surgical CRM Data Extraction' },
-      { value: '24/7', label: 'Multi-Time Zone Pipeline' },
+      { value: '100%', labelKey: 'salesFocus' },
+      { value: '0', suffixKey: 'min', labelKey: 'screeningOverhead' },
+      { value: '4', suffixKey: 'metrics', labelKey: 'crmExtraction' },
+      { value: '24/7', labelKey: 'multiTimezone' },
     ],
   },
   {
     id: 'hvac-saas',
-    tab: 'HVAC & SaaS',
-    title: 'HVAC & SaaS',
     href: '/saas-and-hvac-service-operator',
-    pain: 'Dormant lead databases lose value rapidly, leaving past event lists and cold CRM contacts uncontacted due to manual dialing limits.',
-    solution:
-      'Coldi deployed an outbound AI engine to call cold lists, handle objections, qualify software stacks, and send instant SMS demo booking links.',
     results: [
-      { value: '27', label: 'Total Leads Captured' },
-      { value: '2 Steps', label: 'Structured Objection Handling' },
-      { value: '100%', label: 'Automated Tech Stack Capture' },
-      { value: '1 Click', label: 'Instant SMS Demo Delivery' },
+      { value: '27', labelKey: 'leadsCaptured' },
+      { value: '2', suffixKey: 'steps', labelKey: 'objectionHandling' },
+      { value: '100%', labelKey: 'techStackCapture' },
+      { value: '1', suffixKey: 'click', labelKey: 'smsDemo' },
     ],
   },
 ];
 
-export const IMPLEMENTATIONS: ImplementationCase[] = [
+export const IMPLEMENTATIONS: ImplementationMeta[] = [
   {
     id: 'digital-ads',
-    tab: 'Digital Advertising Agency',
-    title: 'AI Calling with Real-Time Human Handoff',
-    description:
-      'The client needed a seamless calling workflow that could determine when a live team was available and automatically handle the next step when they were not.',
     href: '/performance-marketing-agency',
     handles: [
-      { icon: '/images/use-cases-hub/handle-outbound.png', label: 'Outbound lead calling' },
-      {
-        icon: '/icons/griddy-icons_customer-support.svg',
-        label: 'Call-center availability checks',
-      },
-      { icon: '/images/use-cases-hub/handle-handoff.png', label: 'Live agent transfers' },
-      { icon: '/icons/hugeicons_appointment-02.svg', label: 'Callback scheduling' },
-      { icon: '/images/use-cases-hub/handle-interest.png', label: 'Inbound lead identification' },
-      { icon: '/icons/bx_data.svg', label: 'Lead data retrieval' },
+      { icon: '/images/use-cases-hub/handle-outbound.png', labelKey: 'outbound' },
+      { icon: '/icons/griddy-icons_customer-support.svg', labelKey: 'availability' },
+      { icon: '/images/use-cases-hub/handle-handoff.png', labelKey: 'liveTransfer' },
+      { icon: '/icons/hugeicons_appointment-02.svg', labelKey: 'callback' },
+      { icon: '/images/use-cases-hub/handle-interest.png', labelKey: 'inboundId' },
+      { icon: '/icons/bx_data.svg', labelKey: 'dataRetrieval' },
     ],
-    workflow: [
-      'Hot lead',
-      'AI call',
-      'Call-center status check',
-      'Live transfer or scheduling',
-      'Lead identification',
-      'Booking',
-    ],
-    integration: {
-      name: 'Calendly · Custom API',
-      icon: '/icons/carbon_integration.svg',
-    },
   },
   {
     id: 'portfolioiq',
-    tab: 'AI-powered fintech platform',
-    title: 'Lead Re-engagement with Automated Follow-Up',
-    description:
-      'The client needed to turn outbound calls into a complete follow-up process, giving interested leads both a direct path to a specialist and additional information by SMS.',
     href: '/canadian-fintech',
     handles: [
-      { icon: '/images/use-cases-hub/handle-outbound.png', label: 'Outbound lead calling' },
-      { icon: '/images/use-cases-hub/handle-interest.png', label: 'Interest qualification' },
-      { icon: '/images/use-cases-hub/handle-callback.png', label: 'Callback conversion' },
-      { icon: '/icons/ri_chat-follow-up-line.svg', label: 'SMS follow-up' },
-      { icon: '/images/use-cases-hub/handle-handoff.png', label: 'Lead data capture' },
+      { icon: '/images/use-cases-hub/handle-outbound.png', labelKey: 'outbound' },
+      { icon: '/images/use-cases-hub/handle-interest.png', labelKey: 'interest' },
+      { icon: '/images/use-cases-hub/handle-callback.png', labelKey: 'callbackConversion' },
+      { icon: '/icons/ri_chat-follow-up-line.svg', labelKey: 'sms' },
+      { icon: '/images/use-cases-hub/handle-handoff.png', labelKey: 'dataCapture' },
     ],
-    workflow: [
-      'Lead database',
-      'AI call',
-      'Interest detection',
-      'Callback agreement',
-      'SMS follow-up',
-      'Lead handoff',
-    ],
-    integration: {
-      name: 'Google Sheets · SMS · Local Brazilian number',
-      icon: '/images/use-cases-hub/google-sheets.png',
-    },
   },
 ];
 
-export const WORKFLOWS: WorkflowCard[] = [
-  {
-    id: 'qualify',
-    title: 'Qualify',
-    description: 'Identify serious opportunities before they reach your sales team.',
-    icon: '/icons/fluent_call-inbound-16-regular.svg',
-  },
-  {
-    id: 'follow-up',
-    title: 'Follow Up',
-    description: 'Reconnect with leads and customers without relying on manual outreach.',
-    icon: '/icons/ri_chat-follow-up-line.svg',
-  },
-  {
-    id: 'support',
-    title: 'Support',
-    description: 'Handle routine questions and provide 24/7 first-line assistance.',
-    icon: '/icons/fluent_person-support-16-regular.svg',
-  },
-  {
-    id: 'schedule',
-    title: 'Schedule',
-    description: 'Turn conversations into booked appointments without back-and-forth.',
-    icon: '/icons/hugeicons_appointment-02.svg',
-  },
-  {
-    id: 'dispatch',
-    title: 'Dispatch',
-    description: 'Identify urgent requests and route them to the right specialist.',
-    icon: '/icons/carbon_send.svg',
-  },
-  {
-    id: 'comply',
-    title: 'Comply',
-    description:
-      'Run recurring compliance outreach, classify responses, and escalate exceptions automatically.',
-    icon: '/icons/cil_balance-scale.svg',
-  },
+export const WORKFLOWS: WorkflowMeta[] = [
+  { id: 'qualify', icon: '/icons/fluent_call-inbound-16-regular.svg' },
+  { id: 'follow-up', icon: '/icons/ri_chat-follow-up-line.svg' },
+  { id: 'support', icon: '/icons/fluent_person-support-16-regular.svg' },
+  { id: 'schedule', icon: '/icons/hugeicons_appointment-02.svg' },
+  { id: 'dispatch', icon: '/icons/carbon_send.svg' },
+  { id: 'comply', icon: '/icons/cil_balance-scale.svg' },
 ];

@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
+import { useTranslations } from 'next-intl';
+
 import { cn } from '@/shared/lib/helpers';
 
 import { FEATURED_CASES } from '../../data';
@@ -11,6 +13,7 @@ import st from './Featured.module.scss';
 const METRIC_HIGHLIGHT_MS = 5000;
 
 export const UseCasesFeatured = () => {
+  const t = useTranslations('UseCasesPage.featured');
   const [activeIndex, setActiveIndex] = useState(0);
   const [highlightIndex, setHighlightIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -73,7 +76,7 @@ export const UseCasesFeatured = () => {
         <div
           className={cn(st.tabs, isPaused && st.tabsPaused)}
           role="tablist"
-          aria-label="Featured use cases"
+          aria-label={t('tabsAria')}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
           onFocusCapture={() => setPaused(true)}
@@ -95,7 +98,7 @@ export const UseCasesFeatured = () => {
                 className={cn(st.tab, isActive && st.tabActive)}
                 onClick={() => goToTab(index)}
               >
-                <span>{item.tab}</span>
+                <span>{t(`cases.${item.id}.tab`)}</span>
                 <span className={st.tabTrack} aria-hidden>
                   <span
                     key={isActive ? `fill-${activeIndex}` : `idle-${item.id}`}
@@ -116,29 +119,29 @@ export const UseCasesFeatured = () => {
         >
           <div className={st.top}>
             <div className={st.intro}>
-              <h2 className={st.title}>{active.title}</h2>
+              <h2 className={st.title}>{t(`cases.${active.id}.title`)}</h2>
               <Link href={active.href} className={st.cta}>
-                Explore Full Case
+                {t('exploreCta')}
               </Link>
             </div>
 
             <div className={st.story}>
               <div className={st.storyCard}>
-                <p className={st.storyLabel}>The Pain Point</p>
-                <p className={st.storyText}>{active.pain}</p>
+                <p className={st.storyLabel}>{t('painLabel')}</p>
+                <p className={st.storyText}>{t(`cases.${active.id}.pain`)}</p>
               </div>
               <div className={st.storyCard}>
-                <p className={st.storyLabel}>The Solution</p>
-                <p className={st.storyText}>{active.solution}</p>
+                <p className={st.storyLabel}>{t('solutionLabel')}</p>
+                <p className={st.storyText}>{t(`cases.${active.id}.solution`)}</p>
               </div>
             </div>
           </div>
 
           <div className={st.results}>
-            <p className={st.resultsTitle}>Results</p>
+            <p className={st.resultsTitle}>{t('resultsTitle')}</p>
             <div className={st.metrics}>
               {active.results.map((metric, index) => (
-                <div key={metric.label} className={st.metric}>
+                <div key={metric.labelKey} className={st.metric}>
                   <p
                     className={cn(
                       st.metricValue,
@@ -146,11 +149,13 @@ export const UseCasesFeatured = () => {
                     )}
                   >
                     <span>{metric.value}</span>
-                    {metric.suffix ? (
-                      <span className={st.metricSuffix}> {metric.suffix}</span>
+                    {metric.suffixKey ? (
+                      <span className={st.metricSuffix}>{t(`suffixes.${metric.suffixKey}`)}</span>
                     ) : null}
                   </p>
-                  <p className={st.metricLabel}>{metric.label}</p>
+                  <p className={st.metricLabel}>
+                    {t(`cases.${active.id}.results.${metric.labelKey}`)}
+                  </p>
                 </div>
               ))}
             </div>

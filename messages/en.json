@@ -1242,5 +1242,178 @@
       "emis": "EMIs & Payments",
       "other": "Other Industries"
     }
+  },
+  "UseCasesPage": {
+    "metaTitle": "Coldi Use Cases: AI Voice Agents for Real Business Workflows",
+    "metaDescription": "See how Coldi automates qualification, follow-ups, support, scheduling, and compliance with real AI voice agent implementations.",
+    "hero": {
+      "title": "See How Coldi Automates Business Calls",
+      "subtitle": "Real AI voice agents handling real business workflows:",
+      "subtitleRest": "from qualification and follow-ups to support, scheduling, and compliance."
+    },
+    "featured": {
+      "tabsAria": "Featured use cases",
+      "exploreCta": "Explore Full Case",
+      "painLabel": "The Pain Point",
+      "solutionLabel": "The Solution",
+      "resultsTitle": "Results",
+      "suffixes": {
+        "sec": " Sec",
+        "hours": " Hours",
+        "talk": " talk",
+        "s": "s",
+        "m": "m",
+        "min": " Min",
+        "metrics": " Metrics",
+        "steps": " Steps",
+        "click": " Click"
+      },
+      "cases": {
+        "multi-asset-broker": {
+          "tab": "Multi-Asset Broker",
+          "title": "Multi-Asset Broker",
+          "pain": "Re-engaging a cold database of 11,840 leads across global markets caused low contact rates, manual dialer fatigue, and wasted time on automated voicemails.",
+          "solution": "Coldi deployed an outbound AI voice engine with 2.48 multi-dial cadences, precision answering machine filtering, and dynamic callback scheduling directly into account manager queues.",
+          "results": {
+            "callsPlaced": "calls placed",
+            "talkHours": "hours logged",
+            "pickupEfficiency": "live human pickup efficiency",
+            "qualifiedLeads": "qualified leads captured"
+          }
+        },
+        "payment-solutions": {
+          "tab": "Payment Solutions Provider",
+          "title": "Payment Solutions Provider",
+          "pain": "Manual 6-month compliance reviews across hundreds of clients created spreadsheet overload and slow status-change escalations.",
+          "solution": "Coldi automated the entire review cycle with an outbound compliance agent and a 24/7 inbound AI phone line.",
+          "results": {
+            "reviewAutomation": "Review Cycle Automation",
+            "escalationLag": "Escalation Lag",
+            "savedMonthly": "Saved Monthly",
+            "inboundCoverage": "Inbound Coverage"
+          }
+        },
+        "silverbell": {
+          "tab": "Business Process Outsourcing",
+          "title": "Global Professional Services Provider",
+          "pain": "High inquiry volume across global time zones caused delayed responses, missed appointment opportunities, and staff fatigue outside standard operating hours.",
+          "solution": "Coldi integrated a 24/7 AI voice representative into the client’s digital touchpoints to deliver expert responses, capture contact data, and schedule appointments around the clock.",
+          "results": {
+            "dailyInquiries": "Daily Automated Inquiries Managed",
+            "hoursSavedWeekly": "hours saved weekly",
+            "leadConversions": "Increase in Qualified Lead Conversions",
+            "globalCoverage": "Continuous Global Coverage Achieved"
+          }
+        },
+        "stone-electric": {
+          "tab": "Home & Residential Services",
+          "title": "Residential Electrical Contractor",
+          "pain": "Missed calls during high-volume hours and after-hours emergencies resulted in lost high-value jobs and delayed technician dispatch",
+          "solution": "Coldi deployed an AI voice agent to handle 24/7 intake—instantly transferring emergency calls to live electricians and booking routine jobs directly into technician calendars.",
+          "results": {
+            "dispatch": "Dispatch",
+            "emergencyDelay": "Emergency Delay",
+            "bookingAutomated": "Booking Automated",
+            "schedulingOverhead": "Scheduling Overhead"
+          }
+        },
+        "agricultural-infrastructure-provider": {
+          "tab": "Agricultural Infrastructure Provider",
+          "title": "Agricultural Infrastructure Provider",
+          "pain": "Senior sales managers wasted hours manually filtering unqualified inbound inquiries for complex multi-million dollar infrastructure projects.",
+          "solution": "Coldi deployed an autonomous AI voice concierge to manage technical discovery, extract structured project data, and schedule qualified prospects.",
+          "results": {
+            "salesFocus": "High-Probability Sales Focus",
+            "screeningOverhead": "Manual Screening Overhead",
+            "crmExtraction": "Surgical CRM Data Extraction",
+            "multiTimezone": "Multi-Time Zone Pipeline"
+          }
+        },
+        "hvac-saas": {
+          "tab": "HVAC & SaaS",
+          "title": "HVAC & SaaS",
+          "pain": "Dormant lead databases lose value rapidly, leaving past event lists and cold CRM contacts uncontacted due to manual dialing limits.",
+          "solution": "Coldi deployed an outbound AI engine to call cold lists, handle objections, qualify software stacks, and send instant SMS demo booking links.",
+          "results": {
+            "leadsCaptured": "Total Leads Captured",
+            "objectionHandling": "Structured Objection Handling",
+            "techStackCapture": "Automated Tech Stack Capture",
+            "smsDemo": "Instant SMS Demo Delivery"
+          }
+        }
+      }
+    },
+    "implementations": {
+      "heading": "More Coldi Implementations",
+      "tabsAria": "Implementations",
+      "exploreCta": "Explore Full Case",
+      "handlesTitle": "Coldi handles",
+      "workflowAlt": "The workflow",
+      "integrationAlt": "Integration: Google Sheets connected",
+      "prevItem": "Previous implementation",
+      "nextItem": "Next implementation",
+      "cases": {
+        "digital-ads": {
+          "tab": "Digital Advertising Agency",
+          "title": "AI Calling with Real-Time Human Handoff",
+          "description": "The client needed a seamless calling workflow that could determine when a live team was available and automatically handle the next step when they were not.",
+          "handles": {
+            "outbound": "Outbound lead calling",
+            "availability": "Call-center availability checks",
+            "liveTransfer": "Live agent transfers",
+            "callback": "Callback scheduling",
+            "inboundId": "Inbound lead identification",
+            "dataRetrieval": "Lead data retrieval"
+          }
+        },
+        "portfolioiq": {
+          "tab": "AI-powered fintech platform",
+          "title": "Lead Re-engagement with Automated Follow-Up",
+          "description": "The client needed to turn outbound calls into a complete follow-up process, giving interested leads both a direct path to a specialist and additional information by SMS.",
+          "handles": {
+            "outbound": "Outbound lead calling",
+            "interest": "Interest qualification",
+            "callbackConversion": "Callback conversion",
+            "sms": "SMS follow-up",
+            "dataCapture": "Lead data capture"
+          }
+        }
+      }
+    },
+    "workflows": {
+      "leadAccent": "One AI Voice Platform.",
+      "leadRest": "Multiple Business Workflows.",
+      "items": {
+        "qualify": {
+          "title": "Qualify",
+          "description": "Identify serious opportunities before they reach your sales team."
+        },
+        "follow-up": {
+          "title": "Follow Up",
+          "description": "Reconnect with leads and customers without relying on manual outreach."
+        },
+        "support": {
+          "title": "Support",
+          "description": "Handle routine questions and provide 24/7 first-line assistance."
+        },
+        "schedule": {
+          "title": "Schedule",
+          "description": "Turn conversations into booked appointments without back-and-forth."
+        },
+        "dispatch": {
+          "title": "Dispatch",
+          "description": "Identify urgent requests and route them to the right specialist."
+        },
+        "comply": {
+          "title": "Comply",
+          "description": "Run recurring compliance outreach, classify responses, and escalate exceptions automatically."
+        }
+      }
+    },
+    "cta": {
+      "title": "Inspired by the Results?",
+      "text": "Tell us what your team is spending time on.",
+      "textRest": "We'll show you where Coldi can automate the workflow."
+    }
   }
 }
