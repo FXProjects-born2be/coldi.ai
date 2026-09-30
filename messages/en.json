@@ -222,6 +222,11 @@
           "claims-follow-up": "Claims Follow-up",
           "quote-qualification": "Quote Qualification",
           "payment-reminders": "Payment Reminders"
+        },
+        "handles": {
+          "firstText": "\"Hi, this is Coldi calling on behalf of [Insurer]. Your policy renews August 3rd — want me to lock in your current rate now?\"",
+          "secondText": "\"Done. You'll get confirmation by text and email in the next minute.\"",
+          "answer": "Yeah, go ahead."
         }
       },
       "trading": {
@@ -238,6 +243,11 @@
           "deposit-activation": "Deposit Activation",
           "kyc-follow-up": "KYC Follow-up",
           "client-reactivation": "Client Reactivation"
+        },
+        "handles": {
+          "firstText": "\"Hi, saw you just registered on [Platform]. Got two minutes to tell me what you're looking to trade?\"",
+          "secondText": "\"Good, I'll connect you with an account manager who specializes in FX. They'll call within the hour.\"",
+          "answer": "Sure, mostly FX pairs."
         }
       },
       "debt-collection": {
@@ -254,6 +264,11 @@
           "promise-to-pay": "Promise to Pay",
           "payment-plans": "Payment Plans",
           "recovery-campaigns": "Recovery Campaigns"
+        },
+        "handles": {
+          "firstText": "\"Hi, this is Coldi calling about your account ending 4471. You have a payment of $210 due Friday. Would you like to set up a plan?\"",
+          "secondText": "\"Yes, I can set that up right now. You'll get a confirmation text with both dates.\"",
+          "answer": "Can I pay half now and half next month?"
         }
       },
       "emis": {
@@ -270,6 +285,11 @@
           "verification-calls": "Verification Calls",
           "appointment-booking": "Appointment Booking",
           "custom-automations": "Custom Automations"
+        },
+        "handles": {
+          "firstText": "\"Hi, this is Coldi calling on behalf of [Provider]. You started an account application but didn't finish verification — got two minutes?\"",
+          "secondText": "\"Just a photo ID upload, I'll text you the secure link now.\"",
+          "answer": "Yeah, what do you need?"
         }
       }
     }

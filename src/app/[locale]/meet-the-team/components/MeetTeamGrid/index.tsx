@@ -101,7 +101,7 @@ const teamMembers = [
   {
     id: 'larysa-byshenko',
     name: 'Larysa Byshenko',
-    image: '/images/meet-the-team/alina-denysenko.png',
+    image: '/images/meet-the-team/larysa-byshenko.png',
     linkedinUrl: '',
   },
 ] as const;

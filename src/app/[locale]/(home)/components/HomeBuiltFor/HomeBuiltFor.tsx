@@ -29,9 +29,6 @@ type Industry = {
   workflows: Workflow[];
   handles: {
     background: string;
-    firstText: string;
-    secondText: string;
-    answer: string;
     visual: HandlesVisual;
   };
 };
@@ -71,10 +68,6 @@ const industries: Industry[] = [
     ],
     handles: {
       background: '/images/general/background.png',
-      firstText:
-        '"Hi, this is Coldi calling on behalf of [Insurer]. Your policy renews August 3rd — want me to lock in your current rate now?"',
-      secondText: '"Done. You\'ll get confirmation by text and email in the next minute."',
-      answer: 'Yeah, go ahead.',
       visual: 'soundWave',
     },
   },
@@ -89,11 +82,6 @@ const industries: Industry[] = [
     ],
     handles: {
       background: '/images/general/background-two.png',
-      firstText:
-        '"Hi, saw you just registered on [Platform]. Got two minutes to tell me what you\'re looking to trade?"',
-      answer: 'Sure, mostly FX pairs.',
-      secondText:
-        '"Good, I\'ll connect you with an account manager who specializes in FX. They\'ll call within the hour."',
       visual: 'auraTwo',
     },
   },
@@ -108,11 +96,6 @@ const industries: Industry[] = [
     ],
     handles: {
       background: '/images/general/background-three.png',
-      firstText:
-        '"Hi, this is Coldi calling about your account ending 4471. You have a payment of $210 due Friday. Would you like to set up a plan?"',
-      answer: 'Can I pay half now and half next month?',
-      secondText:
-        '"Yes, I can set that up right now. You\'ll get a confirmation text with both dates."',
       visual: 'timerTwo',
     },
   },
@@ -127,10 +110,6 @@ const industries: Industry[] = [
     ],
     handles: {
       background: '/images/general/background-four.png',
-      firstText:
-        '"Hi, this is Coldi calling on behalf of [Provider]. You started an account application but didn\'t finish verification — got two minutes?"',
-      answer: 'Yeah, what do you need?',
-      secondText: '"Just a photo ID upload, I\'ll text you the secure link now."',
       visual: 'dotWave',
     },
   },
@@ -397,9 +376,9 @@ export const HomeBuiltFor = () => {
             <HomeBuiltForHandlesVisual
               key={industry.id}
               speakingLabel={t('speaking')}
-              firstText={industry.handles.firstText}
-              secondText={industry.handles.secondText}
-              answer={industry.handles.answer}
+              firstText={t(`industries.${industry.id}.handles.firstText`)}
+              secondText={t(`industries.${industry.id}.handles.secondText`)}
+              answer={t(`industries.${industry.id}.handles.answer`)}
               visual={industry.handles.visual}
             />
           </div>
