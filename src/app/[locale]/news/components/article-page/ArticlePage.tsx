@@ -68,27 +68,28 @@ const renderBlocks = (blocks: NewsArticle['intro'], className: string) => {
       return;
     }
 
-    const rowClass = `${st.tableRow} ${block.headers.length === 2 ? st.tableRow2 : ''}`;
-
     nodes.push(
-      <div key={`table-${index}`} className={st.table} role="table">
-        <div className={rowClass} role="row">
-          {block.headers.map((header) => (
-            <div key={header} className={`${st.tableCell} ${st.tableHead}`} role="columnheader">
-              {header}
-            </div>
-          ))}
-        </div>
-        {block.rows.map((row) => (
-          <div key={row.join('-')} className={rowClass} role="row">
-            {row.map((cell) => (
-              <div key={cell} className={st.tableCell} role="cell">
-                {cell}
-              </div>
+      <table
+        key={`table-${index}`}
+        className={cn(st.table, block.headers.length === 2 && st.table2)}
+      >
+        <thead>
+          <tr>
+            {block.headers.map((header, headerIndex) => (
+              <th key={`${header}-${headerIndex}`}>{header}</th>
             ))}
-          </div>
-        ))}
-      </div>
+          </tr>
+        </thead>
+        <tbody>
+          {block.rows.map((row, rowIndex) => (
+            <tr key={`${row.join('-')}-${rowIndex}`}>
+              {row.map((cell, cellIndex) => (
+                <td key={`${cell}-${cellIndex}`}>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     );
   });
 
