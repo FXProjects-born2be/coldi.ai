@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
+import { useTranslations } from 'next-intl';
+
 import { cn } from '@/shared/lib/helpers';
 import { IconAuraTwo } from '@/shared/ui/icons/IconAuraTwo';
 import { IconDotWave } from '@/shared/ui/icons/IconDotWave';
@@ -26,37 +28,17 @@ type InsuranceHandlesProps = {
   background?: string;
   visual?: 'soundWave' | 'auraTwo' | 'timerTwo' | 'dotWave';
   video?: string;
+  /** When set, dialogue texts (and matching workflow labels) come from HomeBuiltFor */
+  industry?: 'insurance' | 'trading' | 'debt-collection' | 'emis' | 'other';
 };
 
-const DEFAULT_ITEMS: InsuranceHandlesItem[] = [
-  { id: 'policy-renewals', icon: '/icons/ic_outline-policy.svg', label: 'Policy Renewals' },
-  {
-    id: 'claims-follow-up',
-    icon: '/icons/hugeicons_ai-audio.svg',
-    label: 'Claims Follow-up',
-  },
-  {
-    id: 'quote-qualification',
-    icon: '/icons/octicon_comment-ai-16.svg',
-    label: 'Quote Qualification',
-  },
-  {
-    id: 'payment-reminders',
-    icon: '/icons/fluent_receipt-sparkles-24-regular.svg',
-    label: 'Payment Reminders',
-  },
-  {
-    id: 'document-kyc',
-    icon: '/icons/ri_file-ai-2-line.svg',
-    label: 'Document / KYC Chasing',
-  },
-];
-
-const DEFAULT_FIRST_TEXT =
-  '"Hi, this is Coldi calling on behalf of [Insurer]. Your policy renews August 3rd — want me to lock in your current rate now?"';
-const DEFAULT_SECOND_TEXT =
-  '"Done. You\'ll get confirmation by text and email in the next minute."';
-const DEFAULT_ANSWER = 'Yeah, go ahead.';
+const DEFAULT_ITEM_META = [
+  { id: 'policy-renewals', icon: '/icons/ic_outline-policy.svg' },
+  { id: 'claims-follow-up', icon: '/icons/hugeicons_ai-audio.svg' },
+  { id: 'quote-qualification', icon: '/icons/octicon_comment-ai-16.svg' },
+  { id: 'payment-reminders', icon: '/icons/fluent_receipt-sparkles-24-regular.svg' },
+  { id: 'document-kyc', icon: '/icons/ri_file-ai-2-line.svg' },
+] as const;
 
 const CHAR_MS = 28;
 const QUESTION_IN_MS = 500;
@@ -82,23 +64,42 @@ type Phase =
   | 'done';
 
 export const InsuranceHandles = ({
-  items = DEFAULT_ITEMS,
-  firstText = DEFAULT_FIRST_TEXT,
-  secondText = DEFAULT_SECOND_TEXT,
-  answer = DEFAULT_ANSWER,
+  items,
+  firstText,
+  secondText,
+  answer,
   background = DEFAULT_BACKGROUND,
   visual = 'soundWave',
   video,
+  industry = 'insurance',
 }: InsuranceHandlesProps) => {
+  const t = useTranslations('InsuranceHandles');
+  const tHome = useTranslations('HomeBuiltFor');
+  const homeIndustry = `industries.${industry}` as const;
+
+  const resolvedItems =
+    items ??
+    DEFAULT_ITEM_META.map((item) => {
+      const workflowKey = `${homeIndustry}.workflows.${item.id}`;
+      return {
+        ...item,
+        label: tHome.has(workflowKey) ? tHome(workflowKey) : t(`items.${item.id}`),
+      };
+    });
+  const resolvedFirstText = firstText ?? tHome(`${homeIndustry}.handles.firstText`);
+  const resolvedSecondText = secondText ?? tHome(`${homeIndustry}.handles.secondText`);
+  const resolvedAnswer = answer ?? tHome(`${homeIndustry}.handles.answer`);
+
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [phase, setPhase] = useState<Phase>('idle');
   const [displayed, setDisplayed] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeItemId = items[activeIndex]?.id ?? items[0].id;
+  const activeItemId = resolvedItems[activeIndex]?.id ?? resolvedItems[0].id;
 
   const isWaveActive = phase === 'typing-1' || phase === 'hold' || phase === 'typing-2';
-  const fullText = phase === 'typing-2' || phase === 'done' ? secondText : firstText;
+  const fullText =
+    phase === 'typing-2' || phase === 'done' ? resolvedSecondText : resolvedFirstText;
   const Visual = VISUALS[visual];
   const showQuestion =
     phase === 'typing-1' || phase === 'hold' || phase === 'typing-2' || phase === 'done';
@@ -212,20 +213,20 @@ export const InsuranceHandles = ({
       <div className={'container'}>
         <div ref={rootRef} className={st.insurance_handles__row}>
           <div className={st.insurance_handles__left}>
-            <h2 className={st.insurance_handles__title}>What Coldi Handles</h2>
+            <h2 className={st.insurance_handles__title}>{t('title')}</h2>
 
             <div className={st.insurance_handles__slider}>
               <button
                 type="button"
                 className={st.insurance_handles__nav}
-                aria-label="Previous item"
+                aria-label={t('prevItem')}
                 disabled={activeIndex === 0}
                 onClick={() => setActiveIndex((index) => Math.max(0, index - 1))}
               >
                 <Image src="/icons/arrow-left.svg" alt="" width={18} height={18} />
               </button>
               <ul className={st.insurance_handles__list}>
-                {items.map((item) => (
+                {resolvedItems.map((item) => (
                   <li
                     key={item.id}
                     className={cn(
@@ -243,9 +244,11 @@ export const InsuranceHandles = ({
               <button
                 type="button"
                 className={st.insurance_handles__nav}
-                aria-label="Next item"
-                disabled={activeIndex === items.length - 1}
-                onClick={() => setActiveIndex((index) => Math.min(items.length - 1, index + 1))}
+                aria-label={t('nextItem')}
+                disabled={activeIndex === resolvedItems.length - 1}
+                onClick={() =>
+                  setActiveIndex((index) => Math.min(resolvedItems.length - 1, index + 1))
+                }
               >
                 <Image src="/icons/arrow-right.svg" alt="" width={18} height={18} />
               </button>
@@ -254,7 +257,7 @@ export const InsuranceHandles = ({
 
           <div className={st.insurance_handles__right}>
             <div className={st.insurance_handles__bg}>
-              <Image src={background} alt="Image" fill sizes="(max-width: 1024px) 100vw, 50vw" />
+              <Image src={background} alt="" fill sizes="(max-width: 1024px) 100vw, 50vw" />
             </div>
 
             <div className={st.insurance_handles__reaction}>
@@ -262,19 +265,19 @@ export const InsuranceHandles = ({
                 <div className={st.insurance_handles__right_top}>
                   {showSpeaking && (
                     <>
-                      <p className={st.insurance_handles__right_top_text}>Speaking...</p>
+                      <p className={st.insurance_handles__right_top_text}>{tHome('speaking')}</p>
                       <IconSpeaking />
                     </>
                   )}
                   <div className={st.insurance_handles__right_top_icon_speaking}>
-                    <Image src={'/icons/speaking.svg'} alt={'Icon'} width={54} height={54} />
+                    <Image src={'/icons/speaking.svg'} alt="" width={54} height={54} />
                   </div>
                 </div>
               )}
 
               {showAnswer && (
                 <div className={st.insurance_handles__answer_wrapper}>
-                  <p className={st.insurance_handles__answer}>{answer}</p>
+                  <p className={st.insurance_handles__answer}>{resolvedAnswer}</p>
                 </div>
               )}
             </div>

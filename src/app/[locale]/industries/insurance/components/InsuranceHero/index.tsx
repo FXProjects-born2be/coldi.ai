@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import { getTranslations } from 'next-intl/server';
+
 import { cn } from '@/shared/lib/helpers';
 import { BookDemo } from '@/shared/ui/components/book-demo';
 import { LazyVideo } from '@/shared/ui/components/lazy-video';
@@ -14,23 +16,25 @@ type InsuranceHeroProps = {
   image?: string;
 };
 
-export const InsuranceHero = ({
-  title = 'AI Voice Agents Built for',
-  titleAccent = 'Insurance Operations',
-  description = 'Coldi calls policyholders, chases documents, and handles renewals, fully managed from day one.',
+export const InsuranceHero = async ({
+  title,
+  titleAccent,
+  description,
   video = '/videos/insurance-hero.mp4',
   image,
 }: InsuranceHeroProps) => {
+  const t = await getTranslations('InsuranceHero');
+
   return (
     <section className={st.insurance_hero}>
       <div className={cn('container', st.insurance_hero__container)}>
         <h1 className={st.insurance_hero__title}>
-          {title}
+          {title ?? t('title')}
           <br />
-          <span>{titleAccent}</span>
+          <span>{titleAccent ?? t('titleAccent')}</span>
         </h1>
 
-        <p className={st.insurance_hero__desc}>{description}</p>
+        <p className={st.insurance_hero__desc}>{description ?? t('description')}</p>
 
         <BookDemo />
       </div>

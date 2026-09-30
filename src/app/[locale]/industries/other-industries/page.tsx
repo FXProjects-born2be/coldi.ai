@@ -10,74 +10,80 @@ import {
   InsuranceWhy,
 } from '../insurance/components';
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: '/industries/other-industries',
-  },
-  title: 'Coldi AI Voice Agents for Other Regulated Industries',
-  description:
-    "See how Coldi's AI voice agents apply to healthcare, real estate, and call center operations beyond our core fintech focus. Book a demo to explore your use case.",
-  openGraph: {
-    title: 'Coldi AI Voice Agents for Other Regulated Industries',
-    description:
-      "See how Coldi's AI voice agents apply to healthcare, real estate, and call center operations beyond our core fintech focus. Book a demo to explore your use case.",
-    images: '/images/meta.png',
-  },
+type Props = {
+  params: Promise<{ locale: string }>;
 };
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'OtherIndustriesPage' });
+
+  return {
+    alternates: {
+      canonical: '/industries/other-industries',
+    },
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      images: '/images/meta.png',
+    },
+  };
+}
+
 export default async function OtherIndustriesPage() {
-  const t = await getTranslations('OtherIndustriesPage.InsuranceHandles');
+  const t = await getTranslations('OtherIndustriesPage');
+  const tHandles = await getTranslations('OtherIndustriesPage.InsuranceHandles');
 
   return (
     <main>
       <InsuranceHero
-        title="AI Voice Agents Built for "
-        titleAccent="More Industries"
-        description="Coldi helps businesses automate calls and keep every customer conversation moving."
+        title={t('hero.title')}
+        titleAccent={t('hero.titleAccent')}
+        description={t('hero.description')}
         video="/videos/other-industries-hero.mp4"
       />
       <InsuranceHandles
+        industry="other"
         items={[
           {
             id: 'lead-qualification',
             icon: '/icons/hugeicons_diploma.svg',
-            label: t('lead-qualification'),
+            label: tHandles('lead-qualification'),
           },
           {
             id: 'appointment-booking',
             icon: '/icons/hugeicons_appointment-02.svg',
-            label: t('appointment-booking'),
+            label: tHandles('appointment-booking'),
           },
           {
             id: 'customer-support',
             icon: '/icons/griddy-icons_customer-support.svg',
-            label: t('customer-support'),
+            label: tHandles('customer-support'),
           },
           {
             id: 'service-dispatchg',
             icon: '/icons/carbon_send.svg',
-            label: t('service-dispatchg'),
+            label: tHandles('service-dispatchg'),
           },
           {
             id: 'lead-re-engagement',
             icon: '/icons/hugeicons_touch-interaction-01.svg',
-            label: t('lead-re-engagement'),
+            label: tHandles('lead-re-engagement'),
           },
           {
             id: 'follow-ups',
             icon: '/icons/famicons_trending-up-outline.svg',
-            label: t('follow-ups'),
+            label: tHandles('follow-ups'),
           },
         ]}
-        firstText={`"Hi, this is Coldi calling on behalf of [Provider]. You left a request on our website. Is it now a good time to talk?" " `}
-        answer="Yes, I did. Thanks for the fast callback"
-        secondText={`"Of course. Could you tell me a little more about your request so I can coordinate the right next step? "`}
         background="/images/general/background-five.png"
         video="/videos/other-industries-handles.mp4"
       />
       <InsuranceCases
-        title="Lead Follow-Up"
-        description="A new request, called back to qualify the need and arrange the next step."
+        title={t('cases.title')}
+        description={t('cases.description')}
         audio="/audio/other-industries.mp3"
         visual="horizon"
         page="other-industries"
@@ -88,83 +94,71 @@ export default async function OtherIndustriesPage() {
             id: 'intro',
             icon: null,
             video: '/videos/meet-the-team-drive.mp4',
-            title: 'Why Teams',
-            titleAccent: 'Bring Coldi In',
+            title: t('why.intro.title'),
+            titleAccent: t('why.intro.titleAccent'),
           },
           {
             id: 'handle-more-calls',
             icon: '/icons/bx_phone-call.svg',
-            title: 'Handle more calls',
-            body: 'AI voice calling gives healthcare, retail, and e-commerce teams the capacity to handle high call volumes without adding headcount.',
+            title: t('why.handle-more-calls.title'),
+            body: t('why.handle-more-calls.body'),
           },
           {
             id: 'follow-up-faster',
             icon: '/icons/ri_chat-follow-up-line.svg',
-            title: 'Follow up faster',
-            body: 'New requests and missed calls get an immediate response, so potential customers do not wait for an agent to become available.',
+            title: t('why.follow-up-faster.title'),
+            body: t('why.follow-up-faster.body'),
           },
           {
             id: 'automate-routine-tasks',
             icon: '/icons/mdi_checkbox-marked-circle-auto-outline.svg',
-            title: 'Automate routine tasks',
-            body: "From qualification and information collection to appointment scheduling, Coldi takes repetitive calls off your team's workload.",
+            title: t('why.automate-routine-tasks.title'),
+            body: t('why.automate-routine-tasks.body'),
           },
           {
             id: 'scale-without-a-call-center',
             icon: '/icons/boxicons_scale.svg',
-            title: 'Scale without a call center',
-            body: 'Technology companies, call centers, and service teams can expand their calling capacity without building a larger contact center.',
+            title: t('why.scale-without-a-call-center.title'),
+            body: t('why.scale-without-a-call-center.body'),
           },
         ]}
       />
       <InsuranceOperations
-        title="Built for Secured Operations"
-        description={
-          <>
-            Every qualification call follows your approved scripts and targeting criteria, with
-            complete recordings, transcripts, and audit logs. Built to support high-converting,
-            GDPR-compliant sales pipelines.
-          </>
-        }
+        title={t('operations.title')}
+        description={t('operations.description')}
       />
       <InsuranceInfo
         items={[
           {
             id: 'cannot-respond-fast-enough',
-            label:
-              'Your team handles hundreds or thousands of calls and requests, but cannot respond to all of them fast enough',
+            label: t('info.items.cannot-respond-fast-enough'),
           },
           {
             id: 'leads-go-cold',
-            label:
-              'Valuable leads and customer requests go cold while your team is busy handling existing conversations',
+            label: t('info.items.leads-go-cold'),
           },
           {
             id: 'repetitive-calls',
-            label:
-              'Your agents spend too much time on repetitive calls, follow-ups, qualification, and appointment scheduling',
+            label: t('info.items.repetitive-calls'),
           },
           {
             id: 'volume-peaks',
-            label:
-              'Call volume fluctuates, but hiring enough people to cover every peak does not make operational sense',
+            label: t('info.items.volume-peaks'),
           },
           {
             id: 'routine-conversations',
-            label:
-              'Your call center is overloaded with routine conversations that do not require a human agent',
+            label: t('info.items.routine-conversations'),
           },
           {
             id: 'calling-capacity',
-            label: 'You need more calling capacity without building a larger contact center',
+            label: t('info.items.calling-capacity'),
           },
           {
             id: 'no-24-7-coverage',
-            label:
-              'Customers expect immediate responses, but your team cannot provide 24/7 coverage',
+            label: t('info.items.no-24-7-coverage'),
           },
         ]}
-        description="Start with a 30-day pilot for one department, product category or service. "
+        description={t('info.description')}
         page="other-industries"
       />
     </main>

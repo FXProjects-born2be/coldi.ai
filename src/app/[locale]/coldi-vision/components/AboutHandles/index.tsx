@@ -43,8 +43,11 @@ export const AboutHandles = async () => {
 
                 <p className={st.about_handles__item_label}>{t(`items.${item.id}.label`)}</p>
               </div>
-              <h3 className={st.about_handles__item_title}>{t(`items.${item.id}.title`)}</h3>
-              <p className={st.about_handles__item_desc}>{t(`items.${item.id}.description`)}</p>
+
+              <div>
+                <h3 className={st.about_handles__item_title}>{t(`items.${item.id}.title`)}</h3>
+                <p className={st.about_handles__item_desc}>{t(`items.${item.id}.description`)}</p>
+              </div>
             </article>
           ))}
         </div>

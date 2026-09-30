@@ -2,6 +2,8 @@
 
 import { useRef, useState } from 'react';
 
+import { useTranslations } from 'next-intl';
+
 import { cn } from '@/shared/lib/helpers';
 import { IconAuraFive } from '@/shared/ui/icons/IconAuraFive';
 import { IconAuraFour } from '@/shared/ui/icons/IconAuraFour';
@@ -55,26 +57,27 @@ const VISUALS = {
 } as const;
 
 export const InsuranceCases = ({
-  title = 'Insurance Cases',
+  title,
   titleAccent,
-  description = 'A real renewal call, softened for privacy. Same tone your policyholders would hear',
+  description,
   audio = '/audio/insurance.mp3',
   visual = 'waveform',
   page,
 }: InsuranceCasesProps) => {
+  const t = useTranslations('InsuranceCases');
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   const togglePlay = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
+    const audioEl = audioRef.current;
+    if (!audioEl) return;
 
     if (isPlaying) {
-      audio.pause();
-      audio.currentTime = 0;
+      audioEl.pause();
+      audioEl.currentTime = 0;
       setIsPlaying(false);
     } else {
-      audio.play();
+      audioEl.play();
       setIsPlaying(true);
     }
   };
@@ -86,6 +89,10 @@ export const InsuranceCases = ({
   const visualPair = VISUALS[visual];
   const LeftVisual = 'left' in visualPair ? visualPair.left : null;
   const RightVisual = visualPair.right;
+  const useInsuranceDefaults = title === undefined;
+  const resolvedTitle = title ?? t('title');
+  const resolvedTitleAccent = titleAccent ?? (useInsuranceDefaults ? t('titleAccent') : undefined);
+  const resolvedDescription = description ?? (useInsuranceDefaults ? t('description') : '');
 
   return (
     <section className={cn(st.insurance_cases, page && st[page])}>
@@ -106,15 +113,15 @@ export const InsuranceCases = ({
 
           <div className={st.insurance_cases__center}>
             <h2 className={st.insurance_cases__title}>
-              {title}
-              {titleAccent ? (
+              {resolvedTitle}
+              {resolvedTitleAccent ? (
                 <>
                   <br />
-                  <span>{titleAccent}</span>
+                  <span>{resolvedTitleAccent}</span>
                 </>
               ) : null}
             </h2>
-            <p className={st.insurance_cases__desc}>{description}</p>
+            <p className={st.insurance_cases__desc}>{resolvedDescription}</p>
 
             <button
               type="button"
@@ -125,7 +132,7 @@ export const InsuranceCases = ({
               )}
               onClick={togglePlay}
             >
-              {isPlaying ? 'Pause' : 'Play'}
+              {isPlaying ? t('pause') : t('play')}
               <span className={st.insurance_cases__play_icon}>
                 {isPlaying ? (
                   <svg width="12" height="14" viewBox="0 0 12 14" fill="none">

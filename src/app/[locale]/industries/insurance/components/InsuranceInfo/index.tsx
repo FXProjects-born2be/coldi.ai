@@ -3,6 +3,8 @@
 import { type CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 
+import { useTranslations } from 'next-intl';
+
 import { cn } from '@/shared/lib/helpers';
 import { BookDemo } from '@/shared/ui/components/book-demo';
 import { IconCheck } from '@/shared/ui/icons/IconCheck';
@@ -45,6 +47,13 @@ const CONNECTORS = [
   IconConnectorArrowFour,
 ] as const;
 
+const DEFAULT_ITEM_IDS = [
+  'claims-follow-up',
+  'quote-qualification',
+  'payment-reminders',
+  'document-kyc',
+] as const;
+
 type InsuranceInfoItem = {
   id: string;
   label: string;
@@ -61,39 +70,22 @@ type InsuranceInfoProps = {
     | 'other-industries';
 };
 
-const DEFAULT_ITEMS: InsuranceInfoItem[] = [
-  {
-    id: 'claims-follow-up',
-    label: 'Leads come in faster than your floor can call them',
-  },
-  {
-    id: 'quote-qualification',
-    label: "You're paying for traffic that never gets a real conversation",
-  },
-  {
-    id: 'payment-reminders',
-    label: "You're expanding into new language markets and don't want to hire locally",
-  },
-  {
-    id: 'document-kyc',
-    label:
-      "One client cut their calling floor from 60 agents to 25 with flat conversion — that's the kind of shift you're after",
-  },
-];
+export const InsuranceInfo = ({ items, description, page }: InsuranceInfoProps) => {
+  const t = useTranslations('InsuranceInfo');
+  const resolvedItems =
+    items ??
+    DEFAULT_ITEM_IDS.map((id) => ({
+      id,
+      label: t(`items.${id}`),
+    }));
+  const resolvedDescription = description ?? t('description');
 
-const DEFAULT_DESCRIPTION = 'Talk to us about a 30-day pilot on your highest-volume lead source.';
-
-export const InsuranceInfo = ({
-  items = DEFAULT_ITEMS,
-  description = DEFAULT_DESCRIPTION,
-  page,
-}: InsuranceInfoProps) => {
   const rowRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [stepIndex, setStepIndex] = useState(0);
   const isOther = page === 'other-industries';
-  const gridSteps = useMemo(() => buildGridSteps(items.length), [items.length]);
+  const gridSteps = useMemo(() => buildGridSteps(resolvedItems.length), [resolvedItems.length]);
   const step = isOther && inView ? gridSteps[stepIndex] : null;
 
   useEffect(() => {
@@ -107,7 +99,7 @@ export const InsuranceInfo = ({
 
         observer.disconnect();
         setInView(true);
-        setActiveId(items[0].id);
+        setActiveId(resolvedItems[0].id);
       },
       { threshold: 0.25 }
     );
@@ -115,7 +107,7 @@ export const InsuranceInfo = ({
     observer.observe(row);
 
     return () => observer.disconnect();
-  }, [items]);
+  }, [resolvedItems]);
 
   useEffect(() => {
     if (!inView) return;
@@ -125,11 +117,11 @@ export const InsuranceInfo = ({
 
       const timeoutId = window.setTimeout(() => {
         setActiveId((current) => {
-          if (!current) return items[0].id;
+          if (!current) return resolvedItems[0].id;
 
-          const index = items.findIndex((item) => item.id === current);
+          const index = resolvedItems.findIndex((item) => item.id === current);
 
-          return items[(index + 1) % items.length].id;
+          return resolvedItems[(index + 1) % resolvedItems.length].id;
         });
       }, AUTO_MS);
 
@@ -143,12 +135,12 @@ export const InsuranceInfo = ({
     }, delay);
 
     return () => window.clearTimeout(timeoutId);
-  }, [activeId, gridSteps, inView, isOther, items, stepIndex]);
+  }, [activeId, gridSteps, inView, isOther, resolvedItems, stepIndex]);
 
   return (
     <section className={cn(st.insurance_info, page && st[page])}>
       <div className={'container'}>
-        <h2 className={st.insurance_info__title}>Is This You?</h2>
+        <h2 className={st.insurance_info__title}>{t('title')}</h2>
 
         <div
           ref={rowRef}
@@ -162,8 +154,8 @@ export const InsuranceInfo = ({
         >
           <div className={st.insurance_info__left}>
             <ul className={st.insurance_info__list}>
-              {items.map((item, index) => {
-                const isLast = index === items.length - 1;
+              {resolvedItems.map((item, index) => {
+                const isLast = index === resolvedItems.length - 1;
                 const isLeftCol = isOther && index % 2 === 0 && !isLast;
                 const isRightCol = isOther && (index % 2 === 1 || isLast);
                 const showBridge = isLeftCol;
@@ -219,7 +211,7 @@ export const InsuranceInfo = ({
             <div className={st.insurance_info__image}>
               <Image
                 src={'/images/home/what-can-image-main.png'}
-                alt={'Image'}
+                alt=""
                 fill
                 sizes="(max-width: 1024px) 198px, 281px"
               />
@@ -227,7 +219,7 @@ export const InsuranceInfo = ({
 
             <div className={st.insurance_info__right_inner}>
               <div className={st.insurance_info__description}>
-                <p>{description}</p>
+                <p>{resolvedDescription}</p>
               </div>
 
               <div className={st.insurance_info__btn}>

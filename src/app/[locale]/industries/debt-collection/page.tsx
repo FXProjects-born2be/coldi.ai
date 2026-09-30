@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 import {
   InsuranceCases,
@@ -9,63 +10,70 @@ import {
   InsuranceWhy,
 } from '../insurance/components';
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: '/industries/debt-collection',
-  },
-  title: 'AI Voice Agents for Debt Collection Software',
-  description:
-    'AI debt collection software that automates borrower communication, payment reminders, and recovery workflows. Scale credit and debit collection services with AI voice agents.',
-  openGraph: {
-    title: 'AI Voice Agents for Debt Collection Software',
-    description:
-      'AI debt collection software that automates borrower communication, payment reminders, and recovery workflows. Scale credit and debit collection services with AI voice agents.',
-    images: '/images/meta.png',
-  },
+type Props = {
+  params: Promise<{ locale: string }>;
 };
 
-export default function DebtCollectionPage() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'DebtCollectionPage' });
+
+  return {
+    alternates: {
+      canonical: '/industries/debt-collection',
+    },
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      images: '/images/meta.png',
+    },
+  };
+}
+
+export default async function DebtCollectionPage() {
+  const t = await getTranslations('DebtCollectionPage');
+
   return (
     <main>
       <InsuranceHero
-        title="AI Voice Agents Built for"
-        titleAccent="Debt Collection"
-        description="Coldi works your full portfolio on a compliant script, at a fraction of the cost of a human floor."
+        title={t('hero.title')}
+        titleAccent={t('hero.titleAccent')}
+        description={t('hero.description')}
         video="/videos/debt-collection-hero.mp4"
       />
       <InsuranceHandles
+        industry="debt-collection"
         items={[
           {
             id: 'payment-reminders',
             icon: '/icons/fluent_receipt-sparkles-24-regular.svg',
-            label: 'Payment Reminders',
+            label: t('handles.items.payment-reminders'),
           },
           {
             id: 'arrangement-negotiation',
             icon: '/icons/ic_outline-policy.svg',
-            label: 'Arrangement / Negotiation',
+            label: t('handles.items.arrangement-negotiation'),
           },
           {
             id: 'broken-promise-follow-up',
             icon: '/icons/hugeicons_ai-audio.svg',
-            label: 'Broken-Promise Follow-up',
+            label: t('handles.items.broken-promise-follow-up'),
           },
           {
             id: 'pre-legal-notice',
             icon: '/icons/octicon_comment-ai-16.svg',
-            label: 'Pre-Legal Notice',
+            label: t('handles.items.pre-legal-notice'),
           },
         ]}
-        firstText={`"Hi, this is Coldi calling about your account ending 4471. You have a payment of $210 due Friday. Would you like to set up a plan?"`}
-        answer="Can I pay half now and half next month?"
-        secondText={`"Yes, I can set that up right now. You'll get a confirmation text with both dates."`}
         background="/images/general/background-three.png"
         visual="timerTwo"
       />
       <InsuranceCases
-        title="Debt Collection"
-        titleAccent="Payment Reminder"
-        description="Scripted word for word, recorded end to end, opt-out honored instantly."
+        title={t('cases.title')}
+        titleAccent={t('cases.titleAccent')}
+        description={t('cases.description')}
         audio="/audio/debt-collection.mp3"
         visual="timer"
         page="debt-collection"
@@ -76,41 +84,41 @@ export default function DebtCollectionPage() {
             id: 'intro',
             icon: null,
             video: '/videos/meet-the-team-drive.mp4',
-            title: 'Why Collections Teams',
-            titleAccent: 'Bring Coldi In',
+            title: t('why.intro.title'),
+            titleAccent: t('why.intro.titleAccent'),
           },
           {
             id: 'contact-rate',
             icon: '/icons/ic_outline-star-rate.svg',
-            title: 'Contact rate',
-            body: 'Portfolios get worked at the times and in the languages that actually connect.',
+            title: t('why.contact-rate.title'),
+            body: t('why.contact-rate.body'),
           },
           {
             id: 'compliance',
             icon: '/icons/ic_outline-policy.svg',
-            title: 'Compliance',
-            body: 'The approved script runs every time, every call recorded and transcribed.',
+            title: t('why.compliance.title'),
+            body: t('why.compliance.body'),
           },
           {
             id: 'small-balances',
             icon: '/icons/cil_balance-scale.svg',
-            title: 'Small balances',
-            body: 'Accounts too small to justify a human agent become profitable to chase again.',
+            title: t('why.small-balances.title'),
+            body: t('why.small-balances.body'),
           },
           {
             id: 'follow-through',
             icon: '/icons/fluent_payment-16-regular.svg',
-            title: 'Follow-through',
-            body: 'Payment arrangements get reminded and re-confirmed automatically instead of going stale.',
+            title: t('why.follow-through.title'),
+            body: t('why.follow-through.body'),
           },
         ]}
       />
       <InsuranceOperations
-        title="Built for Collections Operations"
+        title={t('operations.title')}
         description={
           <>
-            Mandatory disclosures built into every script.
-            <br /> Full audit trail, immediate stop on any opt-out.
+            {t('operations.description1')}
+            <br /> {t('operations.description2')}
           </>
         }
       />
@@ -118,22 +126,22 @@ export default function DebtCollectionPage() {
         items={[
           {
             id: 'portfolio-headcount',
-            label: 'Your portfolio is growing faster than headcount',
+            label: t('info.items.portfolio-headcount'),
           },
           {
             id: 'audit-compliance',
-            label: "You've had a recent audit, compliance incident, or regulatory pressure",
+            label: t('info.items.audit-compliance'),
           },
           {
             id: 'small-balances',
-            label: "You're writing off small balances that were never worth a human agent's time",
+            label: t('info.items.small-balances'),
           },
           {
             id: 'agent-turnover',
-            label: 'Agent turnover on your hardest seat is a recurring cost',
+            label: t('info.items.agent-turnover'),
           },
         ]}
-        description="Talk to us about a 30-day pilot on one portfolio segment."
+        description={t('info.description')}
       />
     </main>
   );

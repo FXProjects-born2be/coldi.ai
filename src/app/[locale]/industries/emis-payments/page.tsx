@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 import {
   InsuranceCases,
@@ -9,63 +10,70 @@ import {
   InsuranceWhy,
 } from '../insurance/components';
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: '/industries/emis-payments',
-  },
-  title: 'Coldi AI Voice Agents for EMIs & Payment Providers',
-  description:
-    "Recover abandoned onboarding and verification with Coldi's AI voice agents for EMIs and payment providers. Automate KYC follow-up, compliance outreach, and CRM sync. Book a demo!",
-  openGraph: {
-    title: 'Coldi AI Voice Agents for EMIs & Payment Providers',
-    description:
-      "Recover abandoned onboarding and verification with Coldi's AI voice agents for EMIs and payment providers. Automate KYC follow-up, compliance outreach, and CRM sync. Book a demo!",
-    images: '/images/meta.png',
-  },
+type Props = {
+  params: Promise<{ locale: string }>;
 };
 
-export default function EmisPaymentsPage() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'EmisPaymentsPage' });
+
+  return {
+    alternates: {
+      canonical: '/industries/emis-payments',
+    },
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      images: '/images/meta.png',
+    },
+  };
+}
+
+export default async function EmisPaymentsPage() {
+  const t = await getTranslations('EmisPaymentsPage');
+
   return (
     <main>
       <InsuranceHero
-        title="AI Voice Agents Built for "
-        titleAccent="EMIs and Payment Providers"
-        description="Coldi recovers stalled onboarding and handles compliance outreach without a full contact center."
+        title={t('hero.title')}
+        titleAccent={t('hero.titleAccent')}
+        description={t('hero.description')}
         image="/images/industries/emis-payments-hero-bg.jpg"
       />
       <InsuranceHandles
+        industry="emis"
         items={[
           {
             id: 'application-recovery',
             icon: '/icons/fluent_receipt-sparkles-24-regular.svg',
-            label: 'Application Recovery',
+            label: t('handles.items.application-recovery'),
           },
           {
             id: 'verification-document-requests',
             icon: '/icons/ri_file-ai-2-line.svg',
-            label: 'Verification / Document Requests',
+            label: t('handles.items.verification-document-requests'),
           },
           {
             id: 'compliance-data-refresh',
             icon: '/icons/ri_bar-chart-box-ai-line.svg',
-            label: 'Compliance Data Refresh',
+            label: t('handles.items.compliance-data-refresh'),
           },
           {
             id: 'account-support-routing',
             icon: '/icons/fluent_person-account-16-regular.svg',
-            label: 'Account Support Routing',
+            label: t('handles.items.account-support-routing'),
           },
         ]}
-        firstText={`"Hi, this is Coldi calling on behalf of [Provider]. You started an account application but didn't finish verification — got two minutes?"`}
-        answer="Yeah, what do you need?"
-        secondText={`"Just a photo ID upload, I'll text you the secure link now."`}
         background="/images/general/background-four.png"
         visual="dotWave"
       />
       <InsuranceCases
-        title="EMIs"
-        titleAccent="Application Recovery"
-        description="A stalled sign-up, walked back through the last step of verification."
+        title={t('cases.title')}
+        titleAccent={t('cases.titleAccent')}
+        description={t('cases.description')}
         audio="/audio/emis.mp3"
         visual="dotWave"
         page="emis-payments"
@@ -76,62 +84,55 @@ export default function EmisPaymentsPage() {
             id: 'intro',
             icon: null,
             video: '/videos/meet-the-team-drive.mp4',
-            title: 'Why EMI Teams',
-            titleAccent: 'Bring Coldi In',
+            title: t('why.intro.title'),
+            titleAccent: t('why.intro.titleAccent'),
           },
           {
             id: 'onboarding-recovery',
-            icon: '/icons/ic_outline-tour.svg',
-            title: 'Onboarding recovery',
-            body: 'Applications abandoned mid-verification get a timely, multilingual nudge.',
+            icon: '/icons/ic_outline-cloud.svg',
+            title: t('why.onboarding-recovery.title'),
+            body: t('why.onboarding-recovery.body'),
           },
           {
             id: 'compliance-outreach',
             icon: '/icons/eos-icons_network-policy-outlined.svg',
-            title: 'Compliance outreach',
-            body: 'Document requests and consent refreshes run automatically, fully logged.',
+            title: t('why.compliance-outreach.title'),
+            body: t('why.compliance-outreach.body'),
           },
           {
             id: 'support-coverage',
             icon: '/icons/fluent_person-support-16-regular.svg',
-            title: 'Support coverage',
-            body: 'Routine account questions get answered around the clock, routed to specialists only when needed.',
+            title: t('why.support-coverage.title'),
+            body: t('why.support-coverage.body'),
           },
           {
             id: 'lean-teams',
             icon: '/icons/eos-icons_ai-healing-outlined.svg',
-            title: 'Lean teams',
-            body: 'You get contact-center coverage without building a contact center.',
+            title: t('why.lean-teams.title'),
+            body: t('why.lean-teams.body'),
           },
         ]}
       />
       <InsuranceOperations
-        title="Built for EMI Operations"
-        description={
-          <>
-            Every verification call follows your approved scripts and regulatory messaging, with
-            complete recordings, transcripts, and audit logs. Built to support GDPR-compliant EMI
-            operations.
-          </>
-        }
+        title={t('operations.title')}
+        description={t('operations.description')}
       />
       <InsuranceInfo
         items={[
           {
             id: 'drop-off',
-            label: 'Drop-off between registration and first use is your biggest growth leak',
+            label: t('info.items.drop-off'),
           },
           {
             id: 'stalls-without-touchpoint',
-            label: 'Verification stalls without a human touchpoint',
+            label: t('info.items.stalls-without-touchpoint'),
           },
           {
             id: 'team-is-too-lean',
-            label:
-              'Your team is too lean to justify a full contact center, but the call volume is there',
+            label: t('info.items.team-is-too-lean'),
           },
         ]}
-        description="Talk to us about a 30-day pilot on your onboarding funnel."
+        description={t('info.description')}
       />
     </main>
   );
