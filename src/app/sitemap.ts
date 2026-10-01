@@ -22,7 +22,6 @@ const STATIC_PATHS = [
   '/industries/insurance',
   '/industries/other-industries',
   '/industries/trading-platforms-brokers',
-  '/canadian-fintech',
   '/global-agricultural-infrastructure-provider',
   '/global-professional-services-provider',
   '/multi-asset-trading-and-investment-platform',

@@ -37,8 +37,6 @@ const segmentLabels: Record<string, string> = {
   legal: 'Legal',
   silverbellgroup: 'Silverbell Group',
   'global-professional-services-provider': 'Silverbell Group',
-  'clarity-global': 'Clarity Global',
-  'canadian-fintech': 'Clarity Global',
   'performance-marketing-agency': 'Clickomi',
   'residential-electrical-contractor': 'Stone Electric',
   'multi-asset-trading-and-investment-platform': 'Evest',

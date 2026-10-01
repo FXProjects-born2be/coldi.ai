@@ -15,10 +15,10 @@ export function getPageHeadingFromPath(pathname: string): string {
   if (pathname === '/legal') return 'Coldi Live';
   if (pathname === '/global-agricultural-infrastructure-provider')
     return 'Lead Qualification in the Global Agro-Industry';
-  if (pathname === '/canadian-fintech') return 'Clarity Global use case';
   if (pathname === '/performance-marketing-agency')
     return 'Lead Qualification in the Global Agro-Industry';
-  if (pathname === '/residential-electrical-contractor') return 'Clarity Global use case';
+  if (pathname === '/residential-electrical-contractor')
+    return 'Residential Electrical Contractor use case';
   if (pathname === '/multi-asset-trading-and-investment-platform') return 'Evest use case';
   if (pathname === '/global-professional-services-provider')
     return 'AI Operational Excellence: Silverbell Group Case Study';

@@ -103,8 +103,10 @@ const nextConfig: NextConfig = {
       { source: '/uk/about', destination: '/uk/coldi-vision', permanent: true },
       { source: '/clickomi', destination: '/performance-marketing-agency', permanent: true },
       { source: '/uk/clickomi', destination: '/uk/performance-marketing-agency', permanent: true },
-      { source: '/clarity-global', destination: '/canadian-fintech', permanent: true },
-      { source: '/uk/clarity-global', destination: '/uk/canadian-fintech', permanent: true },
+      { source: '/canadian-fintech', destination: '/use-cases', permanent: true },
+      { source: '/uk/canadian-fintech', destination: '/uk/use-cases', permanent: true },
+      { source: '/clarity-global', destination: '/use-cases', permanent: true },
+      { source: '/uk/clarity-global', destination: '/uk/use-cases', permanent: true },
       {
         source: '/stone-electric',
         destination: '/residential-electrical-contractor',

@@ -31,16 +31,6 @@ export const FEATURED_CASES: FeaturedCaseMeta[] = [
     ],
   },
   {
-    id: 'payment-solutions',
-    href: '/canadian-fintech',
-    results: [
-      { value: '100%', labelKey: 'reviewAutomation' },
-      { value: '0', suffixKey: 'sec', labelKey: 'escalationLag' },
-      { value: '10+', suffixKey: 'hours', labelKey: 'savedMonthly' },
-      { value: '24/7', labelKey: 'inboundCoverage' },
-    ],
-  },
-  {
     id: 'silverbell',
     href: '/global-professional-services-provider',
     results: [
@@ -93,17 +83,6 @@ export const IMPLEMENTATIONS: ImplementationMeta[] = [
       { icon: '/icons/hugeicons_appointment-02.svg', labelKey: 'callback' },
       { icon: '/images/use-cases-hub/handle-interest.png', labelKey: 'inboundId' },
       { icon: '/icons/bx_data.svg', labelKey: 'dataRetrieval' },
-    ],
-  },
-  {
-    id: 'portfolioiq',
-    href: '/canadian-fintech',
-    handles: [
-      { icon: '/images/use-cases-hub/handle-outbound.png', labelKey: 'outbound' },
-      { icon: '/images/use-cases-hub/handle-interest.png', labelKey: 'interest' },
-      { icon: '/images/use-cases-hub/handle-callback.png', labelKey: 'callbackConversion' },
-      { icon: '/icons/ri_chat-follow-up-line.svg', labelKey: 'sms' },
-      { icon: '/images/use-cases-hub/handle-handoff.png', labelKey: 'dataCapture' },
     ],
   },
 ];

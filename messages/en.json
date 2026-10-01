@@ -767,7 +767,6 @@
     },
     "useCaseItems": {
       "silverbell": "BPO (Silverbell Group)",
-      "clarity-global": "Clarity Global",
       "residential-service": "Residential Service (Stone Electric)",
       "agro-industry": "Agro-Industry",
       "hvac-leads": "HVAC Leads"
@@ -958,11 +957,6 @@
         "caption": "Multi-Currency Payments\nPlatform",
         "title": "Multi-Currency Payments Platform",
         "description": "Coldi AI agent calls new leads, identifies those ready to speak with a specialist, checks real-time availability, and books the callback directly into the calendar."
-      },
-      "clarity": {
-        "caption": "Payment Solutions\nProvider",
-        "title": "Payment Solutions Provider",
-        "description": "AI manages recurring client reviews from first outreach to reminders, response classification, internal escalation, reporting, and a complete activity trail."
       },
       "stone": {
         "caption": "Residential Electrical\nContractor",
@@ -1281,18 +1275,6 @@
             "qualifiedLeads": "qualified leads captured"
           }
         },
-        "payment-solutions": {
-          "tab": "Payment Solutions Provider",
-          "title": "Payment Solutions Provider",
-          "pain": "Manual 6-month compliance reviews across hundreds of clients created spreadsheet overload and slow status-change escalations.",
-          "solution": "Coldi automated the entire review cycle with an outbound compliance agent and a 24/7 inbound AI phone line.",
-          "results": {
-            "reviewAutomation": "Review Cycle Automation",
-            "escalationLag": "Escalation Lag",
-            "savedMonthly": "Saved Monthly",
-            "inboundCoverage": "Inbound Coverage"
-          }
-        },
         "silverbell": {
           "tab": "Business Process Outsourcing",
           "title": "Global Professional Services Provider",
@@ -1364,18 +1346,6 @@
             "callback": "Callback scheduling",
             "inboundId": "Inbound lead identification",
             "dataRetrieval": "Lead data retrieval"
-          }
-        },
-        "portfolioiq": {
-          "tab": "AI-powered fintech platform",
-          "title": "Lead Re-engagement with Automated Follow-Up",
-          "description": "The client needed to turn outbound calls into a complete follow-up process, giving interested leads both a direct path to a specialist and additional information by SMS.",
-          "handles": {
-            "outbound": "Outbound lead calling",
-            "interest": "Interest qualification",
-            "callbackConversion": "Callback conversion",
-            "sms": "SMS follow-up",
-            "dataCapture": "Lead data capture"
           }
         }
       }
@@ -1597,232 +1567,6 @@
         "peakConversion": "Peak Conversation Conversion Rate achieved in August",
         "precisionLockInLabel": "Securing exact dates and times for 92.8% of callbacks prevents lost leads and eliminates phone tag for account managers.",
         "voicemailFilterLabel": "Eliminating 96.4% of automated voicemails ensures conversation time is spent exclusively with active, live prospects."
-      }
-    }
-  },
-  "CanadianFintechPage": {
-    "metaTitle": "Coldi AI Agents Compliance Automation Case Study",
-    "metaDescription": "Check how Clarity Global eliminated manual compliance follow-ups, automated outreach, and cut response lag using Coldi’s AI agents. Read now!",
-    "hero": {
-      "titleLine1": "Zero Response Lag, 100% Audit Readiness:",
-      "titleLine2": "How The Payment Solutions Provider Automated B2B Compliance & Inbound Support",
-      "subtitle": "How a Canadian fintech deployed autonomous outbound review workflows and a 24/7 inbound voice agent to eliminate manual follow-ups across hundreds of B2B client reviews.",
-      "reportingRange": "THE CLIENT",
-      "paragraph": "The client is a Canadian fintech providing advanced payment infrastructure to global B2B clients. Operating under strict regulatory obligations, mandatory periodic compliance reviews are a core operational requirement."
-    },
-    "toc": {
-      "problem": {
-        "title": "Problem",
-        "description": "Calls slipping through after hours"
-      },
-      "engagement-snapshot": {
-        "title": "Engagement Snapshot",
-        "description": "The client, scope, and setup"
-      },
-      "integrated": {
-        "title": "What Coldi Built",
-        "description": "The agent, integrations, and workflows"
-      },
-      "implementation": {
-        "title": "How The Implementation Went",
-        "description": "A phased rollout to go-live"
-      },
-      "issues": {
-        "title": "What The Client Asked For Along The Way",
-        "description": "Requests that reshaped the build"
-      },
-      "monitoring": {
-        "title": "How Coldi Runs The Account",
-        "description": "Monitored, tuned, and audit-ready"
-      },
-      "went-wrong": {
-        "title": "What Went Wrong, and How Fast It Was Fixed",
-        "description": "Edge cases, caught and closed"
-      },
-      "results": {
-        "title": "Results & What The Numbers Mean",
-        "description": "The impact since launch"
-      }
-    },
-    "problem": {
-      "title": "The Problem",
-      "items": {
-        "manualOutreach": {
-          "title": "Manual & Unsegmented Outreach",
-          "text": "Reaching out to hundreds of clients every six months was conducted manually with zero segmentation between corporate and individual accounts."
-        },
-        "followUps": {
-          "title": "Unstructured Follow-Ups & Scaling Bottlenecks",
-          "text": "No automated reminder cadence existed; follow-ups relied on spreadsheets and team memory, causing missed reminders as client volume grew."
-        },
-        "slowClassification": {
-          "title": "Slow Response Classification",
-          "text": "Client responses were categorized by hand, introducing operational lag."
-        },
-        "escalationRisks": {
-          "title": "Compliance Escalation Risks",
-          "text": "Notifications to the compliance team were triggered manually, risking severe delays on high-priority \"changes reported\" cases."
-        },
-        "reporting": {
-          "title": "Time-Consuming Reporting",
-          "text": "Monthly reporting was built manually from scratch each cycle, consuming hours of staff time."
-        },
-        "auditTrail": {
-          "title": "Lack of Audit Trail",
-          "text": "No centralized, timestamped record existed for outbound messages, client replies, and internal alerts."
-        }
-      },
-      "tried": {
-        "title": "What They Tried Before Coldi",
-        "items": {
-          "spreadsheet": {
-            "title": "Spreadsheet Tracking",
-            "text": "Manual logs created inconsistent response tracking and high exposure to human error."
-          },
-          "manualEscalation": {
-            "title": "Manual Staff Escalation",
-            "text": "Relying on human agents to manually flag high-risk declarations created compliance bottlenecks."
-          },
-          "traditionalStaffing": {
-            "title": "Traditional Support Staffing",
-            "text": "Human-only support led to high operational costs and staff burnout from handling repetitive Tier-1 queries around the clock."
-          }
-        }
-      },
-      "asked": {
-        "title": "What They Asked For",
-        "text": "Deploy an autonomous outbound compliance workflow to handle the complete six-month review cycle alongside a 24/7 inbound AI Live Support Agent to qualify visitors, answer queries, and route existing clients automatically."
-      },
-      "conclusion": {
-        "title": "The conclusion they reached",
-        "text": "static spreadsheets and manual follow-ups introduce regulatory risk and cannot scale with growth. The critical requirement is a fully automated communication lifecycle—handling outreach, reminder cadences, response classification, instant high-risk escalation, and audit reporting with zero manual input. That is the point at which they came to Coldi."
-      }
-    },
-    "snapshot": {
-      "values": {
-        "timeline": "6 <span>Weeks</span>",
-        "lifecycle": "100<span>%</span>",
-        "cadence": "7<span> Day</span>"
-      },
-      "labels": {
-        "timeline": "Implementation Timeline",
-        "inbound": "Inbound Voice Support Availability",
-        "lifecycle": "Automated Compliance Lifecycle Execution",
-        "cadence": "Structured Follow-Up Interval Cadence"
-      }
-    },
-    "implementation": {
-      "discovery": {
-        "title": "Discovery & Wiring",
-        "text": "CRM integration setup, client segmentation rules established, and inbound telephony stood up."
-      },
-      "iterative": {
-        "title": "Iterative Prompt & Flow Build",
-        "text": "Configured 3-stage reminder cadences, corporate/individual prompt templates, and the 5-point inbound qualification flow."
-      },
-      "classification": {
-        "title": "Classification & Escalation Engine",
-        "text": "Built AI response sorting (3 categories) and instant compliance alert triggers."
-      },
-      "audit": {
-        "title": "Audit & Reporting Automation",
-        "text": "Integrated centralized timestamped logging and automated monthly compliance report generation."
-      },
-      "rollout": {
-        "title": "Full System Rollout",
-        "text": "Launched live outbound compliance reviews and 24/7 inbound support agent (+1 236 309 2666)."
-      },
-      "hardening": {
-        "title": "Hardening & Audit Review",
-        "text": "Evaluated classification accuracy, latency, and automated hand-off compliance."
-      }
-    },
-    "integrated": {
-      "segmentation": {
-        "title": "Client Segmentation & Dynamic Scripting",
-        "text": "Automatic CRM-based classification into corporate vs. individual accounts, triggering approved, segment-specific outreach scripts."
-      },
-      "reminder": {
-        "title": "3-Stage Automated Reminder Engine",
-        "text": "Schedules and executes follow-up reminders at exact 7-day intervals with per-client tracking of send dates and response status."
-      },
-      "classification": {
-        "title": "AI Response Classification & Real-Time Escalation",
-        "text": "Analyzes incoming client replies, categorizes them into three defined groups, and instantly alerts the compliance department upon detecting \"changes reported\"."
-      },
-      "reporting": {
-        "title": "Automated Audit Trail & Monthly Reporting",
-        "text": "Auto-generates audit-ready monthly reports covering all outcome categories while maintaining a timestamped log of all outreach, replies, and notifications."
-      },
-      "inbound": {
-        "title": "24/7 Inbound AI Live Support Agent",
-        "text": "Dedicated voice coverage (+1 236 309 2666) providing instant response, smart routing for existing clients, and a 5-point lead qualification flow for new visitors."
-      }
-    },
-    "asked": {
-      "values": {
-        "qualification": "5<span>-Point</span>"
-      },
-      "qualification": {
-        "label": "Inbound Qualification Logic Built (Account Status, Payment Solution, Country, Industry, Volume)"
-      },
-      "sla": {
-        "value": "Strict SLA",
-        "label": "Configured for Instant Compliance Escalation Triggers"
-      },
-      "reports": {
-        "value": "100%",
-        "label": "Audit-Ready Automated Report Templates Custom-Built"
-      }
-    },
-    "monitoring": {
-      "auditing": {
-        "label": "Immutable Compliance Auditing",
-        "value": "Complete timestamped records of every call, message, AI classification decision, and internal alert stored automatically."
-      },
-      "escalation": {
-        "label": "Zero-Lag Escalation SLA",
-        "value": "Direct automated routing of change declarations directly to compliance officers, eliminating human delay."
-      },
-      "health": {
-        "label": "Managed System Health",
-        "value": "Ongoing monitoring of phone line deliverability, prompt accuracy, and CRM sync stability."
-      }
-    },
-    "wentWrong": {
-      "0": "Area",
-      "1": "What Happened",
-      "2": "How Coldi Resolved It",
-      "3": "Coming Soon",
-      "4": "Coming Soon",
-      "5": "Coming Soon",
-      "6": "Coming Soon",
-      "7": "Coming Soon",
-      "8": "Coming Soon",
-      "9": "Coming Soon",
-      "10": "Coming Soon",
-      "11": "Coming Soon"
-    },
-    "resultsShow": {
-      "title": "What This Engagement Shows",
-      "text": "In highly regulated fintech environments, AI deployment must provide total operational precision. Coldi delivers strict logic, real-time escalation triggers, and immutable audit trails directly alongside autonomous voice and text capabilities."
-    },
-    "resultsMetrics": {
-      "values": {
-        "zeroMin": "0 Min",
-        "zeroSec": "0 Sec",
-        "threeSteps": "3 Steps",
-        "zeroLag": "Zero <span>Response Lag:</span>"
-      },
-      "labels": {
-        "inboundSupport": "Front-Line Inbound Support Established (+1 236 309 2666)",
-        "lifecycleAutomated": "Inbound & Outbound Compliance Review Lifecycle Automated",
-        "manualDelays": "Manual Scheduling & Follow-Up Delays",
-        "leadCapture": "Automated Lead & Scope Capture",
-        "qualificationDelay": "Automated Lead Qualification Delay",
-        "escalationReporting": "Instant Post-Call Compliance Escalation & Reporting",
-        "qualificationLogic": "Automated Lead Qualification Logic Implemented",
-        "zeroLagLabel": "Automated classification and real-time triggers removed manual delays on high-risk accounts."
       }
     }
   },

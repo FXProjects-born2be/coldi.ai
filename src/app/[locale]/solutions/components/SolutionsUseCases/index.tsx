@@ -14,7 +14,6 @@ import { Link } from '@/i18n/navigation';
 const CASES = [
   { id: 'clickomi', href: '/performance-marketing-agency' },
   { id: 'payset', href: '/use-cases#implementations' },
-  { id: 'clarity', href: '/canadian-fintech' },
   { id: 'stone', href: '/residential-electrical-contractor' },
 ] as const;
 
