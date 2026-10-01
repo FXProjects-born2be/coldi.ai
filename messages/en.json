@@ -98,8 +98,8 @@
     "description": "Book a demo and see how AI calling can fit into your existing workflows."
   },
   "MeetTeamPage": {
-    "metaTitle": "Meet the team",
-    "metaDescription": "We don’t just build technology; we design the bridge between your business strategy and automated execution."
+    "metaTitle": "About Coldi: Fintech AI Voice Agent Creators",
+    "metaDescription": "Meet the team behind Coldi's AI voice agents. Learn our approach to delivery of the best AI voice solutions for fintech businesses. Explore now."
   },
   "MeetTeamHero": {
     "titleEyebrow": "Meet the Team",
@@ -350,7 +350,7 @@
     }
   },
   "TradingPlatformsPage": {
-    "metaTitle": "AI Agents for FX Brokers More FTDs & Retention",
+    "metaTitle": "Coldi AI Voice Agents for Trading Platforms & Brokers",
     "metaDescription": "Convert more leads and retain more traders with AI voice agents built for FX brokers. Instant calls, reactivation, and 30+ languages. Book a demo.",
     "hero": {
       "title": "AI Voice Agents Built for",
@@ -977,8 +977,8 @@
     "cta": "Book a Demo"
   },
   "IndustriesPage": {
-    "metaTitle": "AI Voice Solution for more than 10 industries",
-    "metaDescription": "Explore AI voice solutions for more than 10 industries. Purpose-built agents to scale operations and handle 5,000+ minutes monthly"
+    "metaTitle": "Voice AI for Insurance, Trading Platforms, and Debt Collection",
+    "metaDescription": "Automate customer calls, qualify leads, recover payments, and improve response times with Coldi’s AI voice agents built for financial businesses."
   },
   "IndustriesHero": {
     "title": "Voice AI Built",
@@ -1601,8 +1601,8 @@
     }
   },
   "CanadianFintechPage": {
-    "metaTitle": "Clarity Global use case",
-    "metaDescription": "How Clarity Global is eliminating manual follow-up work across hundreds of client reviews and cutting response lag to zero.",
+    "metaTitle": "Coldi AI Agents Compliance Automation Case Study",
+    "metaDescription": "Check how Clarity Global eliminated manual compliance follow-ups, automated outreach, and cut response lag using Coldi’s AI agents. Read now!",
     "hero": {
       "titleLine1": "Zero Response Lag, 100% Audit Readiness:",
       "titleLine2": "How The Payment Solutions Provider Automated B2B Compliance & Inbound Support",
@@ -2028,8 +2028,8 @@
     }
   },
   "ResidentialElectricalPage": {
-    "metaTitle": "Automated Residential Service Intake & 24/7 Smart Dispatching",
-    "metaDescription": "How a residential electrical contractor deployed an autonomous AI voice agent (\"George\") to triage emergency calls, validate service areas, and book jobs directly into technician calendars.",
+    "metaTitle": "Coldi Residential Service Automation Case Study",
+    "metaDescription": "Discover how Stone Electric uses Coldi’s AI voice agent, George, for emergency dispatching, ZIP triage, and Housecall Pro bookings. Read the case study!",
     "hero": {
       "titleLine1": "Automated Residential Service Intake & 24/7 Smart Dispatching",
       "subtitle": "How a residential electrical contractor deployed an autonomous AI voice agent (\"George\") to triage emergency calls, validate service areas, and book jobs directly into technician calendars.",
@@ -2247,8 +2247,8 @@
     }
   },
   "AgriculturalInfrastructurePage": {
-    "metaTitle": "Lead Qualification in the Global Agro-Industry",
-    "metaDescription": "How Global Agro Industry deployed Coldi's AI voice concierge Sara for technical discovery, CRM data extraction, and senior sales scheduling.",
+    "metaTitle": "Coldi AI Lead Qualification in Agro-Industry Case Study",
+    "metaDescription": "See how Coldi’s AI agent, Sara, qualifies multi-million dollar industrial agro leads, automates discovery, and syncs CRM data 24/7. Read the case study!",
     "hero": {
       "titleLine1": "Automated Technical Screening & Senior Sales Scheduling",
       "subtitle": "How a global agricultural infrastructure provider deployed an autonomous AI voice assistant to handle technical discovery, qualify complex project leads, and populate CRM data.",
@@ -2452,8 +2452,8 @@
     }
   },
   "SaasHvacPage": {
-    "metaTitle": "High-Volume Lead Re-engagement for SaaS and HVAC",
-    "metaDescription": "Re-engage cold SaaS & HVAC leads with ultra-low latency AI. Handle objections automatically and send Calendly links via SMS to book more software demos.",
+    "metaTitle": "Coldi HVAC Lead Re-engagement with AI Voice Agents",
+    "metaDescription": "See how Coldi’s low-latency outbound AI agent reactivates cold data, handles objections, and schedules SaaS demos via instant SMS links. Read the case study!",
     "hero": {
       "titleLine1": "High-Speed Outbound Reactivation & Tech Stack Scoping",
       "subtitle": "How a SaaS and HVAC service operator deployed an ultra-low latency voice AI engine to reactivate cold lead databases, analyze existing software stacks, and book 15-minute product demos.",
@@ -2662,5 +2662,19 @@
     "week": "Week {week}",
     "prevWeek": "Previous week",
     "nextWeek": "Next week"
+  },
+  "NewsPage": {
+    "metaTitle": "Coldi News: Guides & Industry Insights on AI in Fintech",
+    "metaDescription": "Explore AI voice agent trends, use cases and industry insights for call centers, insurance, healthcare and real estate. Read now.",
+    "hero": {
+      "title": "Coldi Community & News",
+      "subtitle": "Media buzz, product updates, and real-world impact - follow the rise of human-sounding AI callers built to convert.",
+      "breadcrumbHome": "Home",
+      "breadcrumbNews": "News",
+      "breadcrumbAria": "Breadcrumb",
+      "featured": "Featured",
+      "featuredTabsAria": "Featured articles",
+      "featuredShow": "Show featured article {index}"
+    }
   }
 }

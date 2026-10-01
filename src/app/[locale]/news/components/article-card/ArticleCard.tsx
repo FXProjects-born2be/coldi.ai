@@ -1,12 +1,15 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+
+import { useLocale } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
 
 import { DEFAULT_NEWS_IMAGE, formatCardDate, type NewsCard } from '../../lib';
 import st from './ArticleCard.module.scss';
+
+import { Link } from '@/i18n/navigation';
 
 export const NEWS_LISTING_RETURN_KEY = 'newsListingReturn';
 
@@ -34,7 +37,8 @@ const rememberListingReturn = () => {
 };
 
 export const ArticleCard = ({ article, variant = 'compact' }: ArticleCardProps) => {
-  const dateLabel = formatCardDate(article.created_at);
+  const locale = useLocale();
+  const dateLabel = formatCardDate(article.created_at, locale);
   const category = article.category || 'News';
   const isLegacyPreview = Boolean(article.isLegacy);
 

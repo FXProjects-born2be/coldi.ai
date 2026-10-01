@@ -98,8 +98,8 @@
     "description": "Забронюйте демо та побачте, як AI-дзвінки вписуються у ваші наявні воркфлоу."
   },
   "MeetTeamPage": {
-    "metaTitle": "Познайомтеся з командою",
-    "metaDescription": "Ми не просто створюємо технології — ми проєктуємо міст між вашою бізнес-стратегією та автоматизованим виконанням."
+    "metaTitle": "About Coldi: Fintech AI Voice Agent Creators",
+    "metaDescription": "Meet the team behind Coldi's AI voice agents. Learn our approach to delivery of the best AI voice solutions for fintech businesses. Explore now."
   },
   "MeetTeamHero": {
     "titleEyebrow": "Познайомтеся з командою",
@@ -350,7 +350,7 @@
     }
   },
   "TradingPlatformsPage": {
-    "metaTitle": "AI Agents for FX Brokers More FTDs & Retention",
+    "metaTitle": "Coldi AI Voice Agents for Trading Platforms & Brokers",
     "metaDescription": "Convert more leads and retain more traders with AI voice agents built for FX brokers. Instant calls, reactivation, and 30+ languages. Book a demo.",
     "hero": {
       "title": "AI-агенти для",
@@ -977,8 +977,8 @@
     "cta": "Забронювати демо"
   },
   "IndustriesPage": {
-    "metaTitle": "Голосове AI-рішення для більш ніж 10 галузей",
-    "metaDescription": "Голосові AI-рішення для більш ніж 10 галузей. Агенти під конкретні задачі, щоб масштабувати операції й обробляти 5 000+ хвилин щомісяця"
+    "metaTitle": "Voice AI for Insurance, Trading Platforms, and Debt Collection",
+    "metaDescription": "Automate customer calls, qualify leads, recover payments, and improve response times with Coldi’s AI voice agents built for financial businesses."
   },
   "IndustriesHero": {
     "title": "Голосові AI рішення",
@@ -1601,8 +1601,8 @@
     }
   },
   "CanadianFintechPage": {
-    "metaTitle": "Кейс Clarity Global",
-    "metaDescription": "Як Clarity Global усуває ручну роботу з повторними контактами під час сотень перевірок клієнтів і скорочує затримку відповіді до нуля.",
+    "metaTitle": "Coldi AI Agents Compliance Automation Case Study",
+    "metaDescription": "Check how Clarity Global eliminated manual compliance follow-ups, automated outreach, and cut response lag using Coldi’s AI agents. Read now!",
     "hero": {
       "titleLine1": "Нульова затримка відповіді, 100% готовність до аудиту:",
       "titleLine2": "Як постачальник платіжних рішень автоматизував B2B-комплаєнс і вхідну підтримку",
@@ -2028,8 +2028,8 @@
     }
   },
   "ResidentialElectricalPage": {
-    "metaTitle": "Автоматизований прийом заявок на побутові послуги та цілодобова інтелектуальна диспетчеризація",
-    "metaDescription": "Як підрядник з електричних робіт для житлових об'єктів впровадив автономного AI-голосового агента (\"George\") для сортування екстрених дзвінків, перевірки зон обслуговування та бронювання робіт безпосередньо в календарях технічних спеціалістів.",
+    "metaTitle": "Coldi Residential Service Automation Case Study",
+    "metaDescription": "Discover how Stone Electric uses Coldi’s AI voice agent, George, for emergency dispatching, ZIP triage, and Housecall Pro bookings. Read the case study!",
     "hero": {
       "titleLine1": "Автоматизований прийом заявок на побутові послуги та цілодобова інтелектуальна диспетчеризація",
       "subtitle": "Як підрядник з електричних робіт для житлових об'єктів впровадив автономного AI-голосового агента (\"George\") для сортування екстрених дзвінків, перевірки зон обслуговування та бронювання робіт безпосередньо в календарях технічних спеціалістів.",
@@ -2247,8 +2247,8 @@
     }
   },
   "AgriculturalInfrastructurePage": {
-    "metaTitle": "Кваліфікація лідів у глобальній агроіндустрії",
-    "metaDescription": "Як Global Agro Industry впровадила AI-голосового консьєржа Coldi на ім’я Sara для технічного збору інформації, вилучення даних у CRM та планування зустрічей із senior sales-менеджерами.",
+    "metaTitle": "Coldi AI Lead Qualification in Agro-Industry Case Study",
+    "metaDescription": "See how Coldi’s AI agent, Sara, qualifies multi-million dollar industrial agro leads, automates discovery, and syncs CRM data 24/7. Read the case study!",
     "hero": {
       "titleLine1": "Автоматизований технічний скринінг і планування зустрічей із senior sales-менеджерами",
       "subtitle": "Як глобальний постачальник сільськогосподарської інфраструктури впровадив автономного AI-голосового асистента для технічного збору інформації, кваліфікації складних проєктних лідів та внесення даних у CRM.",
@@ -2452,8 +2452,8 @@
     }
   },
   "SaasHvacPage": {
-    "metaTitle": "Повторна активація великої кількості лідів для SaaS та HVAC",
-    "metaDescription": "Повторно активуйте холодних SaaS- та HVAC-лідів за допомогою AI з наднизькою затримкою. Автоматично опрацьовуйте заперечення та надсилайте посилання Calendly через SMS, щоб бронювати більше демонстрацій програмного забезпечення.",
+    "metaTitle": "Coldi HVAC Lead Re-engagement with AI Voice Agents",
+    "metaDescription": "See how Coldi’s low-latency outbound AI agent reactivates cold data, handles objections, and schedules SaaS demos via instant SMS links. Read the case study!",
     "hero": {
       "titleLine1": "Швидкісна реактивація вихідних лідів і визначення технологічного стеку",
       "subtitle": "Як оператор SaaS-рішень і HVAC-сервісів впровадив голосовий AI-рушій із наднизькою затримкою для реактивації баз холодних лідів, аналізу наявного програмного стеку та бронювання 15-хвилинних демонстрацій продукту.",
@@ -2662,5 +2662,19 @@
     "week": "Тиждень {week}",
     "prevWeek": "Попередній тиждень",
     "nextWeek": "Наступний тиждень"
+  },
+  "NewsPage": {
+    "metaTitle": "Coldi News: Guides & Industry Insights on AI in Fintech",
+    "metaDescription": "Explore AI voice agent trends, use cases and industry insights for call centers, insurance, healthcare and real estate. Read now.",
+    "hero": {
+      "title": "Спільнота та новини Coldi",
+      "subtitle": "Ажіотаж у ЗМІ, оновлення продуктів і реальний вплив — стежте за стрімким розвитком ШІ-систем для телефонних дзвінків, що звучать як люди й створені для конверсії.",
+      "breadcrumbHome": "Home",
+      "breadcrumbNews": "News",
+      "breadcrumbAria": "Breadcrumb",
+      "featured": "Обране",
+      "featuredTabsAria": "Обрані статті",
+      "featuredShow": "Показати обрану статтю {index}"
+    }
   }
 }

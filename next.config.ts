@@ -151,6 +151,32 @@ const nextConfig: NextConfig = {
         destination: '/uk/saas-and-hvac-service-operator',
         permanent: true,
       },
+      { source: '/hvac-leads', destination: '/saas-and-hvac-service-operator', permanent: true },
+      {
+        source: '/uk/hvac-leads',
+        destination: '/uk/saas-and-hvac-service-operator',
+        permanent: true,
+      },
+      {
+        source: '/residential-service-automation',
+        destination: '/residential-electrical-contractor',
+        permanent: true,
+      },
+      {
+        source: '/uk/residential-service-automation',
+        destination: '/uk/residential-electrical-contractor',
+        permanent: true,
+      },
+      {
+        source: '/industries/other',
+        destination: '/industries/other-industries',
+        permanent: true,
+      },
+      {
+        source: '/uk/industries/other',
+        destination: '/uk/industries/other-industries',
+        permanent: true,
+      },
       { source: '/meettheteam', destination: '/meet-the-team', permanent: true },
       { source: '/uk/meettheteam', destination: '/uk/meet-the-team', permanent: true },
       { source: '/fintech-Industry', destination: '/industries/emis-payments', permanent: true },

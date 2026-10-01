@@ -70,9 +70,18 @@ const getOrdinal = (day: number) => {
   return 'th';
 };
 
-export const formatFeaturedDate = (value: string) => {
+const toIntlLocale = (locale: string) => (locale === 'uk' ? 'uk-UA' : 'en-US');
+
+export const formatFeaturedDate = (value: string, locale = 'en') => {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return '';
+
+  if (locale === 'uk') {
+    return date
+      .toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' })
+      .replace(/\s*р\.?\s*$/u, '')
+      .trim();
+  }
 
   const day = date.getDate();
   const month = date.toLocaleString('en-GB', { month: 'long' });
@@ -80,15 +89,17 @@ export const formatFeaturedDate = (value: string) => {
   return `${day}${getOrdinal(day)} ${month} ${date.getFullYear()}`;
 };
 
-export const formatCardDate = (value: string) => {
+export const formatCardDate = (value: string, locale = 'en') => {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return '';
 
-  return date.toLocaleString('en-US', {
+  const formatted = date.toLocaleDateString(toIntlLocale(locale), {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
   });
+
+  return locale === 'uk' ? formatted.replace(/\s*р\.?\s*$/u, '').trim() : formatted;
 };
 
 export const padPage = (value: number) => String(value).padStart(2, '0');

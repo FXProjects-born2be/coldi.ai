@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import type { ReactNode } from 'react';
 
@@ -13,6 +12,8 @@ import { ArticleShare } from './ArticleShare';
 import { ArticleSummarizeWithAi } from './ArticleSummarizeWithAi';
 import { ArticleToc } from './ArticleToc';
 import { NewsListingLink } from './NewsListingLink';
+
+import { Link } from '@/i18n/navigation';
 
 const SITE_URL = 'https://coldi.ai';
 

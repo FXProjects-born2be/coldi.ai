@@ -4,6 +4,13 @@ import {
   type NewsArticle as LegacyNewsArticle,
 } from '@/features/news/news';
 
+import {
+  applyArticleTranslation,
+  applyCardTranslation,
+  getTranslatedFeaturedArticles,
+  loadArticleTranslation,
+  TRANSLATABLE_ARTICLE_SLUGS,
+} from './article-translations';
 import { FEATURED_ARTICLES, GRID_ARTICLES, LISTING_ARTICLES } from './data';
 import {
   DEFAULT_NEWS_IMAGE,
@@ -90,13 +97,13 @@ export const mapLegacyPostToCard = (post: LegacyNewsArticle): NewsCard => ({
   isLegacy: true,
 });
 
-export const mapLegacyPostToArticle = (post: LegacyNewsArticle): NewsArticle => {
+export const mapLegacyPostToArticle = (post: LegacyNewsArticle, locale = 'en'): NewsArticle => {
   const card = mapLegacyPostToCard(post);
   const { html, tocItems } = addHeadingAnchors(post.content || '');
 
   return {
     ...card,
-    dateLabel: formatCardDate(post.created_at),
+    dateLabel: formatCardDate(post.created_at, locale),
     heroImage: card.image,
     relatedSlugs: [],
     intro: [],
@@ -117,7 +124,7 @@ const fetchLegacyPosts = async (): Promise<LegacyNewsArticle[]> => {
   }
 };
 
-export const getMergedGridArticles = async (): Promise<NewsCard[]> => {
+export const getMergedGridArticles = async (locale = 'en'): Promise<NewsCard[]> => {
   const legacyPosts = await fetchLegacyPosts();
   const staticCards = LISTING_ARTICLES;
   const reservedSlugs = new Set(staticCards.map((item) => item.slug));
@@ -130,7 +137,23 @@ export const getMergedGridArticles = async (): Promise<NewsCard[]> => {
       (card) => !reservedSlugs.has(card.slug) && !reservedTitles.has(normalizeTitleKey(card.title))
     );
 
-  const staticGrid = GRID_ARTICLES.filter((item) => !featuredSlugs.has(item.slug));
+  const translatedCards = await Promise.all(
+    TRANSLATABLE_ARTICLE_SLUGS.map(async (slug) => {
+      const content = await loadArticleTranslation(slug, locale);
+      return content ? ([slug, content] as const) : null;
+    })
+  );
+  const translationBySlug = new Map(
+    translatedCards.filter(Boolean) as [
+      (typeof TRANSLATABLE_ARTICLE_SLUGS)[number],
+      NonNullable<Awaited<ReturnType<typeof loadArticleTranslation>>>,
+    ][]
+  );
+
+  const staticGrid = GRID_ARTICLES.filter((item) => !featuredSlugs.has(item.slug)).map((item) => {
+    const content = translationBySlug.get(item.slug as (typeof TRANSLATABLE_ARTICLE_SLUGS)[number]);
+    return content ? applyCardTranslation(item, content) : item;
+  });
 
   return [...staticGrid, ...legacyCards].sort(
     (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
@@ -156,26 +179,43 @@ export const getNewsFilterCategories = (articles: NewsCard[]) => {
   return [...preferred, ...extras];
 };
 
-export const resolveArticleBySlug = async (slug: string): Promise<NewsArticle | undefined> => {
+export const resolveArticleBySlug = async (
+  slug: string,
+  locale = 'en'
+): Promise<NewsArticle | undefined> => {
   const { getArticleBySlug } = await import('./articles');
   const staticArticle = getArticleBySlug(slug);
   if (staticArticle && (staticArticle.sections.length > 0 || staticArticle.intro.length > 0)) {
-    return staticArticle;
+    const translation = await loadArticleTranslation(slug, locale);
+    if (translation) return applyArticleTranslation(staticArticle, translation);
+
+    return {
+      ...staticArticle,
+      dateLabel: formatCardDate(staticArticle.created_at, locale) || staticArticle.dateLabel,
+    };
   }
 
   try {
     const legacy = await getNewsBySlug(slug);
-    if (legacy) return mapLegacyPostToArticle(legacy);
+    if (legacy) return mapLegacyPostToArticle(legacy, locale);
   } catch (error) {
     console.error(`Failed to load legacy article ${slug}:`, error);
   }
 
-  return staticArticle;
+  return staticArticle
+    ? {
+        ...staticArticle,
+        dateLabel: formatCardDate(staticArticle.created_at, locale) || staticArticle.dateLabel,
+      }
+    : undefined;
 };
 
-export const getRelatedCards = async (article: NewsArticle): Promise<NewsCard[]> => {
-  const grid = await getMergedGridArticles();
-  const pool = [...FEATURED_ARTICLES, ...grid];
+export const getRelatedCards = async (article: NewsArticle, locale = 'en'): Promise<NewsCard[]> => {
+  const [grid, featured] = await Promise.all([
+    getMergedGridArticles(locale),
+    getTranslatedFeaturedArticles(FEATURED_ARTICLES, locale),
+  ]);
+  const pool = [...featured, ...grid];
   const bySlug = new Map(pool.map((item) => [item.slug, item]));
 
   const related = article.relatedSlugs

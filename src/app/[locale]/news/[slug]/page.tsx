@@ -49,13 +49,13 @@ const getArticleDescription = (article?: {
   return article.title || '';
 };
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  const article = await resolveArticleBySlug(slug);
+type Props = {
+  params: Promise<{ slug: string; locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug, locale } = await params;
+  const article = await resolveArticleBySlug(slug, locale);
   const description = getArticleDescription(article);
 
   return {
@@ -74,9 +74,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function NewsPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const article = await resolveArticleBySlug(slug);
+export default async function NewsPage({ params }: Props) {
+  const { slug, locale } = await params;
+  const article = await resolveArticleBySlug(slug, locale);
 
   if (!article) {
     notFound();
@@ -85,7 +85,7 @@ export default async function NewsPage({ params }: { params: Promise<{ slug: str
   const articleUrl = `${SITE_URL}/news/${slug}`;
   const articleImage = article.image || DEFAULT_NEWS_IMAGE;
   const description = getArticleDescription(article);
-  const related = await getRelatedCards(article);
+  const related = await getRelatedCards(article, locale);
 
   return (
     <>

@@ -2,13 +2,16 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+
+import { useLocale, useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
 
 import { DEFAULT_NEWS_IMAGE, formatFeaturedDate, type NewsCard } from '../../lib';
 import { NEWS_LISTING_RETURN_KEY } from '../article-card/ArticleCard';
 import st from './Hero.module.scss';
+
+import { Link } from '@/i18n/navigation';
 
 const AUTOPLAY_MS = 6000;
 
@@ -30,31 +33,37 @@ const FeaturedControl = ({
   isPaused,
   className,
   onSelect,
-}: FeaturedControlProps) => (
-  <div className={cn(st.featuredControl, isPaused && st.featuredControlPaused, className)}>
-    <span>Featured</span>
-    <div className={st.bars} role="tablist" aria-label="Featured articles">
-      {articles.map((article, index) => (
-        <button
-          key={article.id}
-          type="button"
-          role="tab"
-          aria-selected={index === activeIndex}
-          aria-label={`Show featured article ${index + 1}`}
-          className={st.bar}
-          onClick={() => onSelect(index)}
-        >
-          <span
-            key={index === activeIndex ? `fill-${activeIndex}` : `idle-${article.id}`}
-            className={cn(st.barFill, index === activeIndex && st.barFillActive)}
-          />
-        </button>
-      ))}
+}: FeaturedControlProps) => {
+  const t = useTranslations('NewsPage.hero');
+
+  return (
+    <div className={cn(st.featuredControl, isPaused && st.featuredControlPaused, className)}>
+      <span>{t('featured')}</span>
+      <div className={st.bars} role="tablist" aria-label={t('featuredTabsAria')}>
+        {articles.map((article, index) => (
+          <button
+            key={article.id}
+            type="button"
+            role="tab"
+            aria-selected={index === activeIndex}
+            aria-label={t('featuredShow', { index: index + 1 })}
+            className={st.bar}
+            onClick={() => onSelect(index)}
+          >
+            <span
+              key={index === activeIndex ? `fill-${activeIndex}` : `idle-${article.id}`}
+              className={cn(st.barFill, index === activeIndex && st.barFillActive)}
+            />
+          </button>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export const Hero = ({ articles }: HeroProps) => {
+  const t = useTranslations('NewsPage.hero');
+  const locale = useLocale();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const slideCount = articles.length;
@@ -82,11 +91,11 @@ export const Hero = ({ articles }: HeroProps) => {
   return (
     <section className={st.hero}>
       <div className={`container ${st.inner}`}>
-        <nav className={st.breadcrumbs} aria-label="Breadcrumb">
+        <nav className={st.breadcrumbs} aria-label={t('breadcrumbAria')}>
           <ol className={st.crumbs}>
             <li>
               <Link href="/" className={st.crumbLink}>
-                Home
+                {t('breadcrumbHome')}
               </Link>
             </li>
             <li className={st.separator} aria-hidden>
@@ -99,7 +108,7 @@ export const Hero = ({ articles }: HeroProps) => {
               />
             </li>
             <li>
-              <span className={st.crumbCurrent}>News</span>
+              <span className={st.crumbCurrent}>{t('breadcrumbNews')}</span>
             </li>
           </ol>
         </nav>
@@ -107,11 +116,8 @@ export const Hero = ({ articles }: HeroProps) => {
         <div className={st.stage}>
           <div className={st.headingRow}>
             <div className={st.copy}>
-              <h1 className={st.title}>Coldi Community & News</h1>
-              <p className={st.subtitle}>
-                Media buzz, product updates, and real-world impact - follow the rise of
-                human-sounding AI callers built to convert.
-              </p>
+              <h1 className={st.title}>{t('title')}</h1>
+              <p className={st.subtitle}>{t('subtitle')}</p>
             </div>
             {articles.length > 0 && (
               <FeaturedControl
@@ -158,7 +164,7 @@ export const Hero = ({ articles }: HeroProps) => {
                 </div>
                 {activeArticle.created_at && (
                   <time className={st.featuredDate} dateTime={activeArticle.created_at}>
-                    {formatFeaturedDate(activeArticle.created_at)}
+                    {formatFeaturedDate(activeArticle.created_at, locale)}
                   </time>
                 )}
               </div>

@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     alternates: {
-      canonical: '/industries/fx-brokers',
+      canonical: '/industries/trading-platforms-brokers',
     },
     title: t('metaTitle'),
     description: t('metaDescription'),
