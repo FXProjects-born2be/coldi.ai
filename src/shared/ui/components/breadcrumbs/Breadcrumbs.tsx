@@ -9,43 +9,7 @@ import st from './Breadcrumbs.module.scss';
 import { Link, usePathname } from '@/i18n/navigation';
 
 const segmentLabels: Record<string, string> = {
-  products: 'Products',
-  'outbound-calling': 'Outbound Calling',
-  'inbound-calling': 'Inbound Calling',
-  industries: 'Industries',
-  healthcare: 'Healthcare',
-  insurance: 'Insurance Agents',
-  'real-estate': 'Real Estate',
-  'call-center': 'Call Center',
-  'fx-brokers': 'FX Brokers',
-  'debt-collection': 'Debt Collection',
-  'emis-payments': 'EMIs & Payments',
-  pricing: 'Pricing',
-  'coldi-vision': 'Coldi Vision',
-  news: 'News',
-  voices: 'Voices',
-  demo: 'Demo',
   calendar: 'Calendar',
-  'coldi-in-action': 'Coldi in Action',
-  'turn-leads-into-meetings': 'Turn Leads into Meetings',
-  'agent-development': 'AI Agent Development',
-  'meet-the-team': 'Meet the Team',
-  'customer-service-agent': 'AI Customer Service',
-  'voip-phone-service': 'VoIP Phone Service',
-  'ai-for-quality-control': 'AI for Quality Control',
-  'use-cases': 'Use Cases',
-  legal: 'Legal',
-  silverbellgroup: 'Silverbell Group',
-  'global-professional-services-provider': 'Silverbell Group',
-  'performance-marketing-agency': 'Clickomi',
-  'residential-electrical-contractor': 'Stone Electric',
-  'multi-asset-trading-and-investment-platform': 'Evest',
-  helios: 'Helios',
-  'residential-service-automation': 'Residential Service Automation',
-  'agro-industry': 'Agro-Industry',
-  'global-agricultural-infrastructure-provider': 'Agro-Industry',
-  'hvac-leads': 'HVAC Leads',
-  'saas-and-hvac-service-operator': 'HVAC Leads',
 };
 
 type BreadcrumbsProps = {
@@ -60,9 +24,6 @@ export const Breadcrumbs = ({ pathname: pathnameProp, currentLabel }: Breadcrumb
   if (!pathname || pathname === '/') return null;
   if (pathname !== '/calendar' && !pathname.startsWith('/calendar/')) return null;
   if (pathname.includes('/live-demo')) return null;
-
-  const isNewsArticle = pathname.startsWith('/news/') && pathname !== '/news';
-  if (isNewsArticle && !currentLabel) return null;
 
   const segments = pathname.split('/').filter(Boolean);
 

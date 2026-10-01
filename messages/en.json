@@ -765,12 +765,6 @@
       "emis": "EMIs & Payments",
       "other": "Other Industries"
     },
-    "useCaseItems": {
-      "silverbell": "BPO (Silverbell Group)",
-      "residential-service": "Residential Service (Stone Electric)",
-      "agro-industry": "Agro-Industry",
-      "hvac-leads": "HVAC Leads"
-    },
     "aboutItems": {
       "coldi-vision": "Coldi Vision",
       "meet-the-team": "Meet the Team"
@@ -1387,8 +1381,8 @@
     }
   },
   "MultiAssetPage": {
-    "metaTitle": "Evest use case",
-    "metaDescription": "How Evest is eliminating manual follow-up work across hundreds of client reviews and cutting response lag to zero.",
+    "metaTitle": "AI Voice Lead Qualification for Trading Platforms | Coldi",
+    "metaDescription": "See how an international multi-asset trading platform used Coldi to re-engage 11,840 leads, qualify trader interest, filter voicemail pickups and schedule 671 time-specific callbacks for account managers.",
     "hero": {
       "titleLine1": "High-Volume Multi-Asset Trader Qualification & Callback Scheduling",
       "subtitle": "How an international trading platform leveraged an outbound AI voice engine across 29,377 dial attempts to qualify trader intent and lock in 671 structured callbacks.",
@@ -1571,8 +1565,8 @@
     }
   },
   "ProfessionalServicesPage": {
-    "metaTitle": "AI Operational Excellence: Silverbell Group Case Study",
-    "metaDescription": "Discover how Coldi and Silverbell Group built a strategic partnership through AI integration. Our Autonomous AI Agent provides 24/7 expert support and proactive appointment setting to enhance global service standards.",
+    "metaTitle": "AI Agent for Professional Services & 24/7 Client Intake | Coldi",
+    "metaDescription": "See how a global professional services provider used Coldi’s autonomous AI agent to automate 24/7 client inquiries, capture and qualify leads, and book meetings across time zones.",
     "hero": {
       "titleLine1": "Global Scale, Zero Downtime:",
       "titleLine2": "How a Professional Services Provider Expanded 24/7 Service Without Adding Headcount",
@@ -1772,8 +1766,8 @@
     }
   },
   "ResidentialElectricalPage": {
-    "metaTitle": "Coldi Residential Service Automation Case Study",
-    "metaDescription": "Discover how Stone Electric uses Coldi’s AI voice agent, George, for emergency dispatching, ZIP triage, and Housecall Pro bookings. Read the case study!",
+    "metaTitle": "AI Voice Agent for Electrical Service Dispatch | Coldi",
+    "metaDescription": "Learn how an electrical service company uses Coldi to automate inbound calls, emergency triage, service-area checks, job intake and appointment scheduling 24/7.",
     "hero": {
       "titleLine1": "Automated Residential Service Intake & 24/7 Smart Dispatching",
       "subtitle": "How a residential electrical contractor deployed an autonomous AI voice agent (\"George\") to triage emergency calls, validate service areas, and book jobs directly into technician calendars.",
@@ -1991,8 +1985,8 @@
     }
   },
   "AgriculturalInfrastructurePage": {
-    "metaTitle": "Coldi AI Lead Qualification in Agro-Industry Case Study",
-    "metaDescription": "See how Coldi’s AI agent, Sara, qualifies multi-million dollar industrial agro leads, automates discovery, and syncs CRM data 24/7. Read the case study!",
+    "metaTitle": "AI Voice Lead Qualification for Agricultural Infrastructure | Coldi",
+    "metaDescription": "Discover how an agricultural infrastructure provider uses Coldi to automate technical lead screening, qualify complex projects, extract key data into CRM and schedule qualified prospects with senior sales teams.",
     "hero": {
       "titleLine1": "Automated Technical Screening & Senior Sales Scheduling",
       "subtitle": "How a global agricultural infrastructure provider deployed an autonomous AI voice assistant to handle technical discovery, qualify complex project leads, and populate CRM data.",
@@ -2196,8 +2190,8 @@
     }
   },
   "SaasHvacPage": {
-    "metaTitle": "Coldi HVAC Lead Re-engagement with AI Voice Agents",
-    "metaDescription": "See how Coldi’s low-latency outbound AI agent reactivates cold data, handles objections, and schedules SaaS demos via instant SMS links. Read the case study!",
+    "metaTitle": "AI Voice Lead Reactivation for SaaS & HVAC | Coldi",
+    "metaDescription": "Find out how a SaaS and HVAC service operator uses Coldi to reactivate cold leads, handle objections, identify prospects’ software stacks and send demo booking links during live calls.",
     "hero": {
       "titleLine1": "High-Speed Outbound Reactivation & Tech Stack Scoping",
       "subtitle": "How a SaaS and HVAC service operator deployed an ultra-low latency voice AI engine to reactivate cold lead databases, analyze existing software stacks, and book 15-minute product demos.",

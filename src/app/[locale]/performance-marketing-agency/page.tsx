@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/performance-marketing-agency',
   },
-  title: 'Lead Qualification in the Global Agro-Industry',
+  title: 'AI Voice Onboarding & Live Transfer Automation | Coldi',
   description:
-    'How Global Agro Industry deployed Coldi’s AI voice concierge Sara for technical discovery, CRM data extraction, and senior sales scheduling.',
+    'See how a performance marketing agency automated outbound client onboarding across 8,255 leads, booking onboarding sessions, scheduling callbacks and transferring high-intent prospects directly to Success Managers.',
   openGraph: {
-    title: 'Lead Qualification in the Global Agro-Industry',
+    title: 'AI Voice Onboarding & Live Transfer Automation | Coldi',
     description:
-      'How Global Agro Industry deployed Coldi’s AI voice concierge Sara for technical discovery, CRM data extraction, and senior sales scheduling.',
+      'See how a performance marketing agency automated outbound client onboarding across 8,255 leads, booking onboarding sessions, scheduling callbacks and transferring high-intent prospects directly to Success Managers.',
     images: '/images/meta.png',
   },
 };

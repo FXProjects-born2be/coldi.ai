@@ -19,13 +19,13 @@ export function getPageHeadingFromPath(pathname: string): string {
     return 'Lead Qualification in the Global Agro-Industry';
   if (pathname === '/residential-electrical-contractor')
     return 'Residential Electrical Contractor use case';
-  if (pathname === '/multi-asset-trading-and-investment-platform') return 'Evest use case';
+  if (pathname === '/multi-asset-trading-and-investment-platform')
+    return 'AI Voice Lead Qualification for Trading Platforms';
   if (pathname === '/global-professional-services-provider')
-    return 'AI Operational Excellence: Silverbell Group Case Study';
+    return 'AI Agent for Professional Services & 24/7 Client Intake';
   if (pathname === '/saas-and-hvac-service-operator')
     return 'High-Volume Lead Re-engagement for SaaS and HVAC';
   if (pathname === '/hvac-leads') return 'High-Volume Lead Re-engagement for SaaS and HVAC';
-  if (pathname === '/helios') return 'How Helios Cut Costs by 30% & Scaled with AI';
   if (pathname === '/turn-leads-into-meetings' || pathname === '/turn-leads-into-meetings-2') {
     return 'Turn Leads into Meetings';
   }
