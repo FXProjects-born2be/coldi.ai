@@ -26,6 +26,11 @@
   text-align: center;
 }
 
+
+:global(body.page-use-cases.uk) .inner {
+  max-width: 900px;
+}
+
 .title {
   margin: 0;
   color: #000;

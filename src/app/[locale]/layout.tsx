@@ -80,7 +80,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <SpeedInsights />
-      <body className={cn(urbanist.variable, getBodyPageClass(pathname))}>
+      <body className={cn(urbanist.variable, getBodyPageClass(pathname), locale)}>
         <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
           <BodyPageClass />
           <Script

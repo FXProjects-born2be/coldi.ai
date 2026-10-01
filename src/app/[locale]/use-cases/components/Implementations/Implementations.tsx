@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/helpers';
 
@@ -14,9 +14,23 @@ import { Link } from '@/i18n/navigation';
 
 export const UseCasesImplementations = () => {
   const t = useTranslations('UseCasesPage.implementations');
+  const locale = useLocale();
   const [activeId, setActiveId] = useState(IMPLEMENTATIONS[0].id);
   const activeIndex = IMPLEMENTATIONS.findIndex((item) => item.id === activeId);
   const active = IMPLEMENTATIONS[activeIndex] ?? IMPLEMENTATIONS[0];
+  const isUk = locale === 'uk';
+  const workflowDesktopSrc = isUk
+    ? '/images/use-cases-hub/workflow-card-uk.png'
+    : '/images/use-cases-hub/workflow-card.png';
+  const workflowMobileSrc = isUk
+    ? '/images/use-cases-hub/workflow-card-mobile-uk.jpg'
+    : '/images/use-cases-hub/workflow-card-mobile.jpg';
+  const integrationDesktopSrc = isUk
+    ? '/images/use-cases-hub/integration-card-uk.png'
+    : '/images/use-cases-hub/integration-card.jpg';
+  const integrationMobileSrc = isUk
+    ? '/images/use-cases-hub/integration-card-mobile-uk.jpg'
+    : '/images/use-cases-hub/integration-card-mobile.jpg';
 
   const goTo = (direction: -1 | 1) => {
     const nextIndex = (activeIndex + direction + IMPLEMENTATIONS.length) % IMPLEMENTATIONS.length;
@@ -80,24 +94,24 @@ export const UseCasesImplementations = () => {
             <div className={st.visuals}>
               <div className={st.workflow}>
                 <Image
-                  src="/images/use-cases-hub/workflow-card.png"
+                  src={workflowDesktopSrc}
                   alt={t('workflowAlt')}
                   width={624}
                   height={300}
                   className={cn(st.cardImage, st.cardImageDesktop)}
                 />
                 <Image
-                  src="/images/use-cases-hub/workflow-card-mobile.jpg"
+                  src={workflowMobileSrc}
                   alt={t('workflowAlt')}
-                  width={636}
-                  height={1291}
+                  width={318}
+                  height={549}
                   className={cn(st.cardImage, st.cardImageMobile)}
                 />
               </div>
 
               <div className={st.integration}>
                 <Image
-                  src="/images/use-cases-hub/integration-card.jpg"
+                  src={integrationDesktopSrc}
                   alt={t('integrationAlt')}
                   width={576}
                   height={600}
@@ -105,7 +119,7 @@ export const UseCasesImplementations = () => {
                   unoptimized
                 />
                 <Image
-                  src="/images/use-cases-hub/integration-card-mobile.jpg"
+                  src={integrationMobileSrc}
                   alt={t('integrationAlt')}
                   width={636}
                   height={475}
