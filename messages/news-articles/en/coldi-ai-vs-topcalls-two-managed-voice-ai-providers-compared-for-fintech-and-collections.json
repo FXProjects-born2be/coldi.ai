@@ -1,0 +1,99 @@
+{
+  "title": "Coldi AI vs. Topcalls: Two Managed Voice AI Providers, Compared for Fintech & Collections",
+  "category": "Industry Trends",
+  "excerpt": "",
+  "dateLabel": "September 6, 2026",
+  "intro": [
+    {
+      "type": "p",
+      "html": "Topcalls and Coldi AI are both managed voice AI providers, which makes this a genuinely different comparison than the platform-versus-service matchups elsewhere in this category. Neither company is asking a customer to build anything. The real question is depth: Topcalls operates with a broader enterprise BPO orientation, while Coldi is built specifically around fintech call flows, KYC-heavy verification, and the high-intensity, compliance-sensitive conversations that come with debt collection, trading platform onboarding, and insurance broker workflows."
+    }
+  ],
+  "sections": [
+    {
+      "heading": "The core difference",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>General enterprise coverage versus vertical depth. A managed provider built to serve many industries has to keep its call flows, compliance handling, and scripting broadly applicable. A managed provider built around fintech has the opposite advantage: everything from the compliance layer to the escalation logic assumes a KYC check, a collections conversation, or a trading platform onboarding call from the start.</p>"
+        }
+      ]
+    },
+    {
+      "heading": "Side-by-side comparison",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "",
+            "Coldi AI",
+            "Topcalls"
+          ],
+          "rows": [
+            [
+              "Service model",
+              "Managed, done-for-you",
+              "Managed, done-for-you"
+            ],
+            [
+              "Vertical focus",
+              "Fintech: Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams",
+              "Broader enterprise BPO orientation"
+            ],
+            [
+              "Compliance-sensitive call handling",
+              "Built around KYC-heavy, regulated fintech flows",
+              "Handled at a general enterprise level"
+            ],
+            [
+              "Compliance certifications",
+              "ISO 27001, GDPR",
+              "Varies by deployment"
+            ],
+            [
+              "CRM and data-card sync",
+              "Built for fintech workflows",
+              "General CRM integration"
+            ],
+            [
+              "Best fit",
+              "Fintech teams needing regulated, high-intensity call flows",
+              "Enterprises needing broad-purpose managed calling"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Who should use which",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>For a general enterprise use case without heavy compliance or KYC requirements, Topcalls' broader positioning may fit well. For fintech operations specifically, where collections conversations, KYC verification, and trading platform onboarding require call flows built around those exact scenarios, Coldi's vertical depth is the more direct fit.</p>"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Is Topcalls a managed voice AI provider or a developer platform?",
+      "answer": "Topcalls operates as a managed voice AI provider with an enterprise BPO orientation, similar in service model to Coldi but broader in industry focus."
+    },
+    {
+      "question": "What makes Coldi AI different from Topcalls if both are managed services?",
+      "answer": "The difference is vertical depth. Coldi is built specifically around fintech call flows, including KYC-heavy verification and high-intensity collections conversations, rather than general enterprise use cases."
+    },
+    {
+      "question": "Is Coldi AI better suited to debt collection than Topcalls?",
+      "answer": "Coldi's call flows, compliance handling, and escalation logic are built around fintech-specific scenarios like debt collection, which gives it more built-in depth for that use case compared to a broader enterprise-focused provider."
+    },
+    {
+      "question": "Does Topcalls handle KYC and compliance-heavy calls?",
+      "answer": "Compliance handling for KYC-heavy calls depends on how a broader enterprise provider configures each deployment, rather than being purpose-built into the core service as it is with Coldi."
+    },
+    {
+      "question": "Which managed voice AI provider is better for insurance broker outreach?",
+      "answer": "For insurance brokers specifically, a provider built around fintech verticals, like Coldi, has call flows and compliance handling already tuned to that use case rather than requiring custom configuration on a general-purpose platform."
+    }
+  ]
+}

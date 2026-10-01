@@ -1,0 +1,104 @@
+{
+  "title": "Coldi AI vs. Traditional BPO Call Centers: AI Voice Agents vs. Human Agent Teams",
+  "category": "Industry Trends",
+  "excerpt": "",
+  "dateLabel": "September 6, 2026",
+  "intro": [
+    {
+      "type": "p",
+      "html": "Traditional BPO call centers scale by adding headcount: more agents, more shifts, more management layers to keep quality consistent across a growing team. Coldi AI scales by adding capacity to a system that doesn't get tired, doesn't need shift coverage, and holds the same quality on call one thousand as it did on call one. For fintech operations with fluctuating call volume, that difference in how scale actually works changes the calculation on both cost and speed of ramp."
+    }
+  ],
+  "sections": [
+    {
+      "heading": "The core difference",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>A BPO's constraint is people: hiring, training, retention, and coverage. Coldi's constraint is closer to infrastructure: campaigns can ramp up or down without a hiring cycle, and coverage runs 24/7 without shift planning. The trade-off is that a BPO can lean on human judgment for genuinely unusual conversations in a way a voice AI agent handles differently, which is why human handoff routing matters for edge cases.</p>"
+        }
+      ]
+    },
+    {
+      "heading": "Side-by-side comparison",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "",
+            "Coldi AI",
+            "Traditional BPO Call Center"
+          ],
+          "rows": [
+            [
+              "Scaling model",
+              "Add capacity to existing system",
+              "Hire, train, and onboard new agents"
+            ],
+            [
+              "Coverage",
+              "24/7 by default",
+              "Dependent on shift scheduling"
+            ],
+            [
+              "Ramp time for a new campaign",
+              "Days",
+              "Weeks to months, depending on hiring"
+            ],
+            [
+              "Consistency across calls",
+              "Same quality regardless of volume",
+              "Varies with agent experience and fatigue"
+            ],
+            [
+              "Cost-per-conversation",
+              "[Confirm with Or before publishing]",
+              "[Confirm with Or before publishing]"
+            ],
+            [
+              "Compliance",
+              "Included (ISO 27001, GDPR)",
+              "Varies by vendor"
+            ],
+            [
+              "Best fit",
+              "Fintech ops needing consistent, compliant, scalable calling",
+              "Operations needing nuanced human judgment on complex cases"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Who should use which",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>A traditional BPO still has a role where conversations require significant human judgment or relationship-building that a script can't anticipate. Coldi fits fintech operations, particularly Insurance Brokers, Trading Platforms, Debt Collection, and Sales Teams, that need consistent, compliant coverage at a volume and speed that hiring cycles can't match.</p>"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can AI voice agents fully replace a BPO call center?",
+      "answer": "For structured, high-volume fintech conversations like KYC checks, collections outreach, or lead qualification, AI voice agents can replace much of what a BPO handles. Complex, judgment-heavy conversations still often benefit from human handling, which is why handoff routing matters."
+    },
+    {
+      "question": "How fast can Coldi ramp up a new outbound campaign compared to a BPO?",
+      "answer": "Coldi can typically launch a new campaign within days since it doesn't require hiring or training a new team. A BPO's ramp time depends on its hiring pipeline and training cycle, which is usually measured in weeks or months."
+    },
+    {
+      "question": "Is Coldi AI cheaper than a BPO call center?",
+      "answer": "Cost comparisons depend on call volume, complexity, and vendor pricing, and should be evaluated case by case rather than assumed."
+    },
+    {
+      "question": "Does Coldi AI provide 24/7 coverage the way a BPO would need multiple shifts to match?",
+      "answer": "Yes. Coldi operates continuously without the shift coverage planning a BPO needs to offer the same availability."
+    },
+    {
+      "question": "What happens when a call needs human judgment that the AI agent can't handle?",
+      "answer": "Coldi includes human handoff routing so calls that need escalation, such as compliance-sensitive conversations, are routed to a human rather than forced through the AI agent."
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "title": "Coldi AI vs. In-House Build: Real Cost & Time-to-Launch of DIY Voice AI",
+  "category": "Industry Trends",
+  "excerpt": "",
+  "dateLabel": "September 6, 2026",
+  "intro": [
+    {
+      "type": "p",
+      "html": "The DIY path looks simple from the outside: pick a model provider, wire up telephony, connect the CRM, add compliance, and start calling. The Coldi team knows this path firsthand, because it's the one the founders walked before building Coldi. [Placeholder: reference the founders' own build-it-yourself timeline and cost here once confirmed with Or.] What looks like a few weeks of integration work on a roadmap tends to expand once telephony edge cases, compliance requirements, and CRM sync details surface in production. Coldi exists because that build, done properly for a fintech use case, takes longer and costs more than most teams plan for."
+    }
+  ],
+  "sections": [
+    {
+      "heading": "The core difference",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>Building in-house means owning every layer: model selection, telephony, CRM integration, compliance, QA, and the ongoing maintenance once it's live. None of that disappears after launch. It becomes a permanent line item in engineering time. Coldi replaces that ongoing ownership with a managed service built specifically for fintech call operations.</p>"
+        }
+      ]
+    },
+    {
+      "heading": "Side-by-side comparison",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "",
+            "Coldi AI",
+            "In-House Build"
+          ],
+          "rows": [
+            [
+              "Time to first live call",
+              "Days",
+              "[Confirm actual founder timeline with Or]"
+            ],
+            [
+              "Engineering investment",
+              "None required from the customer",
+              "Ongoing, not one-time"
+            ],
+            [
+              "Compliance",
+              "Included (ISO 27001, GDPR)",
+              "Built and maintained internally"
+            ],
+            [
+              "CRM and telephony integration",
+              "Included",
+              "Built and maintained internally"
+            ],
+            [
+              "Ongoing maintenance",
+              "Handled by Coldi",
+              "Permanent engineering commitment"
+            ],
+            [
+              "Vertical-specific tuning",
+              "Built in for fintech use cases",
+              "Requires internal expertise to get right"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Who should use which",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>An in-house build makes sense for a company whose core product is the voice AI stack itself, where owning every layer is the point. For a fintech operations or growth team where voice calling is a channel, not the product, building in-house usually means diverting engineering resources away from the actual business to maintain infrastructure that Coldi already runs.</p>"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "How long does it actually take to build a production-ready voice AI operation in-house?",
+      "answer": "It depends heavily on team size and prior experience with telephony and compliance integration, but it's rarely a short project once fintech-specific requirements like KYC and compliance logging are factored in."
+    },
+    {
+      "question": "What are the hidden costs of building voice AI in-house?",
+      "answer": "Beyond initial development, the ongoing costs include compliance maintenance, CRM integration upkeep, QA processes, and the engineering time needed to keep the system performing as call volume and requirements change."
+    },
+    {
+      "question": "Did Coldi's founders build a voice AI system in-house before starting the company?",
+      "answer": "Yes. [Placeholder: confirm exact details of the founders' build experience with Or before publishing.]"
+    },
+    {
+      "question": "Is it cheaper to build in-house than to use a managed platform like Coldi?",
+      "answer": "The sticker price of open-source or API-based tools can look cheaper upfront, but the full cost includes the engineering time required to build and maintain the surrounding operation, which is often underestimated."
+    },
+    {
+      "question": "What's the biggest risk of building a voice AI operation in-house for a fintech company?",
+      "answer": "Compliance is usually the biggest risk. Getting telephony and CRM integration wrong causes operational headaches, but getting compliance wrong in a regulated fintech context carries real regulatory exposure."
+    }
+  ]
+}

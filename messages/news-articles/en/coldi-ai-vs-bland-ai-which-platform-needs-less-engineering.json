@@ -1,0 +1,104 @@
+{
+  "title": "Coldi AI vs. Bland AI: Which Platform Needs Less Engineering?",
+  "category": "Industry Trends",
+  "excerpt": "",
+  "dateLabel": "September 6, 2026",
+  "intro": [
+    {
+      "type": "p",
+      "html": "Bland AI positions itself as a developer-friendly platform for building phone agents, with strong tooling for teams that want to configure and deploy their own voice flows. It's still a build project, even with good tooling. Coldi AI removes the build entirely: a fintech operations team gets a live, QA'd, compliant calling operation without configuring a platform or maintaining code. If the question is which one needs less engineering, the answer is straightforward. Bland needs some. Coldi needs none."
+    }
+  ],
+  "sections": [
+    {
+      "heading": "The core difference",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>Bland lowers the barrier to building a voice agent. Coldi removes the barrier altogether by delivering the finished operation. For a team without dedicated engineering resources, or one that doesn't want to spend them on a call operation, that distinction determines how fast something actually goes live.</p>"
+        }
+      ]
+    },
+    {
+      "heading": "Side-by-side comparison",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "",
+            "Coldi AI",
+            "Bland AI"
+          ],
+          "rows": [
+            [
+              "Setup approach",
+              "Managed onboarding, no-code for the customer",
+              "Developer-friendly, but still requires configuration and integration"
+            ],
+            [
+              "Time-to-first-call",
+              "Days",
+              "Depends on internal team's build and testing cycle"
+            ],
+            [
+              "QA and case-ID tooling",
+              "Included as part of ongoing operation",
+              "Available as platform features, managed by the customer"
+            ],
+            [
+              "Human handoff routing",
+              "Built into the managed operation for fintech workflows",
+              "Configurable, requires setup by the implementing team"
+            ],
+            [
+              "Compliance",
+              "Included (ISO 27001, GDPR)",
+              "Self-managed"
+            ],
+            [
+              "Vertical focus",
+              "Fintech: Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams",
+              "General purpose"
+            ],
+            [
+              "Ongoing ownership",
+              "Coldi's team",
+              "Customer's team"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Who should use which",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>Bland AI suits a team that wants a flexible, code-friendly platform and has the internal capacity to configure, test, and maintain it. Coldi suits a fintech team looking for a no-code alternative to Bland AI, where the operation is already built, tested, and compliant on day one.</p>"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Is Bland AI a no-code platform?",
+      "answer": "Bland AI offers developer-friendly tooling, but production deployment typically still involves configuration, integration, and testing work rather than being fully no-code."
+    },
+    {
+      "question": "What is a good Bland AI alternative for teams without engineering resources?",
+      "answer": "Coldi AI is built for exactly that case: a fintech operations team that needs a working voice AI operation without configuring a platform or maintaining integration code."
+    },
+    {
+      "question": "How does human handoff work with Coldi versus Bland?",
+      "answer": "Coldi includes handoff routing as part of the managed operation, tuned for fintech workflows like KYC checks or compliance escalations. With Bland, handoff logic is configured by the implementing team."
+    },
+    {
+      "question": "Does Coldi include the same QA and case tracking Bland offers?",
+      "answer": "Coldi includes QA and case-ID tooling as part of the ongoing managed service, so tracking and quality monitoring happen without the customer building or maintaining that layer themselves."
+    },
+    {
+      "question": "Can a team migrate from a Bland AI build to Coldi?",
+      "answer": "Yes. Coldi's onboarding maps existing call flows and logic into the managed operation, so prior work defining scripts and flows on Bland typically translates into the new setup."
+    }
+  ]
+}

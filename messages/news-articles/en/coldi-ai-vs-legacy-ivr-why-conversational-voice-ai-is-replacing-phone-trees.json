@@ -1,0 +1,99 @@
+{
+  "title": "Coldi AI vs. Legacy IVR: Why Conversational Voice AI Is Replacing Phone Trees",
+  "category": "Industry Trends",
+  "excerpt": "",
+  "dateLabel": "September 6, 2026",
+  "intro": [
+    {
+      "type": "p",
+      "html": "Legacy IVR systems route callers through a fixed menu tree: press 1 for this, press 2 for that, repeat your account number three times. It's rigid by design, built for a world where \"understanding the caller\" meant matching a keypress to a branch. Coldi AI replaces the phone tree with an agent that actually holds a conversation, understands context, and can handle the exceptions that break every IVR menu eventually. For fintech operations teams still running IVR for account servicing, collections, or lead intake, this is usually the most direct upgrade path available."
+    }
+  ],
+  "sections": [
+    {
+      "heading": "The core difference",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>IVR is a decision tree. Conversational voice AI is a conversation. The practical difference shows up immediately: an IVR caller who doesn't fit the menu gets stuck or drops off. A Coldi AI caller can explain their situation in their own words and get routed correctly, or handled directly, without hunting through a menu.</p>"
+        }
+      ]
+    },
+    {
+      "heading": "Side-by-side comparison",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "",
+            "Coldi AI",
+            "Legacy IVR"
+          ],
+          "rows": [
+            [
+              "Interaction model",
+              "Natural conversation",
+              "Fixed menu tree, keypress or basic voice commands"
+            ],
+            [
+              "Handles unexpected input",
+              "Yes, understands context and intent",
+              "No, routes to a dead end or agent queue"
+            ],
+            [
+              "Caller experience",
+              "Conversational, low friction",
+              "Often frustrating, especially for complex requests"
+            ],
+            [
+              "Setup and changes",
+              "Managed by Coldi as call flows evolve",
+              "Requires manual reconfiguration of menu logic"
+            ],
+            [
+              "Compliance",
+              "Included (ISO 27001, GDPR)",
+              "Varies by legacy vendor"
+            ],
+            [
+              "Vertical focus",
+              "Fintech: Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams",
+              "General purpose, often decades-old deployments"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Who should use which",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>There's no real case for keeping legacy IVR once a genuine alternative exists, unless the use case is so simple that a menu tree is genuinely sufficient. For fintech operations handling anything beyond the most basic routing, especially KYC checks, collections conversations, or lead qualification, Coldi replaces the friction of a phone tree with something that actually resolves the call.</p>"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is an IVR alternative that uses AI instead of a menu tree?",
+      "answer": "Coldi AI is built specifically to replace IVR systems for fintech use cases, using natural conversation instead of keypress-based menu routing."
+    },
+    {
+      "question": "Why are companies moving away from IVR toward conversational AI?",
+      "answer": "IVR menus are rigid and frustrate callers who don't fit the predefined options. Conversational AI understands intent and context, so it resolves calls that an IVR would otherwise drop or misroute."
+    },
+    {
+      "question": "Can Coldi AI handle the same call volume as an IVR system?",
+      "answer": "Yes. Coldi is built to handle production-scale call volume for outbound and inbound fintech operations, with the added benefit of actually resolving calls rather than routing them into a menu."
+    },
+    {
+      "question": "Does replacing IVR with Coldi AI require rebuilding call flows from scratch?",
+      "answer": "Coldi's onboarding maps existing IVR logic and call flows into the new conversational setup, so most of the underlying routing logic carries over even though the caller experience changes completely."
+    },
+    {
+      "question": "Is conversational AI more expensive to run than a legacy IVR system?",
+      "answer": "Legacy IVR systems often carry hidden costs in abandoned calls, agent escalations, and maintenance of aging infrastructure. Coldi's pricing should be evaluated against the full cost of running an IVR, not just the base platform fee."
+    }
+  ]
+}

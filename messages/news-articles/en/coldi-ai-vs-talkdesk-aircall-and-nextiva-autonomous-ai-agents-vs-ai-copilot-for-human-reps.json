@@ -1,0 +1,99 @@
+{
+  "title": "Coldi AI vs. Talkdesk, Aircall, and Nextiva: Autonomous AI Agents vs. AI Copilot for Human Reps",
+  "category": "Industry Trends",
+  "excerpt": "",
+  "dateLabel": "September 6, 2026",
+  "intro": [
+    {
+      "type": "p",
+      "html": "Talkdesk, Aircall, and Nextiva are CCaaS platforms built around human agents, with AI layered on top to assist them: transcription, sentiment cues, suggested responses, after-call summaries. That AI makes a human rep faster and more consistent. It doesn't hold the call itself. Coldi AI takes the opposite approach: the AI agent conducts the conversation from start to finish. For fintech teams evaluating both categories, the distinction is whether you're buying a tool for your agents or a replacement for the call itself."
+    }
+  ],
+  "sections": [
+    {
+      "heading": "The core difference",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>CCaaS platforms assume a human is always on the line and AI supports that person. Coldi assumes the AI agent is on the line, with human involvement reserved for the calls that genuinely need it. That's a different starting point for how a team plans headcount, coverage, and scaling.</p>"
+        }
+      ]
+    },
+    {
+      "heading": "Side-by-side comparison",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "",
+            "Coldi AI",
+            "Talkdesk / Aircall / Nextiva"
+          ],
+          "rows": [
+            [
+              "Who conducts the call",
+              "Autonomous AI voice agent",
+              "Human agent, assisted by AI copilot tools"
+            ],
+            [
+              "Role of AI",
+              "Holds the entire conversation",
+              "Supports the human rep: transcription, suggestions, summaries"
+            ],
+            [
+              "Scaling model",
+              "Add capacity without adding headcount",
+              "Still requires hiring and staffing human agents"
+            ],
+            [
+              "Coverage",
+              "24/7 by default",
+              "Limited by agent shift availability"
+            ],
+            [
+              "Compliance",
+              "Included (ISO 27001, GDPR)",
+              "Varies by deployment and add-ons"
+            ],
+            [
+              "Vertical focus",
+              "Fintech: Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams",
+              "General purpose contact center software"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Who should use which",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>A CCaaS platform is the right fit for a team that wants to keep human agents at the center of every conversation and use AI to make them faster. Coldi is the right fit for a fintech team that wants to remove the human agent from the call entirely for structured, high-volume conversations, while still routing to a person when a call requires it.</p>"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Does Talkdesk have an AI agent that can hold a full conversation on its own?",
+      "answer": "Talkdesk's AI features are primarily built to support human agents during calls, such as real-time transcription and suggested responses, rather than to autonomously conduct the conversation."
+    },
+    {
+      "question": "What's the difference between an AI copilot and an autonomous AI voice agent?",
+      "answer": "An AI copilot assists a human who is still on the call. An autonomous AI voice agent, like Coldi's, conducts the entire conversation without a human on the line unless the call is routed for handoff."
+    },
+    {
+      "question": "Can Coldi AI integrate with a CCaaS platform a company already uses?",
+      "answer": "Coldi is built to operate as the calling layer itself rather than as an add-on to existing CCaaS software, though CRM and data-card sync are part of the standard integration."
+    },
+    {
+      "question": "Do CCaaS platforms like Aircall or Nextiva reduce the number of human agents a company needs?",
+      "answer": "They can improve agent efficiency, but they don't remove the need for human staffing since a person is still required for every call."
+    },
+    {
+      "question": "Is Coldi AI a replacement for a CCaaS platform or an addition to one?",
+      "answer": "For the calls it's suited to, Coldi is designed to replace the need for a human agent on the line entirely, which is a different function than a CCaaS platform's AI-assisted human calling."
+    }
+  ]
+}

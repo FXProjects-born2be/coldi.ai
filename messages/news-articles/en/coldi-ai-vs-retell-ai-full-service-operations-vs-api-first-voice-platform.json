@@ -1,0 +1,104 @@
+{
+  "title": "Coldi AI vs. Retell AI: Full-Service Operations vs. API-First Voice Platform",
+  "category": "Industry Trends",
+  "excerpt": "",
+  "dateLabel": "September 6, 2026",
+  "intro": [
+    {
+      "type": "p",
+      "html": "Retell AI is a capable API-first platform for building voice agents, and it's a genuinely solid building block: part of Coldi's own infrastructure runs on components in the same category. The difference isn't the quality of the underlying voice technology. It's what sits around it. Retell gives a team the API to build a voice agent. Coldi gives a fintech company the full operation built on top of that layer: telephony, CRM sync, compliance, QA, and the ongoing work of keeping a voice agent performing in production."
+    }
+  ],
+  "sections": [
+    {
+      "heading": "The core difference",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>Think of Retell as the engine. Coldi is the engine plus the rest of the vehicle: the chassis, the dashboard, the maintenance schedule. A team evaluating Retell directly is really asking \"can we build this ourselves.\" A team evaluating Coldi is asking \"who runs this for us.\"</p>"
+        }
+      ]
+    },
+    {
+      "heading": "Side-by-side comparison",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "",
+            "Coldi AI",
+            "Retell AI"
+          ],
+          "rows": [
+            [
+              "What it is",
+              "Full-service managed voice AI operation",
+              "API-first platform for building voice agents"
+            ],
+            [
+              "Underlying voice infrastructure",
+              "Built on production-grade components, including Retell-class technology",
+              "The API layer itself"
+            ],
+            [
+              "Telephony and CRM integration",
+              "Included",
+              "Built and maintained by the customer"
+            ],
+            [
+              "Compliance",
+              "Included (ISO 27001, GDPR)",
+              "Self-managed"
+            ],
+            [
+              "QA, script iteration, tuning",
+              "Ongoing, handled by Coldi",
+              "Owned by the customer's team"
+            ],
+            [
+              "Vertical focus",
+              "Fintech: Insurance Brokers, Trading Platforms, Debt Collection, Sales Teams",
+              "General purpose, industry-agnostic"
+            ],
+            [
+              "Ideal user",
+              "Ops or growth team that wants a live operation",
+              "Engineering team building a custom voice product"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Who should use which",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<p>Retell is the right call for a team with the engineering resources and appetite to build a custom voice agent from the API up, and the patience to iterate on it in-house. Coldi is the right call for a fintech team that wants the same category of underlying technology already assembled into a working, compliant, CRM-connected operation.</p>"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Is Retell AI a finished voice agent product?",
+      "answer": "No. Retell AI is an API-first platform. It provides the building blocks for a voice agent, but telephony integration, CRM sync, compliance, and ongoing tuning are left to the team implementing it."
+    },
+    {
+      "question": "Does Coldi AI use the same underlying technology as Retell?",
+      "answer": "Coldi's infrastructure includes production-grade components from the same category of voice AI technology as Retell. The differentiator is everything Coldi builds and manages around that layer."
+    },
+    {
+      "question": "Why would a company choose a managed layer over building directly on Retell's API?",
+      "answer": "Building directly on an API requires ongoing engineering investment: integration work, maintenance, and iteration. A managed layer like Coldi removes that burden for teams that want the outcome, not the build project."
+    },
+    {
+      "question": "Can Coldi match the customization Retell allows for developers?",
+      "answer": "Coldi is built specifically for fintech call flows, which covers the customization most operations teams in Insurance Brokers, Trading Platforms, Debt Collection, and Sales actually need, without requiring a custom build."
+    },
+    {
+      "question": "Is switching from a Retell-based build to Coldi disruptive?",
+      "answer": "Coldi's onboarding maps existing call flows and scripts into the managed operation, so the conceptual work already done on a Retell-based build typically carries over even though the implementation changes."
+    }
+  ]
+}

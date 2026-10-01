@@ -1,0 +1,41 @@
+# News article translations
+
+Translate files in `uk/` — `en/` is the source.
+
+Each JSON has:
+- `title`, `category`, `excerpt`, `dateLabel`
+- `intro` — blocks (`type: "p"`, `html`)
+- `sections` — `heading` + `blocks` (`p` / `note` / `table` / `image`)
+- `faq` — `question` / `answer`
+
+Keep HTML tags (`<p>`, `<strong>`, `<a>`, `<ul>`, `<li>`) and table structure. Translate only visible text.
+
+## Featured (hero)
+
+- what-building-for-the-us-taught-us
+- impact-of-ai-on-life-insurance
+- ai-benefits-for-real-estate-brokerage
+
+## Comparison articles
+
+- best-voice-ai-platforms-for-fintech-debt-collection-and-insurance-in-2026-where-coldi-fits
+- coldi-ai-vs-topcalls-two-managed-voice-ai-providers-compared-for-fintech-and-collections
+- coldi-ai-vs-in-house-build-real-cost-and-time-to-launch-of-diy-voice-ai
+- coldi-ai-vs-legacy-ivr-why-conversational-voice-ai-is-replacing-phone-trees
+- coldi-ai-vs-talkdesk-aircall-and-nextiva-autonomous-ai-agents-vs-ai-copilot-for-human-reps
+- coldi-ai-vs-traditional-bpo-call-centers-ai-voice-agents-vs-human-agent-teams
+- coldi-ai-vs-bland-ai-which-platform-needs-less-engineering
+- coldi-ai-vs-retell-ai-full-service-operations-vs-api-first-voice-platform
+- coldi-ai-vs-vapi-done-for-you-deployment-vs-developer-infrastructure
+- coldi-ai-vs-elevenlabs-managed-voice-agents-vs-build-your-own
+
+## Other articles
+
+- is-ai-safe
+- will-ai-replace-real-estate-agents
+- voice-ai-for-outbound-sales
+- what-is-an-inbound-call-center
+- how-ai-reduces-costs-in-healthcare
+- ai-car-in-insurance
+- free-llm-ecosystems-and-frameworks
+- will-ai-replace-real-estate-agents-2026
