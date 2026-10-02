@@ -223,7 +223,7 @@
   },
   "InsuranceInfo": {
     "title": "Is This You?",
-    "description": "Talk to us about a 30-day pilot on your highest-volume lead source.",
+    "description": "Talk to us about how Coldi can be integrated into your workflows.",
     "items": {
       "claims-follow-up": "Leads come in faster than your floor can call them",
       "quote-qualification": "You're paying for traffic that never gets a real conversation",
@@ -284,7 +284,7 @@
       "description2": "Full audit trail, immediate stop on any opt-out."
     },
     "info": {
-      "description": "Talk to us about a 30-day pilot on one portfolio segment.",
+      "description": "Talk to us about how Coldi can be integrated into your workflows.",
       "items": {
         "portfolio-headcount": "Your portfolio is growing faster than headcount",
         "audit-compliance": "You've had a recent audit, compliance incident, or regulatory pressure",
@@ -341,7 +341,7 @@
       "description": "Every verification call follows your approved scripts and regulatory messaging, with complete recordings, transcripts, and audit logs. Built to support GDPR-compliant EMI operations."
     },
     "info": {
-      "description": "Talk to us about a 30-day pilot on your onboarding funnel.",
+      "description": "Talk to us about how Coldi can be integrated into your workflows.",
       "items": {
         "drop-off": "Drop-off between registration and first use is your biggest growth leak",
         "stalls-without-touchpoint": "Verification stalls without a human touchpoint",
@@ -398,7 +398,7 @@
       "description": "Multi-entity, multi-jurisdiction ready. Scripts adapt by license and region, every call logged for compliance."
     },
     "info": {
-      "description": "Talk to us about a 30-day pilot on your highest-volume lead source.",
+      "description": "Talk to us about how Coldi can be integrated into your workflows.",
       "items": {
         "leads-faster": "Leads come in faster than your floor can call them",
         "paid-traffic": "You're paying for traffic that never gets a real conversation",
@@ -913,6 +913,10 @@
       }
     }
   },
+  "SolutionsPage": {
+    "metaTitle": "AI Voice Agent Solutions for Fintech Workflows",
+    "metaDescription": "Explore Coldi’s managed AI voice agents for fintech: named bots built, deployed, and optimized for qualification, support, compliance, and scheduling."
+  },
   "SolutionsHero": {
     "titleLine1": "<span>Named</span> AI Agents,",
     "titleLine2": "Built for <span>Fintech</span> Workflows",
@@ -1144,7 +1148,7 @@
       "description": "Every qualification call follows your approved scripts and targeting criteria, with complete recordings, transcripts, and audit logs. Built to support high-converting, GDPR-compliant sales pipelines."
     },
     "info": {
-      "description": "Start with a 30-day pilot for one department, product category or service. ",
+      "description": "Talk to us about how Coldi can be integrated into your workflows.",
       "items": {
         "cannot-respond-fast-enough": "Your team handles hundreds or thousands of calls and requests, but cannot respond to all of them fast enough",
         "leads-go-cold": "Valuable leads and customer requests go cold while your team is busy handling existing conversations",

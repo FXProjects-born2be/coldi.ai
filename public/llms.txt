@@ -1,11 +1,10 @@
 # Coldi
-> Fully managed AI voice agents for fintech: outbound and inbound calling, CRM sync, compliance, and ongoing QA — without building the stack yourself.
-
-Coldi Labs LTD. builds and operates production voice AI for Insurance Brokers, Trading Platforms, Debt Collection, and Sales Teams.
+> Coldi is a managed AI voice platform that automates business phone calls with AI voice agents. Coldi helps businesses handle inbound and outbound calls for lead qualification, follow-ups, customer support, appointment scheduling, reactivation, service dispatch, and other call-based workflows. AI agents follow business rules, use company-specific scripts and knowledge, and integrate with existing telephony, CRM, calendars, and business systems. Coldi provides the technology, integrations, deployment, monitoring, and ongoing optimization needed to run AI-powered calling operations at scale.
 
 ## Core pages
 - [Home](https://coldi.ai/): Product overview and managed AI voice agent positioning
 - [Solutions](https://coldi.ai/solutions): How Coldi deploys voice AI for business workflows
+- [Industries](https://coldi.ai/industries): Voice AI for insurance, trading platforms, debt collection, EMIs, and more
 - [Pricing](https://coldi.ai/pricing): Plans and packaging
 - [Use Cases](https://coldi.ai/use-cases): Customer implementations and industry scenarios
 - [Coldi Vision](https://coldi.ai/coldi-vision): Company vision and purpose

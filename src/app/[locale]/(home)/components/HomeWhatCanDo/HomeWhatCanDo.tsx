@@ -60,12 +60,13 @@ const items = [
     titleIcon: IconHugeIconsAiGenerative,
     list: [{ id: 'custom-agents' }, { id: 'payment-plans' }, { id: 'payment-promises' }],
   },
-];
+] as const;
 
-const IMAGE_MS = 800;
-const TAB_START_MS = 3400 + IMAGE_MS;
-const TAB_STEP_MS = 7500;
-const TAB_ANIM_MS = 3200;
+type TabId = (typeof items)[number]['id'];
+
+/** Soft autoplay between tabs; stops after the user clicks a tab. */
+const AUTOPLAY_ENABLED = true;
+const AUTOPLAY_MS = 5000;
 
 const connectors = [
   { id: items[0].id, className: st.home_what_do__icon_circle_one, Icon: IconCirclePartRoundedTop },
@@ -113,59 +114,47 @@ export const HomeWhatCanDo = () => {
   const t = useTranslations('HomeWhatCanDo');
   const rowRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
-  const [tabsReady, setTabsReady] = useState(false);
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<TabId>(items[0].id);
+  const [userPausedAutoplay, setUserPausedAutoplay] = useState(false);
 
   useEffect(() => {
     const row = rowRef.current;
-
     if (!row) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
-
         observer.disconnect();
         setInView(true);
-
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          setActiveId(items[items.length - 1].id);
-          setTabsReady(true);
-        }
       },
-      { threshold: 0 }
+      { threshold: 0.2 }
     );
 
     observer.observe(row);
-
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    if (!inView) return;
+    if (!AUTOPLAY_ENABLED || !inView || userPausedAutoplay) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const timeouts = items.map((item, index) =>
-      window.setTimeout(() => setActiveId(item.id), TAB_START_MS + index * TAB_STEP_MS)
-    );
+    const id = window.setInterval(() => {
+      setActiveId((current) => {
+        const index = items.findIndex((item) => item.id === current);
+        return items[(index + 1) % items.length].id;
+      });
+    }, AUTOPLAY_MS);
 
-    timeouts.push(
-      window.setTimeout(
-        () => setTabsReady(true),
-        TAB_START_MS + (items.length - 1) * TAB_STEP_MS + TAB_ANIM_MS
-      )
-    );
+    return () => window.clearInterval(id);
+  }, [inView, userPausedAutoplay]);
 
-    return () => timeouts.forEach(window.clearTimeout);
-  }, [inView]);
-
-  const selectTab = (id: string) => {
-    if (!tabsReady || id === activeId) return;
+  const selectTab = (id: TabId) => {
+    setUserPausedAutoplay(true);
     setActiveId(id);
   };
 
   return (
-    <section className={cn(st.home_what_do, inView && st.in_view, tabsReady && st.tabs_ready)}>
+    <section className={cn(st.home_what_do, inView && st.in_view, st.tabs_ready)}>
       <div className="container">
         <h2 className={st.home_what_do__title}>{t('title')}</h2>
 
@@ -203,7 +192,6 @@ export const HomeWhatCanDo = () => {
                   type="button"
                   role="tab"
                   aria-selected={isActive}
-                  aria-disabled={!tabsReady}
                   className={cn(st.home_what_do__item, isActive && st.active)}
                   onClick={() => selectTab(item.id)}
                 >

@@ -179,6 +179,18 @@ const nextConfig: NextConfig = {
         destination: '/uk/industries/other-industries',
         permanent: true,
       },
+      {
+        source: '/industries/fx-brokers',
+        destination: '/industries/trading-platforms-brokers',
+        permanent: true,
+      },
+      {
+        source: '/uk/industries/fx-brokers',
+        destination: '/uk/industries/trading-platforms-brokers',
+        permanent: true,
+      },
+      { source: '/legal', destination: '/trust-center', permanent: true },
+      { source: '/uk/legal', destination: '/uk/trust-center', permanent: true },
       { source: '/meettheteam', destination: '/meet-the-team', permanent: true },
       { source: '/uk/meettheteam', destination: '/uk/meet-the-team', permanent: true },
       { source: '/fintech-Industry', destination: '/industries/emis-payments', permanent: true },
