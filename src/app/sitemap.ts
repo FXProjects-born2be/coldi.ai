@@ -18,7 +18,7 @@ const STATIC_PATHS = [
   '/news',
   '/industries',
   '/industries/debt-collection',
-  '/industries/emis-payments',
+  '/industries/digital-banking-payments',
   '/industries/insurance',
   '/industries/other-industries',
   '/industries/trading-platforms-brokers',

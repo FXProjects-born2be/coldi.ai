@@ -294,11 +294,11 @@
     }
   },
   "EmisPaymentsPage": {
-    "metaTitle": "Coldi AI Voice Agents for EMIs & Payment Providers",
-    "metaDescription": "Recover abandoned onboarding and verification with Coldi's AI voice agents for EMIs and payment providers. Automate KYC follow-up, compliance outreach, and CRM sync. Book a demo!",
+    "metaTitle": "Coldi AI Voice Agents for Електронний банкінг і платіжні провайдери",
+    "metaDescription": "Recover abandoned onboarding and verification with Coldi's AI voice agents for електронного банкінгу та платіжних провайдерів. Automate KYC follow-up, compliance outreach, and CRM sync. Book a demo!",
     "hero": {
       "title": "AI-агенти для",
-      "titleAccent": "EMI та платіжних провайдерів",
+      "titleAccent": "електронного банкінгу та платіжних провайдерів",
       "description": "Coldi повертає користувачів, які не завершили онбординг, і проводить комплаєнс-комунікації без потреби у великому контакт-центрі."
     },
     "handles": {
@@ -310,13 +310,13 @@
       }
     },
     "cases": {
-      "title": "EMI",
+      "title": "Електронний банкінг",
       "titleAccent": "Повернення незавершених заявок",
       "description": "Користувач зупинився під час реєстрації — Coldi допомагає йому повернутися до останнього кроку верифікації."
     },
     "why": {
       "intro": {
-        "title": "Чому команди EMI",
+        "title": "Чому команди електронного банкінгу",
         "titleAccent": "залучають Coldi"
       },
       "onboarding-recovery": {
@@ -337,8 +337,8 @@
       }
     },
     "operations": {
-      "title": "Створено для операцій EMI",
-      "description": "Кожен дзвінок щодо верифікації проходить за затвердженими скриптами та регуляторними вимогами, а всі розмови повністю записуються, транскрибуються та фіксуються в журналах аудиту. Рішення створено для підтримки операцій EMI відповідно до вимог GDPR."
+      "title": "Створено для операцій електронного банкінгу",
+      "description": "Кожен дзвінок щодо верифікації проходить за затвердженими скриптами та регуляторними вимогами, а всі розмови повністю записуються, транскрибуються та фіксуються в журналах аудиту. Рішення створено для підтримки операцій електронного банкінгу відповідно до вимог GDPR."
     },
     "info": {
       "description": "Обговорімо, як Coldi можна інтегрувати у ваші робочі процеси.",
@@ -483,7 +483,7 @@
         }
       },
       "emis": {
-        "label": "EMI",
+        "label": "Електронний банкінг",
         "cta": "Дізнатися більше",
         "messages": [
           "Мій депозит не відображається",
@@ -563,7 +563,7 @@
         "subtitle": "Нагадування про оплату"
       },
       "customer-support": {
-        "title": "EMI",
+        "title": "Електронний банкінг",
         "subtitle": "Верифікаційний дзвінок"
       }
     }
@@ -695,7 +695,7 @@
       "insurance": "Страхування",
       "trading": "Торгові платформи та брокери",
       "debt-collection": "Стягнення боргів",
-      "emis": "EMI та платежі",
+      "emis": "Електронний банкінг та платежі",
       "Other": "Інше"
     }
   },
@@ -762,7 +762,7 @@
       "insurance": "Страхування",
       "trading": "Торгові платформи та брокери",
       "debt-collection": "Стягнення боргів",
-      "emis": "EMI та платежі",
+      "emis": "Електронний банкінг та платежі",
       "other": "Інші галузі"
     },
     "aboutItems": {
@@ -870,7 +870,7 @@
         }
       },
       "emi": {
-        "label": "EMI",
+        "label": "Електронний банкінг",
         "items": {
           "applicationRecovery": {
             "title": "Бот відновлення заявок",
@@ -914,8 +914,8 @@
     }
   },
   "SolutionsPage": {
-    "metaTitle": "AI Voice Agent Solutions for Fintech Workflows",
-    "metaDescription": "Explore Coldi’s managed AI voice agents for fintech: named bots built, deployed, and optimized for qualification, support, compliance, and scheduling."
+    "metaTitle": "Coldi Solutions: Managed Fintech Voice AI Agents",
+    "metaDescription": "Explore purpose-built AI voice agents for lead qualification, follow-ups, onboarding, compliance, customer support, appointment booking and more across fintech and other industries. Book a demo!"
   },
   "SolutionsHero": {
     "titleLine1": "<span>Спеціалізовані</span> AI-агенти,",
@@ -1041,10 +1041,10 @@
         }
       },
       "emi": {
-        "label": "Електронні гроші та платежі",
+        "label": "Електронний банкінг та платежі",
         "subtitle": "Нагадує про кожен платіж — вчасно.",
         "description": "Coldi повертає користувачів, які не завершили онбординг, і проводить комплаєнс-комунікації без потреби у великому кол-центрі.",
-        "cta": "Переглянути рішення для EMI",
+        "cta": "Переглянути рішення для електронного банкінгу",
         "cards": {
           "onboardingRecovery": {
             "title": "Повернення до онбордингу",
@@ -1231,7 +1231,7 @@
       "insurance": "Страхування",
       "trading": "Торгові платформи та брокери",
       "debt-collection": "Стягнення боргів",
-      "emis": "EMI та платежі",
+      "emis": "Електронний банкінг та платежі",
       "other": "Інші галузі"
     }
   },

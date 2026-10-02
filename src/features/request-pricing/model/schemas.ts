@@ -22,7 +22,7 @@ export const PRICING_SECTOR_OPTIONS = [
   { key: 'insurance', value: 'Insurance' },
   { key: 'trading', value: 'Trading Platforms & Brokers' },
   { key: 'debt-collection', value: 'Debt Collection' },
-  { key: 'emis', value: 'EMIs & Payments' },
+  { key: 'emis', value: 'Digital Banking & Payments' },
   { key: 'Other', value: 'Other' },
 ] as const;
 

@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     title: t('metaTitle'),
     description: t('metaDescription'),
+    keywords: ['AI voice news'],
     openGraph: {
       title: t('metaTitle'),
       description: t('metaDescription'),

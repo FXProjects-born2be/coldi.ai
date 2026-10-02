@@ -65,7 +65,7 @@ type InsuranceInfoProps = {
   page?:
     | 'trading-platforms-brokers'
     | 'debt-collection'
-    | 'emis-payments'
+    | 'digital-banking-payments'
     | 'insurance'
     | 'other-industries';
 };

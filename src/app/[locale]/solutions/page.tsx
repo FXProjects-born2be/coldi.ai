@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     title: t('metaTitle'),
     description: t('metaDescription'),
+    keywords: ['AI agent lead qualification in agro industry'],
     openGraph: {
       title: t('metaTitle'),
       description: t('metaDescription'),

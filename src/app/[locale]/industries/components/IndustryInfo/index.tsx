@@ -48,7 +48,7 @@ const TABS = [
   },
   {
     id: 'emi',
-    href: '/industries/emis-payments',
+    href: '/industries/digital-banking-payments',
     visual: IconDots,
     cards: [
       { key: 'onboardingRecovery', icon: '/icons/ic_outline-tour.svg' },

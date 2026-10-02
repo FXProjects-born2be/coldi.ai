@@ -4,7 +4,7 @@
 ## Core pages
 - [Home](https://coldi.ai/): Product overview and managed AI voice agent positioning
 - [Solutions](https://coldi.ai/solutions): How Coldi deploys voice AI for business workflows
-- [Industries](https://coldi.ai/industries): Voice AI for insurance, trading platforms, debt collection, EMIs, and more
+- [Industries](https://coldi.ai/industries): Voice AI for insurance, trading platforms, debt collection, digital banking, and more
 - [Pricing](https://coldi.ai/pricing): Plans and packaging
 - [Use Cases](https://coldi.ai/use-cases): Customer implementations and industry scenarios
 - [Coldi Vision](https://coldi.ai/coldi-vision): Company vision and purpose
@@ -17,7 +17,7 @@
 - [Insurance](https://coldi.ai/industries/insurance)
 - [Trading Platforms & Brokers](https://coldi.ai/industries/trading-platforms-brokers)
 - [Debt Collection](https://coldi.ai/industries/debt-collection)
-- [EMIs & Payments](https://coldi.ai/industries/emis-payments)
+- [Digital Banking & Payments](https://coldi.ai/industries/digital-banking-payments)
 - [Other Industries](https://coldi.ai/industries/other-industries)
 
 ## Platform comparisons

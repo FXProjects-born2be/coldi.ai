@@ -57,7 +57,7 @@ const voices: HearVoiceItem[] = [
   },
   {
     id: 'customer-support',
-    audio: '/audio/emis.mp3',
+    audio: '/audio/digital-banking.mp3',
   },
 ];
 
@@ -154,50 +154,6 @@ export const HomeHearVoice = () => {
           <p className={st.home_hear_voice__description}>{t('description')}</p>
         </div>
 
-        <ul className={st.home_hear_voice__list}>
-          {voices.map((item, index) => (
-            <li
-              key={item.id}
-              className={cn(
-                st.home_hear_voice__item,
-                selectedIndex === index && st.selected,
-                activeIndex === index && st.playing
-              )}
-            >
-              <div>
-                <h3 className={st.home_hear_voice__item_title}>{t(`items.${item.id}.title`)}</h3>
-                <p className={st.home_hear_voice__item_subtitle}>
-                  {t(`items.${item.id}.subtitle`)}
-                </p>
-              </div>
-
-              <HearVisual id={item.id} active={activeIndex === index} />
-
-              <button
-                type="button"
-                className={cn(
-                  'btn',
-                  activeIndex === index ? 'btn-secondary' : 'btn-primary',
-                  st.home_hear_voice__item_btn
-                )}
-                onClick={() => togglePlay(index)}
-              >
-                {activeIndex === index ? (
-                  <>
-                    {t('pause')}
-                    <IconCarbonPauseFilled />
-                  </>
-                ) : (
-                  <>
-                    {t('play')}
-                    <IconEntypoControllerPlay />
-                  </>
-                )}
-              </button>
-            </li>
-          ))}
-        </ul>
-
         <div className={st.home_hear_voice__select} ref={selectRef}>
           <button
             type="button"
@@ -247,6 +203,50 @@ export const HomeHearVoice = () => {
             </ul>
           ) : null}
         </div>
+
+        <ul className={st.home_hear_voice__list}>
+          {voices.map((item, index) => (
+            <li
+              key={item.id}
+              className={cn(
+                st.home_hear_voice__item,
+                selectedIndex === index && st.selected,
+                activeIndex === index && st.playing
+              )}
+            >
+              <div>
+                <h3 className={st.home_hear_voice__item_title}>{t(`items.${item.id}.title`)}</h3>
+                <p className={st.home_hear_voice__item_subtitle}>
+                  {t(`items.${item.id}.subtitle`)}
+                </p>
+              </div>
+
+              <HearVisual id={item.id} active={activeIndex === index} />
+
+              <button
+                type="button"
+                className={cn(
+                  'btn',
+                  activeIndex === index ? 'btn-secondary' : 'btn-primary',
+                  st.home_hear_voice__item_btn
+                )}
+                onClick={() => togglePlay(index)}
+              >
+                {activeIndex === index ? (
+                  <>
+                    {t('pause')}
+                    <IconCarbonPauseFilled />
+                  </>
+                ) : (
+                  <>
+                    {t('play')}
+                    <IconEntypoControllerPlay />
+                  </>
+                )}
+              </button>
+            </li>
+          ))}
+        </ul>
 
         <div className={st.home_hear_voice__btn}>
           <Link href={'/solutions'} className="btn btn-primary d-inline-block">

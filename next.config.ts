@@ -189,14 +189,28 @@ const nextConfig: NextConfig = {
         destination: '/uk/industries/trading-platforms-brokers',
         permanent: true,
       },
+      {
+        source: '/industries/emis-payments',
+        destination: '/industries/digital-banking-payments',
+        permanent: true,
+      },
+      {
+        source: '/uk/industries/emis-payments',
+        destination: '/uk/industries/digital-banking-payments',
+        permanent: true,
+      },
       { source: '/legal', destination: '/trust-center', permanent: true },
       { source: '/uk/legal', destination: '/uk/trust-center', permanent: true },
       { source: '/meettheteam', destination: '/meet-the-team', permanent: true },
       { source: '/uk/meettheteam', destination: '/uk/meet-the-team', permanent: true },
-      { source: '/fintech-Industry', destination: '/industries/emis-payments', permanent: true },
+      {
+        source: '/fintech-Industry',
+        destination: '/industries/digital-banking-payments',
+        permanent: true,
+      },
       {
         source: '/uk/fintech-Industry',
-        destination: '/uk/industries/emis-payments',
+        destination: '/uk/industries/digital-banking-payments',
         permanent: true,
       },
     ];

@@ -32,8 +32,8 @@
   },
   "AboutHero": {
     "titleEyebrow": "Coldi Vision",
-    "title": "Voice AI Built for Real Business",
-    "description": "Coldi helps businesses automate customer and sales calls with AI agents that speak naturally, follow business rules, and work inside existing systems."
+    "title": "Give Every Business the Ability to Serve Customers Better",
+    "description": "Coldi’s vision is to help businesses everywhere deliver fast, attentive customer service with technology, without having to grow their teams."
   },
   "AboutInfo": {
     "blocks": {
@@ -294,11 +294,11 @@
     }
   },
   "EmisPaymentsPage": {
-    "metaTitle": "Coldi AI Voice Agents for EMIs & Payment Providers",
-    "metaDescription": "Recover abandoned onboarding and verification with Coldi's AI voice agents for EMIs and payment providers. Automate KYC follow-up, compliance outreach, and CRM sync. Book a demo!",
+    "metaTitle": "Coldi AI Voice Agents for Digital Banking & Payment Providers",
+    "metaDescription": "Recover abandoned onboarding and verification with Coldi's AI voice agents for Digital Banking and payment providers. Automate KYC follow-up, compliance outreach, and CRM sync. Book a demo!",
     "hero": {
       "title": "AI Voice Agents Built for ",
-      "titleAccent": "EMIs and Payment Providers",
+      "titleAccent": "Digital Banking and Payment Providers",
       "description": "Coldi recovers stalled onboarding and handles compliance outreach without a full contact center."
     },
     "handles": {
@@ -310,13 +310,13 @@
       }
     },
     "cases": {
-      "title": "EMIs",
+      "title": "Digital Banking",
       "titleAccent": "Application Recovery",
       "description": "A stalled sign-up, walked back through the last step of verification."
     },
     "why": {
       "intro": {
-        "title": "Why EMI Teams",
+        "title": "Why Digital Banking Teams",
         "titleAccent": "Bring Coldi In"
       },
       "onboarding-recovery": {
@@ -337,8 +337,8 @@
       }
     },
     "operations": {
-      "title": "Built for EMI Operations",
-      "description": "Every verification call follows your approved scripts and regulatory messaging, with complete recordings, transcripts, and audit logs. Built to support GDPR-compliant EMI operations."
+      "title": "Built for Digital Banking Operations",
+      "description": "Every verification call follows your approved scripts and regulatory messaging, with complete recordings, transcripts, and audit logs. Built to support GDPR-compliant Digital Banking operations."
     },
     "info": {
       "description": "Talk to us about how Coldi can be integrated into your workflows.",
@@ -483,7 +483,7 @@
         }
       },
       "emis": {
-        "label": "EMIs",
+        "label": "Digital Banking",
         "cta": "Learn more",
         "messages": [
           "My deposit isn't showing up",
@@ -563,7 +563,7 @@
         "subtitle": "Payment Reminder"
       },
       "customer-support": {
-        "title": "EMIs",
+        "title": "Digital Banking",
         "subtitle": "Verification Call"
       }
     }
@@ -695,7 +695,7 @@
       "insurance": "Insurance",
       "trading": "Trading Platforms & Brokers",
       "debt-collection": "Debt Collection",
-      "emis": "EMIs & Payments",
+      "emis": "Digital Banking & Payments",
       "Other": "Other"
     }
   },
@@ -762,7 +762,7 @@
       "insurance": "Insurance",
       "trading": "Trading Platforms & Brokers",
       "debt-collection": "Debt Collection",
-      "emis": "EMIs & Payments",
+      "emis": "Digital Banking & Payments",
       "other": "Other Industries"
     },
     "aboutItems": {
@@ -870,7 +870,7 @@
         }
       },
       "emi": {
-        "label": "EMIs",
+        "label": "Digital Banking",
         "items": {
           "applicationRecovery": {
             "title": "Application Recovery Bot",
@@ -914,8 +914,8 @@
     }
   },
   "SolutionsPage": {
-    "metaTitle": "AI Voice Agent Solutions for Fintech Workflows",
-    "metaDescription": "Explore Coldi’s managed AI voice agents for fintech: named bots built, deployed, and optimized for qualification, support, compliance, and scheduling."
+    "metaTitle": "Coldi Solutions: Managed Fintech Voice AI Agents",
+    "metaDescription": "Explore purpose-built AI voice agents for lead qualification, follow-ups, onboarding, compliance, customer support, appointment booking and more across fintech and other industries. Book a demo!"
   },
   "SolutionsHero": {
     "titleLine1": "<span>Named</span> AI Agents,",
@@ -1041,10 +1041,10 @@
         }
       },
       "emi": {
-        "label": "EMIs & Payments",
+        "label": "Digital Banking & Payments",
         "subtitle": "Chases every installment, on time.",
         "description": "Coldi recovers stalled onboarding and handles compliance outreach without a full contact center.",
-        "cta": "Explore EMIs Solution",
+        "cta": "Explore Digital Banking & Payments Solution",
         "cards": {
           "onboardingRecovery": {
             "title": "Onboarding recovery",
@@ -1231,7 +1231,7 @@
       "insurance": "Insurance",
       "trading": "Trading Platforms & Brokers",
       "debt-collection": "Debt Collection",
-      "emis": "EMIs & Payments",
+      "emis": "Digital Banking & Payments",
       "other": "Other Industries"
     }
   },

@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  keywords: ['AI voice agents for fintech'],
 };
 
 export default function Home() {

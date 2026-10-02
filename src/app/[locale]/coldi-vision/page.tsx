@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'Expert AI Calling Solutions Provider',
   description:
     'Discover Coldi – an expert AI calling solutions provider delivering AI voice agents that answer calls, schedule, and support your business 24/7.',
+  keywords: ['Fintech AI voice agents developers'],
   openGraph: {
     title: 'Expert AI Calling Solutions Provider',
     description:

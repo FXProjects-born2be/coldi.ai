@@ -22,7 +22,7 @@ const AREAS = [
   {
     id: 'fintech',
     icon: '/images/industries/ix_piechart-ai.svg',
-    href: '/industries/emis-payments',
+    href: '/industries/digital-banking-payments',
     images: [
       { src: '/images/industries/areas-six.png', width: 403, height: 179 },
       { src: '/images/industries/areas-five.png', width: 371, height: 230 },

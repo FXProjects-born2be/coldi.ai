@@ -2,7 +2,7 @@ export const headerIndustryItems = [
   { id: 'insurance', href: '/industries/insurance' },
   { id: 'trading', href: '/industries/trading-platforms-brokers' },
   { id: 'debt-collection', href: '/industries/debt-collection' },
-  { id: 'emis', href: '/industries/emis-payments' },
+  { id: 'emis', href: '/industries/digital-banking-payments' },
   { id: 'other', href: '/industries/other-industries' },
 ] as const;
 

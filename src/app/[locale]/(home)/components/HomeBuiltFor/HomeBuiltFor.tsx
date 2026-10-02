@@ -101,7 +101,7 @@ const industries: Industry[] = [
   },
   {
     id: 'emis',
-    href: '/industries/emis-payments',
+    href: '/industries/digital-banking-payments',
     workflows: [
       { id: 'customer-support', icon: '/images/icons/customer-support.svg' },
       { id: 'verification-calls', icon: '/images/icons/verification-calls.svg' },
