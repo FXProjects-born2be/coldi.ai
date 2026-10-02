@@ -94,8 +94,8 @@ const teamMembers = [
   },
   {
     id: 'olha-koreva',
-    name: 'Olha Koreva',
-    image: '/images/meet-the-team/alina-denysenko.png',
+    name: 'Olga Koreva',
+    image: '/images/meet-the-team/olga-koreva.png',
     linkedinUrl: '',
   },
   {

@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/performance-marketing-agency',
   },
-  title: 'AI Voice Onboarding & Live Transfer Automation | Coldi',
+  title: 'AI Voice Onboarding & Live Transfer Automation',
   description:
     'See how a performance marketing agency automated outbound client onboarding across 8,255 leads, booking onboarding sessions, scheduling callbacks and transferring high-intent prospects directly to Success Managers.',
   openGraph: {
-    title: 'AI Voice Onboarding & Live Transfer Automation | Coldi',
+    title: 'AI Voice Onboarding & Live Transfer Automation',
     description:
       'See how a performance marketing agency automated outbound client onboarding across 8,255 leads, booking onboarding sessions, scheduling callbacks and transferring high-intent prospects directly to Success Managers.',
     images: '/images/meta.png',
