@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: 'Coldi Pricing: Flexible AI Voice Agent Plans for Fintech',
     description:
       "Compare Coldi's AI voice agent pricing for fintech. We offer outbound, inbound and fully managed plans across 10+ industries. Get a quote.",
-    images: '/images/meta.png',
+    images: '/images/meta-news.png',
   },
 };
 
