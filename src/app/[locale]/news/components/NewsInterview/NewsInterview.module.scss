@@ -1,0 +1,182 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.news_interview {
+    margin-bottom: 60px;
+
+    @include tablet {
+        margin-bottom: 32px;
+    }
+
+    &__row {
+        padding: 32px;
+        border-radius: 8px;
+        border: 0.5px solid rgba(0, 0, 0, 0.20);
+        background: #FFF;
+        display: grid;
+        gap: 40px;
+        grid-template-columns: 0.46145fr 1fr;
+
+        @include tablet {
+            padding: 16px;
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__badge {
+        color: #4268FF;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 130%;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+    }
+
+    &__title {
+        color: #0C1021;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: normal;
+        margin-bottom: 6px;
+    }
+
+    &__description_wrapper>*:not(:last-child) {
+        margin-bottom: 32px;
+
+        @include mobile {
+            margin-bottom: 22px;
+        }
+    }
+
+    &__description {
+        color: #50556B;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 140%;
+    }
+
+    &__image {
+        position: relative;
+        z-index: 1;
+        border-radius: 8px;
+
+        img {
+            object-fit: cover;
+            z-index: -2;
+            border-radius: inherit;
+        }
+
+        @include tablet {
+            aspect-ratio: 795/448;
+        }
+    }
+
+    &__btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        width: 117px;
+        height: 117px;
+        border-radius: 781.947px;
+        border: 1.1px solid rgba(255, 255, 255, 0.40);
+        background: var(--Windows-Glass, rgba(128, 128, 128, 0.30));
+        background-blend-mode: luminosity;
+        backdrop-filter: blur(20.853544235229492px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include mobile {
+            width: 60px;
+            height: 60px;
+
+            img {
+                max-width: 24px;
+            }
+        }
+    }
+
+    &__modal {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+
+        @include mobile {
+            padding: 20px;
+        }
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        cursor: pointer;
+    }
+
+    &__modal_content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__modal_video {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        object-fit: cover;
+    }
+
+    &__close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 2;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+
+        span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 28px;
+            height: 2px;
+            background: #fff;
+        }
+
+        span:first-child {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        span:last-child {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+    }
+
+    &__btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+    }
+}

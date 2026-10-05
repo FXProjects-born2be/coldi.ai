@@ -6,6 +6,8 @@ import { getMergedGridArticles, getNewsFilterCategories } from '../../legacy';
 import { AllArticles } from '../all-articles/AllArticles';
 import { Hero } from '../hero/Hero';
 
+import NewsInterview from '@/app/[locale]/news/components/NewsInterview';
+
 export const NewsFeed = async () => {
   const locale = await getLocale();
   const [featuredArticles, gridArticles] = await Promise.all([
@@ -17,6 +19,7 @@ export const NewsFeed = async () => {
   return (
     <>
       <Hero articles={featuredArticles} />
+      <NewsInterview />
       <AllArticles articles={gridArticles} categories={categories} />
     </>
   );
