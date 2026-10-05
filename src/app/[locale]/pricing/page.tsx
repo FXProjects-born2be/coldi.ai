@@ -1,12 +1,16 @@
 import type { Metadata } from 'next';
 
 import {
+  PricingChooseMinutes,
   PricingContact,
   PricingHero,
+  PricingHowWorks,
   PricingPlans,
   PricingProcess,
   PricingSpecializedServices,
 } from './components';
+
+import PricingSetupFree from '@/app/[locale]/pricing/components/PricingSetupFree';
 
 export const metadata: Metadata = {
   alternates: {
@@ -28,9 +32,12 @@ export default function PricingPage() {
   return (
     <main>
       <PricingHero />
+      <PricingSetupFree />
       <PricingPlans />
       <PricingSpecializedServices />
+      <PricingChooseMinutes />
       <PricingProcess />
+      <PricingHowWorks />
       <PricingContact />
     </main>
   );

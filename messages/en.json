@@ -569,47 +569,66 @@
     }
   },
   "PricingHero": {
-    "title": "Simple Pricing. Scalable Power.",
-    "description": "Choose the plan that fits your stage - whether you're just testing or scaling full operations."
+    "title": "Coldi AI Voice Agent Pricing",
+    "description": "Every lead called within seconds, 24/7. Qualified, recorded and logged in your CRM automatically."
   },
   "PricingPlans": {
     "tabsAria": "Pricing plans",
     "requestNow": "Request Now",
     "plans": {
       "outbound": {
-        "tab": "Outbound",
-        "label": "Outbound Solutions",
-        "title": "Outbound Calling Service",
+        "tab": "Managed",
+        "label": "Managed",
+        "badge": "Recommended",
+        "title": "We run it for you.",
+        "subtitle": "",
         "description": "Transform your outreach with proactive AI agents that execute campaigns on autopilot.",
-        "eyebrow": "Starting from",
-        "priceSuffix": "/per minute",
+        "eyebrow": "3-month minimum",
+        "priceSuffix": "/per month",
         "features": {
-          "strategy-setup": "Strategy & Setup: High-conversion conversational flows",
-          "dynamic-scripting": "Dynamic Scripting: Real-time adaptive responses",
-          "campaign-hours": "Campaign Hours: Flexible timezone scheduling",
-          "infrastructure": "Infrastructure: Your VoIP or Global Infrastructure",
-          "performance-tracking": "Performance Tracking & analytics"
+          "strategy-setup": "We run and optimise your campaigns",
+          "campaign-hours": "Weekly performance report",
+          "dynamic-scripting": "Up to 3 script adjustments per month Dedicated account manager"
         }
       },
       "inbound": {
-        "tab": "Inbound",
-        "label": "Inbound & Customer Service",
-        "title": "Inbound Calling Service",
+        "tab": "Self-Service",
+        "label": "Self-Service",
+        "badge": "",
+        "title": "We launch it with you.",
+        "subtitle": "You run it.",
         "description": "Voice agents that understand intent and execute real business actions in real time.",
-        "eyebrow": "Starting from",
-        "priceSuffix": "/per agent",
+        "eyebrow": "No monthly commitment",
+        "priceSuffix": "/per month",
         "features": {
-          "action-oriented": "Action-oriented AI: bookings, tickets, queries",
-          "crm-integration": "CRM integration: Zendesk, Salesforce, and more",
-          "resolution-24-7": "24/7 resolution with zero wait time",
-          "omnichannel": "Omnichannel support: voice, chat, messaging",
-          "intelligent-escalation": "Intelligent escalation to human agents"
+          "action-oriented": "Up to 3 use cases included; each additional use case may carry a setup fee",
+          "crm-integration": "We launch your first campaign together",
+          "resolution-24-7": "Training for your team",
+          "omnichannel": "You run campaigns in the Coldi platform",
+          "intelligent-escalation": "Email support, extra changes billed"
         }
       }
     }
   },
+  "PricingSetupFree": {
+    "title": "Setup Fee",
+    "includesTitle": "It includes:",
+    "iconAlt": "Icon",
+    "items": {
+      "ai-voice-agent-for-your-campaign": "AI voice agent built, scripted and voiced for your campaign",
+      "crm-and-telephony-integration": "CRM and telephony integration",
+      "testing-with-your-real-leads": "Testing with your real leads before launch"
+    },
+    "priceRange": "1,500–3,000",
+    "priceLabel": "one-time setup fee",
+    "priceDescription": "The setup fee is based on your campaign requirements and applies to both plans.",
+    "creditLabel": "Setup fee credit:",
+    "creditBefore": "The full setup fee is returned as call credit once you reach",
+    "creditHighlight": "30,000 minutes of usage"
+  },
   "SpecializedServices": {
-    "title": "Specialized Services",
+    "title": "Additional Services & Custom Pricing",
+    "description": "Some Coldi deployments require additional infrastructure, AI development or quality-control capabilities. These services are available separately and are priced according to your requirements.",
     "priceLabel": "Pricing",
     "cta": "Get Pricing Quote",
     "prevService": "Previous service",
@@ -618,43 +637,86 @@
       "custom-ai": {
         "title": "Custom AI Development",
         "tab": "AI Development",
-        "description": "Full architecture design of a custom AI agent tailored to your specific business logic and brand voice.",
+        "description": "Custom AI agent architecture designed around your business logic, workflows and brand voice.",
         "price": "Custom Quote"
       },
       "quality-control": {
-        "title": "Quality Control (QC) AI",
-        "tab": "Quality Control",
-        "description": "Automated auditing of 100% of interactions to ensure script compliance, brand safety, and data accuracy.",
+        "title": "AI Quality Control(QC)",
+        "tab": "AI Quality Control(QC)",
+        "description": "Automated auditing of 100% of interactions to check script compliance, brand requirements and data accuracy.",
         "price": "Custom Quote"
       },
       "voip": {
         "title": "Global VoIP Infrastructure",
         "tab": "Global VoIP",
-        "description": "High-quality local numbering and telephony access in dozens of countries to ensure maximum deliverability.",
+        "description": "Local phone numbers and telephony infrastructure across multiple countries, with pricing based on region and call volume.",
         "price": "Based on Region/Volume"
+      }
+    }
+  },
+  "PricingChooseMinutes": {
+    "title": "Choose Your Call Minutes",
+    "description": "Includes call recording, transcripts, CRM logging and analytics dashboard. Larger volumes on request.",
+    "steps": {
+      "infrastructure": {
+        "title": "15,000",
+        "titleSmall": "min",
+        "description": "$0.40 per minute",
+        "price": "$6,000 "
       },
-      "implementation": {
-        "title": "Managed Implementation",
-        "tab": "Managed Implementation",
-        "description": "Full deployment, testing, and continuous optimization. We handle the technical heavy lifting so you don't have to.",
-        "price": "Included in Managed Plans"
+      "script": {
+        "badge": "10% OFF",
+        "title": "20,000",
+        "titleSmall": "min",
+        "description": "$0.36 per minute",
+        "price": "$7,200"
+      },
+      "launch": {
+        "badge": "10% OFF",
+        "title": "30,000",
+        "titleSmall": "min",
+        "description": "$0.32 per minute",
+        "price": "$9,600"
       }
     }
   },
   "PricingProcess": {
-    "title": "The Coldi Process: How It Works",
+    "title": "How to Get Started With Coldi",
     "steps": {
       "infrastructure": {
-        "title": "Infrastructure Integration",
-        "description": "Connect our AI with your existing VoIP provider or leverage our optimized high-deliverability network. We sync with your CRM to ensure the AI has the full context."
+        "title": "Sign up and pay",
+        "description": "Sign the Service Order and pay the setup fee, selected plan and call minutes."
       },
       "script": {
-        "title": "Script & Workflow Design",
-        "description": "Our experts build your dynamic scripts and business logic. We define exactly how the agent handles every scenario to ensure professional and accurate interactions."
+        "title": "Provide access",
+        "description": "Complete the delivery form and provide access to your CRM, telephony and lead list within 7 days."
       },
       "launch": {
-        "title": "Launch & Continuous Optimization",
-        "description": "Go live with 100% transparency. We monitor every interaction, providing you with detailed analytics and constant performance tuning to improve resolution rates."
+        "title": "Go live",
+        "description": "Your AI voice agent is configured, tested and ready for your first campaign in about 7 business days."
+      }
+    }
+  },
+  "PricingHowWorks": {
+    "items": {
+      "intro": {
+        "title": "How Coldi Works"
+      },
+      "renewals": {
+        "title": "Connect Your Systems",
+        "body": "Connect Coldi to your telephony and CRM, or use Coldi’s telephony infrastructure. We configure the connections your AI agent needs to access data and run your campaigns."
+      },
+      "claimsIntake": {
+        "title": "Configure AI Agent",
+        "body": "Configure your AI voice agent with scripts, conversation logic and workflows. We test the agent with real leads to ensure it is ready for launch and performs as expected."
+      },
+      "crossSell": {
+        "title": "Launch Your Campaigns",
+        "body": "Launch your first campaign and track calls, results and performance in the Coldi platform. Managed customers receive ongoing optimization and regular performance reporting."
+      },
+      "verification": {
+        "title": "Track Your Performance",
+        "body": "Monitor leads, calls and campaign performance through clear dashboards. Track your key metrics, review results and see how your campaigns perform over time."
       }
     }
   },

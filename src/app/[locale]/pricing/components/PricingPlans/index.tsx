@@ -5,7 +5,6 @@ import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
 
-import { useRequestPricingStore } from '@/features/request-pricing/store/store';
 import { RequestDialog } from '@/features/request-pricing/ui/request-dialog/RequestDialog';
 
 import { cn } from '@/shared/lib/helpers';
@@ -18,13 +17,13 @@ export const PricingPlans = () => {
   const t = useTranslations('PricingPlans');
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState(plans[0]?.id);
-  const setPlan = useRequestPricingStore((state) => state.setPlan);
 
   if (!plans.length || !activeId) return null;
 
   return (
     <section className={st.pricing_plans}>
       <div className="container">
+        <h2 className={st.pricing_plans__main_title}>Choose Your Coldi Pricing Plan</h2>
         <div className={st.pricing_plans__tabs_wrapper}>
           <div className={st.pricing_plans__tabs} role="tablist" aria-label={t('tabsAria')}>
             {plans.map((plan) => (
@@ -58,34 +57,32 @@ export const PricingPlans = () => {
                     sizes="(max-width: 1024px) 100vw, 476px"
                     aria-hidden
                   />
-                  <h2 className={st.pricing_plans__title}>{t(`plans.${plan.id}.title`)}</h2>
+                  <div>
+                    <div className={st.pricing_plans__inner_top_wrapper}>
+                      <p className={st.pricing_plans__inner_label}>{t(`plans.${plan.id}.label`)}</p>
+                      {t(`plans.${plan.id}.badge`) && (
+                        <div className={st.pricing_plans__inner_badge_wrapper}>
+                          <p className={st.pricing_plans__inner_badge}>
+                            {t(`plans.${plan.id}.badge`)}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    <h2 className={st.pricing_plans__title}>{t(`plans.${plan.id}.title`)}</h2>
+                    {t(`plans.${plan.id}.subtitle`) && (
+                      <p className={st.pricing_plans__subtitle}>{t(`plans.${plan.id}.subtitle`)}</p>
+                    )}
+                  </div>
                   <div className={st.pricing_plans__price}>
-                    <p className={st.pricing_plans__price_label}>{t(`plans.${plan.id}.eyebrow`)}</p>
                     <div className={st.pricing_plans__price_line}>
                       <span className={st.pricing_plans__price_value}>{plan.price}</span>
                       <span className={st.pricing_plans__price_suffix}>
                         {t(`plans.${plan.id}.priceSuffix`)}
                       </span>
                     </div>
+                    <p className={st.pricing_plans__price_label}>{t(`plans.${plan.id}.eyebrow`)}</p>
                   </div>
                 </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setPlan({
-                      label: t(`plans.${plan.id}.label`),
-                      title: t(`plans.${plan.id}.title`),
-                      price: `${plan.price}${t(`plans.${plan.id}.priceSuffix`)}`,
-                    });
-                    setOpen(true);
-                  }}
-                  className={cn('btn', st.pricing_plans__btn)}
-                >
-                  {t('requestNow')}
-                </button>
-
-                <p className={st.pricing_plans__description}>{t(`plans.${plan.id}.description`)}</p>
 
                 <ul className={st.pricing_plans__features}>
                   {plan.features.map((feature) => (

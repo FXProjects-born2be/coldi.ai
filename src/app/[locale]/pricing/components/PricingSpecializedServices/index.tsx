@@ -40,6 +40,7 @@ export const PricingSpecializedServices = () => {
     <section className={st.pricing_services}>
       <div className="container">
         <h2 className={st.pricing_services__title}>{t('title')}</h2>
+        <p className={st.pricing_services__description}>{t('description')}</p>
 
         <div className={st.pricing_services__grid}>
           {services.map((service) => (

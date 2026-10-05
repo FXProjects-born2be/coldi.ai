@@ -3,12 +3,7 @@ export type Plan =
       id: 'outbound';
       price: string;
       features: {
-        id:
-          | 'strategy-setup'
-          | 'dynamic-scripting'
-          | 'campaign-hours'
-          | 'infrastructure'
-          | 'performance-tracking';
+        id: 'strategy-setup' | 'dynamic-scripting' | 'campaign-hours';
         icon: string;
       }[];
     }
@@ -27,7 +22,7 @@ export type Plan =
     };
 
 export type Service = {
-  id: 'custom-ai' | 'quality-control' | 'voip' | 'implementation';
+  id: 'custom-ai' | 'quality-control' | 'voip';
   bg: string;
   hoverBg: string;
 };
@@ -40,18 +35,16 @@ export type ProcessStep = {
 export const plans: Plan[] = [
   {
     id: 'outbound',
-    price: '$0.40',
+    price: '$1,500',
     features: [
       { id: 'strategy-setup', icon: '/icons/pricing/carbon_ai-agent-invocation.svg' },
-      { id: 'dynamic-scripting', icon: '/icons/pricing/ix_code-ai.svg' },
       { id: 'campaign-hours', icon: '/icons/pricing/mdi_clock-star-four-points-outline.svg' },
-      { id: 'infrastructure', icon: '/icons/pricing/boxicons_globe-alt.svg' },
-      { id: 'performance-tracking', icon: '/icons/pricing/ix_piechart-ai.svg' },
+      { id: 'dynamic-scripting', icon: '/icons/pricing/ix_code-ai.svg' },
     ],
   },
   {
     id: 'inbound',
-    price: '$500',
+    price: '$0',
     features: [
       { id: 'action-oriented', icon: '/icons/pricing/hugeicons_ai-magic.svg' },
       { id: 'crm-integration', icon: '/icons/pricing/hugeicons_ai-folder-01.svg' },
@@ -77,11 +70,6 @@ export const services: Service[] = [
     id: 'voip',
     bg: '/images/pricing/services-three-bg.png',
     hoverBg: '/images/pricing/services-three-hover-bg.png',
-  },
-  {
-    id: 'implementation',
-    bg: '/images/pricing/services-four-bg.png',
-    hoverBg: '/images/pricing/services-four-hover-bg.png',
   },
 ];
 
