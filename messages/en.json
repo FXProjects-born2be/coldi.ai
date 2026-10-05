@@ -4,10 +4,7 @@
     "titleLine2": "Built for the Next Generation of",
     "subtitle": "Production-ready AI voice agents, fully managed from day one.",
     "phrases": {
-      "insuranceBrokers": "Insurance Brokers",
-      "tradingPlatforms": "Trading Platforms",
-      "debtCollection": "Debt Collection",
-      "salesTeams": "Sales Teams"
+      "insuranceBrokers": "FinTech Projects"
     }
   },
   "BookDemo": {
@@ -2485,7 +2482,7 @@
     "badge": "Interview",
     "title": "How AI Voice Agents Are Transforming Sales | Coldi on Israel’s Economy Channel",
     "description": {
-      "first": "What does it really take to transform sales and customer engagement over the phone with AI? Coldi founders Ilia Ronin and Or Or Goldshmidt joined Israel’s Economy Channel to discuss how AI voice agents are changing the way businesses communicate with their customers.",
+      "first": "What does it really take to transform sales and customer engagement over the phone with AI? Coldi founders Ilia Ronin and Or Goldshmidt joined Israel’s Economy Channel to discuss how AI voice agents are changing the way businesses communicate with their customers.",
       "second": "In this interview, they explore how Coldi helps companies handle high-volume customer interactions, reduce operational costs, engage and qualify leads at scale, and empower human sales teams to focus on building relationships and closing deals.",
       "third": "They also share insights from Coldi’s journey and discuss the growing role of voice AI in sales and customer engagement."
     },

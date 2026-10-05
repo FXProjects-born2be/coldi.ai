@@ -130,21 +130,33 @@
   }
 }
 
+//@keyframes hero-title-span {
+//  0% {
+//    clip-path: inset(0 100% 0 0);
+//  }
+//
+//  42% {
+//    clip-path: inset(0 0 0 0);
+//  }
+//
+//  68% {
+//    clip-path: inset(0 0 0 0);
+//  }
+//
+//  100% {
+//    clip-path: inset(0 100% 0 0);
+//  }
+//}
+
 @keyframes hero-title-span {
   0% {
     clip-path: inset(0 100% 0 0);
   }
-
   42% {
     clip-path: inset(0 0 0 0);
   }
-
-  68% {
-    clip-path: inset(0 0 0 0);
-  }
-
   100% {
-    clip-path: inset(0 100% 0 0);
+    clip-path: inset(0 0 0 0);
   }
 }
 
