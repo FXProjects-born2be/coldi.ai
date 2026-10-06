@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
 
@@ -12,6 +13,7 @@ import { IconHearDots } from '@/shared/ui/icons/IconHearDots';
 import { IconHearTimer } from '@/shared/ui/icons/IconHearTimer';
 import { IconHearWaveform } from '@/shared/ui/icons/IconHearWaveform';
 
+import { transcripts } from './data';
 import st from './HomeHearVoice.module.scss';
 
 import { Link } from '@/i18n/navigation';
@@ -78,6 +80,8 @@ export const HomeHearVoice = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isSelectOpen, setIsSelectOpen] = useState(false);
+  const [isTranscriptOpen, setIsTranscriptOpen] = useState(false);
+  const [currentMessageIndex, setCurrentMessageIndex] = useState<number | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const selectRef = useRef<HTMLDivElement>(null);
 
@@ -96,10 +100,14 @@ export const HomeHearVoice = () => {
     if (isSame) {
       stopAudio();
       setActiveIndex(null);
+      setIsTranscriptOpen(false);
+      setCurrentMessageIndex(null);
       return;
     }
 
     setActiveIndex(index);
+    setIsTranscriptOpen(false);
+    setCurrentMessageIndex(null);
 
     if (audio && item.audio) {
       audio.src = item.audio;
@@ -117,6 +125,8 @@ export const HomeHearVoice = () => {
     if (activeIndex !== null && activeIndex !== index) {
       stopAudio();
       setActiveIndex(null);
+      setIsTranscriptOpen(false);
+      setCurrentMessageIndex(null);
     }
   };
 
@@ -144,9 +154,51 @@ export const HomeHearVoice = () => {
 
   const selectedVoice = voices[selectedIndex] ?? voices[0];
 
+  const activeTranscript = useMemo(
+    () => (activeIndex !== null ? (transcripts[voices[activeIndex].id] ?? []) : []),
+
+    [activeIndex]
+  );
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleTimeUpdate = () => {
+      const currentTime = audio.currentTime;
+
+      const index = activeTranscript.findIndex(
+        (message) => currentTime >= message.start && currentTime < message.end
+      );
+
+      setCurrentMessageIndex(index === -1 ? null : index);
+    };
+
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+
+    return () => {
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, [activeTranscript]);
+
+  useEffect(() => {
+    document.body.classList.toggle('overflow-hidden', isTranscriptOpen);
+
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [isTranscriptOpen]);
+
   return (
     <section className={st.home_hear_voice}>
-      <audio ref={audioRef} onEnded={() => setActiveIndex(null)} preload="none" />
+      <audio
+        ref={audioRef}
+        onEnded={() => {
+          setActiveIndex(null);
+          setCurrentMessageIndex(null);
+        }}
+        preload="none"
+      />
       <div className="container">
         <div className={st.home_hear_voice__top}>
           <h2 className={st.home_hear_voice__title}>{t('title')}</h2>
@@ -234,16 +286,26 @@ export const HomeHearVoice = () => {
               >
                 {activeIndex === index ? (
                   <>
-                    {t('pause')}
+                    <span>{t('pause')}</span>
                     <IconCarbonPauseFilled />
                   </>
                 ) : (
                   <>
-                    {t('play')}
+                    <span>{t('play')}</span>
                     <IconEntypoControllerPlay />
                   </>
                 )}
               </button>
+
+              {activeIndex === index && (
+                <button
+                  type="button"
+                  className={st.home_hear_voice__item_transcript}
+                  onClick={() => setIsTranscriptOpen(true)}
+                >
+                  See Transcript
+                </button>
+              )}
             </li>
           ))}
         </ul>
@@ -253,6 +315,94 @@ export const HomeHearVoice = () => {
             {t('exploreProducts')}
           </Link>
         </div>
+
+        {isTranscriptOpen && activeIndex !== null && (
+          <div
+            className={st.home_hear_voice__modal}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Transcript"
+          >
+            <div className={st.home_hear_voice__modal_overlay}>
+              <div className={st.home_hear_voice__modal_content}>
+                <button
+                  type="button"
+                  className={st.home_hear_voice__modal_close}
+                  aria-label="Close transcript"
+                  onClick={() => setIsTranscriptOpen(false)}
+                >
+                  <Image
+                    src="/icons/material-symbols_close-rounded.svg"
+                    width={24}
+                    height={24}
+                    alt="Icon"
+                  />
+                </button>
+
+                <div className={st.home_hear_voice__modal_grid}>
+                  {/* LEFT */}
+                  <div className={st.home_hear_voice__modal_left}>
+                    <div className={cn(st.home_hear_voice__item, st.selected, st.playing)}>
+                      <div>
+                        <h3 className={st.home_hear_voice__item_title}>
+                          {t(`items.${voices[activeIndex].id}.title`)}
+                        </h3>
+
+                        <p className={st.home_hear_voice__item_subtitle}>
+                          {t(`items.${voices[activeIndex].id}.subtitle`)}
+                        </p>
+                      </div>
+
+                      <HearVisual id={voices[activeIndex].id} active />
+
+                      <button
+                        type="button"
+                        className={cn('btn btn-secondary', st.home_hear_voice__item_btn)}
+                        onClick={() => togglePlay(activeIndex)}
+                      >
+                        <span>{t('pause')}</span>
+                        <IconCarbonPauseFilled />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* RIGHT */}
+                  <div className={st.home_hear_voice__modal_right}>
+                    <div className={st.home_hear_voice__transcript}>
+                      {activeTranscript.map((message, index) => (
+                        <div
+                          key={index}
+                          className={cn(
+                            st.home_hear_voice__transcript_message_wrapper,
+
+                            message.speaker === 'client'
+                              ? st.home_hear_voice__transcript_client
+                              : st.home_hear_voice__transcript_coldi
+                          )}
+                        >
+                          {message.speaker === 'client' ? (
+                            <Image src="/icons/speaking.svg" width={25} height={25} alt="Icon" />
+                          ) : (
+                            <Image src="/icons/logo-short.svg" width={26} height={25} alt="Icon" />
+                          )}
+
+                          <p
+                            className={cn(
+                              st.home_hear_voice__transcript_message,
+                              currentMessageIndex === index && st.active
+                            )}
+                          >
+                            {message.text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
