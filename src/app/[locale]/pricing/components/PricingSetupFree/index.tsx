@@ -19,7 +19,7 @@ const items = [
   },
 ] as const;
 
-export default async function PricingSetupFree() {
+export async function PricingSetupFree() {
   const t = await getTranslations('PricingSetupFree');
 
   return (

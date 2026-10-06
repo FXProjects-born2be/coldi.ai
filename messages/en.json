@@ -1,10 +1,13 @@
 {
   "Hero": {
     "titleLine1": "AI Workforce",
-    "titleLine2": "Built for the Next Generation of",
+    "titleLine2": "Built for the Next Generation of FinTech Projects",
     "subtitle": "Production-ready AI voice agents, fully managed from day one.",
     "phrases": {
-      "insuranceBrokers": "FinTech Projects"
+      "insuranceBrokers": "Insurance Brokers",
+      "tradingPlatforms": "Trading Platforms",
+      "debtCollection": "Debt Collection",
+      "salesTeams": "Sales Teams"
     }
   },
   "BookDemo": {

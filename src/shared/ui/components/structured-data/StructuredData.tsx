@@ -2,10 +2,11 @@ import Script from 'next/script';
 
 type StructuredDataProps = {
   id?: string;
-  type:
+  type?:
     | 'Organization'
     | 'WebSite'
     | 'Product'
+    | 'Service'
     | 'Article'
     | 'NewsArticle'
     | 'BreadcrumbList'
@@ -16,7 +17,7 @@ type StructuredDataProps = {
 export const StructuredData = ({ id, type, data }: StructuredDataProps) => {
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': type,
+    ...(type ? { '@type': type } : {}),
     ...data,
   };
 
@@ -27,7 +28,7 @@ export const StructuredData = ({ id, type, data }: StructuredDataProps) => {
 
   return (
     <Script
-      id={id ?? `structured-data-${type.toLowerCase()}`}
+      id={id ?? `structured-data-${type?.toLowerCase() ?? 'graph'}`}
       type="application/ld+json"
       dangerouslySetInnerHTML={{
         __html: serializedStructuredData,
