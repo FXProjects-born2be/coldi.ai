@@ -125,7 +125,7 @@ export const MeetTeamGrid = async () => {
                 {member.image ? (
                   <Image
                     src={member.image}
-                    alt={imageAlt('meettheteam')}
+                    alt={t(`imageAlts.${member.id}`)}
                     width={348}
                     height={348}
                     className={st.meet_team_grid__img}

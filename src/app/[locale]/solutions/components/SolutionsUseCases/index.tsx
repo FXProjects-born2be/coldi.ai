@@ -87,7 +87,7 @@ export const SolutionsUseCases = () => {
                 <div className={st.solutions_use_cases__card_image}>
                   <Image
                     src={'/images/solutions/cases-bg.jpg'}
-                    alt={'Image'}
+                    alt={t(`items.${item.id}.imageAlt`)}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className={'-z-1'}

@@ -14,6 +14,7 @@ import st from './HomeManaged.module.scss';
 
 type ManagedTabImage = {
   src: string;
+  altId: string;
 };
 
 type ManagedTab = {
@@ -27,12 +28,15 @@ const tabs: ManagedTab[] = [
     image: [
       {
         src: '/images/home/managed-one-main.svg',
+        altId: 'main',
       },
       {
         src: '/images/home/managed-one-sub-one.png',
+        altId: 'sub-one',
       },
       {
         src: '/images/home/managed-one-sub-two.png',
+        altId: 'sub-two',
       },
     ],
   },
@@ -41,12 +45,15 @@ const tabs: ManagedTab[] = [
     image: [
       {
         src: '/images/home/managed-two.svg',
+        altId: 'main',
       },
       {
         src: '/images/home/managed-two-sub-one.png',
+        altId: 'sub-one',
       },
       {
         src: '/images/home/managed-two-sub-two.png',
+        altId: 'sub-two',
       },
     ],
   },
@@ -55,9 +62,11 @@ const tabs: ManagedTab[] = [
     image: [
       {
         src: '/images/home/managed-three.png',
+        altId: 'main',
       },
       {
         src: '/images/home/managed-two-three-one.png',
+        altId: 'sub-one',
       },
     ],
   },
@@ -66,12 +75,15 @@ const tabs: ManagedTab[] = [
     image: [
       {
         src: '/images/home/managed-five.svg',
+        altId: 'main',
       },
       {
         src: '/images/home/managed-fives-sub-one.png',
+        altId: 'sub-one',
       },
       {
         src: '/images/home/managed-fives-sub-two.png',
+        altId: 'sub-two',
       },
     ],
   },
@@ -80,9 +92,11 @@ const tabs: ManagedTab[] = [
     image: [
       {
         src: '/images/home/managed-four.svg',
+        altId: 'main',
       },
       {
         src: '/images/home/managed-four-sub-one.png',
+        altId: 'sub-one',
       },
     ],
   },
@@ -101,13 +115,13 @@ const rotateClockwise = (order: number[], slot: number) => {
 const ManagedVisualImages = ({
   tabId,
   images,
-  alt,
+  getAlt,
   viewLabel,
   onPreview,
 }: {
   tabId: string;
   images: ManagedTabImage[];
-  alt: string;
+  getAlt: (altId: string) => string;
   viewLabel: string;
   onPreview: (image: ManagedTabImage) => void;
 }) => {
@@ -156,7 +170,7 @@ const ManagedVisualImages = ({
           >
             <Image
               src={image.src}
-              alt={alt}
+              alt={getAlt(image.altId)}
               fill
               sizes="(max-width: 1024px) 50vw, 720px"
               loading="lazy"
@@ -177,6 +191,7 @@ export const HomeManaged = () => {
   const activeTab = tabs.find((tab) => tab.id === activeId) ?? tabs[0];
   const activeTitle = t(`tabs.${activeTab.id}.title`);
   const activeDescription = t(`tabs.${activeTab.id}.description`);
+  const getImageAlt = (altId: string) => t(`tabs.${activeTab.id}.images.${altId}`);
 
   useEffect(() => {
     if (!autoPlay) return;
@@ -273,7 +288,7 @@ export const HomeManaged = () => {
                 key={activeTab.id}
                 tabId={activeTab.id}
                 images={activeTab.image}
-                alt={activeTitle}
+                getAlt={getImageAlt}
                 viewLabel={t('viewScreenshot', { title: activeTitle })}
                 onPreview={setPreview}
               />
@@ -298,7 +313,7 @@ export const HomeManaged = () => {
                     className={st.home_managed__preview_image}
                     onClick={(event) => event.stopPropagation()}
                   >
-                    <Image src={preview.src} alt={activeTitle} />
+                    <Image src={preview.src} alt={getImageAlt(preview.altId)} />
                   </div>
                   <button
                     type="button"

@@ -170,10 +170,9 @@ export const SolutionsInfo = () => {
             <Image
               className={st.solutions_info__visual_bg}
               src="/images/solutions/solutions-info-bg.png"
-              alt=""
+              alt={t(`visual.bgAlt.${activeId}`)}
               fill
               sizes="(max-width: 1024px) 100vw, 592px"
-              aria-hidden
             />
             {activeId === 'insurance' && (
               <div

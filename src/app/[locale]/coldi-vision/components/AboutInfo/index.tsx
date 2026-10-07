@@ -173,7 +173,7 @@ export const AboutInfo = () => {
                 <div className={st.about_info__img}>
                   <Image
                     src={block.image}
-                    alt={title}
+                    alt={t(`blocks.${block.id}.imageAlt`)}
                     fill
                     sizes="(max-width: 1024px) 100vw, 40vw"
                   />

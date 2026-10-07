@@ -39,37 +39,44 @@
     "blocks": {
       "phone-capacity": {
         "title": "The Phone Still Runs on Human Capacity",
-        "description": "The average call center handles over 4,000 calls per month, yet many still miss dozens daily due to overload. Traditional call centers can no longer keep up. Delayed responses, dropped calls, and overwhelmed agents lead to missed opportunities and lost revenue. AI is no longer an innovation - it's a necessity."
+        "description": "The average call center handles over 4,000 calls per month, yet many still miss dozens daily due to overload. Traditional call centers can no longer keep up. Delayed responses, dropped calls, and overwhelmed agents lead to missed opportunities and lost revenue. AI is no longer an innovation - it's a necessity.",
+        "imageAlt": "Donut chart illustrating AI automation impact, highlighting calls saved from human intervention alongside monthly cost savings and agent hours saved"
       },
       "work-in-business": {
         "title": "We Make AI Work in Your Business",
         "description": "Many companies offer AI call center tools. Few take responsibility for making them actually work. Coldi is not a plug-and-play solution that performs miracles on its own. To bring results, it needs to be trained, configured, and integrated - and that’s exactly what our team does for you.",
-        "secondDescription": "From the first call to ongoing optimization, we handle the operational side of voice AI."
+        "secondDescription": "From the first call to ongoing optimization, we handle the operational side of voice AI.",
+        "imageAlt": "Process flowchart illustrating Coldi’s 4-step deployment process from AI Training to Flow Configuration, Integration, and Launch"
       },
       "workflow": {
         "title": "AI That Fits Your Existing Workflow",
         "description": "AI should fit into your workflow, not replace it. Coldi is built to work with the tools your team already uses - calendars, CRMs, ticketing systems, or booking tools. No extra platforms, no tech headaches. We prioritize practical deployment, not technical complexity.",
-        "secondDescription": "Your systems stay in place. Coldi adds the voice layer."
+        "secondDescription": "Your systems stay in place. Coldi adds the voice layer.",
+        "imageAlt": "Integration diagram illustrating compatibility with existing platforms including HubSpot, Zendesk, Salesforce, and Google Calendar"
       },
       "operations": {
         "title": "Built by People Who Understand Operations",
         "description": "Coldi isn’t just software - it’s supported by a team that knows how real business works. We make sure AI fits into your workflow and helps you get things done.",
-        "secondDescription": "We don’t just give you an AI agent. We make it work."
+        "secondDescription": "We don’t just give you an AI agent. We make it work.",
+        "imageAlt": "Live call monitor interface showing active dialogue between a customer and Coldi AI alongside live duration and call quality metrics"
       },
       "global": {
         "title": "Voice AI Ready for Global Operations",
         "description": "Coldi operates managed telephony infrastructure across dozens of countries, with localized calling capabilities and support for 30+ languages. You can connect Coldi to your existing telephony provider or use Coldi’s infrastructure.",
-        "secondDescription": "We manage the technical layer so your team can focus on the conversations and workflows that matter."
+        "secondDescription": "We manage the technical layer so your team can focus on the conversations and workflows that matter.",
+        "imageAlt": "Global operations graphic displaying localized active calls across international regions on a world map dotted grid"
       },
       "purpose": {
         "label": "Our Purpose",
         "title": "Make Voice AI Work in the Real World",
-        "description": "Our mission is clear: to transform large-scale business communication into measurable outcomes. We deploy and manage AI voice solutions that eliminate operational friction and guarantee consistent quality in every second of interaction."
+        "description": "Our mission is clear: to transform large-scale business communication into measurable outcomes. We deploy and manage AI voice solutions that eliminate operational friction and guarantee consistent quality in every second of interaction.",
+        "imageAlt": "Process diagram illustrating AI-Driven Growth, tracing a flow from Input through AI processing to verified Output"
       },
       "vision": {
         "label": "Our Vision",
         "title": "Make Business Calling Easier to Scale",
-        "description": "We aim to become the global standard for the managed communication layer. We envision a future where the integration between human strategy and artificial intelligence is so seamless that technology isn't just a tool, but an invisible engine of high-efficiency growth."
+        "description": "We aim to become the global standard for the managed communication layer. We envision a future where the integration between human strategy and artificial intelligence is so seamless that technology isn't just a tool, but an invisible engine of high-efficiency growth.",
+        "imageAlt": "Global scalability graphic showing an \"AI System Core\" node surrounded by international flag icons orbiting a dotted globe grid"
       }
     }
   },
@@ -79,17 +86,20 @@
       "languages": {
         "label": "30+ languages",
         "title": "Your Rules",
-        "description": "Agents follow your scripts, logic, qualification criteria, and escalation rules."
+        "description": "Agents follow your scripts, logic, qualification criteria, and escalation rules.",
+        "imageAlt": "Feature card labeled \"30+ languages\" displaying language chips with national flags including French, English, Spanish, Japanese, German, Chinese, and Portuguese"
       },
       "telephony": {
         "label": "Global telephony",
         "title": "Your Systems",
-        "description": "Coldi connects to your CRM, calendar, telephony, APIs, and business tools."
+        "description": "Coldi connects to your CRM, calendar, telephony, APIs, and business tools.",
+        "imageAlt": "Feature card titled \"Global telephony\" showing server region nodes for New York, Frankfurt, and Singapore on a world map with sub-10ms latency"
       },
       "availability": {
         "label": "24/7 availability",
         "title": "Your Calls",
-        "description": "Inbound, outbound, follow-ups, qualification, booking, and reactivation."
+        "description": "Inbound, outbound, follow-ups, qualification, booking, and reactivation.",
+        "imageAlt": "Feature card titled \"24/7 availability\" displaying an automated lead processing timeline with average speed and success rate metrics"
       }
     }
   },
@@ -141,6 +151,21 @@
       "paul-samosuyk": "Analyst",
       "olha-koreva": "Customer Success Manager",
       "larysa-byshenko": "Finance Manager"
+    },
+    "imageAlts": {
+      "or-gold": "3D character portrait of Co-Founder wearing a black Coldi t-shirt",
+      "ilia-ron": "3D character portrait of Co-Founder wearing a black Coldi t-shirt",
+      "yosi-stern": "3D character portrait of CTO wearing a black Coldi t-shirt",
+      "serhii-zhakhovskyi": "3D character portrait of Partnerships & Growth Manager wearing a black Coldi t-shirt",
+      "vladyslav-kachanov": "3D character portrait of AI Tech Specialist wearing a black Coldi t-shirt",
+      "oleksandr-romashko": "3D character portrait of AI Tech Specialist wearing a black Coldi t-shirt",
+      "ihor-zhabokrytskyi": "3D character portrait of Head of IT Department wearing a black Coldi t-shirt",
+      "iryna-mykolenko": "3D character portrait of Operations Teamleader wearing a black Coldi t-shirt",
+      "alina-denysenko": "3D character portrait of Quality Control wearing a black Coldi t-shirt",
+      "nikita-kurdybailo": "3D character portrait of Operations Specialist wearing a black Coldi t-shirt",
+      "paul-samosuyk": "3D character portrait of Analyst wearing a black Coldi t-shirt",
+      "olha-koreva": "3D character portrait of Customer Success Manager wearing a black Coldi t-shirt",
+      "larysa-byshenko": "3D character portrait of Finance Manager wearing a black Coldi t-shirt"
     }
   },
   "MeetTeamInfoDrive": {
@@ -787,23 +812,46 @@
     "tabs": {
       "calls": {
         "title": "Calls",
-        "description": "View call activity, duration, outcomes, and call details."
+        "description": "View call activity, duration, outcomes, and call details.",
+        "images": {
+          "main": "Coldi platform analytics dashboard header displaying top-level metrics like total calls, answer rate, transfers, call duration, and hourly call volume heatmaps.",
+          "sub-one": "Bar chart showing the distribution of call durations categorized from under 10 seconds up to over 5 minutes.",
+          "sub-two": "Donut chart breakdown of call outcomes including voicemails, transfers, and callbacks for 2,830 total calls."
+        }
       },
       "analytics": {
         "title": "Analytics",
-        "description": "Track call results, response rates, and key performance metrics."
+        "description": "Track call results, response rates, and key performance metrics.",
+        "images": {
+          "main": "Coldi analytics dashboard displaying campaign metrics, lead funnel statistics, and a daily conversions over time bar graph.",
+          "sub-one": "Donut chart showing technical outcome breakdowns for 529,010 total calls, including answered calls, voicemails, no answers, and provider errors.",
+          "sub-two": "Stacked bar chart showing lead progression across multiple call attempts, tracking human answers, voicemails, and completed outcomes."
+        }
       },
       "agents": {
         "title": "Agents",
-        "description": "Configure agents, calling settings, scripts, and workflows."
+        "description": "Configure agents, calling settings, scripts, and workflows.",
+        "images": {
+          "main": "Coldi agent configuration interface featuring Opening Message controls—such as setting caller speech delay thresholds in seconds—and a list of detected dynamic variables like first name and lead hook type.",
+          "sub-one": "Reactivation script editor in the Coldi platform displaying system prompt parameters, including identity profiling, role definitions, opening messages, and dynamic advisor name variable mappings."
+        }
       },
       "leads": {
         "title": "Leads",
-        "description": "Track leads generated and captured from your calling campaigns."
+        "description": "Track leads generated and captured from your calling campaigns.",
+        "images": {
+          "main": "Coldi telephony management dashboard showing registered phone numbers, SIP trunks, number health indicators (such as Suspended, Problematic, or Healthy), usage type, and linked campaign allocations.",
+          "sub-one": "A visual report titled \"Lead Funnel\" showing sequential lead processing stages, including 669 uploaded, 669 called, 512 completed, and 157 failed lead outcomes."
+        }
       },
       "campaign-performance": {
         "title": "Campaign Performance",
-        "description": "Monitor overall campaign results, efficiency, and outcomes."
+        "description": "Monitor overall campaign results, efficiency, and outcomes.",
+        "images": {
+          "main": "Coldi campaign analytics call log displaying detailed record rows including call direction, anonymized phone numbers, status tags (such as Completed Positive), transfers, talk durations, and timestamps.",
+          "sub-one": "Coldi call summary card showing \"Key Details\" including call duration (1m 16s), voicemail status, positive lead sentiment, user hangup disconnection reason, lead interest flags, and campaign name.",
+          "sub-two": "A visual chart titled \"Duration Distribution\" illustrating call volume broken down by call length intervals, showing a high concentration in the 0–10 second category."
+        }
       }
     }
   },
@@ -848,6 +896,13 @@
     "prevTab": "Previous tab",
     "nextTab": "Next tab",
     "visual": {
+      "bgAlt": {
+        "insurance": "Insurance solution layout showing AI voice bot use cases alongside a Coldi.ai architectural workflow diagram.",
+        "trading": "Trading platforms solution layout featuring AI voice bot use cases alongside system status indicators for API integrations, verification flows, and telephony.",
+        "debt": "Debt collection solution layout displaying AI bot use cases alongside an AI triage engine workflow diagram.",
+        "emi": "Digital banking solution layout displaying AI bot use cases alongside a step-by-step deployment timeline flow.",
+        "other": "Cross-industry solutions layout displaying AI bot use cases for Healthcare, Real Estate, E-commerce, Hospitality, and Education alongside a Coldi.ai core management diagram."
+      },
       "managedBy": "Managed by Coldi.ai",
       "telephony": "Telephony Infrastructure",
       "api": "API Integrations",
@@ -1023,17 +1078,20 @@
       "clickomi": {
         "caption": "Digital Advertising\nAgency",
         "title": "Digital Advertising Agency",
-        "description": "Coldi AI agent calls hot leads, qualifies interest, checks whether the call center is open, and either transfers the lead to a live specialist or books a suitable time automatically."
+        "description": "Coldi AI agent calls hot leads, qualifies interest, checks whether the call center is open, and either transfers the lead to a live specialist or books a suitable time automatically.",
+        "imageAlt": "Case study preview card for Digital Advertising Agency featuring AI lead qualification and live specialist transfers"
       },
       "payset": {
         "caption": "Multi-Currency Payments\nPlatform",
         "title": "Multi-Currency Payments Platform",
-        "description": "Coldi AI agent calls new leads, identifies those ready to speak with a specialist, checks real-time availability, and books the callback directly into the calendar."
+        "description": "Coldi AI agent calls new leads, identifies those ready to speak with a specialist, checks real-time availability, and books the callback directly into the calendar.",
+        "imageAlt": "Coldi platform use case preview featuring text about the Multi-Currency Payments Platform and its automated call booking"
       },
       "stone": {
         "caption": "Residential Electrical\nContractor",
         "title": "Residential Electrical Contractor",
-        "description": "AI answers inbound calls, identifies emergencies, validates the service area, captures job details, and either transfers urgent cases or books an available appointment."
+        "description": "AI answers inbound calls, identifies emergencies, validates the service area, captures job details, and either transfers urgent cases or books an available appointment.",
+        "imageAlt": "Coldi platform use case preview card for a Residential Electrical Contractor describing inbound emergency handling and appointment scheduling"
       }
     }
   },
@@ -1402,8 +1460,8 @@
       "tabsAria": "Implementations",
       "exploreCta": "Explore Full Case",
       "handlesTitle": "Coldi handles",
-      "workflowAlt": "The workflow",
-      "integrationAlt": "Integration: Google Sheets connected",
+      "workflowAlt": "Process flow diagram showing the 6-step AI campaign workflow from lead database to human sales team handoff",
+      "integrationAlt": "AI voice agent Integration card showing a connected Google Sheets status badge",
       "prevItem": "Previous implementation",
       "nextItem": "Next implementation",
       "cases": {

@@ -35,7 +35,7 @@ export const AboutHandles = async () => {
                 <div className={st.about_handles__picture}>
                   <Image
                     src={item.image}
-                    alt={t(`items.${item.id}.title`)}
+                    alt={t(`items.${item.id}.imageAlt`)}
                     fill
                     sizes="(max-width: 1024px) 100vw, 33vw"
                   />
