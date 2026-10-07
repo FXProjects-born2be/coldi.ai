@@ -128,12 +128,12 @@ export default function PricingPage() {
       />
 
       <PricingHero />
-      <PricingSetupFree />
       <PricingPlans />
-      <PricingSpecializedServices />
       <PricingChooseMinutes />
+      <PricingSetupFree />
       <PricingProcess />
       <PricingHowWorks />
+      <PricingSpecializedServices />
       <PricingContact />
     </main>
   );

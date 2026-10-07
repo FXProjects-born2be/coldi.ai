@@ -1,12 +1,11 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .pricing_services {
-  padding-top: 40px;
-  padding-bottom: 80px;
-  background: #fafafa;
+  padding-block: 60px;
+  background: #FAFAFA;
 
   @include tablet {
-    padding-bottom: 40px;
+    padding-block: 40px;
   }
 
   &__title {

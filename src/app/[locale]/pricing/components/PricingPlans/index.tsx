@@ -47,56 +47,54 @@ export const PricingPlans = () => {
               key={plan.id}
               className={cn(st.pricing_plans__card, plan.id === activeId && st.active)}
             >
-              <div className={st.pricing_plans__inner}>
-                <div className={st.pricing_plans__inner_top}>
-                  <Image
-                    className={st.pricing_plans__inner_top_bg}
-                    src="/images/pricing/plans-bg.jpg"
-                    alt="Image"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 476px"
-                    aria-hidden
-                  />
-                  <div>
-                    <div className={st.pricing_plans__inner_top_wrapper}>
-                      <p className={st.pricing_plans__inner_label}>{t(`plans.${plan.id}.label`)}</p>
-                      {t(`plans.${plan.id}.badge`) && (
-                        <div className={st.pricing_plans__inner_badge_wrapper}>
-                          <p className={st.pricing_plans__inner_badge}>
-                            {t(`plans.${plan.id}.badge`)}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                    <h2 className={st.pricing_plans__title}>{t(`plans.${plan.id}.title`)}</h2>
-                    {t(`plans.${plan.id}.subtitle`) && (
-                      <p className={st.pricing_plans__subtitle}>{t(`plans.${plan.id}.subtitle`)}</p>
+              <div className={st.pricing_plans__inner_top}>
+                <Image
+                  className={st.pricing_plans__inner_top_bg}
+                  src="/images/pricing/plans-bg.jpg"
+                  alt="Image"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 476px"
+                  aria-hidden
+                />
+                <div>
+                  <div className={st.pricing_plans__inner_top_wrapper}>
+                    <p className={st.pricing_plans__inner_label}>{t(`plans.${plan.id}.label`)}</p>
+                    {t(`plans.${plan.id}.badge`) && (
+                      <div className={st.pricing_plans__inner_badge_wrapper}>
+                        <p className={st.pricing_plans__inner_badge}>
+                          {t(`plans.${plan.id}.badge`)}
+                        </p>
+                      </div>
                     )}
                   </div>
-                  <div className={st.pricing_plans__price}>
-                    <div className={st.pricing_plans__price_line}>
-                      <span className={st.pricing_plans__price_value}>{plan.price}</span>
-                      <span className={st.pricing_plans__price_suffix}>
-                        {t(`plans.${plan.id}.priceSuffix`)}
-                      </span>
-                    </div>
-                    <p className={st.pricing_plans__price_label}>{t(`plans.${plan.id}.eyebrow`)}</p>
-                  </div>
+                  <h2 className={st.pricing_plans__title}>{t(`plans.${plan.id}.title`)}</h2>
+                  {t(`plans.${plan.id}.subtitle`) && (
+                    <p className={st.pricing_plans__subtitle}>{t(`plans.${plan.id}.subtitle`)}</p>
+                  )}
                 </div>
-
-                <ul className={st.pricing_plans__features}>
-                  {plan.features.map((feature) => (
-                    <li key={feature.id} className={st.pricing_plans__feature}>
-                      <div className={st.pricing_plans__icon}>
-                        <Image src={feature.icon} alt="" width={24} height={24} loading={'lazy'} />
-                      </div>
-                      <p className={st.pricing_plans__feature_text}>
-                        {t(`plans.${plan.id}.features.${feature.id}`)}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
+                <div className={st.pricing_plans__price}>
+                  <div className={st.pricing_plans__price_line}>
+                    <span className={st.pricing_plans__price_value}>{plan.price}</span>
+                    <span className={st.pricing_plans__price_suffix}>
+                      {t(`plans.${plan.id}.priceSuffix`)}
+                    </span>
+                  </div>
+                  <p className={st.pricing_plans__price_label}>{t(`plans.${plan.id}.eyebrow`)}</p>
+                </div>
               </div>
+
+              <ul className={st.pricing_plans__features}>
+                {plan.features.map((feature) => (
+                  <li key={feature.id} className={st.pricing_plans__feature}>
+                    <div className={st.pricing_plans__icon}>
+                      <Image src={feature.icon} alt="" width={24} height={24} loading={'lazy'} />
+                    </div>
+                    <p className={st.pricing_plans__feature_text}>
+                      {t(`plans.${plan.id}.features.${feature.id}`)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

@@ -22,7 +22,7 @@
     margin-bottom: 20px;
     text-align: center;
 
-    @include mobile-up {
+    @include desktop {
       display: none;
     }
   }
@@ -64,8 +64,11 @@
     border: 0.5px solid rgba(0, 0, 0, 0.20);
     background: #FFF;
     padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
 
-    @include mobile {
+    @include tablet {
       display: none;
 
       &.active {
@@ -78,11 +81,9 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    min-height: 295px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 32px;
     border-radius: 8px;
     background: #F6F6F6;
     padding: 20px;
@@ -93,8 +94,9 @@
       z-index: 1;
     }
 
-    @include mobile {
-      min-height: 254px;
+    @include tablet {
+      min-height: 295px;
+      margin-bottom: 32px;
     }
   }
 
@@ -139,7 +141,7 @@
 
   &__title {
     color: #000;
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 400;
     line-height: 1.2;
     transition: color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
@@ -185,16 +187,8 @@
     transition: color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  &__features {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: flex-start;
-    gap: 24px;
-
-    @include mobile {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
+  &__features>*:not(:last-child) {
+    margin-bottom: 16px;
   }
 
   &__feature {
@@ -207,6 +201,9 @@
     padding: 12px;
     border-radius: 4px;
     background: #F6F6F6;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
   }
 
   &__feature_text {
@@ -234,7 +231,7 @@
     color: #F6F6F6;
   }
 
-  @include mobile {
+  @include tablet {
     &__card.active &__inner_top {
       box-shadow: -183.017px 0 50.958px 0 rgba(66, 104, 255, 0.00), -116.987px 0 46.651px 0 rgba(66, 104, 255, 0.01), -66.03px 0 39.474px 0 rgba(66, 104, 255, 0.03), -29.426px 0 29.426px 0 rgba(66, 104, 255, 0.06), -7.177px 0 15.79px 0 rgba(66, 104, 255, 0.06);
     }

@@ -288,3 +288,8 @@
         justify-content: center;
     }
 }
+
+:global(.page-pricing) .footer,
+:global(.page-pricing) .footer__inner {
+    background: #FAFAFA;
+}

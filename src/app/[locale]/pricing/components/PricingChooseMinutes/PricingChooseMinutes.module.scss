@@ -1,12 +1,20 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .pricing_choose_minutes {
-  padding-block: 60px;
-  border-radius: 8px;
-  background: #F6F6F6;
+  padding-top: 60px;
 
   @include tablet {
-    padding-block: 20px;
+    padding-top: 40px;
+  }
+
+  &__inner {
+    background: #F6F6F6;
+    padding: 40px 60px;
+    border-radius: 8px;
+
+    @include tablet {
+      padding: 20px;
+    }
   }
 
   &__title {
@@ -34,6 +42,7 @@
 
     @include mobile {
       grid-template-columns: 1fr;
+      margin-bottom: 20px;
     }
 
     @media (min-width: 768px) and (max-width: 1024px) {
@@ -43,13 +52,46 @@
     }
   }
 
+  &__slider {
+    display: none;
+
+    @include mobile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__slider_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 143px;
+    border-radius: 999px;
+    border: 0.5px solid transparent;
+    padding: 11px 23px;
+    background: #fff;
+
+    &.can_scroll {
+      border-color: rgba(0, 0, 0, 0.20);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+  }
+
   &__card {
     display: flex;
     flex-direction: column;
     border-radius: 8px;
     border: 1px solid rgba(12, 16, 33, 0.05);
     background: #FAFAFA;
-    padding: 4px 4px 10px 4px;
+    padding: 4px;
     position: relative;
     z-index: 1;
 
@@ -58,18 +100,21 @@
       z-index: -1;
       border-radius: inherit;
     }
+
+    @include mobile {
+      display: none;
+
+      &.active {
+        display: flex;
+      }
+    }
   }
 
   &__card_inner {
     border-radius: 8px;
     background: #FFF;
     padding: 20px;
-    min-height: 194px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
-
 
   &__card_badge {
     padding: 4px 8px;
@@ -111,13 +156,20 @@
     padding: 10px 20px;
   }
 
+  &__descriptions {
+    max-width: 800px;
+    margin: auto;
+  }
+
   &__description {
     color: #000;
     text-align: center;
     font-size: 20px;
     font-weight: 400;
     line-height: 140%;
-    max-width: 800px;
-    margin: auto;
+
+    @include mobile {
+      font-size: 16px;
+    }
   }
 }

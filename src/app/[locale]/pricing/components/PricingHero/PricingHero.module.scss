@@ -27,9 +27,9 @@
   &__video {
     position: absolute;
     left: 0;
-    top: -118%;
+    top: -50%;
     width: 100%;
-    height: 220%;
+    height: 180%;
     object-fit: cover;
     z-index: -1;
   }
@@ -40,24 +40,103 @@
     font-size: 64px;
     font-weight: 400;
     line-height: 1.2;
-    margin-bottom: 10px;
+    margin-bottom: 60px;
 
     @include tablet {
       font-size: 40px;
+      margin-bottom: 40px;
     }
   }
 
-  &__desc {
-    color: #50556B;
-    text-align: center;
-    font-size: 28px;
-    font-weight: 400;
-    line-height: 1.2;
-    max-width: 800px;
-    margin-inline: auto;
+  &__row {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    row-gap: 28px;
+
+    @include desktop {
+      grid-template-columns: 245px 63px 235px 85px 237px;
+    }
 
     @include tablet {
-      font-size: 16px;
+      &>*:nth-child(1) {
+        max-width: 245px;
+        width: 100%;
+      }
+
+      &>*:nth-child(3) {
+        max-width: 235px;
+        width: 100%;
+      }
+
+      &>*:nth-child(5) {
+        max-width: 237px;
+        width: 100%;
+      }
     }
+  }
+
+  &__item {
+    padding: 10px 14px;
+    border-radius: 50.395px;
+    border: 1px solid #4268FF;
+    background: #FFF;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 64px;
+    position: relative;
+
+    @include tablet {
+      margin: auto;
+    }
+  }
+
+  &__item_icon {
+    position: relative;
+    flex: 0 0 19px;
+    height: 19px;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__item_description {
+    color: #0C1021;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%;
+  }
+
+  &__item_connector,
+  &__item_connector {
+    width: 100%;
+    height: 8px;
+    position: relative;
+
+    @include tablet {
+      display: none;
+    }
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__item_connector_mobile {
+    position: absolute;
+    width: 306px;
+    height: 99px;
+    right: -33px;
+    top: 50%;
+
+    @include desktop {
+      display: none;
+    }
+  }
+
+  &__item_connector_mobile_second {
+    width: 301px;
   }
 }

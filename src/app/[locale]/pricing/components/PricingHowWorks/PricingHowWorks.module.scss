@@ -2,7 +2,7 @@
 
 .pricing_how_works {
   padding-block: 60px;
-  background: linear-gradient(180deg, #F6F6F6 0%, #FFF 100%);
+  background: #FAFAFA;
 
   @include tablet {
     padding-block: 40px;
@@ -53,6 +53,10 @@
     position: relative;
     z-index: 1;
     transition: all .3s ease-in-out;
+
+    &:hover {
+      background: #fff;
+    }
 
     @include tablet {
       padding: 28px;

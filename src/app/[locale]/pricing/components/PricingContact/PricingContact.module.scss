@@ -1,7 +1,7 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
 .pricing_contact {
-  padding-top: 80px;
+  background: #FAFAFA;
   overflow: hidden;
 
   @include tablet {

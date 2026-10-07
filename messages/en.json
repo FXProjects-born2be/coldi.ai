@@ -570,7 +570,12 @@
   },
   "PricingHero": {
     "title": "Coldi AI Voice Agent Pricing",
-    "description": "Every lead called within seconds, 24/7. Qualified, recorded and logged in your CRM automatically."
+    "iconAlt": "Icon",
+    "steps": {
+      "plan": "Choose your plan (Managed / Self-Service)",
+      "minutes": "Choose your call minutes",
+      "integrations": "Choose your integrations"
+    }
   },
   "PricingPlans": {
     "tabsAria": "Pricing plans",
@@ -587,8 +592,10 @@
         "priceSuffix": "/per month",
         "features": {
           "strategy-setup": "We run and optimise your campaigns",
+          "script-adjustments": "Up to 3 script adjustments per month",
           "campaign-hours": "Weekly performance report",
-          "dynamic-scripting": "Up to 3 script adjustments per month Dedicated account manager"
+          "success-manager": "Dedicated success manager & Direct channel support",
+          "campaign-logic": "Designing campaign logic and legal retry hours"
         }
       },
       "inbound": {
@@ -611,6 +618,7 @@
     }
   },
   "PricingSetupFree": {
+    "mainTitle": "Choose Your Integrations",
     "title": "Setup Fee",
     "includesTitle": "It includes:",
     "iconAlt": "Icon",
@@ -656,7 +664,12 @@
   },
   "PricingChooseMinutes": {
     "title": "Choose Your Call Minutes",
-    "description": "Includes call recording, transcripts, CRM logging and analytics dashboard. Larger volumes on request.",
+    "prevStep": "Previous minutes package",
+    "nextStep": "Next minutes package",
+    "descriptions": {
+      "includes": "Includes call recording, transcripts, CRM logging and analytics dashboard.",
+      "volumes": "Larger volumes on request."
+    },
     "steps": {
       "infrastructure": {
         "title": "15,000",
@@ -665,14 +678,12 @@
         "price": "$6,000 "
       },
       "script": {
-        "badge": "10% OFF",
         "title": "20,000",
         "titleSmall": "min",
         "description": "$0.36 per minute",
         "price": "$7,200"
       },
       "launch": {
-        "badge": "10% OFF",
         "title": "30,000",
         "titleSmall": "min",
         "description": "$0.32 per minute",

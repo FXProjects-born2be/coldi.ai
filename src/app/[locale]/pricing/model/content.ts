@@ -3,7 +3,12 @@ export type Plan =
       id: 'outbound';
       price: string;
       features: {
-        id: 'strategy-setup' | 'dynamic-scripting' | 'campaign-hours';
+        id:
+          | 'strategy-setup'
+          | 'script-adjustments'
+          | 'campaign-hours'
+          | 'success-manager'
+          | 'campaign-logic';
         icon: string;
       }[];
     }
@@ -38,8 +43,10 @@ export const plans: Plan[] = [
     price: '$1,500',
     features: [
       { id: 'strategy-setup', icon: '/icons/pricing/carbon_ai-agent-invocation.svg' },
+      { id: 'script-adjustments', icon: '/icons/pricing/ix_code-ai.svg' },
       { id: 'campaign-hours', icon: '/icons/pricing/mdi_clock-star-four-points-outline.svg' },
-      { id: 'dynamic-scripting', icon: '/icons/pricing/ix_code-ai.svg' },
+      { id: 'success-manager', icon: '/icons/pricing/plan-one.svg' },
+      { id: 'campaign-logic', icon: '/icons/pricing/ebene_2.svg' },
     ],
   },
   {
