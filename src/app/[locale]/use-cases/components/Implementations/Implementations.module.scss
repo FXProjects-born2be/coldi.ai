@@ -76,18 +76,33 @@
   background: #f6f6f6;
 }
 
-.content {
-  display: flex;
+.contents {
+  display: grid;
   flex: 1;
+  min-width: 0;
+}
+
+.content {
+  grid-area: 1 / 1;
+  display: flex;
   flex-direction: column;
   gap: 40px;
   min-width: 0;
-  animation: fade-in 0.35s ease;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
 
   @include tablet {
     gap: 20px;
     width: 100%;
   }
+}
+
+.contentActive {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+  animation: fade-in 0.35s ease;
 }
 
 .contentTop {

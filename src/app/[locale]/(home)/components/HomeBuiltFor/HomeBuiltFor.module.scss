@@ -108,13 +108,27 @@
     }
   }
 
+  &__panels {
+    display: grid;
+  }
+
   &__panel {
+    grid-area: 1 / 1;
     display: grid;
     column-gap: 24px;
     padding: 40px;
     border-radius: 14px;
     border: 1px solid rgba(0, 0, 0, 0.20);
     background: #FFF;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+
+    &.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
 
     @include desktop {
       grid-template-columns: 1fr 1.47676fr;
@@ -122,6 +136,17 @@
 
     @include tablet {
       padding: 20px;
+    }
+  }
+
+  &__visual_static {
+    padding: 24px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 1.4;
+
+    p + p {
+      margin-top: 12px;
     }
   }
 

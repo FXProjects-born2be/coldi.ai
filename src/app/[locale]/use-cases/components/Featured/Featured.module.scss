@@ -100,7 +100,12 @@
   display: none;
 }
 
+.cards {
+  display: grid;
+}
+
 .card {
+  grid-area: 1 / 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -111,6 +116,15 @@
     0 0 0.5px rgba(0, 0, 0, 0.4),
     0 1px 0.5px rgba(0, 0, 0, 0.04),
     0 2px 2px rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cardActive {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
   animation: fade-in 0.35s ease;
 }
 

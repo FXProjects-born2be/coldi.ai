@@ -28,8 +28,8 @@
 
   &__image {
     position: relative;
-    opacity: 0;
-    scale: 0.7;
+    opacity: 1;
+    scale: 1;
 
     @include tablet {
       max-width: 150px;
@@ -37,7 +37,12 @@
     }
   }
 
-  &.in_view &__image {
+  &.tabs_ready:not(.in_view) &__image {
+    opacity: 0;
+    scale: 0.7;
+  }
+
+  &.tabs_ready.in_view &__image {
     animation: image-scale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
@@ -144,7 +149,7 @@
   }
 
   &__items {
-    opacity: 0;
+    opacity: 1;
 
     @include desktop {
       & > *:not(:last-child) {
@@ -160,7 +165,11 @@
     }
   }
 
-  &.in_view &__items {
+  &.tabs_ready:not(.in_view) &__items {
+    opacity: 0;
+  }
+
+  &.tabs_ready.in_view &__items {
     animation: items-opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
@@ -249,7 +258,7 @@
   }
 
   &__content {
-    opacity: 0;
+    opacity: 1;
     display: grid;
     padding: 32px 40px 32px 32px;
     border-radius: 20px;
@@ -259,14 +268,18 @@
     align-self: start;
   }
 
-  &.in_view &__content:has(.active) {
+  &.tabs_ready:not(.in_view) &__content {
+    opacity: 0;
+  }
+
+  &.tabs_ready.in_view &__content:has(.active) {
     animation: tab-fade-in 0.35s ease forwards;
   }
 
   &__content_panel {
     grid-area: 1 / 1;
     opacity: 0;
-    visibility: hidden;
+    pointer-events: none;
     transition: opacity 0.2s ease;
 
     & > *:not(:last-child) {
@@ -277,7 +290,7 @@
 
     &.active {
       opacity: 1;
-      visibility: visible;
+      pointer-events: auto;
       animation: none;
     }
   }
@@ -337,10 +350,13 @@
     &.in_view &__icon_circle_mobile_two,
     &.in_view &__icon_circle_mobile_three,
     &.in_view &__icon_circle_mobile_four,
-    &.in_view &__items,
-    &.in_view &__content,
-    &.in_view &__content:has(.active),
-    &.in_view &__image {
+    &.tabs_ready:not(.in_view) &__items,
+    &.tabs_ready:not(.in_view) &__content,
+    &.tabs_ready:not(.in_view) &__image,
+    &.tabs_ready.in_view &__items,
+    &.tabs_ready.in_view &__content,
+    &.tabs_ready.in_view &__content:has(.active),
+    &.tabs_ready.in_view &__image {
       animation: none;
       opacity: 1;
       translate: 0;

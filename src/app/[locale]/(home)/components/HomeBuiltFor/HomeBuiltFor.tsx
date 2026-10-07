@@ -342,46 +342,68 @@ export const HomeBuiltFor = () => {
           </button>
         </div>
 
-        <div className={st.home_built_for__panel}>
-          <h3 className={st.home_built_for__content_title}>{industryLabel}</h3>
+        <div className={st.home_built_for__panels}>
+          {industries.map((item) => {
+            const isActive = item.id === industry.id;
+            const label = t(`industries.${item.id}.label`);
 
-          <div className={st.home_built_for__content_items}>
-            {industry.workflows.map((item) => (
-              <div key={item.id} className={st.home_built_for__content_item}>
-                <div className={st.home_built_for__content_item_image}>
-                  <Image src={item.icon} alt="Icon" width={20} height={20} />
+            return (
+              <div
+                key={item.id}
+                className={cn(st.home_built_for__panel, isActive && st.active)}
+                aria-hidden={!isActive}
+              >
+                <h3 className={st.home_built_for__content_title}>{label}</h3>
+
+                <div className={st.home_built_for__content_items}>
+                  {item.workflows.map((workflow) => (
+                    <div key={workflow.id} className={st.home_built_for__content_item}>
+                      <div className={st.home_built_for__content_item_image}>
+                        <Image src={workflow.icon} alt="" width={20} height={20} />
+                      </div>
+                      <p className={st.home_built_for__content_item_title}>
+                        {t(`industries.${item.id}.workflows.${workflow.id}`)}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-                <p className={st.home_built_for__content_item_title}>
-                  {t(`industries.${industry.id}.workflows.${item.id}`)}
-                </p>
+
+                <Link
+                  href={item.href}
+                  className={cn('btn btn-primary w-max', st.home_built_for__cta)}
+                  tabIndex={isActive ? undefined : -1}
+                >
+                  {t(`industries.${item.id}.cta`)}
+                </Link>
+
+                <div
+                  className={cn(st.home_built_for__visual, st.home_built_for__visual_handles)}
+                  style={
+                    {
+                      '--home-built-for-visual-bg': `url("${item.handles.background}")`,
+                    } as CSSProperties
+                  }
+                >
+                  {isActive ? (
+                    <HomeBuiltForHandlesVisual
+                      key={item.id}
+                      speakingLabel={t('speaking')}
+                      firstText={t(`industries.${item.id}.handles.firstText`)}
+                      secondText={t(`industries.${item.id}.handles.secondText`)}
+                      answer={t(`industries.${item.id}.handles.answer`)}
+                      visual={item.handles.visual}
+                    />
+                  ) : (
+                    <div className={st.home_built_for__visual_static}>
+                      <p>{t(`industries.${item.id}.handles.firstText`)}</p>
+                      <p>{t(`industries.${item.id}.handles.secondText`)}</p>
+                      <p>{t(`industries.${item.id}.handles.answer`)}</p>
+                    </div>
+                  )}
+                </div>
               </div>
-            ))}
-          </div>
-
-          <Link
-            href={industry.href}
-            className={cn('btn btn-primary w-max', st.home_built_for__cta)}
-          >
-            {t(`industries.${industry.id}.cta`)}
-          </Link>
-
-          <div
-            className={cn(st.home_built_for__visual, st.home_built_for__visual_handles)}
-            style={
-              {
-                '--home-built-for-visual-bg': `url("${industry.handles.background}")`,
-              } as CSSProperties
-            }
-          >
-            <HomeBuiltForHandlesVisual
-              key={industry.id}
-              speakingLabel={t('speaking')}
-              firstText={t(`industries.${industry.id}.handles.firstText`)}
-              secondText={t(`industries.${industry.id}.handles.secondText`)}
-              answer={t(`industries.${industry.id}.handles.answer`)}
-              visual={industry.handles.visual}
-            />
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
@@ -68,6 +68,14 @@ type TabId = (typeof items)[number]['id'];
 const AUTOPLAY_ENABLED = true;
 const AUTOPLAY_MS = 5000;
 
+const emptySubscribe = () => () => undefined;
+const useIsClient = () =>
+  useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+
 const connectors = [
   { id: items[0].id, className: st.home_what_do__icon_circle_one, Icon: IconCirclePartRoundedTop },
   {
@@ -113,6 +121,7 @@ const mobileConnectors = [
 export const HomeWhatCanDo = () => {
   const t = useTranslations('HomeWhatCanDo');
   const rowRef = useRef<HTMLDivElement>(null);
+  const isClient = useIsClient();
   const [inView, setInView] = useState(false);
   const [activeId, setActiveId] = useState<TabId>(items[0].id);
   const [userPausedAutoplay, setUserPausedAutoplay] = useState(false);
@@ -154,7 +163,7 @@ export const HomeWhatCanDo = () => {
   };
 
   return (
-    <section className={cn(st.home_what_do, inView && st.in_view, st.tabs_ready)}>
+    <section className={cn(st.home_what_do, inView && st.in_view, isClient && st.tabs_ready)}>
       <div className="container">
         <h2 className={st.home_what_do__title}>{t('title')}</h2>
 
@@ -213,25 +222,30 @@ export const HomeWhatCanDo = () => {
           </div>
 
           <div className={st.home_what_do__content}>
-            {items.map((item) => (
-              <div
-                key={item.id}
-                role="tabpanel"
-                className={cn(st.home_what_do__content_panel, activeId === item.id && st.active)}
-              >
-                <p className={st.home_what_do__content_title}>{t(`columns.${item.id}`)}</p>
-                {item.list.map((itemList) => (
-                  <div key={itemList.id} className={st.home_what_do__content_item}>
-                    <div className={st.home_what_do__content_item_icon}>
-                      <IconCheck />
+            {items.map((item) => {
+              const isActive = activeId === item.id;
+
+              return (
+                <div
+                  key={item.id}
+                  role="tabpanel"
+                  aria-hidden={!isActive}
+                  className={cn(st.home_what_do__content_panel, isActive && st.active)}
+                >
+                  <p className={st.home_what_do__content_title}>{t(`columns.${item.id}`)}</p>
+                  {item.list.map((itemList) => (
+                    <div key={itemList.id} className={st.home_what_do__content_item}>
+                      <div className={st.home_what_do__content_item_icon}>
+                        <IconCheck />
+                      </div>
+                      <p className={st.home_what_do__content_item_title}>
+                        {t(`items.${itemList.id}`)}
+                      </p>
                     </div>
-                    <p className={st.home_what_do__content_item_title}>
-                      {t(`items.${itemList.id}`)}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            ))}
+                  ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

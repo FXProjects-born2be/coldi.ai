@@ -112,56 +112,67 @@ export const UseCasesFeatured = () => {
           })}
         </div>
 
-        <article
-          className={st.card}
-          key={active.id}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          <div className={st.top}>
-            <div className={st.intro}>
-              <h2 className={st.title}>{t(`cases.${active.id}.title`)}</h2>
-              <Link href={active.href} className={st.cta}>
-                {t('exploreCta')}
-              </Link>
-            </div>
+        <div className={st.cards}>
+          {FEATURED_CASES.map((item, index) => {
+            const isActive = index === activeIndex;
 
-            <div className={st.story}>
-              <div className={st.storyCard}>
-                <p className={st.storyLabel}>{t('painLabel')}</p>
-                <p className={st.storyText}>{t(`cases.${active.id}.pain`)}</p>
-              </div>
-              <div className={st.storyCard}>
-                <p className={st.storyLabel}>{t('solutionLabel')}</p>
-                <p className={st.storyText}>{t(`cases.${active.id}.solution`)}</p>
-              </div>
-            </div>
-          </div>
+            return (
+              <article
+                key={item.id}
+                className={cn(st.card, isActive && st.cardActive)}
+                aria-hidden={!isActive}
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
+              >
+                <div className={st.top}>
+                  <div className={st.intro}>
+                    <h2 className={st.title}>{t(`cases.${item.id}.title`)}</h2>
+                    <Link href={item.href} className={st.cta} tabIndex={isActive ? undefined : -1}>
+                      {t('exploreCta')}
+                    </Link>
+                  </div>
 
-          <div className={st.results}>
-            <p className={st.resultsTitle}>{t('resultsTitle')}</p>
-            <div className={st.metrics}>
-              {active.results.map((metric, index) => (
-                <div key={metric.labelKey} className={st.metric}>
-                  <p
-                    className={cn(
-                      st.metricValue,
-                      index === highlightIndex && st.metricValueHighlight
-                    )}
-                  >
-                    <span>{metric.value}</span>
-                    {metric.suffixKey ? (
-                      <span className={st.metricSuffix}>{t(`suffixes.${metric.suffixKey}`)}</span>
-                    ) : null}
-                  </p>
-                  <p className={st.metricLabel}>
-                    {t(`cases.${active.id}.results.${metric.labelKey}`)}
-                  </p>
+                  <div className={st.story}>
+                    <div className={st.storyCard}>
+                      <p className={st.storyLabel}>{t('painLabel')}</p>
+                      <p className={st.storyText}>{t(`cases.${item.id}.pain`)}</p>
+                    </div>
+                    <div className={st.storyCard}>
+                      <p className={st.storyLabel}>{t('solutionLabel')}</p>
+                      <p className={st.storyText}>{t(`cases.${item.id}.solution`)}</p>
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </article>
+
+                <div className={st.results}>
+                  <p className={st.resultsTitle}>{t('resultsTitle')}</p>
+                  <div className={st.metrics}>
+                    {item.results.map((metric, metricIndex) => (
+                      <div key={metric.labelKey} className={st.metric}>
+                        <p
+                          className={cn(
+                            st.metricValue,
+                            isActive && metricIndex === highlightIndex && st.metricValueHighlight
+                          )}
+                        >
+                          <span>{metric.value}</span>
+                          {metric.suffixKey ? (
+                            <span className={st.metricSuffix}>
+                              {t(`suffixes.${metric.suffixKey}`)}
+                            </span>
+                          ) : null}
+                        </p>
+                        <p className={st.metricLabel}>
+                          {t(`cases.${item.id}.results.${metric.labelKey}`)}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

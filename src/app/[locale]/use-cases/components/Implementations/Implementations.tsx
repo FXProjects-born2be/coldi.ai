@@ -62,72 +62,90 @@ export const UseCasesImplementations = () => {
             })}
           </div>
 
-          <div className={st.content} key={active.id}>
-            <div className={st.contentTop}>
-              <div className={st.copy}>
-                <div className={st.copyText}>
-                  <h3 className={st.title}>{t(`cases.${active.id}.title`)}</h3>
-                  <p className={st.description}>{t(`cases.${active.id}.description`)}</p>
+          <div className={st.contents}>
+            {IMPLEMENTATIONS.map((item) => {
+              const isActive = item.id === active.id;
+
+              return (
+                <div
+                  key={item.id}
+                  className={cn(st.content, isActive && st.contentActive)}
+                  aria-hidden={!isActive}
+                >
+                  <div className={st.contentTop}>
+                    <div className={st.copy}>
+                      <div className={st.copyText}>
+                        <h3 className={st.title}>{t(`cases.${item.id}.title`)}</h3>
+                        <p className={st.description}>{t(`cases.${item.id}.description`)}</p>
+                      </div>
+                      <Link
+                        href={item.href}
+                        className={st.cta}
+                        tabIndex={isActive ? undefined : -1}
+                      >
+                        {t('exploreCta')}
+                      </Link>
+                    </div>
+
+                    <div className={st.handles}>
+                      <p className={st.handlesTitle}>{t('handlesTitle')}</p>
+                      <ul className={st.handlesList}>
+                        {item.handles.map((handle) => (
+                          <li key={handle.labelKey} className={st.handleItem}>
+                            <span className={st.handleIcon}>
+                              <Image src={handle.icon} alt="" width={24} height={24} unoptimized />
+                            </span>
+                            <span className={st.handleLabel}>
+                              {t(`cases.${item.id}.handles.${handle.labelKey}`)}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {isActive ? (
+                    <div className={st.visuals}>
+                      <div className={st.workflow}>
+                        <Image
+                          src={workflowDesktopSrc}
+                          alt={t('workflowAlt')}
+                          width={624}
+                          height={300}
+                          className={cn(st.cardImage, st.cardImageDesktop)}
+                        />
+                        <Image
+                          src={workflowMobileSrc}
+                          alt={t('workflowAlt')}
+                          width={318}
+                          height={549}
+                          className={cn(st.cardImage, st.cardImageMobile)}
+                        />
+                      </div>
+
+                      <div className={st.integration}>
+                        <Image
+                          src={integrationDesktopSrc}
+                          alt={t('integrationAlt')}
+                          width={576}
+                          height={600}
+                          className={cn(st.cardImage, st.cardImageDesktop)}
+                          unoptimized
+                        />
+                        <Image
+                          src={integrationMobileSrc}
+                          alt={t('integrationAlt')}
+                          width={636}
+                          height={475}
+                          className={cn(st.cardImage, st.cardImageMobile)}
+                          unoptimized
+                        />
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
-                <Link href={active.href} className={st.cta}>
-                  {t('exploreCta')}
-                </Link>
-              </div>
-
-              <div className={st.handles}>
-                <p className={st.handlesTitle}>{t('handlesTitle')}</p>
-                <ul className={st.handlesList}>
-                  {active.handles.map((handle) => (
-                    <li key={handle.labelKey} className={st.handleItem}>
-                      <span className={st.handleIcon}>
-                        <Image src={handle.icon} alt="" width={24} height={24} unoptimized />
-                      </span>
-                      <span className={st.handleLabel}>
-                        {t(`cases.${active.id}.handles.${handle.labelKey}`)}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className={st.visuals}>
-              <div className={st.workflow}>
-                <Image
-                  src={workflowDesktopSrc}
-                  alt={t('workflowAlt')}
-                  width={624}
-                  height={300}
-                  className={cn(st.cardImage, st.cardImageDesktop)}
-                />
-                <Image
-                  src={workflowMobileSrc}
-                  alt={t('workflowAlt')}
-                  width={318}
-                  height={549}
-                  className={cn(st.cardImage, st.cardImageMobile)}
-                />
-              </div>
-
-              <div className={st.integration}>
-                <Image
-                  src={integrationDesktopSrc}
-                  alt={t('integrationAlt')}
-                  width={576}
-                  height={600}
-                  className={cn(st.cardImage, st.cardImageDesktop)}
-                  unoptimized
-                />
-                <Image
-                  src={integrationMobileSrc}
-                  alt={t('integrationAlt')}
-                  width={636}
-                  height={475}
-                  className={cn(st.cardImage, st.cardImageMobile)}
-                  unoptimized
-                />
-              </div>
-            </div>
+              );
+            })}
           </div>
 
           <div className={st.mobileNav}>
