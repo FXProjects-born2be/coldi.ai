@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { getTranslations } from 'next-intl/server';
 
@@ -43,7 +44,12 @@ export async function PricingSetupFree() {
                 <span>{t('priceRange')}</span>
                 {t('priceLabel')}
               </p>
-              <p className={st.pricing_setup_free__right_description}>{t('priceDescription')}</p>
+              <div className={st.pricing_setup_free__right_bottom}>
+                <p className={st.pricing_setup_free__right_description}>{t('priceDescription')}</p>
+                <Link href="/calendar" className="btn btn-secondary">
+                  {t('link')}
+                </Link>
+              </div>
             </div>
           </div>
 

@@ -42,10 +42,14 @@ export const PricingPlans = () => {
         </div>
 
         <div className={st.pricing_plans__grid}>
-          {plans.map((plan) => (
+          {plans.map((plan, index) => (
             <div
               key={plan.id}
-              className={cn(st.pricing_plans__card, plan.id === activeId && st.active)}
+              className={cn(
+                st.pricing_plans__card,
+                plan.id === activeId && st.active,
+                index === 0 && st.featured
+              )}
             >
               <div className={st.pricing_plans__inner_top}>
                 <Image

@@ -632,7 +632,8 @@
     "priceDescription": "The setup fee is based on your campaign requirements and applies to both plans.",
     "creditLabel": "Setup fee credit:",
     "creditBefore": "The full setup fee is returned as call credit once you reach",
-    "creditHighlight": "30,000 minutes of usage"
+    "creditHighlight": "30,000 minutes of usage",
+    "link": "Get a Quote"
   },
   "SpecializedServices": {
     "title": "Additional Services & Custom Pricing",

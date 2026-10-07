@@ -142,6 +142,7 @@
         font-size: 16px;
         font-weight: 400;
         line-height: 140%;
+        max-width: 460px;
 
         @include mobile {
             font-size: 14px;
@@ -175,5 +176,13 @@
                 display: block;
             }
         }
+    }
+
+    &__right_bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 32px 10px;
     }
 }

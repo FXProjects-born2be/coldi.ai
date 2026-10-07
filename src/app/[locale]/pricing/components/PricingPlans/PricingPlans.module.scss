@@ -212,43 +212,22 @@
     line-height: 1.4;
   }
 
-  &__card:hover &__inner_top {
+  &__card.featured &__inner_top {
     box-shadow: -183.017px 0 50.958px 0 rgba(66, 104, 255, 0.00), -116.987px 0 46.651px 0 rgba(66, 104, 255, 0.01), -66.03px 0 39.474px 0 rgba(66, 104, 255, 0.03), -29.426px 0 29.426px 0 rgba(66, 104, 255, 0.06), -7.177px 0 15.79px 0 rgba(66, 104, 255, 0.06);
   }
 
-  &__card:hover &__inner_top::after,
-  &__card:hover &__inner_top_bg {
+  &__card.featured &__inner_top::after,
+  &__card.featured &__inner_top_bg {
     opacity: 1;
   }
 
-  &__card:hover &__title,
-  &__card:hover &__subtitle,
-  &__card:hover &__price_label,
-  &__card:hover &__price_value,
-  &__card:hover &__price_suffix,
-  &__card:hover &__inner_label,
-  &__card:hover  &__inner_badge {
+  &__card.featured &__title,
+  &__card.featured &__subtitle,
+  &__card.featured &__price_label,
+  &__card.featured &__price_value,
+  &__card.featured &__price_suffix,
+  &__card.featured &__inner_label,
+  &__card.featured &__inner_badge {
     color: #F6F6F6;
-  }
-
-  @include tablet {
-    &__card.active &__inner_top {
-      box-shadow: -183.017px 0 50.958px 0 rgba(66, 104, 255, 0.00), -116.987px 0 46.651px 0 rgba(66, 104, 255, 0.01), -66.03px 0 39.474px 0 rgba(66, 104, 255, 0.03), -29.426px 0 29.426px 0 rgba(66, 104, 255, 0.06), -7.177px 0 15.79px 0 rgba(66, 104, 255, 0.06);
-    }
-
-    &__card.active &__inner_top::after,
-    &__card.active &__inner_top_bg {
-      opacity: 1;
-    }
-
-    &__card.active &__title,
-    &__card.active &__subtitle,
-    &__card.active &__price_label,
-    &__card.active &__price_value,
-    &__card.active &__price_suffix,
-    &__card.active &__inner_label,
-    &__card.active  &__inner_badge {
-      color: #F6F6F6;
-    }
   }
 }
