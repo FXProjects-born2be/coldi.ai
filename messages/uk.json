@@ -689,7 +689,7 @@
     }
   },
   "PricingChooseMinutes": {
-    "title": "Оберіть кількість хвилин дзвінків",
+    "title": "Оберіть пакети хвилин",
     "prevStep": "Попередній пакет хвилин",
     "nextStep": "Наступний пакет хвилин",
     "descriptions": {
@@ -707,13 +707,15 @@
         "title": "20 000",
         "titleSmall": "хв",
         "description": "$0,36 за хвилину",
-        "price": "$7 200"
+        "price": "$7 200",
+        "badge": "10% OFF"
       },
       "launch": {
         "title": "30 000",
         "titleSmall": "хв",
         "description": "$0,32 за хвилину",
-        "price": "$9 600"
+        "price": "$9 600",
+        "badge": "20% OFF"
       }
     }
   },

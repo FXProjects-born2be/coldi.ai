@@ -153,7 +153,6 @@
     font-size: 32px;
     font-weight: 400;
     line-height: 120%;
-    padding: 10px 20px;
   }
 
   &__descriptions {
@@ -171,5 +170,24 @@
     @include mobile {
       font-size: 16px;
     }
+  }
+
+  &__card_bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 20px;
+  }
+
+  &__card_badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(227, 233, 255, 0.50);
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 140%;
   }
 }

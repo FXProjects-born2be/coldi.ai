@@ -689,7 +689,7 @@
     }
   },
   "PricingChooseMinutes": {
-    "title": "Choose Your Call Minutes",
+    "title": "Choose Your Minutes Packages",
     "prevStep": "Previous minutes package",
     "nextStep": "Next minutes package",
     "descriptions": {
@@ -701,19 +701,21 @@
         "title": "15,000",
         "titleSmall": "min",
         "description": "$0.40 per minute",
-        "price": "$6,000 "
+        "price": "$6,000"
       },
       "script": {
         "title": "20,000",
         "titleSmall": "min",
         "description": "$0.36 per minute",
-        "price": "$7,200"
+        "price": "$7,200",
+        "badge": "10% OFF"
       },
       "launch": {
         "title": "30,000",
         "titleSmall": "min",
         "description": "$0.32 per minute",
-        "price": "$9,600"
+        "price": "$9,600",
+        "badge": "20% OFF"
       }
     }
   },
