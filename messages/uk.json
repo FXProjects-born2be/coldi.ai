@@ -689,7 +689,7 @@
     }
   },
   "PricingChooseMinutes": {
-    "title": "Оберіть пакети хвилин",
+    "title": "Оберіть пакет хвилин",
     "prevStep": "Попередній пакет хвилин",
     "nextStep": "Наступний пакет хвилин",
     "descriptions": {

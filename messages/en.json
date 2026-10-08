@@ -689,7 +689,7 @@
     }
   },
   "PricingChooseMinutes": {
-    "title": "Choose Your Minutes Packages",
+    "title": "Choose Your Minutes Package",
     "prevStep": "Previous minutes package",
     "nextStep": "Next minutes package",
     "descriptions": {
