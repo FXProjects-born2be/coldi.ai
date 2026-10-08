@@ -17,8 +17,11 @@ export const PricingPlans = () => {
   const t = useTranslations('PricingPlans');
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState(plans[0]?.id);
+  const [hoveredId, setHoveredId] = useState<(typeof plans)[number]['id'] | null>(null);
 
   if (!plans.length || !activeId) return null;
+
+  const highlightedId = hoveredId ?? activeId;
 
   return (
     <section className={st.pricing_plans}>
@@ -42,14 +45,16 @@ export const PricingPlans = () => {
         </div>
 
         <div className={st.pricing_plans__grid}>
-          {plans.map((plan, index) => (
+          {plans.map((plan) => (
             <div
               key={plan.id}
               className={cn(
                 st.pricing_plans__card,
                 plan.id === activeId && st.active,
-                index === 0 && st.featured
+                plan.id === highlightedId && st.highlighted
               )}
+              onMouseEnter={() => setHoveredId(plan.id)}
+              onMouseLeave={() => setHoveredId(null)}
             >
               <div className={st.pricing_plans__inner_top}>
                 <Image
@@ -63,13 +68,13 @@ export const PricingPlans = () => {
                 <div>
                   <div className={st.pricing_plans__inner_top_wrapper}>
                     <p className={st.pricing_plans__inner_label}>{t(`plans.${plan.id}.label`)}</p>
-                    {t(`plans.${plan.id}.badge`) && (
+                    {t.has(`plans.${plan.id}.badge`) && t(`plans.${plan.id}.badge`) ? (
                       <div className={st.pricing_plans__inner_badge_wrapper}>
                         <p className={st.pricing_plans__inner_badge}>
                           {t(`plans.${plan.id}.badge`)}
                         </p>
                       </div>
-                    )}
+                    ) : null}
                   </div>
                   <h2 className={st.pricing_plans__title}>{t(`plans.${plan.id}.title`)}</h2>
                   {t(`plans.${plan.id}.subtitle`) && (
