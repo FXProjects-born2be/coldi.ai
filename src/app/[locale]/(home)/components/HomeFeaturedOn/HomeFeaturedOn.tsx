@@ -19,11 +19,11 @@ const logos: Logo[] = [
     alt: 'Yahoo! Finance',
     href: 'https://finance.yahoo.com/sectors/technology/articles/coldi-unveils-turnkey-platform-integrated-120000915.html',
   },
-  {
-    image: '/images/home/tools/logo-morningstar.svg',
-    alt: 'Morningstar',
-    href: 'https://www.morningstar.com/news/pr-newswire/20260526ln67617/coldi-unveils-turnkey-platform-for-integrated-ai-voice-agents',
-  },
+  // {
+  //   image: '/images/home/tools/logo-morningstar.svg',
+  //   alt: 'Morningstar',
+  //   href: 'https://www.morningstar.com/news/pr-newswire/20260526ln67617/coldi-unveils-turnkey-platform-for-integrated-ai-voice-agents',
+  // },
   {
     image: '/images/home/tools/logo-benzinga.svg',
     alt: 'Benzinga',
@@ -42,12 +42,12 @@ const logos: Logo[] = [
   {
     image: '/images/home/tools/logo-tms.png',
     alt: 'TMC',
-    href: ' https://www.tmcnet.com/usubmit/2026/05/26/10388420.htm',
+    href: 'https://www.tmcnet.com/usubmit/2026/05/26/10388420.htm',
   },
   {
     image: '/images/home/tools/logo-california-business-journal.svg',
     alt: 'California business journal',
-    href: ' https://calbizjournal.com/latest-tech-news/?rkey=20260526LN67617&filter=26804',
+    href: 'https://calbizjournal.com/latest-tech-news/?rkey=20260526LN67617&filter=26804',
   },
   {
     image: '/images/home/tools/all-tech-magazine-logo.svg',
