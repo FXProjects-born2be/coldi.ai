@@ -44,11 +44,11 @@ const logos: Logo[] = [
     alt: 'TMC',
     href: 'https://www.tmcnet.com/usubmit/2026/05/26/10388420.htm',
   },
-  {
-    image: '/images/home/tools/logo-california-business-journal.svg',
-    alt: 'California business journal',
-    href: 'https://calbizjournal.com/latest-tech-news/?rkey=20260526LN67617&filter=26804',
-  },
+  // {
+  //   image: '/images/home/tools/logo-california-business-journal.svg',
+  //   alt: 'California business journal',
+  //   href: 'https://calbizjournal.com/latest-tech-news/?rkey=20260526LN67617&filter=26804',
+  // },
   {
     image: '/images/home/tools/all-tech-magazine-logo.svg',
     alt: 'Tech magazine',
