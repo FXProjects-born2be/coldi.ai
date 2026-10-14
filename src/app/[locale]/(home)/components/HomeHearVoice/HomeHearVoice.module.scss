@@ -404,7 +404,7 @@
   &__transcript_message_wrapper {
     display: flex;
     gap: 6px;
-    align-items: start;
+    align-items: flex-start;
 
     img {
       flex: 0 0 34px;

@@ -9,268 +9,65 @@ export const transcripts: Record<string, TranscriptMessage[]> = {
   insurance: [
     {
       speaker: 'coldi',
-      text: 'Hey, am I talking to Luca, right?',
-      start: 3.44,
-      end: 4.62,
+      text: 'Hi, this is Kate, an AI virtual assistant from insurance. Am I speaking with.',
+      start: 0.88,
+      end: 5.64,
     },
 
     {
       speaker: 'client',
-      text: 'Yes,....',
-      start: 6.24,
-      end: 6.34,
+      text: 'Yes, you are. Hi, Kate.',
+      start: 7.34,
+      end: 8.58,
     },
 
     {
       speaker: 'coldi',
-      text: 'This is Paul Whitmore calling on behalf of. We work with freelancers and small business owners across the United Kingdom to help protect their work and income with tailored insurance. Quick question to start. Are you currently working for yourself or running a business?',
-      start: 8.96,
-      end: 21.92,
+      text: 'Thanks. I’m calling about the car insurance for your Honda Civic, which expires in 10 days. The current rate is €480 a year. Would you like to renew it?',
+      start: 10.06,
+      end: 20.12,
     },
 
     {
       speaker: 'client',
-      text: "I'm running a business.",
-      start: 24.3,
-      end: 25.3,
+      text: 'Yes, I would. Can I get some discounts maybe?',
+      start: 21.84,
+      end: 25.98,
     },
 
     {
       speaker: 'coldi',
-      text: "Awesome. Just to point you in the right direction, what industry are you in? Would you say you're more of a freelancer, contractor or small business owner?",
-      start: 27.84,
-      end: 34.68,
+      text: 'Let me check that for you. Yes… You’ve been with us for six years, so I can give you a loyalty discount of €15. Would that work for you?',
+      start: 26.82,
+      end: 35.96,
     },
 
     {
       speaker: 'client',
-      text: 'Construction contractor.',
-      start: 37.16,
-      end: 38.54,
+      text: 'Oh, that’s pretty cool. Yes, that would work. Thank you.',
+      start: 37.36,
+      end: 41.34,
     },
 
     {
       speaker: 'coldi',
-      text: 'And do you currently have any insurance in place or are you still looking?',
-      start: 40.6,
-      end: 43.18,
+      text: 'Wonderful. I’m sending you the payment link by SMS right now. Did you get it?',
+      start: 42.22,
+      end: 46.52,
     },
 
     {
       speaker: 'client',
-      text: "No, I don't have any insurance.",
-      start: 45.74,
-      end: 47.14,
+      text: 'Hold them, please. Oh, yeah, it just came through. Got it.',
+      start: 51.3,
+      end: 58.26,
     },
 
     {
       speaker: 'coldi',
-      text: 'Thanks, that helps. Want to hear what we typically offer for professionals in your space?',
-      start: 48.38,
-      end: 52.3,
-    },
-
-    {
-      speaker: 'client',
-      text: 'Okay.',
-      start: 56.58,
-      end: 56.94,
-    },
-
-    {
-      speaker: 'coldi',
-      text: "Appreciate that. So, based on what you shared, we usually recommend a mix of COVID like Professional Indemnity if you're giving advice or services, Public liability if you're dealing with clients or physical work, or Cyber Cover if you're handling data. Everything's flexible, built around your actual risks, and you only pay for what you need. Would you like to see what kind of protection would make sense in your case?",
-      start: 58.26,
-      end: 79.1,
-    },
-
-    {
-      speaker: 'client',
-      text: 'Well, first I want to know why would I need that protection? Why would I need insurance in first place?',
-      start: 81.38,
-      end: 86.22,
-    },
-
-    {
-      speaker: 'coldi',
-      text: "But if you're giving advice, dealing with clients, using equipment, or even just sending invoices, there's always risk. A single mistake or dispute could cost thousands. Insurance protects your time, income and reputation, so you're not stuck dealing with it alone. Have you ever run into an issue with a client or project that could have gone badly?",
-      start: 87.54,
-      end: 103.86,
-    },
-
-    {
-      speaker: 'client',
-      text: 'Well, yes, but it never cost me thousands of dollars.',
-      start: 106.02,
-      end: 109.04,
-    },
-
-    {
-      speaker: 'coldi',
-      text: "Appreciate that. So, based on what you shared, we usually recommend a mix of COVID like Professional Indemnity if you're giving advice or services, Public Liability if you're dealing with clients or physical work, or Cyber Cover if you're handling data. Everything's flexible, built around your actual risks and you only pay for what you need. Would you like to see what kind of protection would make sense in your case?",
-      start: 111.08,
-      end: 131.26,
-    },
-
-    {
-      speaker: 'client',
-      text: 'So this sounds like a sales call. Is it a sales call?',
-      start: 133.08,
-      end: 135.82,
-    },
-
-    {
-      speaker: 'coldi',
-      text: "I'm just here to ask a couple of questions and if it sounds useful, connect you with a licensed advisor who can explain the right options for your line of work. You're totally in control, zero pressure. Would it be alright if I asked a quick question or two to see if this even applies to you?",
-      start: 137.42,
-      end: 150.6,
-    },
-
-    {
-      speaker: 'client',
-      text: "Well, before I commit to anything, first I would like to speak with my wife, if that's okay.",
-      start: 152.2,
-      end: 156.86,
-    },
-
-    {
-      speaker: 'coldi',
-      text: 'I completely understand. Would you like me to arrange a quick call with them directly so they can get all the details firsthand?',
-      start: 157.24,
-      end: 162.78,
-    },
-
-    {
-      speaker: 'client',
-      text: 'Yes',
-      start: 163.22,
-      end: 163.24,
-    },
-
-    {
-      speaker: 'coldi',
-      text: 'Fantastic. When will be the best time to contact back.',
-      start: 163.26,
-      end: 165.4,
-    },
-
-    {
-      speaker: 'client',
-      text: 'And by the way, tell me, how did you get my number?',
-      start: 167.24,
-      end: 169.42,
-    },
-
-    {
-      speaker: 'coldi',
-      text: "We work with databases and platforms that help us connect with people who are self employed or run small businesses like yourself. It's GDPR compliant and we're simply reaching out to offer relevant cover based on your line of work. Is that something you're currently exploring?",
-      start: 171.38,
-      end: 184.58,
-    },
-
-    {
-      speaker: 'client',
-      text: "Well, you know what? I looked at it, but I didn't put anything down. I was just curious.",
-      start: 188.74,
-      end: 194.22,
-    },
-
-    {
-      speaker: 'coldi',
-      text: "Totally fair. A lot of smart people are curious, believe me. Let me ask you this. When you looked at it, did you have a sense of what it's about or was it a little unclear?",
-      start: 196.74,
-      end: 204.44,
-    },
-
-    {
-      speaker: 'client',
-      text: 'Well, not really.',
-      start: 206.66,
-      end: 207.5,
-    },
-
-    {
-      speaker: 'coldi',
-      text: "Because if it wasn't clear, that's exactly why I'm here, to give you the real picture. Explain how it works. Very simple, very powerful. Want me to break it down for you real quick?",
-      start: 209.62,
-      end: 218.1,
-    },
-
-    {
-      speaker: 'client',
-      text: 'Yes, sure.',
-      start: 219.92,
-      end: 220.4,
-    },
-
-    {
-      speaker: 'coldi',
-      text: "Appreciate that. So, based on what you shared, we usually recommend a mix of COVID like Professional Indemnity if you're giving advice or services, Public Liability if you're dealing with clients or physical work, or Cyber Cover if you're handling data. Everything's flexible, built around your actual risks and you only pay for what you need. Would you like to see what kind of protection would make sense in your case?",
-      start: 222.56,
-      end: 243.3,
-    },
-
-    {
-      speaker: 'client',
-      text: 'Yes, sure.',
-      start: 245.58,
-      end: 246.06,
-    },
-
-    {
-      speaker: 'coldi',
-      text: "Right now we've got some bundled plans that make things super simple, especially for people juggling contracts or doing multiple types of work. Most clients are surprised how affordable it can be for real protection. Would it be useful to see how we can help you set that up?",
-      start: 248.22,
-      end: 260.72,
-    },
-
-    {
-      speaker: 'client',
-      text: 'Yes.',
-      start: 263.38,
-      end: 263.68,
-    },
-
-    {
-      speaker: 'coldi',
-      text: "Here's how it works. I'll transfer you to a licensed advisor. They'll go over your setup, explain the best fit, and if it sounds good, you can activate your policy right away. Or just take the info and think about it. Shall I connect you now? It will just take a minute.",
-      start: 265.38,
-      end: 278.42,
-    },
-
-    {
-      speaker: 'client',
-      text: 'Well, first I would like to speak with my lovely wife. Can you give me a call later today, please?',
-      start: 278.56,
-      end: 283.58,
-    },
-
-    {
-      speaker: 'client',
-      text: 'Fantastic. When will be the best time to contact back?',
-      start: 284.88,
-      end: 286.92,
-    },
-
-    {
-      speaker: 'client',
-      text: "Later today at 8:00'. Clock.",
-      start: 288.84,
-      end: 290.64,
-    },
-
-    {
-      speaker: 'coldi',
-      text: 'Talk later. Bye bye.',
-      start: 292.16,
-      end: 292.9,
-    },
-
-    {
-      speaker: 'client',
-      text: 'Bye.',
-      start: 294.56,
-      end: 294.84,
+      text: 'Perfect. Thank you very much. Have a great day.',
+      start: 59.12,
+      end: 61.7,
     },
   ],
 
