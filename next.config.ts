@@ -99,8 +99,20 @@ const nextConfig: NextConfig = {
     return [
       { source: '/agents', destination: '/solutions', permanent: true },
       { source: '/uk/agents', destination: '/uk/solutions', permanent: true },
+      { source: '/products', destination: '/solutions', permanent: true },
+      { source: '/uk/products', destination: '/uk/solutions', permanent: true },
       { source: '/about', destination: '/coldi-vision', permanent: true },
       { source: '/uk/about', destination: '/uk/coldi-vision', permanent: true },
+      {
+        source: '/industries/call-center',
+        destination: '/industries',
+        permanent: true,
+      },
+      {
+        source: '/uk/industries/call-center',
+        destination: '/uk/industries',
+        permanent: true,
+      },
       { source: '/clickomi', destination: '/performance-marketing-agency', permanent: true },
       { source: '/uk/clickomi', destination: '/uk/performance-marketing-agency', permanent: true },
       { source: '/canadian-fintech', destination: '/use-cases', permanent: true },
