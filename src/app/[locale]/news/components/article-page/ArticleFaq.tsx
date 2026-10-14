@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 
-import type { ArticleFaqItem } from '../../lib';
+import { cn } from '@/shared/lib/helpers';
+
+import { type ArticleFaqItem, slugifyHeading } from '../../lib';
 import st from './ArticleFaq.module.scss';
 
 type ArticleFaqProps = {
@@ -17,28 +19,35 @@ export const ArticleFaq = ({ items }: ArticleFaqProps) => {
   return (
     <section className={st.faq}>
       <h2 id="faq" className={st.title}>
-        FAQ
+        Frequently asked questions
       </h2>
 
       <div className={st.list}>
         {items.map((item, index) => {
           const isOpen = openIndex === index;
+          const questionId = slugifyHeading(item.question);
 
           return (
-            <div key={item.question} className={st.item}>
+            <div key={item.question} id={questionId} className={st.item}>
               <button
                 type="button"
                 className={st.trigger}
                 aria-expanded={isOpen}
+                aria-controls={`${questionId}-answer`}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
               >
-                <span className={st.question}>{item.question}</span>
+                <h3 className={st.question}>{item.question}</h3>
                 <span className={st.icon} aria-hidden>
                   {isOpen ? '−' : '+'}
                 </span>
               </button>
 
-              {isOpen ? <p className={st.answer}>{item.answer}</p> : null}
+              <p
+                id={`${questionId}-answer`}
+                className={cn(st.answer, !isOpen && st.answerCollapsed)}
+              >
+                {item.answer}
+              </p>
             </div>
           );
         })}
