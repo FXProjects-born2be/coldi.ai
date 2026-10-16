@@ -759,6 +759,44 @@
       }
     }
   },
+  "PricingFaq": {
+    "title": "Frequently asked questions",
+    "lastUpdated": "Last updated: 16 October 2026",
+    "viewAll": "View all FAQ",
+    "items": {
+      "managed-vs-self-service": {
+        "question": "What is the difference between Coldi's Managed and Self-Service plans?",
+        "answer": [
+          "On the Managed plan, at $1,500 per month with a 3-month minimum, the Coldi team runs and optimizes the campaigns, designs the campaign logic and legal retry hours, makes up to 3 script adjustments per month, sends a weekly performance report and provides a dedicated success manager with a direct support channel.",
+          "On the Self-Service plan, at $0 per month with no monthly commitment, Coldi launches the first campaign with the client and trains the team, and the client then runs campaigns in the Coldi platform with email support. Both plans use the same setup fee and minute packages."
+        ]
+      },
+      "setup-fee-includes": {
+        "question": "What does the Coldi setup fee include?",
+        "answer": "The one-time setup fee of $1,500 to $3,000 depends on the campaign requirements and applies to both plans. It covers building, scripting and voicing the AI agent, integrating the CRM and telephony, and testing the agent on real leads before launch. The full setup fee is returned as call credit once the client reaches 30,000 minutes of usage."
+      },
+      "call-minutes-cost": {
+        "question": "How much do Coldi call minutes cost?",
+        "answer": "Minutes are bought in packages: 15,000 minutes for 6,000(0.40 per minute), 20,000 minutes for 7,200(0.36 per minute) or 30,000 minutes for 9,600(0.32 per minute). Every package includes call recording, transcripts, CRM logging and the analytics dashboard. Larger volumes are priced on request."
+      },
+      "self-service-use-cases": {
+        "question": "How many use cases does the Self-Service plan include?",
+        "answer": "The Self-Service plan includes up to 3 use cases. Each additional use case may carry a setup fee. Extra changes on Self-Service are billed separately."
+      },
+      "get-started": {
+        "question": "How do I get started with Coldi?",
+        "answer": "Getting started takes three steps. First, the client signs the Service Order and pays the setup fee, plan and call minutes. Second, the client completes the delivery form and provides access to the CRM, telephony and lead list within 7 days. Third, Coldi configures and tests the AI agent, and the first campaign is ready in about 7 business days."
+      },
+      "telephony-cost": {
+        "question": "How much does telephony cost with Coldi?",
+        "answer": "Coldi's Global VoIP Infrastructure provides local numbers and telephony in multiple countries, priced by region and call volume because carrier costs differ by country. Clients can also keep their own telephony provider and connect it to Coldi."
+      },
+      "services-priced-separately": {
+        "question": "Which Coldi services are priced separately?",
+        "answer": "Three services are priced to the client's requirements: Custom AI Development (custom agent architecture around the client's business logic and brand voice), AI Quality Control (automated audit of 100% of interactions) and Global VoIP Infrastructure (priced by region and volume)."
+      }
+    }
+  },
   "PricingContact": {
     "eyebrow": "Have questions?",
     "title": "Contact Coldi!",

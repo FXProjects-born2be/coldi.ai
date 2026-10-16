@@ -1,5 +1,6 @@
 export * from './PricingChooseMinutes';
 export * from './PricingContact';
+export * from './PricingFaq';
 export * from './PricingHero';
 export * from './PricingHowWorks';
 export * from './PricingPlans';

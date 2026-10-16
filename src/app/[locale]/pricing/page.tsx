@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
+import type { FaqItem } from '@/shared/lib/seo/faq';
+import { FaqStructuredData } from '@/shared/ui/components/structured-data/FaqStructuredData';
 import { ServiceStructuredData } from '@/shared/ui/components/structured-data/ServiceStructuredData';
 
 import {
   PricingChooseMinutes,
   PricingContact,
+  PricingFaq,
   PricingHero,
   PricingHowWorks,
   PricingPlans,
@@ -12,6 +16,7 @@ import {
   PricingSetupFree,
   PricingSpecializedServices,
 } from './components';
+import { PRICING_FAQ_IDS } from './components/PricingFaq/content';
 
 export const metadata: Metadata = {
   alternates: {
@@ -29,9 +34,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  const tFaq = await getTranslations('PricingFaq');
+  const faqs: FaqItem[] = PRICING_FAQ_IDS.map((id) => {
+    const answerRaw = tFaq.raw(`items.${id}.answer`);
+    const answer = Array.isArray(answerRaw) ? answerRaw.join(' ') : String(answerRaw);
+
+    return {
+      question: tFaq(`items.${id}.question`),
+      answer,
+    };
+  });
+
   return (
     <main>
+      <FaqStructuredData id="pricing-faq-jsonld" faqs={faqs} />
       <ServiceStructuredData
         id="pricing-services-structured-data"
         services={[
@@ -134,6 +151,7 @@ export default function PricingPage() {
       <PricingProcess />
       <PricingHowWorks />
       <PricingSpecializedServices />
+      <PricingFaq />
       <PricingContact />
     </main>
   );
