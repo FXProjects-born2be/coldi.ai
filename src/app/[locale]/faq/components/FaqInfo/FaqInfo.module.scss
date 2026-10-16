@@ -1,0 +1,141 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.faq_info {
+  padding-block: 40px;
+
+  &__heading {
+    margin: 0 0 8px;
+    color: #0C1021;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 120%;
+
+    @include tablet {
+      font-size: 28px;
+      text-align: left;
+    }
+  }
+
+  &__updated {
+    margin: 0 0 32px;
+    color: #50556B;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%;
+
+    @include tablet {
+      margin-bottom: 24px;
+      text-align: left;
+      font-size: 14px;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @include tablet {
+      justify-content: flex-start;
+    }
+  }
+
+  &__tab {
+    flex-shrink: 0;
+    padding: 13px 32px;
+    border-radius: 9999px;
+    border: 1px solid #2544BD;
+    background: #FFF;
+    color: #2544BD;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 150%;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &.active {
+      background: #2544BD;
+      color: #FFF;
+    }
+  }
+
+  &__content {
+    padding: 20px;
+    border-radius: 8px;
+    background: #F6F6F6;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include tablet {
+      padding: 10px;
+      gap: 24px;
+    }
+  }
+
+  &__content_title {
+    margin: 0;
+    padding: 20px;
+    color: #4268FF;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 120%;
+    scroll-margin-top: 120px;
+  }
+
+  &__content_row {
+    display: grid;
+    align-items: flex-start;
+    gap: 20px;
+    grid-template-columns: 406px 1fr;
+    scroll-margin-top: 120px;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__content_info > *:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &__content_info_item {
+    padding: 32px;
+    border-radius: 8px;
+    border: 0.5px solid rgba(0, 0, 0, 0.20);
+    background: #FFF;
+    scroll-margin-top: 120px;
+
+    @include tablet {
+      padding: 20px;
+    }
+  }
+
+  &__content_info_title {
+    margin: 0 0 16px;
+    color: #0C1021;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+
+  &__content_info_description {
+    margin: 0;
+    color: #50556B;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 140%;
+  }
+}

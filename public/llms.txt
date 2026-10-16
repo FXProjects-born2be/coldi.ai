@@ -10,6 +10,7 @@
 - [Coldi Vision](https://coldi.ai/coldi-vision): Company vision and purpose
 - [Meet the Team](https://coldi.ai/meet-the-team): Founders and team
 - [Trust Center](https://coldi.ai/trust-center): Security and compliance
+- [FAQ](https://coldi.ai/faq): Frequently asked questions about Coldi AI voice agents
 - [News](https://coldi.ai/news): Guides, comparisons, and industry insights
 - [Book a demo](https://coldi.ai/calendar): Schedule a call with Coldi
 

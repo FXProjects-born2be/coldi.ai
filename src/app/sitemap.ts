@@ -15,6 +15,7 @@ const STATIC_PATHS = [
   '/coldi-vision',
   '/meet-the-team',
   '/trust-center',
+  '/faq',
   '/news',
   '/industries',
   '/industries/debt-collection',

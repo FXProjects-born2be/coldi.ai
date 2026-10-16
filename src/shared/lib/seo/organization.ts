@@ -1,26 +1,35 @@
 export const getOrganizationStructuredData = () => ({
-  name: 'Coldi',
-  legalName: 'Coldi Labs LTD.',
+  name: 'COLDI LABS LTD',
+  legalName: 'COLDI LABS LTD',
+  brand: {
+    '@type': 'Brand',
+    name: 'Coldi',
+  },
   url: 'https://coldi.ai',
-  logo: 'https://coldi.ai/full-logo.svg',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://coldi.ai/full-logo.svg',
+  },
   description:
-    'Coldi es una plataforma de automatización e integración inteligente para empresas, conectando herramientas líderes para optimizar flujos de trabajo.',
+    'Coldi is a managed AI voice agent platform for fintech and sales teams. Coldi builds, integrates and runs AI voice agents that handle inbound and outbound calls.',
+  email: 'info@coldi.ai',
+  telephone: '+441299667777',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Yeal Man 1',
-    addressLocality: 'Tel Aviv',
-    postalCode: '4713402',
     addressCountry: 'IL',
   },
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
-    url: 'https://coldi.ai/meet-the-team',
-    availableLanguage: ['en', 'es'],
+    email: 'info@coldi.ai',
+    telephone: '+441299667777',
+    availableLanguage: ['en', 'uk'],
   },
   sameAs: [
-    'https://www.instagram.com/coldi.ai',
-    'https://www.facebook.com/coldiai',
-    'https://il.linkedin.com/company/coldiai',
+    'https://x.com/Coldiai',
+    'https://www.facebook.com/coldiai/',
+    'https://www.linkedin.com/company/coldiai/',
+    'https://www.youtube.com/@ColdiAI',
+    'https://t.me/ColdiAI',
   ],
 });

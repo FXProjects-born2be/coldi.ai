@@ -26,6 +26,7 @@ const menu = [
     links: [
       { id: 'solutions', href: '/solutions' },
       { id: 'pricing', href: '/pricing' },
+      { id: 'faq', href: '/faq' },
       { id: 'news', href: '/news' },
       { id: 'about', href: '/coldi-vision' },
       { id: 'trustCenter', href: '/trust-center' },
