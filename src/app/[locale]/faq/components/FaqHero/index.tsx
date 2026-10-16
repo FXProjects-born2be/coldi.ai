@@ -11,18 +11,20 @@ export const FaqHero = async () => {
   const t = await getTranslations('FaqHero');
 
   return (
-    <section className={cn('hero-shadow hero-shadow-two', st.legal_hero)}>
+    <section className={cn('hero-shadow hero-shadow-two', st.faq_hero)}>
       <Image
-        className={st.legal_hero__bg}
+        className={st.faq_hero__bg}
         src="/images/legal/legal-hero.jpg"
         alt="Image"
         fill
         sizes="100vw"
         aria-hidden
       />
-      <div className={cn('container', st.legal_hero__container)}>
-        <h1 className={st.legal_hero__title}>{t('title')}</h1>
-        <p className={st.legal_hero__desc}>{t('description')}</p>
+      <div className={cn('container', st.faq_hero__container)}>
+        <h1 className={st.faq_hero__title}>{t('title')}</h1>
+        <p className={st.faq_hero__desc}>{t('description')}</p>
+
+        <p className={st.faq_hero__updated}>{t('lastUpdated')}</p>
 
         <BookDemo />
       </div>

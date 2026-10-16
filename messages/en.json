@@ -2571,12 +2571,11 @@
     "metaDescription": "Get answers about how Coldi AI voice agents work, what they can automate, how they integrate with your systems, and how to get started."
   },
   "FaqHero": {
-    "title": "Coldi FAQ",
-    "description": "Find answers about Coldi’s AI voice agents, integrations, pricing, deployment, and how they handle real customer conversations."
+    "title": "Frequently Asked Questions",
+    "description": "Find answers about Coldi’s AI voice agents, integrations, pricing, deployment, and how they handle real customer conversations.",
+    "lastUpdated": "Last updated 16 October 2026"
   },
   "FaqInfo": {
-    "heading": "Frequently asked questions",
-    "lastUpdated": "Last updated 16 October 2026",
     "tabsAria": "FAQ categories",
     "sections": {
       "about-coldi": {

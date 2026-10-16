@@ -21,11 +21,6 @@ export const FaqInfo = () => {
   return (
     <section className={st.faq_info} aria-labelledby="faq">
       <div className="container">
-        <h2 id="faq" className={st.faq_info__heading}>
-          {t('heading')}
-        </h2>
-        <p className={st.faq_info__updated}>{t('lastUpdated')}</p>
-
         <div className={st.faq_info__tabs} role="tablist" aria-label={t('tabsAria')}>
           {FAQ_SECTIONS.map((section) => (
             <button

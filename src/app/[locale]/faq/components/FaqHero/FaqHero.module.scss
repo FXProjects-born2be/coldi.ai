@@ -1,6 +1,6 @@
 @use '@/shared/lib/styles/mixin.scss' as *;
 
-.legal_hero {
+.faq_hero {
   padding-top: 76px;
   text-align: center;
   position: relative;
@@ -33,12 +33,16 @@
   }
 
   &__desc {
+    margin-bottom: 12px;
+  }
+
+  &__desc,
+  &__updated {
     color: #50556B;
     font-size: 20px;
     line-height: 1.4;
     max-width: 650px;
     margin-inline: auto;
-    margin-bottom: 48px;
 
     @include tablet {
       font-size: 16px;
@@ -47,5 +51,9 @@
     @include mobileSmall {
       font-size: 16px;
     }
+  }
+
+  &__updated {
+    margin-bottom: 48px;
   }
 }
