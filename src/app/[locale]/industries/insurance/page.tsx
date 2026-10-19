@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 
 import {
   InsuranceCases,
+  InsuranceFaq,
   InsuranceHandles,
   InsuranceHero,
   InsuranceInfo,
@@ -41,6 +42,7 @@ export default function InsuranceAgentsPage() {
       <InsuranceWhy />
       <InsuranceOperations />
       <InsuranceInfo />
+      <InsuranceFaq />
     </main>
   );
 }

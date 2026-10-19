@@ -260,6 +260,32 @@
     "metaTitle": "Coldi AI Voice Agents for Insurance ",
     "metaDescription": "Optimize claims and policy renewals with Coldi’s insurance AI voice agents. Automate FNOL, quote intake, and CRM updates 24/7. Book a demo!"
   },
+  "InsuranceFaq": {
+    "title": "Frequently Asked Questions",
+    "lastUpdated": "Last updated: 16 October 2026",
+    "items": {
+      "automate-for-brokers": {
+        "question": "What can AI voice agents automate for insurance brokers?",
+        "answer": "Coldi AI voice agents handle an insurance broker's routine call load: new lead qualification, quote intake, policy and coverage questions, renewal reminders, billing and payment reminders, claim intake and claim status updates. Each call is synced to the CRM or policy management system, and complex cases go to a licensed agent."
+      },
+      "first-notice-of-loss": {
+        "question": "Can a Coldi AI agent take a first notice of loss?",
+        "answer": "Yes. A Coldi agent can take a first notice of loss (FNOL) by phone at any hour. It collects the policy number, date, location and description of the incident, confirms the caller's identity, creates the claim record and tells the policyholder what happens next. Urgent or complex claims are transferred to an adjuster."
+      },
+      "will-ai-replace-agents": {
+        "question": "Will AI replace insurance agents?",
+        "answer": "No. AI takes over the repetitive calls that fill an insurance agent's day: status checks, reminders, document chasing and first-round lead qualification. Licensed agents keep advice, coverage recommendations and closing. With Coldi, agents receive pre-qualified prospects and spend more of their time selling."
+      },
+      "renewals-and-quotes": {
+        "question": "How does Coldi help with insurance renewals and quotes?",
+        "answer": "Coldi calls policyholders before renewal dates, confirms details, flags coverage changes and books a review with an agent when needed. For new prospects, the agent collects the information a quote requires and passes a complete, qualified file to the broker, so no lead waits days for a callback."
+      },
+      "peak-claim-volume": {
+        "question": "How does Coldi handle peak claim volume after a storm or disaster?",
+        "answer": "After a large weather event, claim calls can multiply in hours. Coldi scales with call volume, so every policyholder is answered immediately, claims are taken and logged, and status updates go out proactively by phone. Adjusters receive structured claim files instead of a voicemail backlog."
+      }
+    }
+  },
   "DebtCollectionPage": {
     "metaTitle": "AI Voice Agents for Debt Collection Software",
     "metaDescription": "AI debt collection software that automates borrower communication, payment reminders, and recovery workflows. Scale credit and debit collection services with AI voice agents.",
@@ -315,6 +341,36 @@
         "audit-compliance": "You've had a recent audit, compliance incident, or regulatory pressure",
         "small-balances": "You're writing off small balances that were never worth a human agent's time",
         "agent-turnover": "Agent turnover on your hardest seat is a recurring cost"
+      }
+    }
+  },
+  "DebtCollectionFaq": {
+    "title": "Frequently Asked Questions",
+    "lastUpdated": "Last updated: 16 October 2026",
+    "items": {
+      "collection-call": {
+        "question": "What can a Coldi AI agent do on a debt collection call?",
+        "answer": "A Coldi AI collection agent verifies the borrower's identity, explains the outstanding balance, offers the payment plans the agency has approved, sends a secure payment link and confirms the repayment date. It also updates the borrower's contact details and logs the outcome to the collection system, then schedules the next reminder automatically."
+      },
+      "collection-regulations": {
+        "question": "Is AI debt collection compliant with collection regulations?",
+        "answer": "Coldi configures each collection workflow to the rules the agency operates under, such as FDCPA and Regulation F in the US. The agent verifies identity before disclosing any account detail, uses approved language, calls only within permitted hours and frequency, and records every call. Each conversation produces an audit-ready record in the CRM."
+      },
+      "transfer-to-human": {
+        "question": "When does Coldi transfer a borrower to a human collector?",
+        "answer": "Coldi routes calls to a human collector based on rules the agency sets: debt size, payment history, delinquency stage, and borrower sentiment. Disputes, hardship claims and requests to speak to a person are transferred immediately. Routine reminders and payment confirmations stay with the AI agent."
+      },
+      "pay-during-call": {
+        "question": "Can borrowers pay during the call?",
+        "answer": "Yes. When a borrower agrees to pay, the Coldi agent sends a secure payment link by SMS or email while the call is still live and can confirm when the payment goes through. If the borrower prefers a plan, the agent sets the schedule and books automatic reminders before each due date."
+      },
+      "voice-vs-sms-chat": {
+        "question": "Why use voice AI instead of SMS or chatbots for collections?",
+        "answer": "Text reminders and chatbots wait for the borrower to respond, and many never do. A Coldi voice agent calls proactively, verifies identity in real time, answers questions about the balance and negotiates a payment arrangement in one conversation. That turns a missed reminder into a repayment commitment."
+      },
+      "collection-software": {
+        "question": "Does Coldi integrate with our collection software?",
+        "answer": "Yes. Coldi connects to CRMs such as Salesforce and HubSpot, billing and payment platforms, and custom debt management systems. Account balances, payment plans and borrower history flow into the call, and every outcome, promise to pay and payment is written back automatically. The Coldi team builds the integration during setup."
       }
     }
   },
@@ -374,6 +430,28 @@
       }
     }
   },
+  "DigitalBankingFaq": {
+    "title": "Frequently Asked Questions",
+    "lastUpdated": "Last updated: 16 October 2026",
+    "items": {
+      "digital-banks-payments": {
+        "question": "What can Coldi do for digital banks and payment companies?",
+        "answer": "Coldi AI voice agents help digital banks and payment providers convert and keep customers. They call applicants who dropped off during onboarding, chase missing KYC documents, guide new customers to their first transaction, follow up on failed or pending payments and answer routine account questions. Every call is logged to the CRM, and complex cases are transferred to the operations or support team."
+      },
+      "unfinished-onboarding": {
+        "question": "Can Coldi call customers who did not finish onboarding?",
+        "answer": "Yes. Onboarding drop-off is one of Coldi's main use cases in digital banking. The Coldi agent calls each applicant within minutes of dropping off, finds out what stopped them, helps them through the next step or books a callback with a human, and records the reason in the CRM. This recovers sign-ups already paid for in marketing spend."
+      },
+      "verify-identity": {
+        "question": "How does Coldi verify a customer's identity before discussing an account?",
+        "answer": "Before discussing balances, payments or account details, the Coldi agent runs the client's verification flow, such as security questions, account detail checks or a one-time passcode. Failed or suspicious verifications are transferred to a human, and every verification step is recorded for compliance review."
+      },
+      "b2b-cross-border": {
+        "question": "Does Coldi work with B2B and cross-border payment companies?",
+        "answer": "Yes. Coldi agents call business customers as well as consumers, in more than 30 languages and from local numbers in dozens of countries. Typical B2B uses are qualifying inbound business sign-ups, completing onboarding for corporate accounts and following up on dormant accounts."
+      }
+    }
+  },
   "TradingPlatformsPage": {
     "metaTitle": "Coldi AI Voice Agents for Trading Platforms & Brokers",
     "metaDescription": "Convert more leads and retain more traders with AI voice agents built for FX brokers. Instant calls, reactivation, and 30+ languages. Book a demo.",
@@ -429,6 +507,32 @@
         "paid-traffic": "You're paying for traffic that never gets a real conversation",
         "new-languages": "You're expanding into new language markets and don't want to hire locally",
         "floor-reduction": "One client cut their calling floor from 60 agents to 25 with flat conversion — that's the kind of shift you're after"
+      }
+    }
+  },
+  "TradingPlatformsFaq": {
+    "title": "Frequently Asked Questions",
+    "lastUpdated": "Last updated: 16 October 2026",
+    "items": {
+      "forex-cfd-broker": {
+        "question": "What can a Coldi AI voice agent do for a forex or CFD broker?",
+        "answer": "Coldi AI voice agents handle a broker's repetitive client calls: KYC and onboarding status, deposit and withdrawal questions, password resets, platform navigation and margin call notifications. On the sales side, they qualify new registrations and call leads who signed up but have not made a first deposit, then pass hot leads to the retention or sales desk."
+      },
+      "call-spikes-volatility": {
+        "question": "How does Coldi handle call spikes during market volatility?",
+        "answer": "Coldi scales with call volume, so when call volume triples during a news release or market crash, every trader is answered immediately with no queue. Routine questions are resolved by the AI agent, and high-value or urgent accounts are routed straight to senior staff based on account tier."
+      },
+      "mt4-mt5-crm": {
+        "question": "Does Coldi integrate with MT4, MT5 and broker CRMs?",
+        "answer": "Yes. Coldi integrates with MetaTrader 4 and 5, broker CRMs and helpdesks such as Salesforce, HubSpot and Zendesk, and custom back-office APIs. Brokers can run calls on their existing VoIP provider, such as Voiso. Account data flows into each call and every outcome is logged back automatically."
+      },
+      "trading-terminology": {
+        "question": "Do Coldi AI agents understand trading terminology?",
+        "answer": "Yes. Coldi agents are configured for financial conversations and understand terms such as spread, leverage, stop-loss, margin requirement, swap and lot size. They explain account and platform questions in plain language and follow each broker's approved wording for anything that touches trading risk."
+      },
+      "verify-identity": {
+        "question": "Can Coldi verify a trader's identity over the phone?",
+        "answer": "Yes. Before discussing balances or account details, the Coldi agent runs the broker's verification flow, such as security questions, account detail checks or a one-time passcode. Failed or suspicious verifications are transferred to a human. Every verification step is recorded for compliance review."
       }
     }
   },
@@ -1375,6 +1479,36 @@
         "routine-conversations": "Your call center is overloaded with routine conversations that do not require a human agent",
         "calling-capacity": "You need more calling capacity without building a larger contact center",
         "no-24-7-coverage": "Customers expect immediate responses, but your team cannot provide 24/7 coverage"
+      }
+    }
+  },
+  "OtherIndustriesFaq": {
+    "title": "Frequently Asked Questions",
+    "lastUpdated": "Last updated: 16 October 2026",
+    "items": {
+      "outside-fintech": {
+        "question": "Does Coldi work outside fintech?",
+        "answer": "Yes. Fintech is Coldi's core focus, but the same AI voice agents run in other industries with high call volumes. Typical workflows are lead qualification for real estate, technology and e-commerce; appointment booking for healthcare, hospitality and consulting; customer support for retail, telecommunications and education; service dispatch for HVAC, residential services and agro-industry; lead re-engagement; and follow-ups for manufacturing, non-profits and call centers."
+      },
+      "replace-call-center": {
+        "question": "Will AI replace call center agents?",
+        "answer": "No, but it changes their work. Coldi AI agents take tier-1 calls, after-hours coverage, overflow during spikes and repetitive outbound follow-ups. Human agents handle escalations, complex cases and high-value customers, and receive each transferred call with the context already captured."
+      },
+      "alongside-call-center": {
+        "question": "Can Coldi work alongside our existing call center team?",
+        "answer": "Yes. A typical rollout gives Coldi one defined slice of traffic first: after-hours calls, overflow when queues pass a threshold, or one routine call type. Coldi connects to the existing telephony and CRM, so agents keep their tools. Coverage expands once results are proven on that first slice."
+      },
+      "vs-contact-center-ai": {
+        "question": "How is Coldi different from AI features in Talkdesk, Aircall or Nextiva?",
+        "answer": "Contact center platforms such as Talkdesk, Aircall and Nextiva add AI as a copilot for human agents: transcription, suggestions and summaries. The human still takes the call. Coldi's AI agent holds the entire conversation itself, inbound or outbound, and brings in a human only when needed. Coldi can run alongside an existing contact center platform."
+      },
+      "urgent-service": {
+        "question": "Can Coldi handle urgent service requests?",
+        "answer": "Yes. For service businesses, the Coldi agent answers inbound calls, identifies emergencies, checks the service area and captures job details. Urgent cases are transferred to a technician or dispatcher immediately; others are booked into an available appointment slot."
+      },
+      "gdpr-sales-calls": {
+        "question": "Is Coldi GDPR-compliant for sales calls?",
+        "answer": "Coldi is built to support GDPR-compliant sales pipelines. Every qualification call follows the client's approved scripts and targeting criteria, with complete recordings, transcripts and audit logs. Security and compliance documents are on the Coldi Trust Center."
       }
     }
   },

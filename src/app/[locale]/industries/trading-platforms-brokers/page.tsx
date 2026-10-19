@@ -9,6 +9,7 @@ import {
   InsuranceOperations,
   InsuranceWhy,
 } from '../insurance/components';
+import { TradingPlatformsFaq } from './components';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -143,6 +144,7 @@ export default async function BrokersPage() {
         ]}
         description={t('info.description')}
       />
+      <TradingPlatformsFaq />
     </main>
   );
 }

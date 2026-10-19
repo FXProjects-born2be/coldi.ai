@@ -9,6 +9,7 @@ import {
   InsuranceOperations,
   InsuranceWhy,
 } from '../insurance/components';
+import { DigitalBankingFaq } from './components';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -134,6 +135,7 @@ export default async function DigitalBankingPaymentsPage() {
         ]}
         description={t('info.description')}
       />
+      <DigitalBankingFaq />
     </main>
   );
 }

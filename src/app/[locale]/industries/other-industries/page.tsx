@@ -9,6 +9,7 @@ import {
   InsuranceOperations,
   InsuranceWhy,
 } from '../insurance/components';
+import { OtherIndustriesFaq } from './components';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -161,6 +162,7 @@ export default async function OtherIndustriesPage() {
         description={t('info.description')}
         page="other-industries"
       />
+      <OtherIndustriesFaq />
     </main>
   );
 }
