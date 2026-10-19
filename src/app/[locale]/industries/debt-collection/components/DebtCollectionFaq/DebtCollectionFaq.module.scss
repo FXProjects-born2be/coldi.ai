@@ -1,0 +1,117 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.debt_collection_faq {
+  margin-bottom: 80px;
+
+  @include tablet {
+    margin-bottom: 40px;
+  }
+
+  &__row {
+    display: grid;
+    align-items: flex-start;
+    gap: 16px 30px;
+    grid-template-columns: 406px 1fr;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__left {
+    padding: 20px;
+  }
+
+  &__title {
+    color: #000;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 120%;
+    margin: 0 0 8px;
+    scroll-margin-top: 120px;
+
+    @include tablet {
+      font-size: 32px;
+    }
+  }
+
+  &__updated {
+    color: #50556B;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%;
+  }
+
+  &__right > *:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &__right_item {
+    padding: 32px;
+    border-radius: 8px;
+    border: 0.5px solid rgba(0, 0, 0, 0.20);
+    background: #FFF;
+    scroll-margin-top: 120px;
+
+    @include tablet {
+      padding: 20px;
+    }
+  }
+
+  &__right_heading {
+    display: grid;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    grid-template-columns: 0.966fr 66px;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  &__right_heading_title {
+    margin: 0;
+    color: #0C1021;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 120%;
+    text-align: left;
+
+    @include tablet {
+      font-size: 18px;
+      line-height: 140%;
+    }
+  }
+
+  &__right_heading_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    border-radius: 999px;
+    border: 0.5px solid rgba(0, 0, 0, 0.20);
+    background: #FFF;
+  }
+
+  &__right_content {
+    color: #50556B;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 140%;
+    margin-top: 16px;
+
+    p {
+      margin: 0;
+    }
+
+    & > *:not(:last-child) {
+      margin-bottom: 23px;
+    }
+  }
+
+  &__right_content_collapsed {
+    display: none;
+  }
+}
