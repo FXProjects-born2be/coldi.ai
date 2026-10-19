@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server';
 
 import {
   SolutionsDeliver,
+  SolutionsFaq,
   SolutionsHero,
   SolutionsInfo,
   SolutionsSpecific,
@@ -43,6 +44,7 @@ export default function SolutionsPage() {
       </Suspense>
       <SolutionsDeliver />
       <SolutionsUseCases />
+      <SolutionsFaq />
       <SolutionsSpecific />
     </main>
   );

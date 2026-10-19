@@ -1135,6 +1135,52 @@
       }
     }
   },
+  "SolutionsFaq": {
+    "title": "Questions About Coldi's AI Solutions",
+    "lastUpdated": "Last updated: 19 October 2026",
+    "items": {
+      "what-ai-agents": {
+        "question": "What AI agents does Coldi offer?",
+        "answer": "Coldi offers named AI agents, each built for one specific job. In insurance, for example, these are the Policy Renewal Bot, Quote Follow-up Bot, KYC / Document Reminder Bot, Retention / Win-back Bot and FNOL Intake Bot. Trading platforms, debt collection, digital banking and other industries each have their own set. Every agent is built, deployed and managed by Coldi."
+      },
+      "managed-by-coldi": {
+        "question": "What does \"managed by Coldi\" include?",
+        "answer": "Behind every Coldi agent, the Coldi team runs four layers: telephony infrastructure, API integrations with the client's systems, the account verification flow, and an optimization engine that improves scripts and workflows after launch. The client defines the business outcome; Coldi handles the implementation."
+      },
+      "custom-ai-agent": {
+        "question": "Can Coldi build a custom AI agent for our workflow?",
+        "answer": "Yes. If a workflow is not on the list, Coldi builds custom agents on request around the client's business logic, integrations and brand voice. Custom AI development is priced by custom quote."
+      },
+      "inbound-agent": {
+        "question": "What does a Coldi inbound agent do?",
+        "answer": "A Coldi inbound agent answers every incoming call on the first ring, 24/7. It identifies why the person is calling, answers routine questions, qualifies new leads, books meetings into the team's calendar and routes complex calls to the right person. Every call is transcribed and logged in real time."
+      },
+      "route-without-ivr": {
+        "question": "How does Coldi route calls without an IVR menu?",
+        "answer": "Instead of \"press 1 for billing\", the Coldi agent asks the caller what they need in natural language. It routes by intent, urgency and the account profile pulled from the CRM. The human agent receives the call with the context already captured, so the caller does not repeat themselves."
+      },
+      "reactivate-leads": {
+        "question": "Can Coldi reactivate an old or dormant lead database?",
+        "answer": "Yes. Database reactivation is one of Coldi's most common use cases. The AI agent calls every contact in an old list, finds out who is still interested, updates the CRM record and passes warm leads to the sales team. This turns leads already paid for into new pipeline without manual dialing."
+      },
+      "increase-outbound-rates": {
+        "question": "How does Coldi increase outbound contact rates?",
+        "answer": "Coldi schedules calls in each lead's time zone, retries automatically on a set cadence within legal calling hours, filters answering machines and uses local caller ID. Coldi also manages local numbers and monitors their reputation to avoid spam labeling. Leads from ads and forms are called within minutes of signing up."
+      },
+      "agent-vs-chatbot": {
+        "question": "How is a Coldi AI agent different from a chatbot?",
+        "answer": "A rule-based chatbot follows fixed scripts and breaks when a customer phrases something unexpectedly. Coldi's agent understands intent in natural language, keeps context across a multi-step conversation and acts in connected systems in real time. And it works on the phone, where customers expect a real conversation."
+      },
+      "hand-over-to-human": {
+        "question": "When does Coldi hand a caller over to a human?",
+        "answer": "Coldi escalates when a request is outside the agent's defined scope, when the caller asks for a person, or when the conversation shows frustration. The client sets these rules. The human agent receives the conversation summary and customer data with the transfer, so the caller never starts over."
+      },
+      "compliance-quality": {
+        "question": "Can Coldi check calls for compliance and quality?",
+        "answer": "Yes. Coldi's AI Quality Control audits 100% of interactions for script compliance, brand requirements and data accuracy. AI Quality Control is priced by custom quote."
+      }
+    }
+  },
   "SolutionsSpecific": {
     "title": "Need Something More Specific?",
     "description": "If your workflow isn't listed above, we build custom bots on request. Tell us the call, we'll tell you if it's a fit.",

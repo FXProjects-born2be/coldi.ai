@@ -7,5 +7,3 @@ export const PRICING_FAQ_IDS = [
   'telephony-cost',
   'services-priced-separately',
 ] as const;
-
-export type PricingFaqId = (typeof PRICING_FAQ_IDS)[number];
