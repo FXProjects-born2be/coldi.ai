@@ -14,7 +14,6 @@ export const requestPricingSchema = v.object({
 
   message: v.pipe(v.string()),
   plan: v.pipe(v.string()),
-  captchaToken: v.pipe(v.string(), v.minLength(1, 'Please complete the security verification.')),
   smsCode: v.optional(v.string()), // SMS verification code for free email domains
 });
 
