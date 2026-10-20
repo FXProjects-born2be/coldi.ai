@@ -3,6 +3,9 @@ import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
+import { buildFaqItems } from '@/shared/lib/seo/faq';
+import { FaqStructuredData } from '@/shared/ui/components/structured-data/FaqStructuredData';
+
 import {
   SolutionsDeliver,
   SolutionsFaq,
@@ -11,6 +14,7 @@ import {
   SolutionsSpecific,
   SolutionsUseCases,
 } from './components';
+import { SOLUTIONS_FAQ_IDS } from './components/SolutionsFaq/content';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -35,9 +39,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function SolutionsPage() {
+export default async function SolutionsPage() {
+  const tFaq = await getTranslations('SolutionsFaq');
+  const faqs = buildFaqItems(tFaq, SOLUTIONS_FAQ_IDS);
+
   return (
     <main>
+      <FaqStructuredData id="solutions-faq-jsonld" faqs={faqs} />
       <SolutionsHero />
       <Suspense fallback={null}>
         <SolutionsInfo />

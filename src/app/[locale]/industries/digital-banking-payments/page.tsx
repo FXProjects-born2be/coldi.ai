@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
+import { buildFaqItems } from '@/shared/lib/seo/faq';
+import { FaqStructuredData } from '@/shared/ui/components/structured-data/FaqStructuredData';
+
 import {
   InsuranceCases,
   InsuranceHandles,
@@ -10,6 +13,7 @@ import {
   InsuranceWhy,
 } from '../insurance/components';
 import { DigitalBankingFaq } from './components';
+import { DIGITAL_BANKING_FAQ_IDS } from './components/DigitalBankingFaq/content';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -35,9 +39,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function DigitalBankingPaymentsPage() {
   const t = await getTranslations('EmisPaymentsPage');
+  const tFaq = await getTranslations('DigitalBankingFaq');
+  const faqs = buildFaqItems(tFaq, DIGITAL_BANKING_FAQ_IDS);
 
   return (
     <main>
+      <FaqStructuredData id="digital-banking-faq-jsonld" faqs={faqs} />
       <InsuranceHero
         title={t('hero.title')}
         titleAccent={t('hero.titleAccent')}

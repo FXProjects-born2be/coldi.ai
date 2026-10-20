@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
+import { buildFaqItems } from '@/shared/lib/seo/faq';
+import { FaqStructuredData } from '@/shared/ui/components/structured-data/FaqStructuredData';
+
 import {
   InsuranceCases,
   InsuranceHandles,
@@ -10,6 +13,7 @@ import {
   InsuranceWhy,
 } from '../insurance/components';
 import { OtherIndustriesFaq } from './components';
+import { OTHER_INDUSTRIES_FAQ_IDS } from './components/OtherIndustriesFaq/content';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -36,9 +40,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function OtherIndustriesPage() {
   const t = await getTranslations('OtherIndustriesPage');
   const tHandles = await getTranslations('OtherIndustriesPage.InsuranceHandles');
+  const tFaq = await getTranslations('OtherIndustriesFaq');
+  const faqs = buildFaqItems(tFaq, OTHER_INDUSTRIES_FAQ_IDS);
 
   return (
     <main>
+      <FaqStructuredData id="other-industries-faq-jsonld" faqs={faqs} />
       <InsuranceHero
         title={t('hero.title')}
         titleAccent={t('hero.titleAccent')}

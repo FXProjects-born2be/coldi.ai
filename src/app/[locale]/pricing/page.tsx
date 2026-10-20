@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import type { FaqItem } from '@/shared/lib/seo/faq';
+import { buildFaqItems } from '@/shared/lib/seo/faq';
 import { FaqStructuredData } from '@/shared/ui/components/structured-data/FaqStructuredData';
 import { ServiceStructuredData } from '@/shared/ui/components/structured-data/ServiceStructuredData';
 
@@ -36,15 +36,7 @@ export const metadata: Metadata = {
 
 export default async function PricingPage() {
   const tFaq = await getTranslations('PricingFaq');
-  const faqs: FaqItem[] = PRICING_FAQ_IDS.map((id) => {
-    const answerRaw = tFaq.raw(`items.${id}.answer`);
-    const answer = Array.isArray(answerRaw) ? answerRaw.join(' ') : String(answerRaw);
-
-    return {
-      question: tFaq(`items.${id}.question`),
-      answer,
-    };
-  });
+  const faqs = buildFaqItems(tFaq, PRICING_FAQ_IDS);
 
   return (
     <main>
