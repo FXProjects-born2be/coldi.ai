@@ -18,21 +18,28 @@ import {
 } from './components';
 import { PRICING_FAQ_IDS } from './components/PricingFaq/content';
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: '/pricing',
-  },
-  title: 'Coldi Pricing: Flexible AI Voice Agent Plans for Fintech',
-  description:
-    "Compare Coldi's AI voice agent pricing for fintech. We offer outbound, inbound and fully managed plans across 10+ industries. Get a quote.",
-  keywords: ['Fintech AI voice agents pricing'],
-  openGraph: {
-    title: 'Coldi Pricing: Flexible AI Voice Agent Plans for Fintech',
-    description:
-      "Compare Coldi's AI voice agent pricing for fintech. We offer outbound, inbound and fully managed plans across 10+ industries. Get a quote.",
-    images: '/images/meta-news.png',
-  },
+type Props = {
+  params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'PricingPage' });
+
+  return {
+    alternates: {
+      canonical: '/pricing',
+    },
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    keywords: [t('keywords')],
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      images: '/images/meta-news.png',
+    },
+  };
+}
 
 export default async function PricingPage() {
   const tFaq = await getTranslations('PricingFaq');

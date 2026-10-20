@@ -697,6 +697,11 @@
       }
     }
   },
+  "PricingPage": {
+    "metaTitle": "Coldi Pricing | Flexible AI Voice Agent Plans",
+    "metaDescription": "Explore flexible pricing for fully managed AI voice agents. Outbound, inbound and multilingual solutions built around your business needs.",
+    "keywords": "Fintech AI voice agents pricing"
+  },
   "PricingHero": {
     "title": "Ціни на голосового агента Coldi AI",
     "iconAlt": "Icon",
