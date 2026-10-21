@@ -1,0 +1,200 @@
+@use '@/shared/lib/styles/mixin.scss' as *;
+
+.meet_team_glance {
+    padding-top: 25px;
+    padding-bottom: 56px;
+    overflow: hidden;
+
+    @include tablet {
+        padding-top: 16px;
+        padding-bottom: 40px;
+    }
+
+    &__title {
+        color: #0C1021;
+        text-align: center;
+        font-size: 48px;
+        font-weight: 400;
+        line-height: 120%;
+        margin-bottom: 48px;
+
+        @include tablet {
+            font-size: 40px;
+            margin-bottom: 32px;
+        }
+    }
+
+
+    &__row {
+        display: grid;
+        grid-template-columns: 104fr 105fr 51fr 51fr;
+        gap: 12px;
+
+        @include tablet {
+            grid-template-columns: 1fr 1fr;
+
+            & > *:nth-child(1),
+            & > *:nth-child(2),
+            & > *:nth-child(5),
+            & > *:nth-child(6) {
+                grid-column: 1 / -1;
+            }
+
+            & > *:nth-child(3),
+            & > *:nth-child(4) {
+                min-height: 140px;
+            }
+        }
+
+        @include desktop {
+            &>*:nth-child(1) {
+                grid-row: span 3 / span 3;
+            }
+
+            &>*:nth-child(2) {
+                grid-row: span 2 / span 2;
+            }
+
+            &>*:nth-child(5) {
+                grid-column: span 2 / span 2;
+                grid-column-start: 3;
+            }
+
+            &>*:nth-child(6) {
+                grid-column: span 3 / span 3;
+                grid-column-start: 2;
+                grid-row-start: 3;
+            }
+        }
+
+        &>*:nth-child(5) {
+            .meet_team_glance__bg {
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: -2;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .meet_team_glance__subtitle {
+                font-size: 40px;
+                line-height: 120%;
+
+                @include desktop {
+                    max-width: 190px;
+                }
+
+                @include tablet {
+                    font-size: 32px;
+                }
+            }
+
+            &::before {
+                content: '';
+                background: linear-gradient(90deg, #F6F6F6 52.4%, rgba(246, 246, 246, 0.00) 100%);
+                height: 100%;
+                width: 73%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+            }
+        }
+
+        &>*:nth-child(6) {
+            .meet_team_glance__description {
+                max-width: 300px;
+            }
+
+            .meet_team_glance__bg {
+                width: 407px;
+            }
+        }
+    }
+
+    &__item {
+        padding: 24px;
+        border-radius: 20px;
+        background: #F6F6F6;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 24px;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+
+        @include tablet {
+            padding: 20px;
+        }
+    }
+
+    &__itemRow {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        align-items: center;
+
+        @include tablet {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__label {
+        color: #50556B;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 140%;
+        margin-bottom: 12px;
+
+        @include tablet {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+    }
+
+    &__description {
+        color: rgba(0, 0, 0, 0.50);
+        font-size: 28px;
+        font-weight: 500;
+        line-height: 120%;
+
+        @include tablet {
+            font-size: 24px;
+        }
+
+        span {
+            color: #0C1021;
+        }
+    }
+
+    &__subtitle {
+        color: #0C1021;
+        font-size: 60px;
+        font-weight: 400;
+        line-height: 110%;
+
+        @include tablet {
+            font-size: 40px;
+        }
+    }
+
+    &__logos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        @include desktop {
+            justify-content: flex-end;
+        }
+    }
+
+    &__logo {
+        padding: 11px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(0, 0, 0, 0.10);
+        background: #FFF;
+        width: max-content;
+    }
+}

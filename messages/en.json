@@ -168,6 +168,34 @@
       "larysa-byshenko": "3D character portrait of Finance Manager wearing a black Coldi t-shirt"
     }
   },
+  "MeetTeamGlance": {
+    "title": "<brand>Coldi</brand> at a Glance",
+    "imageAlt": "Image",
+    "campaignBrain": {
+      "label": "Campaign Brain:",
+      "description": "<strong>AI system for managing outbound calling campaigns,</strong> including lead calling, call timing, follow-ups, qualification, and campaign outcomes."
+    },
+    "industries": {
+      "label": "Industries:",
+      "description": "<strong>Insurance, trading platforms and brokers, debt collection, payments, fintech, digital banking</strong> and other customer-service and sales operations."
+    },
+    "founded": {
+      "label": "Founded:",
+      "value": "2025"
+    },
+    "languages": {
+      "label": "Languages:",
+      "value": "30+"
+    },
+    "headquarters": {
+      "label": "Headquarters:",
+      "value": "Tel Aviv, Israel"
+    },
+    "integrations": {
+      "label": "Integrations:",
+      "description": "<strong>Twilio, HubSpot, Housecall Pro, n8n, Calendly, Slack, Zapier, Google Sheets,</strong> APIs, CRM, and VoIP."
+    }
+  },
   "MeetTeamInfoDrive": {
     "items": {
       "intro": {

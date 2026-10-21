@@ -168,6 +168,34 @@
       "larysa-byshenko": "3D-портрет персонажа — фінансового менеджера у чорній футболці Coldi"
     }
   },
+  "MeetTeamGlance": {
+    "title": "<brand>Coldi</brand> у цифрах",
+    "imageAlt": "Зображення",
+    "campaignBrain": {
+      "label": "Керування кампаніями:",
+      "description": "<strong>ШІ-система для керування вихідними телефонними кампаніями,</strong> зокрема дзвінками потенційним клієнтам, вибором часу для дзвінків, повторними контактами, кваліфікацією лідів та аналізом результатів кампаній."
+    },
+    "industries": {
+      "label": "Галузі:",
+      "description": "<strong>Страхування, торгові платформи та брокерські компанії, стягнення заборгованості, платежі, фінансові технології, цифровий банкінг</strong> та інші напрями обслуговування клієнтів і продажів."
+    },
+    "founded": {
+      "label": "Рік заснування:",
+      "value": "2025"
+    },
+    "languages": {
+      "label": "Мови:",
+      "value": "30+"
+    },
+    "headquarters": {
+      "label": "Штаб-квартира:",
+      "value": "Тель-Авів, Ізраїль"
+    },
+    "integrations": {
+      "label": "Інтеграції:",
+      "description": "<strong>Twilio, HubSpot, Housecall Pro, n8n, Calendly, Slack, Zapier, Google Sheets,</strong> API, CRM-системи та VoIP."
+    }
+  },
   "MeetTeamInfoDrive": {
     "items": {
       "intro": {

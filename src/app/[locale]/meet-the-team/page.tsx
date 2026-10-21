@@ -3,6 +3,8 @@ import { getTranslations } from 'next-intl/server';
 
 import { MeetTeamGrid, MeetTeamHero, MeetTeamInfoDrive, MeetTeamInfoQuote } from './components';
 
+import MeetTeamGlance from '@/app/[locale]/meet-the-team/components/MeetTeamGlance';
+
 type Props = {
   params: Promise<{ locale: string }>;
 };
@@ -29,6 +31,7 @@ export default function MeetTheTeamPage() {
   return (
     <main>
       <MeetTeamHero />
+      <MeetTeamGlance />
       <MeetTeamGrid />
       <MeetTeamInfoDrive />
       <MeetTeamInfoQuote />
