@@ -18,6 +18,10 @@
     @include tablet {
       padding-block: 64px;
     }
+
+    @include mobile {
+      padding-block: 34px;
+    }
   }
 
   &__title {

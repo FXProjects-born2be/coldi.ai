@@ -3,13 +3,40 @@
 .faq_info {
   padding-block: 40px;
 
+  // Wrapper is not scrollable — ::after stays pinned to the visible right edge.
+  &__tabs_wrap {
+    position: relative;
+    margin-bottom: 40px;
+
+    @include tablet {
+      position: sticky;
+      top: 64px;
+      z-index: 10;
+      margin-inline: -16px;
+      margin-bottom: 28px;
+      padding-block: 12px;
+      background: #fff;
+
+      &::after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 140px;
+        background: linear-gradient(270deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
+        pointer-events: none;
+      }
+    }
+  }
+
   &__tabs {
     display: flex;
     justify-content: center;
     overflow: auto;
     align-items: center;
     gap: 10px;
-    margin-bottom: 40px;
     scrollbar-width: none;
     -ms-overflow-style: none;
 
@@ -19,6 +46,7 @@
 
     @include tablet {
       justify-content: flex-start;
+      padding-inline: 16px;
     }
   }
 
@@ -42,10 +70,23 @@
     }
   }
 
+  &__tab_short {
+    display: none;
+
+    @include tablet {
+      display: inline;
+    }
+  }
+
+  &__tab_full {
+    @include tablet {
+      display: none;
+    }
+  }
+
   &__content {
     padding: 20px;
     border-radius: 8px;
-    background: #F6F6F6;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -64,12 +105,16 @@
     font-weight: 400;
     line-height: 120%;
     scroll-margin-top: 120px;
+
+    @include tablet {
+      padding: 14px;
+    }
   }
 
   &__content_row {
     display: grid;
     align-items: flex-start;
-    gap: 20px;
+    gap: 10px 20px;
     grid-template-columns: 406px 1fr;
     scroll-margin-top: 120px;
 
@@ -90,7 +135,7 @@
     scroll-margin-top: 120px;
 
     @include tablet {
-      padding: 20px;
+      padding: 14px;
     }
   }
 
@@ -98,15 +143,35 @@
     margin: 0 0 16px;
     color: #0C1021;
     font-size: 24px;
-    font-weight: 400;
     line-height: 120%;
+    font-weight: 700;
+
+    @include tablet {
+      font-size: 20px;
+    }
   }
 
   &__content_info_description {
     margin: 0;
-    color: #50556B;
+    color: #000;
     font-size: 18px;
     font-weight: 400;
     line-height: 140%;
+
+    @include tablet {
+      font-size: 16px;
+    }
+  }
+
+  &__content_info_link {
+    color: #4268FF;
+    display: inline;
+    font-weight: 700;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
   }
 }

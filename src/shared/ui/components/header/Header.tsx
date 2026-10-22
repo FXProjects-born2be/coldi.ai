@@ -26,7 +26,7 @@ export const Header = ({ pathname: pathnameProp }: { pathname: string }) => {
     if (!header) return;
 
     const update = () => {
-      setScrolled(window.scrollY > header.offsetHeight);
+      setScrolled(window.scrollY > 0);
     };
 
     update();

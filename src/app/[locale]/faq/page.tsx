@@ -36,7 +36,11 @@ export default async function FaqPage({ params }: Props) {
   const faqs: FaqItem[] = FAQ_SECTIONS.flatMap((section) =>
     section.items.map((itemId) => ({
       question: t(`sections.${section.id}.items.${itemId}.question`),
-      answer: t(`sections.${section.id}.items.${itemId}.answer`),
+      // t.raw keeps tags as text; strip them for plain FAQPage JSON-LD.
+      answer: String(t.raw(`sections.${section.id}.items.${itemId}.answer`)).replace(
+        /<\/?(?:pricingLink|trustCenterLink)>/g,
+        ''
+      ),
     }))
   );
 

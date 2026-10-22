@@ -2831,6 +2831,7 @@
     "sections": {
       "about-coldi": {
         "title": "About Coldi",
+        "tabTitle": "About",
         "items": {
           "what-is-coldi": {
             "question": "What is Coldi.ai?",
@@ -2848,6 +2849,7 @@
       },
       "ai-agents-capabilities": {
         "title": "AI Agents & Capabilities",
+        "tabTitle": "Capabilities",
         "items": {
           "what-is-campaign-brain": {
             "question": "What is Campaign Brain?",
@@ -2869,6 +2871,7 @@
       },
       "integrations-implementation": {
         "title": "Integrations & Implementation",
+        "tabTitle": "Integrations",
         "items": {
           "which-systems": {
             "question": "Which systems does Coldi integrate with?",
@@ -2882,10 +2885,11 @@
       },
       "pricing-plans": {
         "title": "Pricing & Plans",
+        "tabTitle": "Pricing",
         "items": {
           "how-much-does-coldi-cost": {
             "question": "How much does Coldi cost?",
-            "answer": "Coldi charges a one-time setup fee of $1,500 to $3,000, based on the client's requirements, returned as call credit once the client reaches 30,000 minutes of usage. Clients then choose a plan: Managed, at $1,500 per month with a 3-month minimum, where the Coldi team runs and optimizes the campaigns, or Self-Service, at $0 per month, where Coldi launches the first campaign with the client and the client's team runs it. Minutes are bought in packages starting at 15,000 minutes for 6,000(0.40 per minute), with lower rates on larger packages. Full details are on coldi.ai/pricing."
+            "answer": "Coldi charges a one-time setup fee of $1,500 to $3,000, based on the client's requirements, returned as call credit once the client reaches 30,000 minutes of usage. Clients then choose a plan: Managed, at $1,500 per month with a 3-month minimum, where the Coldi team runs and optimizes the campaigns, or Self-Service, at $0 per month, where Coldi launches the first campaign with the client and the client's team runs it. Minutes are bought in packages starting at 15,000 minutes for 6,000(0.40 per minute), with lower rates on larger packages. Full details are on <pricingLink>coldi.ai/pricing</pricingLink>."
           },
           "managed-vs-self-service": {
             "question": "What is the difference between Coldi's Managed and Self-Service plans?",
@@ -2895,10 +2899,11 @@
       },
       "security-compliance": {
         "title": "Security & Compliance",
+        "tabTitle": "Security",
         "items": {
           "secure-and-compliant": {
             "question": "Is Coldi secure and compliant for financial services?",
-            "answer": "Coldi is built for regulated fintech calling. COLDI LABS LTD is ISO 27001 and GDPR certified and listed on the CSA STAR registry. Agents verify identity before discussing account details, every call is recorded and logged to the CRM, and a rules engine applies regional calling regulations, such as US state calling rules. Legal documents and certifications are published on the Coldi Trust Center (coldi.ai/trust-center)."
+            "answer": "Coldi is built for regulated fintech calling. COLDI LABS LTD is ISO 27001 and GDPR certified and listed on the CSA STAR registry. Agents verify identity before discussing account details, every call is recorded and logged to the CRM, and a rules engine applies regional calling regulations, such as US state calling rules. Legal documents and certifications are published on the Coldi Trust Center (<trustCenterLink>coldi.ai/trust-center</trustCenterLink>)."
           }
         }
       }
