@@ -1,5 +1,3 @@
-import Script from 'next/script';
-
 type StructuredDataProps = {
   id?: string;
   type?:
@@ -26,8 +24,9 @@ export const StructuredData = ({ id, type, data }: StructuredDataProps) => {
     .replace(/\u2028/g, '\\u2028')
     .replace(/\u2029/g, '\\u2029');
 
+  // Plain <script>, not next/script — so JSON-LD is in the initial HTML for crawlers/validators.
   return (
-    <Script
+    <script
       id={id ?? `structured-data-${type?.toLowerCase() ?? 'graph'}`}
       type="application/ld+json"
       dangerouslySetInnerHTML={{
