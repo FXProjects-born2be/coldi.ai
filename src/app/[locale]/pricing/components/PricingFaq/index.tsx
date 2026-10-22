@@ -10,8 +10,11 @@ import { cn } from '@/shared/lib/helpers';
 import { PRICING_FAQ_IDS } from './content';
 import st from './PricingFaq.module.scss';
 
+import { Link } from '@/i18n/navigation';
+
 export const PricingFaq = () => {
   const t = useTranslations('PricingFaq');
+  const tGeneral = useTranslations('General');
   const [openId, setOpenId] = useState<(typeof PRICING_FAQ_IDS)[number] | null>(PRICING_FAQ_IDS[0]);
 
   return (
@@ -23,6 +26,10 @@ export const PricingFaq = () => {
               {t('title')}
             </h2>
             <p className={st.pricing_faq__updated}>{t('lastUpdated')}</p>
+
+            <Link href="/faq" className={`btn btn-secondary w-max ${st.pricing_faq__btn_desktop}`}>
+              {tGeneral('faqLink')}
+            </Link>
           </div>
 
           <div className={st.pricing_faq__right}>
@@ -70,6 +77,10 @@ export const PricingFaq = () => {
               );
             })}
           </div>
+
+          <Link href="/faq" className={`btn btn-secondary w-max ${st.pricing_faq__btn_tablet}`}>
+            {tGeneral('faqLink')}
+          </Link>
         </div>
       </div>
     </section>

@@ -10,8 +10,11 @@ import { cn } from '@/shared/lib/helpers';
 import { OTHER_INDUSTRIES_FAQ_IDS } from './content';
 import st from './OtherIndustriesFaq.module.scss';
 
+import { Link } from '@/i18n/navigation';
+
 export const OtherIndustriesFaq = () => {
   const t = useTranslations('OtherIndustriesFaq');
+  const tGeneral = useTranslations('General');
   const [openId, setOpenId] = useState<(typeof OTHER_INDUSTRIES_FAQ_IDS)[number] | null>(
     OTHER_INDUSTRIES_FAQ_IDS[0]
   );
@@ -25,6 +28,13 @@ export const OtherIndustriesFaq = () => {
               {t('title')}
             </h2>
             <p className={st.other_industries_faq__updated}>{t('lastUpdated')}</p>
+
+            <Link
+              href="/faq"
+              className={`btn btn-secondary w-max ${st.other_industries_faq__btn_desktop}`}
+            >
+              {tGeneral('faqLink')}
+            </Link>
           </div>
 
           <div className={st.other_industries_faq__right}>
@@ -72,6 +82,13 @@ export const OtherIndustriesFaq = () => {
               );
             })}
           </div>
+
+          <Link
+            href="/faq"
+            className={`btn btn-secondary w-max ${st.other_industries_faq__btn_tablet}`}
+          >
+            {tGeneral('faqLink')}
+          </Link>
         </div>
       </div>
     </section>

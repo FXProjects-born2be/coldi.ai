@@ -10,8 +10,11 @@ import { cn } from '@/shared/lib/helpers';
 import { DEBT_COLLECTION_FAQ_IDS } from './content';
 import st from './DebtCollectionFaq.module.scss';
 
+import { Link } from '@/i18n/navigation';
+
 export const DebtCollectionFaq = () => {
   const t = useTranslations('DebtCollectionFaq');
+  const tGeneral = useTranslations('General');
   const [openId, setOpenId] = useState<(typeof DEBT_COLLECTION_FAQ_IDS)[number] | null>(
     DEBT_COLLECTION_FAQ_IDS[0]
   );
@@ -25,6 +28,13 @@ export const DebtCollectionFaq = () => {
               {t('title')}
             </h2>
             <p className={st.debt_collection_faq__updated}>{t('lastUpdated')}</p>
+
+            <Link
+              href="/faq"
+              className={`btn btn-secondary w-max ${st.debt_collection_faq__btn_desktop}`}
+            >
+              {tGeneral('faqLink')}
+            </Link>
           </div>
 
           <div className={st.debt_collection_faq__right}>
@@ -72,6 +82,13 @@ export const DebtCollectionFaq = () => {
               );
             })}
           </div>
+
+          <Link
+            href="/faq"
+            className={`btn btn-secondary w-max ${st.debt_collection_faq__btn_tablet}`}
+          >
+            {tGeneral('faqLink')}
+          </Link>
         </div>
       </div>
     </section>

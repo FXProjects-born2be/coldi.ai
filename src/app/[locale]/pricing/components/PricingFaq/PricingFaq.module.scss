@@ -110,4 +110,20 @@
   &__right_content_collapsed {
     display: none;
   }
+
+  &__btn_desktop {
+    margin-top: 20px;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__btn_tablet {
+    margin: auto;
+
+    @include desktop {
+      display: none;
+    }
+  }
 }

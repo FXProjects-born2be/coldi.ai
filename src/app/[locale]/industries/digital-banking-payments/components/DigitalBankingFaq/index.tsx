@@ -10,8 +10,11 @@ import { cn } from '@/shared/lib/helpers';
 import { DIGITAL_BANKING_FAQ_IDS } from './content';
 import st from './DigitalBankingFaq.module.scss';
 
+import { Link } from '@/i18n/navigation';
+
 export const DigitalBankingFaq = () => {
   const t = useTranslations('DigitalBankingFaq');
+  const tGeneral = useTranslations('General');
   const [openId, setOpenId] = useState<(typeof DIGITAL_BANKING_FAQ_IDS)[number] | null>(
     DIGITAL_BANKING_FAQ_IDS[0]
   );
@@ -25,6 +28,13 @@ export const DigitalBankingFaq = () => {
               {t('title')}
             </h2>
             <p className={st.digital_banking_faq__updated}>{t('lastUpdated')}</p>
+
+            <Link
+              href="/faq"
+              className={`btn btn-secondary w-max ${st.digital_banking_faq__btn_desktop}`}
+            >
+              {tGeneral('faqLink')}
+            </Link>
           </div>
 
           <div className={st.digital_banking_faq__right}>
@@ -72,6 +82,13 @@ export const DigitalBankingFaq = () => {
               );
             })}
           </div>
+
+          <Link
+            href="/faq"
+            className={`btn btn-secondary w-max ${st.digital_banking_faq__btn_tablet}`}
+          >
+            {tGeneral('faqLink')}
+          </Link>
         </div>
       </div>
     </section>

@@ -10,8 +10,11 @@ import { cn } from '@/shared/lib/helpers';
 import { INSURANCE_FAQ_IDS } from './content';
 import st from './InsuranceFaq.module.scss';
 
+import { Link } from '@/i18n/navigation';
+
 export const InsuranceFaq = () => {
   const t = useTranslations('InsuranceFaq');
+  const tGeneral = useTranslations('General');
   const [openId, setOpenId] = useState<(typeof INSURANCE_FAQ_IDS)[number] | null>(
     INSURANCE_FAQ_IDS[0]
   );
@@ -25,6 +28,13 @@ export const InsuranceFaq = () => {
               {t('title')}
             </h2>
             <p className={st.insurance_faq__updated}>{t('lastUpdated')}</p>
+
+            <Link
+              href="/faq"
+              className={`btn btn-secondary w-max ${st.insurance_faq__btn_desktop}`}
+            >
+              {tGeneral('faqLink')}
+            </Link>
           </div>
 
           <div className={st.insurance_faq__right}>
@@ -72,6 +82,10 @@ export const InsuranceFaq = () => {
               );
             })}
           </div>
+
+          <Link href="/faq" className={`btn btn-secondary w-max ${st.insurance_faq__btn_tablet}`}>
+            {tGeneral('faqLink')}
+          </Link>
         </div>
       </div>
     </section>

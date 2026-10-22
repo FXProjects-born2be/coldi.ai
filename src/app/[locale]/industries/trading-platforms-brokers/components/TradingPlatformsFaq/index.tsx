@@ -10,8 +10,11 @@ import { cn } from '@/shared/lib/helpers';
 import { TRADING_PLATFORMS_FAQ_IDS } from './content';
 import st from './TradingPlatformsFaq.module.scss';
 
+import { Link } from '@/i18n/navigation';
+
 export const TradingPlatformsFaq = () => {
   const t = useTranslations('TradingPlatformsFaq');
+  const tGeneral = useTranslations('General');
   const [openId, setOpenId] = useState<(typeof TRADING_PLATFORMS_FAQ_IDS)[number] | null>(
     TRADING_PLATFORMS_FAQ_IDS[0]
   );
@@ -25,6 +28,13 @@ export const TradingPlatformsFaq = () => {
               {t('title')}
             </h2>
             <p className={st.trading_platforms_faq__updated}>{t('lastUpdated')}</p>
+
+            <Link
+              href="/faq"
+              className={`btn btn-secondary w-max ${st.trading_platforms_faq__btn_desktop}`}
+            >
+              {tGeneral('faqLink')}
+            </Link>
           </div>
 
           <div className={st.trading_platforms_faq__right}>
@@ -72,6 +82,13 @@ export const TradingPlatformsFaq = () => {
               );
             })}
           </div>
+
+          <Link
+            href="/faq"
+            className={`btn btn-secondary w-max ${st.trading_platforms_faq__btn_tablet}`}
+          >
+            {tGeneral('faqLink')}
+          </Link>
         </div>
       </div>
     </section>
