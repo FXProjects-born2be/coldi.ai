@@ -5,6 +5,8 @@ import { getTranslations } from 'next-intl/server';
 
 import { buildFaqItems } from '@/shared/lib/seo/faq';
 import { FaqStructuredData } from '@/shared/ui/components/structured-data/FaqStructuredData';
+import { ServiceStructuredData } from '@/shared/ui/components/structured-data/ServiceStructuredData';
+import { SoftwareApplicationStructuredData } from '@/shared/ui/components/structured-data/SoftwareApplicationStructuredData';
 
 import {
   SolutionsDeliver,
@@ -40,12 +42,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function SolutionsPage() {
+  const t = await getTranslations('SolutionsPage');
   const tFaq = await getTranslations('SolutionsFaq');
   const faqs = buildFaqItems(tFaq, SOLUTIONS_FAQ_IDS);
 
   return (
     <main>
       <FaqStructuredData id="solutions-faq-jsonld" faqs={faqs} />
+      <SoftwareApplicationStructuredData
+        id="solutions-software-application-jsonld"
+        url="https://coldi.ai/solutions"
+        description={t('metaDescription')}
+      />
+      <ServiceStructuredData
+        id="solutions-service-jsonld"
+        services={[
+          {
+            name: t('metaTitle'),
+            description: t('metaDescription'),
+            url: 'https://coldi.ai/solutions',
+          },
+        ]}
+      />
       <SolutionsHero />
       <Suspense fallback={null}>
         <SolutionsInfo />

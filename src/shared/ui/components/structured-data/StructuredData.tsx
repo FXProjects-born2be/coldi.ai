@@ -5,6 +5,7 @@ type StructuredDataProps = {
     | 'WebSite'
     | 'Product'
     | 'Service'
+    | 'SoftwareApplication'
     | 'Article'
     | 'NewsArticle'
     | 'BreadcrumbList'

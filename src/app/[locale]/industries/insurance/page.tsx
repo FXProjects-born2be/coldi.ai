@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { buildFaqItems } from '@/shared/lib/seo/faq';
 import { FaqStructuredData } from '@/shared/ui/components/structured-data/FaqStructuredData';
+import { ServiceStructuredData } from '@/shared/ui/components/structured-data/ServiceStructuredData';
 
 import {
   InsuranceCases,
@@ -38,12 +39,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function InsuranceAgentsPage() {
+  const t = await getTranslations('InsurancePage');
   const tFaq = await getTranslations('InsuranceFaq');
   const faqs = buildFaqItems(tFaq, INSURANCE_FAQ_IDS);
 
   return (
     <main>
       <FaqStructuredData id="insurance-faq-jsonld" faqs={faqs} />
+      <ServiceStructuredData
+        id="insurance-service-jsonld"
+        services={[
+          {
+            name: t('metaTitle'),
+            description: t('metaDescription'),
+            url: 'https://coldi.ai/industries/insurance',
+          },
+        ]}
+      />
       <InsuranceHero />
       <InsuranceHandles />
       <InsuranceCases page="insurance" />

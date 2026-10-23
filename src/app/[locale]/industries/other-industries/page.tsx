@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { buildFaqItems } from '@/shared/lib/seo/faq';
 import { FaqStructuredData } from '@/shared/ui/components/structured-data/FaqStructuredData';
+import { ServiceStructuredData } from '@/shared/ui/components/structured-data/ServiceStructuredData';
 
 import {
   InsuranceCases,
@@ -46,6 +47,16 @@ export default async function OtherIndustriesPage() {
   return (
     <main>
       <FaqStructuredData id="other-industries-faq-jsonld" faqs={faqs} />
+      <ServiceStructuredData
+        id="other-industries-service-jsonld"
+        services={[
+          {
+            name: t('metaTitle'),
+            description: t('metaDescription'),
+            url: 'https://coldi.ai/industries/other-industries',
+          },
+        ]}
+      />
       <InsuranceHero
         title={t('hero.title')}
         titleAccent={t('hero.titleAccent')}

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
+import { ServiceStructuredData } from '@/shared/ui/components/structured-data/ServiceStructuredData';
+
 import { IndustriesHero, IndustriesOther, IndustryAreas, IndustryInfo } from './components';
 
 type Props = {
@@ -25,9 +27,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function IndustriesPage() {
+export default async function IndustriesPage() {
+  const t = await getTranslations('IndustriesPage');
+
   return (
     <main>
+      <ServiceStructuredData
+        id="industries-service-jsonld"
+        services={[
+          {
+            name: t('metaTitle'),
+            description: t('metaDescription'),
+            url: 'https://coldi.ai/industries',
+          },
+        ]}
+      />
       <IndustriesHero />
       <IndustryInfo />
       <IndustryAreas />
