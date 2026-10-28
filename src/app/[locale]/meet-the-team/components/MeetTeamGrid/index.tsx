@@ -13,13 +13,13 @@ const LINKEDIN_PLACEHOLDER = 'Linkedin';
 const teamMembers = [
   {
     id: 'or-gold',
-    name: 'Or Gold',
+    name: 'Or Goldshmidt',
     image: '/images/meet-the-team/or-gold.png',
     linkedinUrl: 'https://www.linkedin.com/in/or-g-602606119/',
   },
   {
     id: 'ilia-ron',
-    name: 'Ilia Ron',
+    name: 'Ilia Ronin',
     image: '/images/meet-the-team/ilia-ron.png',
     linkedinUrl:
       'https://www.linkedin.com/in/iliaronin?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
@@ -30,12 +30,12 @@ const teamMembers = [
     image: '/images/meet-the-team/yosi-stern.png',
     linkedinUrl: 'https://www.linkedin.com/in/yosi-stern/',
   },
-  {
-    id: 'serhii-zhakhovskyi',
-    name: 'Serhii Zhakhovskyi',
-    image: '/images/meet-the-team/serhii-zhakhovskyi.png',
-    linkedinUrl: 'https://www.linkedin.com/in/serhiizhaks/',
-  },
+  // {
+  //   id: 'serhii-zhakhovskyi',
+  //   name: 'Serhii Zhakhovskyi',
+  //   image: '/images/meet-the-team/serhii-zhakhovskyi.png',
+  //   linkedinUrl: 'https://www.linkedin.com/in/serhiizhaks/',
+  // },
   // {
   //   id: 'jacob-berkun',
   //   name: 'Jacob Berkun',
