@@ -101,6 +101,8 @@ const nextConfig: NextConfig = {
       { source: '/uk/agents', destination: '/uk/solutions', permanent: true },
       { source: '/products', destination: '/solutions', permanent: true },
       { source: '/uk/products', destination: '/uk/solutions', permanent: true },
+      { source: '/products/:path*', destination: '/solutions', permanent: true },
+      { source: '/uk/products/:path*', destination: '/uk/solutions', permanent: true },
       { source: '/about', destination: '/coldi-vision', permanent: true },
       { source: '/uk/about', destination: '/uk/coldi-vision', permanent: true },
       {
@@ -113,6 +115,37 @@ const nextConfig: NextConfig = {
         destination: '/uk/industries',
         permanent: true,
       },
+      {
+        source: '/industries/healthcare',
+        destination: '/industries/other-industries',
+        permanent: true,
+      },
+      {
+        source: '/uk/industries/healthcare',
+        destination: '/uk/industries/other-industries',
+        permanent: true,
+      },
+      {
+        source: '/industries/real-estate',
+        destination: '/industries/other-industries',
+        permanent: true,
+      },
+      {
+        source: '/uk/industries/real-estate',
+        destination: '/uk/industries/other-industries',
+        permanent: true,
+      },
+      // Short legacy paths (also covers Cloudflare → /industries/healthcare chain)
+      { source: '/healthcare', destination: '/industries/other-industries', permanent: true },
+      { source: '/uk/healthcare', destination: '/uk/industries/other-industries', permanent: true },
+      { source: '/real-estate', destination: '/industries/other-industries', permanent: true },
+      {
+        source: '/uk/real-estate',
+        destination: '/uk/industries/other-industries',
+        permanent: true,
+      },
+      { source: '/call-center', destination: '/industries', permanent: true },
+      { source: '/uk/call-center', destination: '/uk/industries', permanent: true },
       { source: '/clickomi', destination: '/performance-marketing-agency', permanent: true },
       { source: '/uk/clickomi', destination: '/uk/performance-marketing-agency', permanent: true },
       { source: '/canadian-fintech', destination: '/use-cases', permanent: true },

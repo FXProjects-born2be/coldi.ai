@@ -2903,7 +2903,7 @@
         "items": {
           "secure-and-compliant": {
             "question": "Is Coldi secure and compliant for financial services?",
-            "answer": "Coldi is built for regulated fintech calling. COLDI LABS LTD is ISO 27001 and GDPR certified and listed on the CSA STAR registry. Agents verify identity before discussing account details, every call is recorded and logged to the CRM, and a rules engine applies regional calling regulations, such as US state calling rules. Legal documents and certifications are published on the Coldi Trust Center (<trustCenterLink>coldi.ai/trust-center</trustCenterLink>)."
+            "answer": "Coldi is built for regulated fintech calling. ISO 27001 and GDPR program in progress, with audit scheduled for November 2026, and listed on the CSA STAR registry. Agents verify identity before discussing account details, every call is recorded and logged to the CRM, and a rules engine applies regional calling regulations, such as US state calling rules. Legal documents and certifications are published on the Coldi Trust Center (<trustCenterLink>coldi.ai/trust-center</trustCenterLink>)."
           }
         }
       }
